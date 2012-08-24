@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'SinglySDK' target in the 'SinglySDK' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif
