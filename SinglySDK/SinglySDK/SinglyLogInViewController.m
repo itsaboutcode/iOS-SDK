@@ -14,7 +14,9 @@
     UIWebView* webview_;
     NSString* targetService;
     NSMutableData* responseData;
+    UIView* pendingLoginView;
     UIActivityIndicatorView* activityView;
+    UILabel* loggingInLabel;
 }
 -(void)processAccessTokenWithData:(NSData*)data;
 @end
@@ -76,9 +78,27 @@
 #pragma mark - UIWebViewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {
-    NSLog(@"Going to %@", [request.URL absoluteString]);
-    NSLog(@"scheme(%@) host(%@)", request.URL.scheme, request.URL.host);
     if ([request.URL.scheme isEqualToString:@"singly"] && [request.URL.host isEqualToString:@"authComplete"]) {
+
+        pendingLoginView = [[UIView alloc] initWithFrame:self.view.bounds];
+        pendingLoginView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+        
+        activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        activityView.frame = CGRectMake(140, 180, activityView.bounds.size.width, activityView.bounds.size.height);
+        [pendingLoginView addSubview:activityView];
+        [activityView startAnimating];
+        
+        loggingInLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 250, pendingLoginView.bounds.size.width - 40, 26)];
+        loggingInLabel.backgroundColor = [UIColor clearColor];
+        loggingInLabel.textColor = [UIColor whiteColor];
+        loggingInLabel.adjustsFontSizeToFitWidth = YES;
+        loggingInLabel.textAlignment = UITextAlignmentCenter;
+        loggingInLabel.text = @"Logging In to Singly";
+        [pendingLoginView addSubview:loggingInLabel];
+        
+        [self.view addSubview:pendingLoginView];
+        [self.view bringSubviewToFront:pendingLoginView];
+        
         // Find the code and request an access token
         NSArray *parameterPairs = [request.URL.query componentsSeparatedByString:@"&"];
         
@@ -137,15 +157,35 @@
 {
     NSError* error;
     NSDictionary* jsonResult = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
+    if (error) {
+        if (session_.delegate) {
+            [session_.delegate singlySession:session_ errorLoggingInToService:targetService withError:error];
+        }
+        return;
+    }
+    
+    NSString* loginError = [jsonResult objectForKey:@"error"];
+    if (loginError) {
+        if (session_.delegate) {
+            NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:loginError forKey:NSLocalizedDescriptionKey]];
+            [session_.delegate singlySession:session_ errorLoggingInToService:targetService withError:error];
+        }
+        return;
+    }
+    
+    // Save the access token and account id
     session_.accessToken = [jsonResult objectForKey:@"access_token"];
     session_.accountID = [jsonResult objectForKey:@"account"];
-    [self removeFromParentViewController];
+    if (session_.delegate) {
+        [session_.delegate singlySession:session_ didLogInForService:targetService];
+    }
     NSLog(@"All set to do requests as account %@ with access token %@", session_.accountID, session_.accessToken);
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"OH NOES: %@", error);
-    // TODO:  Fill this in.
+    if (session_.delegate) {
+        [session_.delegate singlySession:session_ errorLoggingInToService:targetService withError:error];
+    }
 }
 @end

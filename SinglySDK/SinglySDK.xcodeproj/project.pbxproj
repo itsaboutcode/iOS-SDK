@@ -13,11 +13,12 @@
 		827E3EA115E3E9D000D30D96 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827E3EA015E3E9D000D30D96 /* SenTestingKit.framework */; };
 		827E3EA315E3E9D000D30D96 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827E3EA215E3E9D000D30D96 /* UIKit.framework */; };
 		827E3EA415E3E9D000D30D96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827E3E9115E3E9D000D30D96 /* Foundation.framework */; };
-		827E3EA715E3E9D000D30D96 /* libSinglySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 827E3E8E15E3E9D000D30D96 /* libSinglySDK.a */; };
 		827E3EAD15E3E9D000D30D96 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 827E3EAB15E3E9D000D30D96 /* InfoPlist.strings */; };
 		827E3EB015E3E9D000D30D96 /* SinglySDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 827E3EAF15E3E9D000D30D96 /* SinglySDKTests.m */; };
 		827E3EBB15E458E300D30D96 /* SinglySession.m in Sources */ = {isa = PBXBuildFile; fileRef = 827E3EBA15E458E300D30D96 /* SinglySession.m */; };
 		827E3EBE15E5367700D30D96 /* SinglyLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 827E3EBD15E5367700D30D96 /* SinglyLogInViewController.m */; };
+		82AD382A15E7E377000EFC75 /* SinglySession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 827E3EB915E458E300D30D96 /* SinglySession.h */; };
+		82AD382B15E7E379000EFC75 /* SinglyLogInViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 827E3EBC15E5367600D30D96 /* SinglyLogInViewController.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,8 @@
 			dstSubfolderSpec = 16;
 			files = (
 				827E3E9715E3E9D000D30D96 /* SinglySDK.h in CopyFiles */,
+				82AD382A15E7E377000EFC75 /* SinglySession.h in CopyFiles */,
+				82AD382B15E7E379000EFC75 /* SinglyLogInViewController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,7 +81,6 @@
 				827E3EA115E3E9D000D30D96 /* SenTestingKit.framework in Frameworks */,
 				827E3EA315E3E9D000D30D96 /* UIKit.framework in Frameworks */,
 				827E3EA415E3E9D000D30D96 /* Foundation.framework in Frameworks */,
-				827E3EA715E3E9D000D30D96 /* libSinglySDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

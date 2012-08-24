@@ -8,25 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+@class SinglySession;
+
 @protocol SinglySessionDelegate <NSObject>
 @required
--(void)singlyResultForAPI:(NSString*)api withJSON:(id)json;
--(void)singlyErrorForAPI:(NSString*)api withError:(NSError*)error;
+-(void)singlySession:(SinglySession*)session resultForAPI:(NSString*)api withJSON:(id)json;
+-(void)singlySession:(SinglySession*)session errorForAPI:(NSString*)api withError:(NSError*)error;
+-(void)singlySession:(SinglySession*)session didLogInForService:(NSString*)service;
+-(void)singlySession:(SinglySession *)session errorLoggingInToService:(NSString *)service withError:(NSError*)error;
 @end
 
 @interface SinglySession : NSObject {
 }
-@property (strong, atomic, getter = getAccessToken, setter = setAccessToken:) NSString* accessToken;
-@property (strong, atomic, getter = getAccountID, setter = setAccountID:) NSString* accountID;
+@property (copy) NSString* accessToken;
+@property (copy) NSString* accountID;
 @property (strong, atomic) id<SinglySessionDelegate> delegate;
 
--(void)setAccountID:(NSString *)accountID;
--(NSString*)getAccountID;
-
--(void)setAccessToken:(NSString *)accessToken;
--(NSString*)getAccessToken;
-
--(void)checkReadyWithBlock:(void (^)(BOOL))block;
+-(void)checkReadyWithCompletionHandler:(void (^)(BOOL))block;
 -(void)requestAPI:(NSString*)api withParameters:(NSDictionary*)params;
 @end
 

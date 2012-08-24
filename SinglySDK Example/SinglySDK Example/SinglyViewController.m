@@ -25,9 +25,9 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     NSLog(@"View did appear");
-    [session_ checkReadyWithBlock:^(BOOL ready){
+    [session_ checkReadyWithCompletionHandler:^(BOOL ready){
         if(!ready) {
-            loginVC_ = [[SinglyLogInViewController alloc] initWithSession:session_ forService:kSinglyServiceFacebook];
+            loginVC_ = [[SinglyLogInViewController alloc] initWithSession:session_ forService:kSinglyServiceFoursquare];
             loginVC_.clientID = @"5ed51f6c9760d9faa499c793611d2cd3";
             loginVC_.clientSecret = @"ac2f8fafa8463e2f1322883bc17f51ec";
             [self presentModalViewController:loginVC_ animated:YES];
@@ -44,6 +44,8 @@
     
     session_ = [[SinglySession alloc] init];
     session_.delegate = self;
+    session_.accessToken = nil;
+    session_.accountID = nil;
     NSLog(@"Session account is %@ and access token is %@", session_.accountID, session_.accessToken);
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -64,12 +66,22 @@
 }
 
 #pragma mark - SinglySessionDelegate
--(void)singlyResultForAPI:(NSString *)api withJSON:(id)json;
+-(void)singlySession:(SinglySession*)session resultForAPI:(NSString *)api withJSON:(id)json;
 {
     NSLog(@"Got a result for %@:\n%@", api, json);
 }
--(void)singlyErrorForAPI:(NSString *)api withError:(NSError *)error;
+-(void)singlySession:(SinglySession*)session errorForAPI:(NSString *)api withError:(NSError *)error;
 {
     NSLog(@"Error for api(%@): %@", api, error);
+}
+-(void)singlySession:(SinglySession *)session didLogInForService:(NSString *)service;
+{
+    [self dismissModalViewControllerAnimated:loginVC_];
+    loginVC_ = nil;
+}
+-(void)singlySession:(SinglySession *)session errorLoggingInToService:(NSString *)service withError:(NSError *)error;
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 @end

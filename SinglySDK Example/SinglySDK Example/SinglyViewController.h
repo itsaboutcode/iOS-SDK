@@ -11,7 +11,4 @@
 
 @interface SinglyViewController : UIViewController<SinglySessionDelegate>
 
-#pragma mark - SinglySessionDelegate
--(void)singlyResultForAPI:(NSString *)api withJSON:(id)json;
--(void)singlyErrorForAPI:(NSString *)api withError:(NSError *)error;
 @end

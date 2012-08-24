@@ -18,7 +18,7 @@ static NSString* kSinglyAccessTokenKey = @"comsingly.accessToken";
     [[NSUserDefaults standardUserDefaults] setObject:accountID forKey:kSinglyAccountIDKey];
 }
 
--(NSString*)getAccountID;
+-(NSString*)accountID;
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:kSinglyAccountIDKey];
 }
@@ -29,12 +29,12 @@ static NSString* kSinglyAccessTokenKey = @"comsingly.accessToken";
     [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:kSinglyAccessTokenKey];
 }
 
--(NSString*)getAccessToken;
+-(NSString*)accessToken;
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:kSinglyAccessTokenKey];
 }
 
--(void)checkReadyWithBlock:(void (^)(BOOL))block;
+-(void)checkReadyWithCompletionHandler:(void (^)(BOOL))block;
 {
     // If we don't have an accountID or accessToken we're definitely not ready
     if (!self.accountID || !self.accessToken) {
@@ -70,7 +70,8 @@ static NSString* kSinglyAccessTokenKey = @"comsingly.accessToken";
     if (!self.accessToken) {
         if (self.delegate) {
             NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:@"Access token is not yet set" forKey:NSLocalizedDescriptionKey]];
-            return [self.delegate singlyErrorForAPI:api withError:error];
+            [self.delegate singlySession:self errorForAPI:api withError:error];
+            return;
         }
     }
     NSString* apiURLStr = [NSString stringWithFormat:@"https://api.singly.com/v0/%@?access_token=%@", api, self.accessToken];
@@ -87,16 +88,18 @@ static NSString* kSinglyAccessTokenKey = @"comsingly.accessToken";
         NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:apiURLStr]];
         NSError* error;
         id json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        if (error && self.delegate) {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self.delegate singlyErrorForAPI:api withError:error];
-            });
+        if (error) {
+            if (self.delegate) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self.delegate singlySession:self errorForAPI:api withError:error];
+                });
+            }
             return;
         }
         
         if (self.delegate) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [self.delegate singlyResultForAPI:api withJSON:json];
+                [self.delegate singlySession:self resultForAPI:api withJSON:json];
             });
         }
     });
