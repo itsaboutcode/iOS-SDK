@@ -24,7 +24,15 @@
 
 -(void) viewDidAppear:(BOOL)animated
 {
-    NSLog(@"View did appear");
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    session_ = [[SinglySession alloc] init];
+    session_.delegate = self;
+    NSLog(@"Session account is %@ and access token is %@", session_.accountID, session_.accessToken);
     [session_ checkReadyWithCompletionHandler:^(BOOL ready){
         if(!ready) {
             loginVC_ = [[SinglyLogInViewController alloc] initWithSession:session_ forService:kSinglyServiceFoursquare];
@@ -38,16 +46,6 @@
             }];
         }
     }];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    session_ = [[SinglySession alloc] init];
-    session_.delegate = self;
-    NSLog(@"Session account is %@ and access token is %@", session_.accountID, session_.accessToken);
-	// Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)viewDidUnload
