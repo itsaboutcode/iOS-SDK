@@ -25,6 +25,11 @@
     return [[SinglyAPIRequest alloc] initWithEndpoint:endpoint andParameters:parameters];
 }
 
++(SinglyAPIRequest*)apiRequestForEndpoint:(NSString *)endpoint;
+{
+    return [SinglyAPIRequest apiRequestForEndpoint:endpoint withParameters:nil];
+}
+
 -(id)initWithEndpoint:(NSString *)endpoint andParameters:(NSDictionary *)parameters;
 {
     self = [super init];

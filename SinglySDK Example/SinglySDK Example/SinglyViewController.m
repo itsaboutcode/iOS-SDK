@@ -41,7 +41,7 @@
             [self presentModalViewController:loginVC_ animated:YES];
         } else {
             NSLog(@"We're already done!");
-            [session_ requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"profiles" withParameters:nil] withCompletionHandler:^(NSError *error, id json) {
+            [session_ requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"profiles"] withCompletionHandler:^(NSError *error, id json) {
                 NSLog(@"The profiles result is: %@", json);
             }];
         }

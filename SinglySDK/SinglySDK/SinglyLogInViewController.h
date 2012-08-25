@@ -10,6 +10,13 @@
 #import "SinglySession.h"
 
 @interface SinglyLogInViewController : UIViewController<UIWebViewDelegate, NSURLConnectionDataDelegate>
+/*!
+ Initialize with a session and service
+ @param session
+    The session that the login will be saved into.
+ @param serviceId
+    The name of the service that we are logging into.
+*/
 - (id)initWithSession:(SinglySession*)session forService:(NSString*)serviceId;
 
 @property (strong, atomic) NSString* clientID;

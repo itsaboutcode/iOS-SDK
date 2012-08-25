@@ -7,8 +7,13 @@
 //
 
 #import "SinglyLoginViewController.h"
+#import "SinglySession.h"
+#import "SinglyAPIRequest.h"
 
-// Service id constants
+/*!
+    @header SinglySDK
+    Includes the required headers and defines some common contsants.
+*/
 static NSString* kSinglyServiceGoogle = @"google";
 static NSString* kSinglyServiceInstagram = @"instagram";
 static NSString* kSinglyServiceTwitter = @"twitter";

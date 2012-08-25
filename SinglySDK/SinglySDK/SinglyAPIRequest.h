@@ -21,7 +21,20 @@
 @property (copy) NSString* method;
 @property (copy) NSData* body;
 
+/*!
+ Create a new API request
+ @param endpoint
+    The Singly API endpoint to hit, does not need to include the / at the begninning
+ @param parameters
+    A NSDictionary of the query string parameters to send on the request.  This may be nil.
+*/
 +(SinglyAPIRequest*)apiRequestForEndpoint:(NSString*)endpoint withParameters:(NSDictionary*)parameters;
+/*!
+ Create a new API request
+ @param endpoint
+ The Singly API endpoint to hit, does not need to include the / at the begninning
+*/
++(SinglyAPIRequest*)apiRequestForEndpoint:(NSString *)endpoint;
 -(id)initWithEndpoint:(NSString*)endpoint andParameters:(NSDictionary*)parameters;
 -(NSString*)completeURLForToken:(NSString*)accessToken;
 @end
