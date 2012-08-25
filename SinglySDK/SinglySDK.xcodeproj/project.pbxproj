@@ -19,6 +19,7 @@
 		827E3EBE15E5367700D30D96 /* SinglyLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 827E3EBD15E5367700D30D96 /* SinglyLogInViewController.m */; };
 		82AD382A15E7E377000EFC75 /* SinglySession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 827E3EB915E458E300D30D96 /* SinglySession.h */; };
 		82AD382B15E7E379000EFC75 /* SinglyLogInViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 827E3EBC15E5367600D30D96 /* SinglyLogInViewController.h */; };
+		82AD383115E84ED3000EFC75 /* SinglyAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AD383015E84ED3000EFC75 /* SinglyAPIRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		827E3EBA15E458E300D30D96 /* SinglySession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySession.m; sourceTree = "<group>"; };
 		827E3EBC15E5367600D30D96 /* SinglyLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLogInViewController.h; sourceTree = "<group>"; };
 		827E3EBD15E5367700D30D96 /* SinglyLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLogInViewController.m; sourceTree = "<group>"; };
+		82AD382F15E84ED3000EFC75 /* SinglyAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAPIRequest.h; sourceTree = "<group>"; };
+		82AD383015E84ED3000EFC75 /* SinglyAPIRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAPIRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,8 @@
 				827E3EBA15E458E300D30D96 /* SinglySession.m */,
 				827E3EBC15E5367600D30D96 /* SinglyLogInViewController.h */,
 				827E3EBD15E5367700D30D96 /* SinglyLogInViewController.m */,
+				82AD382F15E84ED3000EFC75 /* SinglyAPIRequest.h */,
+				82AD383015E84ED3000EFC75 /* SinglyAPIRequest.m */,
 			);
 			path = SinglySDK;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				827E3E9915E3E9D000D30D96 /* SinglySDK.m in Sources */,
 				827E3EBB15E458E300D30D96 /* SinglySession.m in Sources */,
 				827E3EBE15E5367700D30D96 /* SinglyLogInViewController.m in Sources */,
+				82AD383115E84ED3000EFC75 /* SinglyAPIRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

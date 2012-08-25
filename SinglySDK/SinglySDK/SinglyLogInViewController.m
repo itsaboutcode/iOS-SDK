@@ -16,7 +16,6 @@
     NSMutableData* responseData;
     UIView* pendingLoginView;
     UIActivityIndicatorView* activityView;
-    UILabel* loggingInLabel;
 }
 -(void)processAccessTokenWithData:(NSData*)data;
 @end
@@ -87,14 +86,6 @@
         activityView.frame = CGRectMake(140, 180, activityView.bounds.size.width, activityView.bounds.size.height);
         [pendingLoginView addSubview:activityView];
         [activityView startAnimating];
-        
-        loggingInLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 250, pendingLoginView.bounds.size.width - 40, 26)];
-        loggingInLabel.backgroundColor = [UIColor clearColor];
-        loggingInLabel.textColor = [UIColor whiteColor];
-        loggingInLabel.adjustsFontSizeToFitWidth = YES;
-        loggingInLabel.textAlignment = UITextAlignmentCenter;
-        loggingInLabel.text = @"Logging In to Singly";
-        [pendingLoginView addSubview:loggingInLabel];
         
         [self.view addSubview:pendingLoginView];
         [self.view bringSubviewToFront:pendingLoginView];

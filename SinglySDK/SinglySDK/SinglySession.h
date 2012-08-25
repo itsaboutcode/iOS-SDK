@@ -7,13 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SinglyAPIRequest.h"
 
 @class SinglySession;
 
 @protocol SinglySessionDelegate <NSObject>
 @required
--(void)singlySession:(SinglySession*)session resultForAPI:(NSString*)api withJSON:(id)json;
--(void)singlySession:(SinglySession*)session errorForAPI:(NSString*)api withError:(NSError*)error;
 -(void)singlySession:(SinglySession*)session didLogInForService:(NSString*)service;
 -(void)singlySession:(SinglySession *)session errorLoggingInToService:(NSString *)service withError:(NSError*)error;
 @end
@@ -25,6 +24,7 @@
 @property (strong, atomic) id<SinglySessionDelegate> delegate;
 
 -(void)checkReadyWithCompletionHandler:(void (^)(BOOL))block;
--(void)requestAPI:(NSString*)api withParameters:(NSDictionary*)params;
+-(void)requestAPI:(SinglyAPIRequest*)request withDelegate:(id<SinglyAPIRequestDelegate>)delegate;
+-(void)requestAPI:(SinglyAPIRequest *)request withCompletionHandler:(void (^)(NSError*, id))block;
 @end
 

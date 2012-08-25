@@ -25,7 +25,6 @@ static NSString* kSinglyAccessTokenKey = @"comsingly.accessToken";
 
 -(void)setAccessToken:(NSString *)accessToken;
 {
-    NSLog(@"Saved accesstoken");
     [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:kSinglyAccessTokenKey];
 }
 
@@ -57,51 +56,47 @@ static NSString* kSinglyAccessTokenKey = @"comsingly.accessToken";
     
 }
 
--(NSString*)escapeString:(NSString*)rawString;
+-(void)requestAPI:(SinglyAPIRequest *)request withDelegate:(id<SinglyAPIRequestDelegate>)delegate;
 {
-    CFStringRef originalString = (__bridge_retained CFStringRef)rawString;
-    NSString* finalString = (__bridge_transfer NSString*)CFURLCreateStringByAddingPercentEscapes(NULL, originalString, NULL, NULL, kCFStringEncodingUTF8);
-    CFRelease(originalString);
-    return finalString;
+    [self requestAPI:request withCompletionHandler:^(NSError *error, id json) {
+        if (error) {
+            [delegate singlyAPIRequest:request failedWithError:error];
+        } else {
+            [delegate singlyAPIRequest:request succeededWithJSON:json];
+        }
+    }];
 }
 
--(void)requestAPI:(NSString*)api withParameters:(NSDictionary*)params;
+-(void)requestAPI:(SinglyAPIRequest *)request withCompletionHandler:(void (^)(NSError *, id))block;
 {
     if (!self.accessToken) {
-        if (self.delegate) {
-            NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:@"Access token is not yet set" forKey:NSLocalizedDescriptionKey]];
-            [self.delegate singlySession:self errorForAPI:api withError:error];
+        NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:@"Access token is not yet set" forKey:NSLocalizedDescriptionKey]];
+        block(error, nil);
+        return;
+    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL* reqURL = [NSURL URLWithString:[request completeURLForToken:self.accessToken]];
+        NSMutableURLRequest* urlRequest = [NSMutableURLRequest requestWithURL:reqURL];
+        urlRequest.HTTPMethod = request.method;
+        if (request.body) urlRequest.HTTPBody = request.body;
+        NSURLResponse* response;
+        NSError* error;
+        NSData* returnedData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+        if (error) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                block(error, nil);
+            });
             return;
         }
-    }
-    NSString* apiURLStr = [NSString stringWithFormat:@"https://api.singly.com/v0/%@?access_token=%@", api, self.accessToken];
-    if (params) {
-        NSMutableString* paramString = [NSMutableString string];
-        [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            if (![obj isKindOfClass:[NSNull class]]) {
-                [paramString appendFormat:@"&%@=%@", [self escapeString:key], [self escapeString:obj]];
-            }
-        }];
-        apiURLStr = [apiURLStr stringByAppendingString:paramString];
-    }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:apiURLStr]];
-        NSError* error;
-        id json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        id json = [NSJSONSerialization JSONObjectWithData:returnedData options:kNilOptions error:&error];
         if (error) {
-            if (self.delegate) {
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    [self.delegate singlySession:self errorForAPI:api withError:error];
-                });
-            }
-            return;
+            json = nil;
         }
         
-        if (self.delegate) {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self.delegate singlySession:self resultForAPI:api withJSON:json];
-            });
-        }
-    });
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            block(error, json);
+        });
+    });    
 }
 @end

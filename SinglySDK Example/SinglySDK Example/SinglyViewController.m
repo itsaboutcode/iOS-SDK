@@ -33,7 +33,9 @@
             [self presentModalViewController:loginVC_ animated:YES];
         } else {
             NSLog(@"We're already done!");
-            [session_ requestAPI:@"profiles" withParameters:nil];
+            [session_ requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"profiles" withParameters:nil] withCompletionHandler:^(NSError *error, id json) {
+                NSLog(@"The profiles result is: %@", json);
+            }];
         }
     }];
 }
@@ -44,8 +46,6 @@
     
     session_ = [[SinglySession alloc] init];
     session_.delegate = self;
-    session_.accessToken = nil;
-    session_.accountID = nil;
     NSLog(@"Session account is %@ and access token is %@", session_.accountID, session_.accessToken);
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -66,22 +66,16 @@
 }
 
 #pragma mark - SinglySessionDelegate
--(void)singlySession:(SinglySession*)session resultForAPI:(NSString *)api withJSON:(id)json;
-{
-    NSLog(@"Got a result for %@:\n%@", api, json);
-}
--(void)singlySession:(SinglySession*)session errorForAPI:(NSString *)api withError:(NSError *)error;
-{
-    NSLog(@"Error for api(%@): %@", api, error);
-}
 -(void)singlySession:(SinglySession *)session didLogInForService:(NSString *)service;
 {
-    [self dismissModalViewControllerAnimated:loginVC_];
+    [self dismissModalViewControllerAnimated:YES];
     loginVC_ = nil;
 }
 -(void)singlySession:(SinglySession *)session errorLoggingInToService:(NSString *)service withError:(NSError *)error;
 {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
+    [self dismissModalViewControllerAnimated:YES];
+    loginVC_ = nil;
 }
 @end
