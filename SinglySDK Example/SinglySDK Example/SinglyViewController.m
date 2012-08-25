@@ -28,8 +28,8 @@
     [session_ checkReadyWithCompletionHandler:^(BOOL ready){
         if(!ready) {
             loginVC_ = [[SinglyLogInViewController alloc] initWithSession:session_ forService:kSinglyServiceFoursquare];
-            loginVC_.clientID = @"5ed51f6c9760d9faa499c793611d2cd3";
-            loginVC_.clientSecret = @"ac2f8fafa8463e2f1322883bc17f51ec";
+            loginVC_.clientID = @"<client id here>";
+            loginVC_.clientSecret = @"<client secret here>";
             [self presentModalViewController:loginVC_ animated:YES];
         } else {
             NSLog(@"We're already done!");
