@@ -10,6 +10,7 @@
 #import "SinglyAPIRequest.h"
 
 @class SinglySession;
+@class SinglyLogInViewController;
 
 /*!
  @protocol SinglySessionDelegate
@@ -49,6 +50,12 @@
  The account ID associated with the current access token
 */
 @property (copy) NSString* accountID;
+@property (copy) NSString* clientID;
+@property (copy) NSString* clientSecret;
+/*!
+ Profiles of the services that the account has connected.  Will return until there is a valid session.
+*/
+@property (readonly) NSDictionary* profiles;
 @property (strong, atomic) id<SinglySessionDelegate> delegate;
 
 /*!
@@ -73,5 +80,7 @@
     The block to call when the request is complete.
 */
 -(void)requestAPI:(SinglyAPIRequest *)request withCompletionHandler:(void (^)(NSError*, id))block;
+
+-(void)updateProfilesWithCompletion:(void (^)())block;
 @end
 

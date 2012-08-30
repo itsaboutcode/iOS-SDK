@@ -56,7 +56,7 @@
 
 - (void)viewWillAppear:(BOOL)animated;
 {
-    NSString* urlStr = [NSString stringWithFormat:@"https://api.singly.com/oauth/authorize?redirect_uri=singly://authComplete&service=%@&client_id=%@", targetService, self.clientID];
+    NSString* urlStr = [NSString stringWithFormat:@"https://api.singly.com/oauth/authorize?redirect_uri=singly://authComplete&service=%@&client_id=%@", targetService, session_.clientID];
     if (session_.accountID) {
         urlStr = [urlStr stringByAppendingFormat:@"&account=%@", session_.accountID];
     }
@@ -110,7 +110,7 @@
             NSURL* accessTokenURL = [NSURL URLWithString:@"https://api.singly.com/oauth/access_token"];
             NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:accessTokenURL];
             req.HTTPMethod = @"POST";
-            req.HTTPBody = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&code=%@", self.clientID, self.clientSecret, [parameters objectForKey:@"code"]] dataUsingEncoding:NSUTF8StringEncoding];
+            req.HTTPBody = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&code=%@", session_.clientID, session_.clientSecret, [parameters objectForKey:@"code"]] dataUsingEncoding:NSUTF8StringEncoding];
             responseData = [NSMutableData data];
             [NSURLConnection connectionWithRequest:req delegate:self];
         }
@@ -149,17 +149,18 @@
     NSError* error;
     NSDictionary* jsonResult = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     if (error) {
-        if (session_.delegate) {
-            [session_.delegate singlySession:session_ errorLoggingInToService:targetService withError:error];
+        if (self.delegate) {
+            [self.delegate singlyLogInViewController:self errorLoggingInToService:targetService withError:error];
         }
         return;
     }
     
     NSString* loginError = [jsonResult objectForKey:@"error"];
     if (loginError) {
-        if (session_.delegate) {
+        if (self.delegate) {
             NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:loginError forKey:NSLocalizedDescriptionKey]];
-            [session_.delegate singlySession:session_ errorLoggingInToService:targetService withError:error];
+            [self.delegate singlyLogInViewController:self errorLoggingInToService:targetService withError:error];
+                                                    
         }
         return;
     }
@@ -167,16 +168,18 @@
     // Save the access token and account id
     session_.accessToken = [jsonResult objectForKey:@"access_token"];
     session_.accountID = [jsonResult objectForKey:@"account"];
-    if (session_.delegate) {
-        [session_.delegate singlySession:session_ didLogInForService:targetService];
-    }
-    NSLog(@"All set to do requests as account %@ with access token %@", session_.accountID, session_.accessToken);
+    [session_ updateProfilesWithCompletion:^{
+        NSLog(@"All set to do requests as account %@ with access token %@", session_.accountID, session_.accessToken);
+        if (self.delegate) {
+            [self.delegate singlyLogInViewController:self didLoginForService:targetService];
+        }
+    }];
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    if (session_.delegate) {
-        [session_.delegate singlySession:session_ errorLoggingInToService:targetService withError:error];
+    if (self.delegate) {
+        [self.delegate singlyLogInViewController:self errorLoggingInToService:targetService withError:error];
     }
 }
 @end

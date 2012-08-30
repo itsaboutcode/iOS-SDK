@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:SinglySDK Example/SinglySDK Example.xcodeproj">
+      location = "group:SinglySDK/SinglySDK.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:SinglySDK/SinglySDK.xcodeproj">
+      location = "group:SinglySDK Example/SinglySDK Example.xcodeproj">
    </FileRef>
 </Workspace>

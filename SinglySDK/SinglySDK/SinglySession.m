@@ -11,6 +11,11 @@
 static NSString* kSinglyAccountIDKey = @"com.singly.accountID";
 static NSString* kSinglyAccessTokenKey = @"com.singly.accessToken";
 
+@interface SinglySession () {
+    NSDictionary* _profiles;
+}
+@end
+
 @implementation SinglySession
 
 -(void)setAccountID:(NSString *)accountID
@@ -33,6 +38,11 @@ static NSString* kSinglyAccessTokenKey = @"com.singly.accessToken";
     return [[NSUserDefaults standardUserDefaults] objectForKey:kSinglyAccessTokenKey];
 }
 
+-(NSDictionary*)profiles;
+{
+    return _profiles;
+}
+
 -(void)checkReadyWithCompletionHandler:(void (^)(BOOL))block;
 {
     // If we don't have an accountID or accessToken we're definitely not ready
@@ -47,6 +57,7 @@ static NSString* kSinglyAccessTokenKey = @"com.singly.accessToken";
         NSString* foundAccountID = [json objectForKey:@"id"];
         BOOL isReady = NO;
         if ([foundAccountID isEqualToString:self.accountID]) {
+            _profiles = json;
             isReady = YES;
         }
         dispatch_sync(dispatch_get_main_queue(), ^{
@@ -98,5 +109,19 @@ static NSString* kSinglyAccessTokenKey = @"com.singly.accessToken";
             block(error, json);
         });
     });    
+}
+
+-(void)updateProfilesWithCompletion:(void(^)())block;
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        SinglyAPIRequest* apiReq = [[SinglyAPIRequest alloc] initWithEndpoint:@"profiles" andParameters:nil];
+        NSError* error;
+        id json = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[apiReq completeURLForToken:self.accessToken]]] options:kNilOptions error:&error];
+        if (!error && [json isKindOfClass:[NSDictionary class]]) {
+            _profiles = json;
+        }
+        
+        dispatch_sync(dispatch_get_main_queue(), block);
+    });
 }
 @end

@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "SinglySession.h"
 
+@protocol SinglyLogInViewControllerDelegate <NSObject>
+
+-(void)singlyLogInViewController:(SinglyLogInViewController*)controller didLoginForService:(NSString*)service;
+-(void)singlyLogInViewController:(SinglyLogInViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError*)error;
+@end
+
 @interface SinglyLogInViewController : UIViewController<UIWebViewDelegate, NSURLConnectionDataDelegate>
 /*!
  Initialize with a session and service
@@ -19,8 +25,7 @@
 */
 - (id)initWithSession:(SinglySession*)session forService:(NSString*)serviceId;
 
-@property (strong, atomic) NSString* clientID;
-@property (strong, atomic) NSString* clientSecret;
+@property (strong, atomic) id<SinglyLogInViewControllerDelegate> delegate;
 @property (strong, atomic) NSString* scope;
 @property (strong, atomic) NSString* flags;
 

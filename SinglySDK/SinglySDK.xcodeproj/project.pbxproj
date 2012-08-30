@@ -7,171 +7,127 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		827E3E9215E3E9D000D30D96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827E3E9115E3E9D000D30D96 /* Foundation.framework */; };
-		827E3E9715E3E9D000D30D96 /* SinglySDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 827E3E9615E3E9D000D30D96 /* SinglySDK.h */; };
-		827E3E9915E3E9D000D30D96 /* SinglySDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 827E3E9815E3E9D000D30D96 /* SinglySDK.m */; };
-		827E3EA115E3E9D000D30D96 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827E3EA015E3E9D000D30D96 /* SenTestingKit.framework */; };
-		827E3EA315E3E9D000D30D96 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827E3EA215E3E9D000D30D96 /* UIKit.framework */; };
-		827E3EA415E3E9D000D30D96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827E3E9115E3E9D000D30D96 /* Foundation.framework */; };
-		827E3EAD15E3E9D000D30D96 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 827E3EAB15E3E9D000D30D96 /* InfoPlist.strings */; };
-		827E3EB015E3E9D000D30D96 /* SinglySDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 827E3EAF15E3E9D000D30D96 /* SinglySDKTests.m */; };
-		827E3EBB15E458E300D30D96 /* SinglySession.m in Sources */ = {isa = PBXBuildFile; fileRef = 827E3EBA15E458E300D30D96 /* SinglySession.m */; };
-		827E3EBE15E5367700D30D96 /* SinglyLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 827E3EBD15E5367700D30D96 /* SinglyLogInViewController.m */; };
-		82AD382A15E7E377000EFC75 /* SinglySession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 827E3EB915E458E300D30D96 /* SinglySession.h */; };
-		82AD382B15E7E379000EFC75 /* SinglyLogInViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 827E3EBC15E5367600D30D96 /* SinglyLogInViewController.h */; };
-		82AD383115E84ED3000EFC75 /* SinglyAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AD383015E84ED3000EFC75 /* SinglyAPIRequest.m */; };
+		821D087B15ED177400ECFED0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 821D087915ED177400ECFED0 /* InfoPlist.strings */; };
+		821D088B15ED17B000ECFED0 /* SinglyAPIRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		821D088C15ED17B000ECFED0 /* SinglyAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */; };
+		821D088D15ED17B000ECFED0 /* SinglyLogInViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088515ED17B000ECFED0 /* SinglyLogInViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		821D088E15ED17B000ECFED0 /* SinglyLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088615ED17B000ECFED0 /* SinglyLogInViewController.m */; };
+		821D088F15ED17B000ECFED0 /* SinglySDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088715ED17B000ECFED0 /* SinglySDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		821D089015ED17B000ECFED0 /* SinglySDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088815ED17B000ECFED0 /* SinglySDK.m */; };
+		821D089115ED17B000ECFED0 /* SinglySession.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088915ED17B000ECFED0 /* SinglySession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		821D089215ED17B000ECFED0 /* SinglySession.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088A15ED17B000ECFED0 /* SinglySession.m */; };
+		8236EBDD15EFE79E00F3351E /* SinglyFriendPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8236EBDE15EFE79E00F3351E /* SinglyFriendPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */; };
+		82CAD78B15EEB0B300D3E486 /* SinglyLoginPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		827E3EA515E3E9D000D30D96 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 827E3E8515E3E9D000D30D96 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 827E3E8D15E3E9D000D30D96;
-			remoteInfo = SinglySDK;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		827E3E8C15E3E9D000D30D96 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/${PRODUCT_NAME}";
-			dstSubfolderSpec = 16;
-			files = (
-				827E3E9715E3E9D000D30D96 /* SinglySDK.h in CopyFiles */,
-				82AD382A15E7E377000EFC75 /* SinglySession.h in CopyFiles */,
-				82AD382B15E7E379000EFC75 /* SinglyLogInViewController.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		827E3E8E15E3E9D000D30D96 /* libSinglySDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSinglySDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		827E3E9115E3E9D000D30D96 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		827E3E9515E3E9D000D30D96 /* SinglySDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SinglySDK-Prefix.pch"; sourceTree = "<group>"; };
-		827E3E9615E3E9D000D30D96 /* SinglySDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinglySDK.h; sourceTree = "<group>"; };
-		827E3E9815E3E9D000D30D96 /* SinglySDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SinglySDK.m; sourceTree = "<group>"; };
-		827E3E9F15E3E9D000D30D96 /* SinglySDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinglySDKTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		827E3EA015E3E9D000D30D96 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		827E3EA215E3E9D000D30D96 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		827E3EAA15E3E9D000D30D96 /* SinglySDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SinglySDKTests-Info.plist"; sourceTree = "<group>"; };
-		827E3EAC15E3E9D000D30D96 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		827E3EAE15E3E9D000D30D96 /* SinglySDKTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinglySDKTests.h; sourceTree = "<group>"; };
-		827E3EAF15E3E9D000D30D96 /* SinglySDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SinglySDKTests.m; sourceTree = "<group>"; };
-		827E3EB915E458E300D30D96 /* SinglySession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySession.h; sourceTree = "<group>"; };
-		827E3EBA15E458E300D30D96 /* SinglySession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySession.m; sourceTree = "<group>"; };
-		827E3EBC15E5367600D30D96 /* SinglyLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLogInViewController.h; sourceTree = "<group>"; };
-		827E3EBD15E5367700D30D96 /* SinglyLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLogInViewController.m; sourceTree = "<group>"; };
-		82AD382F15E84ED3000EFC75 /* SinglyAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAPIRequest.h; sourceTree = "<group>"; };
-		82AD383015E84ED3000EFC75 /* SinglyAPIRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAPIRequest.m; sourceTree = "<group>"; };
+		821D087415ED177400ECFED0 /* SinglySDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinglySDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		821D087815ED177400ECFED0 /* SinglySDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SinglySDK-Info.plist"; sourceTree = "<group>"; };
+		821D087A15ED177400ECFED0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		821D087C15ED177400ECFED0 /* SinglySDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SinglySDK-Prefix.pch"; sourceTree = "<group>"; };
+		821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAPIRequest.h; sourceTree = "<group>"; };
+		821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAPIRequest.m; sourceTree = "<group>"; };
+		821D088515ED17B000ECFED0 /* SinglyLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLogInViewController.h; sourceTree = "<group>"; };
+		821D088615ED17B000ECFED0 /* SinglyLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLogInViewController.m; sourceTree = "<group>"; };
+		821D088715ED17B000ECFED0 /* SinglySDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySDK.h; sourceTree = "<group>"; };
+		821D088815ED17B000ECFED0 /* SinglySDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySDK.m; sourceTree = "<group>"; };
+		821D088915ED17B000ECFED0 /* SinglySession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySession.h; sourceTree = "<group>"; };
+		821D088A15ED17B000ECFED0 /* SinglySession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySession.m; sourceTree = "<group>"; };
+		8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendPickerViewController.h; sourceTree = "<group>"; };
+		8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPickerViewController.m; sourceTree = "<group>"; };
+		82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerViewController.h; sourceTree = "<group>"; };
+		82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		827E3E8B15E3E9D000D30D96 /* Frameworks */ = {
+		821D086E15ED177400ECFED0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				827E3E9215E3E9D000D30D96 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		827E3E9B15E3E9D000D30D96 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				827E3EA115E3E9D000D30D96 /* SenTestingKit.framework in Frameworks */,
-				827E3EA315E3E9D000D30D96 /* UIKit.framework in Frameworks */,
-				827E3EA415E3E9D000D30D96 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		827E3E8315E3E9D000D30D96 = {
+		821D086515ED177300ECFED0 = {
 			isa = PBXGroup;
 			children = (
-				827E3E9315E3E9D000D30D96 /* SinglySDK */,
-				827E3EA815E3E9D000D30D96 /* SinglySDKTests */,
-				827E3E9015E3E9D000D30D96 /* Frameworks */,
-				827E3E8F15E3E9D000D30D96 /* Products */,
+				821D087615ED177400ECFED0 /* SinglySDK */,
+				821D087515ED177400ECFED0 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		827E3E8F15E3E9D000D30D96 /* Products */ = {
+		821D087515ED177400ECFED0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				827E3E8E15E3E9D000D30D96 /* libSinglySDK.a */,
-				827E3E9F15E3E9D000D30D96 /* SinglySDKTests.octest */,
+				821D087415ED177400ECFED0 /* SinglySDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		827E3E9015E3E9D000D30D96 /* Frameworks */ = {
+		821D087615ED177400ECFED0 /* SinglySDK */ = {
 			isa = PBXGroup;
 			children = (
-				827E3E9115E3E9D000D30D96 /* Foundation.framework */,
-				827E3EA015E3E9D000D30D96 /* SenTestingKit.framework */,
-				827E3EA215E3E9D000D30D96 /* UIKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		827E3E9315E3E9D000D30D96 /* SinglySDK */ = {
-			isa = PBXGroup;
-			children = (
-				827E3E9615E3E9D000D30D96 /* SinglySDK.h */,
-				827E3E9815E3E9D000D30D96 /* SinglySDK.m */,
-				827E3E9415E3E9D000D30D96 /* Supporting Files */,
-				827E3EB915E458E300D30D96 /* SinglySession.h */,
-				827E3EBA15E458E300D30D96 /* SinglySession.m */,
-				827E3EBC15E5367600D30D96 /* SinglyLogInViewController.h */,
-				827E3EBD15E5367700D30D96 /* SinglyLogInViewController.m */,
-				82AD382F15E84ED3000EFC75 /* SinglyAPIRequest.h */,
-				82AD383015E84ED3000EFC75 /* SinglyAPIRequest.m */,
+				8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */,
+				8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */,
+				821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */,
+				821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */,
+				821D088515ED17B000ECFED0 /* SinglyLogInViewController.h */,
+				821D088615ED17B000ECFED0 /* SinglyLogInViewController.m */,
+				821D088715ED17B000ECFED0 /* SinglySDK.h */,
+				821D088815ED17B000ECFED0 /* SinglySDK.m */,
+				821D088915ED17B000ECFED0 /* SinglySession.h */,
+				821D088A15ED17B000ECFED0 /* SinglySession.m */,
+				821D087715ED177400ECFED0 /* Supporting Files */,
+				82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */,
+				82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */,
 			);
 			path = SinglySDK;
 			sourceTree = "<group>";
 		};
-		827E3E9415E3E9D000D30D96 /* Supporting Files */ = {
+		821D087715ED177400ECFED0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				827E3E9515E3E9D000D30D96 /* SinglySDK-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		827E3EA815E3E9D000D30D96 /* SinglySDKTests */ = {
-			isa = PBXGroup;
-			children = (
-				827E3EAE15E3E9D000D30D96 /* SinglySDKTests.h */,
-				827E3EAF15E3E9D000D30D96 /* SinglySDKTests.m */,
-				827E3EA915E3E9D000D30D96 /* Supporting Files */,
-			);
-			path = SinglySDKTests;
-			sourceTree = "<group>";
-		};
-		827E3EA915E3E9D000D30D96 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				827E3EAA15E3E9D000D30D96 /* SinglySDKTests-Info.plist */,
-				827E3EAB15E3E9D000D30D96 /* InfoPlist.strings */,
+				821D087815ED177400ECFED0 /* SinglySDK-Info.plist */,
+				821D087915ED177400ECFED0 /* InfoPlist.strings */,
+				821D087C15ED177400ECFED0 /* SinglySDK-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		821D086F15ED177400ECFED0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				821D088B15ED17B000ECFED0 /* SinglyAPIRequest.h in Headers */,
+				821D088D15ED17B000ECFED0 /* SinglyLogInViewController.h in Headers */,
+				821D088F15ED17B000ECFED0 /* SinglySDK.h in Headers */,
+				821D089115ED17B000ECFED0 /* SinglySession.h in Headers */,
+				82CAD78B15EEB0B300D3E486 /* SinglyLoginPickerViewController.h in Headers */,
+				8236EBDD15EFE79E00F3351E /* SinglyFriendPickerViewController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		827E3E8D15E3E9D000D30D96 /* SinglySDK */ = {
+		821D087315ED177400ECFED0 /* SinglySDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 827E3EB315E3E9D000D30D96 /* Build configuration list for PBXNativeTarget "SinglySDK" */;
+			buildConfigurationList = 821D087F15ED177400ECFED0 /* Build configuration list for PBXNativeTarget "SinglySDK" */;
 			buildPhases = (
-				827E3E8A15E3E9D000D30D96 /* Sources */,
-				827E3E8B15E3E9D000D30D96 /* Frameworks */,
-				827E3E8C15E3E9D000D30D96 /* CopyFiles */,
+				821D086C15ED177400ECFED0 /* ShellScript */,
+				821D086D15ED177400ECFED0 /* Sources */,
+				821D086E15ED177400ECFED0 /* Frameworks */,
+				821D086F15ED177400ECFED0 /* Headers */,
+				821D087015ED177400ECFED0 /* Resources */,
+				821D087115ED177400ECFED0 /* ShellScript */,
+				821D087215ED177400ECFED0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -179,68 +135,48 @@
 			);
 			name = SinglySDK;
 			productName = SinglySDK;
-			productReference = 827E3E8E15E3E9D000D30D96 /* libSinglySDK.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		827E3E9E15E3E9D000D30D96 /* SinglySDKTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 827E3EB615E3E9D000D30D96 /* Build configuration list for PBXNativeTarget "SinglySDKTests" */;
-			buildPhases = (
-				827E3E9A15E3E9D000D30D96 /* Sources */,
-				827E3E9B15E3E9D000D30D96 /* Frameworks */,
-				827E3E9C15E3E9D000D30D96 /* Resources */,
-				827E3E9D15E3E9D000D30D96 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				827E3EA615E3E9D000D30D96 /* PBXTargetDependency */,
-			);
-			name = SinglySDKTests;
-			productName = SinglySDKTests;
-			productReference = 827E3E9F15E3E9D000D30D96 /* SinglySDKTests.octest */;
+			productReference = 821D087415ED177400ECFED0 /* SinglySDK.framework */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		827E3E8515E3E9D000D30D96 /* Project object */ = {
+		821D086715ED177300ECFED0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = Singly;
 			};
-			buildConfigurationList = 827E3E8815E3E9D000D30D96 /* Build configuration list for PBXProject "SinglySDK" */;
+			buildConfigurationList = 821D086A15ED177300ECFED0 /* Build configuration list for PBXProject "SinglySDK" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 827E3E8315E3E9D000D30D96;
-			productRefGroup = 827E3E8F15E3E9D000D30D96 /* Products */;
+			mainGroup = 821D086515ED177300ECFED0;
+			productRefGroup = 821D087515ED177400ECFED0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				827E3E8D15E3E9D000D30D96 /* SinglySDK */,
-				827E3E9E15E3E9D000D30D96 /* SinglySDKTests */,
+				821D087315ED177400ECFED0 /* SinglySDK */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		827E3E9C15E3E9D000D30D96 /* Resources */ = {
+		821D087015ED177400ECFED0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				827E3EAD15E3E9D000D30D96 /* InfoPlist.strings in Resources */,
+				821D087B15ED177400ECFED0 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		827E3E9D15E3E9D000D30D96 /* ShellScript */ = {
+		821D086C15ED177400ECFED0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -251,45 +187,57 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n\tUFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version  from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\n\n# Short-circuit if all binaries are up to date\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n   [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n   [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\n   [[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n   [[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n   [[ ! \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\nthen\n    exit 0\nfi\n\n\n# Clean other platform if needed\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]]\nthen\n\techo \"Platform \\\"$UFW_SDK_PLATFORM\\\" was cleaned recently. Cleaning \\\"$UFW_OTHER_PLATFORM\\\" as well\"\n\techo xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\n\txcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\nfi\n\n\n# Make sure we are building from fresh binaries\n\nrm -rf \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nrm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nrm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\n";
+		};
+		821D087115ED177400ECFED0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "HEADERS_ROOT=$SRCROOT/$PRODUCT_NAME\nFRAMEWORK_HEADERS_DIR=\"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Versions/$FRAMEWORK_VERSION/Headers\"\n\n## only header files expected at this point\nPUBLIC_HEADERS=$(find $FRAMEWORK_HEADERS_DIR/. -not -type d 2> /dev/null | sed -e \"s@.*/@@g\")\n\nFIND_OPTS=\"\"\nfor PUBLIC_HEADER in $PUBLIC_HEADERS; do\n  if [ -n \"$FIND_OPTS\" ]; then\n    FIND_OPTS=\"$FIND_OPTS -o\"\n  fi\n  FIND_OPTS=\"$FIND_OPTS -name '$PUBLIC_HEADER'\"\ndone\n\nif [ -n \"$FIND_OPTS\" ]; then\n  for ORIG_HEADER in $(eval \"find $HEADERS_ROOT/. $FIND_OPTS\" 2> /dev/null | sed -e \"s@^$HEADERS_ROOT/./@@g\"); do\n    PUBLIC_HEADER=$(basename $ORIG_HEADER)\n    RELATIVE_PATH=$(dirname $ORIG_HEADER)\n    if [ -e $FRAMEWORK_HEADERS_DIR/$PUBLIC_HEADER ]; then\n      mkdir -p \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH\"\n      mv \"$FRAMEWORK_HEADERS_DIR/$PUBLIC_HEADER\" \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH/$PUBLIC_HEADER\"\n    fi\n  done\nfi\n";
+		};
+		821D087215ED177400ECFED0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\nexport UFW_MASTER_SCRIPT_RUNNING=1\n\n\n# Functions\n\n## List files in the specified directory, storing to the specified array.\n#\n# @param $1 The path to list\n# @param $2 The name of the array to fill\n#\n##\nlist_files ()\n{\n    filelist=$(ls \"$1\")\n    while read line\n    do\n        eval \"$2[\\${#$2[*]}]=\\\"\\$line\\\"\"\n    done <<< \"$filelist\"\n}\n\n\n# Sanity check\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]]\nthen\n    echo \"Framework target \\\"${TARGET_NAME}\\\" had no source files to build from. Make sure your source files have the correct target membership\"\n    exit 1\nfi\n\n\n# Gather information\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n    UFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\n\n# Short-circuit if all binaries are up to date.\n# We already checked the other platform in the prerun script.\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\nthen\n    exit 0\nfi\n\n\n# Make sure the other platform gets built\n\necho \"Build other platform\"\n\necho xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\n\n\n# Build the fat static library binary\n\necho \"Create universal static library\"\n\necho \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n\"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n\necho mv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nmv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\n\n\n# Build framework structure\n\necho \"Build symlinks\"\n\necho ln -sfh A \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Versions/Current\"\nln -sfh A \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Versions/Current\"\necho ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Headers\"\nln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Headers\"\necho ln -sfh Versions/Current/Resources \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Resources\"\nln -sfh Versions/Current/Resources \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Resources\"\necho ln -sfh \"Versions/Current/${EXECUTABLE_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${EXECUTABLE_NAME}\"\nln -sfh \"Versions/Current/${EXECUTABLE_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${EXECUTABLE_NAME}\"\n\n\n# Link to binary for unit tests\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/.fake_fw_testing.framework\"\nln -sfh \"../${WRAPPER_NAME}/${EXECUTABLE_NAME}\" \"${BUILT_PRODUCTS_DIR}/.fake_fw_testing.framework/.fake_fw_testing\"\n\n\n# Build embedded framework structure\n\necho \"Build Embedded Framework\"\n\necho rm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\necho mkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\necho cp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\ncp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\n\ndeclare -a UFW_FILE_LIST\nlist_files \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" UFW_FILE_LIST\nfor filename in \"${UFW_FILE_LIST[@]}\"\ndo\n    if [[ \"${filename}\" != \"Info.plist\" ]] && [[ ! \"${filename}\" =~ .*\\.lproj$ ]]\n    then\n        echo ln -sfh \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n        ln -sfh \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n    fi\ndone\n\n\n# Replace other platform's framework with a copy of this one (so that both have the same universal binary)\n\necho \"Copy from $UFW_SDK_PLATFORM to $UFW_OTHER_PLATFORM\"\n\necho rm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\nrm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\necho cp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\ncp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		827E3E8A15E3E9D000D30D96 /* Sources */ = {
+		821D086D15ED177400ECFED0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				827E3E9915E3E9D000D30D96 /* SinglySDK.m in Sources */,
-				827E3EBB15E458E300D30D96 /* SinglySession.m in Sources */,
-				827E3EBE15E5367700D30D96 /* SinglyLogInViewController.m in Sources */,
-				82AD383115E84ED3000EFC75 /* SinglyAPIRequest.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		827E3E9A15E3E9D000D30D96 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				827E3EB015E3E9D000D30D96 /* SinglySDKTests.m in Sources */,
+				821D088C15ED17B000ECFED0 /* SinglyAPIRequest.m in Sources */,
+				821D088E15ED17B000ECFED0 /* SinglyLogInViewController.m in Sources */,
+				821D089015ED17B000ECFED0 /* SinglySDK.m in Sources */,
+				821D089215ED17B000ECFED0 /* SinglySession.m in Sources */,
+				82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */,
+				8236EBDE15EFE79E00F3351E /* SinglyFriendPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		827E3EA615E3E9D000D30D96 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 827E3E8D15E3E9D000D30D96 /* SinglySDK */;
-			targetProxy = 827E3EA515E3E9D000D30D96 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		827E3EAB15E3E9D000D30D96 /* InfoPlist.strings */ = {
+		821D087915ED177400ECFED0 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				827E3EAC15E3E9D000D30D96 /* en */,
+				821D087A15ED177400ECFED0 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -297,7 +245,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		827E3EB115E3E9D000D30D96 /* Debug */ = {
+		821D087D15ED177400ECFED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -323,7 +271,7 @@
 			};
 			name = Debug;
 		};
-		827E3EB215E3E9D000D30D96 /* Release */ = {
+		821D087E15ED177400ECFED0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -343,91 +291,80 @@
 			};
 			name = Release;
 		};
-		827E3EB415E3E9D000D30D96 /* Debug */ = {
+		821D088015ED177400ECFED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DSTROOT = /tmp/SinglySDK.dst;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/$(FRAMEWORK_VERSION)";
+				DEAD_CODE_STRIPPING = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDK/SinglySDK-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
+				INFOPLIST_FILE = "SinglySDK/SinglySDK-Info.plist";
+				INFOPLIST_PATH = "$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Info.plist";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				UNLOCALIZED_RESOURCES_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Resources";
+				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
 		};
-		827E3EB515E3E9D000D30D96 /* Release */ = {
+		821D088115ED177400ECFED0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DSTROOT = /tmp/SinglySDK.dst;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/$(FRAMEWORK_VERSION)";
+				DEAD_CODE_STRIPPING = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDK/SinglySDK-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
+				INFOPLIST_FILE = "SinglySDK/SinglySDK-Info.plist";
+				INFOPLIST_PATH = "$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Info.plist";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		827E3EB715E3E9D000D30D96 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SinglySDK/SinglySDK-Prefix.pch";
-				INFOPLIST_FILE = "SinglySDKTests/SinglySDKTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		827E3EB815E3E9D000D30D96 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SinglySDK/SinglySDK-Prefix.pch";
-				INFOPLIST_FILE = "SinglySDKTests/SinglySDKTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
+				UNLOCALIZED_RESOURCES_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Resources";
+				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		827E3E8815E3E9D000D30D96 /* Build configuration list for PBXProject "SinglySDK" */ = {
+		821D086A15ED177300ECFED0 /* Build configuration list for PBXProject "SinglySDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				827E3EB115E3E9D000D30D96 /* Debug */,
-				827E3EB215E3E9D000D30D96 /* Release */,
+				821D087D15ED177400ECFED0 /* Debug */,
+				821D087E15ED177400ECFED0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		827E3EB315E3E9D000D30D96 /* Build configuration list for PBXNativeTarget "SinglySDK" */ = {
+		821D087F15ED177400ECFED0 /* Build configuration list for PBXNativeTarget "SinglySDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				827E3EB415E3E9D000D30D96 /* Debug */,
-				827E3EB515E3E9D000D30D96 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		827E3EB615E3E9D000D30D96 /* Build configuration list for PBXNativeTarget "SinglySDKTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				827E3EB715E3E9D000D30D96 /* Debug */,
-				827E3EB815E3E9D000D30D96 /* Release */,
+				821D088015ED177400ECFED0 /* Debug */,
+				821D088115ED177400ECFED0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 827E3E8515E3E9D000D30D96 /* Project object */;
+	rootObject = 821D086715ED177300ECFED0 /* Project object */;
 }

@@ -6,9 +6,10 @@
 //  Copyright (c) 2012 Singly. All rights reserved.
 //
 
-#import "SinglyLoginViewController.h"
-#import "SinglySession.h"
-#import "SinglyAPIRequest.h"
+#import <SinglySDK/SinglySession.h>
+#import <SinglySDK/SinglyLoginViewController.h>
+#import <SinglySDK/SinglyAPIRequest.h>
+#import <SinglySDK/SinglyLoginPickerViewController.h>
 
 /*!
     @header SinglySDK
