@@ -26,9 +26,11 @@
 {
     [session_ checkReadyWithCompletionHandler:^(BOOL ready) {
         NSLog(@"Ready is %d", ready);
-        _picker = [[SinglyLoginPickerViewController alloc] initWithSession:session_];
-        [self presentModalViewController:_picker animated:YES];
+        //_picker = [[SinglyLoginPickerViewController alloc] initWithSession:session_];
+        //[self presentModalViewController:_picker animated:YES];
         if(ready) {
+            SinglyFriendPickerViewController* friendPicker = [[SinglyFriendPickerViewController alloc] initWithSession:session_];
+            [self presentModalViewController:friendPicker animated:YES];
             NSLog(@"We're already done!");
             [session_ requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"profiles"] withCompletionHandler:^(NSError *error, id json) {
                 NSLog(@"The profiles result is: %@", json);

@@ -294,10 +294,7 @@
 		821D088015ED177400ECFED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/$(FRAMEWORK_VERSION)";
 				DEAD_CODE_STRIPPING = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -320,10 +317,7 @@
 		821D088115ED177400ECFED0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/$(FRAMEWORK_VERSION)";
 				DEAD_CODE_STRIPPING = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;

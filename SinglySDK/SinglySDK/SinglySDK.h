@@ -10,6 +10,7 @@
 #import <SinglySDK/SinglyLoginViewController.h>
 #import <SinglySDK/SinglyAPIRequest.h>
 #import <SinglySDK/SinglyLoginPickerViewController.h>
+#import <SinglySDK/SinglyFriendPickerViewController.h>
 
 /*!
     @header SinglySDK

@@ -7,9 +7,13 @@
 //
 
 #import "SinglyFriendPickerViewController.h"
+#import <SinglySDK/SinglyAPIRequest.h>
 
 @interface SinglyFriendPickerViewController () {
     SinglySession* _session;
+    NSMutableDictionary* _friends;
+    NSArray* _friendsSortedKeys;
+    UIView* _loadingView;
 }
 
 @end
@@ -29,12 +33,50 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [_session requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"types/contacts" withParameters:[NSDictionary dictionaryWithObject:@"true" forKey:@"map"]] withCompletionHandler:^(NSError *error, id json) {
+        if (![json isKindOfClass:[NSArray class]]) {
+            return;
+        }
+        // Here we flip through the contacts and see merge them a bit
+        NSArray* contacts = (NSArray*)json;
+        _friends = [NSMutableDictionary dictionaryWithCapacity:contacts.count];
+        for (NSDictionary* contact in contacts) {
+            NSDictionary* map = [contact objectForKey:@"map"];
+            if (!map || ![map objectForKey:@"name"]) continue;
+            NSMutableArray* profiles = [_friends objectForKey:[map objectForKey:@"name"]];
+            if (!profiles) {
+                profiles = [NSMutableArray array];
+                [_friends setObject:profiles forKey:[map objectForKey:@"name"]];
+            }
+            [profiles addObject:contact];
+        }
+        _friendsSortedKeys = [[_friends allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        [self.tableView reloadData];
+        [_loadingView removeFromSuperview];
+    }];
+}
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+-(void)viewWillAppear:(BOOL)animated
+{
+    if (_friendsSortedKeys.count == 0) {
+        _loadingView = [[UIView alloc] initWithFrame:self.view.bounds];
+        _loadingView.backgroundColor = [UIColor blackColor];
+        UIActivityIndicatorView* activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        activityView.frame  = CGRectMake(140, 180, activityView.bounds.size.width, activityView.bounds.size.height);
+        [activityView startAnimating];
+        [_loadingView addSubview:activityView];
+        
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(4, 220, _loadingView.bounds.size.width - 8, 22)];
+        label.text = @"Loading...";
+        label.backgroundColor = [UIColor clearColor];
+        label.textAlignment = UITextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        [_loadingView addSubview:label];
+        
+        [self.view addSubview:_loadingView];
+        [self.view bringSubviewToFront:_loadingView];
+    }
 }
 
 - (void)viewDidUnload
@@ -53,24 +95,28 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return _friendsSortedKeys.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"com.singly.SinglyFriendPickerCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
+        UILabel* lbl = [[UILabel alloc] initWithFrame:CGRectMake(8, 0, cell.bounds.size.width - 16, cell.bounds.size.height)];
+        [cell addSubview:lbl];
+    }
+    
+    UILabel* lbl = [[cell subviews] objectAtIndex:1];
+    lbl.text = [_friendsSortedKeys objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -118,6 +164,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
