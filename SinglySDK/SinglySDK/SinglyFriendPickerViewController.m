@@ -16,6 +16,7 @@
     NSArray* _friendsSortedKeys;
     UIView* _loadingView;
     NSMutableArray* _pickedFriends;
+    UIColor* originalSepColor;
 }
 
 @end
@@ -60,6 +61,8 @@
         _friendsSortedKeys = [[_friends allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         [self.tableView reloadData];
         [_loadingView removeFromSuperview];
+        self.tableView.separatorColor = originalSepColor;
+        originalSepColor = nil;
     }];
 }
 
@@ -80,6 +83,7 @@
         label.textColor = [UIColor whiteColor];
         [_loadingView addSubview:label];
         
+        originalSepColor = self.tableView.separatorColor;
         self.tableView.separatorColor = [UIColor clearColor];
         [self.view addSubview:_loadingView];
         [self.view bringSubviewToFront:_loadingView];
