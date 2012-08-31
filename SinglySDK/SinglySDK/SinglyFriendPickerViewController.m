@@ -44,11 +44,13 @@
         _friends = [NSMutableDictionary dictionaryWithCapacity:contacts.count];
         for (NSDictionary* contact in contacts) {
             NSDictionary* map = [contact objectForKey:@"map"];
-            if (!map || ![map objectForKey:@"name"]) continue;
-            NSMutableArray* profiles = [_friends objectForKey:[map objectForKey:@"name"]];
+            if (!map) continue;
+            NSDictionary* oembed = [map objectForKey:@"oembed"];
+            if (!oembed || ![oembed objectForKey:@"title"]) continue;
+            NSMutableArray* profiles = [_friends objectForKey:[oembed objectForKey:@"title"]];
             if (!profiles) {
                 profiles = [NSMutableArray array];
-                [_friends setObject:profiles forKey:[map objectForKey:@"name"]];
+                [_friends setObject:profiles forKey:[oembed objectForKey:@"title"]];
             }
             [profiles addObject:contact];
         }
@@ -169,8 +171,9 @@
     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     */
-    [_pickedFriends removeAllObjects];
-    self.pickedFriends = [NSArray arrayWithObject:[[[_friends objectForKey:[_friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0] objectForKey:@"id"]];
+    NSString* idr = [[[_friends objectForKey:[_friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0] objectForKey:@"idr"];
+    idr = [idr substringFromIndex:[idr rangeOfString:@"#" options:NSBackwardsSearch].location + 1];
+    self.pickedFriends = [NSArray arrayWithObject:idr];
 }
 
 @end
