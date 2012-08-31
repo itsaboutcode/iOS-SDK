@@ -8,6 +8,7 @@
 
 #import "SinglyFriendPickerViewController.h"
 #import <SinglySDK/SinglyAPIRequest.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface SinglyFriendPickerViewController () {
     SinglySession* _session;
@@ -34,19 +35,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [_session requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"types/contacts" withParameters:[NSDictionary dictionaryWithObject:@"true" forKey:@"map"]] withCompletionHandler:^(NSError *error, id json) {
+
+    [_session requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"types/contacts" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"200", @"limit", nil]] withCompletionHandler:^(NSError *error, id json) {
         if (![json isKindOfClass:[NSArray class]]) {
             return;
         }
         // Here we flip through the contacts and see merge them a bit
         NSArray* contacts = (NSArray*)json;
         _friends = [NSMutableDictionary dictionaryWithCapacity:contacts.count];
+        NSLog(@"Got %d contacts", contacts.count);
         for (NSDictionary* contact in contacts) {
-            NSDictionary* map = [contact objectForKey:@"map"];
-            if (!map) continue;
-            NSDictionary* oembed = [map objectForKey:@"oembed"];
-            if (!oembed || ![oembed objectForKey:@"title"]) continue;
+            NSDictionary* oembed = [contact objectForKey:@"oembed"];
+            if (!oembed || ![oembed objectForKey:@"title"]){
+                NSLog(@"Skipped for no title or oembed");
+                continue;
+            }
             NSMutableArray* profiles = [_friends objectForKey:[oembed objectForKey:@"title"]];
             if (!profiles) {
                 profiles = [NSMutableArray array];
@@ -77,6 +80,7 @@
         label.textColor = [UIColor whiteColor];
         [_loadingView addSubview:label];
         
+        self.tableView.separatorColor = [UIColor clearColor];
         [self.view addSubview:_loadingView];
         [self.view bringSubviewToFront:_loadingView];
     }
@@ -114,11 +118,20 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
-        UILabel* lbl = [[UILabel alloc] initWithFrame:CGRectMake(8, 0, cell.bounds.size.width - 16, cell.bounds.size.height)];
+        UIImageView* avatar = [[UIImageView alloc] initWithFrame:CGRectMake(8, 4, 32, 32)];
+        avatar.layer.cornerRadius = 4.0;
+        avatar.clipsToBounds = YES;
+        [cell addSubview:avatar];
+        
+        UILabel* lbl = [[UILabel alloc] initWithFrame:CGRectMake(48, 0, cell.bounds.size.width - 48, cell.bounds.size.height)];
         [cell addSubview:lbl];
     }
     
-    UILabel* lbl = [[cell subviews] objectAtIndex:1];
+    UIImageView* avatar = [cell.subviews objectAtIndex:1];
+    NSDictionary* friendInfo = [[_friends objectForKey:[_friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0];
+    avatar.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[friendInfo objectForKey:@"oembed"] objectForKey:@"thumbnail_url"]]]];
+    
+    UILabel* lbl = [cell.subviews objectAtIndex:2];
     lbl.text = [_friendsSortedKeys objectAtIndex:indexPath.row];
     
     return cell;
