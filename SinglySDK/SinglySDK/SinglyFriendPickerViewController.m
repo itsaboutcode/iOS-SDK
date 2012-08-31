@@ -14,6 +14,7 @@
     NSMutableDictionary* _friends;
     NSArray* _friendsSortedKeys;
     UIView* _loadingView;
+    NSMutableArray* _pickedFriends;
 }
 
 @end
@@ -164,15 +165,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    */
+    [_pickedFriends removeAllObjects];
+    self.pickedFriends = [NSArray arrayWithObject:[[[_friends objectForKey:[_friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0] objectForKey:@"id"]];
 }
 
 @end

@@ -11,6 +11,8 @@
 
 @interface SinglyFriendPickerViewController : UITableViewController
 
+@property (strong, nonatomic) NSArray* pickedFriends;
+
 -(id)initWithSession:(SinglySession*)session;
 
 @end
