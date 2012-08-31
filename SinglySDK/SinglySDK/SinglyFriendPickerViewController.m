@@ -133,7 +133,13 @@
     
     UIImageView* avatar = [cell.subviews objectAtIndex:1];
     NSDictionary* friendInfo = [[_friends objectForKey:[_friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0];
-    avatar.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[friendInfo objectForKey:@"oembed"] objectForKey:@"thumbnail_url"]]]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[[friendInfo objectForKey:@"oembed"] objectForKey:@"thumbnail_url"]]];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            avatar.image = [UIImage imageWithData:data];
+        });
+    });
+    
     
     UILabel* lbl = [cell.subviews objectAtIndex:2];
     lbl.text = [_friendsSortedKeys objectAtIndex:indexPath.row];
