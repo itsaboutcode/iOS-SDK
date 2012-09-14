@@ -18,6 +18,10 @@
 		821D089215ED17B000ECFED0 /* SinglySession.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088A15ED17B000ECFED0 /* SinglySession.m */; };
 		8236EBDD15EFE79E00F3351E /* SinglyFriendPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8236EBDE15EFE79E00F3351E /* SinglyFriendPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */; };
+		82C6252B1600EA8E00BF5225 /* SinglySharingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C625291600EA8E00BF5225 /* SinglySharingView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		82C6252C1600EA8E00BF5225 /* SinglySharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C6252A1600EA8E00BF5225 /* SinglySharingView.m */; };
+		82C6253016011E7900BF5225 /* SinglySharingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C6252E16011E7900BF5225 /* SinglySharingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		82C6253116011E7900BF5225 /* SinglySharingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C6252F16011E7900BF5225 /* SinglySharingViewController.m */; };
 		82CAD78B15EEB0B300D3E486 /* SinglyLoginPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */; };
 /* End PBXBuildFile section */
@@ -37,6 +41,10 @@
 		821D088A15ED17B000ECFED0 /* SinglySession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySession.m; sourceTree = "<group>"; };
 		8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendPickerViewController.h; sourceTree = "<group>"; };
 		8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPickerViewController.m; sourceTree = "<group>"; };
+		82C625291600EA8E00BF5225 /* SinglySharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySharingView.h; sourceTree = "<group>"; };
+		82C6252A1600EA8E00BF5225 /* SinglySharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySharingView.m; sourceTree = "<group>"; };
+		82C6252E16011E7900BF5225 /* SinglySharingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySharingViewController.h; sourceTree = "<group>"; };
+		82C6252F16011E7900BF5225 /* SinglySharingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySharingViewController.m; sourceTree = "<group>"; };
 		82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerViewController.h; sourceTree = "<group>"; };
 		82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,6 +92,10 @@
 				821D087715ED177400ECFED0 /* Supporting Files */,
 				82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */,
 				82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */,
+				82C625291600EA8E00BF5225 /* SinglySharingView.h */,
+				82C6252A1600EA8E00BF5225 /* SinglySharingView.m */,
+				82C6252E16011E7900BF5225 /* SinglySharingViewController.h */,
+				82C6252F16011E7900BF5225 /* SinglySharingViewController.m */,
 			);
 			path = SinglySDK;
 			sourceTree = "<group>";
@@ -111,6 +123,8 @@
 				821D089115ED17B000ECFED0 /* SinglySession.h in Headers */,
 				82CAD78B15EEB0B300D3E486 /* SinglyLoginPickerViewController.h in Headers */,
 				8236EBDD15EFE79E00F3351E /* SinglyFriendPickerViewController.h in Headers */,
+				82C6252B1600EA8E00BF5225 /* SinglySharingView.h in Headers */,
+				82C6253016011E7900BF5225 /* SinglySharingViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +242,8 @@
 				821D089215ED17B000ECFED0 /* SinglySession.m in Sources */,
 				82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */,
 				8236EBDE15EFE79E00F3351E /* SinglyFriendPickerViewController.m in Sources */,
+				82C6252C1600EA8E00BF5225 /* SinglySharingView.m in Sources */,
+				82C6253116011E7900BF5225 /* SinglySharingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

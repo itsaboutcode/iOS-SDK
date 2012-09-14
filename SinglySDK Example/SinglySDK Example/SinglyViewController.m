@@ -29,12 +29,17 @@
         //_picker = [[SinglyLoginPickerViewController alloc] initWithSession:session_];
         //[self presentModalViewController:_picker animated:YES];
         if(ready) {
+            SinglySharingViewController* sharingView = [[SinglySharingViewController alloc] init];
+            self.modalPresentationStyle = UIModalPresentationCurrentContext;
+            [self presentModalViewController:sharingView animated:NO];
+#if 0
             SinglyFriendPickerViewController* friendPicker = [[SinglyFriendPickerViewController alloc] initWithSession:session_];
             [self presentModalViewController:friendPicker animated:YES];
             NSLog(@"We're already done!");
             [session_ requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"profiles"] withCompletionHandler:^(NSError *error, id json) {
                 NSLog(@"The profiles result is: %@", json);
             }];
+#endif
         }
     }];
 }
