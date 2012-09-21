@@ -62,23 +62,34 @@
     NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:_service, @"services", nil];
     SinglyAPIRequest* request = [SinglyAPIRequest apiRequestForEndpoint:url withParameters:params];
     request.method = @"POST";
-    NSString* body = [NSString stringWithFormat:@"body=%@", [self.textView.text URLEncodedString]];
-    request.body = [body dataUsingEncoding:NSASCIIStringEncoding];
+    if ([self attachmentsCount] > 0) {
+        NSLog(@"Getting the photo send ready");
+        UIImage* image = [self.images objectAtIndex:0];
+        NSData* pngData = UIImagePNGRepresentation(image);
+        NSString* imgData = [[NSString alloc] initWithData:pngData encoding:NSASCIIStringEncoding];
+        NSMutableData* data = [NSMutableData dataWithCapacity:6 + imgData.length];
+        [data appendData:[@"photo=%@" dataUsingEncoding:NSASCIIStringEncoding]];
+        [data appendData:[[imgData URLEncodedString] dataUsingEncoding:NSUTF8StringEncoding]];
+        request.body = data;
+    } else {
+        NSString* body = [NSString stringWithFormat:@"body=%@", [self.textView.text URLEncodedString]];
+        request.body = [body dataUsingEncoding:NSUTF8StringEncoding];
+    }
     //    self.textView.text, @"body", nil];
     [_session requestAPI:request withCompletionHandler:^(NSError *error, id resJson) {
-        if (error) {
-            NSLog(@"    error:%@", error);
+        if (error || [resJson objectForKey:@"error"]) {
+            NSLog(@"error:%@", error);
             
             // remove activity
-            [[[self.sendButton subviews] lastObject] removeFromSuperview];
-            [self.sendButton setTitle:@"Post" forState:UIControlStateNormal];
+            //[[[self.sendButton subviews] lastObject] removeFromSuperview];
+            //[self.sendButton setTitle:@"Post" forState:UIControlStateNormal];
             self.view.userInteractionEnabled = YES;
             
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Send Message", @"")
                                                                  message:[NSString stringWithFormat:NSLocalizedString(@"The message, \"%@\" cannot be sent.", @""), self.textView.text]
                                                                 delegate:self
-                                                       cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
-                                                       otherButtonTitles:NSLocalizedString(@"Try Again", @""), nil];
+                                                       cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                                                       otherButtonTitles:nil];
             //alertView.tag = DEFacebookComposeViewControllerCannotSendAlert;
             [alertView show];
             

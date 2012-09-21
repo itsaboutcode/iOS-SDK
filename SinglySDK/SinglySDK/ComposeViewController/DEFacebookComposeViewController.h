@@ -77,7 +77,7 @@ typedef void (^DEFacebookComposeViewControllerCompletionHandler)(DEFacebookCompo
     // Adds a URL to the tweet. Returns NO if the additional URL will not fit
     // within the character space currently available, or if the sheet has already
     // been presented to the user.
-- (BOOL)addImageWithURL:(NSURL *)url;
+//- (BOOL)addImageWithURL:(NSURL *)url;
 
     // Removes all images from the tweet. Returns NO and does not perform an operation
     // if the sheet has already been presented to the user. 
@@ -86,7 +86,7 @@ typedef void (^DEFacebookComposeViewControllerCompletionHandler)(DEFacebookCompo
     // Adds a URL to the tweet. Returns NO if the additional URL will not fit
     // within the character space currently available, or if the sheet has already
     // been presented to the user.
-- (BOOL)addURL:(NSURL *)url;
+//- (BOOL)addURL:(NSURL *)url;
 
     // Removes all URLs from the tweet. Returns NO and does not perform an operation
     // if the sheet has already been presented to the user.
@@ -101,10 +101,6 @@ typedef void (^DEFacebookComposeViewControllerCompletionHandler)(DEFacebookCompo
     // Specify a block to be called when the user is finished. This block is not guaranteed
     // to be called on any particular thread.
 @property (nonatomic, copy) DEFacebookComposeViewControllerCompletionHandler completionHandler;
-
-    // On iOS5+, set to YES to prevent from using built in Twitter credentials.
-    // Set to NO by default.
-@property (assign, nonatomic) BOOL alwaysUseDETwitterCredentials;
 
 
 @end

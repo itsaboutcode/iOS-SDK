@@ -508,7 +508,7 @@ static NSString * const DEFacebookLastAccountIdentifier = @"DEFacebookLastAccoun
     return YES;
 }
 
-
+#if 0
 - (BOOL)addURL:(NSURL *)url
 {
     if (url == nil) {
@@ -530,7 +530,7 @@ static NSString * const DEFacebookLastAccountIdentifier = @"DEFacebookLastAccoun
     [self.urls addObject:url];
     return YES;
 }
-
+#endif
 
 - (BOOL)removeAllURLs
 {
