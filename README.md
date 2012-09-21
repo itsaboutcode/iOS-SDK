@@ -76,6 +76,16 @@ An example implementation of the `SinglySessionDelegate` is:
 }
 ```
 
+If you wish to login multiple services, or offer multiple services for login, then you
+can use the `SinglyLoginPickerViewController`.  All you need to do is set all of th
+services that you wish to allow connections to.
+
+```
+SinglyLoginPickerViewController* controller = [[SinglyLoginPickerViewController alloc] initWithSession:session];
+controller.services = [NSArray arrayWithObjects:kSinglyServiceFacebook, kSinglyServiceTwitter, nil];
+[self presentModalViewController:controller animated:YES];
+```
+
 Once we have a valid session we can start making API requests.  We can make
 GET, POST or any method requests using the `SinglyAPIRequest`.  The request is only
 a description of the request that we are going to make, to actually execute the 
@@ -90,3 +100,21 @@ that requests the profiles list and is using blocks to handle the result is:
 
 That's the basics and enough to get rolling!
 
+## Other View Controllers ##
+
+A few helpful view controllers exist to make life easier and get apps built faster.
+
+* `SinglyLoginViewPickerController`
+    
+    As discussed above this is a view controller to give a list of available services
+    for the user to login to.
+    
+* `SinglyFriendPickerViewController`
+   
+   A view of a users contacts that allows them to pick one.
+   
+* `SinglySharingViewController`
+ 
+    A view to post a status message out to a network.
+
+More docs to come for these.
