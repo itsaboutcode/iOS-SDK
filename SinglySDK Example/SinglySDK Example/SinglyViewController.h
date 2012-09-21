@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <SinglySDK/SinglySDK.h>
 
-@interface SinglyViewController : UIViewController<SinglySessionDelegate>
+@interface SinglyViewController : UIViewController<SinglySessionDelegate, SinglyLogInViewControllerDelegate>
 
 @end

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ComposeViewController/DEFacebookComposeViewController.h"
 
-@interface SinglySharingViewController : UIViewController
+@class SinglySession;
+
+@interface SinglySharingViewController : DEFacebookComposeViewController
+
+-(id)initWithSession:(SinglySession*)session forService:(NSString*)service;
 
 @end
