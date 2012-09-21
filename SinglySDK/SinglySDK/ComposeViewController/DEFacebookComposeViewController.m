@@ -78,7 +78,6 @@ static BOOL waitingForAccess = NO;
 
     // Public
 @synthesize completionHandler = _completionHandler;
-@synthesize alwaysUseDETwitterCredentials = _alwaysUseDETwitterCredentials;
 
     // Private
 @synthesize text = _text;
