@@ -35,7 +35,7 @@
             self.modalPresentationStyle = UIModalPresentationCurrentContext;
             [self presentModalViewController:sharingView animated:YES];
         } else {
-            SinglyLogInViewController* login = [[SinglyLogInViewController alloc] initWithSession:session_ forService:kSinglyServiceTwitter];
+            SinglyLoginViewController* login = [[SinglyLoginViewController alloc] initWithSession:session_ forService:kSinglyServiceTwitter];
             [self presentModalViewController:login animated:YES];
         }
         
@@ -91,8 +91,14 @@
 }
 
 #pragma mark - SinglyLoginViewControllerDelegate
--(void)singlyLogInViewController:(SinglyLogInViewController *)controller didLoginForService:(NSString *)service;
+-(void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service;
 {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 @end

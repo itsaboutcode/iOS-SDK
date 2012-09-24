@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Singly. All rights reserved.
 //
 
-#import "SinglyLogInViewController.h"
+#import "SinglyLoginViewController.h"
 
-@interface SinglyLogInViewController ()
+@interface SinglyLoginViewController ()
 {
     SinglySession* session_;
     UIWebView* webview_;
@@ -20,7 +20,7 @@
 -(void)processAccessTokenWithData:(NSData*)data;
 @end
 
-@implementation SinglyLogInViewController
+@implementation SinglyLoginViewController
 
 - (id)initWithSession:(SinglySession*)session forService:(NSString*)serviceId;
 {
@@ -150,7 +150,7 @@
     NSDictionary* jsonResult = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     if (error) {
         if (self.delegate) {
-            [self.delegate singlyLogInViewController:self errorLoggingInToService:targetService withError:error];
+            [self.delegate singlyLoginViewController:self errorLoggingInToService:targetService withError:error];
         }
         return;
     }
@@ -159,7 +159,7 @@
     if (loginError) {
         if (self.delegate) {
             NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:loginError forKey:NSLocalizedDescriptionKey]];
-            [self.delegate singlyLogInViewController:self errorLoggingInToService:targetService withError:error];
+            [self.delegate singlyLoginViewController:self errorLoggingInToService:targetService withError:error];
                                                     
         }
         return;
@@ -171,7 +171,7 @@
     [session_ updateProfilesWithCompletion:^{
         NSLog(@"All set to do requests as account %@ with access token %@", session_.accountID, session_.accessToken);
         if (self.delegate) {
-            [self.delegate singlyLogInViewController:self didLoginForService:targetService];
+            [self.delegate singlyLoginViewController:self didLoginForService:targetService];
         }
     }];
 }
@@ -179,7 +179,7 @@
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     if (self.delegate) {
-        [self.delegate singlyLogInViewController:self errorLoggingInToService:targetService withError:error];
+        [self.delegate singlyLoginViewController:self errorLoggingInToService:targetService withError:error];
     }
 }
 @end

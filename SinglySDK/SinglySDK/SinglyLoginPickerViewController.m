@@ -133,7 +133,7 @@
     [[button.layer.sublayers objectAtIndex:1] removeFromSuperlayer];
     
     NSLog(@"Login to service %@", [self.services objectAtIndex:button.tag]);
-    SinglyLogInViewController* loginViewController = [[SinglyLogInViewController alloc] initWithSession:session_ forService:[self.services objectAtIndex:button.tag]];
+    SinglyLoginViewController* loginViewController = [[SinglyLoginViewController alloc] initWithSession:session_ forService:[self.services objectAtIndex:button.tag]];
     loginViewController.delegate = self;
     [self presentViewController:loginViewController animated:YES completion:NULL];
 }
@@ -204,13 +204,13 @@
 }
 
 #pragma mark - Singly Login View Controller delegate
--(void)singlyLogInViewController:(SinglyLogInViewController *)controller didLoginForService:(NSString *)service;
+-(void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service;
 {
     [self.tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)singlyLogInViewController:(SinglyLogInViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
+-(void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
 {
     [self dismissViewControllerAnimated:FALSE completion:nil];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];

@@ -10,8 +10,8 @@
 		821D087B15ED177400ECFED0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 821D087915ED177400ECFED0 /* InfoPlist.strings */; };
 		821D088B15ED17B000ECFED0 /* SinglyAPIRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		821D088C15ED17B000ECFED0 /* SinglyAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */; };
-		821D088D15ED17B000ECFED0 /* SinglyLogInViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088515ED17B000ECFED0 /* SinglyLogInViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		821D088E15ED17B000ECFED0 /* SinglyLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088615ED17B000ECFED0 /* SinglyLogInViewController.m */; };
+		821D088D15ED17B000ECFED0 /* SinglyLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088515ED17B000ECFED0 /* SinglyLoginViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		821D088E15ED17B000ECFED0 /* SinglyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088615ED17B000ECFED0 /* SinglyLoginViewController.m */; };
 		821D088F15ED17B000ECFED0 /* SinglySDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088715ED17B000ECFED0 /* SinglySDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		821D089015ED17B000ECFED0 /* SinglySDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088815ED17B000ECFED0 /* SinglySDK.m */; };
 		821D089115ED17B000ECFED0 /* SinglySession.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088915ED17B000ECFED0 /* SinglySession.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -68,8 +68,8 @@
 		821D087C15ED177400ECFED0 /* SinglySDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SinglySDK-Prefix.pch"; sourceTree = "<group>"; };
 		821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAPIRequest.h; sourceTree = "<group>"; };
 		821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAPIRequest.m; sourceTree = "<group>"; };
-		821D088515ED17B000ECFED0 /* SinglyLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLogInViewController.h; sourceTree = "<group>"; };
-		821D088615ED17B000ECFED0 /* SinglyLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLogInViewController.m; sourceTree = "<group>"; };
+		821D088515ED17B000ECFED0 /* SinglyLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginViewController.h; sourceTree = "<group>"; };
+		821D088615ED17B000ECFED0 /* SinglyLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginViewController.m; sourceTree = "<group>"; };
 		821D088715ED17B000ECFED0 /* SinglySDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySDK.h; sourceTree = "<group>"; };
 		821D088815ED17B000ECFED0 /* SinglySDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySDK.m; sourceTree = "<group>"; };
 		821D088915ED17B000ECFED0 /* SinglySession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySession.h; sourceTree = "<group>"; };
@@ -154,8 +154,8 @@
 				8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */,
 				821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */,
 				821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */,
-				821D088515ED17B000ECFED0 /* SinglyLogInViewController.h */,
-				821D088615ED17B000ECFED0 /* SinglyLogInViewController.m */,
+				821D088515ED17B000ECFED0 /* SinglyLoginViewController.h */,
+				821D088615ED17B000ECFED0 /* SinglyLoginViewController.m */,
 				821D088715ED17B000ECFED0 /* SinglySDK.h */,
 				821D088815ED17B000ECFED0 /* SinglySDK.m */,
 				821D088915ED17B000ECFED0 /* SinglySession.h */,
@@ -239,7 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				821D088B15ED17B000ECFED0 /* SinglyAPIRequest.h in Headers */,
-				821D088D15ED17B000ECFED0 /* SinglyLogInViewController.h in Headers */,
+				821D088D15ED17B000ECFED0 /* SinglyLoginViewController.h in Headers */,
 				821D088F15ED17B000ECFED0 /* SinglySDK.h in Headers */,
 				821D089115ED17B000ECFED0 /* SinglySession.h in Headers */,
 				82CAD78B15EEB0B300D3E486 /* SinglyLoginPickerViewController.h in Headers */,
@@ -387,7 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				821D088C15ED17B000ECFED0 /* SinglyAPIRequest.m in Sources */,
-				821D088E15ED17B000ECFED0 /* SinglyLogInViewController.m in Sources */,
+				821D088E15ED17B000ECFED0 /* SinglyLoginViewController.m in Sources */,
 				821D089015ED17B000ECFED0 /* SinglySDK.m in Sources */,
 				821D089215ED17B000ECFED0 /* SinglySession.m in Sources */,
 				82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */,

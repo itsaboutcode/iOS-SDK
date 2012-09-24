@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <SinglySDK/SinglySDK.h>
 
-@interface SinglyLoginPickerViewController : UITableViewController<SinglyLogInViewControllerDelegate>
+@interface SinglyLoginPickerViewController : UITableViewController<SinglyLoginViewControllerDelegate>
 
 @property (strong, atomic) NSArray* services;
 
