@@ -14,10 +14,13 @@ In order to use the SDK make sure that you setup your header search path to poin
 
 To start using the SDK we'll first need a `SinglySession` object.  You'll probably
 want to maintain this in your AppDelegate or root view controller.  You'll also need to
-assign a delegate to it that implements the `SinglySessionDelegate` protocol.
+assign a delegate to it that implements the `SinglySessionDelegate` protocol.  You will
+also assign the client id and secret you generated while signing up for Singly.
 
 ```objective-c
 SinglySession* session = [[SinglySession alloc] init];
+session.clientID = @"<client id here>";
+session.clientSecret = @"<client secret here>";
 session.delegate = self;
 ```
 
@@ -48,8 +51,6 @@ finishes or errors it uses the `SinglySessionDelegate` to fire the correct event
 
 ```objective-c
 SinglyLoginViewController* loginVC = [[SinglyLogInViewController alloc] initWithSession:session_ forService:kSinglyServiceFacebook];
-loginVC.clientID = @"<client id here>";
-loginVC.clientSecret = @"<client secret here>";
 [self presentModalViewController:loginVC animated:YES];
 ```
 
