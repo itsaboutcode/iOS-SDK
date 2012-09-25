@@ -226,7 +226,6 @@ static NSString * const DEFacebookLastAccountIdentifier = @"DEFacebookLastAccoun
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"Did load card view %@", self.cardView);
     self.view.backgroundColor = [UIColor clearColor];
     self.textViewContainer.backgroundColor = [UIColor clearColor];
     self.textView.backgroundColor = [UIColor clearColor];
@@ -288,7 +287,6 @@ static NSString * const DEFacebookLastAccountIdentifier = @"DEFacebookLastAccoun
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"View will appear .view is %@ cardview is %@", self.view, self.cardView);
 
         // Take a snapshot of the current view, and make that our background after our view animates into place.
         // This only works if our orientation is the same as the presenting view.

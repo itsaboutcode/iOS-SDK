@@ -27,7 +27,7 @@
 */
 - (id)initWithSession:(SinglySession*)session forService:(NSString*)serviceId;
 
-@property (strong, atomic) id<SinglyLoginViewControllerDelegate> delegate;
+@property (weak, atomic) id<SinglyLoginViewControllerDelegate> delegate;
 @property (strong, atomic) NSString* scope;
 @property (strong, atomic) NSString* flags;
 

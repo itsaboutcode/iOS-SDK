@@ -56,7 +56,7 @@
  Profiles of the services that the account has connected.  Will return until there is a valid session.
 */
 @property (readonly) NSDictionary* profiles;
-@property (strong, atomic) id<SinglySessionDelegate> delegate;
+@property (weak, atomic) id<SinglySessionDelegate> delegate;
 
 /*!
  Checks if the session is ready to make API requests.
