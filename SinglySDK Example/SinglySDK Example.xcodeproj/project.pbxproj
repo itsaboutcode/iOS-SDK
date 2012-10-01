@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		821885051619F2E40014E067 /* SinglySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821885041619F2E40014E067 /* SinglySDK.framework */; };
 		8236EBD915EF226E00F3351E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8236EBD815EF226E00F3351E /* QuartzCore.framework */; };
 		827E3ED215E5528200D30D96 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827E3ED115E5528200D30D96 /* UIKit.framework */; };
 		827E3ED415E5528200D30D96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827E3ED315E5528200D30D96 /* Foundation.framework */; };
@@ -19,10 +18,10 @@
 		827E3EE815E5528200D30D96 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 827E3EE615E5528200D30D96 /* MainStoryboard_iPad.storyboard */; };
 		827E3EEB15E5528200D30D96 /* SinglyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 827E3EEA15E5528200D30D96 /* SinglyViewController.m */; };
 		82B5FA711614B4B4009ADD27 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B5FA701614B4B4009ADD27 /* Accounts.framework */; };
+		D0CBF6F1161A19AE00C11322 /* SinglySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0CBF6EF161A199F00C11322 /* SinglySDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		821885041619F2E40014E067 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SinglySDK.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Singly_iOS-gzuzrmpvpqnpszelklcsjddhrwtn/Build/Products/Debug-iphoneos/SinglySDK.framework"; sourceTree = "<group>"; };
 		8236EBD815EF226E00F3351E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		827E3ECD15E5528200D30D96 /* SinglySDK Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SinglySDK Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		827E3ED115E5528200D30D96 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -39,6 +38,7 @@
 		827E3EE915E5528200D30D96 /* SinglyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinglyViewController.h; sourceTree = "<group>"; };
 		827E3EEA15E5528200D30D96 /* SinglyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SinglyViewController.m; sourceTree = "<group>"; };
 		82B5FA701614B4B4009ADD27 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		D0CBF6EF161A199F00C11322 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SinglySDK.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Singly_iOS-gvvypxpwwugfmzeggytcxzkclkhp/Build/Products/Debug-iphoneos/SinglySDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,8 +50,8 @@
 				8236EBD915EF226E00F3351E /* QuartzCore.framework in Frameworks */,
 				827E3ED215E5528200D30D96 /* UIKit.framework in Frameworks */,
 				827E3ED415E5528200D30D96 /* Foundation.framework in Frameworks */,
-				821885051619F2E40014E067 /* SinglySDK.framework in Frameworks */,
 				827E3ED615E5528200D30D96 /* CoreGraphics.framework in Frameworks */,
+				D0CBF6F1161A19AE00C11322 /* SinglySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,7 +69,6 @@
 		827E3EC215E5528200D30D96 = {
 			isa = PBXGroup;
 			children = (
-				821885041619F2E40014E067 /* SinglySDK.framework */,
 				827E3ED715E5528200D30D96 /* SinglySDK Example */,
 				827E3ED015E5528200D30D96 /* Frameworks */,
 				827E3ECE15E5528200D30D96 /* Products */,
@@ -92,6 +91,7 @@
 				827E3ED115E5528200D30D96 /* UIKit.framework */,
 				827E3ED315E5528200D30D96 /* Foundation.framework */,
 				827E3ED515E5528200D30D96 /* CoreGraphics.framework */,
+				D0CBF6EF161A199F00C11322 /* SinglySDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -245,7 +245,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = "\"$(BUILD_ROOT)/$(CONFIGURATION)\"/**";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -266,7 +267,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = "\"$(BUILD_ROOT)/$(CONFIGURATION)\"/**";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -277,20 +279,10 @@
 		827E3EEF15E5528200D30D96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Singly_iOS-gzuzrmpvpqnpszelklcsjddhrwtn/Build/Products/Debug-iphoneos/SinglySDK.embeddedframework\"",
-					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Singly_iOS-gzuzrmpvpqnpszelklcsjddhrwtn/Build/Products/Debug-iphoneos\"",
-					"\"$(SRCROOT)/../SinglySDK/build/\"/**",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDK Example/SinglySDK Example-Prefix.pch";
 				INFOPLIST_FILE = "SinglySDK Example/SinglySDK Example-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../SinglySDK/build/Release-iphoneos\"",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -299,20 +291,10 @@
 		827E3EF015E5528200D30D96 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Singly_iOS-gzuzrmpvpqnpszelklcsjddhrwtn/Build/Products/Debug-iphoneos/SinglySDK.embeddedframework\"",
-					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Singly_iOS-gzuzrmpvpqnpszelklcsjddhrwtn/Build/Products/Debug-iphoneos\"",
-					"\"$(SRCROOT)/../SinglySDK/build/\"/**",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDK Example/SinglySDK Example-Prefix.pch";
 				INFOPLIST_FILE = "SinglySDK Example/SinglySDK Example-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../SinglySDK/build/Release-iphoneos\"",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
