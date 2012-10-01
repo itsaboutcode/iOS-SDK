@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ComposeViewController/DEFacebookComposeViewController.h"
+#import "DEFacebookComposeViewController.h"
 
 @class SinglySession;
 

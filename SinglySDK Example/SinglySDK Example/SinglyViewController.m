@@ -7,6 +7,7 @@
 //
 
 #import "SinglyViewController.h"
+#import <Accounts/Accounts.h>
 
 @interface SinglyViewController ()
 {
@@ -24,16 +25,30 @@
 
 -(void) viewDidAppear:(BOOL)animated
 {
+    ACAccountStore* accountStore = [[NSClassFromString(@"ACAccountStore") alloc] init];
+    ACAccountType* accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
+        NSLog(@"Granted(%d) Error:%@", granted, error);
+        NSArray* accounts = [accountStore accountsWithAccountType:accountType];
+        NSLog(@"Account: %@", [accounts objectAtIndex:0]);
+        NSLog(@"Credential: %@", [[accounts objectAtIndex:0] credential]);
+        NSLog(@"Credentials: %@", [[[accounts objectAtIndex:0] credential] oauthToken]);
+    }];
+
+    return;
     [session_ checkReadyWithCompletionHandler:^(BOOL ready) {
+        
         NSLog(@"Ready is %d", ready);
         //_picker = [[SinglyLoginPickerViewController alloc] initWithSession:session_];
         //[self presentModalViewController:_picker animated:YES];
         
         if (ready) {
+#if 0
             SinglySharingViewController* sharingView = [[SinglySharingViewController alloc] initWithSession:session_ forService:kSinglyServiceTwitter];
             [sharingView addImage:[UIImage imageNamed:@"typing.gif"]];
             self.modalPresentationStyle = UIModalPresentationCurrentContext;
             [self presentModalViewController:sharingView animated:YES];
+#endif
         } else {
             SinglyLoginViewController* login = [[SinglyLoginViewController alloc] initWithSession:session_ forService:kSinglyServiceTwitter];
             [self presentModalViewController:login animated:YES];
