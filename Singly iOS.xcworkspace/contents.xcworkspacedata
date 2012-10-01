@@ -5,6 +5,6 @@
       location = "group:SinglySDK/SinglySDK.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:SinglySDK Example/SinglySDK Example.xcodeproj">
+      location = "container:SinglySDK Example/SinglySDK Example.xcodeproj">
    </FileRef>
 </Workspace>

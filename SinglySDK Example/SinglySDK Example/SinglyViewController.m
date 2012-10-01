@@ -45,7 +45,7 @@
         if (ready) {
 #if 0
             SinglySharingViewController* sharingView = [[SinglySharingViewController alloc] initWithSession:session_ forService:kSinglyServiceTwitter];
-            [sharingView addImage:[UIImage imageNamed:@"typing.gif"]];
+            //[sharingView addImage:[UIImage imageNamed:@"typing.gif"]];
             self.modalPresentationStyle = UIModalPresentationCurrentContext;
             [self presentModalViewController:sharingView animated:YES];
 #endif

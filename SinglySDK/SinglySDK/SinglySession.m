@@ -94,21 +94,29 @@ static NSString* kSinglyAccessTokenKey = @"com.singly.accessToken";
         NSURLResponse* response;
         NSError* error;
         NSData* returnedData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
-        if (error) {
+        NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) response;
+        if ([httpResponse statusCode] == 200) {
+            if (error) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    block(error, nil);
+                });
+                return;
+            }
+            id json = [NSJSONSerialization JSONObjectWithData:returnedData options:kNilOptions error:&error];
+            if (error) {
+                json = nil;
+            }
+            
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                block(error, json);
+            });
+        } else {
+            error = [[NSError alloc] initWithDomain:@"SinglyResponseErrorDomain" code:[httpResponse statusCode] userInfo:[[NSDictionary alloc] initWithObjectsAndKeys:@"NSLocalizedDescriptionKey", (NSString *)[[NSString alloc] initWithData:returnedData encoding:NSUTF8StringEncoding], nil]];
             dispatch_sync(dispatch_get_main_queue(), ^{
                 block(error, nil);
             });
-            return;
         }
-        id json = [NSJSONSerialization JSONObjectWithData:returnedData options:kNilOptions error:&error];
-        if (error) {
-            json = nil;
-        }
-        
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            block(error, json);
-        });
-    });    
+    });
 }
 
 -(void)updateProfilesWithCompletion:(void(^)())block;
