@@ -18,6 +18,16 @@ static NSString* kSinglyAccessTokenKey = @"com.singly.accessToken";
 
 @implementation SinglySession
 
+static SinglySession* sharedInstance = nil;
+
++(SinglySession*)sharedSession;
+{
+    if (sharedInstance == nil) {
+        sharedInstance = [SinglySession new];
+    }
+    return sharedInstance;
+}
+
 -(void)setAccountID:(NSString *)accountID
 {
     [[NSUserDefaults standardUserDefaults] setObject:accountID forKey:kSinglyAccountIDKey];
@@ -121,6 +131,7 @@ static NSString* kSinglyAccessTokenKey = @"com.singly.accessToken";
 
 -(void)updateProfilesWithCompletion:(void(^)())block;
 {
+    dispatch_queue_t curQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         SinglyAPIRequest* apiReq = [[SinglyAPIRequest alloc] initWithEndpoint:@"profiles" andParameters:nil];
         NSError* error;
@@ -129,7 +140,7 @@ static NSString* kSinglyAccessTokenKey = @"com.singly.accessToken";
             _profiles = json;
         }
         
-        dispatch_sync(dispatch_get_main_queue(), block);
+        dispatch_sync(curQueue, block);
     });
 }
 @end

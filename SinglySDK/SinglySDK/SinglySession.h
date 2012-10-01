@@ -59,6 +59,14 @@
 @property (weak, atomic) id<SinglySessionDelegate> delegate;
 
 /*!
+ Access the shared session object
+ 
+ This is the preferred way to use the SinglySession and you should only create a new instance if you must use multiple
+ sessions inside one app.
+*/
++(SinglySession*)sharedSession;
+
+/*!
  Checks if the session is ready to make API requests.
  @param block
     The block to run when the check is complete.  It will be passed a BOOL stating if the session is ready.
