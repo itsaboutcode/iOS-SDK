@@ -19,6 +19,7 @@
     if ([segue.identifier isEqualToString:@"ServicesSegue"])
     {
         SinglyLoginPickerViewController *loginPickerViewController = (SinglyLoginPickerViewController *)segue.destinationViewController;
+        self.session.delegate = loginPickerViewController;
         loginPickerViewController.session = self.session;
     }
 }
