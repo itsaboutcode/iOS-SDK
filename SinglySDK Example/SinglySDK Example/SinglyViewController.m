@@ -33,6 +33,10 @@
         //[self presentModalViewController:_picker animated:YES];
         
         if (ready) {
+            SinglyFriendModel* friendModel = [[SinglyFriendModel alloc] initWithSession:session_];
+            [friendModel fetchDataWithCompletionHandler:^(NSError *err) {
+                NSLog(@"Got %d friends", friendModel.friends.count);
+            }];
 #if 0
             SinglySharingViewController* sharingView = [[SinglySharingViewController alloc] initWithSession:session_ forService:kSinglyServiceTwitter];
             //[sharingView addImage:[UIImage imageNamed:@"typing.gif"]];
