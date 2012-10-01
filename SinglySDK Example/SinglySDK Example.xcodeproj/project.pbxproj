@@ -18,6 +18,7 @@
 		827E3EE815E5528200D30D96 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 827E3EE615E5528200D30D96 /* MainStoryboard_iPad.storyboard */; };
 		827E3EEB15E5528200D30D96 /* SinglyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 827E3EEA15E5528200D30D96 /* SinglyViewController.m */; };
 		82B5FA711614B4B4009ADD27 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B5FA701614B4B4009ADD27 /* Accounts.framework */; };
+		D0075FED161A215400F763A1 /* SYMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0075FEC161A215400F763A1 /* SYMainViewController.m */; };
 		D0CBF6F1161A19AE00C11322 /* SinglySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0CBF6EF161A199F00C11322 /* SinglySDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,8 @@
 		827E3EE915E5528200D30D96 /* SinglyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinglyViewController.h; sourceTree = "<group>"; };
 		827E3EEA15E5528200D30D96 /* SinglyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SinglyViewController.m; sourceTree = "<group>"; };
 		82B5FA701614B4B4009ADD27 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		D0075FEB161A215400F763A1 /* SYMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYMainViewController.h; sourceTree = "<group>"; };
+		D0075FEC161A215400F763A1 /* SYMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYMainViewController.m; sourceTree = "<group>"; };
 		D0CBF6EF161A199F00C11322 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SinglySDK.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Singly_iOS-gvvypxpwwugfmzeggytcxzkclkhp/Build/Products/Debug-iphoneos/SinglySDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +110,8 @@
 				827E3EE915E5528200D30D96 /* SinglyViewController.h */,
 				827E3EEA15E5528200D30D96 /* SinglyViewController.m */,
 				827E3ED815E5528200D30D96 /* Supporting Files */,
+				D0075FEB161A215400F763A1 /* SYMainViewController.h */,
+				D0075FEC161A215400F763A1 /* SYMainViewController.m */,
 			);
 			path = "SinglySDK Example";
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 				827E3EDE15E5528200D30D96 /* main.m in Sources */,
 				827E3EE215E5528200D30D96 /* SinglyAppDelegate.m in Sources */,
 				827E3EEB15E5528200D30D96 /* SinglyViewController.m in Sources */,
+				D0075FED161A215400F763A1 /* SYMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

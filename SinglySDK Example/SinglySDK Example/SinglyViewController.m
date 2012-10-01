@@ -45,6 +45,7 @@
 #endif
         } else {
             SinglyLoginViewController* login = [[SinglyLoginViewController alloc] initWithSession:session_ forService:kSinglyServiceTwitter];
+            login.delegate = self;
             [self presentModalViewController:login animated:YES];
         }
         
