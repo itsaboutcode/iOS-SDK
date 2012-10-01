@@ -13,11 +13,13 @@
 
 @protocol SinglyLoginViewControllerDelegate <NSObject>
 
--(void)singlyLoginViewController:(SinglyLoginViewController*)controller didLoginForService:(NSString*)service;
--(void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError*)error;
+- (void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service;
+- (void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
+
 @end
 
-@interface SinglyLoginViewController : UIViewController<UIWebViewDelegate, NSURLConnectionDataDelegate>
+@interface SinglyLoginViewController : UIViewController <UIWebViewDelegate, NSURLConnectionDataDelegate>
+
 /*!
  Initialize with a session and service
  @param session
@@ -25,10 +27,13 @@
  @param serviceId
     The name of the service that we are logging into.
 */
-- (id)initWithSession:(SinglySession*)session forService:(NSString*)serviceId;
+- (id)initWithSession:(SinglySession *)session forService:(NSString *)serviceId;
 
 @property (weak, atomic) id<SinglyLoginViewControllerDelegate> delegate;
-@property (strong, atomic) NSString* scope;
-@property (strong, atomic) NSString* flags;
+@property (strong, atomic) SinglySession *session;
+
+@property (strong, atomic) NSString *targetService;
+@property (strong, atomic) NSString *scope;
+@property (strong, atomic) NSString *flags;
 
 @end

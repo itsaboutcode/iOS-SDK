@@ -11,17 +11,16 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface SinglyLoginPickerViewController () {
-    SinglySession* session_;
 }
 @end
 
 @implementation SinglyLoginPickerViewController
 
--(id)initWithSession:(SinglySession *)session;
+-(id)initWithSession:(SinglySession *)session
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
-        session_ = session;
+        _session = session;
     }
     return self;
 }
@@ -97,7 +96,7 @@
     
     UIButton* button = (UIButton*)[cell.subviews objectAtIndex:3];
     button.tag = indexPath.row;
-    if ([session_.profiles objectForKey:service]) {
+    if ([self.session.profiles objectForKey:service]) {
         [self disableColorButton:button];
         [button setTitle:@"Logged In" forState:UIControlStateNormal];
         button.enabled = NO;
@@ -133,7 +132,7 @@
     [[button.layer.sublayers objectAtIndex:1] removeFromSuperlayer];
     
     NSLog(@"Login to service %@", [self.services objectAtIndex:button.tag]);
-    SinglyLoginViewController* loginViewController = [[SinglyLoginViewController alloc] initWithSession:session_ forService:[self.services objectAtIndex:button.tag]];
+    SinglyLoginViewController* loginViewController = [[SinglyLoginViewController alloc] initWithSession:self.session forService:[self.services objectAtIndex:button.tag]];
     loginViewController.delegate = self;
     [self presentViewController:loginViewController animated:YES completion:NULL];
 }

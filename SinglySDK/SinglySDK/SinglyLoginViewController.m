@@ -10,44 +10,54 @@
 
 @interface SinglyLoginViewController ()
 {
-    SinglySession* session_;
-    UIWebView* webview_;
-    NSString* targetService;
     NSMutableData* responseData;
     UIView* pendingLoginView;
     UIActivityIndicatorView* activityView;
 }
+
+@property (atomic, strong) UIWebView *webView;
+
 -(void)processAccessTokenWithData:(NSData*)data;
+
 @end
 
 @implementation SinglyLoginViewController
 
-- (id)initWithSession:(SinglySession*)session forService:(NSString*)serviceId;
+- (id)init
 {
     self = [super init];
-    if (self) {
-        session_ = session;
-        targetService = serviceId;
-        webview_ = [[UIWebView alloc] initWithFrame:self.view.frame];
-        webview_.scalesPageToFit = YES;
-        webview_.delegate = self;
-        self.view = webview_;
+    if (self)
+    {
+        [self initializeView];
     }
     return self;
 }
 
-- (void)viewDidLoad
+- (id)initWithSession:(SinglySession *)session forService:(NSString *)serviceId
 {
-    [super viewDidLoad];
-    NSLog(@"View did load for Singly Login");
-	// Do any additional setup after loading the view.
+    self = [super init];
+    if (self)
+    {
+        [self initializeView];
+        _session = session;
+        _targetService = serviceId;
+    }
+    return self;
 }
 
-- (void)viewDidUnload
+- (void)awakeFromNib
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+    [self initializeView];
 }
+
+- (void)initializeView
+{
+    _webView = [[UIWebView alloc] initWithFrame:self.view.frame];
+    _webView.scalesPageToFit = YES;
+    _webView.delegate = self;
+    self.view = _webView;
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -56,9 +66,9 @@
 
 - (void)viewWillAppear:(BOOL)animated;
 {
-    NSString* urlStr = [NSString stringWithFormat:@"https://api.singly.com/oauth/authorize?redirect_uri=singly://authComplete&service=%@&client_id=%@", targetService, session_.clientID];
-    if (session_.accountID) {
-        urlStr = [urlStr stringByAppendingFormat:@"&account=%@", session_.accountID];
+    NSString* urlStr = [NSString stringWithFormat:@"https://api.singly.com/oauth/authorize?redirect_uri=singly://authComplete&service=%@&client_id=%@", self.targetService, self.session.clientID];
+    if (self.session.accountID) {
+        urlStr = [urlStr stringByAppendingFormat:@"&account=%@", self.session.accountID];
     }
     if (self.scope) {
         urlStr = [urlStr stringByAppendingFormat:@"&scope=%@", self.scope];
@@ -67,14 +77,16 @@
         urlStr = [urlStr stringByAppendingFormat:@"&flag=%@", self.flags];
     }
     NSLog(@"Going to auth url %@", urlStr);
-    [webview_ loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
 }
+
 -(void)processAccessTokenWithData:(NSData*)data;
 {
     
 }
 
 #pragma mark - UIWebViewDelegate
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {
     if ([request.URL.scheme isEqualToString:@"singly"] && [request.URL.host isEqualToString:@"authComplete"]) {
@@ -110,7 +122,7 @@
             NSURL* accessTokenURL = [NSURL URLWithString:@"https://api.singly.com/oauth/access_token"];
             NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:accessTokenURL];
             req.HTTPMethod = @"POST";
-            req.HTTPBody = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&code=%@", session_.clientID, session_.clientSecret, [parameters objectForKey:@"code"]] dataUsingEncoding:NSUTF8StringEncoding];
+            req.HTTPBody = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&code=%@", self.session.clientID, self.session.clientSecret, [parameters objectForKey:@"code"]] dataUsingEncoding:NSUTF8StringEncoding];
             responseData = [NSMutableData data];
             [NSURLConnection connectionWithRequest:req delegate:self];
         }
@@ -150,7 +162,7 @@
     NSDictionary* jsonResult = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     if (error) {
         if (self.delegate) {
-            [self.delegate singlyLoginViewController:self errorLoggingInToService:targetService withError:error];
+            [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
         }
         return;
     }
@@ -159,19 +171,19 @@
     if (loginError) {
         if (self.delegate) {
             NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:loginError forKey:NSLocalizedDescriptionKey]];
-            [self.delegate singlyLoginViewController:self errorLoggingInToService:targetService withError:error];
+            [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
                                                     
         }
         return;
     }
     
     // Save the access token and account id
-    session_.accessToken = [jsonResult objectForKey:@"access_token"];
-    session_.accountID = [jsonResult objectForKey:@"account"];
-    [session_ updateProfilesWithCompletion:^{
-        NSLog(@"All set to do requests as account %@ with access token %@", session_.accountID, session_.accessToken);
+    self.session.accessToken = [jsonResult objectForKey:@"access_token"];
+    self.session.accountID = [jsonResult objectForKey:@"account"];
+    [self.session updateProfilesWithCompletion:^{
+        NSLog(@"All set to do requests as account %@ with access token %@", self.session.accountID, self.session.accessToken);
         if (self.delegate) {
-            [self.delegate singlyLoginViewController:self didLoginForService:targetService];
+            [self.delegate singlyLoginViewController:self didLoginForService:self.targetService];
         }
     }];
 }
@@ -179,7 +191,8 @@
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     if (self.delegate) {
-        [self.delegate singlyLoginViewController:self errorLoggingInToService:targetService withError:error];
+        [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
     }
 }
+
 @end

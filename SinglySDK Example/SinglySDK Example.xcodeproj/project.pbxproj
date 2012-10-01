@@ -148,9 +148,9 @@
 		827E3EC415E5528200D30D96 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = Singly;
+				CLASSPREFIX = SY;
 				LastUpgradeCheck = 0440;
-				ORGANIZATIONNAME = Singly;
+				ORGANIZATIONNAME = "Singly, Inc";
 			};
 			buildConfigurationList = 827E3EC715E5528200D30D96 /* Build configuration list for PBXProject "SinglySDK Example" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -282,7 +282,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDK Example/SinglySDK Example-Prefix.pch";
 				INFOPLIST_FILE = "SinglySDK Example/SinglySDK Example-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -294,7 +294,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDK Example/SinglySDK Example-Prefix.pch";
 				INFOPLIST_FILE = "SinglySDK Example/SinglySDK Example-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

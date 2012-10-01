@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <SinglySDK/SinglySDK.h>
 
-@interface SinglyLoginPickerViewController : UITableViewController<SinglyLoginViewControllerDelegate>
+@interface SinglyLoginPickerViewController : UITableViewController <SinglyLoginViewControllerDelegate>
 
-@property (strong, atomic) NSArray* services;
+@property (strong, atomic) NSArray *services;
+@property (strong, atomic) SinglySession *session;
 
--(id)initWithSession:(SinglySession*)session;
+- (id)initWithSession:(SinglySession *)session;
+
 @end
