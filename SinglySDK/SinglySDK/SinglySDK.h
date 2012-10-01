@@ -11,7 +11,8 @@
 #import <SinglySDK/SinglyAPIRequest.h>
 #import <SinglySDK/SinglyLoginPickerViewController.h>
 #import <SinglySDK/SinglyFriendPickerViewController.h>
-#import <SinglySDK/SinglySharingViewController.h> 
+#import <SinglySDK/SinglySharingViewController.h>
+#import <SinglySDK/SinglyFriendModel.h>
 
 /*!
     @header SinglySDK

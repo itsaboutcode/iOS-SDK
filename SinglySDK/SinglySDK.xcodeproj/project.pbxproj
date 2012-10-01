@@ -55,7 +55,7 @@
 		824DCF7B1607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF561607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m */; };
 		824DCF7C1607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF571607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h */; };
 		824DCF7D1607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF581607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m */; };
-		8296F4491611F7360004BA0B /* SinglyFriendModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8296F4471611F7360004BA0B /* SinglyFriendModel.h */; };
+		8296F4491611F7360004BA0B /* SinglyFriendModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8296F4471611F7360004BA0B /* SinglyFriendModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8296F44A1611F7360004BA0B /* SinglyFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8296F4481611F7360004BA0B /* SinglyFriendModel.m */; };
 		82C6253016011E7900BF5225 /* SinglySharingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C6252E16011E7900BF5225 /* SinglySharingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82C6253116011E7900BF5225 /* SinglySharingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C6252F16011E7900BF5225 /* SinglySharingViewController.m */; };

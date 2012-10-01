@@ -41,7 +41,7 @@
 {
     [_session requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"types/contacts" withParameters:@{@"limit": @"500"}] withCompletionHandler:^(NSError *error, id json) {
         // Get out of here on system or remote errors
-        if (error || [json objectForKey:@"error"]) {
+        if (error || ([json isKindOfClass:[NSDictionary class]] && [json objectForKey:@"error"])) {
             NSError* finalError = error ? error : [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:@{NSLocalizedDescriptionKey:[json objectForKey:@"error"]}];
             return completionHandler(finalError);
         }
@@ -51,7 +51,6 @@
         // Do our processing via gcd
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSArray* contacts = (NSArray*)json;
-            NSLog(@"Got %d contacts", contacts.count);
             NSMutableArray* allFriends = [NSMutableArray arrayWithCapacity:contacts.count];
             for (NSDictionary* contact in contacts) {
                 NSDictionary* oembed = [contact objectForKey:@"oembed"];
@@ -61,10 +60,15 @@
                 }
                 NSMutableDictionary* friendInfo = [NSMutableDictionary dictionaryWithDictionary:oembed];
                 // Parse the idr and get the service out
-                NSURL* url = [NSURL URLWithString:[contact objectForKey:@"idr"]];
-                [friendInfo setObject:@{url.host:[contact objectForKey:@"data"]} forKey:@"services"];
+                NSString* idr = [contact objectForKey:@"idr"];
+                NSRange serviceRange = [idr rangeOfString:@"@"];
+                serviceRange.location++;
+                serviceRange.length = [idr rangeOfString:@"/"].location - serviceRange.location;
+                [friendInfo setObject:@{[idr substringWithRange:serviceRange]:[contact objectForKey:@"data"]} forKey:@"services"];
                 [allFriends addObject:friendInfo];
             }
+            
+            _friends = allFriends;
             
             dispatch_sync(completionQueue, ^{
                 completionHandler(nil);
