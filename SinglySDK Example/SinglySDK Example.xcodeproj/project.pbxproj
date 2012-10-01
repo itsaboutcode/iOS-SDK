@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		816795DA1617672A00AF3306 /* SinglySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 816795D91617672A00AF3306 /* SinglySDK.framework */; };
 		8236EBD915EF226E00F3351E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8236EBD815EF226E00F3351E /* QuartzCore.framework */; };
 		827E3ED215E5528200D30D96 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827E3ED115E5528200D30D96 /* UIKit.framework */; };
 		827E3ED415E5528200D30D96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827E3ED315E5528200D30D96 /* Foundation.framework */; };
@@ -22,8 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		816795D91617672A00AF3306 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SinglySDK.framework; path = "../../../Users/ctide/Library/Developer/Xcode/DerivedData/Singly_iOS-hiwvkemvrzvhywesxmzaldhdwtxx/Build/Products/Debug-iphoneos/SinglySDK.framework"; sourceTree = "<group>"; };
-		82055189160B7A9400F06D13 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SinglySDK.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Singly_iOS-gzuzrmpvpqnpszelklcsjddhrwtn/Build/Products/Debug-iphoneos/SinglySDK.framework"; sourceTree = "<group>"; };
+		82055189160B7A9400F06D13 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SinglySDK.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Singly_iOS-gzuzrmpvpqnpszelklcsjddhrwtn/Build/Products/Debug-iphoneos/SinglySDK.framework"; sourceTree = SOURCE_ROOT; };
 		8236EBD815EF226E00F3351E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		827E3ECD15E5528200D30D96 /* SinglySDK Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SinglySDK Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		827E3ED115E5528200D30D96 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -48,7 +46,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				82B5FA711614B4B4009ADD27 /* Accounts.framework in Frameworks */,
-				8205518A160B7A9400F06D13 /* SinglySDK.framework in Frameworks */,
 				8236EBD915EF226E00F3351E /* QuartzCore.framework in Frameworks */,
 				827E3ED215E5528200D30D96 /* UIKit.framework in Frameworks */,
 				827E3ED415E5528200D30D96 /* Foundation.framework in Frameworks */,
@@ -61,6 +58,8 @@
 /* Begin PBXGroup section */
 		82055172160B7A6E00F06D13 /* Resources */ = {
 			isa = PBXGroup;
+			children = (
+			);
 			name = Resources;
 			path = ../../SinglySDK/SinglySDK/ComposeViewController/Resources;
 			sourceTree = "<group>";
@@ -68,7 +67,6 @@
 		827E3EC215E5528200D30D96 = {
 			isa = PBXGroup;
 			children = (
-				816795D91617672A00AF3306 /* SinglySDK.framework */,
 				827E3ED715E5528200D30D96 /* SinglySDK Example */,
 				827E3ED015E5528200D30D96 /* Frameworks */,
 				827E3ECE15E5528200D30D96 /* Products */,

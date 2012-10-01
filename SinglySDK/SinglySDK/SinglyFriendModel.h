@@ -25,4 +25,5 @@ Init the session only for the given services only
 
 -(void)fetchDataWithCompletionHandler:(DataReadyBlock)completionHandler;
 
+@property (readonly) NSArray* friends;
 @end

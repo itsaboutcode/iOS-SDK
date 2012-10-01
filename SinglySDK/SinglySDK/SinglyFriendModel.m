@@ -46,17 +46,29 @@
             return completionHandler(finalError);
         }
         
+        dispatch_queue_t completionQueue = dispatch_get_current_queue();
+        
         // Do our processing via gcd
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSArray* contacts = (NSArray*)json;
             NSLog(@"Got %d contacts", contacts.count);
+            NSMutableArray* allFriends = [NSMutableArray arrayWithCapacity:contacts.count];
             for (NSDictionary* contact in contacts) {
                 NSDictionary* oembed = [contact objectForKey:@"oembed"];
                 if (!oembed || ![oembed objectForKey:@"title"]){
                     NSLog(@"Skipped for no title or oembed");
                     continue;
                 }
+                NSMutableDictionary* friendInfo = [NSMutableDictionary dictionaryWithDictionary:oembed];
+                // Parse the idr and get the service out
+                NSURL* url = [NSURL URLWithString:[contact objectForKey:@"idr"]];
+                [friendInfo setObject:@{url.host:[contact objectForKey:@"data"]} forKey:@"services"];
+                [allFriends addObject:friendInfo];
             }
+            
+            dispatch_sync(completionQueue, ^{
+                completionHandler(nil);
+            });
         });
         
     }];

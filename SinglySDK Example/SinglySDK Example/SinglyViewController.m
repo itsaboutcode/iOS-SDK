@@ -8,6 +8,7 @@
 
 #import "SinglyViewController.h"
 #import <Accounts/Accounts.h>
+#include "ClientKeys.h"
 
 @interface SinglyViewController ()
 {
@@ -25,17 +26,6 @@
 
 -(void) viewDidAppear:(BOOL)animated
 {
-    ACAccountStore* accountStore = [[NSClassFromString(@"ACAccountStore") alloc] init];
-    ACAccountType* accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
-        NSLog(@"Granted(%d) Error:%@", granted, error);
-        NSArray* accounts = [accountStore accountsWithAccountType:accountType];
-        NSLog(@"Account: %@", [accounts objectAtIndex:0]);
-        NSLog(@"Credential: %@", [[accounts objectAtIndex:0] credential]);
-        NSLog(@"Credentials: %@", [[[accounts objectAtIndex:0] credential] oauthToken]);
-    }];
-
-    return;
     [session_ checkReadyWithCompletionHandler:^(BOOL ready) {
         
         NSLog(@"Ready is %d", ready);
@@ -74,8 +64,8 @@
     
     session_ = [[SinglySession alloc] init];
     session_.delegate = self;
-    session_.clientID = @"";
-    session_.clientSecret = @"";
+    session_.clientID = CLIENT_ID;
+    session_.clientSecret = CLIENT_SECRET;
     NSLog(@"Session account is %@ and access token is %@", session_.accountID, session_.accessToken);
 }
 
