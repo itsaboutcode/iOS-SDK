@@ -19,6 +19,7 @@
 		827E3EEB15E5528200D30D96 /* SinglyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 827E3EEA15E5528200D30D96 /* SinglyViewController.m */; };
 		82B5FA711614B4B4009ADD27 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B5FA701614B4B4009ADD27 /* Accounts.framework */; };
 		D0075FED161A215400F763A1 /* SYMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0075FEC161A215400F763A1 /* SYMainViewController.m */; };
+		D007BE21161B844200F694FF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D007BE20161B844200F694FF /* Default-568h@2x.png */; };
 		D0CBF6F1161A19AE00C11322 /* SinglySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0CBF6EF161A199F00C11322 /* SinglySDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		82B5FA701614B4B4009ADD27 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D0075FEB161A215400F763A1 /* SYMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYMainViewController.h; sourceTree = "<group>"; };
 		D0075FEC161A215400F763A1 /* SYMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYMainViewController.m; sourceTree = "<group>"; };
+		D007BE20161B844200F694FF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D0CBF6EF161A199F00C11322 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SinglySDK.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Singly_iOS-gvvypxpwwugfmzeggytcxzkclkhp/Build/Products/Debug-iphoneos/SinglySDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +73,7 @@
 		827E3EC215E5528200D30D96 = {
 			isa = PBXGroup;
 			children = (
+				D007BE20161B844200F694FF /* Default-568h@2x.png */,
 				827E3ED715E5528200D30D96 /* SinglySDK Example */,
 				827E3ED015E5528200D30D96 /* Frameworks */,
 				827E3ECE15E5528200D30D96 /* Products */,
@@ -181,6 +184,7 @@
 				827E3EDC15E5528200D30D96 /* InfoPlist.strings in Resources */,
 				827E3EE515E5528200D30D96 /* MainStoryboard_iPhone.storyboard in Resources */,
 				827E3EE815E5528200D30D96 /* MainStoryboard_iPad.storyboard in Resources */,
+				D007BE21161B844200F694FF /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
