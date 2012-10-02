@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>SinglySDK Reference</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.6 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="index.html">SinglySDK </a></h1>
+				<a id="developerHome" href="index.html">Singly, Inc</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">SinglySDK Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<div id="overview_contents" role="main">
+				<div class="main-navigation navigation-top">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">SinglySDK Reference</h1>
+					</div>		
+				</div>
+				<div id="container">
+					
+					<div class="section section-overview index-overview">
+						
+						
+						<h1>Singly SDK</h1>
+
+<p>A simple iOS SDK for accessing Singly.</p>
+
+<h2>Getting Started</h2>
+
+<p>The first thing you should do is <a href="https://singly.com/apps">register an application</a> at Singly.  In your
+application settings you need to get your client id and client secret.  We&rsquo;ll need
+to put this into our new program for logging in.</p>
+
+<p>Now that we&rsquo;re ready we can either start a new iOS application or use an existing one.
+In order to use the SDK make sure that you setup your header search path to point to the
+<code>SinglySDK</code> directory and that your project includes the libSinglySDK.a library.</p>
+
+<p>To start using the SDK we&rsquo;ll first need a <a href="Classes/SinglySession.html"><code>SinglySession</code></a> object.  You&rsquo;ll probably
+want to maintain this in your AppDelegate or root view controller.  You&rsquo;ll also need to
+assign a delegate to it that implements the <a href="Protocols/SinglySessionDelegate.html"><code>SinglySessionDelegate</code></a> protocol.  You will
+also assign the client id and secret you generated while signing up for Singly.</p>
+
+<p><code>objective-c
+SinglySession* session = [[SinglySession alloc] init];
+session.clientID = @"&lt;client id here&gt;";
+session.clientSecret = @"&lt;client secret here&gt;";
+session.delegate = self;
+</code></p>
+
+<p>The <code>SinglySession</code> has two other properties:
+* <code>accessToken</code> &ndash; Your Singly access token.  You should not need to access this unless
+  you really need to do something that does not fit into the current SDK.
+* <code>accountID</code> &ndash; Your Singly account ID.</p>
+
+<p>Both of these are saved between runs in the <code>NSUserDefaults</code> and should be setup using
+a <code>SinglyLoginViewController</code>.  To see if the session was stored and immediately
+usable, without loggin in again.  We can use the <code>checkReadyWithCompletionHandler:</code>.</p>
+
+<p>```objective-c
+[session checkReadyWithCompletionHandler:^(BOOL ready){</p>
+
+<pre><code>if(!ready) {
+    // We're not logged in and we should use SinglyLoginViewController to connect
+} else {
+    // We're all set and can start making requests
+}
+</code></pre>
+
+<p>}];
+```</p>
+
+<p>If the session is not ready, or needs to connect a different service, the
+<code>SinglyLoginViewController</code> gives you a consistent and simple way to connect to
+any of the services that Singly supports.  This is a fully standard
+<code>UIViewController</code> with the extra bits needed to do the Singly auth.  When it
+finishes or errors it uses the <code>SinglySessionDelegate</code> to fire the correct events.</p>
+
+<p><code>objective-c
+SinglyLoginViewController* loginVC = [[SinglyLogInViewController alloc] initWithSession:session_ forService:kSinglyServiceFacebook];
+[self presentModalViewController:loginVC animated:YES];
+</code></p>
+
+<p>The service that you define can be any string of the services that Singly supports,
+but we have these defined as constants for you in the SinglySDK.h.</p>
+
+<p>An example implementation of the <a href="Protocols/SinglySessionDelegate.html"><code>SinglySessionDelegate</code></a> is:</p>
+
+<p>```objective-c</p>
+
+<h1>pragma mark &ndash; <a href="Protocols/SinglySessionDelegate.html">SinglySessionDelegate</a></h1>
+
+<p>&ndash;(void)singlySession:(<a href="Classes/SinglySession.html">SinglySession</a> <em>)session didLogInForService:(NSString </em>)service;
+{</p>
+
+<pre><code>[self dismissModalViewControllerAnimated:YES];
+loginVC = nil;
+
+// We're ready to rock!  Go do something amazing!
+</code></pre>
+
+<p>}
+&ndash;(void)singlySession:(<a href="Classes/SinglySession.html">SinglySession</a> <em>)session errorLoggingInToService:(NSString </em>)service withError:(NSError *)error;
+{</p>
+
+<pre><code>UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+[alert show];
+[self dismissModalViewControllerAnimated:YES];
+loginVC = nil;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>If you wish to login multiple services, or offer multiple services for login, then you
+can use the <a href="Classes/SinglyLoginPickerViewController.html"><code>SinglyLoginPickerViewController</code></a>.  All you need to do is set all of th
+services that you wish to allow connections to.</p>
+
+<p><code>
+SinglyLoginPickerViewController* controller = [[SinglyLoginPickerViewController alloc] initWithSession:session];
+controller.services = [NSArray arrayWithObjects:kSinglyServiceFacebook, kSinglyServiceTwitter, nil];
+[self presentModalViewController:controller animated:YES];
+</code></p>
+
+<p>Once we have a valid session we can start making API requests.  We can make
+GET, POST or any method requests using the <code>SinglyAPIRequest</code>.  The request is only
+a description of the request that we are going to make, to actually execute the
+request we use our session and one of the <code>requestAPI:</code> methods.  An example
+that requests the profiles list and is using blocks to handle the result is:</p>
+
+<p>```objective-c
+[session requestAPI:[<a href="Classes/SinglyAPIRequest.html">SinglyAPIRequest</a> apiRequestForEndpoint:@&ldquo;profiles&rdquo; withParameters:nil] withCompletionHandler:^(NSError *error, id json) {</p>
+
+<pre><code>NSLog(@"The profiles result is: %@", json);
+</code></pre>
+
+<p>}];
+```</p>
+
+<p>That&rsquo;s the basics and enough to get rolling!</p>
+
+<h2>Other View Controllers</h2>
+
+<p>A few helpful view controllers exist to make life easier and get apps built faster.</p>
+
+<ul>
+<li><p><code>SinglyLoginViewPickerController</code></p>
+
+<p>  As discussed above this is a view controller to give a list of available services
+  for the user to login to.</p></li>
+<li><p><a href="Classes/SinglyFriendPickerViewController.html"><code>SinglyFriendPickerViewController</code></a></p>
+
+<p> A view of a users contacts that allows them to pick one.</p></li>
+<li><p><a href="Classes/SinglySharingViewController.html"><code>SinglySharingViewController</code></a></p>
+
+<p>  A view to post a status message out to a network.</p></li>
+</ul>
+
+
+<p>More docs to come for these.</p>
+						
+						
+					</div>
+					
+                        
+                    
+					
+					
+					<div class="index-column">
+						<h2 class="index-title">Class References</h2>
+						<ul>
+							
+							<li><a href="Classes/DEFacebookComposeViewController.html">DEFacebookComposeViewController</a></li>
+							
+							<li><a href="Classes/DEFacebookGradientView.html">DEFacebookGradientView</a></li>
+							
+							<li><a href="Classes/DEFacebookSheetCardView.html">DEFacebookSheetCardView</a></li>
+							
+							<li><a href="Classes/DEFacebookTextView.html">DEFacebookTextView</a></li>
+							
+							<li><a href="Classes/DERuledView.html">DERuledView</a></li>
+							
+							<li><a href="Classes/SinglyAPIRequest.html">SinglyAPIRequest</a></li>
+							
+							<li><a href="Classes/SinglyFriendModel.html">SinglyFriendModel</a></li>
+							
+							<li><a href="Classes/SinglyFriendPickerViewController.html">SinglyFriendPickerViewController</a></li>
+							
+							<li><a href="Classes/SinglyLoginPickerViewController.html">SinglyLoginPickerViewController</a></li>
+							
+							<li><a href="Classes/SinglyLoginViewController.html">SinglyLoginViewController</a></li>
+							
+							<li><a href="Classes/SinglySession.html">SinglySession</a></li>
+							
+							<li><a href="Classes/SinglySharingViewController.html">SinglySharingViewController</a></li>
+							
+						</ul>
+					</div>
+					
+					
+						
+					<div class="index-column">
+						
+						<h2 class="index-title">Protocol References</h2>
+						<ul>
+							
+							<li><a href="Protocols/DEFacebookTextViewDelegate.html">DEFacebookTextViewDelegate</a></li>
+							
+							<li><a href="Protocols/SinglyAPIRequestDelegate.html">SinglyAPIRequestDelegate</a></li>
+							
+							<li><a href="Protocols/SinglyLoginViewControllerDelegate.html">SinglyLoginViewControllerDelegate</a></li>
+							
+							<li><a href="Protocols/SinglySessionDelegate.html">SinglySessionDelegate</a></li>
+							
+						</ul>
+						
+						
+						<h2 class="index-title">Category References</h2>
+						<ul>
+							
+							<li><a href="Categories/UIApplication+DEFacebookComposeViewController.html">UIApplication(DEFacebookComposeViewController)</a></li>
+							
+							<li><a href="Categories/UIDevice+DEFacebookComposeViewController.html">UIDevice(DEFacebookComposeViewController)</a></li>
+							
+						</ul>
+						
+					</div>
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-10-02)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.6 (build 789)</a>.</span></p>
+						
+	
+					</div>
+				</div>
+			</div>
+		</article>		
+	</body>
+</html>

@@ -1,3 +1,8 @@
 .DS_Store
 xcuserdata
 project.xcworkspace
+
+# Generated Documentation
+SinglySDK/Documentation/docset-installed.txt
+SinglySDK/Documentation/docset
+SinglySDK/Documentation/publish
