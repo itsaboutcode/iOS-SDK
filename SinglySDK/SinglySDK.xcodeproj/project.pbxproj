@@ -13,7 +13,6 @@
 		821D088D15ED17B000ECFED0 /* SinglyLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088515ED17B000ECFED0 /* SinglyLoginViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		821D088E15ED17B000ECFED0 /* SinglyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088615ED17B000ECFED0 /* SinglyLoginViewController.m */; };
 		821D088F15ED17B000ECFED0 /* SinglySDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088715ED17B000ECFED0 /* SinglySDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		821D089015ED17B000ECFED0 /* SinglySDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088815ED17B000ECFED0 /* SinglySDK.m */; };
 		821D089115ED17B000ECFED0 /* SinglySession.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088915ED17B000ECFED0 /* SinglySession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		821D089215ED17B000ECFED0 /* SinglySession.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088A15ED17B000ECFED0 /* SinglySession.m */; };
 		8236EBDD15EFE79E00F3351E /* SinglyFriendPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -73,7 +72,6 @@
 		821D088515ED17B000ECFED0 /* SinglyLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginViewController.h; sourceTree = "<group>"; };
 		821D088615ED17B000ECFED0 /* SinglyLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginViewController.m; sourceTree = "<group>"; };
 		821D088715ED17B000ECFED0 /* SinglySDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySDK.h; sourceTree = "<group>"; };
-		821D088815ED17B000ECFED0 /* SinglySDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySDK.m; sourceTree = "<group>"; };
 		821D088915ED17B000ECFED0 /* SinglySession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySession.h; sourceTree = "<group>"; };
 		821D088A15ED17B000ECFED0 /* SinglySession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySession.m; sourceTree = "<group>"; };
 		8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendPickerViewController.h; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				821D088715ED17B000ECFED0 /* SinglySDK.h */,
-				821D088815ED17B000ECFED0 /* SinglySDK.m */,
 				D067E1AE161B433700B43C32 /* Authentication */,
 				D067E1B1161B434E00B43C32 /* Contacts */,
 				D067E1B0161B433D00B43C32 /* Sharing */,
@@ -443,7 +440,6 @@
 			files = (
 				821D088C15ED17B000ECFED0 /* SinglyAPIRequest.m in Sources */,
 				821D088E15ED17B000ECFED0 /* SinglyLoginViewController.m in Sources */,
-				821D089015ED17B000ECFED0 /* SinglySDK.m in Sources */,
 				821D089215ED17B000ECFED0 /* SinglySession.m in Sources */,
 				82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */,
 				8236EBDE15EFE79E00F3351E /* SinglyFriendPickerViewController.m in Sources */,
