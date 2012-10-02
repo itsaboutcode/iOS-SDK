@@ -20,20 +20,27 @@
 
 @interface SinglyLoginViewController : UIViewController <UIWebViewDelegate, NSURLConnectionDataDelegate>
 
-/*!
- Initialize with a session and service
- @param session
-    The session that the login will be saved into.
- @param serviceId
-    The name of the service that we are logging into.
-*/
-- (id)initWithSession:(SinglySession *)session forService:(NSString *)serviceId;
-
 @property (weak, atomic) id<SinglyLoginViewControllerDelegate> delegate;
-@property (strong, atomic) SinglySession *session;
+
+/*!
+ *
+ * The SinglySession to use for the login request. The default value of this is
+ * the shared singleton instance.
+ *
+ */
+@property (strong, nonatomic) SinglySession *session;
 
 @property (strong, atomic) NSString *targetService;
 @property (strong, atomic) NSString *scope;
 @property (strong, atomic) NSString *flags;
+
+/*!
+ *
+ * Initialize with a SinglySession and service identifier.
+ *
+ * @param session The session that the login will be saved into.
+ * @param serviceId The name of the service that we are logging into.
+ */
+- (id)initWithSession:(SinglySession *)session forService:(NSString *)serviceId;
 
 @end

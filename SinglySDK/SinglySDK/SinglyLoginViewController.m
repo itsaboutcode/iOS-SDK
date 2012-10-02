@@ -85,6 +85,14 @@
     
 }
 
+#pragma mark - SinglySession
+
+- (SinglySession *)session
+{
+    _session = [SinglySession sharedSession];
+    return _session;
+}
+
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
@@ -158,7 +166,8 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 {
-    NSError* error;
+
+    NSError *error;
     NSDictionary* jsonResult = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     if (error) {
         if (self.delegate) {

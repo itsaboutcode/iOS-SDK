@@ -64,11 +64,8 @@
 		82055172160B7A6E00F06D13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				827E3EE315E5528200D30D96 /* MainStoryboard_iPhone.storyboard */,
-				827E3EE615E5528200D30D96 /* MainStoryboard_iPad.storyboard */,
 			);
 			name = Resources;
-			path = ../../SinglySDK/SinglySDK/ComposeViewController/Resources;
 			sourceTree = "<group>";
 		};
 		827E3EC215E5528200D30D96 = {
@@ -110,6 +107,8 @@
 				827E3EEA15E5528200D30D96 /* SinglyViewController.m */,
 				D0075FEB161A215400F763A1 /* SYMainViewController.h */,
 				D0075FEC161A215400F763A1 /* SYMainViewController.m */,
+				827E3EE315E5528200D30D96 /* MainStoryboard_iPhone.storyboard */,
+				827E3EE615E5528200D30D96 /* MainStoryboard_iPad.storyboard */,
 				82055172160B7A6E00F06D13 /* Resources */,
 				827E3ED815E5528200D30D96 /* Supporting Files */,
 			);
@@ -216,7 +215,6 @@
 				827E3EE415E5528200D30D96 /* en */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
-			path = "../../../../SinglySDK Example/SinglySDK Example";
 			sourceTree = "<group>";
 		};
 		827E3EE615E5528200D30D96 /* MainStoryboard_iPad.storyboard */ = {
@@ -225,7 +223,6 @@
 				827E3EE715E5528200D30D96 /* en */,
 			);
 			name = MainStoryboard_iPad.storyboard;
-			path = "../../../../SinglySDK Example/SinglySDK Example";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

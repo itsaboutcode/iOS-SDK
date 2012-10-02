@@ -12,7 +12,14 @@
 @interface SinglyLoginPickerViewController : UITableViewController <SinglySessionDelegate, SinglyLoginViewControllerDelegate>
 
 @property (strong, atomic) NSArray *services;
-@property (strong, atomic) SinglySession *session;
+
+/*!
+ *
+ * The SinglySession to use for the login requests. The default value of this is
+ * the shared singleton instance.
+ *
+ */
+@property (strong, nonatomic) SinglySession *session;
 
 - (id)initWithSession:(SinglySession *)session;
 

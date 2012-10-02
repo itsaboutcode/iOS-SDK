@@ -8,6 +8,4 @@
 
 @interface SYMainViewController : UITableViewController
 
-@property (nonatomic, strong) SinglySession *session;
-
 @end

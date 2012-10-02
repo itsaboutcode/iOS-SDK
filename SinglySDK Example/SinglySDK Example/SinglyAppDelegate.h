@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SinglyAppDelegate : UIResponder <UIApplicationDelegate>
-{
-    IBOutlet UIViewController* rootViewController;
-}
 
 @property (strong, nonatomic) UIWindow *window;
 

@@ -10,8 +10,8 @@
 #import <SinglySDK/SinglyLogInViewController.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface SinglyLoginPickerViewController () {
-}
+@interface SinglyLoginPickerViewController ()
+
 @end
 
 @implementation SinglyLoginPickerViewController
@@ -45,6 +45,14 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - SinglySession
+
+- (SinglySession *)session
+{
+    _session = [SinglySession sharedSession];
+    return _session;
 }
 
 #pragma mark - Table view data source
@@ -203,16 +211,18 @@
 }
 
 #pragma mark - Singly Login View Controller delegate
--(void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service;
+
+- (void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service;
 {
     [self.tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
+- (void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
 {
     [self dismissViewControllerAnimated:FALSE completion:nil];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
+
 @end

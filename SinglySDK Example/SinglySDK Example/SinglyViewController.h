@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @interface SinglyViewController : UIViewController<SinglySessionDelegate, SinglyLoginViewControllerDelegate>
 
 @end
