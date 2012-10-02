@@ -12,7 +12,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+
+    // Configure Shared SinglySession
+    SinglySession *session = [SinglySession sharedSession];
+    session.clientID = CLIENT_ID;
+    session.clientSecret = CLIENT_SECRET;
+    NSLog(@"Singly Session\n  - Account: %@\n  - Access Token: %@)", session.accountID, session.accessToken);
+
     return YES;
 }
 							
