@@ -76,9 +76,9 @@
 		821D088815ED17B000ECFED0 /* SinglySDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySDK.m; sourceTree = "<group>"; };
 		821D088915ED17B000ECFED0 /* SinglySession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySession.h; sourceTree = "<group>"; };
 		821D088A15ED17B000ECFED0 /* SinglySession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySession.m; sourceTree = "<group>"; };
-		8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SinglyFriendPickerViewController.h; path = ../SinglyFriendPickerViewController.h; sourceTree = "<group>"; };
+		8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendPickerViewController.h; sourceTree = "<group>"; };
 		8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPickerViewController.m; sourceTree = "<group>"; };
-		824DCF331607B48D009FE2EA /* SinglySharingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SinglySharingViewController.xib; path = SinglySDK/ComposeViewController/SinglySharingViewController.xib; sourceTree = SOURCE_ROOT; };
+		824DCF331607B48D009FE2EA /* SinglySharingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SinglySharingViewController.xib; path = SinglySDK/SinglySharingViewController.xib; sourceTree = SOURCE_ROOT; };
 		824DCF341607B48D009FE2EA /* DEFacebookComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEFacebookComposeViewController.h; sourceTree = "<group>"; };
 		824DCF351607B48D009FE2EA /* DEFacebookComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEFacebookComposeViewController.m; sourceTree = "<group>"; };
 		824DCF361607B48D009FE2EA /* DEFacebookGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEFacebookGradientView.h; sourceTree = "<group>"; };
@@ -138,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				821D087615ED177400ECFED0 /* SinglySDK */,
+				D02EF071161B573700F90EE5 /* Libraries */,
 				821D087515ED177400ECFED0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -153,23 +154,14 @@
 		821D087615ED177400ECFED0 /* SinglySDK */ = {
 			isa = PBXGroup;
 			children = (
-				824DCF321607B48D009FE2EA /* ComposeViewController */,
-				8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */,
-				821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */,
-				821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */,
-				821D088515ED17B000ECFED0 /* SinglyLoginViewController.h */,
-				821D088615ED17B000ECFED0 /* SinglyLoginViewController.m */,
 				821D088715ED17B000ECFED0 /* SinglySDK.h */,
 				821D088815ED17B000ECFED0 /* SinglySDK.m */,
-				821D088915ED17B000ECFED0 /* SinglySession.h */,
-				821D088A15ED17B000ECFED0 /* SinglySession.m */,
+				D067E1AE161B433700B43C32 /* Authentication */,
+				D067E1B1161B434E00B43C32 /* Contacts */,
+				D067E1B0161B433D00B43C32 /* Sharing */,
+				821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */,
+				821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */,
 				821D087715ED177400ECFED0 /* Supporting Files */,
-				82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */,
-				82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */,
-				82C6252E16011E7900BF5225 /* SinglySharingViewController.h */,
-				82C6252F16011E7900BF5225 /* SinglySharingViewController.m */,
-				8296F4471611F7360004BA0B /* SinglyFriendModel.h */,
-				8296F4481611F7360004BA0B /* SinglyFriendModel.m */,
 			);
 			path = SinglySDK;
 			sourceTree = "<group>";
@@ -187,8 +179,6 @@
 		824DCF321607B48D009FE2EA /* ComposeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */,
-				824DCF331607B48D009FE2EA /* SinglySharingViewController.xib */,
 				824DCF341607B48D009FE2EA /* DEFacebookComposeViewController.h */,
 				824DCF351607B48D009FE2EA /* DEFacebookComposeViewController.m */,
 				824DCF361607B48D009FE2EA /* DEFacebookGradientView.h */,
@@ -205,7 +195,8 @@
 				824DCF571607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h */,
 				824DCF581607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m */,
 			);
-			path = ComposeViewController;
+			name = ComposeViewController;
+			path = SinglySDK/Libraries/ComposeViewController;
 			sourceTree = "<group>";
 		};
 		824DCF3E1607B48D009FE2EA /* Resources */ = {
@@ -237,6 +228,48 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		D02EF071161B573700F90EE5 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				824DCF321607B48D009FE2EA /* ComposeViewController */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		D067E1AE161B433700B43C32 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				821D088915ED17B000ECFED0 /* SinglySession.h */,
+				821D088A15ED17B000ECFED0 /* SinglySession.m */,
+				821D088515ED17B000ECFED0 /* SinglyLoginViewController.h */,
+				821D088615ED17B000ECFED0 /* SinglyLoginViewController.m */,
+				82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */,
+				82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
+		D067E1B0161B433D00B43C32 /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				82C6252E16011E7900BF5225 /* SinglySharingViewController.h */,
+				82C6252F16011E7900BF5225 /* SinglySharingViewController.m */,
+				824DCF331607B48D009FE2EA /* SinglySharingViewController.xib */,
+			);
+			name = Sharing;
+			sourceTree = "<group>";
+		};
+		D067E1B1161B434E00B43C32 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				8296F4471611F7360004BA0B /* SinglyFriendModel.h */,
+				8296F4481611F7360004BA0B /* SinglyFriendModel.m */,
+				8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */,
+				8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -246,19 +279,19 @@
 			files = (
 				821D088B15ED17B000ECFED0 /* SinglyAPIRequest.h in Headers */,
 				821D088D15ED17B000ECFED0 /* SinglyLoginViewController.h in Headers */,
-				821D088F15ED17B000ECFED0 /* SinglySDK.h in Headers */,
 				821D089115ED17B000ECFED0 /* SinglySession.h in Headers */,
 				82CAD78B15EEB0B300D3E486 /* SinglyLoginPickerViewController.h in Headers */,
 				8236EBDD15EFE79E00F3351E /* SinglyFriendPickerViewController.h in Headers */,
 				82C6253016011E7900BF5225 /* SinglySharingViewController.h in Headers */,
 				824DCF5A1607B48D009FE2EA /* DEFacebookComposeViewController.h in Headers */,
+				8296F4491611F7360004BA0B /* SinglyFriendModel.h in Headers */,
 				824DCF5C1607B48D009FE2EA /* DEFacebookGradientView.h in Headers */,
+				821D088F15ED17B000ECFED0 /* SinglySDK.h in Headers */,
 				824DCF5E1607B48D009FE2EA /* DEFacebookSheetCardView.h in Headers */,
 				824DCF601607B48D009FE2EA /* DEFacebookTextView.h in Headers */,
 				824DCF621607B48D009FE2EA /* DERuledView.h in Headers */,
 				824DCF7A1607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.h in Headers */,
 				824DCF7C1607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h in Headers */,
-				8296F4491611F7360004BA0B /* SinglyFriendModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +327,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0440;
-				ORGANIZATIONNAME = Singly;
+				ORGANIZATIONNAME = "Singly, Inc";
 			};
 			buildConfigurationList = 821D086A15ED177300ECFED0 /* Build configuration list for PBXProject "SinglySDK" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -399,7 +432,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\nif [ ! -e /usr/local/bin/appledoc ]; then\n    echo \"warning: Unable to generate documentation because AppleDoc is not installed. Please install AppleDoc by using Homebrew (e.g. brew install appledoc).\"\n    exit 0\nfi\n\n/usr/local/bin/appledoc \\\n  --project-name \"${PROJECT_NAME}\" \\\n  --project-company \"Singly, Inc\" \\\n  --company-id \"com.singly\" \\\n  --output \"${PROJECT_DIR}/Documentation\" \\\n  --docset-atom-filename \"SinglySDK.atom\" \\\n  --docset-feed-url \"http://github.com/Singly/iOS-SDK/%DOCSETATOMFILENAME\" \\\n  --docset-package-url \"http://github.com/Singly/iOS-SDK/%DOCSETPACKAGEFILENAME\" \\\n  --docset-fallback-url \"http://github.com/Singly/iOS-SDK/\" \\\n  --publish-docset \\\n  --logformat xcode \\\n  --keep-undocumented-objects \\\n  --keep-undocumented-members \\\n  --keep-intermediate-files \\\n  --no-repeat-first-par \\\n  --no-warn-invalid-crossref \\\n  --exit-threshold 2 \\\n  --ignore \".m\" \\\n  --index-desc \"${PROJECT_DIR}/../README.md\" \\\n  \"${PROJECT_DIR}\"\n";
+			shellScript = "\nif [ ! -e /usr/local/bin/appledoc ]; then\n    echo \"warning: Unable to generate documentation because AppleDoc is not installed. Please install AppleDoc by using Homebrew (e.g. brew install appledoc).\"\n    exit 0\nfi\n\n/usr/local/bin/appledoc \\\n  --project-name \"${PROJECT_NAME}\" \\\n  --project-company \"Singly, Inc\" \\\n  --company-id \"com.singly\" \\\n  --output \"${PROJECT_DIR}/Documentation\" \\\n  --docset-atom-filename \"SinglySDK.atom\" \\\n  --docset-feed-url \"http://github.com/Singly/iOS-SDK/%DOCSETATOMFILENAME\" \\\n  --docset-package-url \"http://github.com/Singly/iOS-SDK/%DOCSETPACKAGEFILENAME\" \\\n  --docset-fallback-url \"http://github.com/Singly/iOS-SDK/\" \\\n  --publish-docset \\\n  --logformat xcode \\\n  --keep-undocumented-objects \\\n  --keep-undocumented-members \\\n  --keep-intermediate-files \\\n  --no-repeat-first-par \\\n  --no-warn-invalid-crossref \\\n  --exit-threshold 2 \\\n  --ignore \".m\" \\\n  --ignore \"Libraries\" \\\n  --index-desc \"${PROJECT_DIR}/../README.md\" \\\n  \"${PROJECT_DIR}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
