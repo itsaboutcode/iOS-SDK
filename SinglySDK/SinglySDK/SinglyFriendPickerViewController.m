@@ -10,8 +10,8 @@
 #import <SinglySDK/SinglyAPIRequest.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface SinglyFriendPickerViewController () {
-    SinglySession* _session;
+@interface SinglyFriendPickerViewController ()
+{
     NSMutableDictionary* _friends;
     NSArray* _friendsSortedKeys;
     UIView* _loadingView;
@@ -23,21 +23,21 @@
 
 @implementation SinglyFriendPickerViewController
 
--(id)initWithSession:(SinglySession*)session;
+- (id)initWithSession:(SinglySession*)session;
 {
     self = [super initWithStyle:UITableViewStylePlain];
-    if (self) {
+    if (self)
+    {
         _session = session;
     }
     return self;
-    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    [_session requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"types/contacts" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"200", @"limit", nil]] withCompletionHandler:^(NSError *error, id json) {
+    [self.session requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"types/contacts" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"200", @"limit", nil]] withCompletionHandler:^(NSError *error, id json) {
         if (![json isKindOfClass:[NSArray class]]) {
             return;
         }
@@ -100,6 +100,14 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - SinglySession
+
+- (SinglySession *)session
+{
+    _session = [SinglySession sharedSession];
+    return _session;
 }
 
 #pragma mark - Table view data source
