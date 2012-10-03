@@ -138,6 +138,7 @@
 			buildPhases = (
 				827E3EC915E5528200D30D96 /* Sources */,
 				827E3ECA15E5528200D30D96 /* Frameworks */,
+				D03BE932161CD248009D0341 /* Increment Build Number */,
 				827E3ECB15E5528200D30D96 /* Resources */,
 			);
 			buildRules = (
@@ -189,6 +190,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D03BE932161CD248009D0341 /* Increment Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Increment Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\nif [ $CONFIGURATION == Release ]; then\n    plist=${PROJECT_DIR}/${INFOPLIST_FILE}\n\n    buildnum=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${plist}\")\n    if [[ \"${buildnum}\" == \"\" ]]; then\n        echo \"error: No build number in $plist\"\n        exit 2\n    fi\n\n    buildnum=$(expr $buildnum + 1)\n    /usr/libexec/Plistbuddy -c \"Set CFBundleVersion $buildnum\" \"${plist}\"\n    echo \"Incremented build number to $buildnum.\"\n\nelse\n    echo \"Not incrementing build number for $CONFIGURATION build.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		827E3EC915E5528200D30D96 /* Sources */ = {
