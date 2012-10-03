@@ -12,6 +12,13 @@
 @class SinglySession;
 @class SinglyLogInViewController;
 
+/*
+ * Constants for notification center.
+ */
+
+/*! Notifcation string for when a session's profiles have been updated. */
+static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifications.sessionProfilesUpdates";
+
 /*!
  @protocol SinglySessionDelegate
  @abstract Delegate methods related to a SinglySession
@@ -67,11 +74,11 @@
 +(SinglySession*)sharedSession;
 
 /*!
- Checks if the session is ready to make API requests.
+ Get the session in a state that is ready to make API calls.
  @param block
     The block to run when the check is complete.  It will be passed a BOOL stating if the session is ready.
 */
--(void)checkReadyWithCompletionHandler:(void (^)(BOOL))block;
+-(void)startSessionWithCompletionHandler:(void (^)(BOOL))block;
 /*!
  Make a Singly API request and handle the result in a delegate
  @param request
@@ -89,6 +96,11 @@
 */
 -(void)requestAPI:(SinglyAPIRequest *)request withCompletionHandler:(void (^)(NSError*, id))block;
 
+/*!
+ Explicitly go and update the profiles
+ @param block
+    The block to call when the profile update is complete
+*/
 -(void)updateProfilesWithCompletion:(void (^)())block;
 @end
 

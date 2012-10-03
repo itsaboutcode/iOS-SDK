@@ -7,6 +7,7 @@
 //
 
 #import "SinglySession.h"
+#import "SinglySDK.h"
 
 static NSString* kSinglyAccountIDKey = @"com.singly.accountID";
 static NSString* kSinglyAccessTokenKey = @"com.singly.accessToken";
@@ -53,26 +54,26 @@ static SinglySession* sharedInstance = nil;
     return _profiles;
 }
 
--(void)checkReadyWithCompletionHandler:(void (^)(BOOL))block;
+-(void)startSessionWithCompletionHandler:(void (^)(BOOL))block;
 {
     // If we don't have an accountID or accessToken we're definitely not ready
     if (!self.accountID || !self.accessToken) {
         return block(NO);
     }
-    
+
+    dispatch_queue_t resultQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/v0/profiles?access_token=%@", self.accessToken]]];
-        NSError* error;
-        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        NSString* foundAccountID = [json objectForKey:@"id"];
-        BOOL isReady = NO;
-        if ([foundAccountID isEqualToString:self.accountID]) {
-            _profiles = json;
-            isReady = YES;
-        }
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            block(isReady);
-        });
+        [self updateProfilesWithCompletion:^{
+            NSString* foundAccountID = [self.profiles objectForKey:@"id"];
+            BOOL isReady = NO;
+            if ([foundAccountID isEqualToString:self.accountID]) {
+                isReady = YES;
+            }
+            dispatch_sync(resultQueue, ^{
+                block(isReady);
+            });
+
+        }];
     });
     
 }
@@ -137,6 +138,7 @@ static SinglySession* sharedInstance = nil;
         NSError* error;
         id json = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[apiReq completeURLForToken:self.accessToken]]] options:kNilOptions error:&error];
         if (!error && [json isKindOfClass:[NSDictionary class]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyNotificationSessionProfilesUpdated object:self];
             _profiles = json;
         }
         

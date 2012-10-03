@@ -19,8 +19,6 @@
 		8236EBDD15EFE79E00F3351E /* SinglyFriendPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8236EBDE15EFE79E00F3351E /* SinglyFriendPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */; };
 		824DCF591607B48D009FE2EA /* SinglySharingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF331607B48D009FE2EA /* SinglySharingViewController.xib */; };
-		824DCF5A1607B48D009FE2EA /* DEFacebookComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF341607B48D009FE2EA /* DEFacebookComposeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		824DCF5B1607B48D009FE2EA /* DEFacebookComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF351607B48D009FE2EA /* DEFacebookComposeViewController.m */; };
 		824DCF5C1607B48D009FE2EA /* DEFacebookGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF361607B48D009FE2EA /* DEFacebookGradientView.h */; };
 		824DCF5D1607B48D009FE2EA /* DEFacebookGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF371607B48D009FE2EA /* DEFacebookGradientView.m */; };
 		824DCF5E1607B48D009FE2EA /* DEFacebookSheetCardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF381607B48D009FE2EA /* DEFacebookSheetCardView.h */; };
@@ -55,6 +53,8 @@
 		824DCF7B1607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF561607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m */; };
 		824DCF7C1607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF571607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h */; };
 		824DCF7D1607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF581607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m */; };
+		825B6D94161C99EF0034DB92 /* NSString+URLEncoded.h in Headers */ = {isa = PBXBuildFile; fileRef = 825B6D92161C99EF0034DB92 /* NSString+URLEncoded.h */; };
+		825B6D95161C99EF0034DB92 /* NSString+URLEncoded.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */; };
 		8296F4491611F7360004BA0B /* SinglyFriendModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8296F4471611F7360004BA0B /* SinglyFriendModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8296F44A1611F7360004BA0B /* SinglyFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8296F4481611F7360004BA0B /* SinglyFriendModel.m */; };
 		82C6253016011E7900BF5225 /* SinglySharingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C6252E16011E7900BF5225 /* SinglySharingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -79,8 +79,6 @@
 		8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendPickerViewController.h; sourceTree = "<group>"; };
 		8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPickerViewController.m; sourceTree = "<group>"; };
 		824DCF331607B48D009FE2EA /* SinglySharingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SinglySharingViewController.xib; path = SinglySDK/SinglySharingViewController.xib; sourceTree = SOURCE_ROOT; };
-		824DCF341607B48D009FE2EA /* DEFacebookComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEFacebookComposeViewController.h; sourceTree = "<group>"; };
-		824DCF351607B48D009FE2EA /* DEFacebookComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEFacebookComposeViewController.m; sourceTree = "<group>"; };
 		824DCF361607B48D009FE2EA /* DEFacebookGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEFacebookGradientView.h; sourceTree = "<group>"; };
 		824DCF371607B48D009FE2EA /* DEFacebookGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEFacebookGradientView.m; sourceTree = "<group>"; };
 		824DCF381607B48D009FE2EA /* DEFacebookSheetCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEFacebookSheetCardView.h; sourceTree = "<group>"; };
@@ -115,6 +113,8 @@
 		824DCF561607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+DEFacebookComposeViewController.m"; sourceTree = "<group>"; };
 		824DCF571607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+DEFacebookComposeViewController.h"; sourceTree = "<group>"; };
 		824DCF581607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+DEFacebookComposeViewController.m"; sourceTree = "<group>"; };
+		825B6D92161C99EF0034DB92 /* NSString+URLEncoded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoded.h"; sourceTree = "<group>"; };
+		825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoded.m"; sourceTree = "<group>"; };
 		8296F4471611F7360004BA0B /* SinglyFriendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendModel.h; sourceTree = "<group>"; };
 		8296F4481611F7360004BA0B /* SinglyFriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendModel.m; sourceTree = "<group>"; };
 		82C6252E16011E7900BF5225 /* SinglySharingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySharingViewController.h; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				821D087615ED177400ECFED0 /* SinglySDK */,
-				D02EF071161B573700F90EE5 /* Libraries */,
+				824DCF321607B48D009FE2EA /* ComposeViewController */,
 				821D087515ED177400ECFED0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -154,6 +154,7 @@
 		821D087615ED177400ECFED0 /* SinglySDK */ = {
 			isa = PBXGroup;
 			children = (
+				825B6D91161C99CE0034DB92 /* Utilities */,
 				821D088715ED17B000ECFED0 /* SinglySDK.h */,
 				821D088815ED17B000ECFED0 /* SinglySDK.m */,
 				D067E1AE161B433700B43C32 /* Authentication */,
@@ -179,8 +180,6 @@
 		824DCF321607B48D009FE2EA /* ComposeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				824DCF341607B48D009FE2EA /* DEFacebookComposeViewController.h */,
-				824DCF351607B48D009FE2EA /* DEFacebookComposeViewController.m */,
 				824DCF361607B48D009FE2EA /* DEFacebookGradientView.h */,
 				824DCF371607B48D009FE2EA /* DEFacebookGradientView.m */,
 				824DCF381607B48D009FE2EA /* DEFacebookSheetCardView.h */,
@@ -196,7 +195,7 @@
 				824DCF581607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m */,
 			);
 			name = ComposeViewController;
-			path = SinglySDK/Libraries/ComposeViewController;
+			path = SinglySDK/ComposeViewController;
 			sourceTree = "<group>";
 		};
 		824DCF3E1607B48D009FE2EA /* Resources */ = {
@@ -228,12 +227,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		D02EF071161B573700F90EE5 /* Libraries */ = {
+		825B6D91161C99CE0034DB92 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				824DCF321607B48D009FE2EA /* ComposeViewController */,
+				825B6D92161C99EF0034DB92 /* NSString+URLEncoded.h */,
+				825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */,
 			);
-			name = Libraries;
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		D067E1AE161B433700B43C32 /* Authentication */ = {
@@ -283,7 +283,6 @@
 				82CAD78B15EEB0B300D3E486 /* SinglyLoginPickerViewController.h in Headers */,
 				8236EBDD15EFE79E00F3351E /* SinglyFriendPickerViewController.h in Headers */,
 				82C6253016011E7900BF5225 /* SinglySharingViewController.h in Headers */,
-				824DCF5A1607B48D009FE2EA /* DEFacebookComposeViewController.h in Headers */,
 				8296F4491611F7360004BA0B /* SinglyFriendModel.h in Headers */,
 				824DCF5C1607B48D009FE2EA /* DEFacebookGradientView.h in Headers */,
 				821D088F15ED17B000ECFED0 /* SinglySDK.h in Headers */,
@@ -292,6 +291,7 @@
 				824DCF621607B48D009FE2EA /* DERuledView.h in Headers */,
 				824DCF7A1607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.h in Headers */,
 				824DCF7C1607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h in Headers */,
+				825B6D94161C99EF0034DB92 /* NSString+URLEncoded.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,7 +448,6 @@
 				82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */,
 				8236EBDE15EFE79E00F3351E /* SinglyFriendPickerViewController.m in Sources */,
 				82C6253116011E7900BF5225 /* SinglySharingViewController.m in Sources */,
-				824DCF5B1607B48D009FE2EA /* DEFacebookComposeViewController.m in Sources */,
 				824DCF5D1607B48D009FE2EA /* DEFacebookGradientView.m in Sources */,
 				824DCF5F1607B48D009FE2EA /* DEFacebookSheetCardView.m in Sources */,
 				824DCF611607B48D009FE2EA /* DEFacebookTextView.m in Sources */,
@@ -456,6 +455,7 @@
 				824DCF7B1607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m in Sources */,
 				824DCF7D1607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m in Sources */,
 				8296F44A1611F7360004BA0B /* SinglyFriendModel.m in Sources */,
+				825B6D95161C99EF0034DB92 /* NSString+URLEncoded.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

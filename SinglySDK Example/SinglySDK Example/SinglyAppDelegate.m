@@ -19,6 +19,14 @@
     session.clientSecret = CLIENT_SECRET;
     NSLog(@"Singly Session\n  - Account: %@\n  - Access Token: %@)", session.accountID, session.accessToken);
 
+    [[NSNotificationCenter defaultCenter] addObserverForName:kSinglyNotificationSessionProfilesUpdated object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        NSLog(@"**** Profiles were updated");
+    }];
+    
+    [session startSessionWithCompletionHandler:^(BOOL ready) {
+        NSLog(@"The session is ready to roll.");
+    }];
+
     return YES;
 }
 							

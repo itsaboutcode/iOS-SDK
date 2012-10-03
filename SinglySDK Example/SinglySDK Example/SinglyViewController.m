@@ -26,7 +26,7 @@
 
 -(void) viewDidAppear:(BOOL)animated
 {
-    [session_ checkReadyWithCompletionHandler:^(BOOL ready) {
+    [session_ startSessionWithCompletionHandler:^(BOOL ready) {
         
         NSLog(@"Ready is %d", ready);
         //_picker = [[SinglyLoginPickerViewController alloc] initWithSession:session_];

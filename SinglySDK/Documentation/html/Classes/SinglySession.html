@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.0.6 (build 789)" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -62,11 +62,11 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/checkReadyWithCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- checkReadyWithCompletionHandler:</option>
-	
 	<option value="//api/name/requestAPI:withCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAPI:withCompletionHandler:</option>
 	
 	<option value="//api/name/requestAPI:withDelegate:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAPI:withDelegate:</option>
+	
+	<option value="//api/name/startSessionWithCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- startSessionWithCompletionHandler:</option>
 	
 	<option value="//api/name/updateProfilesWithCompletion:">&nbsp;&nbsp;&nbsp;&nbsp;- updateProfilesWithCompletion:</option>
 	
@@ -118,11 +118,11 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/checkReadyWithCompletionHandler:">checkReadyWithCompletionHandler:</a></span></li>
-	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAPI:withCompletionHandler:">requestAPI:withCompletionHandler:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAPI:withDelegate:">requestAPI:withDelegate:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/startSessionWithCompletionHandler:">startSessionWithCompletionHandler:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateProfilesWithCompletion:">updateProfilesWithCompletion:</a></span></li>
 	
@@ -224,8 +224,8 @@ The account ID associated with the current access token</p></span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/checkReadyWithCompletionHandler:">&ndash;&nbsp;checkReadyWithCompletionHandler:</a></code>
-		<span class="tooltip"><p>Checks if the session is ready to make API requests.
+		<code><a href="#//api/name/startSessionWithCompletionHandler:">&ndash;&nbsp;startSessionWithCompletionHandler:</a></code>
+		<span class="tooltip"><p>Get the session in a state that is ready to make API calls.
 @param block</p>
 
 <pre><code>The block to run when the check is complete.  It will be passed a BOOL stating if the session is ready.
@@ -268,7 +268,11 @@ The account ID associated with the current access token</p></span>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/updateProfilesWithCompletion:">&ndash;&nbsp;updateProfilesWithCompletion:</a></code>
-		
+		<span class="tooltip"><p>Explicitly go and update the <a href="#//api/name/profiles">profiles</a>
+@param block</p>
+
+<pre><code>The block to call when the profile update is complete
+</code></pre></span>
 	</span>
 	
 	
@@ -487,46 +491,6 @@ sessions inside one app.</p>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/checkReadyWithCompletionHandler:" title="checkReadyWithCompletionHandler:"></a>
-	<h3 class="subsubtitle method-title">checkReadyWithCompletionHandler:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Checks if the session is ready to make API requests.
-@param block</p>
-
-<pre><code>The block to run when the check is complete.  It will be passed a BOOL stating if the session is ready.
-</code></pre>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)checkReadyWithCompletionHandler:(void ( ^ ) ( BOOL ))<em>block</em></code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglySession.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
 	<a name="//api/name/requestAPI:withCompletionHandler:" title="requestAPI:withCompletionHandler:"></a>
 	<h3 class="subsubtitle method-title">requestAPI:withCompletionHandler:</h3>
 	
@@ -617,14 +581,83 @@ sessions inside one app.</p>
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/startSessionWithCompletionHandler:" title="startSessionWithCompletionHandler:"></a>
+	<h3 class="subsubtitle method-title">startSessionWithCompletionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Get the session in a state that is ready to make API calls.
+@param block</p>
+
+<pre><code>The block to run when the check is complete.  It will be passed a BOOL stating if the session is ready.
+</code></pre>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)startSessionWithCompletionHandler:(void ( ^ ) ( BOOL ))<em>block</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglySession.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/updateProfilesWithCompletion:" title="updateProfilesWithCompletion:"></a>
 	<h3 class="subsubtitle method-title">updateProfilesWithCompletion:</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Explicitly go and update the <a href="#//api/name/profiles">profiles</a>
+@param block</p>
+
+<pre><code>The block to call when the profile update is complete
+</code></pre>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (void)updateProfilesWithCompletion:(void ( ^ ) ( ))<em>block</em></code></div>
 
     
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglySession.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 					</div>
@@ -640,9 +673,9 @@ sessions inside one app.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-10-02)</span><br />
+						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-10-03)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.6 (build 789)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>
