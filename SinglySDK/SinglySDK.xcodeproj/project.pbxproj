@@ -323,6 +323,7 @@
 		821D086715ED177300ECFED0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = Singly;
 				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = "Singly, Inc";
 			};
