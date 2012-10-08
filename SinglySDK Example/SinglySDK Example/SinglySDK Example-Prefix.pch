@@ -12,6 +12,6 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <SinglySDK/SinglySDK.h>
-    #include "ClientKeys.h"
-    #include "TestFlight.h"
+    #import "ClientKeys.h"
+    #import "TestFlight.h"
 #endif
