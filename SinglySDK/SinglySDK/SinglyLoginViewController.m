@@ -66,7 +66,7 @@
 
 - (void)viewWillAppear:(BOOL)animated;
 {
-    NSString* urlStr = [NSString stringWithFormat:@"https://api.singly.com/oauth/authorize?redirect_uri=singly://authComplete&service=%@&client_id=%@", self.targetService, self.session.clientID];
+    NSString* urlStr = [NSString stringWithFormat:@"https://api.singly.com/oauth/authorize?redirect_uri=fb%@://authorize&service=%@&client_id=%@", self.session.clientID, self.targetService, self.session.clientID];
     if (self.session.accountID) {
         urlStr = [urlStr stringByAppendingFormat:@"&account=%@", self.session.accountID];
     }
@@ -97,7 +97,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {
-    if ([request.URL.scheme isEqualToString:@"singly"] && [request.URL.host isEqualToString:@"authComplete"]) {
+    if ([request.URL.scheme isEqualToString:[NSString stringWithFormat:@"fb%@", self.session.clientID]] && [request.URL.host isEqualToString:@"authorize"]) {
 
         pendingLoginView = [[UIView alloc] initWithFrame:self.view.bounds];
         pendingLoginView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
