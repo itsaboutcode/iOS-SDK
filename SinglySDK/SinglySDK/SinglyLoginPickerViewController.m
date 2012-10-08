@@ -51,7 +51,8 @@
 
 - (SinglySession *)session
 {
-    _session = [SinglySession sharedSession];
+    if (!_session)
+        _session = [SinglySession sharedSession];
     return _session;
 }
 
