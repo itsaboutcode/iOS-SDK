@@ -13,6 +13,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
+    // Initialize TestFlight
+    #ifdef TESTFLIGHT_TOKEN
+    [TestFlight takeOff:TESTFLIGHT_TOKEN];
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    #endif
+
     // Configure Shared SinglySession
     SinglySession *session = [SinglySession sharedSession];
     session.clientID = CLIENT_ID;

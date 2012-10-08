@@ -13,4 +13,5 @@
     #import <Foundation/Foundation.h>
     #import <SinglySDK/SinglySDK.h>
     #include "ClientKeys.h"
+    #include "TestFlight.h"
 #endif
