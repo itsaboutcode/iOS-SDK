@@ -9,76 +9,61 @@
 #import "SinglySession.h"
 #import "SinglySDK.h"
 
-static NSString* kSinglyAccountIDKey = @"com.singly.accountID";
-static NSString* kSinglyAccessTokenKey = @"com.singly.accessToken";
+static NSString *kSinglyAccountIDKey = @"com.singly.accountID";
+static NSString *kSinglyAccessTokenKey = @"com.singly.accessToken";
 
-@interface SinglySession () {
-    NSDictionary* _profiles;
-}
+@interface SinglySession ()
 @end
 
 @implementation SinglySession
 
-static SinglySession* sharedInstance = nil;
+static SinglySession *sharedInstance = nil;
 
-+(SinglySession*)sharedSession;
++ (SinglySession*)sharedSession
 {
-    if (sharedInstance == nil) {
-        sharedInstance = [SinglySession new];
-    }
+    if (sharedInstance == nil)
+        sharedInstance = [[SinglySession alloc] init];
     return sharedInstance;
 }
 
--(void)setAccountID:(NSString *)accountID
+- (void)setAccountID:(NSString *)accountID
 {
-    [[NSUserDefaults standardUserDefaults] setObject:accountID forKey:kSinglyAccountIDKey];
+    [[NSUserDefaults standardUserDefaults] setValue:accountID forKey:kSinglyAccountIDKey];
 }
 
--(NSString*)accountID;
+- (NSString *)accountID
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:kSinglyAccountIDKey];
+    return [[NSUserDefaults standardUserDefaults] valueForKey:kSinglyAccountIDKey];
 }
 
--(void)setAccessToken:(NSString *)accessToken;
+- (void)setAccessToken:(NSString *)accessToken
 {
-    [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:kSinglyAccessTokenKey];
+    [[NSUserDefaults standardUserDefaults] setValue:accessToken forKey:kSinglyAccessTokenKey];
 }
 
--(NSString*)accessToken;
+- (NSString *)accessToken
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:kSinglyAccessTokenKey];
+    return [[NSUserDefaults standardUserDefaults] valueForKey:kSinglyAccessTokenKey];
 }
 
--(NSDictionary*)profiles;
-{
-    return _profiles;
-}
-
--(void)startSessionWithCompletionHandler:(void (^)(BOOL))block;
+- (void)startSessionWithCompletionHandler:(void (^)(BOOL))block
 {
     // If we don't have an accountID or accessToken we're definitely not ready
-    if (!self.accountID || !self.accessToken) {
-        return block(NO);
-    }
+    if (!self.accountID || !self.accessToken) return block(NO);
 
     dispatch_queue_t resultQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self updateProfilesWithCompletion:^{
-            NSString* foundAccountID = [self.profiles objectForKey:@"id"];
-            BOOL isReady = NO;
-            if ([foundAccountID isEqualToString:self.accountID]) {
-                isReady = YES;
-            }
+            NSString *foundAccountID = [self.profiles objectForKey:@"id"];
+            BOOL isReady = ([foundAccountID isEqualToString:self.accountID]);
             dispatch_sync(resultQueue, ^{
                 block(isReady);
             });
-
         }];
     });
-    
 }
 
--(void)requestAPI:(SinglyAPIRequest *)request withDelegate:(id<SinglyAPIRequestDelegate>)delegate;
+- (void)requestAPI:(SinglyAPIRequest *)request withDelegate:(id<SinglyAPIRequestDelegate>)delegate
 {
     [self requestAPI:request withCompletionHandler:^(NSError *error, id json) {
         if (error) {
@@ -89,7 +74,7 @@ static SinglySession* sharedInstance = nil;
     }];
 }
 
--(void)requestAPI:(SinglyAPIRequest *)request withCompletionHandler:(void (^)(NSError *, id))block;
+- (void)requestAPI:(SinglyAPIRequest *)request withCompletionHandler:(void (^)(NSError *, id))block
 {
     if (!self.accessToken) {
         NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:@"Access token is not yet set" forKey:NSLocalizedDescriptionKey]];
@@ -102,9 +87,9 @@ static SinglySession* sharedInstance = nil;
         NSMutableURLRequest* urlRequest = [NSMutableURLRequest requestWithURL:reqURL];
         urlRequest.HTTPMethod = request.method;
         if (request.body) urlRequest.HTTPBody = request.body;
-        NSURLResponse* response;
-        NSError* error;
-        NSData* returnedData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+        NSURLResponse *response;
+        NSError *error;
+        NSData *returnedData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
         NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) response;
         if ([httpResponse statusCode] == 200) {
             if (error) {
@@ -130,12 +115,12 @@ static SinglySession* sharedInstance = nil;
     });
 }
 
--(void)updateProfilesWithCompletion:(void(^)())block;
+- (void)updateProfilesWithCompletion:(void(^)())block
 {
     dispatch_queue_t curQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         SinglyAPIRequest* apiReq = [[SinglyAPIRequest alloc] initWithEndpoint:@"profiles" andParameters:nil];
-        NSError* error;
+        NSError *error;
         id json = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[apiReq completeURLForToken:self.accessToken]]] options:kNilOptions error:&error];
         if (!error && [json isKindOfClass:[NSDictionary class]]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyNotificationSessionProfilesUpdated object:self];
@@ -145,4 +130,5 @@ static SinglySession* sharedInstance = nil;
         dispatch_sync(curQueue, block);
     });
 }
+
 @end

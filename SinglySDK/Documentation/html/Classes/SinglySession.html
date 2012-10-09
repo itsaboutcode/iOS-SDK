@@ -174,44 +174,43 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/accessToken">&nbsp;&nbsp;accessToken</a></code>
-		<span class="tooltip"><p>@property accessToken
-The access token that will be used for all Singly API requests.</p></span>
+		<span class="tooltip"><p>The access token that will be used for all Singly API requests.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/accountID">&nbsp;&nbsp;accountID</a></code>
-		<span class="tooltip"><p>@property accountID
-The account ID associated with the current access token</p></span>
+		<span class="tooltip"><p>The account ID associated with the current access token.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/clientID">&nbsp;&nbsp;clientID</a></code>
-		
+		<span class="tooltip"><p>The client ID to be used while authenticating against the Singly API.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/clientSecret">&nbsp;&nbsp;clientSecret</a></code>
-		
+		<span class="tooltip"><p>The client secret to be used while authenticating against the Singly API.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/profiles">&nbsp;&nbsp;profiles</a></code>
-		<span class="tooltip"><p>Profiles of the services that the account has connected.  Will return until there is a valid session.</p></span>
+		<span class="tooltip"><p>Profiles of the services that the account has connected.  Will return until
+there is a valid session.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
-		
+		<span class="tooltip"><p>@property delegate</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -225,54 +224,28 @@ The account ID associated with the current access token</p></span>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/startSessionWithCompletionHandler:">&ndash;&nbsp;startSessionWithCompletionHandler:</a></code>
-		<span class="tooltip"><p>Get the session in a state that is ready to make API calls.
-@param block</p>
-
-<pre><code>The block to run when the check is complete.  It will be passed a BOOL stating if the session is ready.
-</code></pre></span>
+		<span class="tooltip"><p>Get the session in a state that is ready to make API calls.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/requestAPI:withDelegate:">&ndash;&nbsp;requestAPI:withDelegate:</a></code>
-		<span class="tooltip"><p>Make a Singly API request and handle the result in a <a href="#//api/name/delegate">delegate</a>
-@param request</p>
-
-<pre><code>The SinglyAPIRequest to process
-</code></pre>
-
-<p>@param <a href="#//api/name/delegate">delegate</a></p>
-
-<pre><code>The object to call when the process succeeds or errors.
-</code></pre></span>
+		<span class="tooltip"><p>Make a Singly API request and handle the result in a <a href="#//api/name/delegate">delegate</a></p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/requestAPI:withCompletionHandler:">&ndash;&nbsp;requestAPI:withCompletionHandler:</a></code>
-		<span class="tooltip"><p>Make a Singly API request and handle the result in a block
-@param request</p>
-
-<pre><code>The SinglyAPIRequest to process
-</code></pre>
-
-<p>@param block</p>
-
-<pre><code>The block to call when the request is complete.
-</code></pre></span>
+		<span class="tooltip"><p>Make a Singly API request and handle the result in a block</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/updateProfilesWithCompletion:">&ndash;&nbsp;updateProfilesWithCompletion:</a></code>
-		<span class="tooltip"><p>Explicitly go and update the <a href="#//api/name/profiles">profiles</a>
-@param block</p>
-
-<pre><code>The block to call when the profile update is complete
-</code></pre></span>
+		<span class="tooltip"><p>Explicitly go and update the <a href="#//api/name/profiles">profiles</a></p></span>
 	</span>
 	
 	
@@ -296,8 +269,7 @@ The account ID associated with the current access token</p></span>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>@property accessToken
-The access token that will be used for all Singly API requests.</p>
+		<p>The access token that will be used for all Singly API requests.</p>
 	</div>		
 	
     
@@ -311,6 +283,11 @@ The access token that will be used for all Singly API requests.</p>
 	
 	
 	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>@property accessToken</p>
+	</div>
 	
 	
 	
@@ -333,13 +310,135 @@ The access token that will be used for all Singly API requests.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>@property accountID
-The account ID associated with the current access token</p>
+		<p>The account ID associated with the current access token.</p>
 	</div>		
 	
     
 
 	<div class="method-subsection method-declaration"><code>@property (copy) NSString *accountID</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>@property accountID</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglySession.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/clientID" title="clientID"></a>
+	<h3 class="subsubtitle method-title">clientID</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The client ID to be used while authenticating against the Singly API.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (copy) NSString *clientID</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>@property clientID</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglySession.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/clientSecret" title="clientSecret"></a>
+	<h3 class="subsubtitle method-title">clientSecret</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The client secret to be used while authenticating against the Singly API.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (copy) NSString *clientSecret</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>@property clientSecret</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglySession.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="subsubtitle method-title">delegate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>@property delegate</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (weak, atomic) id&lt;SinglySessionDelegate&gt; delegate</code></div>
 
     
 	
@@ -364,46 +463,14 @@ The account ID associated with the current access token</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/clientID" title="clientID"></a>
-	<h3 class="subsubtitle method-title">clientID</h3>
-	
-	
-
-	<div class="method-subsection method-declaration"><code>@property (copy) NSString *clientID</code></div>
-
-    
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/clientSecret" title="clientSecret"></a>
-	<h3 class="subsubtitle method-title">clientSecret</h3>
-	
-	
-
-	<div class="method-subsection method-declaration"><code>@property (copy) NSString *clientSecret</code></div>
-
-    
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/delegate" title="delegate"></a>
-	<h3 class="subsubtitle method-title">delegate</h3>
-	
-	
-
-	<div class="method-subsection method-declaration"><code>@property (weak, atomic) id&lt;SinglySessionDelegate&gt; delegate</code></div>
-
-    
-</div>
-						
-						<div class="section-method">
 	<a name="//api/name/profiles" title="profiles"></a>
 	<h3 class="subsubtitle method-title">profiles</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Profiles of the services that the account has connected.  Will return until there is a valid session.</p>
+		<p>Profiles of the services that the account has connected.  Will return until
+there is a valid session.</p>
 	</div>		
 	
     
@@ -417,6 +484,11 @@ The account ID associated with the current access token</p>
 	
 	
 	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>@property profiles</p>
+	</div>
 	
 	
 	
@@ -464,8 +536,8 @@ The account ID associated with the current access token</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>This is the preferred way to use the SinglySession and you should only create a new instance if you must use multiple
-sessions inside one app.</p>
+		<p>This is the preferred way to use the SinglySession and you should only create
+a new instance if you must use multiple sessions inside one app.</p>
 	</div>
 	
 	
@@ -497,16 +569,7 @@ sessions inside one app.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Make a Singly API request and handle the result in a block
-@param request</p>
-
-<pre><code>The SinglyAPIRequest to process
-</code></pre>
-
-<p>@param block</p>
-
-<pre><code>The block to call when the request is complete.
-</code></pre>
+		<p>Make a Singly API request and handle the result in a block</p>
 	</div>		
 	
     
@@ -514,6 +577,21 @@ sessions inside one app.</p>
 	<div class="method-subsection method-declaration"><code>- (void)requestAPI:(SinglyAPIRequest *)<em>request</em> withCompletionHandler:(void ( ^ ) ( NSError *, id ))<em>block</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>request</em></dt>
+			<dd><p>The <a href="../Classes/SinglyAPIRequest.html">SinglyAPIRequest</a> to process</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>block</em></dt>
+			<dd><p>The block to call when the request is complete.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
@@ -542,16 +620,7 @@ sessions inside one app.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Make a Singly API request and handle the result in a <a href="#//api/name/delegate">delegate</a>
-@param request</p>
-
-<pre><code>The SinglyAPIRequest to process
-</code></pre>
-
-<p>@param <a href="#//api/name/delegate">delegate</a></p>
-
-<pre><code>The object to call when the process succeeds or errors.
-</code></pre>
+		<p>Make a Singly API request and handle the result in a <a href="#//api/name/delegate">delegate</a></p>
 	</div>		
 	
     
@@ -559,6 +628,21 @@ sessions inside one app.</p>
 	<div class="method-subsection method-declaration"><code>- (void)requestAPI:(SinglyAPIRequest *)<em>request</em> withDelegate:(id&lt;SinglyAPIRequestDelegate&gt;)<em>delegate</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>request</em></dt>
+			<dd><p>The <a href="../Classes/SinglyAPIRequest.html">SinglyAPIRequest</a> to process</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>delegate</em></dt>
+			<dd><p>The object to call when the process succeeds or errors.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
@@ -587,11 +671,7 @@ sessions inside one app.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Get the session in a state that is ready to make API calls.
-@param block</p>
-
-<pre><code>The block to run when the check is complete.  It will be passed a BOOL stating if the session is ready.
-</code></pre>
+		<p>Get the session in a state that is ready to make API calls.</p>
 	</div>		
 	
     
@@ -599,6 +679,16 @@ sessions inside one app.</p>
 	<div class="method-subsection method-declaration"><code>- (void)startSessionWithCompletionHandler:(void ( ^ ) ( BOOL ))<em>block</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>block</em></dt>
+			<dd><p>The block to run when the check is complete. It will be passed a BOOL stating if the session is ready.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
@@ -627,11 +717,7 @@ sessions inside one app.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Explicitly go and update the <a href="#//api/name/profiles">profiles</a>
-@param block</p>
-
-<pre><code>The block to call when the profile update is complete
-</code></pre>
+		<p>Explicitly go and update the <a href="#//api/name/profiles">profiles</a></p>
 	</div>		
 	
     
@@ -639,6 +725,16 @@ sessions inside one app.</p>
 	<div class="method-subsection method-declaration"><code>- (void)updateProfilesWithCompletion:(void ( ^ ) ( ))<em>block</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>block</em></dt>
+			<dd><p>The block to call when the profile update is complete</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
@@ -673,7 +769,7 @@ sessions inside one app.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-10-08)</span><br />
+						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-10-09)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
