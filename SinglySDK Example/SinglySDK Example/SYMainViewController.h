@@ -8,4 +8,6 @@
 
 @interface SYMainViewController : UITableViewController
 
+@property (nonatomic, strong) IBOutlet UITableViewCell *friendPickerCell;
+
 @end
