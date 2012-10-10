@@ -30,6 +30,8 @@
 		D098EB851626156100B2626C /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB841626156100B2626C /* Icon-114.png */; };
 		D098EB871626156E00B2626C /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB861626156E00B2626C /* Icon-72.png */; };
 		D098EB891626157000B2626C /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB881626157000B2626C /* Icon-144.png */; };
+		D098EB8C1626181900B2626C /* Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB8A1626181900B2626C /* Background@2x.png */; };
+		D098EB8D1626181900B2626C /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB8B1626181900B2626C /* Background.png */; };
 		D0CBF6F1161A19AE00C11322 /* SinglySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0CBF6EF161A199F00C11322 /* SinglySDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,8 @@
 		D098EB841626156100B2626C /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-114.png"; path = "../Icon-114.png"; sourceTree = "<group>"; };
 		D098EB861626156E00B2626C /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
 		D098EB881626157000B2626C /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-144.png"; path = "../Icon-144.png"; sourceTree = "<group>"; };
+		D098EB8A1626181900B2626C /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
+		D098EB8B1626181900B2626C /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		D0CBF6EF161A199F00C11322 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SinglySDK.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Singly_iOS-gvvypxpwwugfmzeggytcxzkclkhp/Build/Products/Debug-iphoneos/SinglySDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +93,8 @@
 		82055172160B7A6E00F06D13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D098EB8A1626181900B2626C /* Background@2x.png */,
+				D098EB8B1626181900B2626C /* Background.png */,
 				D06830CE1624D33100F398A6 /* Avatar Placeholder.png */,
 				D06830CF1624D33100F398A6 /* Avatar Placeholder@2x.png */,
 				D098EB881626157000B2626C /* Icon-144.png */,
@@ -244,6 +250,8 @@
 				D098EB851626156100B2626C /* Icon-114.png in Resources */,
 				D098EB871626156E00B2626C /* Icon-72.png in Resources */,
 				D098EB891626157000B2626C /* Icon-144.png in Resources */,
+				D098EB8C1626181900B2626C /* Background@2x.png in Resources */,
+				D098EB8D1626181900B2626C /* Background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,13 @@
 
 @implementation SYMainViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Background"]];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     
@@ -40,7 +47,7 @@
 {
     if (section == 0 && ![SinglySession sharedSession].accessToken)
     {
-        return @"You must authenticate with one or more service before the examples below will become available.";
+        return @"You must authenticate with a service to access the following examples";
     }
     return nil;
 }
