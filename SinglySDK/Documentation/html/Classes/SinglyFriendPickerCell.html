@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>SinglySessionDelegate Protocol Reference</title>
+		<title>SinglyFriendPickerCell Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">SinglySessionDelegate Protocol Reference</h1>
+				<h1 class="hideInXcode">SinglyFriendPickerCell Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -26,8 +26,6 @@
 				<li id="jumpto_button" role="navigation">
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
-	
-	<option value="overview">Overview</option>
 	
 	
 	
@@ -38,15 +36,13 @@
 	
 	
 	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/friendInfoDictionary">&nbsp;&nbsp;&nbsp;&nbsp;friendInfoDictionary</option>
 	
 	
 	
 	
-	<option value="instance_methods">Instance Methods</option>
-	
-	<option value="//api/name/singlySession:didLogInForService:">&nbsp;&nbsp;&nbsp;&nbsp;- singlySession:didLogInForService:</option>
-	
-	<option value="//api/name/singlySession:errorLoggingInToService:withError:">&nbsp;&nbsp;&nbsp;&nbsp;- singlySession:errorLoggingInToService:withError:</option>
 	
 	
 	
@@ -57,8 +53,6 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
-<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
-
 
 
 
@@ -70,24 +64,22 @@
 
 
 
-
-
-
-
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/singlySession:didLogInForService:">singlySession:didLogInForService:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/singlySession:errorLoggingInToService:withError:">singlySession:errorLoggingInToService:withError:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/friendInfoDictionary">friendInfoDictionary</a></span></li>
 	
 </ul></li>
+
+
+
+
 
 
 			</ul>
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="SinglySessionDelegate Protocol Reference" name="top"></a>
+				<a title="SinglyFriendPickerCell Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -96,30 +88,24 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">SinglySessionDelegate Protocol Reference</h1>
+						<h1 class="title title-header">SinglyFriendPickerCell Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">UITableViewCell</td>
+</tr><tr>
 	<td class="specification-title">Conforms to</td>
-	<td class="specification-value">NSObject</td>
+	<td class="specification-value">NSURLConnectionDataDelegate<br />NSURLConnectionDelegate</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">SinglySession.h</td>
+	<td class="specification-value">SinglyFriendPickerCell.h</td>
 </tr>
 						</tbody></table></div>
 					
-					
-					
-					
-					<div class="section section-overview">
-						<a title="Overview" name="overview"></a>
-						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>@protocol SinglySessionDelegate
-@abstract Delegate methods related to a <a href="../Classes/SinglySession.html">SinglySession</a></p>
-					</div>
 					
 					
 					
@@ -136,18 +122,11 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/singlySession:didLogInForService:">&ndash;&nbsp;singlySession:didLogInForService:</a></code>
-		<span class="tooltip"><p>Delegate method for a successful service login.</p></span>
+		<code><a href="#//api/name/friendInfoDictionary">&nbsp;&nbsp;friendInfoDictionary</a></code>
+		
 	</span>
+	<span class="task-item-suffix">property</span>
 	
-	<span class="task-item-suffix">required method</span>
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/singlySession:errorLoggingInToService:withError:">&ndash;&nbsp;singlySession:errorLoggingInToService:withError:</a></code>
-		<span class="tooltip"><p>Delegate method for an error during service login</p></span>
-	</span>
-	
-	<span class="task-item-suffix">required method</span>
 </li>
 						</ul>
 						
@@ -157,122 +136,26 @@
 					
 					
 					
-					
-					
-					
-					
 					<div class="section section-methods">
-						<a title="Instance Methods" name="instance_methods"></a>
-						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/singlySession:didLogInForService:" title="singlySession:didLogInForService:"></a>
-	<h3 class="subsubtitle method-title">singlySession:didLogInForService:</h3>
+	<a name="//api/name/friendInfoDictionary" title="friendInfoDictionary"></a>
+	<h3 class="subsubtitle method-title">friendInfoDictionary</h3>
 	
 	
-	
-	<div class="method-subsection brief-description">
-		<p>Delegate method for a successful service login.</p>
-	</div>		
-	
-    
 
-	<div class="method-subsection method-declaration"><code>- (void)singlySession:(SinglySession *)<em>session</em> didLogInForService:(NSString *)<em>service</em></code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSDictionary *friendInfoDictionary</code></div>
 
     
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>session</em></dt>
-			<dd><p>The <a href="../Classes/SinglySession.html">SinglySession</a> that this delegate is firing for</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>service</em></dt>
-			<dd><p>The service name for the successful login</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglySession.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/singlySession:errorLoggingInToService:withError:" title="singlySession:errorLoggingInToService:withError:"></a>
-	<h3 class="subsubtitle method-title">singlySession:errorLoggingInToService:withError:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Delegate method for an error during service login</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)singlySession:(SinglySession *)<em>session</em> errorLoggingInToService:(NSString *)<em>service</em> withError:(NSError *)<em>error</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>session</em></dt>
-			<dd><p>The <a href="../Classes/SinglySession.html">SinglySession</a> that this delegate is firing for</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>service</em></dt>
-			<dd><p>The service name for the successful login</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>error</em></dt>
-			<dd><p>The error that occured during login</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglySession.h</code><br />
-	</div>				
-	
-	
 </div>
 						
 					</div>
+					
+					
+					
+					
 					
 					
 				</div>

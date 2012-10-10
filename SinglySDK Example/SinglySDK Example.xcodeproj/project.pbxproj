@@ -24,6 +24,8 @@
 		D03BE92D161CA29E009D0341 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D03BE929161CA29D009D0341 /* README.md */; };
 		D03BE92E161CA29E009D0341 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = D03BE92A161CA29D009D0341 /* release_notes.md */; };
 		D03BE930161CA43B009D0341 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D03BE92F161CA43B009D0341 /* libz.dylib */; };
+		D06830D01624D33100F398A6 /* Avatar Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D06830CE1624D33100F398A6 /* Avatar Placeholder.png */; };
+		D06830D11624D33100F398A6 /* Avatar Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D06830CF1624D33100F398A6 /* Avatar Placeholder@2x.png */; };
 		D0CBF6F1161A19AE00C11322 /* SinglySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0CBF6EF161A199F00C11322 /* SinglySDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,8 @@
 		D03BE92A161CA29D009D0341 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
 		D03BE92B161CA29D009D0341 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		D03BE92F161CA43B009D0341 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D06830CE1624D33100F398A6 /* Avatar Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Avatar Placeholder.png"; sourceTree = "<group>"; };
+		D06830CF1624D33100F398A6 /* Avatar Placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Avatar Placeholder@2x.png"; sourceTree = "<group>"; };
 		D0CBF6EF161A199F00C11322 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SinglySDK.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Singly_iOS-gvvypxpwwugfmzeggytcxzkclkhp/Build/Products/Debug-iphoneos/SinglySDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +81,8 @@
 		82055172160B7A6E00F06D13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D06830CE1624D33100F398A6 /* Avatar Placeholder.png */,
+				D06830CF1624D33100F398A6 /* Avatar Placeholder@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -220,6 +226,8 @@
 				D007BE21161B844200F694FF /* Default-568h@2x.png in Resources */,
 				D03BE92D161CA29E009D0341 /* README.md in Resources */,
 				D03BE92E161CA29E009D0341 /* release_notes.md in Resources */,
+				D06830D01624D33100F398A6 /* Avatar Placeholder.png in Resources */,
+				D06830D11624D33100F398A6 /* Avatar Placeholder@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

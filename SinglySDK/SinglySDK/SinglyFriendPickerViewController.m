@@ -7,8 +7,8 @@
 //
 
 #import "SinglyFriendPickerViewController.h"
-#import <SinglySDK/SinglyAPIRequest.h>
-#import <QuartzCore/QuartzCore.h>
+#import "SinglyAPIRequest.h"
+#import "SinglyFriendPickerCell.h"
 
 @interface SinglyFriendPickerViewController ()
 {
@@ -125,33 +125,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"com.singly.SinglyFriendPickerCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SinglyFriendPickerCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell)
+        cell = [[SinglyFriendPickerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        
-        UIImageView* avatar = [[UIImageView alloc] initWithFrame:CGRectMake(8, 4, 32, 32)];
-        avatar.layer.cornerRadius = 4.0;
-        avatar.clipsToBounds = YES;
-        [cell addSubview:avatar];
-        
-        UILabel* lbl = [[UILabel alloc] initWithFrame:CGRectMake(48, 0, cell.bounds.size.width - 48, cell.bounds.size.height)];
-        [cell addSubview:lbl];
-    }
-    
-    UIImageView* avatar = [cell.subviews objectAtIndex:1];
-    NSDictionary* friendInfo = [[_friends objectForKey:[_friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[[friendInfo objectForKey:@"oembed"] objectForKey:@"thumbnail_url"]]];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            avatar.image = [UIImage imageWithData:data];
-        });
-    });
-    
-    
-    UILabel* lbl = [cell.subviews objectAtIndex:2];
-    lbl.text = [_friendsSortedKeys objectAtIndex:indexPath.row];
-    
+    NSDictionary *friendInfo = [[_friends objectForKey:[_friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0];
+    cell.friendInfoDictionary = friendInfo;
+
     return cell;
 }
 

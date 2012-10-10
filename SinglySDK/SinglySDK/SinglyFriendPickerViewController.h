@@ -11,8 +11,12 @@
 
 @interface SinglyFriendPickerViewController : UITableViewController
 
-@property (strong, nonatomic) NSArray* pickedFriends;
-
+/*!
+ *
+ *
+ *
+ */
+@property (strong, nonatomic) NSArray *pickedFriends;
 
 /*!
  *
