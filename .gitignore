@@ -7,3 +7,7 @@ SinglySDK/Build
 SinglySDK/Documentation/docset-installed.txt
 SinglySDK/Documentation/docset
 SinglySDK/Documentation/publish
+
+# Local Client Keys
+SinglySDK Example/SinglySDK Example/ClientKeys.h
+
