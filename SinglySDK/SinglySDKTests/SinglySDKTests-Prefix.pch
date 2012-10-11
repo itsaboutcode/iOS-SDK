@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'SinglySDKTests' target in the 'SinglySDKTests' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
