@@ -23,14 +23,17 @@
     SinglySession *session = [SinglySession sharedSession];
     session.clientID = CLIENT_ID;
     session.clientSecret = CLIENT_SECRET;
-    NSLog(@"Singly Session\n  - Account: %@\n  - Access Token: %@)", session.accountID, session.accessToken);
 
     [[NSNotificationCenter defaultCenter] addObserverForName:kSinglyNotificationSessionProfilesUpdated object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         NSLog(@"**** Profiles were updated");
     }];
     
     [session startSessionWithCompletionHandler:^(BOOL ready) {
-        NSLog(@"The session is ready to roll.");
+        if (ready)
+            NSLog(@"The session is ready to roll.");
+        else
+            NSLog(@"Something is wrong with the session!");
+        NSLog(@"Singly Session\n  - Account: %@\n  - Access Token: %@)", session.accountID, session.accessToken);
     }];
 
     return YES;
