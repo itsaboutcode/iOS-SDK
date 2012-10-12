@@ -17,7 +17,7 @@
 		827E3EE515E5528200D30D96 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 827E3EE315E5528200D30D96 /* MainStoryboard_iPhone.storyboard */; };
 		827E3EE815E5528200D30D96 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 827E3EE615E5528200D30D96 /* MainStoryboard_iPad.storyboard */; };
 		82B5FA711614B4B4009ADD27 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B5FA701614B4B4009ADD27 /* Accounts.framework */; };
-		D0075FED161A215400F763A1 /* SYMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0075FEC161A215400F763A1 /* SYMainViewController.m */; };
+		D0075FED161A215400F763A1 /* SinglyMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0075FEC161A215400F763A1 /* SinglyMainViewController.m */; };
 		D007BE21161B844200F694FF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D007BE20161B844200F694FF /* Default-568h@2x.png */; };
 		D03BE92C161CA29D009D0341 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D03BE928161CA29D009D0341 /* libTestFlight.a */; };
 		D03BE92D161CA29E009D0341 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D03BE929161CA29D009D0341 /* README.md */; };
@@ -50,8 +50,8 @@
 		827E3EE915E5528200D30D96 /* SinglyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinglyViewController.h; sourceTree = "<group>"; };
 		827E3EEA15E5528200D30D96 /* SinglyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SinglyViewController.m; sourceTree = "<group>"; };
 		82B5FA701614B4B4009ADD27 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		D0075FEB161A215400F763A1 /* SYMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYMainViewController.h; sourceTree = "<group>"; };
-		D0075FEC161A215400F763A1 /* SYMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYMainViewController.m; sourceTree = "<group>"; };
+		D0075FEB161A215400F763A1 /* SinglyMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyMainViewController.h; sourceTree = "<group>"; };
+		D0075FEC161A215400F763A1 /* SinglyMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyMainViewController.m; sourceTree = "<group>"; };
 		D007BE20161B844200F694FF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		D03BE928161CA29D009D0341 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		D03BE929161CA29D009D0341 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -136,8 +136,8 @@
 				827E3EE115E5528200D30D96 /* SinglyAppDelegate.m */,
 				827E3EE915E5528200D30D96 /* SinglyViewController.h */,
 				827E3EEA15E5528200D30D96 /* SinglyViewController.m */,
-				D0075FEB161A215400F763A1 /* SYMainViewController.h */,
-				D0075FEC161A215400F763A1 /* SYMainViewController.m */,
+				D0075FEB161A215400F763A1 /* SinglyMainViewController.h */,
+				D0075FEC161A215400F763A1 /* SinglyMainViewController.m */,
 				D0D80B911628A6F7006F7B90 /* SinglyConfiguration.h */,
 				827E3EE315E5528200D30D96 /* MainStoryboard_iPhone.storyboard */,
 				827E3EE615E5528200D30D96 /* MainStoryboard_iPad.storyboard */,
@@ -286,7 +286,7 @@
 			files = (
 				827E3EDE15E5528200D30D96 /* main.m in Sources */,
 				827E3EE215E5528200D30D96 /* SinglyAppDelegate.m in Sources */,
-				D0075FED161A215400F763A1 /* SYMainViewController.m in Sources */,
+				D0075FED161A215400F763A1 /* SinglyMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

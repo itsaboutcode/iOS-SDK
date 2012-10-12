@@ -1,18 +1,18 @@
 //
-//  SYMainViewController.m
+//  SinglyMainViewController.m
 //  SinglySDK Example
 //
 //  Created by Justin Mecham on 10/1/12.
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
 //
 
-#import "SYMainViewController.h"
+#import "SinglyMainViewController.h"
 
-@interface SYMainViewController ()
+@interface SinglyMainViewController ()
 
 @end
 
-@implementation SYMainViewController
+@implementation SinglyMainViewController
 
 - (void)viewDidLoad
 {

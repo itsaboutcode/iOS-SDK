@@ -1,12 +1,12 @@
 //
-//  SYMainViewController.h
+//  SinglyMainViewController.h
 //  SinglySDK Example
 //
 //  Created by Justin Mecham on 10/1/12.
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
 //
 
-@interface SYMainViewController : UITableViewController
+@interface SinglyMainViewController : UITableViewController
 
 @property (nonatomic, strong) IBOutlet UITableViewCell *friendPickerCell;
 
