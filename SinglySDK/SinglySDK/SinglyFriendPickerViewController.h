@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SinglySDK/SinglySession.h>
+
+@class SinglySession;
 
 @interface SinglyFriendPickerViewController : UITableViewController
 

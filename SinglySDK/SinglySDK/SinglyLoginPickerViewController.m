@@ -6,9 +6,10 @@
 //  Copyright (c) 2012 Singly. All rights reserved.
 //
 
-#import "SinglyLoginPickerViewController.h"
-#import <SinglySDK/SinglyLogInViewController.h>
 #import <QuartzCore/QuartzCore.h>
+
+#import "SinglyLoginPickerViewController.h"
+#import "SinglyLogInViewController.h"
 
 @interface SinglyLoginPickerViewController ()
 

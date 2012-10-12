@@ -15,9 +15,13 @@
 #import <SinglySDK/SinglyFriendModel.h>
 
 /*!
-    @header SinglySDK
-    Includes the required headers and defines some common contsants.
-*/
+ *
+ * Includes the required headers and defines some common contsants.
+ *
+ * @header SinglySDK
+ *
+ */
+
 static NSString *kSinglyServiceGoogle = @"google";
 static NSString *kSinglyServiceInstagram = @"instagram";
 static NSString *kSinglyServiceTwitter = @"twitter";

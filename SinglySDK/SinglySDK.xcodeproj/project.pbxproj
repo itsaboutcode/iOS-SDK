@@ -26,28 +26,6 @@
 		824DCF611607B48D009FE2EA /* DEFacebookTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF3B1607B48D009FE2EA /* DEFacebookTextView.m */; };
 		824DCF621607B48D009FE2EA /* DERuledView.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF3C1607B48D009FE2EA /* DERuledView.h */; };
 		824DCF631607B48D009FE2EA /* DERuledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF3D1607B48D009FE2EA /* DERuledView.m */; };
-		824DCF641607B48D009FE2EA /* DEFacebookAttachmentFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF3F1607B48D009FE2EA /* DEFacebookAttachmentFrame.png */; };
-		824DCF651607B48D009FE2EA /* DEFacebookAttachmentFrame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF401607B48D009FE2EA /* DEFacebookAttachmentFrame@2x.png */; };
-		824DCF661607B48D009FE2EA /* DEFacebookCancelButtonLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF411607B48D009FE2EA /* DEFacebookCancelButtonLandscape.png */; };
-		824DCF671607B48D009FE2EA /* DEFacebookCancelButtonLandscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF421607B48D009FE2EA /* DEFacebookCancelButtonLandscape@2x.png */; };
-		824DCF681607B48D009FE2EA /* DEFacebookCancelButtonPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF431607B48D009FE2EA /* DEFacebookCancelButtonPortrait.png */; };
-		824DCF691607B48D009FE2EA /* DEFacebookCancelButtonPortrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF441607B48D009FE2EA /* DEFacebookCancelButtonPortrait@2x.png */; };
-		824DCF6A1607B48D009FE2EA /* DEFacebookCardAccountLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF451607B48D009FE2EA /* DEFacebookCardAccountLine.png */; };
-		824DCF6B1607B48D009FE2EA /* DEFacebookCardAccountLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF461607B48D009FE2EA /* DEFacebookCardAccountLine@2x.png */; };
-		824DCF6C1607B48D009FE2EA /* DEFacebookCardBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF471607B48D009FE2EA /* DEFacebookCardBackground.png */; };
-		824DCF6D1607B48D009FE2EA /* DEFacebookCardBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF481607B48D009FE2EA /* DEFacebookCardBackground@2x.png */; };
-		824DCF6E1607B48D009FE2EA /* DEFacebookCardHeaderLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF491607B48D009FE2EA /* DEFacebookCardHeaderLine.png */; };
-		824DCF6F1607B48D009FE2EA /* DEFacebookCardHeaderLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF4A1607B48D009FE2EA /* DEFacebookCardHeaderLine@2x.png */; };
-		824DCF701607B48D009FE2EA /* DEFacebookPaperClip.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF4B1607B48D009FE2EA /* DEFacebookPaperClip.png */; };
-		824DCF711607B48D009FE2EA /* DEFacebookPaperClip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF4C1607B48D009FE2EA /* DEFacebookPaperClip@2x.png */; };
-		824DCF721607B48D009FE2EA /* DEFacebookSendButtonLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF4D1607B48D009FE2EA /* DEFacebookSendButtonLandscape.png */; };
-		824DCF731607B48D009FE2EA /* DEFacebookSendButtonLandscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF4E1607B48D009FE2EA /* DEFacebookSendButtonLandscape@2x.png */; };
-		824DCF741607B48D009FE2EA /* DEFacebookSendButtonPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF4F1607B48D009FE2EA /* DEFacebookSendButtonPortrait.png */; };
-		824DCF751607B48D009FE2EA /* DEFacebookSendButtonPortrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF501607B48D009FE2EA /* DEFacebookSendButtonPortrait@2x.png */; };
-		824DCF761607B48D009FE2EA /* DEFacebookURLAttachment.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF511607B48D009FE2EA /* DEFacebookURLAttachment.png */; };
-		824DCF771607B48D009FE2EA /* DEFacebookURLAttachment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF521607B48D009FE2EA /* DEFacebookURLAttachment@2x.png */; };
-		824DCF781607B48D009FE2EA /* NavBarLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF531607B48D009FE2EA /* NavBarLandscape.png */; };
-		824DCF791607B48D009FE2EA /* NavBarLandscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF541607B48D009FE2EA /* NavBarLandscape@2x.png */; };
 		824DCF7A1607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF551607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.h */; };
 		824DCF7B1607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF561607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m */; };
 		824DCF7C1607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF571607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h */; };
@@ -65,11 +43,43 @@
 		D053EF9416271BC9008B8BA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D053EF9316271BC9008B8BA1 /* Foundation.framework */; };
 		D053EF9A16271BC9008B8BA1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D053EF9816271BC9008B8BA1 /* InfoPlist.strings */; };
 		D053EF9D16271BC9008B8BA1 /* SinglySDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D053EF9C16271BC9008B8BA1 /* SinglySDKTests.m */; };
+		D053EFEE16275D05008B8BA1 /* DEFacebookAttachmentFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFD816275D05008B8BA1 /* DEFacebookAttachmentFrame.png */; };
+		D053EFEF16275D05008B8BA1 /* DEFacebookAttachmentFrame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFD916275D05008B8BA1 /* DEFacebookAttachmentFrame@2x.png */; };
+		D053EFF016275D05008B8BA1 /* DEFacebookCancelButtonLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFDA16275D05008B8BA1 /* DEFacebookCancelButtonLandscape.png */; };
+		D053EFF116275D05008B8BA1 /* DEFacebookCancelButtonLandscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFDB16275D05008B8BA1 /* DEFacebookCancelButtonLandscape@2x.png */; };
+		D053EFF216275D05008B8BA1 /* DEFacebookCancelButtonPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFDC16275D05008B8BA1 /* DEFacebookCancelButtonPortrait.png */; };
+		D053EFF316275D05008B8BA1 /* DEFacebookCancelButtonPortrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFDD16275D05008B8BA1 /* DEFacebookCancelButtonPortrait@2x.png */; };
+		D053EFF416275D05008B8BA1 /* DEFacebookCardAccountLine.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFDE16275D05008B8BA1 /* DEFacebookCardAccountLine.png */; };
+		D053EFF516275D05008B8BA1 /* DEFacebookCardAccountLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFDF16275D05008B8BA1 /* DEFacebookCardAccountLine@2x.png */; };
+		D053EFF616275D05008B8BA1 /* DEFacebookCardBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFE016275D05008B8BA1 /* DEFacebookCardBackground.png */; };
+		D053EFF716275D05008B8BA1 /* DEFacebookCardBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFE116275D05008B8BA1 /* DEFacebookCardBackground@2x.png */; };
+		D053EFF816275D05008B8BA1 /* DEFacebookCardHeaderLine.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFE216275D05008B8BA1 /* DEFacebookCardHeaderLine.png */; };
+		D053EFF916275D05008B8BA1 /* DEFacebookCardHeaderLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFE316275D05008B8BA1 /* DEFacebookCardHeaderLine@2x.png */; };
+		D053EFFA16275D05008B8BA1 /* DEFacebookPaperClip.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFE416275D05008B8BA1 /* DEFacebookPaperClip.png */; };
+		D053EFFB16275D05008B8BA1 /* DEFacebookPaperClip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFE516275D05008B8BA1 /* DEFacebookPaperClip@2x.png */; };
+		D053EFFC16275D05008B8BA1 /* DEFacebookSendButtonLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFE616275D05008B8BA1 /* DEFacebookSendButtonLandscape.png */; };
+		D053EFFD16275D05008B8BA1 /* DEFacebookSendButtonLandscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFE716275D05008B8BA1 /* DEFacebookSendButtonLandscape@2x.png */; };
+		D053EFFE16275D05008B8BA1 /* DEFacebookSendButtonPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFE816275D05008B8BA1 /* DEFacebookSendButtonPortrait.png */; };
+		D053EFFF16275D05008B8BA1 /* DEFacebookSendButtonPortrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFE916275D05008B8BA1 /* DEFacebookSendButtonPortrait@2x.png */; };
+		D053F00016275D05008B8BA1 /* DEFacebookURLAttachment.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFEA16275D05008B8BA1 /* DEFacebookURLAttachment.png */; };
+		D053F00116275D05008B8BA1 /* DEFacebookURLAttachment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFEB16275D05008B8BA1 /* DEFacebookURLAttachment@2x.png */; };
+		D053F00216275D05008B8BA1 /* NavBarLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFEC16275D05008B8BA1 /* NavBarLandscape.png */; };
+		D053F00316275D05008B8BA1 /* NavBarLandscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFED16275D05008B8BA1 /* NavBarLandscape@2x.png */; };
+		D053F00416275D08008B8BA1 /* Avatar Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFD216275CFD008B8BA1 /* Avatar Placeholder.png */; };
+		D053F00516275D08008B8BA1 /* Avatar Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFD316275CFD008B8BA1 /* Avatar Placeholder@2x.png */; };
 		D06830BB1624BAFC00F398A6 /* SinglyFriendPickerCell.h in Headers */ = {isa = PBXBuildFile; fileRef = D06830B91624BAFC00F398A6 /* SinglyFriendPickerCell.h */; };
 		D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */; };
-		D06830CB1624D0AB00F398A6 /* Avatar Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D06830C91624D0AB00F398A6 /* Avatar Placeholder.png */; };
-		D06830CC1624D0AB00F398A6 /* Avatar Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D06830CA1624D0AB00F398A6 /* Avatar Placeholder@2x.png */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D053EFD016275CA9008B8BA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 821D086715ED177300ECFED0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D053EFC016275C06008B8BA1;
+			remoteInfo = "Resource Bundle";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		821D087415ED177400ECFED0 /* SinglySDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinglySDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,7 +138,7 @@
 		82C6252F16011E7900BF5225 /* SinglySharingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySharingViewController.m; sourceTree = "<group>"; };
 		82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerViewController.h; sourceTree = "<group>"; };
 		82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerViewController.m; sourceTree = "<group>"; };
-		D053EF8D16271BC9008B8BA1 /* SinglySDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinglySDKTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D053EF8D16271BC9008B8BA1 /* SinglySDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SinglySDKTests.octest; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D053EF8F16271BC9008B8BA1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		D053EF9116271BC9008B8BA1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		D053EF9316271BC9008B8BA1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -137,10 +147,34 @@
 		D053EF9B16271BC9008B8BA1 /* SinglySDKTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinglySDKTests.h; sourceTree = "<group>"; };
 		D053EF9C16271BC9008B8BA1 /* SinglySDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SinglySDKTests.m; sourceTree = "<group>"; };
 		D053EF9E16271BC9008B8BA1 /* SinglySDKTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SinglySDKTests-Prefix.pch"; sourceTree = "<group>"; };
+		D053EFC116275C06008B8BA1 /* SinglySDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinglySDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D053EFD216275CFD008B8BA1 /* Avatar Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Avatar Placeholder.png"; sourceTree = "<group>"; };
+		D053EFD316275CFD008B8BA1 /* Avatar Placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Avatar Placeholder@2x.png"; sourceTree = "<group>"; };
+		D053EFD816275D05008B8BA1 /* DEFacebookAttachmentFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DEFacebookAttachmentFrame.png; sourceTree = "<group>"; };
+		D053EFD916275D05008B8BA1 /* DEFacebookAttachmentFrame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DEFacebookAttachmentFrame@2x.png"; sourceTree = "<group>"; };
+		D053EFDA16275D05008B8BA1 /* DEFacebookCancelButtonLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DEFacebookCancelButtonLandscape.png; sourceTree = "<group>"; };
+		D053EFDB16275D05008B8BA1 /* DEFacebookCancelButtonLandscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DEFacebookCancelButtonLandscape@2x.png"; sourceTree = "<group>"; };
+		D053EFDC16275D05008B8BA1 /* DEFacebookCancelButtonPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DEFacebookCancelButtonPortrait.png; sourceTree = "<group>"; };
+		D053EFDD16275D05008B8BA1 /* DEFacebookCancelButtonPortrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DEFacebookCancelButtonPortrait@2x.png"; sourceTree = "<group>"; };
+		D053EFDE16275D05008B8BA1 /* DEFacebookCardAccountLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DEFacebookCardAccountLine.png; sourceTree = "<group>"; };
+		D053EFDF16275D05008B8BA1 /* DEFacebookCardAccountLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DEFacebookCardAccountLine@2x.png"; sourceTree = "<group>"; };
+		D053EFE016275D05008B8BA1 /* DEFacebookCardBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DEFacebookCardBackground.png; sourceTree = "<group>"; };
+		D053EFE116275D05008B8BA1 /* DEFacebookCardBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DEFacebookCardBackground@2x.png"; sourceTree = "<group>"; };
+		D053EFE216275D05008B8BA1 /* DEFacebookCardHeaderLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DEFacebookCardHeaderLine.png; sourceTree = "<group>"; };
+		D053EFE316275D05008B8BA1 /* DEFacebookCardHeaderLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DEFacebookCardHeaderLine@2x.png"; sourceTree = "<group>"; };
+		D053EFE416275D05008B8BA1 /* DEFacebookPaperClip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DEFacebookPaperClip.png; sourceTree = "<group>"; };
+		D053EFE516275D05008B8BA1 /* DEFacebookPaperClip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DEFacebookPaperClip@2x.png"; sourceTree = "<group>"; };
+		D053EFE616275D05008B8BA1 /* DEFacebookSendButtonLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DEFacebookSendButtonLandscape.png; sourceTree = "<group>"; };
+		D053EFE716275D05008B8BA1 /* DEFacebookSendButtonLandscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DEFacebookSendButtonLandscape@2x.png"; sourceTree = "<group>"; };
+		D053EFE816275D05008B8BA1 /* DEFacebookSendButtonPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DEFacebookSendButtonPortrait.png; sourceTree = "<group>"; };
+		D053EFE916275D05008B8BA1 /* DEFacebookSendButtonPortrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DEFacebookSendButtonPortrait@2x.png"; sourceTree = "<group>"; };
+		D053EFEA16275D05008B8BA1 /* DEFacebookURLAttachment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DEFacebookURLAttachment.png; sourceTree = "<group>"; };
+		D053EFEB16275D05008B8BA1 /* DEFacebookURLAttachment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DEFacebookURLAttachment@2x.png"; sourceTree = "<group>"; };
+		D053EFEC16275D05008B8BA1 /* NavBarLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarLandscape.png; sourceTree = "<group>"; };
+		D053EFED16275D05008B8BA1 /* NavBarLandscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBarLandscape@2x.png"; sourceTree = "<group>"; };
+		D053F01016276255008B8BA1 /* Resources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Resources-Info.plist"; path = "SinglySDK/Resources/Resources-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D06830B91624BAFC00F398A6 /* SinglyFriendPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendPickerCell.h; sourceTree = "<group>"; };
 		D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPickerCell.m; sourceTree = "<group>"; };
-		D06830C91624D0AB00F398A6 /* Avatar Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Avatar Placeholder.png"; sourceTree = "<group>"; };
-		D06830CA1624D0AB00F398A6 /* Avatar Placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Avatar Placeholder@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +214,7 @@
 			children = (
 				821D087415ED177400ECFED0 /* SinglySDK.framework */,
 				D053EF8D16271BC9008B8BA1 /* SinglySDKTests.octest */,
+				D053EFC116275C06008B8BA1 /* SinglySDK.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -187,8 +222,8 @@
 		821D087615ED177400ECFED0 /* SinglySDK */ = {
 			isa = PBXGroup;
 			children = (
-				825B6D91161C99CE0034DB92 /* Utilities */,
 				821D088715ED17B000ECFED0 /* SinglySDK.h */,
+				825B6D91161C99CE0034DB92 /* Utilities */,
 				D067E1AE161B433700B43C32 /* Authentication */,
 				D067E1B1161B434E00B43C32 /* Contacts */,
 				D067E1B0161B433D00B43C32 /* Sharing */,
@@ -203,8 +238,8 @@
 		821D087715ED177400ECFED0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				821D087815ED177400ECFED0 /* SinglySDK-Info.plist */,
 				821D087915ED177400ECFED0 /* InfoPlist.strings */,
+				821D087815ED177400ECFED0 /* SinglySDK-Info.plist */,
 				821D087C15ED177400ECFED0 /* SinglySDK-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -299,6 +334,53 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D053EFCD16275C7F008B8BA1 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D053EFCF16275C8F008B8BA1 /* Compose View */,
+				D053EFCE16275C85008B8BA1 /* Friend Picker */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		D053EFCE16275C85008B8BA1 /* Friend Picker */ = {
+			isa = PBXGroup;
+			children = (
+				D053EFD216275CFD008B8BA1 /* Avatar Placeholder.png */,
+				D053EFD316275CFD008B8BA1 /* Avatar Placeholder@2x.png */,
+			);
+			path = "Friend Picker";
+			sourceTree = "<group>";
+		};
+		D053EFCF16275C8F008B8BA1 /* Compose View */ = {
+			isa = PBXGroup;
+			children = (
+				D053EFD816275D05008B8BA1 /* DEFacebookAttachmentFrame.png */,
+				D053EFD916275D05008B8BA1 /* DEFacebookAttachmentFrame@2x.png */,
+				D053EFDA16275D05008B8BA1 /* DEFacebookCancelButtonLandscape.png */,
+				D053EFDB16275D05008B8BA1 /* DEFacebookCancelButtonLandscape@2x.png */,
+				D053EFDC16275D05008B8BA1 /* DEFacebookCancelButtonPortrait.png */,
+				D053EFDD16275D05008B8BA1 /* DEFacebookCancelButtonPortrait@2x.png */,
+				D053EFDE16275D05008B8BA1 /* DEFacebookCardAccountLine.png */,
+				D053EFDF16275D05008B8BA1 /* DEFacebookCardAccountLine@2x.png */,
+				D053EFE016275D05008B8BA1 /* DEFacebookCardBackground.png */,
+				D053EFE116275D05008B8BA1 /* DEFacebookCardBackground@2x.png */,
+				D053EFE216275D05008B8BA1 /* DEFacebookCardHeaderLine.png */,
+				D053EFE316275D05008B8BA1 /* DEFacebookCardHeaderLine@2x.png */,
+				D053EFE416275D05008B8BA1 /* DEFacebookPaperClip.png */,
+				D053EFE516275D05008B8BA1 /* DEFacebookPaperClip@2x.png */,
+				D053EFE616275D05008B8BA1 /* DEFacebookSendButtonLandscape.png */,
+				D053EFE716275D05008B8BA1 /* DEFacebookSendButtonLandscape@2x.png */,
+				D053EFE816275D05008B8BA1 /* DEFacebookSendButtonPortrait.png */,
+				D053EFE916275D05008B8BA1 /* DEFacebookSendButtonPortrait@2x.png */,
+				D053EFEA16275D05008B8BA1 /* DEFacebookURLAttachment.png */,
+				D053EFEB16275D05008B8BA1 /* DEFacebookURLAttachment@2x.png */,
+				D053EFEC16275D05008B8BA1 /* NavBarLandscape.png */,
+				D053EFED16275D05008B8BA1 /* NavBarLandscape@2x.png */,
+			);
+			path = "Compose View";
+			sourceTree = "<group>";
+		};
 		D067E1AE161B433700B43C32 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,10 +420,10 @@
 		D06830CD1624D0AF00F398A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D06830C91624D0AB00F398A6 /* Avatar Placeholder.png */,
-				D06830CA1624D0AB00F398A6 /* Avatar Placeholder@2x.png */,
+				D053EFCD16275C7F008B8BA1 /* Images */,
+				D053F01016276255008B8BA1 /* Resources-Info.plist */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,27 +459,25 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 821D087F15ED177400ECFED0 /* Build configuration list for PBXNativeTarget "SinglySDK" */;
 			buildPhases = (
-				821D086C15ED177400ECFED0 /* ShellScript */,
 				821D086D15ED177400ECFED0 /* Sources */,
 				821D086E15ED177400ECFED0 /* Frameworks */,
 				821D086F15ED177400ECFED0 /* Headers */,
 				821D087015ED177400ECFED0 /* Resources */,
-				821D087115ED177400ECFED0 /* ShellScript */,
-				821D087215ED177400ECFED0 /* ShellScript */,
 				D067E1B3161B493400B43C32 /* Generate Documentation */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D053EFD116275CA9008B8BA1 /* PBXTargetDependency */,
 			);
 			name = SinglySDK;
 			productName = SinglySDK;
 			productReference = 821D087415ED177400ECFED0 /* SinglySDK.framework */;
 			productType = "com.apple.product-type.bundle";
 		};
-		D053EF8C16271BC9008B8BA1 /* SinglySDKTests */ = {
+		D053EF8C16271BC9008B8BA1 /* Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D053EF9F16271BC9008B8BA1 /* Build configuration list for PBXNativeTarget "SinglySDKTests" */;
+			buildConfigurationList = D053EF9F16271BC9008B8BA1 /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
 				D053EF8816271BC9008B8BA1 /* Sources */,
 				D053EF8916271BC9008B8BA1 /* Frameworks */,
@@ -408,9 +488,24 @@
 			);
 			dependencies = (
 			);
-			name = SinglySDKTests;
+			name = Tests;
 			productName = SinglySDKTests;
 			productReference = D053EF8D16271BC9008B8BA1 /* SinglySDKTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D053EFC016275C06008B8BA1 /* Resources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D053EFCA16275C06008B8BA1 /* Build configuration list for PBXNativeTarget "Resources" */;
+			buildPhases = (
+				D053EFBF16275C06008B8BA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Resources;
+			productName = SinglySDK.bundle;
+			productReference = D053EFC116275C06008B8BA1 /* SinglySDK.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -436,7 +531,8 @@
 			projectRoot = "";
 			targets = (
 				821D087315ED177400ECFED0 /* SinglySDK */,
-				D053EF8C16271BC9008B8BA1 /* SinglySDKTests */,
+				D053EFC016275C06008B8BA1 /* Resources */,
+				D053EF8C16271BC9008B8BA1 /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -448,30 +544,6 @@
 			files = (
 				821D087B15ED177400ECFED0 /* InfoPlist.strings in Resources */,
 				824DCF591607B48D009FE2EA /* SinglySharingViewController.xib in Resources */,
-				824DCF641607B48D009FE2EA /* DEFacebookAttachmentFrame.png in Resources */,
-				824DCF651607B48D009FE2EA /* DEFacebookAttachmentFrame@2x.png in Resources */,
-				824DCF661607B48D009FE2EA /* DEFacebookCancelButtonLandscape.png in Resources */,
-				824DCF671607B48D009FE2EA /* DEFacebookCancelButtonLandscape@2x.png in Resources */,
-				824DCF681607B48D009FE2EA /* DEFacebookCancelButtonPortrait.png in Resources */,
-				824DCF691607B48D009FE2EA /* DEFacebookCancelButtonPortrait@2x.png in Resources */,
-				824DCF6A1607B48D009FE2EA /* DEFacebookCardAccountLine.png in Resources */,
-				824DCF6B1607B48D009FE2EA /* DEFacebookCardAccountLine@2x.png in Resources */,
-				824DCF6C1607B48D009FE2EA /* DEFacebookCardBackground.png in Resources */,
-				824DCF6D1607B48D009FE2EA /* DEFacebookCardBackground@2x.png in Resources */,
-				824DCF6E1607B48D009FE2EA /* DEFacebookCardHeaderLine.png in Resources */,
-				824DCF6F1607B48D009FE2EA /* DEFacebookCardHeaderLine@2x.png in Resources */,
-				824DCF701607B48D009FE2EA /* DEFacebookPaperClip.png in Resources */,
-				824DCF711607B48D009FE2EA /* DEFacebookPaperClip@2x.png in Resources */,
-				824DCF721607B48D009FE2EA /* DEFacebookSendButtonLandscape.png in Resources */,
-				824DCF731607B48D009FE2EA /* DEFacebookSendButtonLandscape@2x.png in Resources */,
-				824DCF741607B48D009FE2EA /* DEFacebookSendButtonPortrait.png in Resources */,
-				824DCF751607B48D009FE2EA /* DEFacebookSendButtonPortrait@2x.png in Resources */,
-				824DCF761607B48D009FE2EA /* DEFacebookURLAttachment.png in Resources */,
-				824DCF771607B48D009FE2EA /* DEFacebookURLAttachment@2x.png in Resources */,
-				824DCF781607B48D009FE2EA /* NavBarLandscape.png in Resources */,
-				824DCF791607B48D009FE2EA /* NavBarLandscape@2x.png in Resources */,
-				D06830CB1624D0AB00F398A6 /* Avatar Placeholder.png in Resources */,
-				D06830CC1624D0AB00F398A6 /* Avatar Placeholder@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,48 +555,40 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D053EFBF16275C06008B8BA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D053EFEE16275D05008B8BA1 /* DEFacebookAttachmentFrame.png in Resources */,
+				D053EFEF16275D05008B8BA1 /* DEFacebookAttachmentFrame@2x.png in Resources */,
+				D053EFF016275D05008B8BA1 /* DEFacebookCancelButtonLandscape.png in Resources */,
+				D053EFF116275D05008B8BA1 /* DEFacebookCancelButtonLandscape@2x.png in Resources */,
+				D053EFF216275D05008B8BA1 /* DEFacebookCancelButtonPortrait.png in Resources */,
+				D053EFF316275D05008B8BA1 /* DEFacebookCancelButtonPortrait@2x.png in Resources */,
+				D053EFF416275D05008B8BA1 /* DEFacebookCardAccountLine.png in Resources */,
+				D053EFF516275D05008B8BA1 /* DEFacebookCardAccountLine@2x.png in Resources */,
+				D053EFF616275D05008B8BA1 /* DEFacebookCardBackground.png in Resources */,
+				D053EFF716275D05008B8BA1 /* DEFacebookCardBackground@2x.png in Resources */,
+				D053EFF816275D05008B8BA1 /* DEFacebookCardHeaderLine.png in Resources */,
+				D053EFF916275D05008B8BA1 /* DEFacebookCardHeaderLine@2x.png in Resources */,
+				D053EFFA16275D05008B8BA1 /* DEFacebookPaperClip.png in Resources */,
+				D053EFFB16275D05008B8BA1 /* DEFacebookPaperClip@2x.png in Resources */,
+				D053EFFC16275D05008B8BA1 /* DEFacebookSendButtonLandscape.png in Resources */,
+				D053EFFD16275D05008B8BA1 /* DEFacebookSendButtonLandscape@2x.png in Resources */,
+				D053EFFE16275D05008B8BA1 /* DEFacebookSendButtonPortrait.png in Resources */,
+				D053EFFF16275D05008B8BA1 /* DEFacebookSendButtonPortrait@2x.png in Resources */,
+				D053F00016275D05008B8BA1 /* DEFacebookURLAttachment.png in Resources */,
+				D053F00116275D05008B8BA1 /* DEFacebookURLAttachment@2x.png in Resources */,
+				D053F00216275D05008B8BA1 /* NavBarLandscape.png in Resources */,
+				D053F00316275D05008B8BA1 /* NavBarLandscape@2x.png in Resources */,
+				D053F00416275D08008B8BA1 /* Avatar Placeholder.png in Resources */,
+				D053F00516275D08008B8BA1 /* Avatar Placeholder@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		821D086C15ED177400ECFED0 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n\tUFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version  from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\n\n# Short-circuit if all binaries are up to date\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n   [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n   [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\n   [[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n   [[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n   [[ ! \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\nthen\n    exit 0\nfi\n\n\n# Clean other platform if needed\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]]\nthen\n\techo \"Platform \\\"$UFW_SDK_PLATFORM\\\" was cleaned recently. Cleaning \\\"$UFW_OTHER_PLATFORM\\\" as well\"\n\techo xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\n\txcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\nfi\n\n\n# Make sure we are building from fresh binaries\n\nrm -rf \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nrm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nrm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\n";
-		};
-		821D087115ED177400ECFED0 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "HEADERS_ROOT=$SRCROOT/$PRODUCT_NAME\nFRAMEWORK_HEADERS_DIR=\"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Versions/$FRAMEWORK_VERSION/Headers\"\n\n## only header files expected at this point\nPUBLIC_HEADERS=$(find $FRAMEWORK_HEADERS_DIR/. -not -type d 2> /dev/null | sed -e \"s@.*/@@g\")\n\nFIND_OPTS=\"\"\nfor PUBLIC_HEADER in $PUBLIC_HEADERS; do\n  if [ -n \"$FIND_OPTS\" ]; then\n    FIND_OPTS=\"$FIND_OPTS -o\"\n  fi\n  FIND_OPTS=\"$FIND_OPTS -name '$PUBLIC_HEADER'\"\ndone\n\nif [ -n \"$FIND_OPTS\" ]; then\n  for ORIG_HEADER in $(eval \"find $HEADERS_ROOT/. $FIND_OPTS\" 2> /dev/null | sed -e \"s@^$HEADERS_ROOT/./@@g\"); do\n    PUBLIC_HEADER=$(basename $ORIG_HEADER)\n    RELATIVE_PATH=$(dirname $ORIG_HEADER)\n    if [ -e $FRAMEWORK_HEADERS_DIR/$PUBLIC_HEADER ]; then\n      mkdir -p \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH\"\n      mv \"$FRAMEWORK_HEADERS_DIR/$PUBLIC_HEADER\" \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH/$PUBLIC_HEADER\"\n    fi\n  done\nfi\n";
-		};
-		821D087215ED177400ECFED0 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\nexport UFW_MASTER_SCRIPT_RUNNING=1\n\n\n# Functions\n\n## List files in the specified directory, storing to the specified array.\n#\n# @param $1 The path to list\n# @param $2 The name of the array to fill\n#\n##\nlist_files ()\n{\n    filelist=$(ls \"$1\")\n    while read line\n    do\n        eval \"$2[\\${#$2[*]}]=\\\"\\$line\\\"\"\n    done <<< \"$filelist\"\n}\n\n\n# Sanity check\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]]\nthen\n    echo \"Framework target \\\"${TARGET_NAME}\\\" had no source files to build from. Make sure your source files have the correct target membership\"\n    exit 1\nfi\n\n\n# Gather information\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n    UFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\n\n# Short-circuit if all binaries are up to date.\n# We already checked the other platform in the prerun script.\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\nthen\n    exit 0\nfi\n\n\n# Make sure the other platform gets built\n\necho \"Build other platform\"\n\necho xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\n\n\n# Build the fat static library binary\n\necho \"Create universal static library\"\n\necho \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n\"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n\necho mv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nmv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\n\n\n# Build framework structure\n\necho \"Build symlinks\"\n\necho ln -sfh A \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Versions/Current\"\nln -sfh A \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Versions/Current\"\necho ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Headers\"\nln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Headers\"\necho ln -sfh Versions/Current/Resources \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Resources\"\nln -sfh Versions/Current/Resources \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Resources\"\necho ln -sfh \"Versions/Current/${EXECUTABLE_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${EXECUTABLE_NAME}\"\nln -sfh \"Versions/Current/${EXECUTABLE_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${EXECUTABLE_NAME}\"\n\n\n# Link to binary for unit tests\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/.fake_fw_testing.framework\"\nln -sfh \"../${WRAPPER_NAME}/${EXECUTABLE_NAME}\" \"${BUILT_PRODUCTS_DIR}/.fake_fw_testing.framework/.fake_fw_testing\"\n\n\n# Build embedded framework structure\n\necho \"Build Embedded Framework\"\n\necho rm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\necho mkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\necho cp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\ncp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\n\ndeclare -a UFW_FILE_LIST\nlist_files \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" UFW_FILE_LIST\nfor filename in \"${UFW_FILE_LIST[@]}\"\ndo\n    if [[ \"${filename}\" != \"Info.plist\" ]] && [[ ! \"${filename}\" =~ .*\\.lproj$ ]]\n    then\n        echo ln -sfh \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n        ln -sfh \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n    fi\ndone\n\n\n# Replace other platform's framework with a copy of this one (so that both have the same universal binary)\n\necho \"Copy from $UFW_SDK_PLATFORM to $UFW_OTHER_PLATFORM\"\n\necho rm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\nrm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\necho cp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\ncp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n";
-		};
 		D053EF8B16271BC9008B8BA1 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -588,6 +652,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D053EFD116275CA9008B8BA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D053EFC016275C06008B8BA1 /* Resources */;
+			targetProxy = D053EFD016275CA9008B8BA1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		821D087915ED177400ECFED0 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -630,7 +702,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
-				SYMROOT = "$(SRCROOT)/Build/Products";
 			};
 			name = Debug;
 		};
@@ -649,7 +720,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
-				SYMROOT = "$(SRCROOT)/Build/Products";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -657,8 +727,6 @@
 		821D088015ED177400ECFED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/$(FRAMEWORK_VERSION)";
 				DEAD_CODE_STRIPPING = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -666,13 +734,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDK/SinglySDK-Prefix.pch";
 				INFOPLIST_FILE = "SinglySDK/SinglySDK-Info.plist";
-				INFOPLIST_PATH = "$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Info.plist";
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = mh_object;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				UNLOCALIZED_RESOURCES_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Resources";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -680,8 +744,6 @@
 		821D088115ED177400ECFED0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/$(FRAMEWORK_VERSION)";
 				DEAD_CODE_STRIPPING = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -689,13 +751,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDK/SinglySDK-Prefix.pch";
 				INFOPLIST_FILE = "SinglySDK/SinglySDK-Info.plist";
-				INFOPLIST_PATH = "$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Info.plist";
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = mh_object;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				UNLOCALIZED_RESOURCES_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Resources";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -737,6 +795,24 @@
 			};
 			name = Release;
 		};
+		D053EFCB16275C06008B8BA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "SinglySDK/Resources/Resources-Info.plist";
+				PRODUCT_NAME = SinglySDK;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		D053EFCC16275C06008B8BA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "SinglySDK/Resources/Resources-Info.plist";
+				PRODUCT_NAME = SinglySDK;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -758,13 +834,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D053EF9F16271BC9008B8BA1 /* Build configuration list for PBXNativeTarget "SinglySDKTests" */ = {
+		D053EF9F16271BC9008B8BA1 /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D053EFA016271BC9008B8BA1 /* Debug */,
 				D053EFA116271BC9008B8BA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D053EFCA16275C06008B8BA1 /* Build configuration list for PBXNativeTarget "Resources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D053EFCB16275C06008B8BA1 /* Debug */,
+				D053EFCC16275C06008B8BA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

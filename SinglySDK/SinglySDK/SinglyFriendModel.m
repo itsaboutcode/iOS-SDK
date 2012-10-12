@@ -7,8 +7,8 @@
 //
 
 #import "SinglyFriendModel.h"
-#import <SinglySDK/SinglySession.h>
-#import <SinglySDK/SinglyAPIRequest.h>
+#import "SinglySession.h"
+#import "SinglyAPIRequest.h"
 
 @interface SinglyFriendModel () {
     SinglySession* _session;

@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Singly. All rights reserved.
 //
 
+#import "SinglySession.h"
 #import "SinglyFriendPickerViewController.h"
 #import "SinglyAPIRequest.h"
 #import "SinglyFriendPickerCell.h"

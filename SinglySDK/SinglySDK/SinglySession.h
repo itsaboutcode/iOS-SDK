@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "SinglyAPIRequest.h"
 
 @class SinglySession;
-@class SinglyLogInViewController;
 
 /*!
  *
@@ -37,7 +37,7 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  * @param service The service name for the successful login
  *
  */
-- (void)singlySession:(SinglySession*)session didLogInForService:(NSString*)service;
+- (void)singlySession:(SinglySession *)session didLogInForService:(NSString *)service;
 
 /*!
  *
@@ -52,6 +52,10 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
 
 @end
 
+/*!
+ * Singly Session...
+ *
+ */
 @interface SinglySession : NSObject
 
 /*!

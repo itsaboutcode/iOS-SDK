@@ -7,7 +7,6 @@
 //
 
 #import "SinglySession.h"
-#import "SinglySDK.h"
 
 static NSString *kSinglyAccountIDKey = @"com.singly.accountID";
 static NSString *kSinglyAccessTokenKey = @"com.singly.accessToken";

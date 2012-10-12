@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SinglySDK/SinglySDK.h>
+#import "SinglySession.h"
+#import "SinglyLoginViewController.h"
 
 @interface SinglyLoginPickerViewController : UITableViewController <SinglySessionDelegate, SinglyLoginViewControllerDelegate>
 

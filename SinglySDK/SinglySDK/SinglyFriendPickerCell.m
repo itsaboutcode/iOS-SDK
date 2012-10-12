@@ -23,7 +23,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
-        self.imageView.image = [UIImage imageNamed:@"Avatar Placeholder"];
+        self.imageView.image = [UIImage imageNamed:@"SinglySDK.bundle/Avatar Placeholder"];
         self.imageView.layer.cornerRadius = 3.0;
         self.imageView.clipsToBounds = YES;
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -44,7 +44,7 @@
     [super prepareForReuse];
 
     [self.imageConnection cancel];
-    self.imageView.image = [UIImage imageNamed:@"Avatar Placeholder"];
+    self.imageView.image = [UIImage imageNamed:@"SinglySDK.bundle/Avatar Placeholder"];
 }
 
 - (void)setFriendInfoDictionary:(NSDictionary *)friendInfoDictionary
