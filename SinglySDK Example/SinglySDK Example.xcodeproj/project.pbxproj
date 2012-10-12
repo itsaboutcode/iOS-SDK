@@ -66,6 +66,7 @@
 		D098EB881626157000B2626C /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-144.png"; path = "../Icon-144.png"; sourceTree = "<group>"; };
 		D098EB8A1626181900B2626C /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
 		D098EB8B1626181900B2626C /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
+		D0D80B911628A6F7006F7B90 /* SinglyConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyConfiguration.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +138,7 @@
 				827E3EEA15E5528200D30D96 /* SinglyViewController.m */,
 				D0075FEB161A215400F763A1 /* SYMainViewController.h */,
 				D0075FEC161A215400F763A1 /* SYMainViewController.m */,
+				D0D80B911628A6F7006F7B90 /* SinglyConfiguration.h */,
 				827E3EE315E5528200D30D96 /* MainStoryboard_iPhone.storyboard */,
 				827E3EE615E5528200D30D96 /* MainStoryboard_iPad.storyboard */,
 				82055172160B7A6E00F06D13 /* Resources */,
