@@ -23,15 +23,6 @@
 
 /*!
  *
- * Your Singly Client ID and Secret. If you don't already have these, you may
- * obtain them by signing up for a Singly account at https://singly.com/signup.
- *
- */
-#define CLIENT_ID @""
-#define CLIENT_SECRET @""
-
-/*!
- *
  * TestFlight token for distribution (optional). Learn more about TestFlight at
  * http://www.testflight.com
  *
