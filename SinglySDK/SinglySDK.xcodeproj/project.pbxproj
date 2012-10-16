@@ -73,6 +73,8 @@
 		D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */; };
 		D08B3EE6162DF3E3009001D5 /* UIViewController+Modal.h in Headers */ = {isa = PBXBuildFile; fileRef = D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */; };
 		D08B3EE7162DF3E3009001D5 /* UIViewController+Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */; };
+		D0DB1623162E0A93005EC7C7 /* Service Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */; };
+		D0DB1624162E0A93005EC7C7 /* Service Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +185,8 @@
 		D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPickerCell.m; sourceTree = "<group>"; };
 		D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Modal.h"; sourceTree = "<group>"; };
 		D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Modal.m"; sourceTree = "<group>"; };
+		D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder.png"; sourceTree = "<group>"; };
+		D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +353,7 @@
 			children = (
 				D053EFCF16275C8F008B8BA1 /* Compose View */,
 				D053EFCE16275C85008B8BA1 /* Friend Picker */,
+				D0DB161B162E0A87005EC7C7 /* Login Picker */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -436,6 +441,15 @@
 				D053F01016276255008B8BA1 /* Resources-Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D0DB161B162E0A87005EC7C7 /* Login Picker */ = {
+			isa = PBXGroup;
+			children = (
+				D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */,
+				D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */,
+			);
+			path = "Login Picker";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -597,6 +611,8 @@
 				D053F00316275D05008B8BA1 /* NavBarLandscape@2x.png in Resources */,
 				D053F00416275D08008B8BA1 /* Avatar Placeholder.png in Resources */,
 				D053F00516275D08008B8BA1 /* Avatar Placeholder@2x.png in Resources */,
+				D0DB1623162E0A93005EC7C7 /* Service Placeholder.png in Resources */,
+				D0DB1624162E0A93005EC7C7 /* Service Placeholder@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
