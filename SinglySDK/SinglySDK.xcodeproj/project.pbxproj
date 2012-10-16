@@ -38,6 +38,8 @@
 		82C6253116011E7900BF5225 /* SinglySharingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C6252F16011E7900BF5225 /* SinglySharingViewController.m */; };
 		82CAD78B15EEB0B300D3E486 /* SinglyLoginPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */; };
+		D021CBC7162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h in Headers */ = {isa = PBXBuildFile; fileRef = D021CBC5162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h */; };
+		D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
 		D053EF9016271BC9008B8BA1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D053EF8F16271BC9008B8BA1 /* SenTestingKit.framework */; };
 		D053EF9216271BC9008B8BA1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D053EF9116271BC9008B8BA1 /* UIKit.framework */; };
 		D053EF9416271BC9008B8BA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D053EF9316271BC9008B8BA1 /* Foundation.framework */; };
@@ -138,6 +140,8 @@
 		82C6252F16011E7900BF5225 /* SinglySharingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySharingViewController.m; sourceTree = "<group>"; };
 		82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerViewController.h; sourceTree = "<group>"; };
 		82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerViewController.m; sourceTree = "<group>"; };
+		D021CBC5162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerServiceCell.h; sourceTree = "<group>"; };
+		D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerServiceCell.m; sourceTree = "<group>"; };
 		D053EF8D16271BC9008B8BA1 /* SinglySDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SinglySDKTests.octest; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D053EF8F16271BC9008B8BA1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		D053EF9116271BC9008B8BA1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -390,6 +394,8 @@
 				821D088615ED17B000ECFED0 /* SinglyLoginViewController.m */,
 				82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */,
 				82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */,
+				D021CBC5162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h */,
+				D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";
@@ -449,6 +455,7 @@
 				824DCF7C1607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h in Headers */,
 				825B6D94161C99EF0034DB92 /* NSString+URLEncoded.h in Headers */,
 				D06830BB1624BAFC00F398A6 /* SinglyFriendPickerCell.h in Headers */,
+				D021CBC7162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,6 +646,7 @@
 				8296F44A1611F7360004BA0B /* SinglyFriendModel.m in Sources */,
 				825B6D95161C99EF0034DB92 /* NSString+URLEncoded.m in Sources */,
 				D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */,
+				D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

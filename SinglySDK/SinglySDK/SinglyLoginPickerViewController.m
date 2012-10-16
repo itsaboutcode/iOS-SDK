@@ -7,11 +7,13 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-
 #import "SinglyLoginPickerViewController.h"
-#import "SinglyLogInViewController.h"
+#import "SinglyLoginPickerServiceCell.h"
 
 @interface SinglyLoginPickerViewController ()
+
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) NSString *selectedService;
 
 @end
 
@@ -28,24 +30,43 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
 
-    if (self.services == nil) {
-        // TODO:  Dynamically load this
-        self.services = [NSArray arrayWithObjects:@"facebook", @"twitter", @"instagram", @"github", @"foursquare", nil];
+//  self.tableView.allowsSelection = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    // Load Services Dictionary
+    // TODO We may want to move this to SinglySession
+    if (!self.servicesDictionary)
+    {
+        
+        // Display Activity Indicator
+        self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.activityIndicator.center = self.view.center;
+        [self.activityIndicator startAnimating];
+        [self.view addSubview:self.activityIndicator];
+
+        // Load Services Dictionary
+        NSURL *servicesURL = [NSURL URLWithString:@"https://api.singly.com/services"];
+        NSURLRequest *servicesRequest = [NSURLRequest requestWithURL:servicesURL];
+        [NSURLConnection sendAsynchronousRequest:servicesRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError) {
+            _servicesDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
+            if (!self.services)
+                self.services = [self.servicesDictionary allKeys];
+            [self.activityIndicator stopAnimating];
+            [self.tableView reloadData];
+        }];
+
     }
-}
+    else if (self.servicesDictionary && !self.services)
+    {
+        self.services = [self.servicesDictionary allKeys];
+    }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - SinglySession
@@ -57,7 +78,7 @@
     return _session;
 }
 
-#pragma mark - Table view data source
+#pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -73,143 +94,38 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"com.singly.serviceCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        
-        UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(6, 6, 32, 32)];
-        imageView.tag = 1;
-        [cell addSubview:imageView];
-        
-        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(44, 5, self.view.bounds.size.width - 40 - 60 - 8, 32)];
-        label.textAlignment = UITextAlignmentLeft;
-        label.tag = 2;
-        [cell addSubview:label];
-        
-        UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        button.frame = CGRectMake(self.view.bounds.size.width - 8 - 80, 10, 80, 28);
-        button.tag = 3;
-        [cell addSubview:button];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    
-    NSString* service = [self.services objectAtIndex:indexPath.row];
-    
-    UIImageView* imageView = (UIImageView*)[cell viewWithTag:1];
-    imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://singly.com/images/service_icons/%@.png", service]]]];
-    
-    UILabel* label = (UILabel*)[cell viewWithTag:2];
-    label.text = service;
-    
-    UIButton* button = (UIButton*)[cell.subviews objectAtIndex:3];
-    button.tag = indexPath.row;
-    if ([self.session.profiles objectForKey:service]) {
-        [self disableColorButton:button];
-        [button setTitle:@"Logged In" forState:UIControlStateNormal];
-        button.enabled = NO;
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    } else {
-        [self enableColorButton:button];
-        [button addTarget:self action:@selector(loginTouchDown:) forControlEvents:UIControlEventTouchDown];
-        [button addTarget:self action:@selector(loginTouchUp:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:@"Log In" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
+    static NSString *CellIdentifier = @"com.singly.SinglyLoginPickerServiceCell";
+    SinglyLoginPickerServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell)
+        cell = [[SinglyLoginPickerServiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
-    [button.titleLabel setShadowColor:[UIColor darkGrayColor]];
-    [button.titleLabel setShadowOffset:CGSizeMake(0, -1)];
-    [button bringSubviewToFront:button.titleLabel];
-    
+    NSString *service = [self.services objectAtIndex:indexPath.row];
+    NSDictionary *serviceInfoDictionary = [self.servicesDictionary objectForKey:service];
+    cell.serviceInfoDictionary = serviceInfoDictionary;
+
+    if ([self.session.profiles objectForKey:service])
+        cell.authenticated = YES;
+    else
+        cell.authenticated = NO;
+
     return cell;
 }
 
--(void)loginTouchDown:(id)sender;
-{
-    UIButton* button = (UIButton*)sender;
-    CALayer *layer = button.layer;
-    CALayer* newLayer = [CALayer layer];
-    newLayer.frame = layer.bounds;
-    newLayer.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.15].CGColor;
-    [layer insertSublayer:newLayer atIndex:1];
-}
-
--(void)loginTouchUp:(id)sender;
-{
-    UIButton* button = (UIButton*)sender;
-    [[button.layer.sublayers objectAtIndex:1] removeFromSuperlayer];
-    
-    NSLog(@"Login to service %@", [self.services objectAtIndex:button.tag]);
-    SinglyLoginViewController* loginViewController = [[SinglyLoginViewController alloc] initWithSession:self.session forService:[self.services objectAtIndex:button.tag]];
-    loginViewController.delegate = self;
-    [self presentViewController:loginViewController animated:YES completion:NULL];
-}
-
--(void)enableColorButton:(UIButton*)button;
-{
-    // Add Border
-    CALayer *layer = button.layer;
-    layer.cornerRadius = 8.0f;
-    layer.masksToBounds = YES;
-    layer.borderWidth = 1.0f;
-    layer.borderColor = [UIColor colorWithWhite:0.5f alpha:0.2f].CGColor;
-    layer.shadowColor = [UIColor darkGrayColor].CGColor;
-    layer.shadowOffset = CGSizeMake(0, -1);
-    
-    // Add Shine
-    CAGradientLayer *shineLayer = [CAGradientLayer layer];
-    shineLayer.frame = layer.bounds;
-    shineLayer.colors = [NSArray arrayWithObjects:
-                         (id)[UIColor colorWithRed:0.537 green:0.604 blue:0.690 alpha:1.0].CGColor,
-                         (id)[UIColor colorWithRed:0.318 green:0.443 blue:0.592 alpha:1.0].CGColor,
-                         (id)[UIColor colorWithRed:0.227 green:0.361 blue:0.529 alpha:1.0].CGColor,
-                         (id)[UIColor colorWithRed:0.235 green:0.369 blue:0.533 alpha:1.0].CGColor,
-                         nil];
-    shineLayer.locations = [NSArray arrayWithObjects:
-                            [NSNumber numberWithFloat:0.0f],
-                            [NSNumber numberWithFloat:0.5f],
-                            [NSNumber numberWithFloat:0.5f],
-                            [NSNumber numberWithFloat:1.0f],
-                            nil];
-    [layer addSublayer:shineLayer];
-}
-
--(void)disableColorButton:(UIButton*)button
-{
-    // Add Border
-    CALayer *layer = button.layer;
-    layer.cornerRadius = 8.0f;
-    layer.masksToBounds = YES;
-    layer.borderWidth = 1.0f;
-    layer.borderColor = [UIColor colorWithWhite:0.0f alpha:0.2f].CGColor;
-    layer.shadowColor = [UIColor darkGrayColor].CGColor;
-    layer.shadowOffset = CGSizeMake(0, -1);
-    
-    // Add Shine
-    CAGradientLayer *shineLayer = [CAGradientLayer layer];
-    shineLayer.frame = layer.bounds;
-    shineLayer.colors = [NSArray arrayWithObjects:
-                         (id)[UIColor colorWithRed:0.882 green:0.882 blue:0.882 alpha:1.0].CGColor,
-                         (id)[UIColor colorWithRed:0.882 green:0.882 blue:0.882 alpha:1.0].CGColor,
-                         (id)[UIColor colorWithRed:0.741 green:0.741 blue:0.741 alpha:1.0].CGColor,
-                         (id)[UIColor colorWithRed:0.741 green:0.741 blue:0.741 alpha:1.0].CGColor,
-                         nil];
-    shineLayer.locations = [NSArray arrayWithObjects:
-                            [NSNumber numberWithFloat:0.0f],
-                            [NSNumber numberWithFloat:0.5f],
-                            [NSNumber numberWithFloat:0.5f],
-                            [NSNumber numberWithFloat:1.0f],
-                            nil];
-    [layer addSublayer:shineLayer];
-}
-
-#pragma mark - Table view delegate
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO:  Should this count as hitting log in?
+    NSString *service = [self.services objectAtIndex:indexPath.row];
+    self.selectedService = service;
+
+    if (![self.session.profiles objectForKey:service])
+    {
+        SinglyLoginViewController* loginViewController = [[SinglyLoginViewController alloc] initWithSession:self.session forService:service];
+        loginViewController.delegate = self;
+        [self presentViewController:loginViewController animated:YES completion:NULL];
+    }
+    else
+    {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 #pragma mark - Singly Login View Controller delegate
