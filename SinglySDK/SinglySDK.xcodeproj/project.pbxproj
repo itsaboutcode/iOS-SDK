@@ -71,6 +71,8 @@
 		D053F00516275D08008B8BA1 /* Avatar Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D053EFD316275CFD008B8BA1 /* Avatar Placeholder@2x.png */; };
 		D06830BB1624BAFC00F398A6 /* SinglyFriendPickerCell.h in Headers */ = {isa = PBXBuildFile; fileRef = D06830B91624BAFC00F398A6 /* SinglyFriendPickerCell.h */; };
 		D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */; };
+		D08B3EE6162DF3E3009001D5 /* UIViewController+Modal.h in Headers */ = {isa = PBXBuildFile; fileRef = D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */; };
+		D08B3EE7162DF3E3009001D5 /* UIViewController+Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +181,8 @@
 		D053F01016276255008B8BA1 /* Resources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Resources-Info.plist"; path = "SinglySDK/Resources/Resources-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D06830B91624BAFC00F398A6 /* SinglyFriendPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendPickerCell.h; sourceTree = "<group>"; };
 		D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPickerCell.m; sourceTree = "<group>"; };
+		D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Modal.h"; sourceTree = "<group>"; };
+		D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Modal.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +308,8 @@
 			children = (
 				825B6D92161C99EF0034DB92 /* NSString+URLEncoded.h */,
 				825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */,
+				D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */,
+				D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -456,6 +462,7 @@
 				825B6D94161C99EF0034DB92 /* NSString+URLEncoded.h in Headers */,
 				D06830BB1624BAFC00F398A6 /* SinglyFriendPickerCell.h in Headers */,
 				D021CBC7162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h in Headers */,
+				D08B3EE6162DF3E3009001D5 /* UIViewController+Modal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,6 +654,7 @@
 				825B6D95161C99EF0034DB92 /* NSString+URLEncoded.m in Sources */,
 				D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */,
 				D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */,
+				D08B3EE7162DF3E3009001D5 /* UIViewController+Modal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

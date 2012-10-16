@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Singly. All rights reserved.
 //
 
+#import "UIViewController+Modal.h"
 #import "SinglyLoginViewController.h"
 
 @interface SinglyLoginViewController ()
@@ -15,9 +16,10 @@
     UIActivityIndicatorView* activityView;
 }
 
-@property (atomic, strong) UIWebView *webView;
+@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) UINavigationBar *navigationBar;
 
--(void)processAccessTokenWithData:(NSData*)data;
+- (void)processAccessTokenWithData:(NSData*)data;
 
 @end
 
@@ -55,7 +57,7 @@
     _webView = [[UIWebView alloc] initWithFrame:self.view.frame];
     _webView.scalesPageToFit = YES;
     _webView.delegate = self;
-    self.view = _webView;
+    [self.view addSubview:_webView];
 }
 
 
@@ -66,6 +68,24 @@
 
 - (void)viewWillAppear:(BOOL)animated;
 {
+    if (self.isModal)
+    {
+      self.webView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44);
+      self.navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+      UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:self.targetService];
+      navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(dismiss)];
+      self.navigationBar.items = @[navigationItem];
+      [self.view addSubview:self.navigationBar];
+    }
+    else
+    {
+      if (self.navigationBar)
+      {
+        [self.navigationBar removeFromSuperview];
+        self.navigationBar = nil;
+      }
+    }
+
     NSString* urlStr = [NSString stringWithFormat:@"https://api.singly.com/oauth/authorize?redirect_uri=fb%@://authorize&service=%@&client_id=%@", self.session.clientID, self.targetService, self.session.clientID];
     if (self.session.accountID) {
         urlStr = [urlStr stringByAppendingFormat:@"&account=%@", self.session.accountID];
@@ -204,6 +224,13 @@
     if (self.delegate) {
         [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
     }
+}
+
+#pragma mark -
+
+- (void)dismiss
+{
+  [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

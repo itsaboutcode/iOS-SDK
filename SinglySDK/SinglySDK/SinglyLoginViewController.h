@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "SinglySession.h"
 
 @class SinglyLoginViewController;
