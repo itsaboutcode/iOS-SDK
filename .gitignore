@@ -1,13 +1,31 @@
+# OS X Finder
 .DS_Store
+
+# Xcode User Configuration
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+*.xcworkspace
 xcuserdata
-project.xcworkspace
-SinglySDK/Build
+
+# Build Products
+build/
+*.o
+*.LinkFileList
+*.hmap
+
+# Automatic Backups
+*~.nib/
+*.swp
+*~
+*.dat
+*.dep
 
 # Generated Documentation
 SinglySDK/Documentation/docset-installed.txt
 SinglySDK/Documentation/docset
 SinglySDK/Documentation/publish
-
-# Local Client Keys
-SinglySDK Example/SinglySDK Example/ClientKeys.h
 
