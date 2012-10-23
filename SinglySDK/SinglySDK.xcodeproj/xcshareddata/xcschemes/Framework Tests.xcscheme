@@ -17,7 +17,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D053EF8C16271BC9008B8BA1"
-               BuildableName = "Tests.octest"
+               BuildableName = "SinglySDK.octest"
                BlueprintName = "Tests"
                ReferencedContainer = "container:SinglySDK.xcodeproj">
             </BuildableReference>

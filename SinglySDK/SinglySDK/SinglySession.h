@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 Singly. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import "SinglyAPIRequest.h"
 
 @class SinglySession;

@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D02B536F16309C7700F1F535"
+               BuildableName = "libSinglySDK.a"
+               BlueprintName = "Static Library"
+               ReferencedContainer = "container:SinglySDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "821D087315ED177400ECFED0"
                BuildableName = "SinglySDK.framework"
-               BlueprintName = "SinglySDK"
+               BlueprintName = "Framework"
                ReferencedContainer = "container:SinglySDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,21 +47,12 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D053EF8C16271BC9008B8BA1"
-               BuildableName = "Tests.octest"
+               BuildableName = "SinglySDK.octest"
                BlueprintName = "Tests"
                ReferencedContainer = "container:SinglySDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "827E3ECC15E5528200D30D96"
-            BuildableName = "SinglySDK Example.app"
-            BlueprintName = "SinglySDK Example"
-            ReferencedContainer = "container:../SinglySDK Example/SinglySDK Example.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"

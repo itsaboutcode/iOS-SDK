@@ -7,6 +7,8 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+
+#import "SinglyConstants.h"
 #import "SinglyLoginPickerViewController.h"
 #import "SinglyLoginPickerServiceCell.h"
 
@@ -28,17 +30,10 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-
-//  self.tableView.allowsSelection = NO;
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    
     // Load Services Dictionary
     // TODO We may want to move this to SinglySession
     if (!self.servicesDictionary)
@@ -49,7 +44,7 @@
         self.activityIndicator.center = self.view.center;
         [self.activityIndicator startAnimating];
         [self.view addSubview:self.activityIndicator];
-
+        
         // Load Services Dictionary
         NSURL *servicesURL = [NSURL URLWithString:@"https://api.singly.com/services"];
         NSURLRequest *servicesRequest = [NSURLRequest requestWithURL:servicesURL];
@@ -60,13 +55,13 @@
             [self.activityIndicator stopAnimating];
             [self.tableView reloadData];
         }];
-
+        
     }
     else if (self.servicesDictionary && !self.services)
     {
         self.services = [self.servicesDictionary allKeys];
     }
-
+    
 }
 
 #pragma mark - SinglySession
@@ -98,16 +93,16 @@
     SinglyLoginPickerServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell)
         cell = [[SinglyLoginPickerServiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-
+    
     NSString *service = [self.services objectAtIndex:indexPath.row];
     NSDictionary *serviceInfoDictionary = [self.servicesDictionary objectForKey:service];
     cell.serviceInfoDictionary = serviceInfoDictionary;
-
+    
     if ([self.session.profiles objectForKey:service])
         cell.authenticated = YES;
     else
         cell.authenticated = NO;
-
+    
     return cell;
 }
 

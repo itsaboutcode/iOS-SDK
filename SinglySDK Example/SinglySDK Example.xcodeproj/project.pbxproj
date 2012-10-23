@@ -23,14 +23,14 @@
 		D03BE92D161CA29E009D0341 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D03BE929161CA29D009D0341 /* README.md */; };
 		D03BE92E161CA29E009D0341 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = D03BE92A161CA29D009D0341 /* release_notes.md */; };
 		D03BE930161CA43B009D0341 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D03BE92F161CA43B009D0341 /* libz.dylib */; };
-		D06F5BCF162770D600696740 /* SinglySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D06F5BCD1627706600696740 /* SinglySDK.bundle */; };
-		D06F5BD0162770DE00696740 /* SinglySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06F5BCB1627703900696740 /* SinglySDK.framework */; };
 		D098EB821626155D00B2626C /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB811626155D00B2626C /* Icon-57.png */; };
 		D098EB851626156100B2626C /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB841626156100B2626C /* Icon-114.png */; };
 		D098EB871626156E00B2626C /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB861626156E00B2626C /* Icon-72.png */; };
 		D098EB891626157000B2626C /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB881626157000B2626C /* Icon-144.png */; };
 		D098EB8C1626181900B2626C /* Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB8A1626181900B2626C /* Background@2x.png */; };
 		D098EB8D1626181900B2626C /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB8B1626181900B2626C /* Background.png */; };
+		D0E2C73E16375B7C00AAD565 /* SinglySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E2C73D16375B7C00AAD565 /* SinglySDK.framework */; };
+		D0E2C74016375BF300AAD565 /* SinglySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D0E2C73F16375BF300AAD565 /* SinglySDK.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,8 +58,6 @@
 		D03BE92A161CA29D009D0341 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
 		D03BE92B161CA29D009D0341 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		D03BE92F161CA43B009D0341 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		D06F5BCB1627703900696740 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SinglySDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D06F5BCD1627706600696740 /* SinglySDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = SinglySDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		D098EB811626155D00B2626C /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-57.png"; path = "../Icon-57.png"; sourceTree = "<group>"; };
 		D098EB841626156100B2626C /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-114.png"; path = "../Icon-114.png"; sourceTree = "<group>"; };
 		D098EB861626156E00B2626C /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
@@ -67,6 +65,8 @@
 		D098EB8A1626181900B2626C /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
 		D098EB8B1626181900B2626C /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		D0D80B911628A6F7006F7B90 /* SinglyConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyConfiguration.h; sourceTree = "<group>"; };
+		D0E2C73D16375B7C00AAD565 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = file; name = SinglySDK.framework; path = "../SinglySDK/build/Release-iphoneos/SinglySDK.framework"; sourceTree = "<group>"; };
+		D0E2C73F16375BF300AAD565 /* SinglySDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = SinglySDK.bundle; path = "/Users/Justin/Library/Developer/Xcode/DerivedData/Singly_iOS-bamtoaiejsarwibdqtrkqsianlde/Build/Products/Debug-iphoneos/SinglySDK.bundle"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,11 +75,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				82B5FA711614B4B4009ADD27 /* Accounts.framework in Frameworks */,
+				827E3ED615E5528200D30D96 /* CoreGraphics.framework in Frameworks */,
+				827E3ED415E5528200D30D96 /* Foundation.framework in Frameworks */,
 				8236EBD915EF226E00F3351E /* QuartzCore.framework in Frameworks */,
 				827E3ED215E5528200D30D96 /* UIKit.framework in Frameworks */,
-				827E3ED415E5528200D30D96 /* Foundation.framework in Frameworks */,
-				827E3ED615E5528200D30D96 /* CoreGraphics.framework in Frameworks */,
-				D06F5BD0162770DE00696740 /* SinglySDK.framework in Frameworks */,
+				D0E2C73E16375B7C00AAD565 /* SinglySDK.framework in Frameworks */,
 				D03BE930161CA43B009D0341 /* libz.dylib in Frameworks */,
 				D03BE92C161CA29D009D0341 /* libTestFlight.a in Frameworks */,
 			);
@@ -123,8 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				D06F5BD11627717C00696740 /* Other Frameworks */,
-				D06F5BCB1627703900696740 /* SinglySDK.framework */,
-				D06F5BCD1627706600696740 /* SinglySDK.bundle */,
+				D0E2C73F16375BF300AAD565 /* SinglySDK.bundle */,
+				D0E2C73D16375B7C00AAD565 /* SinglySDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -162,12 +162,12 @@
 		D03BE926161CA29D009D0341 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				D03BE927161CA29D009D0341 /* TestFlightSDK */,
+				D03BE927161CA29D009D0341 /* TestFlight SDK */,
 			);
 			path = Libraries;
 			sourceTree = SOURCE_ROOT;
 		};
-		D03BE927161CA29D009D0341 /* TestFlightSDK */ = {
+		D03BE927161CA29D009D0341 /* TestFlight SDK */ = {
 			isa = PBXGroup;
 			children = (
 				D03BE928161CA29D009D0341 /* libTestFlight.a */,
@@ -175,6 +175,7 @@
 				D03BE92A161CA29D009D0341 /* release_notes.md */,
 				D03BE92B161CA29D009D0341 /* TestFlight.h */,
 			);
+			name = "TestFlight SDK";
 			path = TestFlightSDK;
 			sourceTree = "<group>";
 		};
@@ -244,7 +245,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D06F5BCF162770D600696740 /* SinglySDK.bundle in Resources */,
 				827E3EDC15E5528200D30D96 /* InfoPlist.strings in Resources */,
 				827E3EE515E5528200D30D96 /* MainStoryboard_iPhone.storyboard in Resources */,
 				827E3EE815E5528200D30D96 /* MainStoryboard_iPad.storyboard in Resources */,
@@ -257,6 +257,7 @@
 				D098EB891626157000B2626C /* Icon-144.png in Resources */,
 				D098EB8C1626181900B2626C /* Background@2x.png in Resources */,
 				D098EB8D1626181900B2626C /* Background.png in Resources */,
+				D0E2C74016375BF300AAD565 /* SinglySDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
