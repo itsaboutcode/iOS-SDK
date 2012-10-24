@@ -29,8 +29,18 @@
 
 #import <UIKit/UIKit.h>
 
+/*!
+ *
+ * A table view cell for displaying a friend record.
+ *
+ */
 @interface SinglyFriendPickerCell : UITableViewCell <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 
+/*!
+ *
+ * 
+ *
+ */
 @property (nonatomic, strong) NSDictionary *friendInfoDictionary;
 
 @end

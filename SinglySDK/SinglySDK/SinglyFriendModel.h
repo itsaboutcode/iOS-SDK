@@ -31,20 +31,22 @@
 
 @class SinglySession;
 
-typedef void(^DataReadyBlock)(NSError*);
+typedef void(^DataReadyBlock)(NSError *);
 
 @interface SinglyFriendModel : NSObject
 
-/*!
-Init the model for all services
-*/
--(id)initWithSession:(SinglySession*)session;
-/*!
-Init the session only for the given services only
-*/
--(id)initWithSession:(SinglySession *)session forService:(NSArray*)services;
+@property (readonly) NSArray *friends;
 
--(void)fetchDataWithCompletionHandler:(DataReadyBlock)completionHandler;
+/*!
+ * Init the model for all services
+ */
+- (id)initWithSession:(SinglySession *)session;
 
-@property (readonly) NSArray* friends;
+/*!
+ * Init the session only for the given services only
+ */
+- (id)initWithSession:(SinglySession *)session forService:(NSArray *)services;
+
+- (void)fetchDataWithCompletionHandler:(DataReadyBlock)completionHandler;
+
 @end

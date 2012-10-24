@@ -162,7 +162,7 @@
 
 - (void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
 {
-    [self dismissViewControllerAnimated:FALSE completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
@@ -188,63 +188,9 @@
 
         NSDictionary *options = @{
             @"ACFacebookAppIdKey": responseDictionary[@"facebook"],
-            @"ACFacebookPermissionsKey": @[
-                @"create_event",
-                @"create_note",
-                @"email",
-                @"friends_about_me",
-                @"friends_activities",
-                @"friends_birthday",
-                @"friends_checkins",
-                @"friends_education_history",
-                @"friends_events",
-                @"friends_groups",
-                @"friends_hometown",
-                @"friends_interests",
-                @"friends_likes",
-                @"friends_location",
-                @"friends_notes",
-                @"friends_photos",
-                @"friends_relationship_details",
-                @"friends_relationships",
-                @"friends_religion_politics",
-                @"friends_status",
-                @"friends_subscriptions",
-                @"friends_videos",
-                @"friends_website",
-                @"friends_work_history",
-                @"photo_upload",
-                @"publish_actions",
-                @"publish_checkins",
-                @"publish_stream",
-                @"read_stream",
-                @"status_update",
-                @"user_about_me",
-                @"user_activities",
-                @"user_birthday",
-                @"user_checkins",
-                @"user_education_history",
-                @"user_events",
-                @"user_groups",
-                @"user_hometown",
-                @"user_interests",
-                @"user_likes",
-                @"user_location",
-                @"user_notes",
-                @"user_photos",
-                @"user_relationship_details",
-                @"user_relationships",
-                @"user_religion_politics",
-                @"user_status",
-                @"user_subscriptions",
-                @"user_videos",
-                @"user_website",
-                @"user_work_history",
-                @"video_upload"
-            ],
+            @"ACFacebookPermissionsKey": @[ @"email", @"user_location" ],
             @"ACFacebookAudienceKey": ACFacebookAudienceEveryone
         };
-        
 
         [accountStore requestAccessToAccountsWithType:accountType options:options completion:^(BOOL granted, NSError *error)
         {
@@ -275,9 +221,27 @@
             
             NSArray *accounts = [accountStore accountsWithAccountType:accountType];
             ACAccount *account = [accounts lastObject];
-            
-            // TODO Persist token...
-            NSLog(@"%@", account.credential.oauthToken);
+
+            NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/auth/facebook/apply?token=%@&client_id=%@&client_secret=%@",
+                                                      account.credential.oauthToken,
+                                                      [SinglySession sharedSession].clientID,
+                                                      [SinglySession sharedSession].clientSecret]];
+
+            NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requestURL];
+            [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
+            {
+                // TODO Handle request errors
+                // TODO Handle JSON parse errors
+                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
+                dispatch_async(dispatch_get_current_queue(), ^{
+                    [SinglySession sharedSession].accessToken = [responseDictionary objectForKey:@"access_token"];
+                    [SinglySession sharedSession].accountID = [responseDictionary objectForKey:@"account"];
+                    [[SinglySession sharedSession] updateProfilesWithCompletion:^{
+                        NSLog(@"All set to do requests as account %@ with access token %@", [SinglySession sharedSession].accountID, [SinglySession sharedSession].accessToken);
+                        [self.tableView reloadData];
+                    }];
+                });
+            }];
         }];
         
     }];

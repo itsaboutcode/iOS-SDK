@@ -177,9 +177,9 @@
             [NSURLConnection connectionWithRequest:req delegate:self];
         }
         NSLog(@"Request the token");
-        return FALSE;
+        return NO;
     }
-    return TRUE;
+    return YES;
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView;

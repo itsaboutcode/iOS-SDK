@@ -31,10 +31,13 @@
 #import "SinglySession.h"
 #import "SinglyAPIRequest.h"
 
-@interface SinglyFriendModel () {
+@interface SinglyFriendModel ()
+{
+    // TODO Make these properties
     SinglySession* _session;
     NSArray* _services;
 }
+
 @end
 
 @implementation SinglyFriendModel
