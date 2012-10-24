@@ -65,8 +65,8 @@
 		D098EB8A1626181900B2626C /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
 		D098EB8B1626181900B2626C /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		D0D80B911628A6F7006F7B90 /* SinglyConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyConfiguration.h; sourceTree = "<group>"; };
-		D0E2C73D16375B7C00AAD565 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = file; name = SinglySDK.framework; path = "../SinglySDK/build/Release-iphoneos/SinglySDK.framework"; sourceTree = "<group>"; };
-		D0E2C73F16375BF300AAD565 /* SinglySDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = SinglySDK.bundle; path = "/Users/Justin/Library/Developer/Xcode/DerivedData/Singly_iOS-bamtoaiejsarwibdqtrkqsianlde/Build/Products/Debug-iphoneos/SinglySDK.bundle"; sourceTree = "<absolute>"; };
+		D0E2C73D16375B7C00AAD565 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SinglySDK.framework; path = "../../../../../../../../Projects/Singly/Source/iOS-SDK/SinglySDK/build/Release-iphoneos/SinglySDK.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0E2C73F16375BF300AAD565 /* SinglySDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = SinglySDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
