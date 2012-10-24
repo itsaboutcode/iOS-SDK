@@ -30,7 +30,7 @@ The `SinglySession` has two other properties:
 * `accountID` - Your Singly account ID.
 
 Both of these are saved between runs in the `NSUserDefaults` and should be setup using
-a `SinglyLoginViewController`.  To see if the session was stored and immediately 
+a `SinglyLoginViewController`.  To see if the session was stored and immediately
 usable, without loggin in again.  We can use the `checkReadyWithCompletionHandler:`.
 
 ```objective-c
@@ -43,7 +43,7 @@ usable, without loggin in again.  We can use the `checkReadyWithCompletionHandle
 }];
 ```
 
-If the session is not ready, or needs to connect a different service, the 
+If the session is not ready, or needs to connect a different service, the
 `SinglyLoginViewController` gives you a consistent and simple way to connect to
 any of the services that Singly supports.  This is a fully standard
 `UIViewController` with the extra bits needed to do the Singly auth.  When it
@@ -65,7 +65,7 @@ An example implementation of the `SinglySessionDelegate` is:
 {
     [self dismissModalViewControllerAnimated:YES];
     loginVC = nil;
-    
+
     // We're ready to rock!  Go do something amazing!
 }
 -(void)singlySession:(SinglySession *)session errorLoggingInToService:(NSString *)service withError:(NSError *)error;
@@ -89,7 +89,7 @@ controller.services = [NSArray arrayWithObjects:kSinglyServiceFacebook, kSinglyS
 
 Once we have a valid session we can start making API requests.  We can make
 GET, POST or any method requests using the `SinglyAPIRequest`.  The request is only
-a description of the request that we are going to make, to actually execute the 
+a description of the request that we are going to make, to actually execute the
 request we use our session and one of the `requestAPI:` methods.  An example
 that requests the profiles list and is using blocks to handle the result is:
 
@@ -106,16 +106,22 @@ That's the basics and enough to get rolling!
 A few helpful view controllers exist to make life easier and get apps built faster.
 
 * `SinglyLoginViewPickerController`
-    
+
     As discussed above this is a view controller to give a list of available services
     for the user to login to.
-    
+
 * `SinglyFriendPickerViewController`
-   
+
    A view of a users contacts that allows them to pick one.
-   
+
 * `SinglySharingViewController`
- 
+
     A view to post a status message out to a network.
 
 More docs to come for these.
+
+## License ##
+
+The Singly SDK is licensed under the terms of the BSD License. Please see the
+LICENSE file for more information.
+
