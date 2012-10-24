@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Singly. All rights reserved.
 //
 
+#import <Accounts/Accounts.h>
 #import <QuartzCore/QuartzCore.h>
 
 #import "SinglyConstants.h"
@@ -110,17 +111,24 @@
 {
     NSString *service = [self.services objectAtIndex:indexPath.row];
     self.selectedService = service;
-
-    if (![self.session.profiles objectForKey:service])
-    {
-        SinglyLoginViewController* loginViewController = [[SinglyLoginViewController alloc] initWithSession:self.session forService:service];
-        loginViewController.delegate = self;
-        [self presentViewController:loginViewController animated:YES completion:NULL];
-    }
-    else
+    
+    // Do nothing if we are already authenticated against the selected service
+    if ([self.session.profiles objectForKey:service])
     {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
     }
+    
+    // Override the standard behavior for Facebook
+    if ([service isEqualToString:kSinglyServiceFacebook])
+    {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self authenticateWithFacebook];
+        return;
+    }
+    
+    // Display the standard login view controller
+    [self authenticateWithService:service];
 }
 
 #pragma mark - Singly Login View Controller delegate
@@ -136,6 +144,122 @@
     [self dismissViewControllerAnimated:FALSE completion:nil];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
+}
+
+#pragma mark - Service-Specific Authentication
+
+- (void)authenticateWithService:(NSString *)service
+{
+    SinglyLoginViewController* loginViewController = [[SinglyLoginViewController alloc] initWithSession:self.session forService:service];
+    loginViewController.delegate = self;
+    [self presentViewController:loginViewController animated:YES completion:NULL];
+}
+
+- (void)authenticateWithFacebook
+{
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+
+    NSURL *facebookClientIdURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/v0/auth/%@/client_id/facebook", [[SinglySession sharedSession] clientID]]];
+    NSURLRequest *facebookAppIdRequest = [NSURLRequest requestWithURL:facebookClientIdURL];
+    [NSURLConnection sendAsynchronousRequest:facebookAppIdRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+
+        NSDictionary *options = @{
+            @"ACFacebookAppIdKey": responseDictionary[@"facebook"],
+            @"ACFacebookPermissionsKey": @[
+                @"create_event",
+                @"create_note",
+                @"email",
+                @"friends_about_me",
+                @"friends_activities",
+                @"friends_birthday",
+                @"friends_checkins",
+                @"friends_education_history",
+                @"friends_events",
+                @"friends_groups",
+                @"friends_hometown",
+                @"friends_interests",
+                @"friends_likes",
+                @"friends_location",
+                @"friends_notes",
+                @"friends_photos",
+                @"friends_relationship_details",
+                @"friends_relationships",
+                @"friends_religion_politics",
+                @"friends_status",
+                @"friends_subscriptions",
+                @"friends_videos",
+                @"friends_website",
+                @"friends_work_history",
+                @"photo_upload",
+                @"publish_actions",
+                @"publish_checkins",
+                @"publish_stream",
+                @"read_stream",
+                @"status_update",
+                @"user_about_me",
+                @"user_activities",
+                @"user_birthday",
+                @"user_checkins",
+                @"user_education_history",
+                @"user_events",
+                @"user_groups",
+                @"user_hometown",
+                @"user_interests",
+                @"user_likes",
+                @"user_location",
+                @"user_notes",
+                @"user_photos",
+                @"user_relationship_details",
+                @"user_relationships",
+                @"user_religion_politics",
+                @"user_status",
+                @"user_subscriptions",
+                @"user_videos",
+                @"user_website",
+                @"user_work_history",
+                @"video_upload"
+            ],
+            @"ACFacebookAudienceKey": ACFacebookAudienceEveryone
+        };
+        
+
+        [accountStore requestAccessToAccountsWithType:accountType options:options completion:^(BOOL granted, NSError *error)
+        {
+            if (error)
+            {
+                if (error.code == ACErrorAccountNotFound)
+                {
+                    NSLog(@"Device is not authenticated with Facebook. Falling back...");
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self authenticateWithService:kSinglyServiceFacebook];
+                    });
+                    return;
+                }
+
+                NSLog(@"Unhandled error: %@", error);
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                        message:[error localizedDescription]
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"Dismiss"
+                                                              otherButtonTitles:nil];
+                    [alertView show];
+                });
+
+                return;
+            }
+            
+            NSArray *accounts = [accountStore accountsWithAccountType:accountType];
+            ACAccount *account = [accounts lastObject];
+            
+            // TODO Persist token...
+            NSLog(@"%@", account.credential.oauthToken);
+        }];
+        
+    }];
 }
 
 @end
