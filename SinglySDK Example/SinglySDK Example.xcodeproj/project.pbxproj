@@ -29,6 +29,7 @@
 		D098EB891626157000B2626C /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB881626157000B2626C /* Icon-144.png */; };
 		D098EB8C1626181900B2626C /* Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB8A1626181900B2626C /* Background@2x.png */; };
 		D098EB8D1626181900B2626C /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB8B1626181900B2626C /* Background.png */; };
+		D0D80B961628B301006F7B90 /* SinglyPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D80B951628B301006F7B90 /* SinglyPhotosViewController.m */; };
 		D0E2C73E16375B7C00AAD565 /* SinglySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E2C73D16375B7C00AAD565 /* SinglySDK.framework */; };
 		D0E2C74016375BF300AAD565 /* SinglySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D0E2C73F16375BF300AAD565 /* SinglySDK.bundle */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,8 @@
 		D098EB8A1626181900B2626C /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
 		D098EB8B1626181900B2626C /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		D0D80B911628A6F7006F7B90 /* SinglyConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyConfiguration.h; sourceTree = "<group>"; };
+		D0D80B941628B301006F7B90 /* SinglyPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyPhotosViewController.h; sourceTree = "<group>"; };
+		D0D80B951628B301006F7B90 /* SinglyPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyPhotosViewController.m; sourceTree = "<group>"; };
 		D0E2C73D16375B7C00AAD565 /* SinglySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SinglySDK.framework; path = "../../../../../../../../Projects/Singly/Source/iOS-SDK/SinglySDK/build/Release-iphoneos/SinglySDK.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E2C73F16375BF300AAD565 /* SinglySDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = SinglySDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -137,6 +140,8 @@
 				827E3EE915E5528200D30D96 /* SinglyViewController.h */,
 				827E3EEA15E5528200D30D96 /* SinglyViewController.m */,
 				D0075FEB161A215400F763A1 /* SinglyMainViewController.h */,
+				D0D80B941628B301006F7B90 /* SinglyPhotosViewController.h */,
+				D0D80B951628B301006F7B90 /* SinglyPhotosViewController.m */,
 				D0075FEC161A215400F763A1 /* SinglyMainViewController.m */,
 				D0D80B911628A6F7006F7B90 /* SinglyConfiguration.h */,
 				827E3EE315E5528200D30D96 /* MainStoryboard_iPhone.storyboard */,
@@ -288,6 +293,7 @@
 				827E3EDE15E5528200D30D96 /* main.m in Sources */,
 				827E3EE215E5528200D30D96 /* SinglyAppDelegate.m in Sources */,
 				D0075FED161A215400F763A1 /* SinglyMainViewController.m in Sources */,
+				D0D80B961628B301006F7B90 /* SinglyPhotosViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,7 +386,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDK Example/SinglySDK Example-Prefix.pch";
 				INFOPLIST_FILE = "SinglySDK Example/SinglySDK Example-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/TestFlightSDK\"",
@@ -396,7 +402,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDK Example/SinglySDK Example-Prefix.pch";
 				INFOPLIST_FILE = "SinglySDK Example/SinglySDK Example-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/TestFlightSDK\"",
