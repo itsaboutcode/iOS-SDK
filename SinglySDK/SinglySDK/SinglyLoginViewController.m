@@ -110,6 +110,8 @@
     NSString* urlStr = [NSString stringWithFormat:@"https://api.singly.com/oauth/authorize?redirect_uri=fb%@://authorize&service=%@&client_id=%@", self.session.clientID, self.targetService, self.session.clientID];
     if (self.session.accountID) {
         urlStr = [urlStr stringByAppendingFormat:@"&account=%@", self.session.accountID];
+    } else {
+        urlStr = [urlStr stringByAppendingString:@"&account=false"];
     }
     if (self.scope) {
         urlStr = [urlStr stringByAppendingFormat:@"&scope=%@", self.scope];
