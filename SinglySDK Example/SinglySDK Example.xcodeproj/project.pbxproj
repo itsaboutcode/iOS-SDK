@@ -121,7 +121,9 @@
 				827E3ED015E5528200D30D96 /* Frameworks */,
 				827E3ECE15E5528200D30D96 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		827E3ECE15E5528200D30D96 /* Products */ = {
 			isa = PBXGroup;

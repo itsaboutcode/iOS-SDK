@@ -540,7 +540,9 @@
 				D0E158DE1631C19E000D0BCA /* Scripts */,
 				821D087515ED177400ECFED0 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		821D087515ED177400ECFED0 /* Products */ = {
 			isa = PBXGroup;
