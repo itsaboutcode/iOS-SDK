@@ -66,10 +66,10 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    if (section == 0 && ![SinglySession sharedSession].accessToken)
-    {
-        return @"You must authenticate with a service to access the following examples";
-    }
+//    if (section == 0 && ![SinglySession sharedSession].accessToken)
+//    {
+//        return @"You must authenticate with a service to access the following examples";
+//    }
     return nil;
 }
 
