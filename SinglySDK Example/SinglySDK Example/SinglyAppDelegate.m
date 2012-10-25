@@ -36,8 +36,10 @@
 
     // Initialize TestFlight
     #ifdef TESTFLIGHT_TOKEN
-    [TestFlight takeOff:TESTFLIGHT_TOKEN];
-    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+        [TestFlight takeOff:TESTFLIGHT_TOKEN];
+        #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+            [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+        #pragma clang diagnostic warning "-Wdeprecated-declarations"
     #endif
 
     // Configure Shared SinglySession
