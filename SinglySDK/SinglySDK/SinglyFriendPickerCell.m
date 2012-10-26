@@ -56,8 +56,8 @@
 {
     [super layoutSubviews];
     
-    self.imageView.frame = CGRectMake(4, 4, 35, 35);
-    self.textLabel.frame = CGRectMake(47, 0, self.textLabel.frame.size.width - 48, self.textLabel.frame.size.height);
+    self.imageView.frame = CGRectMake((self.frame.size.height - 42) / 2, (self.frame.size.height - 42) / 2, 42, 42);
+    self.textLabel.frame = CGRectMake(46 + (self.frame.size.height - 42), 0, self.textLabel.frame.size.width - 48, self.textLabel.frame.size.height);
 }
 
 - (void)prepareForReuse

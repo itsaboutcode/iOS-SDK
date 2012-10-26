@@ -59,6 +59,8 @@
 {
     [super viewDidLoad];
 
+    self.tableView.rowHeight = 54;
+
     [self.session requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"types/contacts" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"200", @"limit", nil]] withCompletionHandler:^(NSError *error, id json) {
         if (![json isKindOfClass:[NSArray class]]) {
             return;

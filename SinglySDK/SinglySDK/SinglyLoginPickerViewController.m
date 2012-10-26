@@ -62,11 +62,14 @@
     {
         
         // Display Activity Indicator
-        self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.activityIndicator.center = self.view.center;
+        if (!self.activityIndicator)
+        {
+            self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            self.activityIndicator.center = self.view.center;
+            [self.view addSubview:self.activityIndicator];
+        }
         [self.activityIndicator startAnimating];
-        [self.view addSubview:self.activityIndicator];
-        
+
         // Load Services Dictionary
         NSURL *servicesURL = [NSURL URLWithString:@"https://api.singly.com/services"];
         NSURLRequest *servicesRequest = [NSURLRequest requestWithURL:servicesURL];
@@ -77,7 +80,10 @@
             [self.activityIndicator stopAnimating];
             [self.tableView reloadData];
         }];
-        
+
+        // Customize Table View Appearance
+        self.tableView.rowHeight = 54;
+
     }
     else if (self.servicesDictionary && !self.services)
     {
