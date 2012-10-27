@@ -56,6 +56,8 @@
         self.button.titleLabel.shadowOffset = CGSizeMake(0, -1);
         self.button.userInteractionEnabled = NO;
 
+        self.textLabel.font = [UIFont systemFontOfSize:16];
+
         self.accessoryView = self.button;
     }
     return self;

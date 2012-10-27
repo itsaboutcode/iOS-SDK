@@ -29,14 +29,15 @@
 
 #import <Accounts/Accounts.h>
 #import <QuartzCore/QuartzCore.h>
+#import "FacebookSDK.h"
 
 #import "SinglyConstants.h"
 #import "SinglyLoginPickerViewController.h"
 #import "SinglyLoginPickerServiceCell.h"
+#import "SinglyActivityIndicatorView.h"
 
 @interface SinglyLoginPickerViewController ()
 
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) NSString *selectedService;
 
 @end
@@ -55,20 +56,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+
     // Load Services Dictionary
     // TODO We may want to move this to SinglySession
     if (!self.servicesDictionary)
     {
         
         // Display Activity Indicator
-        if (!self.activityIndicator)
-        {
-            self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            self.activityIndicator.center = self.view.center;
-            [self.view addSubview:self.activityIndicator];
-        }
-        [self.activityIndicator startAnimating];
+        [SinglyActivityIndicatorView showIndicator];
 
         // Load Services Dictionary
         NSURL *servicesURL = [NSURL URLWithString:@"https://api.singly.com/services"];
@@ -77,7 +72,11 @@
             _servicesDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
             if (!self.services)
                 self.services = [self.servicesDictionary allKeys];
-            [self.activityIndicator stopAnimating];
+
+            // Dismiss the Activity Indicator
+            [SinglyActivityIndicatorView dismissIndicator];
+
+            // Reload the Table View
             [self.tableView reloadData];
         }];
 

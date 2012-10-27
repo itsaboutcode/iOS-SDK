@@ -31,12 +31,12 @@
 #import "SinglyFriendPickerViewController.h"
 #import "SinglyAPIRequest.h"
 #import "SinglyFriendPickerCell.h"
+#import "SinglyActivityIndicatorView.h"
 
 @interface SinglyFriendPickerViewController ()
 {
     NSMutableDictionary* _friends;
     NSArray* _friendsSortedKeys;
-    UIView* _loadingView;
     NSMutableArray* _pickedFriends;
     UIColor* originalSepColor;
 }
@@ -84,7 +84,7 @@
         }
         _friendsSortedKeys = [[_friends allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         [self.tableView reloadData];
-        [_loadingView removeFromSuperview];
+        [SinglyActivityIndicatorView dismissIndicator];
         self.tableView.separatorColor = originalSepColor;
         originalSepColor = nil;
     }];
@@ -93,24 +93,17 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     if (_friendsSortedKeys.count == 0) {
-        _loadingView = [[UIView alloc] initWithFrame:self.view.bounds];
-        _loadingView.backgroundColor = [UIColor blackColor];
-        UIActivityIndicatorView* activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        activityView.frame  = CGRectMake(140, 180, activityView.bounds.size.width, activityView.bounds.size.height);
-        [activityView startAnimating];
-        [_loadingView addSubview:activityView];
-        
-        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(4, 220, _loadingView.bounds.size.width - 8, 22)];
-        label.text = @"Loading...";
-        label.backgroundColor = [UIColor clearColor];
-        label.textAlignment = UITextAlignmentCenter;
-        label.textColor = [UIColor whiteColor];
-        [_loadingView addSubview:label];
-        
+        [SinglyActivityIndicatorView showIndicator];
+
+//        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(4, 220, _loadingView.bounds.size.width - 8, 22)];
+//        label.text = @"Loading...";
+//        label.backgroundColor = [UIColor clearColor];
+//        label.textAlignment = UITextAlignmentCenter;
+//        label.textColor = [UIColor whiteColor];
+//        [_loadingView addSubview:label];
+
         originalSepColor = self.tableView.separatorColor;
         self.tableView.separatorColor = [UIColor clearColor];
-        [self.view addSubview:_loadingView];
-        [self.view bringSubviewToFront:_loadingView];
     }
 }
 

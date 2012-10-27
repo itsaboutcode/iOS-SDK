@@ -297,6 +297,11 @@
 		D0E2C7101637576E00AAD565 /* SinglyFriendPickerCell.h in Headers */ = {isa = PBXBuildFile; fileRef = D06830B91624BAFC00F398A6 /* SinglyFriendPickerCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0E2C7111637577300AAD565 /* SinglySharingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C6252E16011E7900BF5225 /* SinglySharingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0E2C7121637578600AAD565 /* SinglyAPIRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0EA60BE163B3B9A001AC1DF /* SinglyActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = D0EA60BC163B3B99001AC1DF /* SinglyActivityIndicatorView.h */; };
+		D0EA60BF163B3B9A001AC1DF /* SinglyActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = D0EA60BC163B3B99001AC1DF /* SinglyActivityIndicatorView.h */; };
+		D0EA60C0163B3B9A001AC1DF /* SinglyActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EA60BD163B3B99001AC1DF /* SinglyActivityIndicatorView.m */; };
+		D0EA60C1163B3B9A001AC1DF /* SinglyActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EA60BD163B3B99001AC1DF /* SinglyActivityIndicatorView.m */; };
+		D0EA60C3163B4554001AC1DF /* Icon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = D0EA60C2163B4554001AC1DF /* Icon-512.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */

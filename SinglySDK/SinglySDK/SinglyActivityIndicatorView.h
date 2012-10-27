@@ -10,4 +10,10 @@
 
 @interface SinglyActivityIndicatorView : UIView
 
++ (SinglyActivityIndicatorView *)sharedSession;
+
++ (void)showIndicator;
+
++ (void)dismissIndicator;
+
 @end

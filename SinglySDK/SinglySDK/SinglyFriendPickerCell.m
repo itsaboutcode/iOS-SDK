@@ -48,6 +48,7 @@
         self.imageView.layer.cornerRadius = 3.0;
         self.imageView.clipsToBounds = YES;
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.textLabel.font = [UIFont systemFontOfSize:16];
     }
     return self;
 }
