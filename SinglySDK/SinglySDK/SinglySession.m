@@ -28,6 +28,7 @@
 //
 
 #import "SinglySession.h"
+#import "FacebookSDK.h"
 
 static NSString *kSinglyAccountIDKey = @"com.singly.accountID";
 static NSString *kSinglyAccessTokenKey = @"com.singly.accessToken";
@@ -149,6 +150,16 @@ static SinglySession *sharedInstance = nil;
         
         dispatch_sync(curQueue, block);
     });
+}
+
+- (BOOL)handleOpenURL:(NSURL *)url
+{
+    if ([url.scheme hasPrefix:@"fb"])
+    {
+        return [FBSession.activeSession handleOpenURL:url];
+    }
+
+    return NO;
 }
 
 @end

@@ -157,7 +157,7 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  * @param delegate The object to call when the process succeeds or errors.
  *
  */
-- (void)requestAPI:(SinglyAPIRequest*)request withDelegate:(id<SinglyAPIRequestDelegate>)delegate;
+- (void)requestAPI:(SinglyAPIRequest *)request withDelegate:(id<SinglyAPIRequestDelegate>)delegate;
 
 /*!
  *
@@ -176,6 +176,17 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  *
  */
 - (void)updateProfilesWithCompletion:(void (^)())block;
+
+
+/*!
+ *
+ * Handles app launches by oauth redirection requests and maps them appropriately
+ * based on the service.
+ *
+ * @param url The redirection URL that should be handled
+ *
+ */
+- (BOOL)handleOpenURL:(NSURL *)url;
 
 @end
 
