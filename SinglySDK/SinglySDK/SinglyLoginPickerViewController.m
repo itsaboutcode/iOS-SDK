@@ -183,52 +183,36 @@
 
 - (void)authenticateWithFacebook
 {
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
 
     NSURL *facebookClientIdURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/v0/auth/%@/client_id/facebook", [[SinglySession sharedSession] clientID]]];
     NSURLRequest *facebookAppIdRequest = [NSURLRequest requestWithURL:facebookClientIdURL];
-    [NSURLConnection sendAsynchronousRequest:facebookAppIdRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    [NSURLConnection sendAsynchronousRequest:facebookAppIdRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+    {
         NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 
-        NSDictionary *options = @{
-            @"ACFacebookAppIdKey": responseDictionary[@"facebook"],
-            @"ACFacebookPermissionsKey": @[ @"email", @"user_location" ],
-            @"ACFacebookAudienceKey": ACFacebookAudienceEveryone
-        };
+        NSLog(@"Retrieved Facebook ID: %@", responseDictionary[@"facebook"]);
 
-        [accountStore requestAccessToAccountsWithType:accountType options:options completion:^(BOOL granted, NSError *error)
+        NSArray *permissions = @[ @"email", @"user_location", @"user_birthday" ];
+
+        [FBSession setDefaultAppID:responseDictionary[@"facebook"]];
+        [FBSession openActiveSessionWithReadPermissions:permissions
+                                           allowLoginUI:YES
+                                      completionHandler:^(FBSession *session, FBSessionState status, NSError *error)
         {
             if (error)
             {
-                if (error.code == ACErrorAccountNotFound)
-                {
-                    NSLog(@"Device is not authenticated with Facebook. Falling back...");
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self authenticateWithService:kSinglyServiceFacebook];
-                    });
-                    return;
-                }
-
-                NSLog(@"Unhandled error: %@", error);
-
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                        message:[error localizedDescription]
-                                                                       delegate:self
-                                                              cancelButtonTitle:@"Dismiss"
-                                                              otherButtonTitles:nil];
-                    [alertView show];
-                });
-
+                NSLog(@"Foo: %d", [error code]);
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Unable to Authorize"
+                                                                    message:@"Authorization request was declined or failed."
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"Dismiss"
+                                                          otherButtonTitles:nil];
+                [alertView show];
                 return;
             }
-            
-            NSArray *accounts = [accountStore accountsWithAccountType:accountType];
-            ACAccount *account = [accounts lastObject];
 
             NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/auth/facebook/apply?token=%@&client_id=%@&client_secret=%@",
-                                                      account.credential.oauthToken,
+                                                      [session accessToken],
                                                       [SinglySession sharedSession].clientID,
                                                       [SinglySession sharedSession].clientSecret]];
 
@@ -247,9 +231,88 @@
                     }];
                 });
             }];
-        }];
-        
+       }];
     }];
+
+
+
+
+//      ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+//      ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+//
+//      NSURL *facebookClientIdURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/v0/auth/%@/client_id/facebook", [[SinglySession sharedSession] clientID]]];
+//      NSURLRequest *facebookAppIdRequest = [NSURLRequest requestWithURL:facebookClientIdURL];
+//      [NSURLConnection sendAsynchronousRequest:facebookAppIdRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//
+//        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+//        NSArray *permissions = @[ @"email", @"user_location", @"user_birthday" ];
+//        NSDictionary *options = @{
+//            @"ACFacebookAppIdKey": responseDictionary[@"facebook"],
+//            @"ACFacebookPermissionsKey": permissions,
+//            @"ACFacebookAudienceKey": ACFacebookAudienceEveryone
+//        };
+//
+//        NSLog(@"Blah: %@",  responseDictionary[@"facebook"]);
+//
+//        [accountStore requestAccessToAccountsWithType:accountType options:options completion:^(BOOL granted, NSError *error)
+//        {
+//            if (error)
+//            {
+//                if (error.code == ACErrorAccountNotFound)
+//                {
+//                    NSLog(@"Device is not authenticated with Facebook. Falling back...");
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        [self authenticateWithService:kSinglyServiceFacebook];
+//                    });
+//                    return;
+//                }
+//
+//                NSLog(@"Unhandled error: %@", error);
+//
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+//                                                                        message:[error localizedDescription]
+//                                                                       delegate:self
+//                                                              cancelButtonTitle:@"Dismiss"
+//                                                              otherButtonTitles:nil];
+//                    [alertView show];
+//                });
+//
+//                return;
+//            }
+//            
+//            NSArray *accounts = [accountStore accountsWithAccountType:accountType];
+//            ACAccount *account = [accounts lastObject];
+//
+//          NSLog(@"Received Token from Facebook... %@", account.credential.oauthToken);
+//
+//            NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/auth/facebook/apply?token=%@&client_id=%@&client_secret=%@",
+//                                                      account.credential.oauthToken,
+//                                                      [SinglySession sharedSession].clientID,
+//                                                      [SinglySession sharedSession].clientSecret]];
+//
+//            NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requestURL];
+//            [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
+//            {
+//                // TODO Handle request errors
+//                // TODO Handle JSON parse errors
+//                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
+//                dispatch_async(dispatch_get_current_queue(), ^{
+//
+//
+//                  NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+//                  NSLog(@"Apply Resplonse: %@", responseString);
+//                  NSLog(@"Apply Resplonse: %@", responseDictionary);
+//                    [SinglySession sharedSession].accessToken = [responseDictionary objectForKey:@"access_token"];
+//                    [SinglySession sharedSession].accountID = [responseDictionary objectForKey:@"account"];
+//                    [[SinglySession sharedSession] updateProfilesWithCompletion:^{
+//                        NSLog(@"All set to do requests as account %@ with access token %@", [SinglySession sharedSession].accountID, [SinglySession sharedSession].accessToken);
+//                        [self.tableView reloadData];
+//                    }];
+//                });
+//            }];
+//        }];
+//    }];
 }
 
 @end

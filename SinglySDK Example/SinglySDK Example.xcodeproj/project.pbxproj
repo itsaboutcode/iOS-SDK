@@ -16,7 +16,7 @@
 		827E3EE215E5528200D30D96 /* SinglyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 827E3EE115E5528200D30D96 /* SinglyAppDelegate.m */; };
 		827E3EE515E5528200D30D96 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 827E3EE315E5528200D30D96 /* MainStoryboard_iPhone.storyboard */; };
 		827E3EE815E5528200D30D96 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 827E3EE615E5528200D30D96 /* MainStoryboard_iPad.storyboard */; };
-		82B5FA711614B4B4009ADD27 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B5FA701614B4B4009ADD27 /* Accounts.framework */; };
+		82B5FA711614B4B4009ADD27 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B5FA701614B4B4009ADD27 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D0075FED161A215400F763A1 /* SinglyMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0075FEC161A215400F763A1 /* SinglyMainViewController.m */; };
 		D007BE21161B844200F694FF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D007BE20161B844200F694FF /* Default-568h@2x.png */; };
 		D03BE92C161CA29D009D0341 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D03BE928161CA29D009D0341 /* libTestFlight.a */; };
@@ -160,9 +160,9 @@
 				827E3EE915E5528200D30D96 /* SinglyViewController.h */,
 				827E3EEA15E5528200D30D96 /* SinglyViewController.m */,
 				D0075FEB161A215400F763A1 /* SinglyMainViewController.h */,
+				D0075FEC161A215400F763A1 /* SinglyMainViewController.m */,
 				D0D80B941628B301006F7B90 /* SinglyPhotosViewController.h */,
 				D0D80B951628B301006F7B90 /* SinglyPhotosViewController.m */,
-				D0075FEC161A215400F763A1 /* SinglyMainViewController.m */,
 				D0D80B911628A6F7006F7B90 /* SinglyConfiguration.h */,
 				827E3EE315E5528200D30D96 /* MainStoryboard_iPhone.storyboard */,
 				827E3EE615E5528200D30D96 /* MainStoryboard_iPad.storyboard */,
@@ -412,7 +412,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDK Example/SinglySDK Example-Prefix.pch";
 				INFOPLIST_FILE = "SinglySDK Example/SinglySDK Example-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/TestFlightSDK\"",
@@ -428,7 +428,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDK Example/SinglySDK Example-Prefix.pch";
 				INFOPLIST_FILE = "SinglySDK Example/SinglySDK Example-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/TestFlightSDK\"",
