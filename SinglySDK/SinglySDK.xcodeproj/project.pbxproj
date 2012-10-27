@@ -498,6 +498,9 @@
 		D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder.png"; sourceTree = "<group>"; };
 		D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder@2x.png"; sourceTree = "<group>"; };
 		D0E158DF1631C1BD000D0BCA /* Create Universal Library.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "Create Universal Library.rb"; sourceTree = "<group>"; };
+		D0EA60BC163B3B99001AC1DF /* SinglyActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyActivityIndicatorView.h; sourceTree = "<group>"; };
+		D0EA60BD163B3B99001AC1DF /* SinglyActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyActivityIndicatorView.m; sourceTree = "<group>"; };
+		D0EA60C2163B4554001AC1DF /* Icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-512.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -565,12 +568,14 @@
 			children = (
 				821D088715ED17B000ECFED0 /* SinglySDK.h */,
 				D02B53D91630A31600F1F535 /* SinglyConstants.h */,
+				821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */,
+				821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */,
+				D0EA60BC163B3B99001AC1DF /* SinglyActivityIndicatorView.h */,
+				D0EA60BD163B3B99001AC1DF /* SinglyActivityIndicatorView.m */,
 				825B6D91161C99CE0034DB92 /* Utilities */,
 				D067E1AE161B433700B43C32 /* Authentication */,
 				D067E1B1161B434E00B43C32 /* Contacts */,
 				D067E1B0161B433D00B43C32 /* Sharing */,
-				821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */,
-				821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */,
 				D06830CD1624D0AF00F398A6 /* Resources */,
 			);
 			path = SinglySDK;
@@ -649,6 +654,7 @@
 				D053EFCF16275C8F008B8BA1 /* Compose View */,
 				D053EFCE16275C85008B8BA1 /* Friend Picker */,
 				D0DB161B162E0A87005EC7C7 /* Login Picker */,
+				D0EA60C2163B4554001AC1DF /* Icon-512.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -943,6 +949,7 @@
 				D06194D91638620700A906F7 /* FBSBJsonBase.h in Headers */,
 				D06194DD1638620700A906F7 /* FBSBJsonParser.h in Headers */,
 				D06194E11638620700A906F7 /* FBSBJsonWriter.h in Headers */,
+				D0EA60BE163B3B9A001AC1DF /* SinglyActivityIndicatorView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1016,6 +1023,7 @@
 				D06194DA1638620700A906F7 /* FBSBJsonBase.h in Headers */,
 				D06194DE1638620700A906F7 /* FBSBJsonParser.h in Headers */,
 				D06194E21638620700A906F7 /* FBSBJsonWriter.h in Headers */,
+				D0EA60BF163B3B9A001AC1DF /* SinglyActivityIndicatorView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1168,6 +1176,7 @@
 				D02B540D1630AABF00F1F535 /* InfoPlist.strings in Resources */,
 				D06194C91638616100A906F7 /* FBUserSettingsViewResources.bundle in Resources */,
 				D06194CA1638616400A906F7 /* FacebookSDKResources.bundle in Resources */,
+				D0EA60C3163B4554001AC1DF /* Icon-512.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1306,6 +1315,7 @@
 				D06194DC1638620700A906F7 /* FBSBJsonBase.m in Sources */,
 				D06194E01638620700A906F7 /* FBSBJsonParser.m in Sources */,
 				D06194E41638620700A906F7 /* FBSBJsonWriter.m in Sources */,
+				D0EA60C1163B3B9A001AC1DF /* SinglyActivityIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1368,6 +1378,7 @@
 				D06194DB1638620700A906F7 /* FBSBJsonBase.m in Sources */,
 				D06194DF1638620700A906F7 /* FBSBJsonParser.m in Sources */,
 				D06194E31638620700A906F7 /* FBSBJsonWriter.m in Sources */,
+				D0EA60C0163B3B9A001AC1DF /* SinglyActivityIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
