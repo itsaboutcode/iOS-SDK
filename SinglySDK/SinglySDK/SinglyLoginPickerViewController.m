@@ -149,6 +149,12 @@
     if ([self.session.profiles objectForKey:service])
     {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Disconnect from %@?", self.servicesDictionary[service][@"name"]]
+                                                            message:nil
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"Disconnect", nil];
+        [alertView show];
         return;
     }
     
@@ -162,6 +168,28 @@
     
     // Display the standard login view controller
     [self authenticateWithService:service];
+}
+
+#pragma mark - Alert View Delegates
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (alertView.tag)
+    {
+        case 0: // Disconnect
+            switch (buttonIndex)
+            {
+                case 0: // Cancel
+                    break;
+                case 1: // Disconnect
+                    [self disconnectFromService:self.selectedService];
+                    break;
+            }
+            break;
+
+        default:
+            break;
+    }
 }
 
 #pragma mark - Singly Login View Controller delegate
@@ -240,9 +268,6 @@
             }];
        }];
     }];
-
-
-
 
 //      ACAccountStore *accountStore = [[ACAccountStore alloc] init];
 //      ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
