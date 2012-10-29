@@ -109,8 +109,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidUnload];
-    // e.g. self.myOutlet = nil;
+    [super viewWillDisappear:animated];
 
     [SinglyActivityIndicatorView dismissIndicator];
 }
