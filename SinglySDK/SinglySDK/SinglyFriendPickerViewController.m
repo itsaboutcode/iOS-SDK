@@ -107,16 +107,12 @@
     }
 }
 
-- (void)viewDidUnload
+- (void)viewWillDisappear:(BOOL)animated
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    [SinglyActivityIndicatorView dismissIndicator];
 }
 
 #pragma mark - SinglySession

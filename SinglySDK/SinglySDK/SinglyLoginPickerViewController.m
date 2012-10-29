@@ -88,7 +88,14 @@
     {
         self.services = [self.servicesDictionary allKeys];
     }
-    
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+
+    [SinglyActivityIndicatorView dismissIndicator];
 }
 
 #pragma mark - SinglySession
