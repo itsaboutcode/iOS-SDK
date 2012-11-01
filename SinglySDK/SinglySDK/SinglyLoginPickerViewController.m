@@ -40,6 +40,8 @@
 
 @property (nonatomic, strong) NSString *selectedService;
 
+- (void)disconnectFromService:(NSString *)service;
+
 @end
 
 @implementation SinglyLoginPickerViewController
