@@ -24,11 +24,19 @@
     else
         urlSchemesArray = urlSchemesArray[0];
 
-    if ([urlSchemesArray indexOfObject:@"fb325008370894171"] == NSNotFound)
-        supported = NO;
+    for (NSString *urlScheme in urlSchemesArray)
+    {
+        if ([urlScheme hasPrefix:@"fb"])
+        {
+            supported = YES;
+            break;
+        }
+        else
+            supported = NO;
+    }
 
     if (!supported)
-        NSLog(@"Missing facebook url scheme");
+        NSLog(@"[SinglySDK] Missing facebook url scheme in Info.plist");
 
     return supported;
 }
