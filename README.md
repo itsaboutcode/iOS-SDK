@@ -143,7 +143,22 @@ along with fallbacks to both the Facebook app and traditional web-based
 authentication. Although we abstract the Facebook SDK away, there are still a
 few steps you must take to ensure support for native authorization:
 
- * Configure your app to respond to Facebook URLs.
+### Configure your app to respond to Facebook URLs.
+
+You must add the following to your Info.plist, replacing the 0's with your
+actual Facebook App ID:
+
+````
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb000000000000000</string>
+            </array>
+        </dict>
+    </array>
+````
 
 --------------------------------------------------------------------------------
 
