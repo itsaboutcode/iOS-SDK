@@ -1,3 +1,0 @@
-[submodule "SinglySDK/SinglySDK/Libraries/Facebook"]
-	path = SinglySDK/SinglySDK/Libraries/Facebook
-	url = git://github.com/facebook/facebook-ios-sdk.git
