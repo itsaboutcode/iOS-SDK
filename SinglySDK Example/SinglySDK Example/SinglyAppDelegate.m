@@ -43,6 +43,10 @@
         #pragma clang diagnostic warning "-Wdeprecated-declarations"
     #endif
 
+    // Confirm that the Client ID and Client Secret have been configured
+    if (CLIENT_ID.length == 0 || CLIENT_SECRET.length == 0)
+        [NSException raise:@"Missing Singly credentials" format:@"You must configure your Singly client id and client secret in SinglyConfiguration.h"];
+    
     // Configure Shared SinglySession
     SinglySession *session = [SinglySession sharedSession];
     session.clientID = CLIENT_ID;
@@ -54,10 +58,10 @@
     
     [session startSessionWithCompletionHandler:^(BOOL ready) {
         if (ready)
+        {
             NSLog(@"The session is ready to roll.");
-        else
-            NSLog(@"Something is wrong with the session!");
-        NSLog(@"Singly Session\n  - Account: %@\n  - Access Token: %@)", session.accountID, session.accessToken);
+            NSLog(@"Singly Session\n  - Account: %@\n  - Access Token: %@)", session.accountID, session.accessToken);
+        }
     }];
 
     return YES;

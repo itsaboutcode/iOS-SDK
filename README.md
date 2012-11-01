@@ -5,9 +5,8 @@ A simple SDK for accessing Singly from iOS apps.
 
 The Singly SDK is currently **in active development** and as such should be
 considered alpha quality. We are very interested in feedback from the community
-about the direction you would like to see us take with it. Please consider the
-current state of hte project as alpha and follow with us as we push towards our
-[1.0 milestone](https://github.com/Singly/iOS-SDK/issues?milestone=4&state=open).
+about the direction you would like to see us take with it. Please follow with us
+as we push towards our [1.0 milestone](https://github.com/Singly/iOS-SDK/issues?milestone=4&state=open).
 
 --------------------------------------------------------------------------------
 
