@@ -23,9 +23,7 @@
 		D03BE92D161CA29E009D0341 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D03BE929161CA29D009D0341 /* README.md */; };
 		D03BE92E161CA29E009D0341 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = D03BE92A161CA29D009D0341 /* release_notes.md */; };
 		D03BE930161CA43B009D0341 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D03BE92F161CA43B009D0341 /* libz.dylib */; };
-		D06194F01638653800A906F7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D06194EF1638653800A906F7 /* libsqlite3.dylib */; };
 		D06194F51638669E00A906F7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06194F41638669E00A906F7 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		D061950A16388A4500A906F7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06194EC1638653200A906F7 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D081F8691639B542000F63DA /* Icon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = D081F8681639B542000F63DA /* Icon-512.png */; };
 		D081F86B1639BCC1000F63DA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D081F86A1639BCC1000F63DA /* Default.png */; };
 		D081F86D1639BCD4000F63DA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D081F86C1639BCD4000F63DA /* Default@2x.png */; };
@@ -65,8 +63,6 @@
 		D03BE92A161CA29D009D0341 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
 		D03BE92B161CA29D009D0341 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		D03BE92F161CA43B009D0341 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		D06194EC1638653200A906F7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		D06194EF1638653800A906F7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		D06194F41638669E00A906F7 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D081F8681639B542000F63DA /* Icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-512.png"; sourceTree = "<group>"; };
 		D081F86A1639BCC1000F63DA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
@@ -90,7 +86,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				82B5FA711614B4B4009ADD27 /* Accounts.framework in Frameworks */,
-				D061950A16388A4500A906F7 /* AdSupport.framework in Frameworks */,
 				827E3ED615E5528200D30D96 /* CoreGraphics.framework in Frameworks */,
 				827E3ED415E5528200D30D96 /* Foundation.framework in Frameworks */,
 				8236EBD915EF226E00F3351E /* QuartzCore.framework in Frameworks */,
@@ -99,7 +94,6 @@
 				827E3ED215E5528200D30D96 /* UIKit.framework in Frameworks */,
 				D03BE930161CA43B009D0341 /* libz.dylib in Frameworks */,
 				D03BE92C161CA29D009D0341 /* libTestFlight.a in Frameworks */,
-				D06194F01638653800A906F7 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,13 +202,11 @@
 			isa = PBXGroup;
 			children = (
 				82B5FA701614B4B4009ADD27 /* Accounts.framework */,
-				D06194EC1638653200A906F7 /* AdSupport.framework */,
 				827E3ED515E5528200D30D96 /* CoreGraphics.framework */,
 				827E3ED315E5528200D30D96 /* Foundation.framework */,
 				8236EBD815EF226E00F3351E /* QuartzCore.framework */,
 				D06194F41638669E00A906F7 /* Social.framework */,
 				827E3ED115E5528200D30D96 /* UIKit.framework */,
-				D06194EF1638653800A906F7 /* libsqlite3.dylib */,
 				D03BE92F161CA43B009D0341 /* libz.dylib */,
 			);
 			name = "Other Frameworks";

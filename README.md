@@ -1,12 +1,22 @@
-# Singly SDK #
 
-A simple iOS SDK for accessing Singly.
+# Singly SDK
 
-## Getting Started ##
+A simple SDK for accessing Singly from iOS apps.
 
-The first thing you should do is [register an application](https://singly.com/apps) at Singly.  In your
-application settings you need to get your client id and client secret.  We'll need
-to put this into our new program for logging in.
+The Singly SDK is currently **in active development** and as such should be
+considered alpha quality. We are very interested in feedback from the community
+about the direction you would like to see us take with it. Please consider the
+current state of hte project as alpha and follow with us as we push towards our
+[1.0 milestone](https://github.com/Singly/iOS-SDK/issues?milestone=4&state=open).
+
+--------------------------------------------------------------------------------
+
+## Getting Started
+
+The first thing you will need is a client id and client secret for your
+application. If you have not done so already, [sign in](https://singly.com/apps)
+to Singly and add your application. Your client id and secret can be found on
+the [application settings](https://singly.com/apps) page for your application.
 
 Now that we're ready we can either start a new iOS application or use an existing one.
 In order to use the SDK make sure that you setup your header search path to point to the
@@ -60,7 +70,6 @@ but we have these defined as constants for you in the SinglySDK.h.
 An example implementation of the `SinglySessionDelegate` is:
 
 ```objective-c
-#pragma mark - SinglySessionDelegate
 -(void)singlySession:(SinglySession *)session didLogInForService:(NSString *)service;
 {
     [self dismissModalViewControllerAnimated:YES];
@@ -101,7 +110,13 @@ that requests the profiles list and is using blocks to handle the result is:
 
 That's the basics and enough to get rolling!
 
-## Other View Controllers ##
+--------------------------------------------------------------------------------
+
+## Example App
+
+--------------------------------------------------------------------------------
+
+## Other View Controllers
 
 A few helpful view controllers exist to make life easier and get apps built faster.
 
@@ -120,7 +135,20 @@ A few helpful view controllers exist to make life easier and get apps built fast
 
 More docs to come for these.
 
-## License ##
+--------------------------------------------------------------------------------
+
+## Native Facebook Authorization
+
+Singly SDK wraps the Facebook SDK and supports native authorization (on iOS 6+)
+along with fallbacks to both the Facebook app and traditional web-based
+authentication. Although we abstract the Facebook SDK away, there are still a
+few steps you must take to ensure support for native authorization:
+
+ * Configure your app to respond to Facebook URLs.
+
+--------------------------------------------------------------------------------
+
+## License
 
 The Singly SDK is licensed under the terms of the BSD License. Please see the
 LICENSE file for more information.

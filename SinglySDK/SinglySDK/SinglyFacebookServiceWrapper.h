@@ -10,4 +10,6 @@
 
 @interface SinglyFacebookServiceWrapper : NSObject
 
++ (BOOL)nativeAuthSupported;
+
 @end

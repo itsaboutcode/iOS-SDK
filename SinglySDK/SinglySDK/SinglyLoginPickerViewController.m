@@ -347,4 +347,33 @@
 //    }];
 }
 
+- (void)disconnectFromService:(NSString *)service
+{
+
+    // TODO Profile IDs return as an array. Are multiple profiles supported?
+
+    NSURL *profilesURL = [NSURL URLWithString:@"https://api.singly.com/profiles"];
+    NSString *postString = [NSString stringWithFormat:@"delete=%@&access_token=%@",
+                            [NSString stringWithFormat:@"%@@%@", [[[SinglySession sharedSession] profiles] objectForKey:service][0], service],
+                            [SinglySession sharedSession].accessToken];
+
+    NSMutableURLRequest *disconnectRequest = [NSMutableURLRequest requestWithURL:profilesURL];
+    [disconnectRequest setHTTPMethod:@"POST"];
+    [disconnectRequest setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    [NSURLConnection sendAsynchronousRequest:disconnectRequest
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *error)
+    {
+
+        // TODO Handle Errors...
+
+        [[SinglySession sharedSession] updateProfilesWithCompletion:^{
+            [self.tableView reloadData];
+        }];
+
+    }];
+
+}
+
 @end
