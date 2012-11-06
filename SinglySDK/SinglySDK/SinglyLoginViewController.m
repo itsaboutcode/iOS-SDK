@@ -91,20 +91,32 @@
 {
     if (self.isModal)
     {
-      self.webView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44);
-      self.navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-      UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:self.targetService];
-      navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(dismiss)];
-      self.navigationBar.items = @[navigationItem];
-      [self.view addSubview:self.navigationBar];
+        self.webView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44);
+        self.navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+        UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:self.targetService];
+        navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(dismiss)];
+        self.navigationBar.items = @[navigationItem];
+
+        //
+        // Set the tint color of our navigation bar to match the tint of the
+        // view controller's navigation bar that is responsible for presenting
+        // us modally.
+        //
+        if ([self.presentingViewController respondsToSelector:@selector(navigationBar)])
+        {
+            UIColor *presentingTintColor = ((UINavigationController *)self.presentingViewController).navigationBar.tintColor;
+            self.navigationBar.tintColor = presentingTintColor;
+        }
+
+        [self.view addSubview:self.navigationBar];
     }
     else
     {
-      if (self.navigationBar)
-      {
-        [self.navigationBar removeFromSuperview];
-        self.navigationBar = nil;
-      }
+        if (self.navigationBar)
+        {
+            [self.navigationBar removeFromSuperview];
+            self.navigationBar = nil;
+        }
     }
 
     NSString* urlStr = [NSString stringWithFormat:@"https://api.singly.com/oauth/authorize?redirect_uri=fb%@://authorize&service=%@&client_id=%@", self.session.clientID, self.targetService, self.session.clientID];
