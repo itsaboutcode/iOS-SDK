@@ -29,11 +29,11 @@
 
 #import <Accounts/Accounts.h>
 #import <QuartzCore/QuartzCore.h>
-#import "FacebookSDK.h"
 
 #import "SinglyConstants.h"
 #import "SinglyLoginPickerViewController.h"
 #import "SinglyLoginPickerServiceCell.h"
+#import "SinglyFacebookService.h"
 #import "SinglyActivityIndicatorView.h"
 
 @interface SinglyLoginPickerViewController ()
@@ -59,11 +59,25 @@
 {
     [super viewWillAppear:animated];
 
+    //
+    // Observe for changes to the session profiles and update the view when
+    // changes occur (such as when a session is connected or disconnected).
+    //
+    [[NSNotificationCenter defaultCenter] addObserverForName:kSinglyNotificationSessionProfilesUpdated
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *notification)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
+
     // Load Services Dictionary
     // TODO We may want to move this to SinglySession
     if (!self.servicesDictionary)
     {
-        
+
         // Display Activity Indicator
         [SinglyActivityIndicatorView showIndicator];
 
@@ -98,6 +112,18 @@
     [super viewWillDisappear:animated];
 
     [SinglyActivityIndicatorView dismissIndicator];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+
+    //
+    // Stop observing for updates to the session profiles.
+    //
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kSinglyNotificationSessionProfilesUpdated
+                                                  object:nil];
 }
 
 #pragma mark - SinglySession
@@ -146,7 +172,7 @@
 {
     NSString *service = [self.services objectAtIndex:indexPath.row];
     self.selectedService = service;
-    
+
     // Do nothing if we are already authenticated against the selected service
     if ([self.session.profiles objectForKey:service])
     {
@@ -213,7 +239,7 @@
 
 - (void)authenticateWithService:(NSString *)service
 {
-    SinglyLoginViewController* loginViewController = [[SinglyLoginViewController alloc] initWithSession:self.session forService:service];
+    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithSession:self.session forService:service];
     loginViewController.delegate = self;
     [self presentViewController:loginViewController animated:YES completion:NULL];
 }
@@ -221,134 +247,12 @@
 - (void)authenticateWithFacebook
 {
 
-    NSURL *facebookClientIdURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/v0/auth/%@/client_id/facebook", [[SinglySession sharedSession] clientID]]];
-    NSURLRequest *facebookAppIdRequest = [NSURLRequest requestWithURL:facebookClientIdURL];
-    [NSURLConnection sendAsynchronousRequest:facebookAppIdRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-    {
-        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    SinglyFacebookService *facebookService = [SinglyService serviceWithIdentifier:@"facebook"];
+    [facebookService requestAuthorizationWithViewController:self];
 
-        NSLog(@"Retrieved Facebook ID: %@", responseDictionary[@"facebook"]);
-
-        NSArray *permissions = @[ @"email", @"user_location", @"user_birthday" ];
-
-        [FBSession setDefaultAppID:responseDictionary[@"facebook"]];
-        [FBSession openActiveSessionWithReadPermissions:permissions
-                                           allowLoginUI:YES
-                                      completionHandler:^(FBSession *session, FBSessionState status, NSError *error)
-        {
-            if (error)
-            {
-                NSLog(@"Foo: %d", [error code]);
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Unable to Authorize"
-                                                                    message:@"Authorization request was declined or failed."
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"Dismiss"
-                                                          otherButtonTitles:nil];
-                [alertView show];
-                return;
-            }
-
-            NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/auth/facebook/apply?token=%@&client_id=%@&client_secret=%@",
-                                                      [session accessToken],
-                                                      [SinglySession sharedSession].clientID,
-                                                      [SinglySession sharedSession].clientSecret]];
-
-            NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requestURL];
-            [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
-            {
-                // TODO Handle request errors
-                // TODO Handle JSON parse errors
-                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
-                dispatch_async(dispatch_get_current_queue(), ^{
-                    [SinglySession sharedSession].accessToken = [responseDictionary objectForKey:@"access_token"];
-                    [SinglySession sharedSession].accountID = [responseDictionary objectForKey:@"account"];
-                    [[SinglySession sharedSession] updateProfilesWithCompletion:^{
-                        NSLog(@"All set to do requests as account %@ with access token %@", [SinglySession sharedSession].accountID, [SinglySession sharedSession].accessToken);
-                        [self.tableView reloadData];
-                    }];
-                });
-            }];
-       }];
-    }];
-
-//      ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-//      ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-//
-//      NSURL *facebookClientIdURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/v0/auth/%@/client_id/facebook", [[SinglySession sharedSession] clientID]]];
-//      NSURLRequest *facebookAppIdRequest = [NSURLRequest requestWithURL:facebookClientIdURL];
-//      [NSURLConnection sendAsynchronousRequest:facebookAppIdRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-//
-//        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//        NSArray *permissions = @[ @"email", @"user_location", @"user_birthday" ];
-//        NSDictionary *options = @{
-//            @"ACFacebookAppIdKey": responseDictionary[@"facebook"],
-//            @"ACFacebookPermissionsKey": permissions,
-//            @"ACFacebookAudienceKey": ACFacebookAudienceEveryone
-//        };
-//
-//        NSLog(@"Blah: %@",  responseDictionary[@"facebook"]);
-//
-//        [accountStore requestAccessToAccountsWithType:accountType options:options completion:^(BOOL granted, NSError *error)
-//        {
-//            if (error)
-//            {
-//                if (error.code == ACErrorAccountNotFound)
-//                {
-//                    NSLog(@"Device is not authenticated with Facebook. Falling back...");
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        [self authenticateWithService:kSinglyServiceFacebook];
-//                    });
-//                    return;
-//                }
-//
-//                NSLog(@"Unhandled error: %@", error);
-//
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-//                                                                        message:[error localizedDescription]
-//                                                                       delegate:self
-//                                                              cancelButtonTitle:@"Dismiss"
-//                                                              otherButtonTitles:nil];
-//                    [alertView show];
-//                });
-//
-//                return;
-//            }
-//            
-//            NSArray *accounts = [accountStore accountsWithAccountType:accountType];
-//            ACAccount *account = [accounts lastObject];
-//
-//          NSLog(@"Received Token from Facebook... %@", account.credential.oauthToken);
-//
-//            NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/auth/facebook/apply?token=%@&client_id=%@&client_secret=%@",
-//                                                      account.credential.oauthToken,
-//                                                      [SinglySession sharedSession].clientID,
-//                                                      [SinglySession sharedSession].clientSecret]];
-//
-//            NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requestURL];
-//            [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
-//            {
-//                // TODO Handle request errors
-//                // TODO Handle JSON parse errors
-//                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
-//                dispatch_async(dispatch_get_current_queue(), ^{
-//
-//
-//                  NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-//                  NSLog(@"Apply Resplonse: %@", responseString);
-//                  NSLog(@"Apply Resplonse: %@", responseDictionary);
-//                    [SinglySession sharedSession].accessToken = [responseDictionary objectForKey:@"access_token"];
-//                    [SinglySession sharedSession].accountID = [responseDictionary objectForKey:@"account"];
-//                    [[SinglySession sharedSession] updateProfilesWithCompletion:^{
-//                        NSLog(@"All set to do requests as account %@ with access token %@", [SinglySession sharedSession].accountID, [SinglySession sharedSession].accessToken);
-//                        [self.tableView reloadData];
-//                    }];
-//                });
-//            }];
-//        }];
-//    }];
 }
 
+// TODO Move this to SinglyService
 - (void)disconnectFromService:(NSString *)service
 {
 

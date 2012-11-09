@@ -1,5 +1,5 @@
 //
-//  NSString+URLEncoded.m
+//  SinglyService.m
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,21 +27,38 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "NSString+URLEncoded.h"
+#import "SinglySession.h"
+#import "SinglyService.h"
+#import "SinglyService+Internal.h"
+#import "SinglyFacebookService.h"
 
-@implementation NSString (URLEncoded)
+@implementation SinglyService
 
-- (NSString *)URLEncodedString
++ (id)serviceWithIdentifier:(NSString *)serviceIdentifier
 {
-    __autoreleasing NSString *encodedString;
-    NSString *originalString = (NSString *)self;
-    encodedString = (__bridge_transfer NSString *)
-    CFURLCreateStringByAddingPercentEscapes(NULL,
-                                            (__bridge CFStringRef)originalString,
-                                            NULL,
-                                            (CFStringRef)@":!*();@/&?#[]+$,='%’\"",
-                                            kCFStringEncodingUTF8);
-    return encodedString;
+
+    // Custom Service for Facebook
+    if ([serviceIdentifier isEqualToString:@"facebook"])
+        return [self facebookService];
+
+    SinglyService *serviceInstance = [[SinglyService alloc] initWithIdentifier:serviceIdentifier];
+    return serviceInstance;
+
+}
+
++ (SinglyFacebookService *)facebookService
+{
+    SinglyFacebookService *serviceInstance = [[SinglyFacebookService alloc] initWithIdentifier:@"facebook"];
+    return serviceInstance;
+}
+
+- (id)initWithIdentifier:(NSString *)serviceIdentifier
+{
+    if (self = [self init])
+    {
+        _serviceIdentifier = serviceIdentifier;
+    }
+    return self;
 }
 
 @end

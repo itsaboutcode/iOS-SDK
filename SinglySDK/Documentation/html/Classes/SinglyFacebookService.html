@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>SinglyFriendPickerViewController Class Reference</title>
+		<title>SinglyFacebookService Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">SinglyFriendPickerViewController Class Reference</h1>
+				<h1 class="hideInXcode">SinglyFacebookService Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -26,6 +26,8 @@
 				<li id="jumpto_button" role="navigation">
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
 	
 	
 	
@@ -36,20 +38,17 @@
 	
 	
 	
-	<option value="properties">Properties</option>
-	
-	<option value="//api/name/pickedFriends">&nbsp;&nbsp;&nbsp;&nbsp;pickedFriends</option>
-	
-	<option value="//api/name/session">&nbsp;&nbsp;&nbsp;&nbsp;session</option>
-	
-	
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/initWithSession:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithSession:</option>
+	<option value="//api/name/appAuthorizationConfigured">&nbsp;&nbsp;&nbsp;&nbsp;- appAuthorizationConfigured</option>
+	
+	<option value="//api/name/integratedAuthorizationConfigured">&nbsp;&nbsp;&nbsp;&nbsp;- integratedAuthorizationConfigured</option>
+	
+	<option value="//api/name/requestAuthorizationWithViewController:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAuthorizationWithViewController:</option>
 	
 	
 	
@@ -60,6 +59,8 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
 
 
 
@@ -71,21 +72,17 @@
 
 
 
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pickedFriends">pickedFriends</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/session">session</a></span></li>
-	
-</ul></li>
-
 
 
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithSession:">initWithSession:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/appAuthorizationConfigured">appAuthorizationConfigured</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/integratedAuthorizationConfigured">integratedAuthorizationConfigured</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAuthorizationWithViewController:">requestAuthorizationWithViewController:</a></span></li>
 	
 </ul></li>
 
@@ -94,7 +91,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="SinglyFriendPickerViewController Class Reference" name="top"></a>
+				<a title="SinglyFacebookService Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -103,7 +100,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">SinglyFriendPickerViewController Class Reference</h1>
+						<h1 class="title title-header">SinglyFacebookService Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -111,13 +108,24 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value">UITableViewController</td>
+	<td class="specification-value"><a href="../Classes/SinglyService.html">SinglyService</a> : NSObject</td>
+</tr><tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value"><a href="../Protocols/SinglyLoginViewControllerDelegate.html">SinglyLoginViewControllerDelegate</a></td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">SinglyFriendPickerViewController.h</td>
+	<td class="specification-value">SinglyFacebookService.h</td>
 </tr>
 						</tbody></table></div>
 					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>Singly Facebook Service</p>
+					</div>
 					
 					
 					
@@ -134,22 +142,27 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/pickedFriends">&nbsp;&nbsp;pickedFriends</a></code>
-		
+		<code><a href="#//api/name/appAuthorizationConfigured">&ndash;&nbsp;appAuthorizationConfigured</a></code>
+		<span class="tooltip"><p>Determines if the current device can authorize via the installed Facebook
+app.</p></span>
 	</span>
-	<span class="task-item-suffix">property</span>
+	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/session">&nbsp;&nbsp;session</a></code>
-		<span class="tooltip"><p>The <a href="../Classes/SinglySession.html">SinglySession</a> to use. The default value is the shared singleton instance.</p></span>
+		<code><a href="#//api/name/integratedAuthorizationConfigured">&ndash;&nbsp;integratedAuthorizationConfigured</a></code>
+		<span class="tooltip"><p>Determines whether or not the current device is authenticated with Facebook
+in the Settings app using the authorization support featured in iOS 6 and
+higher.</p></span>
 	</span>
-	<span class="task-item-suffix">property</span>
+	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithSession:">&ndash;&nbsp;initWithSession:</a></code>
-		
+		<code><a href="#//api/name/requestAuthorizationWithViewController:">&ndash;&nbsp;requestAuthorizationWithViewController:</a></code>
+		<span class="tooltip"><p>Requests authorization from the user through any means possible, falling back
+from integrated auth, app-based auth then Singly auth via our standard
+login web view.</p></span>
 	</span>
 	
 	
@@ -162,80 +175,6 @@
 					
 					
 					
-					<div class="section section-methods">
-						<a title="Properties" name="properties"></a>
-						<h2 class="subtitle subtitle-methods">Properties</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/pickedFriends" title="pickedFriends"></a>
-	<h3 class="subsubtitle method-title">pickedFriends</h3>
-	
-	
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) NSArray *pickedFriends</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglyFriendPickerViewController.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/session" title="session"></a>
-	<h3 class="subsubtitle method-title">session</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The <a href="../Classes/SinglySession.html">SinglySession</a> to use. The default value is the shared singleton instance.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) SinglySession *session</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglyFriendPickerViewController.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
-					
 					
 					
 					
@@ -245,14 +184,142 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithSession:" title="initWithSession:"></a>
-	<h3 class="subsubtitle method-title">initWithSession:</h3>
+	<a name="//api/name/appAuthorizationConfigured" title="appAuthorizationConfigured"></a>
+	<h3 class="subsubtitle method-title">appAuthorizationConfigured</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines if the current device can authorize via the installed Facebook
+app.</p>
+	</div>		
+	
+    
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithSession:(SinglySession *)<em>session</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (BOOL)appAuthorizationConfigured</code></div>
 
     
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyFacebookService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/integratedAuthorizationConfigured" title="integratedAuthorizationConfigured"></a>
+	<h3 class="subsubtitle method-title">integratedAuthorizationConfigured</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines whether or not the current device is authenticated with Facebook
+in the Settings app using the authorization support featured in iOS 6 and
+higher.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)integratedAuthorizationConfigured</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>This method will query the account store and operates under the following,
+undocumented assumptions (as of iOS 6.0):</p>
+
+<ul>
+<li><p>If the user has not authenticated with Facebook on their device, the
+account store will return <code>nil</code> when requesting Facebook accounts.</p></li>
+<li><p>If the user has authenticated with Facebook, but we are not yet authorized
+to use the account, the account store will return an empty array (except
+in the simulator, which will return the configured account as the array&rsquo;s
+only member).</p></li>
+<li><p>If the user has authenticated with Facebook and we are already authorized
+to use the account, the account store will return an array with the
+authorized account as the only entry.</p></li>
+</ul>
+
+
+<p>Unfortunately, the above assumptions are the only way to discover what we
+need to know and quite likely will break in future releases of iOS 6. For
+that reason, one should keep a close eye on this method to ensure support is
+maintained throughout future releases.</p>
+
+<p>TODO Write unit tests for this method.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyFacebookService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/requestAuthorizationWithViewController:" title="requestAuthorizationWithViewController:"></a>
+	<h3 class="subsubtitle method-title">requestAuthorizationWithViewController:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Requests authorization from the user through any means possible, falling back
+from integrated auth, app-based auth then Singly auth via our standard
+login web view.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)requestAuthorizationWithViewController:(UIViewController *)<em>viewController</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyFacebookService.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 					</div>

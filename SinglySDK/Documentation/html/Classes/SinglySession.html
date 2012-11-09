@@ -27,8 +27,6 @@
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
 	
-	<option value="overview">Overview</option>
-	
 	
 	
 	
@@ -64,6 +62,8 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
+	<option value="//api/name/applyService:withToken:">&nbsp;&nbsp;&nbsp;&nbsp;- applyService:withToken:</option>
+	
 	<option value="//api/name/handleOpenURL:">&nbsp;&nbsp;&nbsp;&nbsp;- handleOpenURL:</option>
 	
 	<option value="//api/name/requestAPI:withCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAPI:withCompletionHandler:</option>
@@ -71,6 +71,8 @@
 	<option value="//api/name/requestAPI:withDelegate:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAPI:withDelegate:</option>
 	
 	<option value="//api/name/startSessionWithCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- startSessionWithCompletionHandler:</option>
+	
+	<option value="//api/name/updateProfiles">&nbsp;&nbsp;&nbsp;&nbsp;- updateProfiles</option>
 	
 	<option value="//api/name/updateProfilesWithCompletion:">&nbsp;&nbsp;&nbsp;&nbsp;- updateProfilesWithCompletion:</option>
 	
@@ -83,8 +85,6 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
-<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
-
 
 
 
@@ -124,6 +124,8 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/applyService:withToken:">applyService:withToken:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleOpenURL:">handleOpenURL:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAPI:withCompletionHandler:">requestAPI:withCompletionHandler:</a></span></li>
@@ -131,6 +133,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAPI:withDelegate:">requestAPI:withDelegate:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/startSessionWithCompletionHandler:">startSessionWithCompletionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateProfiles">updateProfiles</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateProfilesWithCompletion:">updateProfilesWithCompletion:</a></span></li>
 	
@@ -165,14 +169,6 @@
 </tr>
 						</tbody></table></div>
 					
-					
-					
-					
-					<div class="section section-overview">
-						<a title="Overview" name="overview"></a>
-						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Singly Session&hellip;</p>
-					</div>
 					
 					
 					
@@ -260,6 +256,14 @@ there is a valid session.</p></span>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/updateProfiles">&ndash;&nbsp;updateProfiles</a></code>
+		<span class="tooltip"><p>Explicitly go and update the <a href="#//api/name/profiles">profiles</a>. Posts a notification when <a href="#//api/name/profiles">profiles</a>
+have been updated.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/updateProfilesWithCompletion:">&ndash;&nbsp;updateProfilesWithCompletion:</a></code>
 		<span class="tooltip"><p>Explicitly go and update the <a href="#//api/name/profiles">profiles</a></p></span>
 	</span>
@@ -270,6 +274,14 @@ there is a valid session.</p></span>
 		<code><a href="#//api/name/handleOpenURL:">&ndash;&nbsp;handleOpenURL:</a></code>
 		<span class="tooltip"><p>Handles app launches by oauth redirection requests and maps them appropriately
 based on the service.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/applyService:withToken:">&ndash;&nbsp;applyService:withToken:</a></code>
+		<span class="tooltip"><p>Allows you to associate a service with an existing access token to the Singly
+session.</p></span>
 	</span>
 	
 	
@@ -587,6 +599,58 @@ a new instance if you must use multiple sessions inside one app.</p>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
+	<a name="//api/name/applyService:withToken:" title="applyService:withToken:"></a>
+	<h3 class="subsubtitle method-title">applyService:withToken:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Allows you to associate a service with an existing access token to the Singly
+session.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)applyService:(NSString *)<em>serviceIdentifier</em> withToken:(NSString *)<em>token</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>serviceIdentifier</em></dt>
+			<dd><p>The service identifier (e.g. &ldquo;facebook&rdquo;, &ldquo;twitter&rdquo;, etc)</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>token</em></dt>
+			<dd><p>The access token to associate</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglySession.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/handleOpenURL:" title="handleOpenURL:"></a>
 	<h3 class="subsubtitle method-title">handleOpenURL:</h3>
 	
@@ -659,7 +723,7 @@ based on the service.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>block</em></dt>
-			<dd><p>The block to call when the request is complete.</p></dd>
+			<dd><p>The block to call when the request is complete</p></dd>
 		</dl>
 		
 	</div>
@@ -710,7 +774,7 @@ based on the service.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>delegate</em></dt>
-			<dd><p>The object to call when the process succeeds or errors.</p></dd>
+			<dd><p>The object to call when the process succeeds or errors</p></dd>
 		</dl>
 		
 	</div>
@@ -760,6 +824,43 @@ based on the service.</p>
 		</dl>
 		
 	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglySession.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/updateProfiles" title="updateProfiles"></a>
+	<h3 class="subsubtitle method-title">updateProfiles</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Explicitly go and update the <a href="#//api/name/profiles">profiles</a>. Posts a notification when <a href="#//api/name/profiles">profiles</a>
+have been updated.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)updateProfiles</code></div>
+
+    
 	
 	
 	
@@ -840,7 +941,7 @@ based on the service.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-11-01)</span><br />
+						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-11-08)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

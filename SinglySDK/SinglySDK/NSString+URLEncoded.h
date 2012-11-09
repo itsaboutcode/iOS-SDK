@@ -1,5 +1,5 @@
 //
-//  NSString+NSString_URIEncoding.h
+//  NSString+URLEncoded.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.

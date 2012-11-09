@@ -46,41 +46,26 @@
 
 @implementation SinglyLoginViewController
 
-- (id)init
-{
-    self = [super init];
-    if (self)
-    {
-        [self initializeView];
-    }
-    return self;
-}
-
 - (id)initWithSession:(SinglySession *)session forService:(NSString *)serviceId
 {
     self = [super init];
     if (self)
     {
-        [self initializeView];
         _session = session;
         _targetService = serviceId;
     }
     return self;
 }
 
-- (void)awakeFromNib
+- (void)viewDidLoad
 {
-    [self initializeView];
-}
+    [super viewDidLoad];
 
-- (void)initializeView
-{
     _webView = [[UIWebView alloc] initWithFrame:self.view.frame];
     _webView.scalesPageToFit = YES;
     _webView.delegate = self;
     [self.view addSubview:_webView];
 }
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -242,15 +227,14 @@
         }
         return;
     }
-    
+
     // Save the access token and account id
     self.session.accessToken = [jsonResult objectForKey:@"access_token"];
     self.session.accountID = [jsonResult objectForKey:@"account"];
     [self.session updateProfilesWithCompletion:^{
         NSLog(@"All set to do requests as account %@ with access token %@", self.session.accountID, self.session.accessToken);
-        if (self.delegate) {
+        if (self.delegate)
             [self.delegate singlyLoginViewController:self didLoginForService:self.targetService];
-        }
     }];
 }
 

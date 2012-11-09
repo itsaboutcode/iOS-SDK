@@ -1,5 +1,5 @@
 //
-//  NSString+URLEncoded.m
+//  NSDictionary+QueryString.m
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,21 +27,25 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "NSString+URLEncoded.h"
+#import "NSDictionary+QueryString.h"
 
-@implementation NSString (URLEncoded)
+@implementation NSDictionary (QueryString)
 
-- (NSString *)URLEncodedString
++ (NSDictionary *)dictionaryWithQueryString:(NSString *)queryString
 {
-    __autoreleasing NSString *encodedString;
-    NSString *originalString = (NSString *)self;
-    encodedString = (__bridge_transfer NSString *)
-    CFURLCreateStringByAddingPercentEscapes(NULL,
-                                            (__bridge CFStringRef)originalString,
-                                            NULL,
-                                            (CFStringRef)@":!*();@/&?#[]+$,='%’\"",
-                                            kCFStringEncodingUTF8);
-    return encodedString;
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    NSArray *pairs = [queryString componentsSeparatedByString:@"&"];
+
+    for (NSString *pair in pairs)
+    {
+        NSArray *elements = [pair componentsSeparatedByString:@"="];
+        NSString *key = [[elements objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *val = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+        [dictionary setObject:val forKey:key];
+    }
+
+    return [NSDictionary dictionaryWithDictionary:dictionary];
 }
 
 @end

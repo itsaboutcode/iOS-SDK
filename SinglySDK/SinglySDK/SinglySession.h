@@ -35,15 +35,15 @@
  *
  * Notification raised when a session's profiles have been updated.
  *
- */
-static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifications.sessionProfilesUpdates";
+**/
+static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifications.sessionProfilesUpdated";
 
 /*!
  *
  * @protocol SinglySessionDelegate
  * @abstract Delegate methods related to a SinglySession
  *
- */
+**/
 @protocol SinglySessionDelegate <NSObject>
 
 @required
@@ -55,7 +55,7 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  * @param session The SinglySession that this delegate is firing for
  * @param service The service name for the successful login
  *
- */
+**/
 - (void)singlySession:(SinglySession *)session didLogInForService:(NSString *)service;
 
 /*!
@@ -66,15 +66,11 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  * @param service The service name for the successful login
  * @param error The error that occured during login
  *
- */
+**/
 - (void)singlySession:(SinglySession *)session errorLoggingInToService:(NSString *)service withError:(NSError*)error;
 
 @end
 
-/*!
- * Singly Session...
- *
- */
 @interface SinglySession : NSObject
 
 /*!
@@ -83,7 +79,7 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  *
  * @property accessToken
  *
- */
+**/
 @property (copy) NSString *accessToken;
 
 /*!
@@ -92,7 +88,7 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  *
  * @property accountID
  *
- */
+**/
 @property (copy) NSString *accountID;
 
 /*!
@@ -101,7 +97,7 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  *
  * @property clientID
  *
- */
+**/
 @property (copy) NSString *clientID;
 
 /*!
@@ -110,7 +106,7 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  *
  * @property clientSecret
  *
- */
+**/
 @property (copy) NSString *clientSecret;
 
 /*!
@@ -119,7 +115,7 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  * there is a valid session.
  *
  * @property profiles
- */
+**/
 @property (readonly) NSDictionary *profiles;
 
 /*!
@@ -128,7 +124,7 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  *
  * @property delegate
  *
- */
+**/
 @property (weak, atomic) id<SinglySessionDelegate> delegate;
 
 /*!
@@ -138,7 +134,7 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  * This is the preferred way to use the SinglySession and you should only create
  * a new instance if you must use multiple sessions inside one app.
  *
- */
+**/
 + (SinglySession *)sharedSession;
 
 /*!
@@ -146,7 +142,8 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  * Get the session in a state that is ready to make API calls.
  *
  * @param block The block to run when the check is complete. It will be passed a BOOL stating if the session is ready.
- */
+ *
+**/
 - (void)startSessionWithCompletionHandler:(void (^)(BOOL))block;
 
 /*!
@@ -154,9 +151,9 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  * Make a Singly API request and handle the result in a delegate
  *
  * @param request The SinglyAPIRequest to process
- * @param delegate The object to call when the process succeeds or errors.
+ * @param delegate The object to call when the process succeeds or errors
  *
- */
+**/
 - (void)requestAPI:(SinglyAPIRequest *)request withDelegate:(id<SinglyAPIRequestDelegate>)delegate;
 
 /*!
@@ -164,9 +161,18 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  * Make a Singly API request and handle the result in a block
  *
  * @param request The SinglyAPIRequest to process
- * @param block The block to call when the request is complete.
- */
+ * @param block The block to call when the request is complete
+ *
+**/
 - (void)requestAPI:(SinglyAPIRequest *)request withCompletionHandler:(void (^)(NSError *, id))block;
+
+/*!
+ *
+ * Explicitly go and update the profiles. Posts a notification when profiles
+ * have been updated.
+ *
+**/
+- (void)updateProfiles;
 
 /*!
  *
@@ -174,9 +180,8 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  *
  * @param block The block to call when the profile update is complete
  *
- */
+**/
 - (void)updateProfilesWithCompletion:(void (^)())block;
-
 
 /*!
  *
@@ -185,8 +190,18 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  *
  * @param url The redirection URL that should be handled
  *
- */
+**/
 - (BOOL)handleOpenURL:(NSURL *)url;
 
-@end
+/*!
+ *
+ * Allows you to associate a service with an existing access token to the Singly
+ * session.
+ *
+ * @param serviceIdentifier The service identifier (e.g. "facebook", "twitter", etc)
+ * @param token The access token to associate
+ *
+**/
+- (void)applyService:(NSString *)serviceIdentifier withToken:(NSString *)token;
 
+@end

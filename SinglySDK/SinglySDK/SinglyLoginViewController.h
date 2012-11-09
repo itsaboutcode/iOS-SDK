@@ -41,7 +41,7 @@
 
 @interface SinglyLoginViewController : UIViewController <UIWebViewDelegate, NSURLConnectionDataDelegate>
 
-@property (weak, atomic) id<SinglyLoginViewControllerDelegate> delegate;
+@property (nonatomic, strong) id<SinglyLoginViewControllerDelegate> delegate;
 
 /*!
  *

@@ -27,8 +27,9 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "NSURL+AccessToken.h"
+#import "SinglyFacebookService.h"
 #import "SinglySession.h"
-#import "FacebookSDK.h"
 
 static NSString *kSinglyAccountIDKey = @"com.singly.accountID";
 static NSString *kSinglyAccessTokenKey = @"com.singly.accessToken";
@@ -136,30 +137,72 @@ static SinglySession *sharedInstance = nil;
     });
 }
 
+- (void)updateProfiles
+{
+    [self updateProfilesWithCompletion:nil];
+}
+
 - (void)updateProfilesWithCompletion:(void(^)())block
 {
     dispatch_queue_t curQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        SinglyAPIRequest* apiReq = [[SinglyAPIRequest alloc] initWithEndpoint:@"profiles" andParameters:nil];
+        SinglyAPIRequest *apiReq = [[SinglyAPIRequest alloc] initWithEndpoint:@"profiles" andParameters:nil];
         NSError *error;
-        id json = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[apiReq completeURLForToken:self.accessToken]]] options:kNilOptions error:&error];
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[apiReq completeURLForToken:self.accessToken]]];
+        id json = [NSJSONSerialization JSONObjectWithData:data
+                                                  options:kNilOptions
+                                                    error:&error];
         if (!error && [json isKindOfClass:[NSDictionary class]]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyNotificationSessionProfilesUpdated object:self];
             _profiles = json;
         }
-        
-        dispatch_sync(curQueue, block);
+
+        if (block) dispatch_sync(curQueue, block);
     });
 }
 
 - (BOOL)handleOpenURL:(NSURL *)url
 {
+
+    // Facebook
     if ([url.scheme hasPrefix:@"fb"])
     {
-        return [FBSession.activeSession handleOpenURL:url];
+        NSString *accessToken = [url extractAccessToken];
+        if (accessToken)
+        {
+            [[SinglySession sharedSession] applyService:@"facebook" withToken:accessToken];
+            return YES;
+        }
     }
 
     return NO;
+
+}
+
+- (void)applyService:(NSString *)serviceIdentifier withToken:(NSString *)token
+{
+    NSLog(@"[SinglySDK] Applying %@ with token %@", serviceIdentifier, token);
+
+    //    __block SinglySession *currentSession = self;
+    NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/auth/%@/apply?token=%@&client_id=%@&client_secret=%@",
+                                              serviceIdentifier,
+                                              token,
+                                              self.clientID,
+                                              self.clientSecret]];
+
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requestURL];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
+    {
+        // TODO Handle request errors
+        // TODO Handle JSON parse errors
+        dispatch_async(dispatch_get_current_queue(), ^{
+            NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
+            [SinglySession sharedSession].accessToken = [responseDictionary objectForKey:@"access_token"];
+            [SinglySession sharedSession].accountID = [responseDictionary objectForKey:@"account"];
+            [[SinglySession sharedSession] updateProfiles];
+        });
+    }];
 }
 
 @end

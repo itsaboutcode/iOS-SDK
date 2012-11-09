@@ -1,5 +1,5 @@
 //
-//  NSString+URLEncoded.m
+//  SinglyService.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,21 +27,57 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "NSString+URLEncoded.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@implementation NSString (URLEncoded)
+@interface SinglyService : NSObject
 
-- (NSString *)URLEncodedString
-{
-    __autoreleasing NSString *encodedString;
-    NSString *originalString = (NSString *)self;
-    encodedString = (__bridge_transfer NSString *)
-    CFURLCreateStringByAddingPercentEscapes(NULL,
-                                            (__bridge CFStringRef)originalString,
-                                            NULL,
-                                            (CFStringRef)@":!*();@/&?#[]+$,='%’\"",
-                                            kCFStringEncodingUTF8);
-    return encodedString;
-}
+/*!
+ *
+ * The service identifier (e.g. "facebook", "twitter", etc).
+ *
+**/
+@property (nonatomic, strong) NSString *serviceIdentifier;
+
+/*!
+ *
+ * The client id for the service. This may be fetched (asynchronously) by
+ * calling fetchClientID.
+ *
+**/
+@property (nonatomic, strong) NSString *clientID;
+
+/*!
+ *
+ * Whether or not the service is currently authorized.
+ *
+**/
+@property (nonatomic, assign) BOOL isAuthorized;
+
+/*!
+ *
+ * Convenience method that will return an instance of SinglyService initialized
+ * by the service identifier.
+ *
+ * @param serviceIdentifier The service identifier (e.g. "facebook", "twitter", etc).
+ *
+**/
++ (id)serviceWithIdentifier:(NSString *)serviceIdentifier;
+
+/*!
+ *
+ * Initializes with serviceIdentifier;
+ *
+ * @param serviceIdentifier The service identifier (e.g. "facebook", "twitter", etc).
+ *
+**/
+- (id)initWithIdentifier:(NSString *)serviceIdentifier;
+
+/*!
+ *
+ * Fetches the client id from Singly.
+ *
+**/
+- (void)fetchClientID;
 
 @end

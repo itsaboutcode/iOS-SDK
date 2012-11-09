@@ -8,7 +8,6 @@ considered alpha quality. We are very interested in feedback from the community
 about the direction you would like to see us take with it. Please follow with us
 as we push towards our [1.0 milestone](https://github.com/Singly/iOS-SDK/issues?milestone=4&state=open).
 
---------------------------------------------------------------------------------
 
 ## Getting Started
 
@@ -109,11 +108,9 @@ that requests the profiles list and is using blocks to handle the result is:
 
 That's the basics and enough to get rolling!
 
---------------------------------------------------------------------------------
 
 ## Example App
 
---------------------------------------------------------------------------------
 
 ## Other View Controllers
 
@@ -134,7 +131,6 @@ A few helpful view controllers exist to make life easier and get apps built fast
 
 More docs to come for these.
 
---------------------------------------------------------------------------------
 
 ## Native Facebook Authorization
 
@@ -143,27 +139,42 @@ along with fallbacks to both the Facebook app and traditional web-based
 authentication. Although we abstract the Facebook SDK away, there are still a
 few steps you must take to ensure support for native authorization:
 
-### Configure your app to respond to Facebook URLs.
+### Register your app to handle Facebook URLs
 
 You must add the following to your Info.plist, replacing the 0's with your
 actual Facebook App ID:
 
-````
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb000000000000000</string>
-            </array>
-        </dict>
-    </array>
-````
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>fb000000000000000</string>
+        </array>
+    </dict>
+</array>
+```
 
---------------------------------------------------------------------------------
+### Configure your app delegate to handle launches by URL
+
+When native integration is not possible, we fall back to launching the Facebook
+app (if installed) in order to complete the auth workflow. In order for this to
+happen, you will need your app delegate to implement the following in order for
+the round-trip process to complete:
+
+```objective-c
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+  return [[SinglySession sharedSession] handleOpenURL:url];
+}
+```
 
 ## License
 
 The Singly SDK is licensed under the terms of the BSD License. Please see the
-LICENSE file for more information.
-
+[LICENSE](http://github.com/singly/ios-sdk/blob/master/LICENSE) file for more
+information.
