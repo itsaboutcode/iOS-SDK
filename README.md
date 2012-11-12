@@ -55,7 +55,7 @@ setup using `SinglyService` or a `SinglyLoginViewController` instance.
 ### Using the Singly Login View Controller
 
 ```objective-c
-SinglyLoginViewController *loginViewController = [[SinglyLogInViewController alloc]
+SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc]
     initWithSession:[SinglySession sharedSession]
          forService:kSinglyServiceFacebook];
 
