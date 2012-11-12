@@ -37,3 +37,5 @@
 #import <SinglySDK/SinglyFriendPickerViewController.h>
 #import <SinglySDK/SinglySharingViewController.h>
 #import <SinglySDK/SinglyFriendModel.h>
+#import <SinglySDK/SinglyService.h>
+#import <SinglySDK/SinglyFacebookService.h>
