@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C54" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="cFv-T8-fOZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C2034" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="cFv-T8-fOZ">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
         <!--Singly Main View Controller - Singly SDK Example-->
@@ -124,7 +124,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="jzC-cU-ob4">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FriendCellIdentifier" id="jzC-cU-ob4">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -144,21 +144,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1G4-Mf-aD5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1199" y="1"/>
-        </scene>
-        <!--View Controller - Photos-->
-        <scene sceneID="Smm-Tp-d7s">
-            <objects>
-                <viewController id="lxS-y0-bnn" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="cop-g7-6N8">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Photos" id="72S-Fx-F4j"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4GF-Nc-we1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1199" y="804"/>
         </scene>
         <!--Singly Login Picker View Controller - Services-->
         <scene sceneID="BjZ-ls-no5">
@@ -193,20 +178,6 @@
     <resources>
         <image name="Icon-512.png" width="512" height="512"/>
     </resources>
-    <classes>
-        <class className="SinglyFriendPickerViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SinglyFriendPickerViewController.h"/>
-        </class>
-        <class className="SinglyLoginPickerViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SinglyLoginPickerViewController.h"/>
-        </class>
-        <class className="SinglyMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SinglyMainViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="friendPickerCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

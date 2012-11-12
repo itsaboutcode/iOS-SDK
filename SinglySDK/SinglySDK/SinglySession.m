@@ -196,7 +196,6 @@ static SinglySession *sharedInstance = nil;
         // TODO Handle request errors
         // TODO Handle JSON parse errors
         dispatch_async(dispatch_get_current_queue(), ^{
-            NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
             [SinglySession sharedSession].accessToken = [responseDictionary objectForKey:@"access_token"];
             [SinglySession sharedSession].accountID = [responseDictionary objectForKey:@"account"];

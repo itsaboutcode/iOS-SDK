@@ -62,9 +62,9 @@ static SinglyActivityIndicatorView *sharedInstance = nil;
         CABasicAnimation *fullRotation;
         fullRotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
         fullRotation.fromValue = [NSNumber numberWithFloat:0];
-        fullRotation.toValue = [NSNumber numberWithFloat:(2*M_PI)];
+        fullRotation.toValue = [NSNumber numberWithFloat:(2 * M_PI)];
         fullRotation.duration = 1.0;
-        fullRotation.repeatCount = 1e100f;
+        fullRotation.repeatCount = MAXFLOAT;
         [spinner.layer addAnimation:fullRotation forKey:@"spinner"];
         [self addSubview:spinner];
 

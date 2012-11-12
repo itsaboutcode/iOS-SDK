@@ -36,8 +36,7 @@
  * with the option to log in to any supported services.
  *
  */
-@interface SinglyLoginPickerViewController : UITableViewController <SinglySessionDelegate,
-    SinglyLoginViewControllerDelegate, UIAlertViewDelegate>
+@interface SinglyLoginPickerViewController : UITableViewController <SinglyLoginViewControllerDelegate, UIAlertViewDelegate>
 
 /*!
  *

@@ -22,7 +22,6 @@
 		82C6253116011E7900BF5225 /* SinglySharingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C6252F16011E7900BF5225 /* SinglySharingViewController.m */; };
 		82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */; };
 		D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
-		D02B53531630958500F1F535 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D021CBBB162C933D00DE9922 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D02B537216309C7700F1F535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B537116309C7700F1F535 /* Foundation.framework */; };
 		D02B539616309CDF00F1F535 /* NSString+URLEncoded.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */; };
 		D02B539716309CE200F1F535 /* UIViewController+Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */; };
@@ -99,8 +98,7 @@
 		D0587106164330FF007E8970 /* SinglyFacebookService.h in Headers */ = {isa = PBXBuildFile; fileRef = D058710116431AFC007E8970 /* SinglyFacebookService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D058710716433102007E8970 /* SinglyService.m in Sources */ = {isa = PBXBuildFile; fileRef = D05870FC16431ADB007E8970 /* SinglyService.m */; };
 		D058710816433105007E8970 /* SinglyFacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = D058710216431AFC007E8970 /* SinglyFacebookService.m */; };
-		D06194E8163864AD00A906F7 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D021CBBB162C933D00DE9922 /* Accounts.framework */; };
-		D06194F21638668500A906F7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06194F11638668400A906F7 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D06194E8163864AD00A906F7 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D021CBBB162C933D00DE9922 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D06194F31638668E00A906F7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06194F11638668400A906F7 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */; };
 		D08B3EE7162DF3E3009001D5 /* UIViewController+Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */; };
@@ -258,8 +256,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D02B53531630958500F1F535 /* Accounts.framework in Frameworks */,
-				D06194F21638668500A906F7 /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,7 +594,6 @@
 			buildPhases = (
 				821D086D15ED177400ECFED0 /* Sources */,
 				821D086E15ED177400ECFED0 /* Frameworks */,
-				D02B54081630A81A00F1F535 /* Restructure Framework Bundle */,
 				D02B540A1630A99300F1F535 /* Headers */,
 				D067E1B3161B493400B43C32 /* Generate Documentation */,
 				D0E2C7041637528B00AAD565 /* Create Universal Library */,
@@ -743,20 +738,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D02B54081630A81A00F1F535 /* Restructure Framework Bundle */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Restructure Framework Bundle";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n#mkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/${FRAMEWORK_VERSION}/Headers\"\n#ln -sfh ${FRAMEWORK_VERSION} \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n#ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n#cp -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current/${PRODUCT_NAME}\"\n#ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n";
-		};
 		D053EF8B16271BC9008B8BA1 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -941,6 +922,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = "non-global";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -960,6 +943,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = "non-global";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -971,6 +956,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
+				INSTALL_PATH = /Library/Frameworks;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -978,7 +964,6 @@
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = mh_object;
 				PRODUCT_NAME = SinglySDK;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -990,6 +975,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
+				INSTALL_PATH = /Library/Frameworks;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -997,7 +983,6 @@
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = mh_object;
 				PRODUCT_NAME = SinglySDK;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -1006,9 +991,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1016,9 +999,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SinglySDK;
 				PUBLIC_HEADERS_FOLDER_PATH = Headers;
-				SKIP_INSTALL = YES;
-				STRIP_STYLE = "non-global";
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1026,9 +1006,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1036,9 +1014,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SinglySDK;
 				PUBLIC_HEADERS_FOLDER_PATH = Headers;
-				SKIP_INSTALL = YES;
-				STRIP_STYLE = "non-global";
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1054,7 +1029,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDKTests/SinglySDKTests-Prefix.pch";
 				INFOPLIST_FILE = "SinglySDKTests/SinglySDKTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1077,7 +1051,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDKTests/SinglySDKTests-Prefix.pch";
 				INFOPLIST_FILE = "SinglySDKTests/SinglySDKTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1091,6 +1064,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = "SinglySDK/Resources/Resources-Info.plist";
+				INSTALL_PATH = /Library/Bundles;
 				PRODUCT_NAME = SinglySDK;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -1100,6 +1074,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = "SinglySDK/Resources/Resources-Info.plist";
+				INSTALL_PATH = /Library/Bundles;
 				PRODUCT_NAME = SinglySDK;
 				WRAPPER_EXTENSION = bundle;
 			};

@@ -61,4 +61,29 @@
     return self;
 }
 
+#pragma mark -
+
+- (void)fetchClientID
+{
+
+    // If we already have the Client ID, do not attempt to fetch it again...
+    if (self.clientID) return;
+
+    // Make a request to the Singly API for the Client ID...
+    NSError *requestError;
+    NSError *parseError;
+    NSURLResponse *response;
+    NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/v0/auth/%@/client_id/%@", [[SinglySession sharedSession] clientID], self.serviceIdentifier]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
+
+    // TODO Add error handling to the request
+    // TODO Add error handling to JSON parse
+
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&parseError];
+    self.clientID = responseDictionary[@"facebook"];
+
+    NSLog(@"[SinglySDK] Retrieved Client ID for '%@': %@", self.serviceIdentifier, self.clientID);
+}
+
 @end

@@ -78,6 +78,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Singly iOS SDK"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

@@ -250,30 +250,6 @@
 
 }
 
-- (void)fetchClientID
-{
-
-    // If we already have the Client ID, do not attempt to fetch it again...
-    if (self.clientID) return;
-
-    // Make a request to the Singly API for the Client ID (Facebook App ID)...
-    NSError *requestError;
-    NSError *parseError;
-    NSURLResponse *response;
-    NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/v0/auth/%@/client_id/facebook", [[SinglySession sharedSession] clientID]]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
-
-    // TODO Add error handling to the request
-
-    // TODO Add error handling to JSON parse
-    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&parseError];
-    self.clientID = responseDictionary[@"facebook"];
-
-    NSLog(@"[SinglySDK] Retrieved Facebook App ID: %@", self.clientID);
-
-}
-
 #pragma mark - get rid of these
 
 + (NSString *)serializeURL:(NSString *)baseUrl

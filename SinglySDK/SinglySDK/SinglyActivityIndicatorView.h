@@ -10,7 +10,7 @@
 
 @interface SinglyActivityIndicatorView : UIView
 
-+ (SinglyActivityIndicatorView *)sharedSession;
++ (SinglyActivityIndicatorView *)sharedIndicator;
 
 + (void)showIndicator;
 
