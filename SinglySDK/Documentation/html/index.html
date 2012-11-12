@@ -34,117 +34,129 @@
 					<div class="section section-overview index-overview">
 						
 						
-						<h1>Singly SDK</h1>
+						<h1>Singly iOS SDK</h1>
 
 <p>A simple SDK for accessing Singly from iOS apps.</p>
 
-<p>The Singly SDK is currently <strong>in active development</strong> and as such should be
-considered alpha quality. We are very interested in feedback from the community
-about the direction you would like to see us take with it. Please follow with us
-as we push towards our <a href="https://github.com/Singly/iOS-SDK/issues?milestone=4&amp;state=open">1.0 milestone</a>.</p>
+<p><strong>The Singly SDK is currently in active development</strong> and as such should be
+considered alpha quality at this stage. We are very interested in feedback
+from the community about the direction you would like to see us take with it.
+Please follow with us as we push towards our
+<a href="https://github.com/Singly/iOS-SDK/issues?milestone=4&amp;state=open">1.0 milestone</a>.</p>
 
 <h2>Getting Started</h2>
 
-<p>The first thing you will need is a client id and client secret for your
-application. If you have not done so already, <a href="https://singly.com/apps">sign in</a>
-to Singly and add your application. Your client id and secret can be found on
-the <a href="https://singly.com/apps">application settings</a> page for your application.</p>
+<p>The first thing you will need is a Client ID and a Client Secret for your
+application from Singly. If you have not done so already, add your application
+by <a href="https://singly.com/apps">signing in to Singly</a>. Your Client ID and Client
+Secret can be found on the application settings page for your application.</p>
 
-<p>Now that we&rsquo;re ready we can either start a new iOS application or use an existing one.
-In order to use the SDK make sure that you setup your header search path to point to the
-<code>SinglySDK</code> directory and that your project includes the libSinglySDK.a library.</p>
+<p>Once you have your Client ID and Client Secret, we can either start a new iOS
+application or use an existing one.</p>
 
-<p>To start using the SDK we&rsquo;ll first need a <a href="Classes/SinglySession.html"><code>SinglySession</code></a> object.  You&rsquo;ll probably
-want to maintain this in your AppDelegate or root view controller.  You&rsquo;ll also need to
-assign a delegate to it that implements the <a href="Protocols/SinglySessionDelegate.html"><code>SinglySessionDelegate</code></a> protocol.  You will
-also assign the client id and secret you generated while signing up for Singly.</p>
+<h3>Linking to the Singly SDK</h3>
 
-<p><code>objective-c
-SinglySession* session = [[SinglySession alloc] init];
-session.clientID = @"&lt;client id here&gt;";
-session.clientSecret = @"&lt;client secret here&gt;";
-session.delegate = self;
-</code></p>
+<h3>Opening a Session to Singly</h3>
 
-<p>The <code>SinglySession</code> has two other properties:
-* <code>accessToken</code> &ndash; Your Singly access token.  You should not need to access this unless
-  you really need to do something that does not fit into the current SDK.
-* <code>accountID</code> &ndash; Your Singly account ID.</p>
-
-<p>Both of these are saved between runs in the <code>NSUserDefaults</code> and should be setup using
-a <code>SinglyLoginViewController</code>.  To see if the session was stored and immediately
-usable, without loggin in again.  We can use the <code>checkReadyWithCompletionHandler:</code>.</p>
+<p>To start using the Singly SDK in your project, you will first need to
+initialize the <a href="Classes/SinglySession.html"><code>SinglySession</code></a>. You&rsquo;ll probably want to do this in your
+application delegate right after the application has finished launching, such
+as in the <code>application:didFinishLaunchingWithOptions:launchOptions</code> method.</p>
 
 <p>```objective-c
-[session checkReadyWithCompletionHandler:^(BOOL ready){</p>
+<a href="Classes/SinglySession.html">SinglySession</a> *session = <a href="Classes/SinglySession.html#//api/name/sharedSession">[SinglySession sharedSession]</a>;
+session.clientID = CLIENT_ID;
+session.clientSecret = CLIENT_SECRET;</p>
 
-<pre><code>if(!ready) {
-    // We're not logged in and we should use SinglyLoginViewController to connect
+<p>[session startSessionWithCompletionHandler:^(BOOL ready) {</p>
+
+<pre><code>if (ready) {
+    // The session is ready to go!
 } else {
-    // We're all set and can start making requests
+    // You will need to auth with a service...
 }
 </code></pre>
 
 <p>}];
 ```</p>
 
-<p>If the session is not ready, or needs to connect a different service, the
-<code>SinglyLoginViewController</code> gives you a consistent and simple way to connect to
-any of the services that Singly supports.  This is a fully standard
-<code>UIViewController</code> with the extra bits needed to do the Singly auth.  When it
-finishes or errors it uses the <code>SinglySessionDelegate</code> to fire the correct events.</p>
+<p>The <code>SinglySession</code> has two other properties:</p>
 
-<p><code>objective-c
-SinglyLoginViewController* loginVC = [[SinglyLogInViewController alloc] initWithSession:session_ forService:kSinglyServiceFacebook];
-[self presentModalViewController:loginVC animated:YES];
-</code></p>
+<ul>
+<li><code>accessToken</code> &ndash; Your Singly Access Token. You should not need to access
+this unless you really need to do something that does not fit into the
+current Singly SDK.</li>
+<li><code>accountID</code> &ndash; Your Singly Account ID.</li>
+</ul>
+
+
+<p>Both of these are saved between runs in the <code>NSUserDefaults</code> and should be
+setup using <code>SinglyService</code> or a <code>SinglyLoginViewController</code> instance.</p>
+
+<h3>Using the Singly Login View Controller</h3>
+
+<p>```objective-c
+<a href="Classes/SinglyLoginViewController.html">SinglyLoginViewController</a> *loginViewController = [[SinglyLogInViewController alloc]</p>
+
+<pre><code>initWithSession:[SinglySession sharedSession]
+     forService:kSinglyServiceFacebook];
+</code></pre>
+
+<p>[self presentModalViewController:loginViewController animated:YES];
+```</p>
 
 <p>The service that you define can be any string of the services that Singly supports,
-but we have these defined as constants for you in the SinglySDK.h.</p>
+but we have these defined as constants for you in the SinglyConstants.h.</p>
 
 <p>An example implementation of the <a href="Protocols/SinglySessionDelegate.html"><code>SinglySessionDelegate</code></a> is:</p>
 
 <p>```objective-c
-&ndash;(void)singlySession:(<a href="Classes/SinglySession.html">SinglySession</a> <em>)session didLogInForService:(NSString </em>)service;
+&ndash; (void)singlySession:(<a href="Classes/SinglySession.html">SinglySession</a> <em>)session didLogInForService:(NSString </em>)service
 {</p>
 
 <pre><code>[self dismissModalViewControllerAnimated:YES];
-loginVC = nil;
 
 // We're ready to rock!  Go do something amazing!
 </code></pre>
 
-<p>}
-&ndash;(void)singlySession:(<a href="Classes/SinglySession.html">SinglySession</a> <em>)session errorLoggingInToService:(NSString </em>)service withError:(NSError *)error;
-{</p>
+<p>}</p>
 
-<pre><code>UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-[alert show];
-[self dismissModalViewControllerAnimated:YES];
-loginVC = nil;
+<ul>
+<li>(void)singlySession:(<a href="Classes/SinglySession.html">SinglySession</a> <em>)session errorLoggingInToService:(NSString </em>)service withError:(NSError <em>)error
+{
+  UIAlertView</em> alert = [[UIAlertView alloc] initWithTitle:@&ldquo;Login Error&rdquo; message:[error localizedDescription] delegate:self cancelButtonTitle:@&ldquo;OK&rdquo; otherButtonTitles:nil];
+  [alert show];
+  [self dismissModalViewControllerAnimated:YES];
+}
+```</li>
+</ul>
+
+
+<h3>Using the Singly Login Picker</h3>
+
+<p>If you wish to login multiple services, or offer multiple services for login,
+then you can use the <a href="Classes/SinglyLoginPickerViewController.html"><code>SinglyLoginPickerViewController</code></a>.</p>
+
+<p>```
+<a href="Classes/SinglyLoginPickerViewController.html">SinglyLoginPickerViewController</a> *pickerViewController = [[SinglyLoginPickerViewController alloc]</p>
+
+<pre><code>initWithSession:[SinglySession sharedSession]];
 </code></pre>
 
-<p>}
+<p>[self presentModalViewController:pickerViewController animated:YES];
 ```</p>
 
-<p>If you wish to login multiple services, or offer multiple services for login, then you
-can use the <a href="Classes/SinglyLoginPickerViewController.html"><code>SinglyLoginPickerViewController</code></a>.  All you need to do is set all of th
-services that you wish to allow connections to.</p>
-
-<p><code>
-SinglyLoginPickerViewController* controller = [[SinglyLoginPickerViewController alloc] initWithSession:session];
-controller.services = [NSArray arrayWithObjects:kSinglyServiceFacebook, kSinglyServiceTwitter, nil];
-[self presentModalViewController:controller animated:YES];
-</code></p>
+<h3>Making API Requests</h3>
 
 <p>Once we have a valid session we can start making API requests.  We can make
-GET, POST or any method requests using the <code>SinglyAPIRequest</code>.  The request is only
-a description of the request that we are going to make, to actually execute the
-request we use our session and one of the <code>requestAPI:</code> methods.  An example
-that requests the profiles list and is using blocks to handle the result is:</p>
+GET, POST or any method requests using the <code>SinglyAPIRequest</code>.  The request is
+only a description of the request that we are going to make, to actually
+execute the request we use our session and one of the <code>requestAPI:</code> methods.
+An example that requests the profiles list and is using blocks to handle the
+result is:</p>
 
 <p>```objective-c
-[session requestAPI:[<a href="Classes/SinglyAPIRequest.html">SinglyAPIRequest</a> apiRequestForEndpoint:@&ldquo;profiles&rdquo; withParameters:nil] withCompletionHandler:^(NSError *error, id json) {</p>
+[[SinglySession sharedSession] requestAPI:[<a href="Classes/SinglyAPIRequest.html">SinglyAPIRequest</a> apiRequestForEndpoint:@&ldquo;profiles&rdquo; withParameters:nil] withCompletionHandler:^(NSError *error, id json) {</p>
 
 <pre><code>NSLog(@"The profiles result is: %@", json);
 </code></pre>
@@ -154,34 +166,43 @@ that requests the profiles list and is using blocks to handle the result is:</p>
 
 <p>That&rsquo;s the basics and enough to get rolling!</p>
 
-<h2>Example App</h2>
+<h2>Building the Example App</h2>
 
-<h2>Other View Controllers</h2>
+<p>Singly SDK ships with an example app that illustrates all of the capabilities
+of the SDK.</p>
 
-<p>A few helpful view controllers exist to make life easier and get apps built faster.</p>
+<h3>Configure the Example App</h3>
 
-<ul>
-<li><p><code>SinglyLoginViewPickerController</code></p>
+<p>Before you can build and run the example app, you will need to provide your
+Client ID and Client Secret in <code>SinglyConfiguration.h</code>.</p>
 
-<p>  As discussed above this is a view controller to give a list of available services
-  for the user to login to.</p></li>
-<li><p><a href="Classes/SinglyFriendPickerViewController.html"><code>SinglyFriendPickerViewController</code></a></p>
+<h3>Enable Native Facebook Authorization (optional)</h3>
 
-<p> A view of a users contacts that allows them to pick one.</p></li>
-<li><p><code>SinglySharingViewController</code></p>
+<p>See the instructions below (under &ldquo;Native Facebook Authorization&rdquo;) to enable
+testing of the Facebook application fallback attempt.</p>
 
-<p>  A view to post a status message out to a network.</p></li>
-</ul>
+<h3>Build and Run!</h3>
 
+<p>Once you have things configured, simply build and run the project in the
+Simulator.</p>
 
-<p>More docs to come for these.</p>
+<p>If you wish to run the example on your iPhone or iPad, you will need to
+configure the project with provisioning appropriate to your device and Apple
+developer account, which is beyond the scope of this document.</p>
+
+<h2>SDK Documentation</h2>
+
+<p>After you&rsquo;ve cloned the project, you will find generated documentation in
+the <code>SinglySDK/Documentation</code> folder. This documentation is automatically
+regenerated with each successful build of the framework in Xcode, provided
+you have (appledoc)[<a href="http://gentlebytes.com/appledoc/">http://gentlebytes.com/appledoc/</a>] installed.</p>
 
 <h2>Native Facebook Authorization</h2>
 
-<p>Singly SDK wraps the Facebook SDK and supports native authorization (on iOS 6+)
-along with fallbacks to both the Facebook app and traditional web-based
-authentication. Although we abstract the Facebook SDK away, there are still a
-few steps you must take to ensure support for native authorization:</p>
+<p>Singly SDK interfaces directly with the device to support authorization on
+iOS 6+ and will attempt to fallback to the installed Facebook application and
+then the built-in Singly web-based authorization. In order for the Facebook
+application fallback to work, you will need to perform the following steps:</p>
 
 <h3>Register your app to handle Facebook URLs</h3>
 
@@ -205,10 +226,10 @@ actual Facebook App ID:</p>
 
 <h3>Configure your app delegate to handle launches by URL</h3>
 
-<p>When native integration is not possible, we fall back to launching the Facebook
-app (if installed) in order to complete the auth workflow. In order for this to
-happen, you will need your app delegate to implement the following in order for
-the round-trip process to complete:</p>
+<p>When native integration is not possible, we fall back to launching the
+Facebook app (if installed) in order to complete the auth workflow. In order
+for this to happen, you will need your application delegate to implement the
+following method in order for the round-trip process to complete:</p>
 
 <p>```objective-c
 &ndash; (BOOL)application:(UIApplication *)application</p>
@@ -225,6 +246,23 @@ the round-trip process to complete:</p>
   return [[SinglySession sharedSession] handleOpenURL:url];
 }
 ```</p>
+
+<h2>Need Help?</h2>
+
+<p>We are available to answer your questions, help you work through integration
+issues and look into possible bugs with our service and SDKs.</p>
+
+<ul>
+<li><p><strong>Found a bug?</strong>
+If you think you have come across a bug in the SDK, please take a moment
+to <a href="https://github.com/singly/ios-sdk/issues">file an issue</a>, providing as
+much information about the issue as possible.</p></li>
+<li><p><strong>Join us on HipChat.</strong>
+For questions or just to say hi and show off what you&rsquo;re building, feel
+free to join us on our <a href="https://support.singly.com">Support HipChat</a> and
+have a word with us!</p></li>
+</ul>
+
 
 <h2>License</h2>
 
@@ -322,7 +360,7 @@ information.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-11-08)</span><br />
+						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-11-12)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
