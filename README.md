@@ -75,9 +75,13 @@ An example implementation of the `SinglySessionDelegate` is:
     // We're ready to rock!  Go do something amazing!
 }
 
-- (void)singlySession:(SinglySession *)session errorLoggingInToService:(NSString *)service withError:(NSError *)error
+- (void)singlySession:(SinglySession *)session
+  errorLoggingInToService:(NSString *)service withError:(NSError *)error
 {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error"
+                                                    message:[error localizedDescription]
+                                                    delegate:self cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
     [alert show];
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -89,9 +93,9 @@ If you wish to login multiple services, or offer multiple services for login,
 then you can use the `SinglyLoginPickerViewController`.
 
 ```
-SinglyLoginPickerViewController *pickerViewController = [[SinglyLoginPickerViewController alloc]
+SinglyLoginPickerViewController *viewController = [[SinglyLoginPickerViewController alloc]
     initWithSession:[SinglySession sharedSession]];
-[self presentModalViewController:pickerViewController animated:YES];
+[self presentModalViewController:viewController animated:YES];
 ```
 
 ### Making API Requests
