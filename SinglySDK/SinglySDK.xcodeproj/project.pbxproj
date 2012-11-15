@@ -236,6 +236,12 @@
 		D06194F11638668400A906F7 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D06830B91624BAFC00F398A6 /* SinglyFriendPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendPickerCell.h; sourceTree = "<group>"; };
 		D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPickerCell.m; sourceTree = "<group>"; };
+		D06D8DAC165193AB00E8750C /* Create Disk Image.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "Create Disk Image.rb"; sourceTree = "<group>"; };
+		D077BA6116540FE800F6EEDE /* Singly Folder Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Singly Folder Icon.icns"; sourceTree = "<group>"; };
+		D077BA6216540FF000F6EEDE /* Singly Folder Icon.rsrc */ = {isa = PBXFileReference; lastKnownFileType = archive.rsrc; path = "Singly Folder Icon.rsrc"; sourceTree = "<group>"; };
+		D077BA63165554E500F6EEDE /* Customize Disk Image.applescript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.applescript; path = "Customize Disk Image.applescript"; sourceTree = "<group>"; };
+		D077BA6516555A3F00F6EEDE /* Disk Image Background.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Disk Image Background.psd"; sourceTree = "<group>"; };
+		D077BA6616555A3F00F6EEDE /* Disk Image Background.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "Disk Image Background.tiff"; sourceTree = "<group>"; };
 		D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Modal.h"; sourceTree = "<group>"; };
 		D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Modal.m"; sourceTree = "<group>"; };
 		D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryString.h"; sourceTree = "<group>"; };
@@ -398,6 +404,8 @@
 				D053EFCE16275C85008B8BA1 /* Friend Picker */,
 				D0DB161B162E0A87005EC7C7 /* Login Picker */,
 				D0EA60C2163B4554001AC1DF /* Icon-512.png */,
+				D077BA6516555A3F00F6EEDE /* Disk Image Background.psd */,
+				D077BA6616555A3F00F6EEDE /* Disk Image Background.tiff */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -493,12 +501,22 @@
 		D06830CD1624D0AF00F398A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D077BA6016540FDD00F6EEDE /* Icons */,
 				D053EFCD16275C7F008B8BA1 /* Images */,
 				821D087915ED177400ECFED0 /* InfoPlist.strings */,
 				D053F01016276255008B8BA1 /* Resources-Info.plist */,
 				D02B53D91630A31600F1F535 /* SinglyConstants.h */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D077BA6016540FDD00F6EEDE /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				D077BA6216540FF000F6EEDE /* Singly Folder Icon.rsrc */,
+				D077BA6116540FE800F6EEDE /* Singly Folder Icon.icns */,
+			);
+			path = Icons;
 			sourceTree = "<group>";
 		};
 		D0DB161B162E0A87005EC7C7 /* Login Picker */ = {
@@ -514,6 +532,8 @@
 			isa = PBXGroup;
 			children = (
 				D0E158DF1631C1BD000D0BCA /* Create Universal Library.rb */,
+				D06D8DAC165193AB00E8750C /* Create Disk Image.rb */,
+				D077BA63165554E500F6EEDE /* Customize Disk Image.applescript */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
