@@ -26,7 +26,9 @@ image_path     = "#{Tempfile.new('dmg').path}.dmg"
 Dir.mktmpdir do |temp_path|
 
   # Stage the README to Disk Image
-  markup = Markdown.new(File.read("#{workspace_path}/README.md"))
+  readme = File.read("#{workspace_path}/README.md")
+  readme.gsub!('```objective-c', '```')
+  markup = Markdown.new(readme)
   File.open "#{temp_path}/Get Started.html", "w" do |file|
     file.write "<style>#{File.read("#{source_path}/SinglySDK/Resources/Get Started Stylesheet.css")}</style>"
     file.write markup.to_html
