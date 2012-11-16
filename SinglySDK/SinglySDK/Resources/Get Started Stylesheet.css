@@ -1,11 +1,11 @@
 
-@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700italic,700&subset=latin,latin-ext);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans+Narrow|Inconsolata);
 
 body
 {
   margin: 160px;
-  font-family: "Quattrocento Sans", sans-serif;
+  font-family: "Arial", "Helvetica", sans-serif;
+  font-size: 14px;
   line-height: 1.5;
   letter-spacing: -0.02em;
 }
@@ -14,25 +14,46 @@ a
 {
   color: #40a8de;
   font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover
+{
+  color: #00c4b3;
+  text-decoration: underline;
 }
 
 h1, h2, h3, h4, h5, h6
 {
-  font-family: "Futura", "Open Sans", sans-serif;
+  font-family: "Helvetica Neue LT STD Condensed", "PT Sans Narrow", sans-serif;
   font-weight: normal;
-  color: #58585b;
+  color: #606062;
 }
 
 h1
 {
   margin-top: 60px;
   margin-bottom: 30px;
-  font-size: 48px;
+  font-size: 64px;
+}
+
+h1 + p
+{
+  font-weight: bold;
 }
 
 h2
 {
   margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 32px;
+}
+
+h3
+{
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 24px;
 }
 
 pre
@@ -47,5 +68,5 @@ pre
 
 code
 {
-
+  font-family: "Inconsolata", monospace;
 }
