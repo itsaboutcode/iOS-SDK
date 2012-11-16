@@ -29,6 +29,7 @@
 
 #import "UIViewController+Modal.h"
 #import "SinglyLoginViewController.h"
+#import "SinglyService+Internal.h"
 
 @interface SinglyLoginViewController ()
 {
@@ -46,13 +47,15 @@
 
 @implementation SinglyLoginViewController
 
-- (id)initWithSession:(SinglySession *)session forService:(NSString *)serviceId
+- (id)initWithSession:(SinglySession *)session forService:(NSString *)serviceIdentifier
 {
     self = [super init];
     if (self)
     {
         _session = session;
-        _targetService = serviceId;
+
+        serviceIdentifier = [SinglyService normalizeServiceIdentifier:serviceIdentifier];
+        _targetService = serviceIdentifier;
     }
     return self;
 }

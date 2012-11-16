@@ -37,6 +37,9 @@
 + (id)serviceWithIdentifier:(NSString *)serviceIdentifier
 {
 
+    // Normalize the Service Identifier
+    serviceIdentifier = [SinglyService normalizeServiceIdentifier:serviceIdentifier];
+
     // Custom Service for Facebook
     if ([serviceIdentifier isEqualToString:@"facebook"])
         return [self facebookService];
@@ -56,6 +59,7 @@
 {
     if (self = [self init])
     {
+        serviceIdentifier = [SinglyService normalizeServiceIdentifier:serviceIdentifier];
         _serviceIdentifier = serviceIdentifier;
     }
     return self;
@@ -84,6 +88,14 @@
     self.clientID = responseDictionary[@"facebook"];
 
     NSLog(@"[SinglySDK] Retrieved Client ID for '%@': %@", self.serviceIdentifier, self.clientID);
+}
+
+#pragma mark -
+
++ (NSString *)normalizeServiceIdentifier:(NSString *)serviceIdentifier
+{
+    serviceIdentifier = [serviceIdentifier lowercaseString];
+    return serviceIdentifier;
 }
 
 @end

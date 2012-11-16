@@ -33,4 +33,6 @@
 
 + (SinglyFacebookService *)facebookService;
 
++ (NSString *)normalizeServiceIdentifier:(NSString *)serviceIdentifier;
+
 @end
