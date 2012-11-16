@@ -17,9 +17,24 @@ by [signing in to Singly](https://singly.com/apps). Your Client ID and Client
 Secret can be found on the application settings page for your application.
 
 Once you have your Client ID and Client Secret, we can either start a new iOS
-application or use an existing one.
+application or use an existing one. If you are starting fresh, you can take a
+look at and clone our [skeleton project](https://github.com/singly/ios-sdk-skelton)
+that is already bootstrapped for the Singly iOS SDK.
 
-### Linking to the Singly SDK
+### Download the Singly SDK
+
+The easiest way to get started with the Singly SDK is to download our
+pre-packaged distribution.
+
+### Include the Singly SDK in Your Project
+
+1. Drag the `SinglySDK.framework` and `SinglySDK.bundle` files from the
+   pre-packaged distribution into your Xcode project. You will be asked to
+   add them to your targets; do this.
+
+2. The Singly SDK requires both the Accounts and QuartzCore frameworks. Under
+   your Build Phases setting, add the `Accounts` and `QuartzCore` frameworks
+   to the "Link Binary With Libraries" phase.
 
 ### Opening a Session to Singly
 
@@ -108,7 +123,11 @@ An example that requests the profiles list and is using blocks to handle the
 result is:
 
 ```objective-c
-[[SinglySession sharedSession] requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"profiles" withParameters:nil] withCompletionHandler:^(NSError *error, id json) {
+SinglyAPIRequest *apiRequest = [SinglyAPIRequest apiRequestForEndpoint:@"profiles"
+                                                        withParameters:nil];
+
+[[SinglySession sharedSession] requestAPI:apiRequest
+                    withCompletionHandler:^(NSError *error, id json) {
     NSLog(@"The profiles result is: %@", json);
 }];
 ```
@@ -120,7 +139,7 @@ That's the basics and enough to get rolling!
 Singly SDK ships with an example app that illustrates all of the capabilities
 of the SDK.
 
-### Configure the Example App
+### Provide Your Client ID and Client Secret
 
 Before you can build and run the example app, you will need to provide your
 Client ID and Client Secret in `SinglyConfiguration.h`.
