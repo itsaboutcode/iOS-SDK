@@ -104,14 +104,14 @@
         //
         // Step 2 - Attempt Integrated Authorization
         //
-        if (!self.isAuthorized && [self integratedAuthorizationConfigured])
+        if (self.clientID && !self.isAuthorized && [self integratedAuthorizationConfigured])
             [self requestIntegratedAuthorization];
 
         //
         // Step 3 - Attempt Native Application Authorization
         //
         BOOL isAuthorizingViaApplication = NO;
-        if (!self.isAuthorized && [self appAuthorizationConfigured])
+        if (self.clientID && !self.isAuthorized && [self appAuthorizationConfigured])
             isAuthorizingViaApplication = [self requestApplicationAuthorization];
 
         //
