@@ -69,6 +69,10 @@ setup using `SinglyService` or a `SinglyLoginViewController` instance.
 
 ### Logging Into Services Using Singly
 
+The Singly iOS SDK attempts to provide the best possible user experience, based
+on the service the user wishes to authenticate with and the support that we
+have for that service on the device they are using.
+
 ```objective-c
 SinglyService *service = [SinglyService serviceWithIdentifier:@"facebook"];
 [service requestAuthorizationWithViewController:self];
