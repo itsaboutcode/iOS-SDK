@@ -215,7 +215,7 @@
     NSError *error;
     NSDictionary* jsonResult = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     if (error) {
-        if (self.delegate) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:didLoginForService:)]) {
             [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
         }
         return;
@@ -223,7 +223,7 @@
     
     NSString* loginError = [jsonResult objectForKey:@"error"];
     if (loginError) {
-        if (self.delegate) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)]) {
             NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:loginError forKey:NSLocalizedDescriptionKey]];
             [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
                                                     
@@ -243,7 +243,7 @@
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    if (self.delegate) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)]) {
         [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
     }
 }
