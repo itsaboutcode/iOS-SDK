@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>SinglyFacebookService Class Reference</title>
+		<title>SinglyServiceDelegate Protocol Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">SinglyFacebookService Class Reference</h1>
+				<h1 class="hideInXcode">SinglyServiceDelegate Protocol Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -44,9 +44,9 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/appAuthorizationConfigured">&nbsp;&nbsp;&nbsp;&nbsp;- appAuthorizationConfigured</option>
+	<option value="//api/name/singlyServiceDidAuthorize:">&nbsp;&nbsp;&nbsp;&nbsp;- singlyServiceDidAuthorize:</option>
 	
-	<option value="//api/name/integratedAuthorizationConfigured">&nbsp;&nbsp;&nbsp;&nbsp;- integratedAuthorizationConfigured</option>
+	<option value="//api/name/singlyServiceDidFail:withError:">&nbsp;&nbsp;&nbsp;&nbsp;- singlyServiceDidFail:withError:</option>
 	
 	
 	
@@ -76,9 +76,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/appAuthorizationConfigured">appAuthorizationConfigured</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/singlyServiceDidAuthorize:">singlyServiceDidAuthorize:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/integratedAuthorizationConfigured">integratedAuthorizationConfigured</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/singlyServiceDidFail:withError:">singlyServiceDidFail:withError:</a></span></li>
 	
 </ul></li>
 
@@ -87,7 +87,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="SinglyFacebookService Class Reference" name="top"></a>
+				<a title="SinglyServiceDelegate Protocol Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -96,18 +96,18 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">SinglyFacebookService Class Reference</h1>
+						<h1 class="title title-header">SinglyServiceDelegate Protocol Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
-	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/SinglyService.html">SinglyService</a> : NSObject</td>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">SinglyFacebookService.h</td>
+	<td class="specification-value">SinglyService.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -117,7 +117,8 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Singly Facebook Service</p>
+						<p>@protocol <a href="../Protocols/SinglySessionDelegate.html">SinglySessionDelegate</a>
+@abstract Delegate methods related to a <a href="../Classes/SinglyService.html">SinglyService</a></p>
 					</div>
 					
 					
@@ -135,21 +136,18 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/appAuthorizationConfigured">&ndash;&nbsp;appAuthorizationConfigured</a></code>
-		<span class="tooltip"><p>Determines if the current device can authorize via the installed Facebook
-app.</p></span>
+		<code><a href="#//api/name/singlyServiceDidAuthorize:">&ndash;&nbsp;singlyServiceDidAuthorize:</a></code>
+		<span class="tooltip"><p>Delegate method for a successful service login.</p></span>
 	</span>
 	
-	
+	<span class="task-item-suffix">required method</span>
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/integratedAuthorizationConfigured">&ndash;&nbsp;integratedAuthorizationConfigured</a></code>
-		<span class="tooltip"><p>Determines whether or not the current device is authenticated with Facebook
-in the Settings app using the authorization support featured in iOS 6 and
-higher.</p></span>
+		<code><a href="#//api/name/singlyServiceDidFail:withError:">&ndash;&nbsp;singlyServiceDidFail:withError:</a></code>
+		<span class="tooltip"><p>Delegate method for an error during service login</p></span>
 	</span>
 	
-	
+	<span class="task-item-suffix">required method</span>
 </li>
 						</ul>
 						
@@ -168,90 +166,29 @@ higher.</p></span>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/appAuthorizationConfigured" title="appAuthorizationConfigured"></a>
-	<h3 class="subsubtitle method-title">appAuthorizationConfigured</h3>
+	<a name="//api/name/singlyServiceDidAuthorize:" title="singlyServiceDidAuthorize:"></a>
+	<h3 class="subsubtitle method-title">singlyServiceDidAuthorize:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Determines if the current device can authorize via the installed Facebook
-app.</p>
+		<p>Delegate method for a successful service login.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (BOOL)appAuthorizationConfigured</code></div>
+	<div class="method-subsection method-declaration"><code>- (void)singlyServiceDidAuthorize:(SinglyService *)<em>service</em></code></div>
 
     
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglyFacebookService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/integratedAuthorizationConfigured" title="integratedAuthorizationConfigured"></a>
-	<h3 class="subsubtitle method-title">integratedAuthorizationConfigured</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Determines whether or not the current device is authenticated with Facebook
-in the Settings app using the authorization support featured in iOS 6 and
-higher.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (BOOL)integratedAuthorizationConfigured</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>This method will query the account store and operates under the following,
-undocumented assumptions (as of iOS 6.0):</p>
-
-<ul>
-<li><p>If the user has not authenticated with Facebook on their device, the
-account store will return <code>nil</code> when requesting Facebook accounts.</p></li>
-<li><p>If the user has authenticated with Facebook, but we are not yet authorized
-to use the account, the account store will return an empty array (except
-in the simulator, which will return the configured account as the array&rsquo;s
-only member).</p></li>
-<li><p>If the user has authenticated with Facebook and we are already authorized
-to use the account, the account store will return an array with the
-authorized account as the only entry.</p></li>
-</ul>
-
-
-<p>Unfortunately, the above assumptions are the only way to discover what we
-need to know and quite likely will break in future releases of iOS 6. For
-that reason, one should keep a close eye on this method to ensure support is
-maintained throughout future releases.</p>
-
-<p>TODO Write unit tests for this method.</p>
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>service</em></dt>
+			<dd><p>The Service that this delegate is firing for</p></dd>
+		</dl>
+		
 	</div>
 	
 	
@@ -260,9 +197,66 @@ maintained throughout future releases.</p>
 	
 	
 	
+	
+	
+	
+	
+	
+	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglyFacebookService.h</code><br />
+		<code class="declared-in-ref">SinglyService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/singlyServiceDidFail:withError:" title="singlyServiceDidFail:withError:"></a>
+	<h3 class="subsubtitle method-title">singlyServiceDidFail:withError:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Delegate method for an error during service login</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)singlyServiceDidFail:(SinglyService *)<em>service</em> withError:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>service</em></dt>
+			<dd><p>The service where the error occurred</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>The error that occured during login</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyService.h</code><br />
 	</div>				
 	
 	

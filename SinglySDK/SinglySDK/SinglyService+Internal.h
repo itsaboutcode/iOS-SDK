@@ -35,4 +35,6 @@
 
 + (NSString *)normalizeServiceIdentifier:(NSString *)serviceIdentifier;
 
+- (void)requestAuthorizationViaSinglyWithViewController:(UIViewController *)viewController;
+
 @end

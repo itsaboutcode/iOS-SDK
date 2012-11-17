@@ -35,7 +35,7 @@
  * Singly Facebook Service
  *
 **/
-@interface SinglyFacebookService : SinglyService <SinglyLoginViewControllerDelegate>
+@interface SinglyFacebookService : SinglyService
 
 /*!
  *

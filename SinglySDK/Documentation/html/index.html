@@ -118,6 +118,7 @@ have for that service on the device they are using.</p>
 
 <p><code>objective-c
 SinglyService *service = [SinglyService serviceWithIdentifier:@"facebook"];
+service.delegate = self;
 [service requestAuthorizationWithViewController:self];
 </code></p>
 
@@ -127,21 +128,19 @@ supports.</p>
 <p>An example implementation of the <a href="Protocols/SinglySessionDelegate.html"><code>SinglySessionDelegate</code></a> is:</p>
 
 <p>```objective-c
-&ndash; (void)singlySession:(<a href="Classes/SinglySession.html">SinglySession</a> <em>)session didLogInForService:(NSString </em>)service
+&ndash; (void)singlyServiceDidAuthorize:(<a href="Classes/SinglyService.html">SinglyService</a> *)service
 {</p>
 
-<pre><code>[self dismissModalViewControllerAnimated:YES];
-
-// We're ready to rock!  Go do something amazing!
+<pre><code>// We're ready to rock!  Go do something amazing!
 </code></pre>
 
 <p>}</p>
 
 <ul>
-<li>(void)singlySession:(<a href="Classes/SinglySession.html">SinglySession</a> <em>)session
-errorLoggingInToService:(NSString </em>)service withError:(NSError <em>)error
+<li>(void)singlyServiceDidFail:(<a href="Classes/SinglyService.html">SinglyService</a> <em>)service
+                 withError:(NSError </em>)error
 {
-  UIAlertView</em> alert = [[UIAlertView alloc] initWithTitle:@&ldquo;Login Error&rdquo;
+  UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@&ldquo;Login Error&rdquo;
                                                   message:[error localizedDescription]
                                                   delegate:self cancelButtonTitle:@&ldquo;OK&rdquo;
                                                   otherButtonTitles:nil];
@@ -229,6 +228,11 @@ you have (appledoc)[<a href="http://gentlebytes.com/appledoc/">http://gentlebyte
 iOS 6+ and will attempt to fallback to the installed Facebook application and
 then the built-in Singly web-based authorization. In order for the Facebook
 application fallback to work, you will need to perform the following steps:</p>
+
+<h3>Configure Your Application at Facebook</h3>
+
+<p>You will need to create your app at Facebook and configure it as a &ldquo;Native
+iOS App&rdquo;.</p>
 
 <h3>Register your app to handle Facebook URLs</h3>
 
@@ -354,6 +358,8 @@ information.</p>
 							<li><a href="Protocols/SinglyAPIRequestDelegate.html">SinglyAPIRequestDelegate</a></li>
 							
 							<li><a href="Protocols/SinglyLoginViewControllerDelegate.html">SinglyLoginViewControllerDelegate</a></li>
+							
+							<li><a href="Protocols/SinglyServiceDelegate.html">SinglyServiceDelegate</a></li>
 							
 							<li><a href="Protocols/SinglySessionDelegate.html">SinglySessionDelegate</a></li>
 							

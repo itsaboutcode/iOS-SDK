@@ -40,6 +40,8 @@
 	
 	<option value="//api/name/clientID">&nbsp;&nbsp;&nbsp;&nbsp;clientID</option>
 	
+	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
+	
 	<option value="//api/name/isAuthorized">&nbsp;&nbsp;&nbsp;&nbsp;isAuthorized</option>
 	
 	<option value="//api/name/serviceIdentifier">&nbsp;&nbsp;&nbsp;&nbsp;serviceIdentifier</option>
@@ -93,6 +95,8 @@
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/clientID">clientID</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isAuthorized">isAuthorized</a></span></li>
 	
@@ -150,6 +154,9 @@
 	<td class="specification-title">Inherits from</td>
 	<td class="specification-value">NSObject</td>
 </tr><tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value"><a href="../Protocols/SinglyLoginViewControllerDelegate.html">SinglyLoginViewControllerDelegate</a></td>
+</tr><tr>
 	<td class="specification-title">Declared in</td>
 	<td class="specification-value">SinglyService.h</td>
 </tr>
@@ -170,6 +177,13 @@
 
 						<ul class="task-list">
 							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+		<span class="tooltip"><p>@property delegate</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/serviceIdentifier">&nbsp;&nbsp;serviceIdentifier</a></code>
 		<span class="tooltip"><p>The service identifier (e.g. &ldquo;facebook&rdquo;, &ldquo;twitter&rdquo;, etc).</p></span>
@@ -222,13 +236,6 @@ login web view.</p></span>
 	</span>
 	
 	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/requestAuthorizationViaSinglyWithViewController:">&ndash;&nbsp;requestAuthorizationViaSinglyWithViewController:</a></code>
-		
-	</span>
-	
-	
 </li>
 						</ul>
 						
@@ -247,6 +254,13 @@ login web view.</p></span>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/normalizeServiceIdentifier:">+&nbsp;normalizeServiceIdentifier:</a></code>
+		
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestAuthorizationViaSinglyWithViewController:">&ndash;&nbsp;requestAuthorizationViaSinglyWithViewController:</a></code>
 		
 	</span>
 	
@@ -278,6 +292,42 @@ calling <a href="#//api/name/fetchClientID">fetchClientID</a>.</p>
     
 
 	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSString *clientID</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="subsubtitle method-title">delegate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>@property delegate</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (weak, atomic) id&lt;SinglyServiceDelegate&gt; delegate</code></div>
 
     
 	

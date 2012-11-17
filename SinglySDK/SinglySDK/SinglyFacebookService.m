@@ -31,6 +31,7 @@
 #import "NSDictionary+QueryString.h"
 #import "NSString+URLEncoded.h"
 #import "SinglySession.h"
+#import "SinglyService+Internal.h"
 #import "SinglyFacebookService.h"
 
 @implementation SinglyFacebookService
@@ -272,20 +273,6 @@
     NSString* query = [pairs componentsJoinedByString:@"&"];
 
     return [NSString stringWithFormat:@"%@%@%@", baseUrl, queryPrefix, query];
-}
-
-#pragma mark - Login View Controller Delegates
-
-- (void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service
-{
-    [controller dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error
-{
-    [controller dismissViewControllerAnimated:NO completion:nil];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
 }
 
 @end

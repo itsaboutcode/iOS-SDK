@@ -29,8 +29,51 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "SinglyLoginViewController.h"
 
-@interface SinglyService : NSObject
+@class SinglyService;
+
+/*!
+ *
+ * @protocol SinglySessionDelegate
+ * @abstract Delegate methods related to a SinglyService
+ *
+ **/
+@protocol SinglyServiceDelegate <NSObject>
+
+@required
+
+/*!
+ *
+ * Delegate method for a successful service login.
+ *
+ * @param service The Service that this delegate is firing for
+ *
+ **/
+- (void)singlyServiceDidAuthorize:(SinglyService *)service;
+
+/*!
+ *
+ * Delegate method for an error during service login
+ *
+ * @param service The service where the error occurred
+ * @param error The error that occured during login
+ *
+ **/
+- (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error;
+
+@end
+
+@interface SinglyService : NSObject <SinglyLoginViewControllerDelegate>
+
+/*!
+ *
+ *
+ *
+ * @property delegate
+ *
+ **/
+@property (weak, atomic) id<SinglyServiceDelegate> delegate;
 
 /*!
  *
@@ -88,7 +131,5 @@
  *
  **/
 - (void)requestAuthorizationWithViewController:(UIViewController *)viewController;
-
-- (void)requestAuthorizationViaSinglyWithViewController:(UIViewController *)viewController;
 
 @end

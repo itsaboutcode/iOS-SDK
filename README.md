@@ -75,6 +75,7 @@ have for that service on the device they are using.
 
 ```objective-c
 SinglyService *service = [SinglyService serviceWithIdentifier:@"facebook"];
+service.delegate = self;
 [service requestAuthorizationWithViewController:self];
 ```
 
@@ -84,15 +85,13 @@ supports.
 An example implementation of the `SinglySessionDelegate` is:
 
 ```objective-c
-- (void)singlySession:(SinglySession *)session didLogInForService:(NSString *)service
+- (void)singlyServiceDidAuthorize:(SinglyService *)service
 {
-    [self dismissModalViewControllerAnimated:YES];
-
     // We're ready to rock!  Go do something amazing!
 }
 
-- (void)singlySession:(SinglySession *)session
-  errorLoggingInToService:(NSString *)service withError:(NSError *)error
+- (void)singlyServiceDidFail:(SinglyService *)service
+                   withError:(NSError *)error
 {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error"
                                                     message:[error localizedDescription]
@@ -173,6 +172,10 @@ iOS 6+ and will attempt to fallback to the installed Facebook application and
 then the built-in Singly web-based authorization. In order for the Facebook
 application fallback to work, you will need to perform the following steps:
 
+### Configure Your Application at Facebook
+
+You will need to create your app at Facebook and configure it as a "Native
+iOS App".
 ### Register your app to handle Facebook URLs
 
 You must add the following to your Info.plist, replacing the 0's with your
