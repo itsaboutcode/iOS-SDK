@@ -85,7 +85,7 @@
     // TODO Add error handling to JSON parse
 
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&parseError];
-    self.clientID = responseDictionary[@"facebook"];
+    self.clientID = responseDictionary[self.serviceIdentifier];
 
     NSLog(@"[SinglySDK] Retrieved Client ID for '%@': %@", self.serviceIdentifier, self.clientID);
 }
