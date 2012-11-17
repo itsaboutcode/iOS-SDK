@@ -64,6 +64,10 @@
 	
 	<option value="//api/name/initWithIdentifier:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithIdentifier:</option>
 	
+	<option value="//api/name/requestAuthorizationViaSinglyWithViewController:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAuthorizationViaSinglyWithViewController:</option>
+	
+	<option value="//api/name/requestAuthorizationWithViewController:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAuthorizationWithViewController:</option>
+	
 	
 	
 </select>
@@ -115,6 +119,10 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fetchClientID">fetchClientID</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithIdentifier:">initWithIdentifier:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAuthorizationViaSinglyWithViewController:">requestAuthorizationViaSinglyWithViewController:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAuthorizationWithViewController:">requestAuthorizationWithViewController:</a></span></li>
 	
 </ul></li>
 
@@ -202,6 +210,22 @@ by the service identifier.</p></span>
 	<span class="tooltip">
 		<code><a href="#//api/name/fetchClientID">&ndash;&nbsp;fetchClientID</a></code>
 		<span class="tooltip"><p>Fetches the client id from Singly.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestAuthorizationWithViewController:">&ndash;&nbsp;requestAuthorizationWithViewController:</a></code>
+		<span class="tooltip"><p>Requests authorization from the user through any means possible, falling back
+from integrated auth, app-based auth then Singly auth via our standard
+login web view.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestAuthorizationViaSinglyWithViewController:">&ndash;&nbsp;requestAuthorizationViaSinglyWithViewController:</a></code>
+		
 	</span>
 	
 	
@@ -495,6 +519,55 @@ by the service identifier.</p>
 		</dl>
 		
 	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/requestAuthorizationViaSinglyWithViewController:" title="requestAuthorizationViaSinglyWithViewController:"></a>
+	<h3 class="subsubtitle method-title">requestAuthorizationViaSinglyWithViewController:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)requestAuthorizationViaSinglyWithViewController:(UIViewController *)<em>viewController</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/requestAuthorizationWithViewController:" title="requestAuthorizationWithViewController:"></a>
+	<h3 class="subsubtitle method-title">requestAuthorizationWithViewController:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Requests authorization from the user through any means possible, falling back
+from integrated auth, app-based auth then Singly auth via our standard
+login web view.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)requestAuthorizationWithViewController:(UIViewController *)<em>viewController</em></code></div>
+
+    
 	
 	
 	

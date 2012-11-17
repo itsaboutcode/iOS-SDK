@@ -80,4 +80,15 @@
 **/
 - (void)fetchClientID;
 
+/*!
+ *
+ * Requests authorization from the user through any means possible, falling back
+ * from integrated auth, app-based auth then Singly auth via our standard
+ * login web view.
+ *
+ **/
+- (void)requestAuthorizationWithViewController:(UIViewController *)viewController;
+
+- (void)requestAuthorizationViaSinglyWithViewController:(UIViewController *)viewController;
+
 @end

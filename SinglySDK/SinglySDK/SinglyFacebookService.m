@@ -241,15 +241,6 @@
 
 }
 
-- (void)requestAuthorizationViaSinglyWithViewController:(UIViewController *)viewController
-{
-
-    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithSession:[SinglySession sharedSession] forService:@"facebook"];
-    loginViewController.delegate = self;
-    [viewController presentModalViewController:loginViewController animated:YES];
-
-}
-
 #pragma mark - get rid of these
 
 + (NSString *)serializeURL:(NSString *)baseUrl

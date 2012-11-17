@@ -98,4 +98,33 @@
     return serviceIdentifier;
 }
 
+#pragma mark -
+
+- (void)requestAuthorizationWithViewController:(UIViewController *)viewController
+{
+
+    self.isAuthorized = NO;
+
+    dispatch_queue_t authorizationQueue;
+    authorizationQueue = dispatch_queue_create("com.singly.AuthorizationQueue", NULL);
+
+    dispatch_async(authorizationQueue, ^{
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self requestAuthorizationViaSinglyWithViewController:viewController];
+        });
+
+    });
+    
+}
+
+- (void)requestAuthorizationViaSinglyWithViewController:(UIViewController *)viewController
+{
+
+    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithSession:[SinglySession sharedSession] forService:@"facebook"];
+    loginViewController.delegate = self;
+    [viewController presentModalViewController:loginViewController animated:YES];
+    
+}
+
 @end

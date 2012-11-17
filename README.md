@@ -67,18 +67,15 @@ The `SinglySession` has two other properties:
 Both of these are saved between runs in the `NSUserDefaults` and should be
 setup using `SinglyService` or a `SinglyLoginViewController` instance.
 
-### Using the Singly Login View Controller
+### Logging Into Services Using Singly
 
 ```objective-c
-SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc]
-    initWithSession:[SinglySession sharedSession]
-         forService:kSinglyServiceFacebook];
-
-[self presentModalViewController:loginViewController animated:YES];
+SinglyService *service = [SinglyService serviceWithIdentifier:@"facebook"];
+[service requestAuthorizationWithViewController:self];
 ```
 
-The service that you define can be any string of the services that Singly supports,
-but we have these defined as constants for you in the SinglyConstants.h.
+The service that you define can be any string of the services that Singly
+supports.
 
 An example implementation of the `SinglySessionDelegate` is:
 
