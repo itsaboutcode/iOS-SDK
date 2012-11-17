@@ -121,7 +121,7 @@
 - (void)requestAuthorizationViaSinglyWithViewController:(UIViewController *)viewController
 {
 
-    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithSession:[SinglySession sharedSession] forService:@"facebook"];
+    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithSession:[SinglySession sharedSession] forService:self.serviceIdentifier];
     loginViewController.delegate = self;
     [viewController presentModalViewController:loginViewController animated:YES];
     
