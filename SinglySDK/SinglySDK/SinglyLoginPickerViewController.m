@@ -87,7 +87,7 @@
         [NSURLConnection sendAsynchronousRequest:servicesRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError) {
             _servicesDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
             if (!self.services)
-                self.services = [self.servicesDictionary allKeys];
+                self.services = [[self.servicesDictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
 
             // Dismiss the Activity Indicator
             [SinglyActivityIndicatorView dismissIndicator];
