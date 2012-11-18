@@ -35,7 +35,7 @@
 
 /*!
  *
- * @protocol SinglySessionDelegate
+ * @protocol SinglyServiceDelegate
  * @abstract Delegate methods related to a SinglyService
  *
  **/
@@ -49,7 +49,7 @@
  *
  * @param service The Service that this delegate is firing for
  *
- **/
+**/
 - (void)singlyServiceDidAuthorize:(SinglyService *)service;
 
 /*!
@@ -59,7 +59,7 @@
  * @param service The service where the error occurred
  * @param error The error that occured during login
  *
- **/
+**/
 - (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error;
 
 @end
@@ -72,7 +72,7 @@
  *
  * @property delegate
  *
- **/
+**/
 @property (weak, atomic) id<SinglyServiceDelegate> delegate;
 
 /*!
@@ -129,7 +129,7 @@
  * from integrated auth, app-based auth then Singly auth via our standard
  * login web view.
  *
- **/
+**/
 - (void)requestAuthorizationWithViewController:(UIViewController *)viewController;
 
 @end
