@@ -44,25 +44,32 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
-    // Disable examples unless authenticated...
-    if (![SinglySession sharedSession].accessToken)
-    {
-        self.friendPickerCell.userInteractionEnabled = NO;
-        self.friendPickerCell.textLabel.alpha = 0.25;
-        self.friendPickerCell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    else
-    {
-        self.friendPickerCell.userInteractionEnabled = YES;
-        self.friendPickerCell.textLabel.alpha = 1.0;
-        self.friendPickerCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
 
-    [self.tableView reloadData];
-    
+    // Observe for changes to the profile data on the Singly session so that we
+    // can active (or deactivate) the examples.
+    [[NSNotificationCenter defaultCenter] addObserver:self.tableView
+                                             selector:@selector(reloadData)
+                                                 name:kSinglyNotificationSessionProfilesUpdated
+                                               object:nil];
+
     [super viewWillAppear:animated];
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.tableView reloadData];
+
+    [super viewDidAppear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [super viewDidDisappear:animated];
+}
+
+#pragma mark - Table View Data Source
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
@@ -71,6 +78,33 @@
 //        return @"You must authenticate with a service to access the following examples";
 //    }
     return nil;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+
+    // Enable the example cells if we have both an access token and active profiles
+    // on the Singly session.
+    if (indexPath.section == 1)
+    {
+        SinglySession *session = [SinglySession sharedSession];
+
+        if (session.accessToken && session.profiles)
+        {
+            cell.userInteractionEnabled = YES;
+            cell.textLabel.alpha = 1.0;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        else
+        {
+            cell.userInteractionEnabled = NO;
+            cell.textLabel.alpha = 0.25;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+    }
+
+    return cell;
 }
 
 @end

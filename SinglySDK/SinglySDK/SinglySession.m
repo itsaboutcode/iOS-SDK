@@ -153,8 +153,11 @@ static SinglySession *sharedInstance = nil;
                                                   options:kNilOptions
                                                     error:&error];
         if (!error && [json isKindOfClass:[NSDictionary class]]) {
+            if ([json valueForKey:@"error"])
+                _profiles = nil;
+            else
+                _profiles = json;
             [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyNotificationSessionProfilesUpdated object:self];
-            _profiles = json;
         }
 
         if (block) dispatch_sync(curQueue, block);
