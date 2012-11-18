@@ -183,7 +183,6 @@ static SinglySession *sharedInstance = nil;
 {
     NSLog(@"[SinglySDK] Applying %@ with token %@", serviceIdentifier, token);
 
-    //    __block SinglySession *currentSession = self;
     NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/auth/%@/apply?token=%@&client_id=%@&client_secret=%@",
                                               serviceIdentifier,
                                               token,
@@ -199,7 +198,11 @@ static SinglySession *sharedInstance = nil;
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
             [SinglySession sharedSession].accessToken = [responseDictionary objectForKey:@"access_token"];
             [SinglySession sharedSession].accountID = [responseDictionary objectForKey:@"account"];
-            [[SinglySession sharedSession] updateProfiles];
+            [[SinglySession sharedSession] updateProfilesWithCompletion:^{
+                dispatch_async(dispatch_get_current_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceAppliedNotification object:serviceIdentifier];
+                });
+            }];
         });
     }];
 }

@@ -29,6 +29,7 @@
 
 #import "SinglyAPIRequest.h"
 
+@class SinglyService;
 @class SinglySession;
 
 /*!
@@ -37,6 +38,13 @@
  *
 **/
 static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifications.sessionProfilesUpdated";
+
+/*!
+ *
+ * Notification raised when a service has been applied to the Singly API.
+ *
+**/
+static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.serviceApplied";
 
 /*!
  *
@@ -117,6 +125,16 @@ static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifi
  * @property profiles
 **/
 @property (readonly) NSDictionary *profiles;
+
+/*!
+ *
+ * The service the is currently being authorized. This is necessary for
+ * integration with 3rd party apps on the iPhone so that we know which service
+ * has been authorized after our app is opened again.
+ *
+ * @property authorizingService
+**/
+@property (nonatomic, strong) SinglyService *authorizingService;
 
 /*!
  *

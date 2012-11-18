@@ -27,6 +27,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import <SinglySDK/SinglyService.h>
 #import <SinglySDK/SinglySession.h>
 #import <SinglySDK/SinglyLoginViewController.h>
 
@@ -36,7 +37,8 @@
  * with the option to log in to any supported services.
  *
  */
-@interface SinglyLoginPickerViewController : UITableViewController <SinglyLoginViewControllerDelegate, UIAlertViewDelegate>
+@interface SinglyLoginPickerViewController : UITableViewController <SinglyLoginViewControllerDelegate,
+    SinglyServiceDelegate, UIAlertViewDelegate>
 
 /*!
  *

@@ -159,6 +159,9 @@
 
             NSLog(@"[SinglySDK] Unhandled error: %@", error);
 
+            if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
+                [self.delegate singlyServiceDidFail:self withError:error];
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
                                                                     message:[error localizedDescription]
@@ -199,7 +202,10 @@
                 NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
                 [SinglySession sharedSession].accessToken = [responseDictionary objectForKey:@"access_token"];
                 [SinglySession sharedSession].accountID = [responseDictionary objectForKey:@"account"];
-                [[SinglySession sharedSession] updateProfiles];
+                [[SinglySession sharedSession] updateProfilesWithCompletion:^{
+                    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
+                        [self.delegate singlyServiceDidAuthorize:self];
+                }];
             }
         }];
 
@@ -237,9 +243,26 @@
 
     if (!isAppInstalled)
         NSLog(@"[SinglySDK]   Facebook app is not installed.");
+    else
+    {
+        [SinglySession sharedSession].authorizingService = self;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleServiceAppliedNotification:)
+                                                     name:kSinglyServiceAppliedNotification
+                                                   object:nil];
+    }
 
     return isAppInstalled;
 
+}
+
+- (void)handleServiceAppliedNotification:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kSinglyServiceAppliedNotification object:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
+        [self.delegate singlyServiceDidAuthorize:self];
+    [SinglySession sharedSession].authorizingService = nil;
 }
 
 #pragma mark - get rid of these

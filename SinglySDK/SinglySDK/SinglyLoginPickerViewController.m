@@ -248,6 +248,7 @@
 {
 
     SinglyFacebookService *facebookService = [SinglyService serviceWithIdentifier:@"facebook"];
+    facebookService.delegate = self;
     [facebookService requestAuthorizationWithViewController:self];
 
 }
@@ -281,5 +282,18 @@
     }];
 
 }
+
+#pragma mark - Singly Service Delegates
+
+- (void)singlyServiceDidAuthorize:(SinglyService *)service
+{
+    NSLog(@"Success");
+}
+
+- (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error
+{
+    NSLog(@"Fail");
+}
+
 
 @end
