@@ -88,6 +88,7 @@
     self.clientID = responseDictionary[self.serviceIdentifier];
 
     NSLog(@"[SinglySDK] Retrieved Client ID for '%@': %@", self.serviceIdentifier, self.clientID);
+
 }
 
 #pragma mark -
@@ -121,7 +122,8 @@
 - (void)requestAuthorizationViaSinglyWithViewController:(UIViewController *)viewController
 {
 
-    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithSession:[SinglySession sharedSession] forService:self.serviceIdentifier];
+    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithSession:SinglySession.sharedSession
+                                                                                             forService:self.serviceIdentifier];
     loginViewController.delegate = self;
     [viewController presentModalViewController:loginViewController animated:YES];
     
