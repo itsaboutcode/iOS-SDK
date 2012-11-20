@@ -37,14 +37,14 @@
  *
  *
  *
- */
+**/
 @property (strong, nonatomic) NSArray *pickedFriends;
 
 /*!
  *
  * The SinglySession to use. The default value is the shared singleton instance.
  *
- */
+**/
 @property (strong, nonatomic) SinglySession *session;
 
 - (id)initWithSession:(SinglySession *)session;

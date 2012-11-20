@@ -29,21 +29,8 @@
 
 #import "UIViewController+Modal.h"
 #import "SinglyLoginViewController.h"
+#import "SinglyLoginViewController+Internal.h"
 #import "SinglyService+Internal.h"
-
-@interface SinglyLoginViewController ()
-{
-    NSMutableData* responseData;
-    UIView* pendingLoginView;
-    UIActivityIndicatorView* activityView;
-}
-
-@property (nonatomic, strong) UIWebView *webView;
-@property (nonatomic, strong) UINavigationBar *navigationBar;
-
-- (void)processAccessTokenWithData:(NSData*)data;
-
-@end
 
 @implementation SinglyLoginViewController
 
@@ -64,15 +51,10 @@
 {
     [super viewDidLoad];
 
-    _webView = [[UIWebView alloc] initWithFrame:self.view.frame];
-    _webView.scalesPageToFit = YES;
-    _webView.delegate = self;
-    [self.view addSubview:_webView];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    self.webView = [[UIWebView alloc] initWithFrame:self.view.frame];
+    self.webView.scalesPageToFit = YES;
+    self.webView.delegate = self;
+    [self.view addSubview:self.webView];
 }
 
 - (void)viewWillAppear:(BOOL)animated;
@@ -107,7 +89,7 @@
         }
     }
 
-    NSString* urlStr = [NSString stringWithFormat:@"https://api.singly.com/oauth/authorize?redirect_uri=fb%@://authorize&service=%@&client_id=%@", self.session.clientID, self.targetService, self.session.clientID];
+    NSString *urlStr = [NSString stringWithFormat:@"https://api.singly.com/oauth/authorize?redirect_uri=fb%@://authorize&service=%@&client_id=%@", self.session.clientID, self.targetService, self.session.clientID];
     if (self.session.accountID) {
         urlStr = [urlStr stringByAppendingFormat:@"&account=%@", self.session.accountID];
     } else {
@@ -123,7 +105,7 @@
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
 }
 
--(void)processAccessTokenWithData:(NSData*)data;
+- (void)processAccessTokenWithData:(NSData *)data;
 {
     
 }
@@ -133,26 +115,26 @@
 - (SinglySession *)session
 {
     if (!_session)
-        _session = [SinglySession sharedSession];
+        _session = SinglySession.sharedSession;
     return _session;
 }
 
 #pragma mark - UIWebViewDelegate
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     if ([request.URL.scheme isEqualToString:[NSString stringWithFormat:@"fb%@", self.session.clientID]] && [request.URL.host isEqualToString:@"authorize"]) {
 
-        pendingLoginView = [[UIView alloc] initWithFrame:self.view.bounds];
-        pendingLoginView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+        self.pendingLoginView = [[UIView alloc] initWithFrame:self.view.bounds];
+        self.pendingLoginView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         
-        activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        activityView.frame = CGRectMake(140, 180, activityView.bounds.size.width, activityView.bounds.size.height);
-        [pendingLoginView addSubview:activityView];
-        [activityView startAnimating];
+        self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        self.activityView.frame = CGRectMake(140, 180, self.activityView.bounds.size.width, self.activityView.bounds.size.height);
+        [self.pendingLoginView addSubview:self.activityView];
+        [self.activityView startAnimating];
         
-        [self.view addSubview:pendingLoginView];
-        [self.view bringSubviewToFront:pendingLoginView];
+        [self.view addSubview:self.pendingLoginView];
+        [self.view bringSubviewToFront:self.pendingLoginView];
         
         // Find the code and request an access token
         NSArray *parameterPairs = [request.URL.query componentsSeparatedByString:@"&"];
@@ -175,7 +157,7 @@
             NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:accessTokenURL];
             req.HTTPMethod = @"POST";
             req.HTTPBody = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&code=%@", self.session.clientID, self.session.clientSecret, [parameters objectForKey:@"code"]] dataUsingEncoding:NSUTF8StringEncoding];
-            responseData = [NSMutableData data];
+            self.responseData = [NSMutableData data];
             [NSURLConnection connectionWithRequest:req delegate:self];
         }
         NSLog(@"Request the token");
@@ -184,49 +166,51 @@
     return YES;
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView;
+- (void)webViewDidStartLoad:(UIWebView *)webView
 {
     
 }
-- (void)webViewDidFinishLoad:(UIWebView *)webView;
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     
 }
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     //TODO:  Fill this in
 }
 
 #pragma mark - NSURLConnectionDataDelegate
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    [responseData setLength:0];
+    [self.responseData setLength:0];
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    [responseData appendData:data];
+    [self.responseData appendData:data];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection;
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
 
     NSError *error;
-    NSDictionary* jsonResult = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
+    NSDictionary *jsonResult = [NSJSONSerialization JSONObjectWithData:self.responseData options:kNilOptions error:&error];
     if (error) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:didLoginForService:)]) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:didLoginForService:)])
             [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
-        }
         return;
     }
     
-    NSString* loginError = [jsonResult objectForKey:@"error"];
-    if (loginError) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)]) {
+    NSString *loginError = [jsonResult objectForKey:@"error"];
+    if (loginError)
+    {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)])
+        {
             NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:loginError forKey:NSLocalizedDescriptionKey]];
             [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
-                                                    
         }
         return;
     }
@@ -241,11 +225,10 @@
     }];
 }
 
--(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)])
         [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
-    }
 }
 
 #pragma mark -

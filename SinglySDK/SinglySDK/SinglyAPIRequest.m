@@ -28,7 +28,6 @@
 //
 
 #import "SinglyAPIRequest.h"
-#import "SinglyAPIRequest+Internal.h"
 
 @implementation SinglyAPIRequest
 

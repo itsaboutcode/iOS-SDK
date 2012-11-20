@@ -27,15 +27,8 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <QuartzCore/QuartzCore.h>
 #import "SinglyFriendPickerCell.h"
-
-@interface SinglyFriendPickerCell ()
-
-@property (nonatomic, strong) NSURLConnection *imageConnection;
-@property (nonatomic, strong) NSMutableData *receivedData;
-
-@end
+#import "SinglyFriendPickerCell+Internal.h"
 
 @implementation SinglyFriendPickerCell
 

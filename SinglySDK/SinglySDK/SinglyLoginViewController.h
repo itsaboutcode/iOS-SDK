@@ -28,7 +28,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SinglySession.h"
+#import <SinglySDK/SinglySession.h>
 
 @class SinglyLoginViewController;
 
@@ -48,7 +48,7 @@
  * The SinglySession to use for the login request. The default value of this is
  * the shared singleton instance.
  *
- */
+**/
 @property (strong, nonatomic) SinglySession *session;
 
 @property (strong, atomic) NSString *targetService;
@@ -61,7 +61,7 @@
  *
  * @param session The session that the login will be saved into.
  * @param serviceId The name of the service that we are logging into.
- */
+**/
 - (id)initWithSession:(SinglySession *)session forService:(NSString *)serviceId;
 
 @end

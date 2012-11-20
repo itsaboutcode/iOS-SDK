@@ -29,7 +29,7 @@
 
 #import "SinglyFacebookService.h"
 
-@interface SinglyService (Internal)
+@interface SinglyService ()
 
 + (SinglyFacebookService *)facebookService;
 

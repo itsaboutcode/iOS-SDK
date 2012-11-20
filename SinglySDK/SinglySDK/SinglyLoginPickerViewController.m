@@ -32,24 +32,18 @@
 
 #import "SinglyConstants.h"
 #import "SinglyLoginPickerViewController.h"
+#import "SinglyLoginPickerViewController+Internal.h"
 #import "SinglyLoginPickerServiceCell.h"
 #import "SinglyFacebookService.h"
 #import "SinglyActivityIndicatorView.h"
-
-@interface SinglyLoginPickerViewController ()
-
-@property (nonatomic, strong) NSString *selectedService;
-
-- (void)disconnectFromService:(NSString *)service;
-
-@end
 
 @implementation SinglyLoginPickerViewController
 
 -(id)initWithSession:(SinglySession *)session
 {
     self = [super initWithStyle:UITableViewStylePlain];
-    if (self) {
+    if (self)
+    {
         _session = session;
     }
     return self;
@@ -63,7 +57,7 @@
     // Observe for changes to the session profiles and update the view when
     // changes occur (such as when a session is connected or disconnected).
     //
-    [[NSNotificationCenter defaultCenter] addObserverForName:kSinglyNotificationSessionProfilesUpdated
+    [[NSNotificationCenter defaultCenter] addObserverForName:kSinglySessionProfilesUpdatedNotification
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *notification)
@@ -122,7 +116,7 @@
     // Stop observing for updates to the session profiles.
     //
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:kSinglyNotificationSessionProfilesUpdated
+                                                    name:kSinglySessionProfilesUpdatedNotification
                                                   object:nil];
 }
 
@@ -131,7 +125,7 @@
 - (SinglySession *)session
 {
     if (!_session)
-        _session = [SinglySession sharedSession];
+        _session = SinglySession.sharedSession;
     return _session;
 }
 
@@ -222,13 +216,13 @@
 
 #pragma mark - Singly Login View Controller delegate
 
-- (void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service;
+- (void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service
 {
     [self.tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
+- (void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error
 {
     [self dismissViewControllerAnimated:NO completion:nil];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -294,6 +288,5 @@
 {
     NSLog(@"Fail");
 }
-
 
 @end

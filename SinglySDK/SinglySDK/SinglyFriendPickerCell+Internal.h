@@ -1,5 +1,5 @@
 //
-//  NSURL+AccessToken.m
+//  SinglyFriendPickerCell+Internal.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,20 +27,9 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "NSDictionary+QueryString.h"
-#import "NSURL+AccessToken.h"
+@interface SinglyFriendPickerCell ()
 
-@implementation NSURL (AccessToken)
-
-- (NSString *)extractAccessToken
-{
-    NSString *queryString = self.fragment;
-    if (!queryString) queryString = self.query;
-
-    NSDictionary *params = [NSDictionary dictionaryWithQueryString:queryString];
-    NSString *accessToken = [params objectForKey:@"access_token"];
-
-    return accessToken;
-}
+@property (nonatomic, strong) NSURLConnection *imageConnection;
+@property (nonatomic, strong) NSMutableData *receivedData;
 
 @end

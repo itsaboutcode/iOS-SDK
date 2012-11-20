@@ -1,5 +1,5 @@
 //
-//  SinglyAPIRequest+Internal.h
+//  SinglyLogInViewController+Internal.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,8 +27,14 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-@interface SinglyAPIRequest (Internal)
+@interface SinglyLoginViewController ()
 
-- (NSString *)escapeString:(NSString *)rawString;
+@property (nonatomic, strong) NSMutableData *responseData;
+@property (nonatomic, strong) UIView *pendingLoginView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) UINavigationBar *navigationBar;
+
+- (void)processAccessTokenWithData:(NSData*)data;
 
 @end

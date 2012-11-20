@@ -27,43 +27,37 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "SinglyAPIRequest.h"
 #import "SinglyFriendModel.h"
 #import "SinglySession.h"
-#import "SinglyAPIRequest.h"
-
-@interface SinglyFriendModel ()
-{
-    // TODO Make these properties
-    SinglySession* _session;
-    NSArray* _services;
-}
-
-@end
 
 @implementation SinglyFriendModel
 
--(id)initWithSession:(SinglySession *)session;
+- (id)initWithSession:(SinglySession *)session
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _session = session;
     }
     return self;
 }
 
--(id)initWithSession:(SinglySession *)session forService:(NSArray *)services;
+- (id)initWithSession:(SinglySession *)session forService:(NSArray *)services
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _session = session;
         _services = services;
     }
     return self;
 }
 
--(void)fetchDataWithCompletionHandler:(DataReadyBlock)completionHandler;
+- (void)fetchDataWithCompletionHandler:(DataReadyBlock)completionHandler
 {
-    [_session requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"types/contacts" withParameters:@{@"limit": @"500"}] withCompletionHandler:^(NSError *error, id json) {
+    [self.session requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"types/contacts" withParameters:@{@"limit": @"500"}] withCompletionHandler:^(NSError *error, id json)
+    {
         // Get out of here on system or remote errors
         if (error || ([json isKindOfClass:[NSDictionary class]] && [json objectForKey:@"error"])) {
             NSError* finalError = error ? error : [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:@{NSLocalizedDescriptionKey:[json objectForKey:@"error"]}];

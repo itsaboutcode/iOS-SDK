@@ -29,15 +29,14 @@
 
 #import "SinglyAPIRequest.h"
 
-@class SinglyService;
-@class SinglySession;
+@class SinglyService, SinglySession;
 
 /*!
  *
  * Notification raised when a session's profiles have been updated.
  *
 **/
-static NSString *kSinglyNotificationSessionProfilesUpdated = @"com.singly.notifications.sessionProfilesUpdated";
+static NSString *kSinglySessionProfilesUpdatedNotification = @"com.singly.notifications.sessionProfilesUpdated";
 
 /*!
  *
@@ -79,6 +78,11 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
 
 @end
 
+/*!
+ *
+ * 
+ *
+**/
 @interface SinglySession : NSObject
 
 /*!

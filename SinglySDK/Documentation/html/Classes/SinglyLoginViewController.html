@@ -38,15 +38,25 @@
 	
 	<option value="properties">Properties</option>
 	
+	<option value="//api/name/activityView">&nbsp;&nbsp;&nbsp;&nbsp;activityView</option>
+	
 	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
 	
 	<option value="//api/name/flags">&nbsp;&nbsp;&nbsp;&nbsp;flags</option>
+	
+	<option value="//api/name/navigationBar">&nbsp;&nbsp;&nbsp;&nbsp;navigationBar</option>
+	
+	<option value="//api/name/pendingLoginView">&nbsp;&nbsp;&nbsp;&nbsp;pendingLoginView</option>
+	
+	<option value="//api/name/responseData">&nbsp;&nbsp;&nbsp;&nbsp;responseData</option>
 	
 	<option value="//api/name/scope">&nbsp;&nbsp;&nbsp;&nbsp;scope</option>
 	
 	<option value="//api/name/session">&nbsp;&nbsp;&nbsp;&nbsp;session</option>
 	
 	<option value="//api/name/targetService">&nbsp;&nbsp;&nbsp;&nbsp;targetService</option>
+	
+	<option value="//api/name/webView">&nbsp;&nbsp;&nbsp;&nbsp;webView</option>
 	
 	
 	
@@ -56,6 +66,8 @@
 	<option value="instance_methods">Instance Methods</option>
 	
 	<option value="//api/name/initWithSession:forService:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithSession:forService:</option>
+	
+	<option value="//api/name/processAccessTokenWithData:">&nbsp;&nbsp;&nbsp;&nbsp;- processAccessTokenWithData:</option>
 	
 	
 	
@@ -71,6 +83,8 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Extension Methods">Extension Methods</a></span></li>
+	
 </ul></li>
 
 
@@ -79,15 +93,25 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/activityView">activityView</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/flags">flags</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/navigationBar">navigationBar</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pendingLoginView">pendingLoginView</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/responseData">responseData</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/scope">scope</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/session">session</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/targetService">targetService</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/webView">webView</a></span></li>
 	
 </ul></li>
 
@@ -98,6 +122,8 @@
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithSession:forService:">initWithSession:forService:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/processAccessTokenWithData:">processAccessTokenWithData:</a></span></li>
 	
 </ul></li>
 
@@ -144,7 +170,7 @@
 						
 						
 						
-						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
 
 						<ul class="task-list">
 							<li>
@@ -193,6 +219,56 @@ the shared singleton instance.</p></span>
 </li>
 						</ul>
 						
+						
+						<a title="Extension Methods" name="task_Extension Methods"></a>
+						<h3 class="subsubtitle task-title">Extension Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/responseData">&nbsp;&nbsp;responseData</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pendingLoginView">&nbsp;&nbsp;pendingLoginView</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/activityView">&nbsp;&nbsp;activityView</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/webView">&nbsp;&nbsp;webView</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/navigationBar">&nbsp;&nbsp;navigationBar</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/processAccessTokenWithData:">&ndash;&nbsp;processAccessTokenWithData:</a></code>
+		
+	</span>
+	
+	
+</li>
+						</ul>
+						
 					</div>
 					
 					
@@ -202,6 +278,17 @@ the shared singleton instance.</p></span>
 					<div class="section section-methods">
 						<a title="Properties" name="properties"></a>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/activityView" title="activityView"></a>
+	<h3 class="subsubtitle method-title">activityView</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIActivityIndicatorView *activityView</code></div>
+
+    
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/delegate" title="delegate"></a>
@@ -221,6 +308,39 @@ the shared singleton instance.</p></span>
 	
 
 	<div class="method-subsection method-declaration"><code>@property (strong, atomic) NSString *flags</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/navigationBar" title="navigationBar"></a>
+	<h3 class="subsubtitle method-title">navigationBar</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UINavigationBar *navigationBar</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/pendingLoginView" title="pendingLoginView"></a>
+	<h3 class="subsubtitle method-title">pendingLoginView</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIView *pendingLoginView</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/responseData" title="responseData"></a>
+	<h3 class="subsubtitle method-title">responseData</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSMutableData *responseData</code></div>
 
     
 </div>
@@ -280,6 +400,17 @@ the shared singleton instance.</p>
 	
 
 	<div class="method-subsection method-declaration"><code>@property (strong, atomic) NSString *targetService</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/webView" title="webView"></a>
+	<h3 class="subsubtitle method-title">webView</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIWebView *webView</code></div>
 
     
 </div>
@@ -345,6 +476,17 @@ the shared singleton instance.</p>
 	
 </div>
 						
+						<div class="section-method">
+	<a name="//api/name/processAccessTokenWithData:" title="processAccessTokenWithData:"></a>
+	<h3 class="subsubtitle method-title">processAccessTokenWithData:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)processAccessTokenWithData:(NSData *)<em>data</em></code></div>
+
+    
+</div>
+						
 					</div>
 					
 					
@@ -358,7 +500,7 @@ the shared singleton instance.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-11-19)</span><br />
+						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-11-20)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

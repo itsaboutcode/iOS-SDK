@@ -36,15 +36,25 @@ typedef void(^DataReadyBlock)(NSError *);
 @interface SinglyFriendModel : NSObject
 
 @property (readonly) NSArray *friends;
+@property (nonatomic, strong) SinglySession *session;
+@property (nonatomic, strong) NSArray *services;
 
 /*!
- * Init the model for all services
- */
+ *
+ * Initialize the model for all services.
+ *
+ * @param session The Singly session to use.
+**/
 - (id)initWithSession:(SinglySession *)session;
 
 /*!
- * Init the session only for the given services only
- */
+ *
+ * Initialize the model for only the given services.
+ *
+ * @param session The Singly session to use.
+ * @param services The services to be enabled.
+ *
+**/
 - (id)initWithSession:(SinglySession *)session forService:(NSArray *)services;
 
 - (void)fetchDataWithCompletionHandler:(DataReadyBlock)completionHandler;

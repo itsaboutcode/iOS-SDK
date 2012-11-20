@@ -49,7 +49,7 @@
     // can active (or deactivate) the examples.
     [[NSNotificationCenter defaultCenter] addObserver:self.tableView
                                              selector:@selector(reloadData)
-                                                 name:kSinglyNotificationSessionProfilesUpdated
+                                                 name:kSinglySessionProfilesUpdatedNotification
                                                object:nil];
 
     [super viewWillAppear:animated];

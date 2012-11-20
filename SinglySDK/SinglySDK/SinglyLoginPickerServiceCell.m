@@ -27,16 +27,8 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <QuartzCore/QuartzCore.h>
 #import "SinglyLoginPickerServiceCell.h"
-
-@interface SinglyLoginPickerServiceCell ()
-
-@property (nonatomic, strong) NSURLConnection *imageConnection;
-@property (nonatomic, strong) NSMutableData *receivedData;
-@property (nonatomic, strong) UIButton *button;
-
-@end
+#import "SinglyLoginPickerServiceCell+Internal.h"
 
 @implementation SinglyLoginPickerServiceCell
 
@@ -50,11 +42,11 @@
         self.imageView.clipsToBounds = YES;
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
 
-        self.button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        self.button.frame = CGRectMake(self.bounds.size.width - 8 - 80, 10, 80, 28);
-        self.button.titleLabel.shadowColor = [UIColor darkGrayColor];
-        self.button.titleLabel.shadowOffset = CGSizeMake(0, -1);
-        self.button.userInteractionEnabled = NO;
+        _button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _button.frame = CGRectMake(self.bounds.size.width - 8 - 80, 10, 80, 28);
+        _button.titleLabel.shadowColor = [UIColor darkGrayColor];
+        _button.titleLabel.shadowOffset = CGSizeMake(0, -1);
+        _button.userInteractionEnabled = NO;
 
         self.textLabel.font = [UIFont systemFontOfSize:16];
 
@@ -143,7 +135,7 @@
     self.receivedData = nil;
 }
 
-- (void)enableColorButton:(UIButton *)button;
+- (void)enableColorButton:(UIButton *)button
 {
     // Add Border
     CALayer *layer = button.layer;

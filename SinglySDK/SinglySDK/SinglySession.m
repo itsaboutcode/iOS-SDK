@@ -34,9 +34,6 @@
 static NSString *kSinglyAccountIDKey = @"com.singly.accountID";
 static NSString *kSinglyAccessTokenKey = @"com.singly.accessToken";
 
-@interface SinglySession ()
-@end
-
 @implementation SinglySession
 
 static SinglySession *sharedInstance = nil;
@@ -157,7 +154,7 @@ static SinglySession *sharedInstance = nil;
                 _profiles = nil;
             else
                 _profiles = json;
-            [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyNotificationSessionProfilesUpdated object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSinglySessionProfilesUpdatedNotification object:self];
         }
 
         if (block) dispatch_sync(curQueue, block);
@@ -199,9 +196,9 @@ static SinglySession *sharedInstance = nil;
         // TODO Handle JSON parse errors
         dispatch_async(dispatch_get_current_queue(), ^{
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
-            [SinglySession sharedSession].accessToken = [responseDictionary objectForKey:@"access_token"];
-            [SinglySession sharedSession].accountID = [responseDictionary objectForKey:@"account"];
-            [[SinglySession sharedSession] updateProfilesWithCompletion:^{
+            SinglySession.sharedSession.accessToken = [responseDictionary objectForKey:@"access_token"];
+            SinglySession.sharedSession.accountID = [responseDictionary objectForKey:@"account"];
+            [SinglySession.sharedSession updateProfilesWithCompletion:^{
                 dispatch_async(dispatch_get_current_queue(), ^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceAppliedNotification object:serviceIdentifier];
                 });
