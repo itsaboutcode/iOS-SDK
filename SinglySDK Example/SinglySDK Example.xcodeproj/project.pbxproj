@@ -52,8 +52,6 @@
 		827E3EE115E5528200D30D96 /* SinglyAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SinglyAppDelegate.m; sourceTree = "<group>"; };
 		827E3EE415E5528200D30D96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		827E3EE715E5528200D30D96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		827E3EE915E5528200D30D96 /* SinglyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinglyViewController.h; sourceTree = "<group>"; };
-		827E3EEA15E5528200D30D96 /* SinglyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SinglyViewController.m; sourceTree = "<group>"; };
 		82B5FA701614B4B4009ADD27 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D0075FEB161A215400F763A1 /* SinglyMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyMainViewController.h; sourceTree = "<group>"; };
 		D0075FEC161A215400F763A1 /* SinglyMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyMainViewController.m; sourceTree = "<group>"; };
@@ -151,8 +149,6 @@
 			children = (
 				827E3EE015E5528200D30D96 /* SinglyAppDelegate.h */,
 				827E3EE115E5528200D30D96 /* SinglyAppDelegate.m */,
-				827E3EE915E5528200D30D96 /* SinglyViewController.h */,
-				827E3EEA15E5528200D30D96 /* SinglyViewController.m */,
 				D0075FEB161A215400F763A1 /* SinglyMainViewController.h */,
 				D0075FEC161A215400F763A1 /* SinglyMainViewController.m */,
 				D0D80B941628B301006F7B90 /* SinglyPhotosViewController.h */,
