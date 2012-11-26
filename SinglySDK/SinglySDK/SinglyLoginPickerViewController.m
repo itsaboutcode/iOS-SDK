@@ -30,12 +30,13 @@
 #import <Accounts/Accounts.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "SinglyActivityIndicatorView.h"
 #import "SinglyConstants.h"
+#import "SinglyFacebookService.h"
+#import "SinglyLoginPickerServiceCell.h"
 #import "SinglyLoginPickerViewController.h"
 #import "SinglyLoginPickerViewController+Internal.h"
-#import "SinglyLoginPickerServiceCell.h"
-#import "SinglyFacebookService.h"
-#import "SinglyActivityIndicatorView.h"
+#import "SinglyRequest.h"
 
 @implementation SinglyLoginPickerViewController
 
@@ -76,9 +77,11 @@
         [SinglyActivityIndicatorView showIndicator];
 
         // Load Services Dictionary
-        NSURL *servicesURL = [NSURL URLWithString:@"https://api.singly.com/services"];
-        NSURLRequest *servicesRequest = [NSURLRequest requestWithURL:servicesURL];
-        [NSURLConnection sendAsynchronousRequest:servicesRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError) {
+        SinglyRequest *servicesRequest = [SinglyRequest requestWithEndpoint:@"services"];
+        [NSURLConnection sendAsynchronousRequest:servicesRequest
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
+        {
             _servicesDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
             if (!self.services)
                 self.services = [[self.servicesDictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
@@ -253,23 +256,23 @@
 
     // TODO Profile IDs return as an array. Are multiple profiles supported?
 
-    NSURL *profilesURL = [NSURL URLWithString:@"https://api.singly.com/profiles"];
-    NSString *postString = [NSString stringWithFormat:@"delete=%@&access_token=%@",
-                            [NSString stringWithFormat:@"%@@%@", [[[SinglySession sharedSession] profiles] objectForKey:service][0], service],
-                            [SinglySession sharedSession].accessToken];
+    SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profiles"];
+    NSString *postString = [NSString stringWithFormat:@"delete=%@", [NSString stringWithFormat:@"%@@%@", SinglySession.sharedSession.profiles[service][0], service]];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
 
-    NSMutableURLRequest *disconnectRequest = [NSMutableURLRequest requestWithURL:profilesURL];
-    [disconnectRequest setHTTPMethod:@"POST"];
-    [disconnectRequest setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-
-    [NSURLConnection sendAsynchronousRequest:disconnectRequest
+    [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *error)
+                           completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
     {
 
         // TODO Handle Errors...
+        if (requestError)
+        {
+            NSLog(@"Error: %@", requestError);
+        }
 
-        [[SinglySession sharedSession] updateProfilesWithCompletion:^{
+        [SinglySession.sharedSession updateProfilesWithCompletion:^{
             [self.tableView reloadData];
         }];
 
