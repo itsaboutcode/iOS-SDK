@@ -154,7 +154,7 @@
         
         if ([parameters objectForKey:@"code"]) {
             NSLog(@"Getting the tokens");
-            NSURL* accessTokenURL = [NSURL URLWithString:@"https://api.singly.com/oauth/access_token"];
+            NSURL* accessTokenURL = [NSURL URLWithString:kSinglyAccessTokenURL];
             NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:accessTokenURL];
             req.HTTPMethod = @"POST";
             req.HTTPBody = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&code=%@", self.session.clientID, self.session.clientSecret, [parameters objectForKey:@"code"]] dataUsingEncoding:NSUTF8StringEncoding];
