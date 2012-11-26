@@ -164,7 +164,7 @@ developer account, which is beyond the scope of this document.
 After you've cloned the project, you will find generated documentation in
 the `SinglySDK/Documentation` folder. This documentation is automatically
 regenerated with each successful build of the framework in Xcode, provided
-you have (appledoc)[http://gentlebytes.com/appledoc/] installed.
+you have [appledoc](http://gentlebytes.com/appledoc/) installed.
 
 ## Native Facebook Authorization
 
@@ -177,6 +177,7 @@ application fallback to work, you will need to perform the following steps:
 
 You will need to create your app at Facebook and configure it as a "Native
 iOS App".
+
 ### Register your app to handle Facebook URLs
 
 You must add the following to your Info.plist, replacing the 0's with your
@@ -225,6 +226,10 @@ issues and look into possible bugs with our service and SDKs.
     For questions or just to say hi and show off what you're building, feel
     free to join us on our [Support HipChat](https://support.singly.com) and
     have a word with us!
+
+You may also contact the maintainer of the Singly iOS SDK, Justin Mecham, at
+[opie@singly.com](mailto:opie@singly.com) or `@opie` in the
+[Support HipChat](https://support.singly.com).
 
 ## License
 
