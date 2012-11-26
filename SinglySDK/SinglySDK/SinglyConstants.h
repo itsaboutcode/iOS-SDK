@@ -36,6 +36,7 @@
  */
 
 static NSString *kSinglyBaseURL = @"https://api.singly.com";
+static NSString *kSinglyAuthenticateURL = @"https://api.singly.com/oauth/authenticate";
 
 static NSString *kSinglyServiceGoogle = @"google";
 static NSString *kSinglyServiceInstagram = @"instagram";

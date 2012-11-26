@@ -27,10 +27,11 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "UIViewController+Modal.h"
+#import "SinglyConstants.h"
 #import "SinglyLoginViewController.h"
 #import "SinglyLoginViewController+Internal.h"
 #import "SinglyService+Internal.h"
+#import "UIViewController+Modal.h"
 
 @implementation SinglyLoginViewController
 
@@ -89,7 +90,7 @@
         }
     }
 
-    NSString *urlStr = [NSString stringWithFormat:@"https://api.singly.com/oauth/authorize?redirect_uri=fb%@://authorize&service=%@&client_id=%@", self.session.clientID, self.targetService, self.session.clientID];
+    NSString *urlStr = [kSinglyAuthenticateURL stringByAppendingFormat:@"?redirect_uri=fb%@://authorize&service=%@&client_id=%@", self.session.clientID, self.targetService, self.session.clientID];
     if (self.session.accountID) {
         urlStr = [urlStr stringByAppendingFormat:@"&account=%@", self.session.accountID];
     } else {
