@@ -137,8 +137,6 @@
 /* Begin PBXFileReference section */
 		821D087415ED177400ECFED0 /* SinglySDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinglySDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		821D087A15ED177400ECFED0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAPIRequest.h; sourceTree = "<group>"; };
-		821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAPIRequest.m; sourceTree = "<group>"; };
 		821D088515ED17B000ECFED0 /* SinglyLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginViewController.h; sourceTree = "<group>"; };
 		821D088615ED17B000ECFED0 /* SinglyLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginViewController.m; sourceTree = "<group>"; };
 		821D088715ED17B000ECFED0 /* SinglySDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySDK.h; sourceTree = "<group>"; };
@@ -508,8 +506,6 @@
 		D090E33D165AE98E00FE8273 /* API Requests */ = {
 			isa = PBXGroup;
 			children = (
-				821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */,
-				821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */,
 				D090E34F165BE96E00FE8273 /* SinglyRequest.h */,
 				D090E350165BE96E00FE8273 /* SinglyRequest.m */,
 			);
