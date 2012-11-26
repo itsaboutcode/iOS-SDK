@@ -27,7 +27,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SinglyAPIRequest.h"
+#import <Foundation/Foundation.h>
 
 @class SinglyService, SinglySession;
 
@@ -167,26 +167,6 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
  *
 **/
 - (void)startSessionWithCompletionHandler:(void (^)(BOOL))block;
-
-/*!
- *
- * Make a Singly API request and handle the result in a delegate
- *
- * @param request The SinglyAPIRequest to process
- * @param delegate The object to call when the process succeeds or errors
- *
-**/
-- (void)requestAPI:(SinglyAPIRequest *)request withDelegate:(id<SinglyAPIRequestDelegate>)delegate;
-
-/*!
- *
- * Make a Singly API request and handle the result in a block
- *
- * @param request The SinglyAPIRequest to process
- * @param block The block to call when the request is complete
- *
-**/
-- (void)requestAPI:(SinglyAPIRequest *)request withCompletionHandler:(void (^)(NSError *, id))block;
 
 /*!
  *

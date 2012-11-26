@@ -27,11 +27,11 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SinglySession.h"
-#import "SinglyFriendPickerViewController.h"
-#import "SinglyAPIRequest.h"
-#import "SinglyFriendPickerCell.h"
 #import "SinglyActivityIndicatorView.h"
+#import "SinglyFriendPickerCell.h"
+#import "SinglyFriendPickerViewController.h"
+#import "SinglyRequest.h"
+#import "SinglySession.h"
 
 @interface SinglyFriendPickerViewController ()
 {
@@ -40,6 +40,8 @@
     NSMutableArray* _pickedFriends;
     UIColor* originalSepColor;
 }
+
+@property (nonatomic, assign) BOOL isRefreshing;
 
 @end
 
@@ -61,40 +63,14 @@
 
     self.tableView.rowHeight = 54;
 
-    [self.session requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"types/contacts" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"200", @"limit", nil]] withCompletionHandler:^(NSError *error, id json) {
-        if (![json isKindOfClass:[NSArray class]]) {
-            return;
-        }
-        // Here we flip through the contacts and see merge them a bit
-        NSArray* contacts = (NSArray*)json;
-        _friends = [NSMutableDictionary dictionaryWithCapacity:contacts.count];
-        NSLog(@"Got %d contacts", contacts.count);
-        for (NSDictionary* contact in contacts) {
-            NSDictionary* oembed = [contact objectForKey:@"oembed"];
-            if (!oembed || ![oembed objectForKey:@"title"]){
-                NSLog(@"Skipped for no title or oembed");
-                continue;
-            }
-            NSMutableArray* profiles = [_friends objectForKey:[oembed objectForKey:@"title"]];
-            if (!profiles) {
-                profiles = [NSMutableArray array];
-                [_friends setObject:profiles forKey:[oembed objectForKey:@"title"]];
-            }
-            [profiles addObject:contact];
-        }
-        _friendsSortedKeys = [[_friends allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        [self.tableView reloadData];
-        [SinglyActivityIndicatorView dismissIndicator];
-        self.tableView.separatorColor = originalSepColor;
-        originalSepColor = nil;
-    }];
+    [self refreshFriends];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 
-    if (_friendsSortedKeys.count == 0)
+    if (_friendsSortedKeys.count == 0 || self.isRefreshing)
     {
         [SinglyActivityIndicatorView showIndicator];
 
@@ -108,6 +84,10 @@
         originalSepColor = self.tableView.separatorColor;
         self.tableView.separatorColor = [UIColor clearColor];
     }
+    else
+    {
+        [self refreshFriends];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -115,6 +95,59 @@
     [super viewWillDisappear:animated];
 
     [SinglyActivityIndicatorView dismissIndicator];
+}
+
+#pragma mark -
+
+- (void)refreshFriends
+{
+
+    if (self.isRefreshing)
+        return;
+
+    self.isRefreshing = YES;
+    NSLog(@"[SinglySDK] Refreshing friends...");
+
+    SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"types/contacts" andParameters:@{ @"limit": @"200" }];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
+    {
+        // TODO If not a json array, set isRefreshing = NO and return...
+
+        NSArray *friends = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
+        _friends = [NSMutableDictionary dictionaryWithCapacity:friends.count];
+
+        NSLog(@"[SinglySDK] Loaded %d friends", friends.count);
+
+        for (NSDictionary *friend in friends)
+        {
+            NSDictionary *oEmbed = [friend objectForKey:@"oembed"];
+
+            if (!oEmbed || ![oEmbed objectForKey:@"title"])
+            {
+                NSLog(@"Skipped for no title or oembed");
+                continue;
+            }
+
+            NSMutableArray *profiles = [_friends objectForKey:[oEmbed objectForKey:@"title"]];
+            if (!profiles)
+            {
+                profiles = [NSMutableArray array];
+                [_friends setObject:profiles forKey:[oEmbed objectForKey:@"title"]];
+            }
+            [profiles addObject:friend];
+
+        }
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _friendsSortedKeys = [[_friends allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+            [self.tableView reloadData];
+            [SinglyActivityIndicatorView dismissIndicator];
+            self.tableView.separatorColor = originalSepColor;
+            originalSepColor = nil;
+        });
+
+        self.isRefreshing = NO;
+    }];
 }
 
 #pragma mark - SinglySession

@@ -70,10 +70,6 @@
 	
 	<option value="//api/name/handleOpenURL:">&nbsp;&nbsp;&nbsp;&nbsp;- handleOpenURL:</option>
 	
-	<option value="//api/name/requestAPI:withCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAPI:withCompletionHandler:</option>
-	
-	<option value="//api/name/requestAPI:withDelegate:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAPI:withDelegate:</option>
-	
 	<option value="//api/name/startSessionWithCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- startSessionWithCompletionHandler:</option>
 	
 	<option value="//api/name/updateProfiles">&nbsp;&nbsp;&nbsp;&nbsp;- updateProfiles</option>
@@ -135,10 +131,6 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/applyService:withToken:">applyService:withToken:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleOpenURL:">handleOpenURL:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAPI:withCompletionHandler:">requestAPI:withCompletionHandler:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAPI:withDelegate:">requestAPI:withDelegate:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/startSessionWithCompletionHandler:">startSessionWithCompletionHandler:</a></span></li>
 	
@@ -256,20 +248,6 @@ has been authorized after our app is opened again.</p></span>
 	<span class="tooltip">
 		<code><a href="#//api/name/startSessionWithCompletionHandler:">&ndash;&nbsp;startSessionWithCompletionHandler:</a></code>
 		<span class="tooltip"><p>Get the session in a state that is ready to make API calls.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/requestAPI:withDelegate:">&ndash;&nbsp;requestAPI:withDelegate:</a></code>
-		<span class="tooltip"><p>Make a Singly API request and handle the result in a <a href="#//api/name/delegate">delegate</a></p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/requestAPI:withCompletionHandler:">&ndash;&nbsp;requestAPI:withCompletionHandler:</a></code>
-		<span class="tooltip"><p>Make a Singly API request and handle the result in a block</p></span>
 	</span>
 	
 	
@@ -760,108 +738,6 @@ based on the service.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/requestAPI:withCompletionHandler:" title="requestAPI:withCompletionHandler:"></a>
-	<h3 class="subsubtitle method-title">requestAPI:withCompletionHandler:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Make a Singly API request and handle the result in a block</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)requestAPI:(SinglyAPIRequest *)<em>request</em> withCompletionHandler:(void ( ^ ) ( NSError *, id ))<em>block</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>request</em></dt>
-			<dd><p>The <a href="../Classes/SinglyAPIRequest.html">SinglyAPIRequest</a> to process</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>block</em></dt>
-			<dd><p>The block to call when the request is complete</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglySession.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/requestAPI:withDelegate:" title="requestAPI:withDelegate:"></a>
-	<h3 class="subsubtitle method-title">requestAPI:withDelegate:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Make a Singly API request and handle the result in a <a href="#//api/name/delegate">delegate</a></p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)requestAPI:(SinglyAPIRequest *)<em>request</em> withDelegate:(id&lt;SinglyAPIRequestDelegate&gt;)<em>delegate</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>request</em></dt>
-			<dd><p>The <a href="../Classes/SinglyAPIRequest.html">SinglyAPIRequest</a> to process</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>delegate</em></dt>
-			<dd><p>The object to call when the process succeeds or errors</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglySession.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
 	<a name="//api/name/startSessionWithCompletionHandler:" title="startSessionWithCompletionHandler:"></a>
 	<h3 class="subsubtitle method-title">startSessionWithCompletionHandler:</h3>
 	
@@ -1003,7 +879,7 @@ have been updated.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-11-21)</span><br />
+						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-11-26)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

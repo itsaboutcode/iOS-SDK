@@ -7,27 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		821D088C15ED17B000ECFED0 /* SinglyAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */; };
 		821D088E15ED17B000ECFED0 /* SinglyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088615ED17B000ECFED0 /* SinglyLoginViewController.m */; };
 		821D089215ED17B000ECFED0 /* SinglySession.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088A15ED17B000ECFED0 /* SinglySession.m */; };
 		8236EBDE15EFE79E00F3351E /* SinglyFriendPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */; };
-		824DCF5D1607B48D009FE2EA /* DEFacebookGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF371607B48D009FE2EA /* DEFacebookGradientView.m */; };
-		824DCF5F1607B48D009FE2EA /* DEFacebookSheetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF391607B48D009FE2EA /* DEFacebookSheetCardView.m */; };
-		824DCF611607B48D009FE2EA /* DEFacebookTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF3B1607B48D009FE2EA /* DEFacebookTextView.m */; };
-		824DCF631607B48D009FE2EA /* DERuledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF3D1607B48D009FE2EA /* DERuledView.m */; };
-		824DCF7B1607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF561607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m */; };
-		824DCF7D1607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF581607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m */; };
 		825B6D95161C99EF0034DB92 /* NSString+URLEncoded.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */; };
 		8296F44A1611F7360004BA0B /* SinglyFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8296F4481611F7360004BA0B /* SinglyFriendModel.m */; };
-		82C6253116011E7900BF5225 /* SinglySharingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C6252F16011E7900BF5225 /* SinglySharingViewController.m */; };
 		82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */; };
 		D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
 		D02B537216309C7700F1F535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B537116309C7700F1F535 /* Foundation.framework */; };
 		D02B539616309CDF00F1F535 /* NSString+URLEncoded.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */; };
 		D02B539716309CE200F1F535 /* UIViewController+Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */; };
-		D02B539816309CE800F1F535 /* SinglySharingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C6252F16011E7900BF5225 /* SinglySharingViewController.m */; };
-		D02B539916309CED00F1F535 /* SinglySharingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824DCF331607B48D009FE2EA /* SinglySharingViewController.xib */; };
-		D02B539A16309CF200F1F535 /* SinglyAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */; };
 		D02B539C16309DB900F1F535 /* SinglySDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088715ED17B000ECFED0 /* SinglySDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D02B539D16309DBE00F1F535 /* NSString+URLEncoded.h in Headers */ = {isa = PBXBuildFile; fileRef = 825B6D92161C99EF0034DB92 /* NSString+URLEncoded.h */; };
 		D02B539E16309DC500F1F535 /* UIViewController+Modal.h in Headers */ = {isa = PBXBuildFile; fileRef = D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */; };
@@ -45,20 +34,6 @@
 		D02B53AA16309DF900F1F535 /* SinglyFriendPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */; };
 		D02B53AB16309DFE00F1F535 /* SinglyFriendPickerCell.h in Headers */ = {isa = PBXBuildFile; fileRef = D06830B91624BAFC00F398A6 /* SinglyFriendPickerCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D02B53AC16309E0100F1F535 /* SinglyFriendPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */; };
-		D02B53AD16309E0500F1F535 /* SinglySharingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C6252E16011E7900BF5225 /* SinglySharingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D02B53AE16309E1200F1F535 /* SinglyAPIRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D02B53CD16309FAA00F1F535 /* DEFacebookGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF361607B48D009FE2EA /* DEFacebookGradientView.h */; };
-		D02B53CE16309FAD00F1F535 /* DEFacebookGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF371607B48D009FE2EA /* DEFacebookGradientView.m */; };
-		D02B53CF16309FB000F1F535 /* DEFacebookSheetCardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF381607B48D009FE2EA /* DEFacebookSheetCardView.h */; };
-		D02B53D016309FB200F1F535 /* DEFacebookSheetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF391607B48D009FE2EA /* DEFacebookSheetCardView.m */; };
-		D02B53D116309FB400F1F535 /* DEFacebookTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF3A1607B48D009FE2EA /* DEFacebookTextView.h */; };
-		D02B53D216309FB800F1F535 /* DEFacebookTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF3B1607B48D009FE2EA /* DEFacebookTextView.m */; };
-		D02B53D316309FBA00F1F535 /* DERuledView.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF3C1607B48D009FE2EA /* DERuledView.h */; };
-		D02B53D416309FBD00F1F535 /* DERuledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF3D1607B48D009FE2EA /* DERuledView.m */; };
-		D02B53D516309FCB00F1F535 /* UIApplication+DEFacebookComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF551607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.h */; };
-		D02B53D616309FCD00F1F535 /* UIApplication+DEFacebookComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF561607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m */; };
-		D02B53D716309FCF00F1F535 /* UIDevice+DEFacebookComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF571607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h */; };
-		D02B53D816309FD300F1F535 /* UIDevice+DEFacebookComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824DCF581607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m */; };
 		D02B53DB1630A31600F1F535 /* SinglyConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = D02B53D91630A31600F1F535 /* SinglyConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D02B540B1630A99A00F1F535 /* SinglySDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088715ED17B000ECFED0 /* SinglySDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D02B540C1630AA4700F1F535 /* SinglyConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = D02B53D91630A31600F1F535 /* SinglyConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -102,12 +77,6 @@
 		D06194F31638668E00A906F7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06194F11638668400A906F7 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */; };
 		D08B3EE7162DF3E3009001D5 /* UIViewController+Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */; };
-		D08C1BD01649BE1400035775 /* DEFacebookGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF361607B48D009FE2EA /* DEFacebookGradientView.h */; };
-		D08C1BD11649BE1400035775 /* DEFacebookSheetCardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF381607B48D009FE2EA /* DEFacebookSheetCardView.h */; };
-		D08C1BD21649BE1400035775 /* DEFacebookTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF3A1607B48D009FE2EA /* DEFacebookTextView.h */; };
-		D08C1BD31649BE1400035775 /* DERuledView.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF3C1607B48D009FE2EA /* DERuledView.h */; };
-		D08C1BD41649BE1400035775 /* UIApplication+DEFacebookComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF551607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.h */; };
-		D08C1BD51649BE1400035775 /* UIDevice+DEFacebookComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 824DCF571607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h */; };
 		D08C1BD81649C37000035775 /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */; };
 		D08C1BD91649C37000035775 /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */; };
 		D08C1BDA1649C37000035775 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C1BD71649C37000035775 /* NSDictionary+QueryString.m */; };
@@ -126,6 +95,10 @@
 		D090E347165B0ED700FE8273 /* SinglyLoginPickerServiceCell+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D090E345165B0ED700FE8273 /* SinglyLoginPickerServiceCell+Internal.h */; };
 		D090E349165B116700FE8273 /* SinglyFriendPickerCell+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D090E348165B116700FE8273 /* SinglyFriendPickerCell+Internal.h */; };
 		D090E34A165B116700FE8273 /* SinglyFriendPickerCell+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D090E348165B116700FE8273 /* SinglyFriendPickerCell+Internal.h */; };
+		D090E351165BE96E00FE8273 /* SinglyRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = D090E34F165BE96E00FE8273 /* SinglyRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D090E352165BE96E00FE8273 /* SinglyRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = D090E34F165BE96E00FE8273 /* SinglyRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D090E353165BE96E00FE8273 /* SinglyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D090E350165BE96E00FE8273 /* SinglyRequest.m */; };
+		D090E354165BE96E00FE8273 /* SinglyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D090E350165BE96E00FE8273 /* SinglyRequest.m */; };
 		D0DB1623162E0A93005EC7C7 /* Service Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */; };
 		D0DB1624162E0A93005EC7C7 /* Service Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */; };
 		D0E2C7081637572B00AAD565 /* SinglySession.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088915ED17B000ECFED0 /* SinglySession.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -137,8 +110,6 @@
 		D0E2C70E1637576400AAD565 /* SinglyFriendModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8296F4471611F7360004BA0B /* SinglyFriendModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0E2C70F1637576A00AAD565 /* SinglyFriendPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0E2C7101637576E00AAD565 /* SinglyFriendPickerCell.h in Headers */ = {isa = PBXBuildFile; fileRef = D06830B91624BAFC00F398A6 /* SinglyFriendPickerCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0E2C7111637577300AAD565 /* SinglySharingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C6252E16011E7900BF5225 /* SinglySharingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0E2C7121637578600AAD565 /* SinglyAPIRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0EA60BE163B3B9A001AC1DF /* SinglyActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = D0EA60BC163B3B99001AC1DF /* SinglyActivityIndicatorView.h */; };
 		D0EA60BF163B3B9A001AC1DF /* SinglyActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = D0EA60BC163B3B99001AC1DF /* SinglyActivityIndicatorView.h */; };
 		D0EA60C0163B3B9A001AC1DF /* SinglyActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EA60BD163B3B99001AC1DF /* SinglyActivityIndicatorView.m */; };
@@ -261,6 +232,8 @@
 		D090E342165B0DD300FE8273 /* SinglyLoginPickerViewController+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyLoginPickerViewController+Internal.h"; sourceTree = "<group>"; };
 		D090E345165B0ED700FE8273 /* SinglyLoginPickerServiceCell+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyLoginPickerServiceCell+Internal.h"; sourceTree = "<group>"; };
 		D090E348165B116700FE8273 /* SinglyFriendPickerCell+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyFriendPickerCell+Internal.h"; sourceTree = "<group>"; };
+		D090E34F165BE96E00FE8273 /* SinglyRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyRequest.h; sourceTree = "<group>"; };
+		D090E350165BE96E00FE8273 /* SinglyRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyRequest.m; sourceTree = "<group>"; };
 		D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder.png"; sourceTree = "<group>"; };
 		D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder@2x.png"; sourceTree = "<group>"; };
 		D0E158DF1631C1BD000D0BCA /* Create Universal Library.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "Create Universal Library.rb"; sourceTree = "<group>"; };
@@ -537,6 +510,8 @@
 			children = (
 				821D088315ED17B000ECFED0 /* SinglyAPIRequest.h */,
 				821D088415ED17B000ECFED0 /* SinglyAPIRequest.m */,
+				D090E34F165BE96E00FE8273 /* SinglyRequest.h */,
+				D090E350165BE96E00FE8273 /* SinglyRequest.m */,
 			);
 			name = "API Requests";
 			sourceTree = "<group>";
@@ -595,16 +570,8 @@
 				D02B53A716309DEE00F1F535 /* SinglyFriendModel.h in Headers */,
 				D02B53A916309DF500F1F535 /* SinglyFriendPickerViewController.h in Headers */,
 				D02B53AB16309DFE00F1F535 /* SinglyFriendPickerCell.h in Headers */,
-				D02B53AD16309E0500F1F535 /* SinglySharingViewController.h in Headers */,
 				D05870FD16431ADC007E8970 /* SinglyService.h in Headers */,
 				D058710316431AFC007E8970 /* SinglyFacebookService.h in Headers */,
-				D02B53AE16309E1200F1F535 /* SinglyAPIRequest.h in Headers */,
-				D02B53CD16309FAA00F1F535 /* DEFacebookGradientView.h in Headers */,
-				D02B53CF16309FB000F1F535 /* DEFacebookSheetCardView.h in Headers */,
-				D02B53D116309FB400F1F535 /* DEFacebookTextView.h in Headers */,
-				D02B53D316309FBA00F1F535 /* DERuledView.h in Headers */,
-				D02B53D516309FCB00F1F535 /* UIApplication+DEFacebookComposeViewController.h in Headers */,
-				D02B53D716309FCF00F1F535 /* UIDevice+DEFacebookComposeViewController.h in Headers */,
 				D02B53DB1630A31600F1F535 /* SinglyConstants.h in Headers */,
 				D0EA60BE163B3B9A001AC1DF /* SinglyActivityIndicatorView.h in Headers */,
 				D08C1BD81649C37000035775 /* NSDictionary+QueryString.h in Headers */,
@@ -614,6 +581,7 @@
 				D090E343165B0DD300FE8273 /* SinglyLoginPickerViewController+Internal.h in Headers */,
 				D090E346165B0ED700FE8273 /* SinglyLoginPickerServiceCell+Internal.h in Headers */,
 				D090E349165B116700FE8273 /* SinglyFriendPickerCell+Internal.h in Headers */,
+				D090E351165BE96E00FE8273 /* SinglyRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,17 +600,9 @@
 				D0E2C70E1637576400AAD565 /* SinglyFriendModel.h in Headers */,
 				D0E2C70F1637576A00AAD565 /* SinglyFriendPickerViewController.h in Headers */,
 				D0E2C7101637576E00AAD565 /* SinglyFriendPickerCell.h in Headers */,
-				D0E2C7111637577300AAD565 /* SinglySharingViewController.h in Headers */,
-				D0E2C7121637578600AAD565 /* SinglyAPIRequest.h in Headers */,
 				D0EA60BF163B3B9A001AC1DF /* SinglyActivityIndicatorView.h in Headers */,
 				D0587105164330FD007E8970 /* SinglyService.h in Headers */,
 				D0587106164330FF007E8970 /* SinglyFacebookService.h in Headers */,
-				D08C1BD01649BE1400035775 /* DEFacebookGradientView.h in Headers */,
-				D08C1BD11649BE1400035775 /* DEFacebookSheetCardView.h in Headers */,
-				D08C1BD21649BE1400035775 /* DEFacebookTextView.h in Headers */,
-				D08C1BD31649BE1400035775 /* DERuledView.h in Headers */,
-				D08C1BD41649BE1400035775 /* UIApplication+DEFacebookComposeViewController.h in Headers */,
-				D08C1BD51649BE1400035775 /* UIDevice+DEFacebookComposeViewController.h in Headers */,
 				D08C1BD91649C37000035775 /* NSDictionary+QueryString.h in Headers */,
 				D08C1BDF1649C48900035775 /* NSURL+AccessToken.h in Headers */,
 				D08C1BEB164C780C00035775 /* SinglyService+Internal.h in Headers */,
@@ -650,6 +610,7 @@
 				D090E344165B0DD300FE8273 /* SinglyLoginPickerViewController+Internal.h in Headers */,
 				D090E347165B0ED700FE8273 /* SinglyLoginPickerServiceCell+Internal.h in Headers */,
 				D090E34A165B116700FE8273 /* SinglyFriendPickerCell+Internal.h in Headers */,
+				D090E352165BE96E00FE8273 /* SinglyRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,7 +758,6 @@
 				D053F00516275D08008B8BA1 /* Avatar Placeholder@2x.png in Resources */,
 				D0DB1623162E0A93005EC7C7 /* Service Placeholder.png in Resources */,
 				D0DB1624162E0A93005EC7C7 /* Service Placeholder@2x.png in Resources */,
-				D02B539916309CED00F1F535 /* SinglySharingViewController.xib in Resources */,
 				D02B540D1630AABF00F1F535 /* InfoPlist.strings in Resources */,
 				D0EA60C3163B4554001AC1DF /* Icon-512.png in Resources */,
 			);
@@ -869,18 +829,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				821D088C15ED17B000ECFED0 /* SinglyAPIRequest.m in Sources */,
 				821D088E15ED17B000ECFED0 /* SinglyLoginViewController.m in Sources */,
 				821D089215ED17B000ECFED0 /* SinglySession.m in Sources */,
 				82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */,
 				8236EBDE15EFE79E00F3351E /* SinglyFriendPickerViewController.m in Sources */,
-				82C6253116011E7900BF5225 /* SinglySharingViewController.m in Sources */,
-				824DCF5D1607B48D009FE2EA /* DEFacebookGradientView.m in Sources */,
-				824DCF5F1607B48D009FE2EA /* DEFacebookSheetCardView.m in Sources */,
-				824DCF611607B48D009FE2EA /* DEFacebookTextView.m in Sources */,
-				824DCF631607B48D009FE2EA /* DERuledView.m in Sources */,
-				824DCF7B1607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m in Sources */,
-				824DCF7D1607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m in Sources */,
 				8296F44A1611F7360004BA0B /* SinglyFriendModel.m in Sources */,
 				825B6D95161C99EF0034DB92 /* NSString+URLEncoded.m in Sources */,
 				D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */,
@@ -891,6 +843,7 @@
 				D058710816433105007E8970 /* SinglyFacebookService.m in Sources */,
 				D08C1BDB1649C37000035775 /* NSDictionary+QueryString.m in Sources */,
 				D08C1BE11649C48900035775 /* NSURL+AccessToken.m in Sources */,
+				D090E354165BE96E00FE8273 /* SinglyRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -900,8 +853,6 @@
 			files = (
 				D02B539616309CDF00F1F535 /* NSString+URLEncoded.m in Sources */,
 				D02B539716309CE200F1F535 /* UIViewController+Modal.m in Sources */,
-				D02B539816309CE800F1F535 /* SinglySharingViewController.m in Sources */,
-				D02B539A16309CF200F1F535 /* SinglyAPIRequest.m in Sources */,
 				D02B53A016309DD100F1F535 /* SinglySession.m in Sources */,
 				D02B53A216309DD600F1F535 /* SinglyLoginViewController.m in Sources */,
 				D02B53A416309DDF00F1F535 /* SinglyLoginPickerViewController.m in Sources */,
@@ -909,17 +860,12 @@
 				D02B53A816309DF200F1F535 /* SinglyFriendModel.m in Sources */,
 				D02B53AA16309DF900F1F535 /* SinglyFriendPickerViewController.m in Sources */,
 				D02B53AC16309E0100F1F535 /* SinglyFriendPickerCell.m in Sources */,
-				D02B53CE16309FAD00F1F535 /* DEFacebookGradientView.m in Sources */,
-				D02B53D016309FB200F1F535 /* DEFacebookSheetCardView.m in Sources */,
-				D02B53D216309FB800F1F535 /* DEFacebookTextView.m in Sources */,
-				D02B53D416309FBD00F1F535 /* DERuledView.m in Sources */,
-				D02B53D616309FCD00F1F535 /* UIApplication+DEFacebookComposeViewController.m in Sources */,
-				D02B53D816309FD300F1F535 /* UIDevice+DEFacebookComposeViewController.m in Sources */,
 				D0EA60C0163B3B9A001AC1DF /* SinglyActivityIndicatorView.m in Sources */,
 				D05870FE16431ADC007E8970 /* SinglyService.m in Sources */,
 				D058710416431AFC007E8970 /* SinglyFacebookService.m in Sources */,
 				D08C1BDA1649C37000035775 /* NSDictionary+QueryString.m in Sources */,
 				D08C1BE01649C48900035775 /* NSURL+AccessToken.m in Sources */,
+				D090E353165BE96E00FE8273 /* SinglyRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

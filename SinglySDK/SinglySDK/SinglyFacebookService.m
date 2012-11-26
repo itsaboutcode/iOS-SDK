@@ -27,9 +27,9 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Accounts/Accounts.h>
 #import "NSDictionary+QueryString.h"
 #import "NSString+URLEncoded.h"
+#import "SinglyRequest.h"
 #import "SinglySession.h"
 #import "SinglyService+Internal.h"
 #import "SinglyFacebookService.h"
@@ -180,29 +180,28 @@
         //
         // Apply the Facebook service to our current session.
         //
-        NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/auth/facebook/apply?token=%@&client_id=%@&client_secret=%@",
-                                                  account.credential.oauthToken,
-                                                  [SinglySession sharedSession].clientID,
-                                                  [SinglySession sharedSession].clientSecret]];
-
-        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requestURL];
+        SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:@"auth/facebook/apply"];
+        request.parameters = @{ @"token": account.credential.oauthToken, @"client_id": SinglySession.sharedSession.clientID, @"client_secret": SinglySession.sharedSession.clientSecret };
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
         {
             // TODO Assume this means the token is expired. It may not be. Need to update how errors are returned from the apply endpoint for expired tokens.
             if (((NSHTTPURLResponse *)response).statusCode != 200)
             {
+                NSLog(@"Request Error: %@", requestError);
                 [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
-                    NSLog(@"Token is expired... Renewed!");
-                    [[SinglySession sharedSession] applyService:self.serviceIdentifier withToken:account.credential.oauthToken];
+                    NSLog(@"Token is expired... Renewed! %d", renewResult);
+                    NSLog(@"Error: %@", error);
+                    NSLog(@"Token: %@", account.credential.oauthToken);
+                    [SinglySession.sharedSession applyService:self.serviceIdentifier withToken:account.credential.oauthToken];
                 }];
             }
 
             else
             {
                 NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
-                [SinglySession sharedSession].accessToken = [responseDictionary objectForKey:@"access_token"];
-                [SinglySession sharedSession].accountID = [responseDictionary objectForKey:@"account"];
-                [[SinglySession sharedSession] updateProfilesWithCompletion:^{
+                SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"];
+                SinglySession.sharedSession.accountID = responseDictionary[@"account"];
+                [SinglySession.sharedSession updateProfilesWithCompletion:^{
                     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
                         [self.delegate singlyServiceDidAuthorize:self];
                 }];

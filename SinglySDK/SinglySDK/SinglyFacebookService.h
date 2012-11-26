@@ -27,6 +27,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import <Accounts/Accounts.h>
 #import "SinglyService.h"
 #import "SinglyLoginViewController.h"
 

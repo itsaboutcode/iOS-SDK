@@ -27,6 +27,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "SinglyRequest.h"
 #import "SinglySession.h"
 #import "SinglyService.h"
 #import "SinglyService+Internal.h"
@@ -77,14 +78,32 @@
     NSError *requestError;
     NSError *parseError;
     NSURLResponse *response;
-    NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/v0/auth/%@/client_id/%@", [[SinglySession sharedSession] clientID], self.serviceIdentifier]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
+    SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"/auth/%@/client_id/%@", SinglySession.sharedSession.clientID, self.serviceIdentifier]];
+
+    // Send the request and check for errors...
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
+    if (requestError)
+    {
+        NSLog(@"[SinglySDK] A request error occurred while attempting to fetch the client id from '%@': %@", request.URL, requestError);
+        return;
+    }
 
-    // TODO Add error handling to the request
-    // TODO Add error handling to JSON parse
+    // Parse the response and check for errors...
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+    if (parseError)
+    {
+        NSLog(@"[SinglySDK] A parse error occurred while attempting to parse the client id response for '%@': %@", self.serviceIdentifier, parseError);
+        return;
+    }
 
-    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&parseError];
+    // Check for service errors...
+    NSError *serviceError = responseDictionary[@"error"];
+    if (serviceError)
+    {
+        NSLog(@"[SinglySDK] A service error occured while attempting to fetch the client id for '%@': %@", self.serviceIdentifier, serviceError);
+        return;
+    }
+
     self.clientID = responseDictionary[self.serviceIdentifier];
 
     NSLog(@"[SinglySDK] Retrieved Client ID for '%@': %@", self.serviceIdentifier, self.clientID);

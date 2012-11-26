@@ -27,7 +27,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SinglyAPIRequest.h"
+#import "SinglyRequest.h"
 #import "SinglyFriendModel.h"
 #import "SinglySession.h"
 
@@ -56,44 +56,41 @@
 
 - (void)fetchDataWithCompletionHandler:(DataReadyBlock)completionHandler
 {
-    [self.session requestAPI:[SinglyAPIRequest apiRequestForEndpoint:@"types/contacts" withParameters:@{@"limit": @"500"}] withCompletionHandler:^(NSError *error, id json)
+
+    SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"types/contacts" andParameters:@{ @"limit": @"500" }];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
     {
-        // Get out of here on system or remote errors
-        if (error || ([json isKindOfClass:[NSDictionary class]] && [json objectForKey:@"error"])) {
-            NSError* finalError = error ? error : [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:@{NSLocalizedDescriptionKey:[json objectForKey:@"error"]}];
-            return completionHandler(finalError);
-        }
-        
-        dispatch_queue_t completionQueue = dispatch_get_current_queue();
-        
-        // Do our processing via gcd
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSArray* contacts = (NSArray*)json;
-            NSMutableArray* allFriends = [NSMutableArray arrayWithCapacity:contacts.count];
-            for (NSDictionary* contact in contacts) {
-                NSDictionary* oembed = [contact objectForKey:@"oembed"];
-                if (!oembed || ![oembed objectForKey:@"title"]){
-                    NSLog(@"Skipped for no title or oembed");
-                    continue;
-                }
-                NSMutableDictionary* friendInfo = [NSMutableDictionary dictionaryWithDictionary:oembed];
-                // Parse the idr and get the service out
-                NSString* idr = [contact objectForKey:@"idr"];
-                NSRange serviceRange = [idr rangeOfString:@"@"];
-                serviceRange.location++;
-                serviceRange.length = [idr rangeOfString:@"/"].location - serviceRange.location;
-                [friendInfo setObject:@{[idr substringWithRange:serviceRange]:[contact objectForKey:@"data"]} forKey:@"services"];
-                [allFriends addObject:friendInfo];
+//        // Get out of here on system or remote errors
+//        if (error || ([json isKindOfClass:[NSDictionary class]] && [json objectForKey:@"error"])) {
+//            NSError* finalError = error ? error : [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:@{NSLocalizedDescriptionKey:[json objectForKey:@"error"]}];
+//            return completionHandler(finalError);
+//        }
+
+        NSArray *friends = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
+        NSMutableArray *allFriends = [NSMutableArray arrayWithCapacity:friends.count];
+        for (NSDictionary *friend in friends)
+        {
+            NSDictionary *oEmbed = [friend objectForKey:@"oembed"];
+
+            if (!oEmbed || ![oEmbed objectForKey:@"title"])
+            {
+                NSLog(@"Skipped for no title or oembed");
+                continue;
             }
-            
-            _friends = allFriends;
-            
-            dispatch_sync(completionQueue, ^{
-                completionHandler(nil);
-            });
-        });
-        
+
+            NSMutableDictionary *friendInfo = [NSMutableDictionary dictionaryWithDictionary:oEmbed];
+            // Parse the idr and get the service out
+            NSString *idr = [friend objectForKey:@"idr"];
+            NSRange serviceRange = [idr rangeOfString:@"@"];
+            serviceRange.location++;
+            serviceRange.length = [idr rangeOfString:@"/"].location - serviceRange.location;
+            [friendInfo setObject:@{[idr substringWithRange:serviceRange]:[friend objectForKey:@"data"]} forKey:@"services"];
+            [allFriends addObject:friendInfo];
+        }
+
+        _friends = allFriends;
     }];
+
 }
 
 @end

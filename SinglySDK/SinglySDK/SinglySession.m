@@ -29,6 +29,7 @@
 
 #import "NSURL+AccessToken.h"
 #import "SinglyFacebookService.h"
+#import "SinglyRequest.h"
 #import "SinglySession.h"
 
 static NSString *kSinglyAccountIDKey = @"com.singly.accountID";
@@ -82,58 +83,6 @@ static SinglySession *sharedInstance = nil;
     });
 }
 
-- (void)requestAPI:(SinglyAPIRequest *)request withDelegate:(id<SinglyAPIRequestDelegate>)delegate
-{
-    [self requestAPI:request withCompletionHandler:^(NSError *error, id json) {
-        if (error) {
-            [delegate singlyAPIRequest:request failedWithError:error];
-        } else {
-            [delegate singlyAPIRequest:request succeededWithJSON:json];
-        }
-    }];
-}
-
-- (void)requestAPI:(SinglyAPIRequest *)request withCompletionHandler:(void (^)(NSError *, id))block
-{
-    if (!self.accessToken) {
-        NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:@"Access token is not yet set" forKey:NSLocalizedDescriptionKey]];
-        block(error, nil);
-        return;
-    }
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSURL* reqURL = [NSURL URLWithString:[request completeURLForToken:self.accessToken]];
-        NSMutableURLRequest* urlRequest = [NSMutableURLRequest requestWithURL:reqURL];
-        urlRequest.HTTPMethod = request.method;
-        if (request.body) urlRequest.HTTPBody = request.body;
-        NSURLResponse *response;
-        NSError *error;
-        NSData *returnedData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
-        NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) response;
-        if ([httpResponse statusCode] == 200) {
-            if (error) {
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    block(error, nil);
-                });
-                return;
-            }
-            id json = [NSJSONSerialization JSONObjectWithData:returnedData options:kNilOptions error:&error];
-            if (error) {
-                json = nil;
-            }
-            
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                block(error, json);
-            });
-        } else {
-            error = [[NSError alloc] initWithDomain:@"SinglyResponseErrorDomain" code:[httpResponse statusCode] userInfo:[[NSDictionary alloc] initWithObjectsAndKeys:@"NSLocalizedDescriptionKey", (NSString *)[[NSString alloc] initWithData:returnedData encoding:NSUTF8StringEncoding], nil]];
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                block(error, nil);
-            });
-        }
-    });
-}
-
 - (void)updateProfiles
 {
     [self updateProfilesWithCompletion:nil];
@@ -143,17 +92,19 @@ static SinglySession *sharedInstance = nil;
 {
     dispatch_queue_t curQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        SinglyAPIRequest *apiReq = [[SinglyAPIRequest alloc] initWithEndpoint:@"profiles" andParameters:nil];
-        NSError *error;
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[apiReq completeURLForToken:self.accessToken]]];
-        id json = [NSJSONSerialization JSONObjectWithData:data
-                                                  options:kNilOptions
-                                                    error:&error];
-        if (!error && [json isKindOfClass:[NSDictionary class]]) {
-            if ([json valueForKey:@"error"])
+        NSError *requestError;
+        NSError *parseError;
+        NSURLResponse *response;
+        SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:@"profiles"];
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+
+        if (!requestError && !parseError)
+        {
+            if ([responseDictionary valueForKey:@"error"])
                 _profiles = nil;
             else
-                _profiles = json;
+                _profiles = responseDictionary;
             [[NSNotificationCenter defaultCenter] postNotificationName:kSinglySessionProfilesUpdatedNotification object:self];
         }
 
@@ -181,30 +132,34 @@ static SinglySession *sharedInstance = nil;
 
 - (void)applyService:(NSString *)serviceIdentifier withToken:(NSString *)token
 {
-    NSLog(@"[SinglySDK] Applying %@ with token %@", serviceIdentifier, token);
+    NSLog(@"[SinglySDK] Applying service '%@' with token '%@' to the Singly service ...", serviceIdentifier, token);
 
-    NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.singly.com/auth/%@/apply?token=%@&client_id=%@&client_secret=%@",
-                                              serviceIdentifier,
-                                              token,
-                                              self.clientID,
-                                              self.clientSecret]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSError *requestError;
+        NSError *parseError;
+        NSURLResponse *response;
+        SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/apply", serviceIdentifier]];
+        request.parameters = @{
+            @"client_id": self.clientID,
+            @"client_secret": self.clientSecret,
+            @"token": token
+        };
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
 
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requestURL];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
-    {
-        // TODO Handle request errors
-        // TODO Handle JSON parse errors
-        dispatch_async(dispatch_get_current_queue(), ^{
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
-            SinglySession.sharedSession.accessToken = [responseDictionary objectForKey:@"access_token"];
-            SinglySession.sharedSession.accountID = [responseDictionary objectForKey:@"account"];
-            [SinglySession.sharedSession updateProfilesWithCompletion:^{
-                dispatch_async(dispatch_get_current_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceAppliedNotification object:serviceIdentifier];
-                });
-            }];
-        });
-    }];
+        if (!requestError && !parseError)
+        {
+            dispatch_async(dispatch_get_current_queue(), ^{
+                SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"];
+                SinglySession.sharedSession.accountID = responseDictionary[@"account"];
+                [SinglySession.sharedSession updateProfilesWithCompletion:^{
+                    dispatch_async(dispatch_get_current_queue(), ^{
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceAppliedNotification object:serviceIdentifier];
+                    });
+                }];
+            });
+        }
+    });
 }
 
 @end

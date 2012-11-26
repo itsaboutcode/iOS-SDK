@@ -30,12 +30,11 @@
 #import <Foundation/Foundation.H>
 
 #import <SinglySDK/SinglyConstants.h>
-#import <SinglySDK/SinglySession.h>
-#import <SinglySDK/SinglyAPIRequest.h>
-#import <SinglySDK/SinglyLoginViewController.h>
-#import <SinglySDK/SinglyLoginPickerViewController.h>
-#import <SinglySDK/SinglyFriendPickerViewController.h>
-#import <SinglySDK/SinglySharingViewController.h>
-#import <SinglySDK/SinglyFriendModel.h>
-#import <SinglySDK/SinglyService.h>
 #import <SinglySDK/SinglyFacebookService.h>
+#import <SinglySDK/SinglyFriendModel.h>
+#import <SinglySDK/SinglyFriendPickerViewController.h>
+#import <SinglySDK/SinglyLoginPickerViewController.h>
+#import <SinglySDK/SinglyLoginViewController.h>
+#import <SinglySDK/SinglyService.h>
+#import <SinglySDK/SinglySession.h>
+//#import <SinglySDK/SinglySharingViewController.h>

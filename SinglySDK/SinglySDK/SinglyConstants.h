@@ -27,11 +27,15 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import <Foundation/Foundation.h>
+
 /*!
  *
  * @header SinglyConstants
  *
  */
+
+static NSString *kSinglyBaseURL = @"https://api.singly.com";
 
 static NSString *kSinglyServiceGoogle = @"google";
 static NSString *kSinglyServiceInstagram = @"instagram";

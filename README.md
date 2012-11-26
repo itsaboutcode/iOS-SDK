@@ -115,24 +115,25 @@ SinglyLoginPickerViewController *viewController = [[SinglyLoginPickerViewControl
 
 ### Making API Requests
 
-Once we have a valid session we can start making API requests.  We can make
-GET, POST or any method requests using the `SinglyAPIRequest`.  The request is
-only a description of the request that we are going to make, to actually
-execute the request we use our session and one of the `requestAPI:` methods.
-An example that requests the profiles list and is using blocks to handle the
-result is:
+Once we have a valid session we can start making API requests. We can make
+GET, POST or any method requests using the `SinglyRequest` class (which is
+simply a convenient subclass of `NSURLRequest`). The request is only a
+description of the request that we are going to make, to actually execute
+the request we use `NSURLConnection`.
+
+Here is an example that requests the profiles list and uses blocks to handle
+the result:
 
 ```objective-c
-SinglyAPIRequest *apiRequest = [SinglyAPIRequest apiRequestForEndpoint:@"profiles"
-                                                        withParameters:nil];
+SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profiles"];
 
-[[SinglySession sharedSession] requestAPI:apiRequest
-                    withCompletionHandler:^(NSError *error, id json) {
-    NSLog(@"The profiles result is: %@", json);
+[NSURLConnection sendAsynchronousRequest:request
+                                   queue:[NSOperationQueue mainQueue]
+                       completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    NSArray *profiles = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    NSLog(@"The profiles result is: %@", profiles);
 }];
 ```
-
-That's the basics and enough to get rolling!
 
 ## Building the Example App
 

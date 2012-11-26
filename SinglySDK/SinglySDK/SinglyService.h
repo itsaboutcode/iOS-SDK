@@ -129,6 +129,8 @@
  * from integrated auth, app-based auth then Singly auth via our standard
  * login web view.
  *
+ * @param viewController The view controller instance that is presenting the authorization request.
+ *
 **/
 - (void)requestAuthorizationWithViewController:(UIViewController *)viewController;
 
