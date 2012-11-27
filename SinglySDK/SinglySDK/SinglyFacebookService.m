@@ -71,18 +71,21 @@
 {
     BOOL isConfigured = NO;
 
-    // TODO Need to update this method to work correctly on iOS 5 (i.e. return NO)
-
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    NSArray *accounts = [accountStore accountsWithAccountType:accountType];
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
 
-    if ([accounts respondsToSelector:@selector(count)])
-        isConfigured = YES;
+    // iOS 6+
+    if (accountType)
+    {
+        NSArray *accounts = [accountStore accountsWithAccountType:accountType];
 
-    if (!isConfigured)
-        NSLog(@"[SinglySDK] Integrated Facebook auth is not available because this device is not signed in to Facebook.");
-    
+        if ([accounts respondsToSelector:@selector(count)])
+            isConfigured = YES;
+
+        if (!isConfigured)
+            NSLog(@"[SinglySDK] Integrated Facebook auth is not available because this device is not signed in to Facebook.");
+    }
+
     return isConfigured;
 }
 
