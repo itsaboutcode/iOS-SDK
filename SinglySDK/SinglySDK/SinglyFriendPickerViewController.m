@@ -111,14 +111,39 @@
     SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"types/contacts" andParameters:@{ @"limit": @"200" }];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
     {
-        // TODO If not a json array, set isRefreshing = NO and return...
 
-        NSArray *friends = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
-        _friends = [NSMutableDictionary dictionaryWithCapacity:friends.count];
+        NSError *parseError;
 
-        NSLog(@"[SinglySDK] Loaded %d friends", friends.count);
+        // Check for Request Errors
+        if (requestError)
+        {
+            NSLog(@"[SinglySDK:SinglySession] A request error occurred while attempting to load friends: %@", requestError);
+            self.isRefreshing = NO;
+            return;
+        }
 
-        for (NSDictionary *friend in friends)
+        // Parse the Response
+        id parsedFriends = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+        if (parseError)
+        {
+            NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to parse friends: %@", parseError);
+            self.isRefreshing = NO;
+            return;
+        }
+
+        // We are expecting an array, so if we receive a dictionary it is
+        // likely because of an error...
+        else if ([parsedFriends isKindOfClass:[NSDictionary class]] && parsedFriends[@"error"])
+        {
+            NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to request friends: %@", parsedFriends[@"error"]);
+            self.isRefreshing = NO;
+            return;
+        }
+
+        NSLog(@"[SinglySDK] Loaded %d friends: %@", ((NSArray *)parsedFriends).count, parsedFriends);
+
+        _friends = [NSMutableDictionary dictionary];
+        for (NSDictionary *friend in parsedFriends)
         {
             NSDictionary *oEmbed = [friend objectForKey:@"oembed"];
 

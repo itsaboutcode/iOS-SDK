@@ -183,7 +183,7 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
  * @param block The block to call when the profile update is complete
  *
 **/
-- (void)updateProfilesWithCompletion:(void (^)())block;
+- (void)updateProfilesWithCompletion:(void (^)(BOOL))block;
 
 /*!
  *

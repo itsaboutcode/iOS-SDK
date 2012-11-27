@@ -73,7 +73,8 @@ static SinglySession *sharedInstance = nil;
 
     dispatch_queue_t resultQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self updateProfilesWithCompletion:^{
+        [self updateProfilesWithCompletion:^(BOOL success)
+        {
             NSString *foundAccountID = [self.profiles objectForKey:@"id"];
             BOOL isReady = ([foundAccountID isEqualToString:self.accountID]);
             dispatch_sync(resultQueue, ^{
@@ -88,22 +89,29 @@ static SinglySession *sharedInstance = nil;
     [self updateProfilesWithCompletion:nil];
 }
 
-- (void)updateProfilesWithCompletion:(void(^)())block
+- (void)updateProfilesWithCompletion:(void (^)(BOOL))block
 {
     dispatch_queue_t curQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSError *requestError;
         NSError *parseError;
         NSURLResponse *response;
+        BOOL isSuccessful = NO;
+
         SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profiles"];
         NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
 
         // Check for invalid or expired tokens...
-        if (requestError && [(NSHTTPURLResponse *)response statusCode] == 401)
+        if (requestError)
         {
-            NSLog(@"[SinglySDK:SinglySession] Access token is invalid or expired! Need to reauthorize...");
-            _profiles = nil;
-            self.accessToken = nil;
+            NSLog(@"[SinglySDK:SinglySession] An error occurred while requesting profiles: %@", requestError);
+            _profiles = [NSDictionary dictionary];
+
+            if ([(NSHTTPURLResponse *)response statusCode] == 401)
+            {
+                NSLog(@"[SinglySDK:SinglySession] Access token is invalid or expired! Need to reauthorize...");
+                self.accessToken = nil;
+            }
         }
 
         else
@@ -112,14 +120,17 @@ static SinglySession *sharedInstance = nil;
             if (!requestError && !parseError)
             {
                 if ([responseDictionary valueForKey:@"error"])
-                    _profiles = nil;
+                    _profiles = [NSDictionary dictionary];
                 else
                     _profiles = responseDictionary;
                 [[NSNotificationCenter defaultCenter] postNotificationName:kSinglySessionProfilesUpdatedNotification object:self];
+                isSuccessful = YES;
             }
         }
 
-        if (block) dispatch_sync(curQueue, block);
+        if (block) dispatch_sync(curQueue, ^{
+            block(isSuccessful);
+        });
     });
 }
 
@@ -163,7 +174,8 @@ static SinglySession *sharedInstance = nil;
             dispatch_async(dispatch_get_current_queue(), ^{
                 SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"];
                 SinglySession.sharedSession.accountID = responseDictionary[@"account"];
-                [SinglySession.sharedSession updateProfilesWithCompletion:^{
+                [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL successful)
+                {
                     dispatch_async(dispatch_get_current_queue(), ^{
                         [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceAppliedNotification object:serviceIdentifier];
                     });

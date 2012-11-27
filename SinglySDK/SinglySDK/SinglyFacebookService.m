@@ -201,7 +201,8 @@
                 NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
                 SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"];
                 SinglySession.sharedSession.accountID = responseDictionary[@"account"];
-                [SinglySession.sharedSession updateProfilesWithCompletion:^{
+                [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL success)
+                {
                     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
                         [self.delegate singlyServiceDidAuthorize:self];
                 }];

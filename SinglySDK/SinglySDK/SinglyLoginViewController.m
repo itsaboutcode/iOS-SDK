@@ -219,7 +219,8 @@
     // Save the access token and account id
     self.session.accessToken = [jsonResult objectForKey:@"access_token"];
     self.session.accountID = [jsonResult objectForKey:@"account"];
-    [self.session updateProfilesWithCompletion:^{
+    [self.session updateProfilesWithCompletion:^(BOOL success)
+    {
         NSLog(@"All set to do requests as account %@ with access token %@", self.session.accountID, self.session.accessToken);
         if (self.delegate)
             [self.delegate singlyLoginViewController:self didLoginForService:self.targetService];

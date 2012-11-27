@@ -275,7 +275,8 @@
             NSLog(@"Error: %@", requestError);
         }
 
-        [SinglySession.sharedSession updateProfilesWithCompletion:^{
+        [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL success)
+        {
             [self.tableView reloadData];
         }];
 
