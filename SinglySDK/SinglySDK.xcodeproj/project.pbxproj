@@ -13,6 +13,7 @@
 		825B6D95161C99EF0034DB92 /* NSString+URLEncoded.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */; };
 		8296F44A1611F7360004BA0B /* SinglyFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8296F4481611F7360004BA0B /* SinglyFriendModel.m */; };
 		82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */; };
+		D00348381665322D0048513A /* SinglyRequest+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D00348371665322D0048513A /* SinglyRequest+Internal.h */; };
 		D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
 		D02B537216309C7700F1F535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B537116309C7700F1F535 /* Foundation.framework */; };
 		D02B539616309CDF00F1F535 /* NSString+URLEncoded.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */; };
@@ -165,6 +166,7 @@
 		82C6252F16011E7900BF5225 /* SinglySharingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySharingViewController.m; sourceTree = "<group>"; };
 		82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerViewController.h; sourceTree = "<group>"; };
 		82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerViewController.m; sourceTree = "<group>"; };
+		D00348371665322D0048513A /* SinglyRequest+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyRequest+Internal.h"; sourceTree = "<group>"; };
 		D021CBBB162C933D00DE9922 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D021CBC5162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerServiceCell.h; sourceTree = "<group>"; };
 		D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerServiceCell.m; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 			isa = PBXGroup;
 			children = (
 				D090E34F165BE96E00FE8273 /* SinglyRequest.h */,
+				D00348371665322D0048513A /* SinglyRequest+Internal.h */,
 				D090E350165BE96E00FE8273 /* SinglyRequest.m */,
 			);
 			name = "API Requests";
@@ -578,6 +581,7 @@
 				D090E346165B0ED700FE8273 /* SinglyLoginPickerServiceCell+Internal.h in Headers */,
 				D090E349165B116700FE8273 /* SinglyFriendPickerCell+Internal.h in Headers */,
 				D090E351165BE96E00FE8273 /* SinglyRequest.h in Headers */,
+				D00348381665322D0048513A /* SinglyRequest+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

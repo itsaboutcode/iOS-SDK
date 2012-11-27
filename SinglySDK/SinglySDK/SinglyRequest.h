@@ -97,7 +97,34 @@
 **/
 - (id)initWithEndpoint:(NSString *)endpoint andParameters:(NSDictionary *)parameters;
 
-+ (NSURL *)URLForEndpoint:(NSString *)endpoint andParameters:(NSDictionary *)parameters;
+/*!
+ *
+ * Returns the URL for a specified endpoint that has been customized for making
+ * a request to the Singly API (such as the access_token parameter, etc).
+ *
+ * @param endpoint The endpoint for the new request.
+ * @param parameters The parameters for the new request.
+ *
+ * @returns The URL to use when contacting the Singly API service.
+ *
+**/
++ (NSURL *)URLForEndpoint:(NSString *)endpoint withParameters:(NSDictionary *)parameters;
+
+/*!
+ *
+ * Returns the URL for a specified endpoint that has been customized for making
+ * a request to the Singly API, with the option to disable the inclusion of any
+ * authorization parameters (e.g. access_token) if your request does not require
+ * authorization.
+ *
+ * @param endpoint The endpoint for the new request.
+ * @param parameters The parameters for the new request.
+ * @param authorization Whether or not authorization parameters should be included.
+ *
+ * @returns The URL to use when contacting the Singly API service.
+ *
+**/
++ (NSURL *)URLForEndpoint:(NSString *)endpoint withParameters:(NSDictionary *)parameters andAuthorization:(BOOL)authorization;
 
 /// ----------------------------------------------------------------------------
 /// @name Accessing Request Properties
@@ -118,5 +145,15 @@
  *
 **/
 @property (nonatomic, strong) NSDictionary *parameters;
+
+/*!
+ *
+ * Whether or not the request requires authorization. This defaults to `YES`,
+ * however, it can be set to `NO` to prevent the passing of credentials (which
+ * may be necessary in case you have an invalidated access token or for requests
+ * that do not need authorization).
+ *
+**/
+@property (nonatomic, assign) BOOL isAuthorizedRequest;
 
 @end

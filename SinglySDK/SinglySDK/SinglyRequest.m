@@ -30,6 +30,7 @@
 #import "NSString+URLEncoded.h"
 #import "SinglyConstants.h"
 #import "SinglyRequest.h"
+#import "SinglyRequest+Internal.h"
 #import "SinglySession.h"
 
 @implementation SinglyRequest
@@ -54,40 +55,76 @@
 
 - (id)initWithEndpoint:(NSString *)endpoint andParameters:(NSDictionary *)parameters
 {
-    _endpoint = endpoint;
-    _parameters = parameters;
-    self = [super initWithURL:self.URL];
+    self = [super init];
     if (self)
     {
-        // ...
+        _endpoint = endpoint;
+        _parameters = parameters;
+        _isAuthorizedRequest = YES;
+        [self updateURL];
     }
     return self;
 }
 
-- (NSURL *)URL
+#pragma mark - Properties
+
+- (void)setEndpoint:(NSString *)endpoint
 {
-    return [SinglyRequest URLForEndpoint:self.endpoint andParameters:self.parameters];
+    _endpoint = endpoint;
+    [self updateURL];
 }
 
-+ (NSURL *)URLForEndpoint:(NSString *)endpoint andParameters:(NSDictionary *)parameters
+- (void)setIsAuthorizedRequest:(BOOL)isAuthorizedRequest
 {
-    NSString *apiURLString = [NSString stringWithFormat:@"%@/%@?", kSinglyBaseURL, endpoint];
+    _isAuthorizedRequest = isAuthorizedRequest;
+    [self updateURL];
+}
+
+- (void)setParameters:(NSDictionary *)parameters
+{
+    _parameters = parameters;
+    [self updateURL];
+}
+
+#pragma mark - Endpoint URLs
+
+- (void)updateURL
+{
+    self.URL = [SinglyRequest URLForEndpoint:self.endpoint
+                              withParameters:self.parameters
+                            andAuthorization:self.isAuthorizedRequest];
+}
+
++ (NSURL *)URLForEndpoint:(NSString *)endpoint withParameters:(NSDictionary *)parameters
+{
+    return [SinglyRequest URLForEndpoint:endpoint
+                          withParameters:parameters
+                        andAuthorization:YES];
+}
+
++ (NSURL *)URLForEndpoint:(NSString *)endpoint withParameters:(NSDictionary *)parameters andAuthorization:(BOOL)isAuthorized
+{
+    NSMutableString *apiURLString = [NSMutableString stringWithFormat:@"%@/%@", kSinglyBaseURL, endpoint];
+
+    // Add Query Parameter Separator to URL
+    if (isAuthorized || parameters.count > 0)
+        [apiURLString appendString:@"?"];
 
     // Add Parameters to URL
     if (parameters)
     {
-        NSMutableString *paramString = [NSMutableString string];
         [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop)
          {
              if (![value isKindOfClass:[NSNull class]])
-                 [paramString appendFormat:@"&%@=%@", [key URLEncodedString], [value URLEncodedString]];
+                 [apiURLString appendFormat:@"&%@=%@", [key URLEncodedString], [value URLEncodedString]];
          }];
-        apiURLString = [apiURLString stringByAppendingString:paramString];
     }
 
     // Add Singly Access Token to URL
-    if (SinglySession.sharedSession.accessToken)
-        apiURLString = [apiURLString stringByAppendingFormat:@"&access_token=%@", SinglySession.sharedSession.accessToken];
+    if (isAuthorized && SinglySession.sharedSession.accessToken)
+        [apiURLString appendFormat:@"&access_token=%@", SinglySession.sharedSession.accessToken];
+
+//    NSLog(@"[SinglySDK:SinglyRequest] Generated URL: %@", apiURLString);
 
     return [NSURL URLWithString:apiURLString];
 }

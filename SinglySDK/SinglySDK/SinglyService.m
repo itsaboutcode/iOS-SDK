@@ -74,11 +74,12 @@
     // If we already have the Client ID, do not attempt to fetch it again...
     if (self.clientID) return;
 
-    // Make a request to the Singly API for the Client ID...
+    // Configure the Request
     NSError *requestError;
     NSError *parseError;
     NSURLResponse *response;
-    SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"/auth/%@/client_id/%@", SinglySession.sharedSession.clientID, self.serviceIdentifier]];
+    SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/client_id/%@", SinglySession.sharedSession.clientID, self.serviceIdentifier]];
+    request.isAuthorizedRequest = NO;
 
     // Send the request and check for errors...
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];

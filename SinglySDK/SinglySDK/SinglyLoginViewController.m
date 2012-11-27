@@ -58,7 +58,7 @@
     [self.view addSubview:self.webView];
 }
 
-- (void)viewWillAppear:(BOOL)animated;
+- (void)viewWillAppear:(BOOL)animated
 {
     if (self.isModal)
     {

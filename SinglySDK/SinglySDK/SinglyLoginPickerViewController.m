@@ -76,8 +76,11 @@
         // Display Activity Indicator
         [SinglyActivityIndicatorView showIndicator];
 
-        // Load Services Dictionary
+        // Configure the Services Request
         SinglyRequest *servicesRequest = [SinglyRequest requestWithEndpoint:@"services"];
+        servicesRequest.isAuthorizedRequest = NO;
+
+        // Load Services Dictionary
         [NSURLConnection sendAsynchronousRequest:servicesRequest
                                            queue:[NSOperationQueue mainQueue]
                                completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)

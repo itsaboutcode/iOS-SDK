@@ -95,17 +95,28 @@ static SinglySession *sharedInstance = nil;
         NSError *requestError;
         NSError *parseError;
         NSURLResponse *response;
-        SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:@"profiles"];
+        SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profiles"];
         NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
-        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
 
-        if (!requestError && !parseError)
+        // Check for invalid or expired tokens...
+        if (requestError && [(NSHTTPURLResponse *)response statusCode] == 401)
         {
-            if ([responseDictionary valueForKey:@"error"])
-                _profiles = nil;
-            else
-                _profiles = responseDictionary;
-            [[NSNotificationCenter defaultCenter] postNotificationName:kSinglySessionProfilesUpdatedNotification object:self];
+            NSLog(@"[SinglySDK:SinglySession] Access token is invalid or expired! Need to reauthorize...");
+            _profiles = nil;
+            self.accessToken = nil;
+        }
+
+        else
+        {
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+            if (!requestError && !parseError)
+            {
+                if ([responseDictionary valueForKey:@"error"])
+                    _profiles = nil;
+                else
+                    _profiles = responseDictionary;
+                [[NSNotificationCenter defaultCenter] postNotificationName:kSinglySessionProfilesUpdatedNotification object:self];
+            }
         }
 
         if (block) dispatch_sync(curQueue, block);
