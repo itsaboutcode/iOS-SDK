@@ -14,6 +14,19 @@
 		8296F44A1611F7360004BA0B /* SinglyFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8296F4481611F7360004BA0B /* SinglyFriendModel.m */; };
 		82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */; };
 		D00348381665322D0048513A /* SinglyRequest+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D00348371665322D0048513A /* SinglyRequest+Internal.h */; };
+		D003483B16666C8B0048513A /* SinglyKeychainItemWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = D003483916666C8B0048513A /* SinglyKeychainItemWrapper.h */; };
+		D003483C16666C8B0048513A /* SinglyKeychainItemWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = D003483916666C8B0048513A /* SinglyKeychainItemWrapper.h */; };
+		D003483D16666C8B0048513A /* SinglyKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D003483E16666C8B0048513A /* SinglyKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D003484116666ED50048513A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D003483F16666E650048513A /* Security.framework */; };
+		D003484216666EE80048513A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D021CBBB162C933D00DE9922 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D003484316666EE80048513A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B537116309C7700F1F535 /* Foundation.framework */; };
+		D003484416666EE80048513A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D003483F16666E650048513A /* Security.framework */; };
+		D003484516666EE80048513A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06194F11638668400A906F7 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D003484616666EE80048513A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B538116309C7700F1F535 /* UIKit.framework */; };
+		D003484716666EFE0048513A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B538116309C7700F1F535 /* UIKit.framework */; };
+		D00348541666B56F0048513A /* SinglySession+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D00348531666B56F0048513A /* SinglySession+Internal.h */; };
+		D00348551666B56F0048513A /* SinglySession+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D00348531666B56F0048513A /* SinglySession+Internal.h */; };
 		D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
 		D02B537216309C7700F1F535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B537116309C7700F1F535 /* Foundation.framework */; };
 		D02B539616309CDF00F1F535 /* NSString+URLEncoded.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */; };
@@ -167,6 +180,10 @@
 		82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerViewController.h; sourceTree = "<group>"; };
 		82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerViewController.m; sourceTree = "<group>"; };
 		D00348371665322D0048513A /* SinglyRequest+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyRequest+Internal.h"; sourceTree = "<group>"; };
+		D003483916666C8B0048513A /* SinglyKeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyKeychainItemWrapper.h; sourceTree = "<group>"; };
+		D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyKeychainItemWrapper.m; sourceTree = "<group>"; };
+		D003483F16666E650048513A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D00348531666B56F0048513A /* SinglySession+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglySession+Internal.h"; sourceTree = "<group>"; };
 		D021CBBB162C933D00DE9922 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D021CBC5162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerServiceCell.h; sourceTree = "<group>"; };
 		D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerServiceCell.m; sourceTree = "<group>"; };
@@ -247,6 +264,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D003484216666EE80048513A /* Accounts.framework in Frameworks */,
+				D003484316666EE80048513A /* Foundation.framework in Frameworks */,
+				D003484416666EE80048513A /* Security.framework in Frameworks */,
+				D003484516666EE80048513A /* Social.framework in Frameworks */,
+				D003484616666EE80048513A /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +278,9 @@
 			files = (
 				D06194E8163864AD00A906F7 /* Accounts.framework in Frameworks */,
 				D02B537216309C7700F1F535 /* Foundation.framework in Frameworks */,
+				D003484116666ED50048513A /* Security.framework in Frameworks */,
 				D06194F31638668E00A906F7 /* Social.framework in Frameworks */,
+				D003484716666EFE0048513A /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +358,16 @@
 		825B6D91161C99CE0034DB92 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D0034852166672180048513A /* Extensions */,
+				D003483916666C8B0048513A /* SinglyKeychainItemWrapper.h */,
+				D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		D0034852166672180048513A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
 				D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */,
 				D08C1BD71649C37000035775 /* NSDictionary+QueryString.m */,
 				825B6D92161C99EF0034DB92 /* NSString+URLEncoded.h */,
@@ -343,18 +377,19 @@
 				D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */,
 				D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */,
 			);
-			name = Utilities;
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		D053EF8E16271BC9008B8BA1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				D021CBBB162C933D00DE9922 /* Accounts.framework */,
-				D053EF8F16271BC9008B8BA1 /* SenTestingKit.framework */,
 				D02B535B1630989A00F1F535 /* CoreFoundation.framework */,
 				D02B537116309C7700F1F535 /* Foundation.framework */,
-				D02B538116309C7700F1F535 /* UIKit.framework */,
+				D003483F16666E650048513A /* Security.framework */,
+				D053EF8F16271BC9008B8BA1 /* SenTestingKit.framework */,
 				D06194F11638668400A906F7 /* Social.framework */,
+				D02B538116309C7700F1F535 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -519,6 +554,7 @@
 			isa = PBXGroup;
 			children = (
 				821D088915ED17B000ECFED0 /* SinglySession.h */,
+				D00348531666B56F0048513A /* SinglySession+Internal.h */,
 				821D088A15ED17B000ECFED0 /* SinglySession.m */,
 			);
 			name = Sessions;
@@ -582,6 +618,8 @@
 				D090E349165B116700FE8273 /* SinglyFriendPickerCell+Internal.h in Headers */,
 				D090E351165BE96E00FE8273 /* SinglyRequest.h in Headers */,
 				D00348381665322D0048513A /* SinglyRequest+Internal.h in Headers */,
+				D003483B16666C8B0048513A /* SinglyKeychainItemWrapper.h in Headers */,
+				D00348541666B56F0048513A /* SinglySession+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +649,8 @@
 				D090E347165B0ED700FE8273 /* SinglyLoginPickerServiceCell+Internal.h in Headers */,
 				D090E34A165B116700FE8273 /* SinglyFriendPickerCell+Internal.h in Headers */,
 				D090E352165BE96E00FE8273 /* SinglyRequest.h in Headers */,
+				D003483C16666C8B0048513A /* SinglyKeychainItemWrapper.h in Headers */,
+				D00348551666B56F0048513A /* SinglySession+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,7 +832,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\nif [ ! -e /usr/local/bin/appledoc ]; then\n    echo \"warning: Unable to generate documentation because AppleDoc is not installed. Please install AppleDoc by using Homebrew (e.g. brew install appledoc).\"\n    exit 0\nfi\n\n/usr/local/bin/appledoc \\\n  --project-name \"${PROJECT_NAME}\" \\\n  --project-company \"Singly, Inc\" \\\n  --company-id \"com.singly\" \\\n  --output \"${PROJECT_DIR}/Documentation\" \\\n  --docset-atom-filename \"SinglySDK.atom\" \\\n  --docset-feed-url \"http://github.com/Singly/iOS-SDK/%DOCSETATOMFILENAME\" \\\n  --docset-package-url \"http://github.com/Singly/iOS-SDK/%DOCSETPACKAGEFILENAME\" \\\n  --docset-fallback-url \"http://github.com/Singly/iOS-SDK/\" \\\n  --publish-docset \\\n  --logformat xcode \\\n  --keep-undocumented-objects \\\n  --keep-undocumented-members \\\n  --keep-intermediate-files \\\n  --no-repeat-first-par \\\n  --no-warn-invalid-crossref \\\n  --exit-threshold 2 \\\n  --ignore \".m\" \\\n  --ignore \"SinglySDKTests\" \\\n  --ignore \"SinglySDK/SinglySDK/Libraries\" \\\n  --ignore \"+Internal.h\" \\\n  --ignore \"DEFacebookGradientView.h\" \\\n  --ignore \"DEFacebookGradientView.m\" \\\n  --ignore \"DEFacebookSheetCardView.h\" \\\n  --ignore \"DEFacebookSheetCardView.m\" \\\n  --ignore \"DEFacebookTextView.h\" \\\n  --ignore \"DEFacebookTextView.m\" \\\n  --ignore \"DERuledView.h\" \\\n  --ignore \"DERuledView.m\" \\\n  --ignore \"UIApplication+DEFacebookComposeViewController.h\" \\\n  --ignore \"UIApplication+DEFacebookComposeViewController.m\" \\\n  --ignore \"UIDevice+DEFacebookComposeViewController.h\" \\\n  --ignore \"UIDevice+DEFacebookComposeViewController.m\" \\\n  --ignore \"SinglySharingViewController.h\" \\\n  --ignore \"SinglySharingViewController.m\" \\\n  --ignore \"SinglyActivityIndicatorView.h\" \\\n  --ignore \"SinglyActivityIndicatorView.m\" \\\n  --index-desc \"${PROJECT_DIR}/../README.md\" \\\n  \"${PROJECT_DIR}\"\n";
+			shellScript = "\nif [ ! -e /usr/local/bin/appledoc ]; then\n    echo \"warning: Unable to generate documentation because AppleDoc is not installed. Please install AppleDoc by using Homebrew (e.g. brew install appledoc).\"\n    exit 0\nfi\n\n/usr/local/bin/appledoc \\\n  --project-name \"${PROJECT_NAME}\" \\\n  --project-company \"Singly, Inc\" \\\n  --company-id \"com.singly\" \\\n  --output \"${PROJECT_DIR}/Documentation\" \\\n  --docset-atom-filename \"SinglySDK.atom\" \\\n  --docset-feed-url \"http://github.com/Singly/iOS-SDK/%DOCSETATOMFILENAME\" \\\n  --docset-package-url \"http://github.com/Singly/iOS-SDK/%DOCSETPACKAGEFILENAME\" \\\n  --docset-fallback-url \"http://github.com/Singly/iOS-SDK/\" \\\n  --publish-docset \\\n  --logformat xcode \\\n  --keep-undocumented-objects \\\n  --keep-undocumented-members \\\n  --keep-intermediate-files \\\n  --no-repeat-first-par \\\n  --no-warn-invalid-crossref \\\n  --exit-threshold 2 \\\n  --ignore \".m\" \\\n  --ignore \"SinglySDKTests\" \\\n  --ignore \"SinglySDK/SinglySDK/Libraries\" \\\n  --ignore \"+Internal.h\" \\\n  --ignore \"DEFacebookGradientView.h\" \\\n  --ignore \"DEFacebookGradientView.m\" \\\n  --ignore \"DEFacebookSheetCardView.h\" \\\n  --ignore \"DEFacebookSheetCardView.m\" \\\n  --ignore \"DEFacebookTextView.h\" \\\n  --ignore \"DEFacebookTextView.m\" \\\n  --ignore \"DERuledView.h\" \\\n  --ignore \"DERuledView.m\" \\\n  --ignore \"UIApplication+DEFacebookComposeViewController.h\" \\\n  --ignore \"UIApplication+DEFacebookComposeViewController.m\" \\\n  --ignore \"UIDevice+DEFacebookComposeViewController.h\" \\\n  --ignore \"UIDevice+DEFacebookComposeViewController.m\" \\\n  --ignore \"SinglySharingViewController.h\" \\\n  --ignore \"SinglySharingViewController.m\" \\\n  --ignore \"SinglyActivityIndicatorView.h\" \\\n  --ignore \"SinglyActivityIndicatorView.m\" \\\n  --ignore \"SinglyKeychainWrapper.h\" \\\n  --ignore \"SinglyKeychainWrapper.m\" \\\n  --index-desc \"${PROJECT_DIR}/../README.md\" \\\n  \"${PROJECT_DIR}\"\n";
 		};
 		D0E158DD1631BF9B000D0BCA /* Create Universal Library */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -844,6 +884,7 @@
 				D08C1BDB1649C37000035775 /* NSDictionary+QueryString.m in Sources */,
 				D08C1BE11649C48900035775 /* NSURL+AccessToken.m in Sources */,
 				D090E354165BE96E00FE8273 /* SinglyRequest.m in Sources */,
+				D003483E16666C8B0048513A /* SinglyKeychainItemWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -866,6 +907,7 @@
 				D08C1BDA1649C37000035775 /* NSDictionary+QueryString.m in Sources */,
 				D08C1BE01649C48900035775 /* NSURL+AccessToken.m in Sources */,
 				D090E353165BE96E00FE8273 /* SinglyRequest.m in Sources */,
+				D003483D16666C8B0048513A /* SinglyKeychainItemWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

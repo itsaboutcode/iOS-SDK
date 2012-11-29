@@ -73,10 +73,7 @@
             NSDictionary *oEmbed = [friend objectForKey:@"oembed"];
 
             if (!oEmbed || ![oEmbed objectForKey:@"title"])
-            {
                 NSLog(@"Skipped for no title or oembed");
-                continue;
-            }
 
             NSMutableDictionary *friendInfo = [NSMutableDictionary dictionaryWithDictionary:oEmbed];
             // Parse the idr and get the service out

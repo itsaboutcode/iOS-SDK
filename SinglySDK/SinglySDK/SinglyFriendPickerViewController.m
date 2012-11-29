@@ -140,7 +140,7 @@
             return;
         }
 
-        NSLog(@"[SinglySDK] Loaded %d friends: %@", ((NSArray *)parsedFriends).count, parsedFriends);
+        NSLog(@"[SinglySDK] Loaded %d friends", ((NSArray *)parsedFriends).count);
 
         _friends = [NSMutableDictionary dictionary];
         for (NSDictionary *friend in parsedFriends)
@@ -148,10 +148,7 @@
             NSDictionary *oEmbed = [friend objectForKey:@"oembed"];
 
             if (!oEmbed || ![oEmbed objectForKey:@"title"])
-            {
-                NSLog(@"Skipped for no title or oembed");
                 continue;
-            }
 
             NSMutableArray *profiles = [_friends objectForKey:[oEmbed objectForKey:@"title"]];
             if (!profiles)

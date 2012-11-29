@@ -29,10 +29,11 @@
 
 #import "NSURL+AccessToken.h"
 #import "SinglyFacebookService.h"
+#import "SinglyKeychainItemWrapper.h"
 #import "SinglyRequest.h"
 #import "SinglySession.h"
+#import "SinglySession+Internal.h"
 
-static NSString *kSinglyAccountIDKey = @"com.singly.accountID";
 static NSString *kSinglyAccessTokenKey = @"com.singly.accessToken";
 
 @implementation SinglySession
@@ -46,24 +47,34 @@ static SinglySession *sharedInstance = nil;
     return sharedInstance;
 }
 
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        _accessTokenWrapper = [[SinglyKeychainItemWrapper alloc] initWithIdentifier:kSinglyAccessTokenKey accessGroup:nil];
+    }
+    return self;
+}
+
 - (void)setAccountID:(NSString *)accountID
 {
-    [[NSUserDefaults standardUserDefaults] setValue:accountID forKey:kSinglyAccountIDKey];
+    [self.accessTokenWrapper setObject:accountID forKey:(__bridge id)kSecAttrAccount];
 }
 
 - (NSString *)accountID
 {
-    return [[NSUserDefaults standardUserDefaults] valueForKey:kSinglyAccountIDKey];
+    return [self.accessTokenWrapper objectForKey:(__bridge id)kSecAttrAccount];
 }
 
 - (void)setAccessToken:(NSString *)accessToken
 {
-    [[NSUserDefaults standardUserDefaults] setValue:accessToken forKey:kSinglyAccessTokenKey];
+    [self.accessTokenWrapper setObject:accessToken forKey:(__bridge id)kSecValueData];
 }
 
 - (NSString *)accessToken
 {
-    return [[NSUserDefaults standardUserDefaults] valueForKey:kSinglyAccessTokenKey];
+    return [self.accessTokenWrapper objectForKey:(__bridge id)kSecValueData];
 }
 
 - (void)startSessionWithCompletionHandler:(void (^)(BOOL))block
@@ -143,7 +154,7 @@ static SinglySession *sharedInstance = nil;
         NSString *accessToken = [url extractAccessToken];
         if (accessToken)
         {
-            [[SinglySession sharedSession] applyService:@"facebook" withToken:accessToken];
+            [SinglySession.sharedSession applyService:@"facebook" withToken:accessToken];
             return YES;
         }
     }
@@ -172,7 +183,7 @@ static SinglySession *sharedInstance = nil;
         if (!requestError && !parseError)
         {
             dispatch_async(dispatch_get_current_queue(), ^{
-                SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"];
+                SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"][@"access_token"];
                 SinglySession.sharedSession.accountID = responseDictionary[@"account"];
                 [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL successful)
                 {

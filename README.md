@@ -32,9 +32,9 @@ pre-packaged distribution](https://github.com/downloads/Singly/iOS-SDK/Singly%20
    pre-packaged distribution into your Xcode project. You will be asked to
    add them to your targets; do this.
 
-2. The Singly SDK requires both the Accounts and QuartzCore frameworks. Under
-   your Build Phases setting, add the `Accounts` and `QuartzCore` frameworks
-   to the "Link Binary With Libraries" phase.
+2. The Singly SDK requires the Accounts, Security and QuartzCore frameworks.
+   Under your Build Phases setting, add the `Accounts`, `Security` and
+   `QuartzCore` frameworks to the "Link Binary With Libraries" phase.
 
 ### Opening a Session to Singly
 
@@ -208,7 +208,7 @@ following method in order for the round-trip process to complete:
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-  return [[SinglySession sharedSession] handleOpenURL:url];
+  return [SinglySession.sharedSession handleOpenURL:url];
 }
 ```
 
@@ -233,6 +233,6 @@ You may also contact the maintainer of the Singly iOS SDK, Justin Mecham, at
 
 ## License
 
-The Singly SDK is licensed under the terms of the BSD License. Please see the
-[LICENSE](http://github.com/singly/ios-sdk/blob/master/LICENSE) file for more
-information.
+The Singly iOS SDK is licensed under the terms of the BSD License. Please see
+the [LICENSE](http://github.com/singly/ios-sdk/blob/master/LICENSE) file for
+more information.
