@@ -121,6 +121,11 @@
 
 #pragma mark -
 
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
+{
+    [self requestAuthorizationFromViewController:viewController withScopes:nil];
+}
+
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
 {
 
