@@ -96,8 +96,10 @@
     } else {
         urlStr = [urlStr stringByAppendingString:@"&account=false"];
     }
-    if (self.scope) {
-        urlStr = [urlStr stringByAppendingFormat:@"&scope=%@", self.scope];
+    if (self.scopes)
+    {
+        NSString *scopes = [self.scopes componentsJoinedByString:@","];
+        urlStr = [urlStr stringByAppendingFormat:@"&scope=%@", scopes];
     }
     if (self.flags) {
         urlStr = [urlStr stringByAppendingFormat:@"&flag=%@", self.flags];

@@ -29,10 +29,6 @@
 
 #import "SinglyMainViewController.h"
 
-@interface SinglyMainViewController ()
-
-@end
-
 @implementation SinglyMainViewController
 
 - (void)viewDidLoad

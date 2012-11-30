@@ -249,7 +249,7 @@
 
     SinglyFacebookService *facebookService = [SinglyService serviceWithIdentifier:@"facebook"];
     facebookService.delegate = self;
-    [facebookService requestAuthorizationWithViewController:self];
+    [facebookService requestAuthorizationFromViewController:self];
 
 }
 

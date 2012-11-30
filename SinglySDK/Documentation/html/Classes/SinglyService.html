@@ -62,7 +62,9 @@
 	
 	<option value="//api/name/initWithIdentifier:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithIdentifier:</option>
 	
-	<option value="//api/name/requestAuthorizationWithViewController:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAuthorizationWithViewController:</option>
+	<option value="//api/name/requestAuthorizationFromViewController:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAuthorizationFromViewController:</option>
+	
+	<option value="//api/name/requestAuthorizationFromViewController:withScopes:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAuthorizationFromViewController:withScopes:</option>
 	
 	
 	
@@ -112,7 +114,9 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithIdentifier:">initWithIdentifier:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAuthorizationWithViewController:">requestAuthorizationWithViewController:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAuthorizationFromViewController:">requestAuthorizationFromViewController:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAuthorizationFromViewController:withScopes:">requestAuthorizationFromViewController:withScopes:</a></span></li>
 	
 </ul></li>
 
@@ -215,7 +219,16 @@ by the service identifier.</p></span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/requestAuthorizationWithViewController:">&ndash;&nbsp;requestAuthorizationWithViewController:</a></code>
+		<code><a href="#//api/name/requestAuthorizationFromViewController:">&ndash;&nbsp;requestAuthorizationFromViewController:</a></code>
+		<span class="tooltip"><p>Requests authorization from the user through any means possible, falling back
+from integrated auth, app-based auth then Singly auth via our standard
+login web view.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestAuthorizationFromViewController:withScopes:">&ndash;&nbsp;requestAuthorizationFromViewController:withScopes:</a></code>
 		<span class="tooltip"><p>Requests authorization from the user through any means possible, falling back
 from integrated auth, app-based auth then Singly auth via our standard
 login web view.</p></span>
@@ -526,8 +539,8 @@ by the service identifier.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/requestAuthorizationWithViewController:" title="requestAuthorizationWithViewController:"></a>
-	<h3 class="subsubtitle method-title">requestAuthorizationWithViewController:</h3>
+	<a name="//api/name/requestAuthorizationFromViewController:" title="requestAuthorizationFromViewController:"></a>
+	<h3 class="subsubtitle method-title">requestAuthorizationFromViewController:</h3>
 	
 	
 	
@@ -539,7 +552,7 @@ login web view.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)requestAuthorizationWithViewController:(UIViewController *)<em>viewController</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)requestAuthorizationFromViewController:(UIViewController *)<em>viewController</em></code></div>
 
     
 	
@@ -549,6 +562,59 @@ login web view.</p>
 		<dl class="argument-def parameter-def">
 			<dt><em>viewController</em></dt>
 			<dd><p>The view controller instance that is presenting the authorization request.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/requestAuthorizationFromViewController:withScopes:" title="requestAuthorizationFromViewController:withScopes:"></a>
+	<h3 class="subsubtitle method-title">requestAuthorizationFromViewController:withScopes:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Requests authorization from the user through any means possible, falling back
+from integrated auth, app-based auth then Singly auth via our standard
+login web view.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)requestAuthorizationFromViewController:(UIViewController *)<em>viewController</em> withScopes:(NSArray *)<em>scopes</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>viewController</em></dt>
+			<dd><p>The view controller instance that is presenting the authorization request.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>scopes</em></dt>
+			<dd><p>The scopes to request from the service.</p></dd>
 		</dl>
 		
 	</div>
@@ -586,7 +652,7 @@ login web view.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-11-29)</span><br />
+						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-11-30)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

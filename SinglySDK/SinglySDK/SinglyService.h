@@ -132,6 +132,18 @@
  * @param viewController The view controller instance that is presenting the authorization request.
  *
 **/
-- (void)requestAuthorizationWithViewController:(UIViewController *)viewController;
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController;
+
+/*!
+ *
+ * Requests authorization from the user through any means possible, falling back
+ * from integrated auth, app-based auth then Singly auth via our standard
+ * login web view.
+ *
+ * @param viewController The view controller instance that is presenting the authorization request.
+ * @param scopes The scopes to request from the service.
+ *
+**/
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes;
 
 @end

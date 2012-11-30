@@ -121,7 +121,7 @@
 
 #pragma mark -
 
-- (void)requestAuthorizationWithViewController:(UIViewController *)viewController
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
 {
 
     self.isAuthorized = NO;
@@ -132,18 +132,24 @@
     dispatch_async(authorizationQueue, ^{
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self requestAuthorizationViaSinglyWithViewController:viewController];
+            [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes];
         });
 
     });
     
 }
 
-- (void)requestAuthorizationViaSinglyWithViewController:(UIViewController *)viewController
+- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
+{
+    [self requestAuthorizationFromViewController:viewController withScopes:nil];
+}
+
+- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
 {
 
     SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithSession:SinglySession.sharedSession
                                                                                              forService:self.serviceIdentifier];
+    loginViewController.scopes = scopes;
     loginViewController.delegate = self;
     [viewController presentModalViewController:loginViewController animated:YES];
     

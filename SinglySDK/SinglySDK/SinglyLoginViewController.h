@@ -52,7 +52,7 @@
 @property (strong, nonatomic) SinglySession *session;
 
 @property (strong, atomic) NSString *targetService;
-@property (strong, atomic) NSString *scope;
+@property (strong, atomic) NSArray *scopes;
 @property (strong, atomic) NSString *flags;
 
 /*!

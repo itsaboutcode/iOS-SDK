@@ -89,7 +89,12 @@
     return isConfigured;
 }
 
-- (void)requestAuthorizationWithViewController:(UIViewController *)viewController
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
+{
+    [self requestAuthorizationFromViewController:viewController withScopes:nil];
+}
+
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
 {
 
     self.isAuthorized = NO;
@@ -109,14 +114,14 @@
         // Step 2 - Attempt Integrated Authorization
         //
         if (self.clientID && !self.isAuthorized && [self integratedAuthorizationConfigured])
-            [self requestIntegratedAuthorization];
+            [self requestIntegratedAuthorization:scopes];
 
         //
         // Step 3 - Attempt Native Application Authorization
         //
         BOOL isAuthorizingViaApplication = NO;
         if (self.clientID && !self.isAuthorized && [self appAuthorizationConfigured])
-            isAuthorizingViaApplication = [self requestApplicationAuthorization];
+            isAuthorizingViaApplication = [self requestApplicationAuthorization:scopes];
 
         //
         // Step 4 - Fallback to Singly Authorization
@@ -124,7 +129,7 @@
         if (!self.isAuthorized && !isAuthorizingViaApplication)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self requestAuthorizationViaSinglyWithViewController:viewController];
+                [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes];
             });
         }
 
@@ -132,7 +137,7 @@
     
 }
 
-- (void)requestIntegratedAuthorization
+- (void)requestIntegratedAuthorization:(NSArray *)scopes
 {
     NSLog(@"[SinglySDK] Attempting integrated authorization...");
 
@@ -141,7 +146,7 @@
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
 
-    NSArray *permissions = @[ @"email", @"user_location", @"user_birthday" ];
+    NSArray *permissions = (scopes != nil) ? scopes : @[ @"email", @"user_location", @"user_birthday" ];
     NSDictionary *options = @{
         @"ACFacebookAppIdKey": self.clientID,
         @"ACFacebookPermissionsKey": permissions,
@@ -224,12 +229,12 @@
     dispatch_release(authorizationSemaphore);
 }
 
-- (BOOL)requestApplicationAuthorization
+- (BOOL)requestApplicationAuthorization:(NSArray *)scopes
 {
 
     NSLog(@"[SinglySDK] Attempting to authorize with the installed Facebook app...");
 
-    NSArray *permissions = @[ @"email", @"user_location", @"user_birthday" ];
+    NSArray *permissions = (scopes != nil) ? scopes : @[ @"email", @"user_location", @"user_birthday" ];
     NSDictionary *params = @{
         @"client_id": self.clientID,
         @"type": @"user_agent",

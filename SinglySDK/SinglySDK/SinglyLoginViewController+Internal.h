@@ -35,6 +35,6 @@
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UINavigationBar *navigationBar;
 
-- (void)processAccessTokenWithData:(NSData*)data;
+- (void)processAccessTokenWithData:(NSData *)data;
 
 @end
