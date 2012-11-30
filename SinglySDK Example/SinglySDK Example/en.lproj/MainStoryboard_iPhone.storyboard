@@ -178,6 +178,20 @@
     <resources>
         <image name="Icon-512.png" width="512" height="512"/>
     </resources>
+    <classes>
+        <class className="SinglyFriendPickerViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SinglyFriendPickerViewController.h"/>
+        </class>
+        <class className="SinglyLoginPickerViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SinglyLoginPickerViewController.h"/>
+        </class>
+        <class className="SinglyMainViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SinglyMainViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="friendPickerCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
