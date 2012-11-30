@@ -101,6 +101,7 @@
 		D08C1BE11649C48900035775 /* NSURL+AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C1BDD1649C48900035775 /* NSURL+AccessToken.m */; };
 		D08C1BEA164C780C00035775 /* SinglyService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D08C1BE8164C780B00035775 /* SinglyService+Internal.h */; };
 		D08C1BEB164C780C00035775 /* SinglyService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D08C1BE8164C780B00035775 /* SinglyService+Internal.h */; };
+		D08D8AAF1669157300231B73 /* SinglyRequest+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D00348371665322D0048513A /* SinglyRequest+Internal.h */; };
 		D090E340165AF02000FE8273 /* SinglyLoginViewController+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D090E33F165AF02000FE8273 /* SinglyLoginViewController+Internal.h */; };
 		D090E341165AF02000FE8273 /* SinglyLoginViewController+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D090E33F165AF02000FE8273 /* SinglyLoginViewController+Internal.h */; };
 		D090E343165B0DD300FE8273 /* SinglyLoginPickerViewController+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D090E342165B0DD300FE8273 /* SinglyLoginPickerViewController+Internal.h */; };
@@ -651,6 +652,7 @@
 				D090E352165BE96E00FE8273 /* SinglyRequest.h in Headers */,
 				D003483C16666C8B0048513A /* SinglyKeychainItemWrapper.h in Headers */,
 				D00348551666B56F0048513A /* SinglySession+Internal.h in Headers */,
+				D08D8AAF1669157300231B73 /* SinglyRequest+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

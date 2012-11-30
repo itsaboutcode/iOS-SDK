@@ -27,7 +27,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.H>
+#import <Foundation/Foundation.h>
 
 #import <SinglySDK/SinglyConstants.h>
 #import <SinglySDK/SinglyFacebookService.h>
@@ -35,6 +35,6 @@
 #import <SinglySDK/SinglyFriendPickerViewController.h>
 #import <SinglySDK/SinglyLoginPickerViewController.h>
 #import <SinglySDK/SinglyLoginViewController.h>
+#import <SinglySDK/SinglyRequest.h>
 #import <SinglySDK/SinglyService.h>
 #import <SinglySDK/SinglySession.h>
-//#import <SinglySDK/SinglySharingViewController.h>
