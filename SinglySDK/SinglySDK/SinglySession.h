@@ -47,40 +47,7 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
 
 /*!
  *
- * @protocol SinglySessionDelegate
- * @abstract Delegate methods related to a SinglySession
- *
-**/
-@protocol SinglySessionDelegate <NSObject>
-
-@required
-
-/*!
- *
- * Delegate method for a successful service login.
- *
- * @param session The SinglySession that this delegate is firing for
- * @param service The service name for the successful login
- *
-**/
-- (void)singlySession:(SinglySession *)session didLogInForService:(NSString *)service;
-
-/*!
- *
- * Delegate method for an error during service login
- *
- * @param session The SinglySession that this delegate is firing for
- * @param service The service name for the successful login
- * @param error The error that occured during login
- *
-**/
-- (void)singlySession:(SinglySession *)session errorLoggingInToService:(NSString *)service withError:(NSError*)error;
-
-@end
-
-/*!
- *
- * 
+ * Manages the current session state.
  *
 **/
 @interface SinglySession : NSObject
@@ -139,15 +106,6 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
  * @property authorizingService
 **/
 @property (nonatomic, strong) SinglyService *authorizingService;
-
-/*!
- *
- *
- *
- * @property delegate
- *
-**/
-@property (weak, atomic) id<SinglySessionDelegate> delegate;
 
 /*!
  *
