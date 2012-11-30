@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>SinglyLoginViewController Class Reference</title>
+		<title>SinglyLoginPickerViewControllerDelegate Protocol Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">SinglyLoginViewController Class Reference</h1>
+				<h1 class="hideInXcode">SinglyLoginPickerViewControllerDelegate Protocol Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -38,24 +38,15 @@
 	
 	
 	
-	<option value="properties">Properties</option>
-	
-	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
-	
-	<option value="//api/name/flags">&nbsp;&nbsp;&nbsp;&nbsp;flags</option>
-	
-	<option value="//api/name/scopes">&nbsp;&nbsp;&nbsp;&nbsp;scopes</option>
-	
-	<option value="//api/name/serviceIdentifier">&nbsp;&nbsp;&nbsp;&nbsp;serviceIdentifier</option>
-	
-	
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/initWithServiceIdentifier:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithServiceIdentifier:</option>
+	<option value="//api/name/singlyLoginPickerViewController:didLoginForService:">&nbsp;&nbsp;&nbsp;&nbsp;- singlyLoginPickerViewController:didLoginForService:</option>
+	
+	<option value="//api/name/singlyLoginPickerViewController:errorLoggingInToService:withError:">&nbsp;&nbsp;&nbsp;&nbsp;- singlyLoginPickerViewController:errorLoggingInToService:withError:</option>
 	
 	
 	
@@ -79,25 +70,15 @@
 
 
 
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/flags">flags</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/scopes">scopes</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/serviceIdentifier">serviceIdentifier</a></span></li>
-	
-</ul></li>
-
 
 
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithServiceIdentifier:">initWithServiceIdentifier:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/singlyLoginPickerViewController:didLoginForService:">singlyLoginPickerViewController:didLoginForService:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/singlyLoginPickerViewController:errorLoggingInToService:withError:">singlyLoginPickerViewController:errorLoggingInToService:withError:</a></span></li>
 	
 </ul></li>
 
@@ -106,7 +87,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="SinglyLoginViewController Class Reference" name="top"></a>
+				<a title="SinglyLoginPickerViewControllerDelegate Protocol Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -115,21 +96,18 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">SinglyLoginViewController Class Reference</h1>
+						<h1 class="title title-header">SinglyLoginPickerViewControllerDelegate Protocol Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
-	<td class="specification-title">Inherits from</td>
-	<td class="specification-value">UIViewController</td>
-</tr><tr>
 	<td class="specification-title">Conforms to</td>
-	<td class="specification-value">NSURLConnectionDataDelegate<br />UIWebViewDelegate</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">SinglyLoginViewController.h</td>
+	<td class="specification-value">SinglyLoginPickerViewController.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -139,12 +117,8 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>A view controller for requesting authorization from a supported service via
-a web view.</p>
-
-<p>In general, you should use <a href="../Classes/SinglyService.html">SinglyService</a> to invoke authorization requests as
-opposed to using this view controller directly. If you need to do something
-more custom, then this view controller is a good starting point.</p>
+						<p>@protocol <a href="../Protocols/SinglyLoginViewControllerDelegate.html">SinglyLoginViewControllerDelegate</a>
+@abstract Delegate methods related to a <a href="../Classes/SinglyLoginViewController.html">SinglyLoginViewController</a></p>
 					</div>
 					
 					
@@ -162,40 +136,19 @@ more custom, then this view controller is a good starting point.</p>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
-		<span class="tooltip"><p>When defined, this delegate will be called when authorization succeeds or
-fails.</p></span>
+		<code><a href="#//api/name/singlyLoginPickerViewController:didLoginForService:">&ndash;&nbsp;singlyLoginPickerViewController:didLoginForService:</a></code>
+		<span class="tooltip"><p>This method is invoked on the delegate after login was successful.</p></span>
 	</span>
-	<span class="task-item-suffix">property</span>
 	
+	<span class="task-item-suffix">required method</span>
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/serviceIdentifier">&nbsp;&nbsp;serviceIdentifier</a></code>
-		<span class="tooltip"><p>The service identifier of the service we are attempting to authenticate with.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/scopes">&nbsp;&nbsp;scopes</a></code>
-		<span class="tooltip"><p>Custom scope to request from the service.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/flags">&nbsp;&nbsp;flags</a></code>
-		<span class="tooltip"><p>Some services may require a custom flag, so specify them here.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initWithServiceIdentifier:">&ndash;&nbsp;initWithServiceIdentifier:</a></code>
-		<span class="tooltip"><p>Initialize with a service identifier.</p></span>
+		<code><a href="#//api/name/singlyLoginPickerViewController:errorLoggingInToService:withError:">&ndash;&nbsp;singlyLoginPickerViewController:errorLoggingInToService:withError:</a></code>
+		<span class="tooltip"><p>This method is invoked on the delegate when an error occurs during the login
+process.</p></span>
 	</span>
 	
-	
+	<span class="task-item-suffix">required method</span>
 </li>
 						</ul>
 						
@@ -204,157 +157,6 @@ fails.</p></span>
 					
 					
 					
-					
-					<div class="section section-methods">
-						<a title="Properties" name="properties"></a>
-						<h2 class="subtitle subtitle-methods">Properties</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/delegate" title="delegate"></a>
-	<h3 class="subsubtitle method-title">delegate</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>When defined, this delegate will be called when authorization succeeds or
-fails.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) id&lt;SinglyLoginViewControllerDelegate&gt; delegate</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglyLoginViewController.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/flags" title="flags"></a>
-	<h3 class="subsubtitle method-title">flags</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Some services may require a custom flag, so specify them here.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSString *flags</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglyLoginViewController.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/scopes" title="scopes"></a>
-	<h3 class="subsubtitle method-title">scopes</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Custom scope to request from the service.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSArray *scopes</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglyLoginViewController.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/serviceIdentifier" title="serviceIdentifier"></a>
-	<h3 class="subsubtitle method-title">serviceIdentifier</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The service identifier of the service we are attempting to authenticate with.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSString *serviceIdentifier</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglyLoginViewController.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
 					
 					
 					
@@ -365,18 +167,18 @@ fails.</p>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithServiceIdentifier:" title="initWithServiceIdentifier:"></a>
-	<h3 class="subsubtitle method-title">initWithServiceIdentifier:</h3>
+	<a name="//api/name/singlyLoginPickerViewController:didLoginForService:" title="singlyLoginPickerViewController:didLoginForService:"></a>
+	<h3 class="subsubtitle method-title">singlyLoginPickerViewController:didLoginForService:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initialize with a service identifier.</p>
+		<p>This method is invoked on the delegate after login was successful.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithServiceIdentifier:(NSString *)<em>serviceIdentifier</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)singlyLoginPickerViewController:(SinglyLoginPickerViewController *)<em>controller</em> didLoginForService:(NSString *)<em>service</em></code></div>
 
     
 	
@@ -384,8 +186,13 @@ fails.</p>
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>serviceIdentifier</em></dt>
-			<dd><p>The name of the service that we are logging into.</p></dd>
+			<dt><em>controller</em></dt>
+			<dd><p>The login view controller instance.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>service</em></dt>
+			<dd><p>The service identifier.</p></dd>
 		</dl>
 		
 	</div>
@@ -404,7 +211,64 @@ fails.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglyLoginViewController.h</code><br />
+		<code class="declared-in-ref">SinglyLoginPickerViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/singlyLoginPickerViewController:errorLoggingInToService:withError:" title="singlyLoginPickerViewController:errorLoggingInToService:withError:"></a>
+	<h3 class="subsubtitle method-title">singlyLoginPickerViewController:errorLoggingInToService:withError:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>This method is invoked on the delegate when an error occurs during the login
+process.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)singlyLoginPickerViewController:(SinglyLoginPickerViewController *)<em>controller</em> errorLoggingInToService:(NSString *)<em>service</em> withError:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>controller</em></dt>
+			<dd><p>The login view controller instance.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>service</em></dt>
+			<dd><p>The service identifier.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>The error that occurred.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyLoginPickerViewController.h</code><br />
 	</div>				
 	
 	

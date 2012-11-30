@@ -64,6 +64,12 @@
 
 @end
 
+/*!
+ *
+ * Authenticating with the services that Singly supports is done through the
+ * SinglyService object.
+ *
+**/
 @interface SinglyService : NSObject <SinglyLoginViewControllerDelegate>
 
 /*!

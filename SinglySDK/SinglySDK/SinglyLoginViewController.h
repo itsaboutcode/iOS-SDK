@@ -32,36 +32,86 @@
 
 @class SinglyLoginViewController;
 
+/*!
+ *
+ * @protocol SinglyLoginViewControllerDelegate
+ * @abstract Delegate methods related to a SinglyLoginViewController
+ *
+ **/
 @protocol SinglyLoginViewControllerDelegate <NSObject>
 
+/*!
+ *
+ * This method is invoked on the delegate after login was successful.
+ *
+ * @param controller The login view controller instance.
+ * @param service The service identifier.
+ *
+**/
 - (void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service;
+
+/*!
+ *
+ * This method is invoked on the delegate when an error occurs during the login
+ * process.
+ *
+ * @param controller The login view controller instance.
+ * @param service The service identifier.
+ * @param error The error that occurred.
+ *
+**/
 - (void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
 
 @end
 
+/*!
+ *
+ * A view controller for requesting authorization from a supported service via
+ * a web view.
+ *
+ * In general, you should use SinglyService to invoke authorization requests as
+ * opposed to using this view controller directly. If you need to do something
+ * more custom, then this view controller is a good starting point.
+ *
+**/
 @interface SinglyLoginViewController : UIViewController <UIWebViewDelegate, NSURLConnectionDataDelegate>
 
+/*!
+ *
+ * When defined, this delegate will be called when authorization succeeds or
+ * fails.
+ *
+**/
 @property (nonatomic, strong) id<SinglyLoginViewControllerDelegate> delegate;
 
 /*!
  *
- * The SinglySession to use for the login request. The default value of this is
- * the shared singleton instance.
+ * The service identifier of the service we are attempting to authenticate with.
  *
 **/
-@property (strong, nonatomic) SinglySession *session;
-
-@property (strong, atomic) NSString *targetService;
-@property (strong, atomic) NSArray *scopes;
-@property (strong, atomic) NSString *flags;
+@property (nonatomic, strong) NSString *serviceIdentifier;
 
 /*!
  *
- * Initialize with a SinglySession and service identifier.
+ * Custom scope to request from the service.
  *
- * @param session The session that the login will be saved into.
- * @param serviceId The name of the service that we are logging into.
 **/
-- (id)initWithSession:(SinglySession *)session forService:(NSString *)serviceId;
+@property (nonatomic, strong) NSArray *scopes;
+
+/*!
+ *
+ * Some services may require a custom flag, so specify them here.
+ *
+**/
+@property (nonatomic, strong) NSString *flags;
+
+/*!
+ *
+ * Initialize with a service identifier.
+ *
+ * @param serviceIdentifier The name of the service that we are logging into.
+ *
+**/
+- (id)initWithServiceIdentifier:(NSString *)serviceIdentifier;
 
 @end

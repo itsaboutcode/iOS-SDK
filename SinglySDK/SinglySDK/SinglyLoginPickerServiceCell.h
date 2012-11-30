@@ -28,11 +28,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
 
 @interface SinglyLoginPickerServiceCell : UITableViewCell <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 
 @property (nonatomic, strong) NSDictionary *serviceInfoDictionary;
-@property (nonatomic, assign) BOOL authenticated;
+@property (nonatomic, assign) BOOL isAuthenticated;
 
 @end

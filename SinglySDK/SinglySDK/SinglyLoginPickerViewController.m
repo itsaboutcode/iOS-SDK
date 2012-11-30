@@ -40,16 +40,6 @@
 
 @implementation SinglyLoginPickerViewController
 
--(id)initWithSession:(SinglySession *)session
-{
-    self = [super initWithStyle:UITableViewStylePlain];
-    if (self)
-    {
-        _session = session;
-    }
-    return self;
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -126,15 +116,6 @@
                                                   object:nil];
 }
 
-#pragma mark - SinglySession
-
-- (SinglySession *)session
-{
-    if (!_session)
-        _session = SinglySession.sharedSession;
-    return _session;
-}
-
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -160,10 +141,10 @@
     NSDictionary *serviceInfoDictionary = [self.servicesDictionary objectForKey:service];
     cell.serviceInfoDictionary = serviceInfoDictionary;
     
-    if ([self.session.profiles objectForKey:service])
-        cell.authenticated = YES;
+    if ([SinglySession.sharedSession.profiles objectForKey:service])
+        cell.isAuthenticated = YES;
     else
-        cell.authenticated = NO;
+        cell.isAuthenticated = NO;
     
     return cell;
 }
@@ -174,7 +155,7 @@
     self.selectedService = service;
 
     // Do nothing if we are already authenticated against the selected service
-    if ([self.session.profiles objectForKey:service])
+    if ([SinglySession.sharedSession.profiles objectForKey:service])
     {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Disconnect from %@?", self.servicesDictionary[service][@"name"]]
@@ -237,9 +218,9 @@
 
 #pragma mark - Service-Specific Authentication
 
-- (void)authenticateWithService:(NSString *)service
+- (void)authenticateWithService:(NSString *)serviceIdentifier
 {
-    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithSession:self.session forService:service];
+    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithServiceIdentifier:serviceIdentifier];
     loginViewController.delegate = self;
     [self presentViewController:loginViewController animated:YES completion:NULL];
 }
@@ -288,12 +269,14 @@
 
 - (void)singlyServiceDidAuthorize:(SinglyService *)service
 {
-    NSLog(@"Success");
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:didLoginForService:)])
+        [self.delegate singlyLoginPickerViewController:self didLoginForService:[service serviceIdentifier]];
 }
 
 - (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error
 {
-    NSLog(@"Fail");
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:errorLoggingInToService:withError:)])
+        [self.delegate singlyLoginPickerViewController:self errorLoggingInToService:[service serviceIdentifier] withError:error];
 }
 
 @end

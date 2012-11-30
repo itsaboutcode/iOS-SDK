@@ -27,6 +27,8 @@
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
 	
+	<option value="overview">Overview</option>
+	
 	
 	
 	
@@ -55,6 +57,8 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
 
 
 
@@ -110,6 +114,15 @@
 					
 					
 					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>@protocol SinglyLoginViewControllerDelegate
+@abstract Delegate methods related to a <a href="../Classes/SinglyLoginViewController.html">SinglyLoginViewController</a></p>
+					</div>
+					
+					
+					
 					
 					
 					<div class="section section-tasks">
@@ -124,14 +137,15 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/singlyLoginViewController:didLoginForService:">&ndash;&nbsp;singlyLoginViewController:didLoginForService:</a></code>
-		
+		<span class="tooltip"><p>This method is invoked on the delegate after login was successful.</p></span>
 	</span>
 	
 	<span class="task-item-suffix">required method</span>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/singlyLoginViewController:errorLoggingInToService:withError:">&ndash;&nbsp;singlyLoginViewController:errorLoggingInToService:withError:</a></code>
-		
+		<span class="tooltip"><p>This method is invoked on the delegate when an error occurs during the login
+process.</p></span>
 	</span>
 	
 	<span class="task-item-suffix">required method</span>
@@ -157,10 +171,50 @@
 	<h3 class="subsubtitle method-title">singlyLoginViewController:didLoginForService:</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>This method is invoked on the delegate after login was successful.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (void)singlyLoginViewController:(SinglyLoginViewController *)<em>controller</em> didLoginForService:(NSString *)<em>service</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>controller</em></dt>
+			<dd><p>The login view controller instance.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>service</em></dt>
+			<dd><p>The service identifier.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyLoginViewController.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -168,10 +222,56 @@
 	<h3 class="subsubtitle method-title">singlyLoginViewController:errorLoggingInToService:withError:</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>This method is invoked on the delegate when an error occurs during the login
+process.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (void)singlyLoginViewController:(SinglyLoginViewController *)<em>controller</em> errorLoggingInToService:(NSString *)<em>service</em> withError:(NSError *)<em>error</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>controller</em></dt>
+			<dd><p>The login view controller instance.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>service</em></dt>
+			<dd><p>The service identifier.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>The error that occurred.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyLoginViewController.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 					</div>

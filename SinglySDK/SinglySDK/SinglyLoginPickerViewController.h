@@ -31,6 +31,40 @@
 #import <SinglySDK/SinglySession.h>
 #import <SinglySDK/SinglyLoginViewController.h>
 
+@class SinglyLoginPickerViewController;
+
+/*!
+ *
+ * @protocol SinglyLoginViewControllerDelegate
+ * @abstract Delegate methods related to a SinglyLoginViewController
+ *
+ **/
+@protocol SinglyLoginPickerViewControllerDelegate <NSObject>
+
+/*!
+ *
+ * This method is invoked on the delegate after login was successful.
+ *
+ * @param controller The login view controller instance.
+ * @param service The service identifier.
+ *
+**/
+- (void)singlyLoginPickerViewController:(SinglyLoginPickerViewController *)controller didLoginForService:(NSString *)service;
+
+/*!
+ *
+ * This method is invoked on the delegate when an error occurs during the login
+ * process.
+ *
+ * @param controller The login view controller instance.
+ * @param service The service identifier.
+ * @param error The error that occurred.
+ *
+**/
+- (void)singlyLoginPickerViewController:(SinglyLoginPickerViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
+
+@end
+
 /*!
  *
  * Displays a list of services that can be authenticated against in a list view
@@ -39,6 +73,14 @@
 **/
 @interface SinglyLoginPickerViewController : UITableViewController <SinglyLoginViewControllerDelegate,
     SinglyServiceDelegate, UIAlertViewDelegate>
+
+/*!
+ *
+ * When defined, this delegate will be called when authorization succeeds or
+ * fails.
+ *
+**/
+@property (nonatomic, strong) id<SinglyLoginPickerViewControllerDelegate> delegate;
 
 /*!
  *
@@ -56,15 +98,5 @@
  *
 **/
 @property (nonatomic, strong, readonly) NSDictionary *servicesDictionary;
-
-/*!
- *
- * The SinglySession to use for the login requests. The default value of this is
- * the shared singleton instance.
- *
-**/
-@property (nonatomic, strong) SinglySession *session;
-
-- (id)initWithSession:(SinglySession *)session;
 
 @end

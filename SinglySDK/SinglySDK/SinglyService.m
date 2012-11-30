@@ -147,12 +147,11 @@
 - (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
 {
 
-    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithSession:SinglySession.sharedSession
-                                                                                             forService:self.serviceIdentifier];
+    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithServiceIdentifier:self.serviceIdentifier];
     loginViewController.scopes = scopes;
     loginViewController.delegate = self;
     [viewController presentModalViewController:loginViewController animated:YES];
-    
+
 }
 
 #pragma mark - Login View Controller Delegates

@@ -35,15 +35,12 @@
 
 @implementation SinglyLoginViewController
 
-- (id)initWithSession:(SinglySession *)session forService:(NSString *)serviceIdentifier
+- (id)initWithServiceIdentifier:(NSString *)serviceIdentifier
 {
     self = [super init];
     if (self)
     {
-        _session = session;
-
-        serviceIdentifier = [SinglyService normalizeServiceIdentifier:serviceIdentifier];
-        _targetService = serviceIdentifier;
+        _serviceIdentifier = [SinglyService normalizeServiceIdentifier:serviceIdentifier];
     }
     return self;
 }
@@ -64,7 +61,7 @@
     {
         self.webView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44);
         self.navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
-        UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:self.targetService];
+        UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:self.serviceIdentifier];
         navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(dismiss)];
         self.navigationBar.items = @[navigationItem];
 
@@ -90,21 +87,25 @@
         }
     }
 
-    NSString *urlStr = [kSinglyAuthenticateURL stringByAppendingFormat:@"?redirect_uri=fb%@://authorize&service=%@&client_id=%@", self.session.clientID, self.targetService, self.session.clientID];
-    if (self.session.accountID) {
-        urlStr = [urlStr stringByAppendingFormat:@"&account=%@", self.session.accountID];
-    } else {
+    NSString *urlStr = [kSinglyAuthenticateURL stringByAppendingFormat:@"?redirect_uri=fb%@://authorize&service=%@&client_id=%@",
+                        SinglySession.sharedSession.clientID, self.serviceIdentifier, SinglySession.sharedSession.clientID];
+
+    if (SinglySession.sharedSession.accountID)
+        urlStr = [urlStr stringByAppendingFormat:@"&account=%@", SinglySession.sharedSession.accountID];
+    else
         urlStr = [urlStr stringByAppendingString:@"&account=false"];
-    }
+
     if (self.scopes)
     {
         NSString *scopes = [self.scopes componentsJoinedByString:@","];
         urlStr = [urlStr stringByAppendingFormat:@"&scope=%@", scopes];
     }
-    if (self.flags) {
+
+    if (self.flags)
         urlStr = [urlStr stringByAppendingFormat:@"&flag=%@", self.flags];
-    }
-    NSLog(@"Going to auth url %@", urlStr);
+
+    NSLog(@"[SinglySDK:SinglyLoginViewController] Going to URL: %@", urlStr);
+
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
 }
 
@@ -113,20 +114,12 @@
     
 }
 
-#pragma mark - SinglySession
-
-- (SinglySession *)session
-{
-    if (!_session)
-        _session = SinglySession.sharedSession;
-    return _session;
-}
-
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    if ([request.URL.scheme isEqualToString:[NSString stringWithFormat:@"fb%@", self.session.clientID]] && [request.URL.host isEqualToString:@"authorize"]) {
+    if ([request.URL.scheme isEqualToString:[NSString stringWithFormat:@"fb%@", SinglySession.sharedSession.clientID]] && [request.URL.host isEqualToString:@"authorize"])
+    {
 
         self.pendingLoginView = [[UIView alloc] initWithFrame:self.view.bounds];
         self.pendingLoginView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
@@ -159,7 +152,7 @@
             NSURL* accessTokenURL = [NSURL URLWithString:kSinglyAccessTokenURL];
             NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:accessTokenURL];
             req.HTTPMethod = @"POST";
-            req.HTTPBody = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&code=%@", self.session.clientID, self.session.clientSecret, [parameters objectForKey:@"code"]] dataUsingEncoding:NSUTF8StringEncoding];
+            req.HTTPBody = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&code=%@", SinglySession.sharedSession.clientID, SinglySession.sharedSession.clientSecret, [parameters objectForKey:@"code"]] dataUsingEncoding:NSUTF8StringEncoding];
             self.responseData = [NSMutableData data];
             [NSURLConnection connectionWithRequest:req delegate:self];
         }
@@ -203,7 +196,7 @@
     NSDictionary *jsonResult = [NSJSONSerialization JSONObjectWithData:self.responseData options:kNilOptions error:&error];
     if (error) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:didLoginForService:)])
-            [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
+            [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:error];
         return;
     }
     
@@ -213,26 +206,26 @@
         if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)])
         {
             NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:loginError forKey:NSLocalizedDescriptionKey]];
-            [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
+            [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:error];
         }
         return;
     }
 
     // Save the access token and account id
-    self.session.accessToken = [jsonResult objectForKey:@"access_token"];
-    self.session.accountID = [jsonResult objectForKey:@"account"];
-    [self.session updateProfilesWithCompletion:^(BOOL success)
+    SinglySession.sharedSession.accessToken = [jsonResult objectForKey:@"access_token"];
+    SinglySession.sharedSession.accountID = [jsonResult objectForKey:@"account"];
+    [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL success)
     {
-        NSLog(@"All set to do requests as account %@ with access token %@", self.session.accountID, self.session.accessToken);
-        if (self.delegate)
-            [self.delegate singlyLoginViewController:self didLoginForService:self.targetService];
+        NSLog(@"All set to do requests as account %@ with access token %@", SinglySession.sharedSession.accountID, SinglySession.sharedSession.accessToken);
+        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:didLoginForService:)])
+            [self.delegate singlyLoginViewController:self didLoginForService:self.serviceIdentifier];
     }];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)])
-        [self.delegate singlyLoginViewController:self errorLoggingInToService:self.targetService withError:error];
+        [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:error];
 }
 
 #pragma mark -

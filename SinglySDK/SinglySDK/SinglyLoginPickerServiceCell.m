@@ -27,6 +27,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "SinglyLoginPickerServiceCell.h"
 #import "SinglyLoginPickerServiceCell+Internal.h"
 
@@ -87,9 +88,9 @@
     [self.imageConnection start];
 }
 
-- (void)setAuthenticated:(BOOL)authenticated
+- (void)setIsAuthenticated:(BOOL)authenticated
 {
-    _authenticated = authenticated;
+    _isAuthenticated = authenticated;
 
     if (authenticated)
     {
