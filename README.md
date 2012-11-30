@@ -76,7 +76,7 @@ have for that service on the device they are using.
 ```objective-c
 SinglyService *service = [SinglyService serviceWithIdentifier:@"facebook"];
 service.delegate = self;
-[service requestAuthorizationWithViewController:self];
+[service requestAuthorizationFromViewController:self];
 ```
 
 The service that you define can be any string of the services that Singly
