@@ -36,6 +36,8 @@
  * relevant credentials for the current SinglySession shared instance
  * automatically.
  *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
 **/
 @interface SinglyRequest : NSMutableURLRequest
 
@@ -53,6 +55,8 @@
  *
  * @returns The newly created Singly request.
  *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
 **/
 + (id)requestWithEndpoint:(NSString *)endpoint;
 
@@ -67,6 +71,8 @@
  *
  * @returns The newly created Singly request.
  *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
 **/
 + (id)requestWithEndpoint:(NSString *)endpoint andParameters:(NSDictionary *)parameters;
 
@@ -79,6 +85,8 @@
  * @param endpoint The endpoint for the new request.
  *
  * @returns The newly created Singly request.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 - (id)initWithEndpoint:(NSString *)endpoint;
@@ -94,6 +102,8 @@
  *
  * @returns The newly created Singly request.
  *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
 **/
 - (id)initWithEndpoint:(NSString *)endpoint andParameters:(NSDictionary *)parameters;
 
@@ -106,6 +116,8 @@
  * @param parameters The parameters for the new request.
  *
  * @returns The URL to use when contacting the Singly API service.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 + (NSURL *)URLForEndpoint:(NSString *)endpoint withParameters:(NSDictionary *)parameters;
@@ -123,17 +135,21 @@
  *
  * @returns The URL to use when contacting the Singly API service.
  *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
 **/
 + (NSURL *)URLForEndpoint:(NSString *)endpoint withParameters:(NSDictionary *)parameters andAuthorization:(BOOL)authorization;
 
 /// ----------------------------------------------------------------------------
-/// @name Accessing Request Properties
+/// @name Configuring the Request
 /// ----------------------------------------------------------------------------
 
 /*!
  *
  * The relative endpoint path to access on the Singly API. This path will be
  * appended to the full request URL.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 @property (nonatomic, strong) NSString *endpoint;
@@ -142,6 +158,8 @@
  *
  * The request parameters to use for the request. These will be merged with
  * the access_token and any other required parameters of the Singly API.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 @property (nonatomic, strong) NSDictionary *parameters;
@@ -152,6 +170,8 @@
  * however, it can be set to `NO` to prevent the passing of credentials (which
  * may be necessary in case you have an invalidated access token or for requests
  * that do not need authorization).
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 @property (nonatomic, assign) BOOL isAuthorizedRequest;

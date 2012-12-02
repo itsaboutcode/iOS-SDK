@@ -27,7 +27,6 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <QuartzCore/QuartzCore.h>
 #import "SinglyLoginPickerServiceCell.h"
 #import "SinglyLoginPickerServiceCell+Internal.h"
 

@@ -27,107 +27,85 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 #import "SinglyLoginViewController.h"
-
-@class SinglyService;
-
-/*!
- *
- * @protocol SinglyServiceDelegate
- * @abstract Delegate methods related to a SinglyService
- *
- **/
-@protocol SinglyServiceDelegate <NSObject>
-
-@required
+#import "SinglyService+Delegate.h"
 
 /*!
  *
- * Delegate method for a successful service login.
+ * Authentication and state handling for a service (such as Facebook, Twitter,
+ * etc) is managed by a SinglyService instance.
  *
- * @param service The Service that this delegate is firing for
- *
-**/
-- (void)singlyServiceDidAuthorize:(SinglyService *)service;
-
-/*!
- *
- * Delegate method for an error during service login
- *
- * @param service The service where the error occurred
- * @param error The error that occured during login
- *
-**/
-- (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error;
-
-@end
-
-/*!
- *
- * Authenticating with the services that Singly supports is done through the
- * SinglyService object.
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 @interface SinglyService : NSObject <SinglyLoginViewControllerDelegate>
 
-/*!
- *
- *
- *
- * @property delegate
- *
-**/
-@property (weak, atomic) id<SinglyServiceDelegate> delegate;
-
-/*!
- *
- * The service identifier (e.g. "facebook", "twitter", etc).
- *
-**/
-@property (nonatomic, strong) NSString *serviceIdentifier;
-
-/*!
- *
- * The client id for the service. This may be fetched (asynchronously) by
- * calling fetchClientID.
- *
-**/
-@property (nonatomic, strong) NSString *clientID;
-
-/*!
- *
- * Whether or not the service is currently authorized.
- *
-**/
-@property (nonatomic, assign) BOOL isAuthorized;
+/// ----------------------------------------------------------------------------
+/// @name Initializing a Service
+/// ----------------------------------------------------------------------------
 
 /*!
  *
  * Convenience method that will return an instance of SinglyService initialized
  * by the service identifier.
  *
- * @param serviceIdentifier The service identifier (e.g. "facebook", "twitter", etc).
+ * @param serviceIdentifier  The identifier of the service (e.g. "facebook",
+ *                           "twitter", etc).
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 + (id)serviceWithIdentifier:(NSString *)serviceIdentifier;
 
 /*!
  *
- * Initializes with serviceIdentifier;
+ * Initializes with serviceIdentifier.
  *
- * @param serviceIdentifier The service identifier (e.g. "facebook", "twitter", etc).
+ * @param serviceIdentifier  The identifier of the service (e.g. "facebook",
+ *                           "twitter", etc).
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 - (id)initWithIdentifier:(NSString *)serviceIdentifier;
 
+/// ----------------------------------------------------------------------------
+/// @name Configuring the Service
+/// ----------------------------------------------------------------------------
+
 /*!
  *
- * Fetches the client id from Singly.
+ * The service identifier (e.g. "facebook", "twitter", etc).
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-- (void)fetchClientID;
+@property (nonatomic, strong) NSString *serviceIdentifier;
+
+/*!
+ *
+ * The client id for the service. This will be requested from the Singly API
+ * automatically unless explicitly provided.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, strong) NSString *clientID;
+
+/// ----------------------------------------------------------------------------
+/// @name Requesting Authorization
+/// ----------------------------------------------------------------------------
+
+/*!
+ *
+ * Whether or not the service is currently authorized.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, assign) BOOL isAuthorized;
 
 /*!
  *
@@ -135,7 +113,12 @@
  * from integrated auth, app-based auth then Singly auth via our standard
  * login web view.
  *
- * @param viewController The view controller instance that is presenting the authorization request.
+ * @param viewController  The view controller instance that is presenting the
+ *                        authorization request.
+ *
+ * @see requestAuthorizationFromViewController:withScopes:
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController;
@@ -146,10 +129,32 @@
  * from integrated auth, app-based auth then Singly auth via our standard
  * login web view.
  *
- * @param viewController The view controller instance that is presenting the authorization request.
- * @param scopes The scopes to request from the service.
+ * @param viewController  The view controller instance that is presenting the
+ *                        authorization request.
+ *
+ * @param scopes          The scope(s) to request from the service.
+ *
+ * @see requestAuthorizationFromViewController:
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-- (void)requestAuthorizationFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes;
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
+                                    withScopes:(NSArray *)scopes;
+
+/// ----------------------------------------------------------------------------
+/// @name Managing the Delegate
+/// ----------------------------------------------------------------------------
+
+/*!
+ *
+ * The object that acts as the delegate of the service.
+ *
+ * The delegate must adopt the SinglyServiceDelegate protocol.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (weak, atomic) id<SinglyServiceDelegate> delegate;
 
 @end

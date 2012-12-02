@@ -27,19 +27,21 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 
 /*!
  *
  * A simple activity indicator that displays a rotating instance of the Singly
  * gradient logo. This is used by the various view controllers in the SDK.
  *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
 **/
 @interface SinglyActivityIndicatorView : UIView
 
 /// ----------------------------------------------------------------------------
-/// @name Singleton
+/// @name Accessing the Indicator View
 /// ----------------------------------------------------------------------------
 
 /*!
@@ -48,16 +50,20 @@
  *
  * @returns SinglyActivityIndicatorView
  *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
 **/
 + (SinglyActivityIndicatorView *)sharedIndicator;
 
 /// ----------------------------------------------------------------------------
-/// @name Indicator Visibility
+/// @name Controlling Visibility
 /// ----------------------------------------------------------------------------
 
 /*!
  *
  * Displays the activity indicator centered on the main window object.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 + (void)showIndicator;
@@ -66,7 +72,9 @@
  *
  * Dismisses the activity indicator from view.
  *
- **/
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 + (void)dismissIndicator;
 
 @end

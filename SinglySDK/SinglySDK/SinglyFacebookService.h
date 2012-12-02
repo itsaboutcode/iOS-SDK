@@ -28,12 +28,19 @@
 //
 
 #import <Accounts/Accounts.h>
-#import "SinglyService.h"
+
 #import "SinglyLoginViewController.h"
+#import "SinglyService.h"
 
 /*!
  *
- * Singly Facebook Service
+ * A custom implementation of a service specifically for Facebook that adds
+ * support for authorization via the integrated support on iOS 6+. If integrated
+ * support is not available, the installed Facebook app is tried. If neither
+ * integrated authorization is available or the native app is not installed,
+ * the standard Singly login workflow will be used.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 @interface SinglyFacebookService : SinglyService
@@ -43,8 +50,13 @@
  * Determines if the current device can authorize via the installed Facebook
  * app.
  *
+ * @returns Whether or not the running app is configured correctly for
+ *          authorization via the natively installed app.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
 **/
-- (BOOL)appAuthorizationConfigured;
+- (BOOL)isAppAuthorizationConfigured;
 
 /*!
  *
@@ -72,9 +84,12 @@
  * that reason, one should keep a close eye on this method to ensure support is
  * maintained throughout future releases.
  *
- * TODO Write unit tests for this method.
+ * @returns Whether or not the current device is configured for integrated
+ *          authorization.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-- (BOOL)integratedAuthorizationConfigured;
+- (BOOL)isIntegratedAuthorizationConfigured;
 
 @end

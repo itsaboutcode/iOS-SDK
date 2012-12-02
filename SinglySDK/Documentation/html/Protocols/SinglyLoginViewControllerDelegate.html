@@ -107,7 +107,7 @@
 	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">SinglyLoginViewController.h</td>
+	<td class="specification-value">SinglyLoginViewController+Delegate.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -117,8 +117,8 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>@protocol SinglyLoginViewControllerDelegate
-@abstract Delegate methods related to a <a href="../Classes/SinglyLoginViewController.html">SinglyLoginViewController</a></p>
+						<p>Delegate methods related to actions performed by an instance of
+<a href="../Classes/SinglyLoginViewController.html">SinglyLoginViewController</a>.</p>
 					</div>
 					
 					
@@ -137,15 +137,15 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/singlyLoginViewController:didLoginForService:">&ndash;&nbsp;singlyLoginViewController:didLoginForService:</a></code>
-		<span class="tooltip"><p>This method is invoked on the delegate after login was successful.</p></span>
+		<span class="tooltip"><p>Invoked upon a successful login to the service identified by the
+<code>serviceIdentifier</code> parameter.</p></span>
 	</span>
 	
 	<span class="task-item-suffix">required method</span>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/singlyLoginViewController:errorLoggingInToService:withError:">&ndash;&nbsp;singlyLoginViewController:errorLoggingInToService:withError:</a></code>
-		<span class="tooltip"><p>This method is invoked on the delegate when an error occurs during the login
-process.</p></span>
+		<span class="tooltip"><p>Invoked when a login request has failed for any reason.</p></span>
 	</span>
 	
 	<span class="task-item-suffix">required method</span>
@@ -173,12 +173,13 @@ process.</p></span>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>This method is invoked on the delegate after login was successful.</p>
+		<p>Invoked upon a successful login to the service identified by the
+<code>serviceIdentifier</code> parameter.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)singlyLoginViewController:(SinglyLoginViewController *)<em>controller</em> didLoginForService:(NSString *)<em>service</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)singlyLoginViewController:(SinglyLoginViewController *)<em>viewController</em> didLoginForService:(NSString *)<em>serviceIdentifier</em></code></div>
 
     
 	
@@ -186,13 +187,15 @@ process.</p></span>
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>controller</em></dt>
-			<dd><p>The login view controller instance.</p></dd>
+			<dt><em>viewController</em></dt>
+			<dd><p>The login view controller instance that performed
+the login request.</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>service</em></dt>
-			<dd><p>The service identifier.</p></dd>
+			<dt><em>serviceIdentifier</em></dt>
+			<dd><p>The identifier of the service (e.g. &ldquo;facebook&rdquo;,
+&ldquo;twitter&rdquo;, etc).</p></dd>
 		</dl>
 		
 	</div>
@@ -200,6 +203,11 @@ process.</p></span>
 	
 	
 	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.0.0 and later.</p>
+	</div>
 	
 	
 	
@@ -211,7 +219,7 @@ process.</p></span>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglyLoginViewController.h</code><br />
+		<code class="declared-in-ref">SinglyLoginViewController+Delegate.h</code><br />
 	</div>				
 	
 	
@@ -224,13 +232,12 @@ process.</p></span>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>This method is invoked on the delegate when an error occurs during the login
-process.</p>
+		<p>Invoked when a login request has failed for any reason.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)singlyLoginViewController:(SinglyLoginViewController *)<em>controller</em> errorLoggingInToService:(NSString *)<em>service</em> withError:(NSError *)<em>error</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)singlyLoginViewController:(SinglyLoginViewController *)<em>viewController</em> errorLoggingInToService:(NSString *)<em>serviceIdentifier</em> withError:(NSError *)<em>error</em></code></div>
 
     
 	
@@ -238,18 +245,20 @@ process.</p>
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>controller</em></dt>
-			<dd><p>The login view controller instance.</p></dd>
+			<dt><em>viewController</em></dt>
+			<dd><p>The login view controller instance that performed
+the login request.</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>service</em></dt>
-			<dd><p>The service identifier.</p></dd>
+			<dt><em>serviceIdentifier</em></dt>
+			<dd><p>The identifier of the service (e.g. &ldquo;facebook&rdquo;,
+&ldquo;twitter&rdquo;, etc).</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>error</em></dt>
-			<dd><p>The error that occurred.</p></dd>
+			<dd><p>The error that occurred while attempting to login.</p></dd>
 		</dl>
 		
 	</div>
@@ -257,6 +266,11 @@ process.</p>
 	
 	
 	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.0.0 and later.</p>
+	</div>
 	
 	
 	
@@ -268,7 +282,7 @@ process.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglyLoginViewController.h</code><br />
+		<code class="declared-in-ref">SinglyLoginViewController+Delegate.h</code><br />
 	</div>				
 	
 	
@@ -287,7 +301,7 @@ process.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-11-30)</span><br />
+						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-12-02)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

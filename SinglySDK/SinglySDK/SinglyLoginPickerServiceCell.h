@@ -27,11 +27,39 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
-@interface SinglyLoginPickerServiceCell : UITableViewCell <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
+/*!
+ *
+ * A custom table view cell implementation for the display of service state.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@interface SinglyLoginPickerServiceCell : UITableViewCell <NSURLConnectionDelegate,
+    NSURLConnectionDataDelegate>
 
+/// ----------------------------------------------------------------------------
+/// @name Configuring the Service Cell
+/// ----------------------------------------------------------------------------
+
+/*!
+ *
+ * Information from the Singly API about to the service.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 @property (nonatomic, strong) NSDictionary *serviceInfoDictionary;
+
+/*!
+ *
+ * Whether or not the service is currently authenticated.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 @property (nonatomic, assign) BOOL isAuthenticated;
 
 @end

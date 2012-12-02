@@ -27,19 +27,32 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 
 /*!
  *
- * A table view cell for displaying a friend record.
+ * A custom table view cell implementation for the display of service state.
+ *
+ * @warning This table view cell is currently in development and is not intended
+ *          to be used in a production app. The API for this cell _will_ be
+ *          changing drastically in upcoming versions of the SDK.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@interface SinglyFriendPickerCell : UITableViewCell <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
+@interface SinglyFriendPickerCell : UITableViewCell <NSURLConnectionDelegate,
+    NSURLConnectionDataDelegate>
+
+/// ----------------------------------------------------------------------------
+/// @name Configuring the Friend Picker Cell
+/// ----------------------------------------------------------------------------
 
 /*!
  *
- * 
+ * Information from the Singly API about to the friend.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 @property (nonatomic, strong) NSDictionary *friendInfoDictionary;

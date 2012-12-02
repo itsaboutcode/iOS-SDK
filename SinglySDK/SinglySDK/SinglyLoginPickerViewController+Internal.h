@@ -29,8 +29,22 @@
 
 @interface SinglyLoginPickerViewController ()
 
+/*!
+ *
+ * The service identifier that is currently selected.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 @property (nonatomic, strong) NSString *selectedService;
 
-- (void)disconnectFromService:(NSString *)service;
+/*!
+ *
+ * Disconnect from the specified service.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+- (void)disconnectFromService:(NSString *)serviceIdentifier;
 
 @end

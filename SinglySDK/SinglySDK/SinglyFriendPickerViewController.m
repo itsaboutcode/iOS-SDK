@@ -30,32 +30,86 @@
 #import "SinglyActivityIndicatorView.h"
 #import "SinglyFriendPickerCell.h"
 #import "SinglyFriendPickerViewController.h"
+#import "SinglyFriendPickerViewController+Internal.h"
 #import "SinglyRequest.h"
 #import "SinglySession.h"
 
-@interface SinglyFriendPickerViewController ()
-{
-    NSMutableDictionary* _friends;
-    NSArray* _friendsSortedKeys;
-    NSMutableArray* _pickedFriends;
-    UIColor* originalSepColor;
-}
-
-@property (nonatomic, assign) BOOL isRefreshing;
-
-@end
-
 @implementation SinglyFriendPickerViewController
 
-- (id)initWithSession:(SinglySession*)session
+- (void)refreshFriends
 {
-    self = [super initWithStyle:UITableViewStylePlain];
-    if (self)
-    {
-        _session = session;
-    }
-    return self;
+
+    if (self.isRefreshing)
+        return;
+
+    self.isRefreshing = YES;
+    NSLog(@"[SinglySDK] Refreshing friends...");
+
+    SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"types/contacts" andParameters:@{ @"limit": @"200" }];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
+     {
+
+         NSError *parseError;
+
+         // Check for Request Errors
+         if (requestError)
+         {
+             NSLog(@"[SinglySDK:SinglySession] A request error occurred while attempting to load friends: %@", requestError);
+             self.isRefreshing = NO;
+             return;
+         }
+
+         // Parse the Response
+         id parsedFriends = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+         if (parseError)
+         {
+             NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to parse friends: %@", parseError);
+             self.isRefreshing = NO;
+             return;
+         }
+
+         // We are expecting an array, so if we receive a dictionary it is
+         // likely because of an error...
+         else if ([parsedFriends isKindOfClass:[NSDictionary class]] && parsedFriends[@"error"])
+         {
+             NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to request friends: %@", parsedFriends[@"error"]);
+             self.isRefreshing = NO;
+             return;
+         }
+
+         NSLog(@"[SinglySDK] Loaded %d friends", ((NSArray *)parsedFriends).count);
+
+         self.friends = [NSMutableDictionary dictionary];
+         for (NSDictionary *friend in parsedFriends)
+         {
+             NSDictionary *oEmbed = [friend objectForKey:@"oembed"];
+
+             if (!oEmbed || ![oEmbed objectForKey:@"title"])
+                 continue;
+
+             NSMutableArray *profiles = [self.friends objectForKey:[oEmbed objectForKey:@"title"]];
+             if (!profiles)
+             {
+                 profiles = [NSMutableArray array];
+                 [self.friends setObject:profiles forKey:[oEmbed objectForKey:@"title"]];
+             }
+             [profiles addObject:friend];
+
+         }
+
+         dispatch_async(dispatch_get_main_queue(), ^{
+             self.friendsSortedKeys = [[self.friends allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+             [self.tableView reloadData];
+             [SinglyActivityIndicatorView dismissIndicator];
+             self.tableView.separatorColor = self.originalSeparatorColor;
+             self.originalSeparatorColor = nil;
+         });
+         
+         self.isRefreshing = NO;
+     }];
 }
+
+#pragma mark - View Callbacks
 
 - (void)viewDidLoad
 {
@@ -70,18 +124,11 @@
 {
     [super viewWillAppear:animated];
 
-    if (_friendsSortedKeys.count == 0 || self.isRefreshing)
+    if (self.friendsSortedKeys.count == 0 || self.isRefreshing)
     {
         [SinglyActivityIndicatorView showIndicator];
 
-//        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(4, 220, _loadingView.bounds.size.width - 8, 22)];
-//        label.text = @"Loading...";
-//        label.backgroundColor = [UIColor clearColor];
-//        label.textAlignment = UITextAlignmentCenter;
-//        label.textColor = [UIColor whiteColor];
-//        [_loadingView addSubview:label];
-
-        originalSepColor = self.tableView.separatorColor;
+        self.originalSeparatorColor = self.tableView.separatorColor;
         self.tableView.separatorColor = [UIColor clearColor];
     }
     else
@@ -97,90 +144,7 @@
     [SinglyActivityIndicatorView dismissIndicator];
 }
 
-#pragma mark -
-
-- (void)refreshFriends
-{
-
-    if (self.isRefreshing)
-        return;
-
-    self.isRefreshing = YES;
-    NSLog(@"[SinglySDK] Refreshing friends...");
-
-    SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"types/contacts" andParameters:@{ @"limit": @"200" }];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
-    {
-
-        NSError *parseError;
-
-        // Check for Request Errors
-        if (requestError)
-        {
-            NSLog(@"[SinglySDK:SinglySession] A request error occurred while attempting to load friends: %@", requestError);
-            self.isRefreshing = NO;
-            return;
-        }
-
-        // Parse the Response
-        id parsedFriends = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
-        if (parseError)
-        {
-            NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to parse friends: %@", parseError);
-            self.isRefreshing = NO;
-            return;
-        }
-
-        // We are expecting an array, so if we receive a dictionary it is
-        // likely because of an error...
-        else if ([parsedFriends isKindOfClass:[NSDictionary class]] && parsedFriends[@"error"])
-        {
-            NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to request friends: %@", parsedFriends[@"error"]);
-            self.isRefreshing = NO;
-            return;
-        }
-
-        NSLog(@"[SinglySDK] Loaded %d friends", ((NSArray *)parsedFriends).count);
-
-        _friends = [NSMutableDictionary dictionary];
-        for (NSDictionary *friend in parsedFriends)
-        {
-            NSDictionary *oEmbed = [friend objectForKey:@"oembed"];
-
-            if (!oEmbed || ![oEmbed objectForKey:@"title"])
-                continue;
-
-            NSMutableArray *profiles = [_friends objectForKey:[oEmbed objectForKey:@"title"]];
-            if (!profiles)
-            {
-                profiles = [NSMutableArray array];
-                [_friends setObject:profiles forKey:[oEmbed objectForKey:@"title"]];
-            }
-            [profiles addObject:friend];
-
-        }
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _friendsSortedKeys = [[_friends allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-            [self.tableView reloadData];
-            [SinglyActivityIndicatorView dismissIndicator];
-            self.tableView.separatorColor = originalSepColor;
-            originalSepColor = nil;
-        });
-
-        self.isRefreshing = NO;
-    }];
-}
-
-#pragma mark - SinglySession
-
-- (SinglySession *)session
-{
-    _session = [SinglySession sharedSession];
-    return _session;
-}
-
-#pragma mark - Table view data source
+#pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -189,7 +153,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _friendsSortedKeys.count;
+    return self.friendsSortedKeys.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -199,23 +163,20 @@
     if (!cell)
         cell = [[SinglyFriendPickerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
-    NSDictionary *friendInfo = [[_friends objectForKey:[_friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0];
+    NSDictionary *friendInfo = [[self.friends objectForKey:[self.friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0];
     cell.friendInfoDictionary = friendInfo;
 
     return cell;
 }
 
-#pragma mark - Table view delegate
+#pragma mark - Table View Delegates
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    */
-    NSString *idr = [[[_friends objectForKey:[_friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0] objectForKey:@"idr"];
+    NSString *idr = [[[self.friends objectForKey:[self.friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0] objectForKey:@"idr"];
     idr = [idr substringFromIndex:[idr rangeOfString:@"#" options:NSBackwardsSearch].location + 1];
-    self.pickedFriends = [NSArray arrayWithObject:idr];
+    NSLog(@"[SinglySDK:SinglyFriendPickerViewController] Selected IDR: %@", idr);
 }
 
 @end

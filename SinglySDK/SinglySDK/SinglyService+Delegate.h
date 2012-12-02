@@ -1,5 +1,5 @@
 //
-//  SinglyFriendModel.h
+//  SinglyService+Delegate.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,36 +27,42 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
-
-@class SinglySession;
-
-typedef void(^DataReadyBlock)(NSError *);
-
-@interface SinglyFriendModel : NSObject
-
-@property (readonly) NSArray *friends;
-@property (nonatomic, strong) SinglySession *session;
-@property (nonatomic, strong) NSArray *services;
+@class SinglyService;
 
 /*!
  *
- * Initialize the model for all services.
+ * Delegate methods related to a SinglyService.
  *
- * @param session The Singly session to use.
-**/
-- (id)initWithSession:(SinglySession *)session;
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+ **/
+@protocol SinglyServiceDelegate <NSObject>
+
+@required
 
 /*!
  *
- * Initialize the model for only the given services.
+ * Delegate method for a successful service login.
  *
- * @param session The Singly session to use.
- * @param services The services to be enabled.
+ * @param service  The service instance that this delegate is firing for.
  *
-**/
-- (id)initWithSession:(SinglySession *)session forService:(NSArray *)services;
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+ **/
+- (void)singlyServiceDidAuthorize:(SinglyService *)service;
 
-- (void)fetchDataWithCompletionHandler:(DataReadyBlock)completionHandler;
+/*!
+ *
+ * Delegate method for an error during service login
+ *
+ * @param service The service where the error occurred
+ *
+ * @param error   The error that occured during login
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+ **/
+- (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error;
 
 @end
+

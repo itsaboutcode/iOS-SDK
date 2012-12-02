@@ -28,6 +28,7 @@
 //
 
 #import "NSURL+AccessToken.h"
+
 #import "SinglyFacebookService.h"
 #import "SinglyKeychainItemWrapper.h"
 #import "SinglyRequest.h"
@@ -35,10 +36,9 @@
 #import "SinglySession+Internal.h"
 
 static NSString *kSinglyAccessTokenKey = @"com.singly.accessToken";
+static SinglySession *sharedInstance = nil;
 
 @implementation SinglySession
-
-static SinglySession *sharedInstance = nil;
 
 + (SinglySession*)sharedSession
 {

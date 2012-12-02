@@ -35,6 +35,8 @@
  * isAuthorizedRequest properties. This method should be called any time those
  * parameters change.
  *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
 **/
 - (void)updateURL;
 

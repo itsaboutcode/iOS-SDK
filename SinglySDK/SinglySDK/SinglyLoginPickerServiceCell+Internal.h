@@ -29,8 +29,31 @@
 
 @interface SinglyLoginPickerServiceCell ()
 
+/*!
+ *
+ * The connection opened to the Singly API for downloading the service icon.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 @property (nonatomic, strong) NSURLConnection *imageConnection;
+
+/*!
+ *
+ * Received data from the image download connection.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 @property (nonatomic, strong) NSMutableData *receivedData;
+
+/*!
+ *
+ * The button for connecting (or disconnecting) from the service.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 @property (nonatomic, strong) UIButton *button;
 
 @end

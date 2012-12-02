@@ -1,5 +1,5 @@
 //
-//  SinglyFriendPickerViewController.h
+//  SinglyLoginPickerViewController+Delegate.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,19 +27,41 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <UIKit/UIKit.h>
+@class SinglyLoginPickerViewController;
 
 /*!
  *
- * Displays a list of friends with their name and avatar in a table view.
- *
- * @warning This view controller is currently in development and is not intended
- *          to be used in a production app. The API for this view controller
- *          _will_ be changing drastically in upcoming versions of the SDK.
+ * Delegate methods related to a SinglyLoginViewController.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
-**/
-@interface SinglyFriendPickerViewController : UITableViewController
+ **/
+@protocol SinglyLoginPickerViewControllerDelegate <NSObject>
+
+/*!
+ *
+ * This method is invoked on the delegate after login was successful.
+ *
+ * @param controller The login view controller instance.
+ * @param service The service identifier.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+ **/
+- (void)singlyLoginPickerViewController:(SinglyLoginPickerViewController *)controller didLoginForService:(NSString *)service;
+
+/*!
+ *
+ * This method is invoked on the delegate when an error occurs during the login
+ * process.
+ *
+ * @param controller The login view controller instance.
+ * @param service The service identifier.
+ * @param error The error that occurred.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+ **/
+- (void)singlyLoginPickerViewController:(SinglyLoginPickerViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
 
 @end

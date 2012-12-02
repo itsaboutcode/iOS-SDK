@@ -36,6 +36,9 @@ pre-packaged distribution](https://github.com/downloads/Singly/iOS-SDK/Singly%20
    Under your Build Phases setting, add the `Accounts`, `Security` and
    `QuartzCore` frameworks to the "Link Binary With Libraries" phase.
 
+3. Import the Singly SDK into the source files you wish to use the SDK in by
+   using `#import <SinglySDK/SinglySDK.h>`.
+
 ### Opening a Session to Singly
 
 To start using the Singly SDK in your project, you will first need to

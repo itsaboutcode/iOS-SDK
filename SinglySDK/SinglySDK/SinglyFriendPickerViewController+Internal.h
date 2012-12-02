@@ -1,5 +1,5 @@
 //
-//  SinglyFriendPickerViewController.h
+//  SinglyFriendPickerViewController+Internal.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,19 +27,44 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <UIKit/UIKit.h>
+@interface SinglyFriendPickerViewController ()
 
 /*!
  *
- * Displays a list of friends with their name and avatar in a table view.
- *
- * @warning This view controller is currently in development and is not intended
- *          to be used in a production app. The API for this view controller
- *          _will_ be changing drastically in upcoming versions of the SDK.
+ * The friends fetched from the Singly API.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@interface SinglyFriendPickerViewController : UITableViewController
+@property (nonatomic, strong) NSMutableDictionary *friends;
+
+/*!
+ *
+ *
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, strong) NSArray *friendsSortedKeys;
+
+/*!
+ *
+ *
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, strong) UIColor *originalSeparatorColor;
+
+/*!
+ *
+ * Denotes whether or not the view controller is currently in the process of
+ * refreshing the friends list.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, assign) BOOL isRefreshing;
 
 @end
+

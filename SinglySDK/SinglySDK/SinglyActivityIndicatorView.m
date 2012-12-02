@@ -29,9 +29,9 @@
 
 #import "SinglyActivityIndicatorView.h"
 
-@implementation SinglyActivityIndicatorView
-
 static SinglyActivityIndicatorView *sharedInstance = nil;
+
+@implementation SinglyActivityIndicatorView
 
 + (SinglyActivityIndicatorView *)sharedIndicator
 {

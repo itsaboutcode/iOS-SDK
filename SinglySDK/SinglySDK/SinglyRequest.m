@@ -28,6 +28,7 @@
 //
 
 #import "NSString+URLEncoded.h"
+
 #import "SinglyConstants.h"
 #import "SinglyRequest.h"
 #import "SinglyRequest+Internal.h"

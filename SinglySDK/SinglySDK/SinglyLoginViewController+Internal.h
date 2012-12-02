@@ -1,5 +1,5 @@
 //
-//  SinglyLogInViewController+Internal.h
+//  SinglyLoginViewController+Internal.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -29,12 +29,50 @@
 
 @interface SinglyLoginViewController ()
 
+/**
+ *
+ * Response data received during the connection process.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 @property (nonatomic, strong) NSMutableData *responseData;
-@property (nonatomic, strong) UIView *pendingLoginView;
-@property (nonatomic, strong) UIActivityIndicatorView *activityView;
-@property (nonatomic, strong) UIWebView *webView;
-@property (nonatomic, strong) UINavigationBar *navigationBar;
 
-- (void)processAccessTokenWithData:(NSData *)data;
+/**
+ *
+ *
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, strong) UIView *pendingLoginView;
+
+/**
+ *
+ *
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+
+/**
+ *
+ * The web view that will handle loading of the service login location.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, strong) UIWebView *webView;
+
+/**
+ *
+ * A custom navigation bar instance that is used when this view controller is
+ * presented modally.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, strong) UINavigationBar *navigationBar;
 
 @end

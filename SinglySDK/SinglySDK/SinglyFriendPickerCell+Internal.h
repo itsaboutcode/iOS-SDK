@@ -29,7 +29,22 @@
 
 @interface SinglyFriendPickerCell ()
 
+/*!
+ *
+ * The connection opened for downloading the friend avatar image.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+ **/
 @property (nonatomic, strong) NSURLConnection *imageConnection;
+
+/*!
+ *
+ * Received data from the image download connection.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+ **/
 @property (nonatomic, strong) NSMutableData *receivedData;
 
 @end

@@ -29,14 +29,15 @@
 
 #import "NSDictionary+QueryString.h"
 #import "NSString+URLEncoded.h"
-#import "SinglyRequest.h"
-#import "SinglySession.h"
-#import "SinglyService+Internal.h"
+
 #import "SinglyFacebookService.h"
+#import "SinglyRequest.h"
+#import "SinglyService+Internal.h"
+#import "SinglySession.h"
 
 @implementation SinglyFacebookService
 
-- (BOOL)appAuthorizationConfigured
+- (BOOL)isAppAuthorizationConfigured
 {
     BOOL isConfigured = YES;
 
@@ -67,7 +68,7 @@
     return isConfigured;
 }
 
-- (BOOL)integratedAuthorizationConfigured
+- (BOOL)isIntegratedAuthorizationConfigured
 {
     BOOL isConfigured = NO;
 
@@ -113,14 +114,14 @@
         //
         // Step 2 - Attempt Integrated Authorization
         //
-        if (self.clientID && !self.isAuthorized && [self integratedAuthorizationConfigured])
+        if (self.clientID && !self.isAuthorized && [self isIntegratedAuthorizationConfigured])
             [self requestIntegratedAuthorization:scopes];
 
         //
         // Step 3 - Attempt Native Application Authorization
         //
         BOOL isAuthorizingViaApplication = NO;
-        if (self.clientID && !self.isAuthorized && [self appAuthorizationConfigured])
+        if (self.clientID && !self.isAuthorized && [self isAppAuthorizationConfigured])
             isAuthorizingViaApplication = [self requestApplicationAuthorization:scopes];
 
         //

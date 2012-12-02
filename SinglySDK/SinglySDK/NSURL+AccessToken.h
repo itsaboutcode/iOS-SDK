@@ -31,6 +31,16 @@
 
 @interface NSURL (AccessToken)
 
+/*!
+ *
+ * Looks for and extracts an access_token from the fragment or query string
+ * segments of a URL.
+ *
+ * @returns The extracted access token, or `nil` if a token could not be found.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 - (NSString *)extractAccessToken;
 
 @end

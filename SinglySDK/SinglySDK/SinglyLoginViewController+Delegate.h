@@ -1,5 +1,5 @@
 //
-//  SinglyFriendPickerViewController.h
+//  SinglyLoginViewController+Delegate.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,19 +27,52 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <UIKit/UIKit.h>
+@class SinglyLoginViewController;
 
 /*!
  *
- * Displays a list of friends with their name and avatar in a table view.
- *
- * @warning This view controller is currently in development and is not intended
- *          to be used in a production app. The API for this view controller
- *          _will_ be changing drastically in upcoming versions of the SDK.
+ * Delegate methods related to actions performed by an instance of
+ * SinglyLoginViewController.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@interface SinglyFriendPickerViewController : UITableViewController
+@protocol SinglyLoginViewControllerDelegate <NSObject>
+
+/*!
+ *
+ * Invoked upon a successful login to the service identified by the
+ * `serviceIdentifier` parameter.
+ *
+ * @param viewController     The login view controller instance that performed
+ *                           the login request.
+ *
+ * @param serviceIdentifier  The identifier of the service (e.g. "facebook",
+ *                           "twitter", etc).
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+- (void)singlyLoginViewController:(SinglyLoginViewController *)viewController
+               didLoginForService:(NSString *)serviceIdentifier;
+
+/*!
+ *
+ * Invoked when a login request has failed for any reason.
+ *
+ * @param viewController     The login view controller instance that performed
+ *                           the login request.
+ *
+ * @param serviceIdentifier  The identifier of the service (e.g. "facebook",
+ *                           "twitter", etc).
+ *
+ * @param error              The error that occurred while attempting to login.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+- (void)singlyLoginViewController:(SinglyLoginViewController *)viewController
+          errorLoggingInToService:(NSString *)serviceIdentifier
+                        withError:(NSError *)error;
 
 @end

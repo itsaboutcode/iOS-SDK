@@ -31,6 +31,14 @@
 
 @interface SinglySession ()
 
+/*!
+ *
+ * A wrapper for accessing the Singly access token that is stored in the
+ * keychain.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 @property (nonatomic, strong) SinglyKeychainItemWrapper *accessTokenWrapper;
 
 @end

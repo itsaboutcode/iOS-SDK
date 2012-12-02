@@ -73,6 +73,12 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initializing a Login View Controller">Initializing a Login View Controller</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Configuring the Login View Controller">Configuring the Login View Controller</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Managing the Delegate">Managing the Delegate</a></span></li>
+	
 </ul></li>
 
 
@@ -139,12 +145,11 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>A view controller for requesting authorization from a supported service via
-a web view.</p>
-
-<p>In general, you should use <a href="../Classes/SinglyService.html">SinglyService</a> to invoke authorization requests as
-opposed to using this view controller directly. If you need to do something
-more custom, then this view controller is a good starting point.</p>
+						<p>A view controller for performing login workflows to supported services via a
+web view.</p><div class="note"><p><strong>Note:</strong> You should use the <a href="../Classes/SinglyService.html">SinglyService</a> class to invoke login requests instead
+of creating an instance of this view controller directly. However, if you
+need to accomplish something that is not supported by <a href="../Classes/SinglyService.html">SinglyService</a>, this
+view controller is a good place to start.</p></div>
 					</div>
 					
 					
@@ -156,45 +161,62 @@ more custom, then this view controller is a good starting point.</p>
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						
-						
+						<a title="Initializing a Login View Controller" name="task_Initializing a Login View Controller"></a>
+						<h3 class="subsubtitle task-title">Initializing a Login View Controller</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
-		<span class="tooltip"><p>When defined, this delegate will be called when authorization succeeds or
-fails.</p></span>
+		<code><a href="#//api/name/initWithServiceIdentifier:">&ndash;&nbsp;initWithServiceIdentifier:</a></code>
+		<span class="tooltip"><p>Initialize with a service identifier.</p></span>
 	</span>
-	<span class="task-item-suffix">property</span>
 	
-</li><li>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Configuring the Login View Controller" name="task_Configuring the Login View Controller"></a>
+						<h3 class="subsubtitle task-title">Configuring the Login View Controller</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/serviceIdentifier">&nbsp;&nbsp;serviceIdentifier</a></code>
-		<span class="tooltip"><p>The service identifier of the service we are attempting to authenticate with.</p></span>
+		<span class="tooltip"><p>Identifier of the service to login to. For a list of supported services, see
+the <a href="https://singly.com/docs/services_overview">Services Overview</a>.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/scopes">&nbsp;&nbsp;scopes</a></code>
-		<span class="tooltip"><p>Custom scope to request from the service.</p></span>
+		<span class="tooltip"><p>Custom scope to send to the service with the login request.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/flags">&nbsp;&nbsp;flags</a></code>
-		<span class="tooltip"><p>Some services may require a custom flag, so specify them here.</p></span>
+		<span class="tooltip"><p>Optional flag to send to the service with the login request. Some services,
+such as Twitter, require additional options which may be specified here.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Managing the Delegate" name="task_Managing the Delegate"></a>
+						<h3 class="subsubtitle task-title">Managing the Delegate</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithServiceIdentifier:">&ndash;&nbsp;initWithServiceIdentifier:</a></code>
-		<span class="tooltip"><p>Initialize with a service identifier.</p></span>
+		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+		<span class="tooltip"><p>The object that acts as the delegate of the login view controller.</p></span>
 	</span>
-	
+	<span class="task-item-suffix">property</span>
 	
 </li>
 						</ul>
@@ -216,8 +238,7 @@ fails.</p></span>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>When defined, this delegate will be called when authorization succeeds or
-fails.</p>
+		<p>The object that acts as the delegate of the login view controller.</p>
 	</div>		
 	
     
@@ -230,7 +251,17 @@ fails.</p>
 	
 	
 	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.0.0 and later.</p>
+	</div>
 	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The delegate must adopt the <a href="../Protocols/SinglyLoginViewControllerDelegate.html">SinglyLoginViewControllerDelegate</a> protocol.</p>
+	</div>
 	
 	
 	
@@ -253,7 +284,8 @@ fails.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Some services may require a custom flag, so specify them here.</p>
+		<p>Optional flag to send to the service with the login request. Some services,
+such as Twitter, require additional options which may be specified here.</p>
 	</div>		
 	
     
@@ -265,6 +297,11 @@ fails.</p>
 	
 	
 	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.0.0 and later.</p>
+	</div>
 	
 	
 	
@@ -289,7 +326,7 @@ fails.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Custom scope to request from the service.</p>
+		<p>Custom scope to send to the service with the login request.</p>
 	</div>		
 	
     
@@ -301,6 +338,11 @@ fails.</p>
 	
 	
 	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.0.0 and later.</p>
+	</div>
 	
 	
 	
@@ -325,7 +367,8 @@ fails.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The service identifier of the service we are attempting to authenticate with.</p>
+		<p>Identifier of the service to login to. For a list of supported services, see
+the <a href="https://singly.com/docs/services_overview">Services Overview</a>.</p>
 	</div>		
 	
     
@@ -337,6 +380,11 @@ fails.</p>
 	
 	
 	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.0.0 and later.</p>
+	</div>
 	
 	
 	
@@ -385,7 +433,8 @@ fails.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>serviceIdentifier</em></dt>
-			<dd><p>The name of the service that we are logging into.</p></dd>
+			<dd><p>The identifier of the service (e.g. &ldquo;facebook&rdquo;,
+&ldquo;twitter&rdquo;, etc).</p></dd>
 		</dl>
 		
 	</div>
@@ -393,6 +442,11 @@ fails.</p>
 	
 	
 	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.0.0 and later.</p>
+	</div>
 	
 	
 	
@@ -423,7 +477,7 @@ fails.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-11-30)</span><br />
+						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-12-02)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

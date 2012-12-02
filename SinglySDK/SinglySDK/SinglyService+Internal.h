@@ -31,11 +31,62 @@
 
 @interface SinglyService ()
 
+/*!
+ *
+ * A convenience accessor for creating and returning an instance of the Facebook
+ * service.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 + (SinglyFacebookService *)facebookService;
 
+/*!
+ *
+ * Fetches the client id from Singly.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+- (void)fetchClientID;
+
+/*!
+ *
+ * Takes the specified service identifier and normalizes it by ensuring that it
+ * is downcased and is in line with what is expected by the API.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 + (NSString *)normalizeServiceIdentifier:(NSString *)serviceIdentifier;
 
+/*!
+ *
+ * Requests authorization from Singly by initializing an instance of the login
+ * view controller and configuring it for the service identified by the current
+ * instance.
+ *
+ * @see requestAuthorizationViaSinglyFromViewController:withScopes:
+ * @see SinglyLoginViewController
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 - (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController;
-- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes;
+
+/*!
+ *
+ * Requests authorization from Singly by initializing an instance of the login
+ * view controller and configuring it for the service identified by the current
+ * instance and any custom scope(s).
+ *
+ * @see requestAuthorizationViaSinglyFromViewController:
+ * @see SinglyLoginViewController
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
+                                             withScopes:(NSArray *)scopes;
 
 @end

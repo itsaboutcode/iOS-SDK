@@ -1,5 +1,5 @@
 //
-//  SinglyLogInViewController.h
+//  SinglyLoginViewController.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -28,90 +28,88 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SinglySDK/SinglySession.h>
 
-@class SinglyLoginViewController;
-
-/*!
- *
- * @protocol SinglyLoginViewControllerDelegate
- * @abstract Delegate methods related to a SinglyLoginViewController
- *
- **/
-@protocol SinglyLoginViewControllerDelegate <NSObject>
+#import "SinglyLoginViewController+Delegate.h"
+#import "SinglySession.h"
 
 /*!
  *
- * This method is invoked on the delegate after login was successful.
+ * A view controller for performing login workflows to supported services via a
+ * web view.
  *
- * @param controller The login view controller instance.
- * @param service The service identifier.
+ * @note You should use the SinglyService class to invoke login requests instead
+ * of creating an instance of this view controller directly. However, if you
+ * need to accomplish something that is not supported by SinglyService, this
+ * view controller is a good place to start.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-- (void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service;
+@interface SinglyLoginViewController : UIViewController <UIWebViewDelegate,
+    NSURLConnectionDataDelegate>
+
+/// ----------------------------------------------------------------------------
+/// @name Initializing a Login View Controller
+/// ----------------------------------------------------------------------------
 
 /*!
  *
- * This method is invoked on the delegate when an error occurs during the login
- * process.
+ * Initialize with a service identifier.
  *
- * @param controller The login view controller instance.
- * @param service The service identifier.
- * @param error The error that occurred.
+ * @param serviceIdentifier  The identifier of the service (e.g. "facebook",
+ *                           "twitter", etc).
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-- (void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
+- (id)initWithServiceIdentifier:(NSString *)serviceIdentifier;
 
-@end
-
-/*!
- *
- * A view controller for requesting authorization from a supported service via
- * a web view.
- *
- * In general, you should use SinglyService to invoke authorization requests as
- * opposed to using this view controller directly. If you need to do something
- * more custom, then this view controller is a good starting point.
- *
-**/
-@interface SinglyLoginViewController : UIViewController <UIWebViewDelegate, NSURLConnectionDataDelegate>
+/// ----------------------------------------------------------------------------
+/// @name Configuring the Login View Controller
+/// ----------------------------------------------------------------------------
 
 /*!
  *
- * When defined, this delegate will be called when authorization succeeds or
- * fails.
+ * Identifier of the service to login to. For a list of supported services, see
+ * the [Services Overview](https://singly.com/docs/services_overview).
  *
-**/
-@property (nonatomic, strong) id<SinglyLoginViewControllerDelegate> delegate;
-
-/*!
- *
- * The service identifier of the service we are attempting to authenticate with.
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 @property (nonatomic, strong) NSString *serviceIdentifier;
 
 /*!
  *
- * Custom scope to request from the service.
+ * Custom scope to send to the service with the login request.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 @property (nonatomic, strong) NSArray *scopes;
 
 /*!
  *
- * Some services may require a custom flag, so specify them here.
+ * Optional flag to send to the service with the login request. Some services,
+ * such as Twitter, require additional options which may be specified here.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 @property (nonatomic, strong) NSString *flags;
 
+/// ----------------------------------------------------------------------------
+/// @name Managing the Delegate
+/// ----------------------------------------------------------------------------
+
 /*!
  *
- * Initialize with a service identifier.
+ * The object that acts as the delegate of the login view controller.
  *
- * @param serviceIdentifier The name of the service that we are logging into.
+ * The delegate must adopt the SinglyLoginViewControllerDelegate protocol.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-- (id)initWithServiceIdentifier:(NSString *)serviceIdentifier;
+@property (nonatomic, strong) id<SinglyLoginViewControllerDelegate> delegate;
 
 @end

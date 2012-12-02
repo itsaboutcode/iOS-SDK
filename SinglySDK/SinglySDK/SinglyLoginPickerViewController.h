@@ -27,66 +27,35 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <SinglySDK/SinglyService.h>
-#import <SinglySDK/SinglySession.h>
-#import <SinglySDK/SinglyLoginViewController.h>
+#import <UIKit/UIKit.h>
 
-@class SinglyLoginPickerViewController;
-
-/*!
- *
- * @protocol SinglyLoginViewControllerDelegate
- * @abstract Delegate methods related to a SinglyLoginViewController
- *
- **/
-@protocol SinglyLoginPickerViewControllerDelegate <NSObject>
-
-/*!
- *
- * This method is invoked on the delegate after login was successful.
- *
- * @param controller The login view controller instance.
- * @param service The service identifier.
- *
-**/
-- (void)singlyLoginPickerViewController:(SinglyLoginPickerViewController *)controller didLoginForService:(NSString *)service;
-
-/*!
- *
- * This method is invoked on the delegate when an error occurs during the login
- * process.
- *
- * @param controller The login view controller instance.
- * @param service The service identifier.
- * @param error The error that occurred.
- *
-**/
-- (void)singlyLoginPickerViewController:(SinglyLoginPickerViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
-
-@end
+#import "SinglyLoginPickerViewController+Delegate.h"
+#import "SinglyLoginViewController.h"
+#import "SinglyService.h"
+#import "SinglySession.h"
 
 /*!
  *
  * Displays a list of services that can be authenticated against in a list view
  * with the option to log in to any supported services.
  *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
 **/
 @interface SinglyLoginPickerViewController : UITableViewController <SinglyLoginViewControllerDelegate,
     SinglyServiceDelegate, UIAlertViewDelegate>
 
-/*!
- *
- * When defined, this delegate will be called when authorization succeeds or
- * fails.
- *
-**/
-@property (nonatomic, strong) id<SinglyLoginPickerViewControllerDelegate> delegate;
+/// ----------------------------------------------------------------------------
+/// @name Managing Available Services
+/// ----------------------------------------------------------------------------
 
 /*!
  *
  * The services that should be displayed in the picker. This defaults to all of
  * the available services as returned by servicesDictionary, but can be
  * set to just the services you require.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 @property (nonatomic, strong) NSArray *services;
@@ -96,7 +65,24 @@
  * A dictionary containing metadata describing all of the supported services.
  * The dictionary is automatically populated from the Singly API.
  *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
 **/
 @property (nonatomic, strong, readonly) NSDictionary *servicesDictionary;
+
+/// ----------------------------------------------------------------------------
+/// @name Managing the Delegate
+/// ----------------------------------------------------------------------------
+
+/*!
+ *
+ * The object that acts as the delegate of the login picker view controller.
+ *
+ * The delegate must adopt the SinglyLoginPickerViewControllerDelegate protocol.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, strong) id<SinglyLoginPickerViewControllerDelegate> delegate;
 
 @end

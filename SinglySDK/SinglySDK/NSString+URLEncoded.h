@@ -31,6 +31,15 @@
 
 @interface NSString (URLEncoded)
 
+/*!
+ *
+ * Encodes the string for use in a URL.
+ *
+ * @returns The string encoded for use in a URL
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 - (NSString *)URLEncodedString;
 
 @end

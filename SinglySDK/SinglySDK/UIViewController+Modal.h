@@ -29,13 +29,23 @@
 
 #import <UIKit/UIKit.h>
 
+/*!
+ *
+ * Utility methods for determining whether or not a given view controller is
+ * being presented modally.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 @interface UIViewController (Modal)
 
 /*!
  *
  * Determines whether the view controller has been presented modally.
  *
- */
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 - (BOOL)isModal;
 
 @end

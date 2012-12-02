@@ -1,5 +1,5 @@
 //
-//  SinglyLogInViewController.m
+//  SinglyLoginViewController.m
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,11 +27,12 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "UIViewController+Modal.h"
+
 #import "SinglyConstants.h"
 #import "SinglyLoginViewController.h"
 #import "SinglyLoginViewController+Internal.h"
 #import "SinglyService+Internal.h"
-#import "UIViewController+Modal.h"
 
 @implementation SinglyLoginViewController
 
@@ -44,6 +45,13 @@
     }
     return self;
 }
+
+- (void)setServiceIdentifier:(NSString *)serviceIdentifier
+{
+    _serviceIdentifier = [SinglyService normalizeServiceIdentifier:serviceIdentifier];
+}
+
+#pragma mark - View Callbacks
 
 - (void)viewDidLoad
 {
@@ -109,12 +117,7 @@
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
 }
 
-- (void)processAccessTokenWithData:(NSData *)data;
-{
-    
-}
-
-#pragma mark - UIWebViewDelegate
+#pragma mark - Web View Delegates
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -162,22 +165,12 @@
     return YES;
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    
-}
-
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    //TODO:  Fill this in
+
 }
 
-#pragma mark - NSURLConnectionDataDelegate
+#pragma mark - URL Connection Delegates
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
