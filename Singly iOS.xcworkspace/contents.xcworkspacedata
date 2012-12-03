@@ -2,13 +2,13 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:README.md">
+      location = "group:CONTRIBUTORS">
    </FileRef>
    <FileRef
       location = "group:LICENSE">
    </FileRef>
    <FileRef
-      location = "group:CONTRIBUTORS">
+      location = "group:README.md">
    </FileRef>
    <FileRef
       location = "group:RELEASE_PROCESS.md">
