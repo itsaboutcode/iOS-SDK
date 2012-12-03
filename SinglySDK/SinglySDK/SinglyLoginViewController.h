@@ -80,6 +80,15 @@
 
 /*!
  *
+ * The brand name of the service which is properly capitalized and punctuated.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, strong) NSString *serviceName;
+
+/*!
+ *
  * Custom scope to send to the service with the login request.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.

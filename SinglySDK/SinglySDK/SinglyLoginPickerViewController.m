@@ -220,8 +220,10 @@
 
 - (void)authenticateWithService:(NSString *)serviceIdentifier
 {
+    NSDictionary *serviceDictionary = [self.servicesDictionary objectForKey:serviceIdentifier];
     SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithServiceIdentifier:serviceIdentifier];
     loginViewController.delegate = self;
+    loginViewController.serviceName = serviceDictionary[@"name"];
     [self presentViewController:loginViewController animated:YES completion:NULL];
 }
 
