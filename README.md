@@ -156,12 +156,17 @@ If you wish to run the example on your iPhone or iPad, you will need to
 configure the project with provisioning appropriate to your device and Apple
 developer account, which is beyond the scope of this document.
 
-## SDK Documentation
+## API Documentation
 
 After you've cloned the project, you will find generated documentation in
 the `SinglySDK/Documentation` folder. This documentation is automatically
 regenerated with each successful build of the framework in Xcode, provided
 you have [appledoc](http://gentlebytes.com/appledoc/) installed.
+
+You may also view the documentation for the latest release at
+[http://singly.github.com/iOS-SDK/api](http://singly.github.com/iOS-SDK/api)
+or subscribe to it within Xcode at
+[http://singly.github.com/iOS-SDK/api/SinglySDK.atom](http://singly.github.com/iOS-SDK/api/SinglySDK.atom).
 
 ## Native Facebook Authorization
 
