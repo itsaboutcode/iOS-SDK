@@ -64,7 +64,9 @@ static SinglySession *sharedInstance = nil;
 
 - (NSString *)accountID
 {
-    return [self.accessTokenWrapper objectForKey:(__bridge id)kSecAttrAccount];
+    NSString *theAccountID = [self.accessTokenWrapper objectForKey:(__bridge id)kSecAttrAccount];
+    if (theAccountID.length == 0) theAccountID = nil;
+    return theAccountID;
 }
 
 - (void)setAccessToken:(NSString *)accessToken
@@ -74,7 +76,9 @@ static SinglySession *sharedInstance = nil;
 
 - (NSString *)accessToken
 {
-    return [self.accessTokenWrapper objectForKey:(__bridge id)kSecValueData];
+    NSString *theAccessToken = [self.accessTokenWrapper objectForKey:(__bridge id)kSecValueData];
+    if (theAccessToken.length == 0) theAccessToken = nil;
+    return theAccessToken;
 }
 
 - (void)startSessionWithCompletionHandler:(void (^)(BOOL))block

@@ -72,8 +72,7 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-  return [[SinglySession sharedSession] handleOpenURL:url];
+  return [SinglySession.sharedSession handleOpenURL:url];
 }
-
 
 @end
