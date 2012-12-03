@@ -33,7 +33,9 @@
  *
  * @header SinglyConstants
  *
- */
+**/
+
+static NSString *kSinglySDKVersion = @"1.0.0";
 
 static NSString *kSinglyBaseURL = @"https://api.singly.com";
 static NSString *kSinglyAccessTokenURL = @"https://api.singly.com/oauth/access_token";
