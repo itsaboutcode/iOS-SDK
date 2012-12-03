@@ -75,6 +75,16 @@
                                            queue:[NSOperationQueue mainQueue]
                                completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
         {
+            if (requestError)
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                    message:[requestError localizedDescription]
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+                [alertView show];
+                return;
+            }
+
             _servicesDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
             if (!self.services)
                 self.services = [[self.servicesDictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
