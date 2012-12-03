@@ -56,6 +56,12 @@
          {
              NSLog(@"[SinglySDK:SinglySession] A request error occurred while attempting to load friends: %@", requestError);
              self.isRefreshing = NO;
+
+             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                 message:[requestError localizedDescription]
+                                                                delegate:self
+                                                       cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+             [alertView show];
              return;
          }
 
