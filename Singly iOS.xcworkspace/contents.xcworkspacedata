@@ -11,6 +11,9 @@
       location = "group:CONTRIBUTORS">
    </FileRef>
    <FileRef
+      location = "group:RELEASE_PROCESS.md">
+   </FileRef>
+   <FileRef
       location = "group:SinglySDK/SinglySDK.xcodeproj">
    </FileRef>
    <FileRef
