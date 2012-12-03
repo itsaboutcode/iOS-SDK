@@ -30,11 +30,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-<<<<<<< HEAD
-	<string>1.0.3</string>
-=======
 	<string>1.1.0</string>
->>>>>>> Bumped version number of the example app for next milestone release.
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
