@@ -12,13 +12,13 @@ Secret can be found on the application settings page for your application.
 
 Once you have your Client ID and Client Secret, we can either start a new iOS
 application or use an existing one. If you are starting fresh, you can take a
-look at and clone our [skeleton project](https://github.com/singly/ios-sdk-skelton)
+look at and clone our [skeleton project](https://github.com/singly/ios-sdk-skeleton)
 that is already bootstrapped for the Singly iOS SDK.
 
 ### Download the Singly SDK
 
 The easiest way to get started with the Singly SDK is to [download our
-pre-packaged distribution](https://github.com/downloads/Singly/iOS-SDK/Singly%20iOS%20SDK.dmg).
+pre-packaged distribution](https://github.com/downloads/Singly/iOS-SDK/Singly%20iOS%20SDK%20(1.0.0).dmg).
 
 ### Include the Singly SDK in Your Project
 
