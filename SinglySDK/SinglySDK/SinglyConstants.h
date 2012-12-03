@@ -35,7 +35,7 @@
  *
 **/
 
-static NSString *kSinglySDKVersion = @"1.0.1";
+static NSString *kSinglySDKVersion = @"1.1.0";
 
 static NSString *kSinglyBaseURL = @"https://api.singly.com";
 static NSString *kSinglyAccessTokenURL = @"https://api.singly.com/oauth/access_token";
