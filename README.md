@@ -178,8 +178,9 @@ application fallback to work, you will need to perform the following steps:
 
 ### Configure Your Application at Facebook
 
-You will need to create your app at Facebook and configure it as a "Native
-iOS App".
+On the [Facebook Developers](http://developers.facebook.com) site, you will
+need to create and configure your app as a "Native iOS App". You will need
+to set the bundle identifier defined in your Info.plist.
 
 ### Register your app to handle Facebook URLs
 
