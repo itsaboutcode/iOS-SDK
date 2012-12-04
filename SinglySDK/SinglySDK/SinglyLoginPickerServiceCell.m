@@ -66,8 +66,9 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-    
-    [self.imageConnection cancel];
+
+    if (self.imageConnection)
+        [self.imageConnection cancel];
     self.imageView.image = [UIImage imageNamed:@"SinglySDK.bundle/Service Placeholder"];
 }
 
@@ -79,12 +80,16 @@
     self.textLabel.text = serviceInfoDictionary[@"name"];
 
     // Load Image
-    NSURL *imageURL = [NSURL URLWithString:serviceInfoDictionary[@"icons"][2][@"source"]];
-    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
-    self.receivedData = [NSMutableData data];
-    self.imageConnection = [[NSURLConnection alloc] initWithRequest:imageRequest delegate:self startImmediately:NO];
-    [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-    [self.imageConnection start];
+    NSString *imageLocation = serviceInfoDictionary[@"icons"][2][@"source"];
+    if (imageLocation)
+    {
+        NSURL *imageURL = [NSURL URLWithString:imageLocation];
+        NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
+        self.receivedData = [NSMutableData data];
+        self.imageConnection = [[NSURLConnection alloc] initWithRequest:imageRequest delegate:self startImmediately:NO];
+        [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+        [self.imageConnection start];
+    }
 }
 
 - (void)setIsAuthenticated:(BOOL)authenticated

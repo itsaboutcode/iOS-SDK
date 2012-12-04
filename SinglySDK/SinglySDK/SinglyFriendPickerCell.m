@@ -58,7 +58,8 @@
 {
     [super prepareForReuse];
 
-    [self.imageConnection cancel];
+    if (self.imageConnection)
+        [self.imageConnection cancel];
     self.imageView.image = [UIImage imageNamed:@"SinglySDK.bundle/Avatar Placeholder"];
 }
 
@@ -70,12 +71,16 @@
     self.textLabel.text = friendInfoDictionary[@"oembed"][@"title"];
 
     // Load Image
-    NSURL *imageURL = [NSURL URLWithString:friendInfoDictionary[@"oembed"][@"thumbnail_url"]];
-    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
-    self.receivedData = [NSMutableData data];
-    self.imageConnection = [[NSURLConnection alloc] initWithRequest:imageRequest delegate:self startImmediately:NO];
-    [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-    [self.imageConnection start];
+    NSString *imageLocation = friendInfoDictionary[@"oembed"][@"thumbnail_url"];
+    if (imageLocation)
+    {
+        NSURL *imageURL = [NSURL URLWithString:imageLocation];
+        NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
+        self.receivedData = [NSMutableData data];
+        self.imageConnection = [[NSURLConnection alloc] initWithRequest:imageRequest delegate:self startImmediately:NO];
+        [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+        [self.imageConnection start];
+    }
 }
 
 #pragma mark - URL Connection Delegates
@@ -99,7 +104,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"Connection failed! Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+    NSLog(@"[SinglySDK:SinglyFriendPickerCell] Connection Error: %@ (%@)", [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     self.imageConnection = nil;
     self.receivedData = nil;
 }
