@@ -15,8 +15,8 @@
 		D00348381665322D0048513A /* SinglyRequest+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D00348371665322D0048513A /* SinglyRequest+Internal.h */; };
 		D003483B16666C8B0048513A /* SinglyKeychainItemWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = D003483916666C8B0048513A /* SinglyKeychainItemWrapper.h */; };
 		D003483C16666C8B0048513A /* SinglyKeychainItemWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = D003483916666C8B0048513A /* SinglyKeychainItemWrapper.h */; };
-		D003483D16666C8B0048513A /* SinglyKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D003483E16666C8B0048513A /* SinglyKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D003483D16666C8B0048513A /* SinglyKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */; };
+		D003483E16666C8B0048513A /* SinglyKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */; };
 		D003484116666ED50048513A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D003483F16666E650048513A /* Security.framework */; };
 		D003484716666EFE0048513A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B538116309C7700F1F535 /* UIKit.framework */; };
 		D00348541666B56F0048513A /* SinglySession+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D00348531666B56F0048513A /* SinglySession+Internal.h */; };
