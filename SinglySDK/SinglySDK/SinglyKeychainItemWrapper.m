@@ -109,7 +109,7 @@
 			if (accessGroup)
 			{
                 #if !TARGET_IPHONE_SIMULATOR
-                    [_keychainItemData setObject:accessGroup forKey:(id)kSecAttrAccessGroup];
+                    [_keychainItemData setObject:accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
                 #endif
 			}
 		}
