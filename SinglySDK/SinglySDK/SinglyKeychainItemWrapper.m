@@ -109,7 +109,7 @@
 			if (accessGroup)
 			{
                 #if !TARGET_IPHONE_SIMULATOR
-                    [keychainItemData setObject:accessGroup forKey:(id)kSecAttrAccessGroup];
+                    [_keychainItemData setObject:accessGroup forKey:(id)kSecAttrAccessGroup];
                 #endif
 			}
 		}
@@ -119,7 +119,7 @@
             // Load the saved data from Keychain.
             //
             NSMutableDictionary *outDictionary = (__bridge_transfer NSMutableDictionary *)outDictionaryReference;
-            self.keychainItemData = [self secItemFormatToDictionary:outDictionary];
+            _keychainItemData = [self secItemFormatToDictionary:outDictionary];
         }
     }
 	return self;
