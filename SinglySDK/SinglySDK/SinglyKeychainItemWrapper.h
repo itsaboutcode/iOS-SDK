@@ -30,26 +30,63 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-/*
- The KeychainItemWrapper class is an abstraction layer for the iPhone Keychain communication. It is merely a
- simple wrapper to provide a distinct barrier between all the idiosyncracies involved with the Keychain
- CF/NS container objects.
- */
+/*!
+ *
+ * The SinglyKeychainItemWrapper class is an abstraction layer for the iPhone
+ * Keychain communication. It is merely a simple wrapper to provide a distinct
+ * barrier between all the idiosyncracies involved with the Keychain CF/NS
+ * container objects.
+ *
+ * This class is heavily based on KeychainItemWrapper from Apple, but has been
+ * modernized with ARC and Objective-C 2.0 syntax.
+ *
+**/
 @interface SinglyKeychainItemWrapper : NSObject
-{
-    NSMutableDictionary *keychainItemData;		// The actual keychain item data backing store.
-    NSMutableDictionary *genericPasswordQuery;	// A placeholder for the generic keychain item query used to locate the item.
-}
 
-@property (nonatomic, retain) NSMutableDictionary *keychainItemData;
-@property (nonatomic, retain) NSMutableDictionary *genericPasswordQuery;
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, strong) NSMutableDictionary *keychainItemData;
 
-// Designated initializer.
-- (id)initWithIdentifier: (NSString *)identifier accessGroup:(NSString *) accessGroup;
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (nonatomic, strong) NSMutableDictionary *genericPasswordQuery;
+
+/*!
+ *
+ * The designated initializer.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+- (id)initWithIdentifier:(NSString *)identifier accessGroup:(NSString *)accessGroup;
+
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 - (void)setObject:(id)inObject forKey:(id)key;
+
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 - (id)objectForKey:(id)key;
 
-// Initializes and resets the default generic keychain item data.
+/*!
+ *
+ * Initializes and resets the default generic keychain item data.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
 - (void)resetKeychainItem;
 
 @end
