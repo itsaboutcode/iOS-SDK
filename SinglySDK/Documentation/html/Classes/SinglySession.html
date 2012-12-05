@@ -68,6 +68,8 @@
 	
 	<option value="//api/name/handleOpenURL:">&nbsp;&nbsp;&nbsp;&nbsp;- handleOpenURL:</option>
 	
+	<option value="//api/name/resetSession">&nbsp;&nbsp;&nbsp;&nbsp;- resetSession</option>
+	
 	<option value="//api/name/startSessionWithCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- startSessionWithCompletionHandler:</option>
 	
 	<option value="//api/name/updateProfiles">&nbsp;&nbsp;&nbsp;&nbsp;- updateProfiles</option>
@@ -94,7 +96,7 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Configuring the Session">Configuring the Session</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Accessing the Session Credentials">Accessing the Session Credentials</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Managing the Session">Managing the Session</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Managing Session Profiles">Managing Session Profiles</a></span></li>
 	
@@ -139,6 +141,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/applyService:withToken:">applyService:withToken:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleOpenURL:">handleOpenURL:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/resetSession">resetSession</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/startSessionWithCompletionHandler:">startSessionWithCompletionHandler:</a></span></li>
 	
@@ -239,8 +243,8 @@
 						</ul>
 						
 						
-						<a title="Accessing the Session Credentials" name="task_Accessing the Session Credentials"></a>
-						<h3 class="subsubtitle task-title">Accessing the Session Credentials</h3>
+						<a title="Managing the Session" name="task_Managing the Session"></a>
+						<h3 class="subsubtitle task-title">Managing the Session</h3>
 
 						<ul class="task-list">
 							<li>
@@ -256,6 +260,14 @@
 		<span class="tooltip"><p>The account ID associated with the current access token.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/resetSession">&ndash;&nbsp;resetSession</a></code>
+		<span class="tooltip"><p>Resets the current session by clearing the access token, account id and
+loaded <a href="#//api/name/profiles">profiles</a>.</p></span>
+	</span>
+	
 	
 </li>
 						</ul>
@@ -750,6 +762,48 @@ based on the service.</p>
 	<div class="method-subsection availability">
 		<h4 class="method-subtitle parameter-title">Availability</h4>
 		<p>Available in Singly iOS SDK 1.0.0 and later.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglySession.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/resetSession" title="resetSession"></a>
+	<h3 class="subsubtitle method-title">resetSession</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Resets the current session by clearing the access token, account id and
+loaded <a href="#//api/name/profiles">profiles</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)resetSession</code></div>
+
+    
+	
+	
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.1.0 and later.</p>
 	</div>
 	
 	
