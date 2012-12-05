@@ -103,4 +103,34 @@
     return cell;
 }
 
+#pragma mark - Table View Delegates
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2 && indexPath.row == 0)
+    {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self resetApplicationState];
+    }
+}
+
+#pragma mark -
+
+- (void)resetApplicationState
+{
+    NSLog(@"Resetting Application State ...");
+
+    // Delete Cookies
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies])
+    {
+        [storage deleteCookie:cookie];
+    }
+
+    // Reset Session
+    [SinglySession.sharedSession resetSession];
+
+}
+
 @end

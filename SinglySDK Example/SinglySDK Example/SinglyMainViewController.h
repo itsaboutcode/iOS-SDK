@@ -31,4 +31,6 @@
 
 @property (nonatomic, strong) IBOutlet UITableViewCell *friendPickerCell;
 
+- (void)resetApplicationState;
+
 @end
