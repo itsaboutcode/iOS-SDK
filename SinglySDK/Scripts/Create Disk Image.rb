@@ -22,6 +22,7 @@ source_path    = ENV["SRCROOT"]
 workspace_path = File.dirname(ENV["WORKSPACE_PATH"])
 archive_path   = ENV["ARCHIVE_PATH"]
 image_path     = "#{Tempfile.new('dmg').path}.dmg"
+version        = `grep SinglySDKVersion "#{source_path}/SinglySDK/SinglyConstants.h" | sed 's/[^0-9\.]//g'`.strip
 
 Dir.mktmpdir do |temp_path|
 
@@ -67,6 +68,6 @@ Dir.mktmpdir do |temp_path|
   sleep 10
 
   # Compress Disk Image
-  puts `hdiutil convert "#{image_path}" -format UDZO -imagekey zlib-level=9 -o "#{File.expand_path("~/Desktop")}/#{name}.dmg"`
+  puts `hdiutil convert "#{image_path}" -format UDZO -imagekey zlib-level=9 -o "#{File.expand_path("~/Desktop")}/#{name} #{version}.dmg"`
 
 end
