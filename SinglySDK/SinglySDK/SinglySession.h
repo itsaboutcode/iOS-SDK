@@ -110,7 +110,7 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
 @property (copy) NSString *clientSecret;
 
 /// ----------------------------------------------------------------------------
-/// @name Accessing the Session Credentials
+/// @name Managing the Session
 /// ----------------------------------------------------------------------------
 
 /*!
@@ -130,6 +130,16 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
  *
 **/
 @property (copy) NSString *accountID;
+
+/*!
+ *
+ * Resets the current session by clearing the access token, account id and
+ * loaded profiles.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+- (void)resetSession;
 
 /// ----------------------------------------------------------------------------
 /// @name Managing Session Profiles
