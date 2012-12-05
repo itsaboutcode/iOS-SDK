@@ -57,6 +57,24 @@ static SinglySession *sharedInstance = nil;
     return self;
 }
 
+- (void)startSessionWithCompletionHandler:(void (^)(BOOL))block
+{
+    // If we don't have an accountID or accessToken we're definitely not ready
+    if (!self.accountID || !self.accessToken) return block(NO);
+
+    dispatch_queue_t resultQueue = dispatch_get_current_queue();
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self updateProfilesWithCompletion:^(BOOL success)
+        {
+            NSString *foundAccountID = [self.profiles objectForKey:@"id"];
+            BOOL isReady = ([foundAccountID isEqualToString:self.accountID]);
+            dispatch_sync(resultQueue, ^{
+                block(isReady);
+            });
+        }];
+    });
+}
+
 - (void)setAccountID:(NSString *)accountID
 {
     [self.accessTokenWrapper setObject:accountID forKey:(__bridge id)kSecAttrAccount];
@@ -81,22 +99,17 @@ static SinglySession *sharedInstance = nil;
     return theAccessToken;
 }
 
-- (void)startSessionWithCompletionHandler:(void (^)(BOOL))block
+- (void)resetSession
 {
-    // If we don't have an accountID or accessToken we're definitely not ready
-    if (!self.accountID || !self.accessToken) return block(NO);
 
-    dispatch_queue_t resultQueue = dispatch_get_current_queue();
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self updateProfilesWithCompletion:^(BOOL success)
-        {
-            NSString *foundAccountID = [self.profiles objectForKey:@"id"];
-            BOOL isReady = ([foundAccountID isEqualToString:self.accountID]);
-            dispatch_sync(resultQueue, ^{
-                block(isReady);
-            });
-        }];
-    });
+    // Reset Profiles
+    _profiles = nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSinglySessionProfilesUpdatedNotification object:self];
+
+    // Reset Access Token & Account ID
+    self.accessToken = nil;
+    self.accountID = nil;
+
 }
 
 - (void)updateProfiles
