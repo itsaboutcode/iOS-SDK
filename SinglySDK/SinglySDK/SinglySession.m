@@ -138,7 +138,9 @@ static SinglySession *sharedInstance = nil;
                     _profiles = [NSDictionary dictionary];
                 else
                     _profiles = responseDictionary;
-                [[NSNotificationCenter defaultCenter] postNotificationName:kSinglySessionProfilesUpdatedNotification object:self];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [NSNotificationCenter.defaultCenter postNotificationName:kSinglySessionProfilesUpdatedNotification object:self];
+                });
                 isSuccessful = YES;
             }
         }
@@ -191,8 +193,8 @@ static SinglySession *sharedInstance = nil;
                 SinglySession.sharedSession.accountID = responseDictionary[@"account"];
                 [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL successful)
                 {
-                    dispatch_async(dispatch_get_current_queue(), ^{
-                        [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceAppliedNotification object:serviceIdentifier];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [NSNotificationCenter.defaultCenter postNotificationName:kSinglyServiceAppliedNotification object:serviceIdentifier];
                     });
                 }];
             });
