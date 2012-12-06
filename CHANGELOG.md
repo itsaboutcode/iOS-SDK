@@ -1,6 +1,10 @@
 
 # ChangeLog
 
+## 1.0.2 — ...
+
+* 
+
 ## 1.0.1 — December 5th, 2012
 
 * Added support for Cocoapods.
