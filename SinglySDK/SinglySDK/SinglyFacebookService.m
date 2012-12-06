@@ -145,13 +145,16 @@
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
 
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
+
+    if (!accountType)
+        return;
 
     NSArray *permissions = (scopes != nil) ? scopes : @[ @"email", @"user_location", @"user_birthday" ];
     NSDictionary *options = @{
         @"ACFacebookAppIdKey": self.clientID,
         @"ACFacebookPermissionsKey": permissions,
-        @"ACFacebookAudienceKey": ACFacebookAudienceEveryone
+        @"ACFacebookAudienceKey": @"everyone"
     };
 
     [accountStore requestAccessToAccountsWithType:accountType
