@@ -178,7 +178,7 @@
     }
     
     // Override the standard behavior for Facebook
-    if ([service isEqualToString:kSinglyServiceFacebook])
+    if ([service isEqualToString:@"facebook"])
     {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         [self authenticateWithFacebook];
