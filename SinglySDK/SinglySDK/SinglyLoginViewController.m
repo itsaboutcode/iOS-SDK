@@ -130,7 +130,8 @@
         self.pendingLoginView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         
         self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        self.activityView.frame = CGRectMake(140, 180, self.activityView.bounds.size.width, self.activityView.bounds.size.height);
+        self.activityView.frame = CGRectMake(0, 0, self.activityView.bounds.size.width, self.activityView.bounds.size.height);
+        self.activityView.center = self.view.center;
         [self.pendingLoginView addSubview:self.activityView];
         [self.activityView startAnimating];
         
