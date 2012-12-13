@@ -1,6 +1,6 @@
 //
-//  SinglyMainViewController.h
-//  SinglySDK Example
+//  SinglyFriend.h
+//  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
 //
@@ -27,11 +27,10 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-@interface SinglyMainViewController : UITableViewController
+#import <Foundation/Foundation.h>
 
-@property (nonatomic, strong) IBOutlet UITableViewCell *friendPickerCell;
+@interface SinglyFriend : NSObject
 
-- (void)syncContacts;
-- (void)resetApplicationState;
++ (void)syncContacts;
 
 @end
