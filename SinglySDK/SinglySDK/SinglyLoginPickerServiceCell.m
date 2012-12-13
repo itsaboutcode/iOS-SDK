@@ -128,7 +128,8 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    self.imageView.image = [UIImage imageWithData:self.receivedData];
+    UIImage *receivedImage = [UIImage imageWithData:self.receivedData];
+    if (receivedImage) self.imageView.image = receivedImage;
     self.imageConnection = nil;
     self.receivedData = nil;
 }
