@@ -107,17 +107,38 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 2 && indexPath.row == 0)
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    switch (indexPath.section)
     {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        [self resetApplicationState];
+        // Sync Contacts
+        case 2:
+            [self syncContacts];
+            break;
+
+        // Reset Application
+        case 3:
+            [self resetApplicationState];
+            break;
+
+        default:
+            break;
     }
+
 }
 
 #pragma mark -
 
+- (void)syncContacts
+{
+    NSLog(@"Syncing contacts...");
+    [SinglyFriend syncContacts];
+}
+
 - (void)resetApplicationState
 {
+
     NSLog(@"Resetting Application State ...");
 
     // Delete Cookies
