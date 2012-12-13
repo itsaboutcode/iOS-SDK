@@ -31,88 +31,134 @@
 #import "SinglyFriendPickerCell.h"
 #import "SinglyFriendPickerViewController.h"
 #import "SinglyFriendPickerViewController+Internal.h"
+#import "SinglyFriendPlaceholder.h"
 #import "SinglyRequest.h"
 #import "SinglySession.h"
 
 @implementation SinglyFriendPickerViewController
 
-- (void)refreshFriends
+- (void)fetchFriends
 {
+    [self fetchFriendsAtOffset:0 withLimit:0];
+}
 
-    if (self.isRefreshing)
-        return;
+- (void)fetchFriendsAtOffset:(NSInteger)offset
+{
+    [self fetchFriendsAtOffset:offset withLimit:0];
+}
 
-    self.isRefreshing = YES;
-    NSLog(@"[SinglySDK] Refreshing friends...");
+- (void)fetchFriendsAtOffset:(NSInteger)offset withLimit:(NSInteger)limit
+{
+    if (self.isRefreshing) return;
+    _isRefreshing = YES;
 
-    SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"types/contacts" andParameters:@{ @"limit": @"200" }];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
-     {
+    // Offset & Limit
+    if (limit <= 0) limit = 50;
+    NSString *offsetString = [NSString stringWithFormat:@"%d", offset];
+    NSString *limitString = [NSString stringWithFormat:@"%d", limit];
 
-         NSError *parseError;
+    NSLog(@"[SinglySDK] Fetching friends...");
 
-         // Check for Request Errors
-         if (requestError)
-         {
-             NSLog(@"[SinglySDK:SinglySession] A request error occurred while attempting to load friends: %@", requestError);
-             self.isRefreshing = NO;
+    // Configure the Request
+    NSDictionary *requestParameters = @{
+        @"limit": limitString,
+        @"offset": offsetString,
+        @"toc": @"true"
+    };
+    SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"friends/all"
+                                                  andParameters:requestParameters];
 
-             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                                 message:[requestError localizedDescription]
-                                                                delegate:self
-                                                       cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-             [alertView show];
-             return;
-         }
+    // Send the Request to the Singly API
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
+    {
+        NSError *parseError;
 
-         // Parse the Response
-         id parsedFriends = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
-         if (parseError)
-         {
-             NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to parse friends: %@", parseError);
-             self.isRefreshing = NO;
-             return;
-         }
+        // Check for Request Errors
+        if (requestError)
+        {
+            NSLog(@"[SinglySDK:SinglySession] A request error occurred while attempting to load friends: %@", requestError);
+            _isRefreshing = NO;
 
-         // We are expecting an array, so if we receive a dictionary it is
-         // likely because of an error...
-         else if ([parsedFriends isKindOfClass:[NSDictionary class]] && parsedFriends[@"error"])
-         {
-             NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to request friends: %@", parsedFriends[@"error"]);
-             self.isRefreshing = NO;
-             return;
-         }
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:[requestError localizedDescription]
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+            [alertView show];
+            return;
+        }
 
-         NSLog(@"[SinglySDK] Loaded %d friends", ((NSArray *)parsedFriends).count);
+        // Parse the Response
+        id responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+        if (parseError)
+        {
+            NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to parse friends: %@", parseError);
+            _isRefreshing = NO;
+            return;
+        }
 
-         self.friends = [NSMutableDictionary dictionary];
-         for (NSDictionary *friend in parsedFriends)
-         {
-             NSDictionary *oEmbed = [friend objectForKey:@"oembed"];
+        // We are expecting an array, so if we receive a dictionary it is
+        // likely because of an error...
+        else if ([responseObject isKindOfClass:[NSDictionary class]] && responseObject[@"error"])
+        {
+            NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to request friends: %@", responseObject[@"error"]);
+            _isRefreshing = NO;
+            return;
+        }
 
-             if (!oEmbed || ![oEmbed objectForKey:@"title"])
-                 continue;
+        // Extract Response Components
+        NSMutableDictionary *indexDetails = [NSMutableDictionary dictionaryWithDictionary:responseObject[0]];
+        NSDictionary *indexMetadata = indexDetails[@"meta"];
+        NSMutableArray *friends = [NSMutableArray arrayWithArray:responseObject];
 
-             NSMutableArray *profiles = [self.friends objectForKey:[oEmbed objectForKey:@"title"]];
-             if (!profiles)
-             {
-                 profiles = [NSMutableArray array];
-                 [self.friends setObject:profiles forKey:[oEmbed objectForKey:@"title"]];
-             }
-             [profiles addObject:friend];
+        NSLog(@"Index Meta: %@", indexMetadata);
+        
+        // Remove Metadata from Keys
+        [indexDetails removeObjectForKey:@"meta"];
 
-         }
+        // Remove Metadata from Friends
+        [friends removeObjectAtIndex:0];
 
-         dispatch_async(dispatch_get_main_queue(), ^{
-             self.friendsSortedKeys = [[self.friends allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-             [self.tableView reloadData];
-             [SinglyActivityIndicatorView dismissIndicator];
-             self.tableView.separatorColor = self.originalSeparatorColor;
-             self.originalSeparatorColor = nil;
-         });
-         
-         self.isRefreshing = NO;
-     }];
+        // TODO Compare returned metadata from friends array size and reset if
+        //      necessary
+
+        // Prepare Index Keys
+
+        if (!_friends)
+        {
+            int friendsCount = [indexMetadata[@"length"] intValue];
+            _friends = [NSMutableArray arrayWithCapacity:friendsCount];
+            for (int i = 0; i < friendsCount; i++)
+            {
+                SinglyFriendPlaceholder *placeholder = [[SinglyFriendPlaceholder alloc] init];
+                placeholder.isLoading = NO;
+                [_friends insertObject:placeholder atIndex:i];
+            }
+        }
+
+        [_friends replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(offset, friends.count)] withObjects:friends];
+        _indexDetails = indexDetails;
+        _indexKeys = [[indexDetails allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
+        {
+            return [indexDetails[obj1][@"offset"] intValue] > [indexDetails[obj2][@"offset"] intValue];
+        }];
+
+        NSLog(@"Index Details: %@", indexDetails);
+        NSLog(@"Index Keys: %@", self.indexKeys);
+        NSLog(@"Friends: %@", responseObject);
+
+        NSLog(@"[SinglySDK] Loaded %d friends ...", self.friends.count);
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [SinglyActivityIndicatorView dismissIndicator];
+            self.tableView.separatorColor = self.originalSeparatorColor;
+            self.originalSeparatorColor = nil;
+        });
+
+        _isRefreshing = NO;
+    }];
 }
 
 #pragma mark - View Callbacks
@@ -122,15 +168,16 @@
     [super viewDidLoad];
 
     self.tableView.rowHeight = 54;
+    self.tableView.delegate = self;
 
-    [self refreshFriends];
+    [self fetchFriends];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 
-    if (self.friendsSortedKeys.count == 0 || self.isRefreshing)
+    if (self.friends.count == 0 || self.isRefreshing)
     {
         [SinglyActivityIndicatorView showIndicator];
 
@@ -139,7 +186,7 @@
     }
     else
     {
-        [self refreshFriends];
+//        [self refreshFriends];
     }
 }
 
@@ -154,12 +201,32 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.indexKeys.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.friendsSortedKeys.count;
+    NSDictionary *sectionInfo = self.indexDetails[self.indexKeys[section]];
+    return [sectionInfo[@"length"] intValue];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSDictionary *sectionInfo = self.indexDetails[self.indexKeys[section]];
+    if ([sectionInfo[@"length"] intValue] > 0)
+        return [self.indexKeys[section] uppercaseString];
+    return nil;
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    NSMutableArray *titles = [self.indexKeys mutableCopy];
+
+    // Capitalize the Titles
+    for (int i = 0; i < titles.count; i++)
+        [titles replaceObjectAtIndex:i withObject:[titles[i] uppercaseString]];
+
+    return titles;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -168,9 +235,19 @@
     SinglyFriendPickerCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell)
         cell = [[SinglyFriendPickerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    
-    NSDictionary *friendInfo = [[self.friends objectForKey:[self.friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0];
-    cell.friendInfoDictionary = friendInfo;
+
+    NSString *indexKey = self.indexKeys[indexPath.section];
+    NSDictionary *sectionInfo = self.indexDetails[indexKey];
+    int friendIndex = indexPath.row + [sectionInfo[@"offset"] intValue];
+
+    if (friendIndex < self.friends.count)
+    {
+        id friendInfo = self.friends[friendIndex];
+        if (![friendInfo isKindOfClass:[SinglyFriendPlaceholder class]])
+            cell.friendInfoDictionary = friendInfo;
+        else
+            cell.friendInfoDictionary = nil;
+    }
 
     return cell;
 }
@@ -180,9 +257,42 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSString *idr = [[[self.friends objectForKey:[self.friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0] objectForKey:@"idr"];
-    idr = [idr substringFromIndex:[idr rangeOfString:@"#" options:NSBackwardsSearch].location + 1];
-    NSLog(@"[SinglySDK:SinglyFriendPickerViewController] Selected IDR: %@", idr);
+//    NSString *idr = [[[self.friends objectForKey:[self.friendsSortedKeys objectAtIndex:indexPath.row]] objectAtIndex:0] objectForKey:@"idr"];
+//    idr = [idr substringFromIndex:[idr rangeOfString:@"#" options:NSBackwardsSearch].location + 1];
+//    NSLog(@"[SinglySDK:SinglyFriendPickerViewController] Selected IDR: %@", idr);
+}
+
+#pragma mark - Scroll View Delegates
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    int visibleFriendIndex;
+    NSDictionary *sectionInfo;
+    id friend;
+    NSArray *visibleIndexPaths = self.tableView.indexPathsForVisibleRows;
+    NSMutableArray *indexesToLoad = [NSMutableArray array];
+
+    for (NSIndexPath *indexPath in visibleIndexPaths)
+    {
+        sectionInfo = self.indexDetails[self.indexKeys[indexPath.section]];
+        visibleFriendIndex = [sectionInfo[@"offset"] intValue] + indexPath.row;
+        friend = self.friends[visibleFriendIndex];
+
+        if ([friend isKindOfClass:[SinglyFriendPlaceholder class]])
+        {
+            if (!((SinglyFriendPlaceholder *)friend).isLoading)
+            {
+                ((SinglyFriendPlaceholder *)friend).isLoading = YES;
+                [indexesToLoad addObject:[NSNumber numberWithInt:visibleFriendIndex]];
+            }
+        }
+    }
+
+    if (indexesToLoad.count > 0)
+    {
+        [self fetchFriendsAtOffset:[indexesToLoad[0] intValue] - 10 withLimit:[[indexesToLoad lastObject] intValue] - [indexesToLoad[0] intValue] * 2];
+    }
+
 }
 
 @end

@@ -1,6 +1,14 @@
 
 # Singly SDK ChangeLog
 
+## 1.1.0 — Not Released
+
+* Updated the friends picker to be an indexed view with on-demand loading of
+  friends.
+
+* Placeholder images in the login and friend picker view controllers are no
+  longer cleared if the image failed to load.
+
 ## 1.0.2 — December 7th, 2012
 
 * Fixed a runtime issue with iOS 5.x caused by accessing an undefined symbol in

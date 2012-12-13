@@ -21,6 +21,10 @@
 		D003484716666EFE0048513A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B538116309C7700F1F535 /* UIKit.framework */; };
 		D00348541666B56F0048513A /* SinglySession+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D00348531666B56F0048513A /* SinglySession+Internal.h */; };
 		D00348551666B56F0048513A /* SinglySession+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D00348531666B56F0048513A /* SinglySession+Internal.h */; };
+		D005904B167A492600F1374D /* SinglyFriendPlaceholder.h in Headers */ = {isa = PBXBuildFile; fileRef = D0059049167A492600F1374D /* SinglyFriendPlaceholder.h */; };
+		D005904D167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */; };
+		D005904E167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */; };
+		D0059051167A4D5400F1374D /* SinglyFriendPlaceholder.h in Headers */ = {isa = PBXBuildFile; fileRef = D0059049167A492600F1374D /* SinglyFriendPlaceholder.h */; };
 		D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
 		D02B537216309C7700F1F535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B537116309C7700F1F535 /* Foundation.framework */; };
 		D02B539616309CDF00F1F535 /* NSString+URLEncoded.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */; };
@@ -158,6 +162,8 @@
 		D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyKeychainItemWrapper.m; sourceTree = "<group>"; };
 		D003483F16666E650048513A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D00348531666B56F0048513A /* SinglySession+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglySession+Internal.h"; sourceTree = "<group>"; };
+		D0059049167A492600F1374D /* SinglyFriendPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendPlaceholder.h; sourceTree = "<group>"; };
+		D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPlaceholder.m; sourceTree = "<group>"; };
 		D021CBBB162C933D00DE9922 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D021CBC5162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerServiceCell.h; sourceTree = "<group>"; };
 		D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerServiceCell.m; sourceTree = "<group>"; };
@@ -490,6 +496,8 @@
 				D06830B91624BAFC00F398A6 /* SinglyFriendPickerCell.h */,
 				D090E348165B116700FE8273 /* SinglyFriendPickerCell+Internal.h */,
 				D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */,
+				D0059049167A492600F1374D /* SinglyFriendPlaceholder.h */,
+				D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -598,6 +606,7 @@
 				D064F0E1166BF87900091CE5 /* SinglyService+Delegate.h in Headers */,
 				D064F0E4166BFDFA00091CE5 /* SinglyLoginViewController+Delegate.h in Headers */,
 				D064F0E7166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h in Headers */,
+				D005904B167A492600F1374D /* SinglyFriendPlaceholder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +641,7 @@
 				D064F0E2166BF87900091CE5 /* SinglyService+Delegate.h in Headers */,
 				D064F0E5166BFDFA00091CE5 /* SinglyLoginViewController+Delegate.h in Headers */,
 				D064F0E8166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h in Headers */,
+				D0059051167A4D5400F1374D /* SinglyFriendPlaceholder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -842,6 +852,7 @@
 				D08C1BE11649C48900035775 /* NSURL+AccessToken.m in Sources */,
 				D090E354165BE96E00FE8273 /* SinglyRequest.m in Sources */,
 				D003483E16666C8B0048513A /* SinglyKeychainItemWrapper.m in Sources */,
+				D005904E167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -864,6 +875,7 @@
 				D08C1BE01649C48900035775 /* NSURL+AccessToken.m in Sources */,
 				D090E353165BE96E00FE8273 /* SinglyRequest.m in Sources */,
 				D003483D16666C8B0048513A /* SinglyKeychainItemWrapper.m in Sources */,
+				D005904D167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

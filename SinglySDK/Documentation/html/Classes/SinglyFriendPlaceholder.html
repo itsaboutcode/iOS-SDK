@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>SinglyFriendPickerCell Class Reference</title>
+		<title>SinglyFriendPlaceholder Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">SinglyFriendPickerCell Class Reference</h1>
+				<h1 class="hideInXcode">SinglyFriendPlaceholder Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -26,8 +26,6 @@
 				<li id="jumpto_button" role="navigation">
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
-	
-	<option value="overview">Overview</option>
 	
 	
 	
@@ -40,7 +38,7 @@
 	
 	<option value="properties">Properties</option>
 	
-	<option value="//api/name/friendInfoDictionary">&nbsp;&nbsp;&nbsp;&nbsp;friendInfoDictionary</option>
+	<option value="//api/name/isLoading">&nbsp;&nbsp;&nbsp;&nbsp;isLoading</option>
 	
 	
 	
@@ -55,14 +53,10 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
-<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
-
 
 
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Configuring the Friend Picker Cell">Configuring the Friend Picker Cell</a></span></li>
 	
 </ul></li>
 
@@ -72,7 +66,7 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/friendInfoDictionary">friendInfoDictionary</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isLoading">isLoading</a></span></li>
 	
 </ul></li>
 
@@ -85,7 +79,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="SinglyFriendPickerCell Class Reference" name="top"></a>
+				<a title="SinglyFriendPlaceholder Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -94,7 +88,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">SinglyFriendPickerCell Class Reference</h1>
+						<h1 class="title title-header">SinglyFriendPlaceholder Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -102,26 +96,13 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value">UITableViewCell</td>
-</tr><tr>
-	<td class="specification-title">Conforms to</td>
-	<td class="specification-value">NSURLConnectionDataDelegate<br />NSURLConnectionDelegate</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">SinglyFriendPickerCell.h</td>
+	<td class="specification-value">SinglyFriendPlaceholder.h</td>
 </tr>
 						</tbody></table></div>
 					
-					
-					
-					
-					<div class="section section-overview">
-						<a title="Overview" name="overview"></a>
-						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>A custom table view cell implementation for the display of service state.</p><div class="warning"><p><strong>Warning:</strong> This table view cell is currently in development and is not intended
-to be used in a production app. The API for this cell <em>will</em> be
-changing drastically in upcoming versions of the SDK.</p></div>
-					</div>
 					
 					
 					
@@ -132,14 +113,14 @@ changing drastically in upcoming versions of the SDK.</p></div>
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						<a title="Configuring the Friend Picker Cell" name="task_Configuring the Friend Picker Cell"></a>
 						
-<h3 class="subsubtitle task-title">Configuring the Friend Picker Cell</h3>
+						
+
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/friendInfoDictionary">&nbsp;&nbsp;friendInfoDictionary</a></code>
-		<span class="tooltip"><p>Information from the Singly API about to the friend.</p></span>
+		<code><a href="#//api/name/isLoading">&nbsp;&nbsp;isLoading</a></code>
+		
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -157,44 +138,14 @@ changing drastically in upcoming versions of the SDK.</p></div>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/friendInfoDictionary" title="friendInfoDictionary"></a>
-	<h3 class="subsubtitle method-title">friendInfoDictionary</h3>
+	<a name="//api/name/isLoading" title="isLoading"></a>
+	<h3 class="subsubtitle method-title">isLoading</h3>
 	
 	
-	
-	<div class="method-subsection brief-description">
-		<p>Information from the Singly API about to the friend.</p>
-	</div>		
-	
-    
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSDictionary *friendInfoDictionary</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL isLoading</code></div>
 
     
-	
-	
-	
-	
-	
-	<div class="method-subsection availability">
-		<h4 class="method-subtitle parameter-title">Availability</h4>
-		<p>Available in Singly iOS SDK 1.0.0 and later.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglyFriendPickerCell.h</code><br />
-	</div>				
-	
-	
 </div>
 						
 					</div>
