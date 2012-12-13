@@ -1,5 +1,5 @@
 //
-//  SinglyFriendPickerViewController+Internal.h
+//  SinglyFriendPlaceholder.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,54 +27,10 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-@interface SinglyFriendPickerViewController ()
+#import <Foundation/Foundation.h>
 
-/*!
- *
- * The friends fetched from the Singly API.
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-@property (nonatomic, strong, readonly) NSMutableArray *friends;
+@interface SinglyFriendPlaceholder : NSObject
 
-/*!
- *
- *
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-//@property (nonatomic, strong) NSArray *friendsSortedKeys;
-
-/*!
- *
- *
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-@property (nonatomic, strong) UIColor *originalSeparatorColor;
-
-/*!
- *
- * Denotes whether or not the view controller is currently in the process of
- * refreshing the friends list.
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-@property (nonatomic, assign, readonly) BOOL isRefreshing;
-
-@property (nonatomic, strong) NSArray *indexKeys;
-
-@property (nonatomic, strong) NSDictionary *indexDetails;
-
-- (void)fetchFriends;
-
-- (void)fetchFriendsAtOffset:(NSInteger)offset;
-
-- (void)fetchFriendsAtOffset:(NSInteger)offset withLimit:(NSInteger)limit;
+@property (nonatomic, assign) BOOL isLoading;
 
 @end
-

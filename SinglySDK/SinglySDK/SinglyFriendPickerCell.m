@@ -60,27 +60,43 @@
 
     if (self.imageConnection)
         [self.imageConnection cancel];
-    self.imageView.image = [UIImage imageNamed:@"SinglySDK.bundle/Avatar Placeholder"];
+//    self.imageView.image = [UIImage imageNamed:@"SinglySDK.bundle/Avatar Placeholder"];
+//    self.friendInfoDictionary = nil;
 }
 
 - (void)setFriendInfoDictionary:(NSDictionary *)friendInfoDictionary
 {
+    if ([_friendInfoDictionary isEqualToDictionary:friendInfoDictionary])
+        return;
+
     _friendInfoDictionary = friendInfoDictionary;
+    NSLog(@"Friend Info Dictionary: %@", friendInfoDictionary);
 
-    // Set Text Label
-    self.textLabel.text = friendInfoDictionary[@"oembed"][@"title"];
-
-    // Load Image
-    NSString *imageLocation = friendInfoDictionary[@"oembed"][@"thumbnail_url"];
-    if (imageLocation)
+    if (friendInfoDictionary)
     {
-        NSURL *imageURL = [NSURL URLWithString:imageLocation];
-        NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
-        self.receivedData = [NSMutableData data];
-        self.imageConnection = [[NSURLConnection alloc] initWithRequest:imageRequest delegate:self startImmediately:NO];
-        [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-        [self.imageConnection start];
+
+        // Set Text Label
+        self.textLabel.text = friendInfoDictionary[@"name"];
+
+        // Load Image
+        NSString *imageLocation = friendInfoDictionary[@"thumbnail_url"];
+        if (imageLocation)
+        {
+            NSURL *imageURL = [NSURL URLWithString:imageLocation];
+            NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
+            self.receivedData = [NSMutableData data];
+            self.imageConnection = [[NSURLConnection alloc] initWithRequest:imageRequest delegate:self startImmediately:NO];
+            [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+            [self.imageConnection start];
+        }
+
     }
+    else
+    {
+        self.textLabel.text = @"";
+        self.imageView.image = [UIImage imageNamed:@"SinglySDK.bundle/Avatar Placeholder"];;
+    }
+
 }
 
 #pragma mark - URL Connection Delegates
