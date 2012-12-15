@@ -79,25 +79,59 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    SinglySession *session = SinglySession.sharedSession;
+    
+    // Enable or disable table view cells based on the current application
+    // and Singly session state.
 
-    // Enable the example cells if we have both an access token and active profiles
-    // on the Singly session.
-    if (indexPath.section == 1)
+    switch (indexPath.section)
     {
-        SinglySession *session = [SinglySession sharedSession];
+        // Examples
+        case 1:
+            if (session.isReady && session.profiles)
+            {
+                cell.userInteractionEnabled = YES;
+                cell.textLabel.alpha = 1.0;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
+            else
+            {
+                cell.userInteractionEnabled = NO;
+                cell.textLabel.alpha = 0.25;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            break;
 
-        if (session.accessToken && session.profiles)
-        {
-            cell.userInteractionEnabled = YES;
-            cell.textLabel.alpha = 1.0;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-        else
-        {
-            cell.userInteractionEnabled = NO;
-            cell.textLabel.alpha = 0.25;
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
+        // Sync Contacts
+        case 2:
+            if (session.isReady)
+            {
+                cell.userInteractionEnabled = YES;
+                cell.textLabel.alpha = 1.0;
+            }
+            else
+            {
+                cell.userInteractionEnabled = NO;
+                cell.textLabel.alpha = 0.25;
+            }
+            break;
+
+        // Reset Application
+        case 3:
+            if (session.isReady)
+            {
+                cell.userInteractionEnabled = YES;
+                cell.textLabel.alpha = 1.0;
+            }
+            else
+            {
+                cell.userInteractionEnabled = NO;
+                cell.textLabel.alpha = 0.25;
+            }
+            break;
+
+        default:
+            break;
     }
 
     return cell;
@@ -145,9 +179,7 @@
     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (cookie in [storage cookies])
-    {
         [storage deleteCookie:cookie];
-    }
 
     // Reset Session
     [SinglySession.sharedSession resetSession];
