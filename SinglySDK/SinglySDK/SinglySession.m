@@ -67,9 +67,9 @@ static SinglySession *sharedInstance = nil;
         [self updateProfilesWithCompletion:^(BOOL success)
         {
             NSString *foundAccountID = [self.profiles objectForKey:@"id"];
-            BOOL isReady = ([foundAccountID isEqualToString:self.accountID]);
+            _isReady = ([foundAccountID isEqualToString:self.accountID]);
             dispatch_sync(resultQueue, ^{
-                block(isReady);
+                block(self.isReady);
             });
         }];
     });
@@ -101,6 +101,9 @@ static SinglySession *sharedInstance = nil;
 
 - (void)resetSession
 {
+
+    // Reset Session Ready State
+    _isReady = NO;
 
     // Reset Profiles
     _profiles = nil;
