@@ -133,6 +133,16 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
 
 /*!
  *
+ * Returns whether or not the session is in a ready state (i.e. authorized and
+ * valid).
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+@property (nonatomic, assign, readonly) BOOL isReady;
+
+/*!
+ *
  * Resets the current session by clearing the access token, account id and
  * loaded profiles.
  *
