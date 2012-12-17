@@ -3,6 +3,12 @@
 
 ## 1.1.0 — Not Released
 
+* Service icons in the login picker are now bundled with the framework and
+  includes Retina versions of each.
+
+* Avatar images for friends that are loaded and displayed in the friends picker
+  are now cached.
+
 * Updated the friends picker to be an indexed view with on-demand loading of
   friends.
 
