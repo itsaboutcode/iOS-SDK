@@ -205,7 +205,7 @@ static SinglySession *sharedInstance = nil;
         if (!requestError && !parseError)
         {
             dispatch_async(dispatch_get_current_queue(), ^{
-                SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"][@"access_token"];
+                SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"];
                 SinglySession.sharedSession.accountID = responseDictionary[@"account"];
                 [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL successful)
                 {
