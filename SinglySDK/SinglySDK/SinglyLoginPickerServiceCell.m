@@ -79,16 +79,29 @@
     // Set Text Label
     self.textLabel.text = serviceInfoDictionary[@"name"];
 
-    // Load Image
-    NSString *imageLocation = serviceInfoDictionary[@"icons"][2][@"source"];
-    if (imageLocation)
+    // Look for the Service Icon in the bundle
+    UIImage *serviceImage = [UIImage imageNamed:[NSString stringWithFormat:@"SinglySDK.bundle/%@", self.serviceIdentifier]];
+    if (serviceImage)
     {
-        NSURL *imageURL = [NSURL URLWithString:imageLocation];
-        NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
-        self.receivedData = [NSMutableData data];
-        self.imageConnection = [[NSURLConnection alloc] initWithRequest:imageRequest delegate:self startImmediately:NO];
-        [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-        [self.imageConnection start];
+        self.imageView.image = serviceImage;
+    }
+
+    // If there is not a bundled icon, fallback to loading from the server
+    else
+    {
+
+        // Load Image
+        NSString *imageLocation = serviceInfoDictionary[@"icons"][2][@"source"];
+        if (imageLocation)
+        {
+            NSURL *imageURL = [NSURL URLWithString:imageLocation];
+            NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
+            self.receivedData = [NSMutableData data];
+            self.imageConnection = [[NSURLConnection alloc] initWithRequest:imageRequest delegate:self startImmediately:NO];
+            [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+            [self.imageConnection start];
+        }
+
     }
 }
 
