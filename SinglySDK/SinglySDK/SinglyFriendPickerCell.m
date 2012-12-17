@@ -27,6 +27,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "SinglyAvatarCache.h"
 #import "SinglyFriendPickerCell.h"
 #import "SinglyFriendPickerCell+Internal.h"
 
@@ -60,8 +61,8 @@
 
     if (self.imageConnection)
         [self.imageConnection cancel];
-//    self.imageView.image = [UIImage imageNamed:@"SinglySDK.bundle/Avatar Placeholder"];
-//    self.friendInfoDictionary = nil;
+    self.imageView.image = [UIImage imageNamed:@"SinglySDK.bundle/Avatar Placeholder"];
+    self.friendInfoDictionary = nil;
 }
 
 - (void)setFriendInfoDictionary:(NSDictionary *)friendInfoDictionary
@@ -70,17 +71,21 @@
         return;
 
     _friendInfoDictionary = friendInfoDictionary;
-    NSLog(@"Friend Info Dictionary: %@", friendInfoDictionary);
 
-    if (friendInfoDictionary)
+    // Set Text Label
+    self.textLabel.text = friendInfoDictionary[@"name"];
+
+    // Load Image
+    NSString *imageLocation = friendInfoDictionary[@"thumbnail_url"];
+    if (imageLocation)
     {
 
-        // Set Text Label
-        self.textLabel.text = friendInfoDictionary[@"name"];
-
-        // Load Image
-        NSString *imageLocation = friendInfoDictionary[@"thumbnail_url"];
-        if (imageLocation)
+        // Check cache...
+        if ([SinglyAvatarCache.sharedCache cachedImageExistsForURL:imageLocation])
+        {
+            self.imageView.image = (UIImage *)[SinglyAvatarCache.sharedCache cachedImageForURL:imageLocation];
+        }
+        else
         {
             NSURL *imageURL = [NSURL URLWithString:imageLocation];
             NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
@@ -89,12 +94,6 @@
             [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
             [self.imageConnection start];
         }
-
-    }
-    else
-    {
-        self.textLabel.text = @"";
-        self.imageView.image = [UIImage imageNamed:@"SinglySDK.bundle/Avatar Placeholder"];;
     }
 
 }
@@ -113,8 +112,10 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    NSString *imageLocation = [[connection.originalRequest URL] absoluteString];
     UIImage *receivedImage = [UIImage imageWithData:self.receivedData];
     if (receivedImage) self.imageView.image = receivedImage;
+    [SinglyAvatarCache.sharedCache cacheImage:receivedImage forURL:imageLocation];
     self.imageConnection = nil;
     self.receivedData = nil;
 }

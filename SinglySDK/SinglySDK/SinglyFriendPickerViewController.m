@@ -144,10 +144,6 @@
             return [indexDetails[obj1][@"offset"] intValue] > [indexDetails[obj2][@"offset"] intValue];
         }];
 
-        NSLog(@"Index Details: %@", indexDetails);
-        NSLog(@"Index Keys: %@", self.indexKeys);
-        NSLog(@"Friends: %@", responseObject);
-
         NSLog(@"[SinglySDK] Loaded %d friends ...", self.friends.count);
 
         dispatch_async(dispatch_get_main_queue(), ^{

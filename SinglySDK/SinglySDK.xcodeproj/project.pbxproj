@@ -121,6 +121,10 @@
 		D03699CB167F77D000ED6D40 /* youtube@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369985167F77D000ED6D40 /* youtube@2x.png */; };
 		D03699CC167F77D000ED6D40 /* zeo.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369986167F77D000ED6D40 /* zeo.png */; };
 		D03699CD167F77D000ED6D40 /* zeo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369987167F77D000ED6D40 /* zeo@2x.png */; };
+		D04AD40B167FA3E10046C296 /* SinglyAvatarCache.h in Headers */ = {isa = PBXBuildFile; fileRef = D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */; };
+		D04AD40C167FA3E10046C296 /* SinglyAvatarCache.h in Headers */ = {isa = PBXBuildFile; fileRef = D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */; };
+		D04AD40D167FA3E10046C296 /* SinglyAvatarCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */; };
+		D04AD40E167FA3E10046C296 /* SinglyAvatarCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */; };
 		D053EF9016271BC9008B8BA1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D053EF8F16271BC9008B8BA1 /* SenTestingKit.framework */; };
 		D053EF9A16271BC9008B8BA1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D053EF9816271BC9008B8BA1 /* InfoPlist.strings */; };
 		D053EF9D16271BC9008B8BA1 /* SinglySDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D053EF9C16271BC9008B8BA1 /* SinglySDKTests.m */; };
@@ -318,6 +322,8 @@
 		D0369985167F77D000ED6D40 /* youtube@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "youtube@2x.png"; path = "Service Icons/youtube@2x.png"; sourceTree = "<group>"; };
 		D0369986167F77D000ED6D40 /* zeo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zeo.png; path = "Service Icons/zeo.png"; sourceTree = "<group>"; };
 		D0369987167F77D000ED6D40 /* zeo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zeo@2x.png"; path = "Service Icons/zeo@2x.png"; sourceTree = "<group>"; };
+		D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAvatarCache.h; sourceTree = "<group>"; };
+		D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAvatarCache.m; sourceTree = "<group>"; };
 		D053EF8D16271BC9008B8BA1 /* SinglySDK.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinglySDK.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D053EF8F16271BC9008B8BA1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		D053EF9716271BC9008B8BA1 /* SinglySDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SinglySDKTests-Info.plist"; sourceTree = "<group>"; };
@@ -486,6 +492,8 @@
 				D0034852166672180048513A /* Extensions */,
 				D003483916666C8B0048513A /* SinglyKeychainItemWrapper.h */,
 				D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */,
+				D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */,
+				D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -834,6 +842,7 @@
 				D064F0E7166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h in Headers */,
 				D005904B167A492600F1374D /* SinglyFriendPlaceholder.h in Headers */,
 				D0059054167A766D00F1374D /* SinglyFriend.h in Headers */,
+				D04AD40B167FA3E10046C296 /* SinglyAvatarCache.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,6 +879,7 @@
 				D064F0E8166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h in Headers */,
 				D0059051167A4D5400F1374D /* SinglyFriendPlaceholder.h in Headers */,
 				D0059055167A766D00F1374D /* SinglyFriend.h in Headers */,
+				D04AD40C167FA3E10046C296 /* SinglyAvatarCache.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1098,7 +1108,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\nif [ ! -e /usr/local/bin/appledoc ]; then\n    echo \"warning: Unable to generate documentation because AppleDoc is not installed. Please install AppleDoc by using Homebrew (e.g. brew install appledoc).\"\n    exit 0\nfi\n\nexport SINGLY_SDK_VERSION=`grep SinglySDKVersion \"${PROJECT_DIR}/SinglySDK/SinglyConstants.h\" | sed 's/[^0-9\\.]//g'`\n\n/usr/local/bin/appledoc \\\n  --project-name \"${PROJECT_NAME}\" \\\n  --project-company \"Singly, Inc\" \\\n  --project-version \"${SINGLY_SDK_VERSION}\" \\\n  --company-id \"com.singly\" \\\n  --output \"${PROJECT_DIR}/Documentation\" \\\n  --docset-atom-filename \"SinglySDK.atom\" \\\n  --docset-feed-url \"http://singly.github.com/iOS-SDK/api/%DOCSETATOMFILENAME\" \\\n  --docset-package-url \"http://singly.github.com/iOS-SDK/api/%DOCSETPACKAGEFILENAME\" \\\n  --docset-fallback-url \"http://singly.github.com/iOS-SDK/api\" \\\n  --publish-docset \\\n  --logformat xcode \\\n  --keep-undocumented-objects \\\n  --keep-undocumented-members \\\n  --keep-intermediate-files \\\n  --no-repeat-first-par \\\n  --no-warn-invalid-crossref \\\n  --exit-threshold 2 \\\n  --ignore \".m\" \\\n  --ignore \"SinglySDKTests\" \\\n  --ignore \"SinglySDK/SinglySDK/Libraries\" \\\n  --ignore \"+Internal.h\" \\\n  --ignore \"DEFacebookGradientView.h\" \\\n  --ignore \"DEFacebookSheetCardView.h\" \\\n  --ignore \"DEFacebookTextView.h\" \\\n  --ignore \"DERuledView.h\" \\\n  --ignore \"UIApplication+DEFacebookComposeViewController.h\" \\\n  --ignore \"UIDevice+DEFacebookComposeViewController.h\" \\\n  --ignore \"SinglySharingViewController.h\" \\\n  --ignore \"SinglyActivityIndicatorView.h\" \\\n  --ignore \"SinglyKeychainItemWrapper.h\" \\\n  --ignore \"NSDictionary+QueryString.h\" \\\n  --ignore \"NSString+URLEncoded.h\" \\\n  --ignore \"NSURL+AccessToken.h\" \\\n  --ignore \"UIViewController+Modal.h\" \\\n  \"${PROJECT_DIR}\"\n";
+			shellScript = "\nif [ ! -e /usr/local/bin/appledoc ]; then\n    echo \"warning: Unable to generate documentation because AppleDoc is not installed. Please install AppleDoc by using Homebrew (e.g. brew install appledoc).\"\n    exit 0\nfi\n\nexport SINGLY_SDK_VERSION=`grep SinglySDKVersion \"${PROJECT_DIR}/SinglySDK/SinglyConstants.h\" | sed 's/[^0-9\\.]//g'`\n\n/usr/local/bin/appledoc \\\n  --project-name \"${PROJECT_NAME}\" \\\n  --project-company \"Singly, Inc\" \\\n  --project-version \"${SINGLY_SDK_VERSION}\" \\\n  --company-id \"com.singly\" \\\n  --output \"${PROJECT_DIR}/Documentation\" \\\n  --docset-atom-filename \"SinglySDK.atom\" \\\n  --docset-feed-url \"http://singly.github.com/iOS-SDK/api/%DOCSETATOMFILENAME\" \\\n  --docset-package-url \"http://singly.github.com/iOS-SDK/api/%DOCSETPACKAGEFILENAME\" \\\n  --docset-fallback-url \"http://singly.github.com/iOS-SDK/api\" \\\n  --publish-docset \\\n  --logformat xcode \\\n  --keep-undocumented-objects \\\n  --keep-undocumented-members \\\n  --keep-intermediate-files \\\n  --no-repeat-first-par \\\n  --no-warn-invalid-crossref \\\n  --exit-threshold 2 \\\n  --ignore \".m\" \\\n  --ignore \"SinglySDKTests\" \\\n  --ignore \"SinglySDK/SinglySDK/Libraries\" \\\n  --ignore \"+Internal.h\" \\\n  --ignore \"DEFacebookGradientView.h\" \\\n  --ignore \"DEFacebookSheetCardView.h\" \\\n  --ignore \"DEFacebookTextView.h\" \\\n  --ignore \"DERuledView.h\" \\\n  --ignore \"UIApplication+DEFacebookComposeViewController.h\" \\\n  --ignore \"UIDevice+DEFacebookComposeViewController.h\" \\\n  --ignore \"SinglySharingViewController.h\" \\\n  --ignore \"SinglyActivityIndicatorView.h\" \\\n  --ignore \"SinglyKeychainItemWrapper.h\" \\\n  --ignore \"SinglyAvatarCache.h\" \\\n  --ignore \"NSDictionary+QueryString.h\" \\\n  --ignore \"NSString+URLEncoded.h\" \\\n  --ignore \"NSURL+AccessToken.h\" \\\n  --ignore \"UIViewController+Modal.h\" \\\n  \"${PROJECT_DIR}\"\n";
 		};
 		D0E158DD1631BF9B000D0BCA /* Create Universal Library */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1152,6 +1162,7 @@
 				D003483E16666C8B0048513A /* SinglyKeychainItemWrapper.m in Sources */,
 				D005904E167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */,
 				D0059057167A766D00F1374D /* SinglyFriend.m in Sources */,
+				D04AD40E167FA3E10046C296 /* SinglyAvatarCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1176,6 +1187,7 @@
 				D003483D16666C8B0048513A /* SinglyKeychainItemWrapper.m in Sources */,
 				D005904D167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */,
 				D0059056167A766D00F1374D /* SinglyFriend.m in Sources */,
+				D04AD40D167FA3E10046C296 /* SinglyAvatarCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
