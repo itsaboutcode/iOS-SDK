@@ -29,8 +29,23 @@
 
 #import <Foundation/Foundation.h>
 
+/*!
+ *
+ * Represents a friend model and facilitates the syncing of device contacts
+ * with the Singly service.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
 @interface SinglyFriend : NSObject
 
+/*!
+ *
+ * Syncronizes the device contacts with the Singly service.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
 + (void)syncContacts;
 
 @end

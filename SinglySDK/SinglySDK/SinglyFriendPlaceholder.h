@@ -29,8 +29,24 @@
 
 #import <Foundation/Foundation.h>
 
+/*!
+ *
+ * Provides a simple object to use as a placeholder in the friends array that
+ * helps to faciliate asynchronous loading.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
 @interface SinglyFriendPlaceholder : NSObject
 
+/*!
+ *
+ * Denotes whether or not the contact that this placeholder is standing in for
+ * is currently being loaded.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+ **/
 @property (nonatomic, assign) BOOL isLoading;
 
 @end
