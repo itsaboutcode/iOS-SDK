@@ -1,6 +1,11 @@
 
 # Singly SDK ChangeLog
 
+## 1.0.3 — December 17th, 2012
+
+* Fixed an issue that caused a crash in the SDK when returning from the native
+  Facebook app after authorization completed.
+
 ## 1.0.2 — December 7th, 2012
 
 * Fixed a runtime issue with iOS 5.x caused by accessing an undefined symbol in
