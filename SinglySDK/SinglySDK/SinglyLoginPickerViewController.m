@@ -148,9 +148,10 @@
         cell = [[SinglyLoginPickerServiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
     NSString *service = [self.services objectAtIndex:indexPath.row];
+    cell.serviceIdentifier = service;
     NSDictionary *serviceInfoDictionary = [self.servicesDictionary objectForKey:service];
     cell.serviceInfoDictionary = serviceInfoDictionary;
-    
+
     if ([SinglySession.sharedSession.profiles objectForKey:service])
         cell.isAuthenticated = YES;
     else

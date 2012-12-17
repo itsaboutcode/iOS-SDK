@@ -55,6 +55,15 @@
 
 /*!
  *
+ * The service identifier of the service being displayed.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+@property (nonatomic, strong) NSString *serviceIdentifier;
+
+/*!
+ *
  * Whether or not the service is currently authenticated.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.

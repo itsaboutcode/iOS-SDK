@@ -51,6 +51,76 @@
 		D02B53DB1630A31600F1F535 /* SinglyConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = D02B53D91630A31600F1F535 /* SinglyConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D02B540B1630A99A00F1F535 /* SinglySDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088715ED17B000ECFED0 /* SinglySDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D02B540C1630AA4700F1F535 /* SinglyConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = D02B53D91630A31600F1F535 /* SinglyConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0369988167F77D000ED6D40 /* 37signals.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369942167F77D000ED6D40 /* 37signals.png */; };
+		D0369989167F77D000ED6D40 /* 37signals@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369943167F77D000ED6D40 /* 37signals@2x.png */; };
+		D036998A167F77D000ED6D40 /* 500px.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369944167F77D000ED6D40 /* 500px.png */; };
+		D036998B167F77D000ED6D40 /* 500px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369945167F77D000ED6D40 /* 500px@2x.png */; };
+		D036998C167F77D000ED6D40 /* bodymedia.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369946167F77D000ED6D40 /* bodymedia.png */; };
+		D036998D167F77D000ED6D40 /* bodymedia@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369947167F77D000ED6D40 /* bodymedia@2x.png */; };
+		D036998E167F77D000ED6D40 /* dropbox.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369948167F77D000ED6D40 /* dropbox.png */; };
+		D036998F167F77D000ED6D40 /* dropbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369949167F77D000ED6D40 /* dropbox@2x.png */; };
+		D0369990167F77D000ED6D40 /* dwolla.png in Resources */ = {isa = PBXBuildFile; fileRef = D036994A167F77D000ED6D40 /* dwolla.png */; };
+		D0369991167F77D000ED6D40 /* dwolla@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D036994B167F77D000ED6D40 /* dwolla@2x.png */; };
+		D0369992167F77D000ED6D40 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = D036994C167F77D000ED6D40 /* facebook.png */; };
+		D0369993167F77D000ED6D40 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D036994D167F77D000ED6D40 /* facebook@2x.png */; };
+		D0369994167F77D000ED6D40 /* fitbit.png in Resources */ = {isa = PBXBuildFile; fileRef = D036994E167F77D000ED6D40 /* fitbit.png */; };
+		D0369995167F77D000ED6D40 /* fitbit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D036994F167F77D000ED6D40 /* fitbit@2x.png */; };
+		D0369996167F77D000ED6D40 /* flickr.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369950167F77D000ED6D40 /* flickr.png */; };
+		D0369997167F77D000ED6D40 /* flickr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369951167F77D000ED6D40 /* flickr@2x.png */; };
+		D0369998167F77D000ED6D40 /* foursquare.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369952167F77D000ED6D40 /* foursquare.png */; };
+		D0369999167F77D000ED6D40 /* foursquare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369953167F77D000ED6D40 /* foursquare@2x.png */; };
+		D036999A167F77D000ED6D40 /* gcal.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369954167F77D000ED6D40 /* gcal.png */; };
+		D036999B167F77D000ED6D40 /* gcal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369955167F77D000ED6D40 /* gcal@2x.png */; };
+		D036999C167F77D000ED6D40 /* gcontacts.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369956167F77D000ED6D40 /* gcontacts.png */; };
+		D036999D167F77D000ED6D40 /* gcontacts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369957167F77D000ED6D40 /* gcontacts@2x.png */; };
+		D036999E167F77D000ED6D40 /* gdocs.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369958167F77D000ED6D40 /* gdocs.png */; };
+		D036999F167F77D000ED6D40 /* gdocs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369959167F77D000ED6D40 /* gdocs@2x.png */; };
+		D03699A0167F77D000ED6D40 /* github.png in Resources */ = {isa = PBXBuildFile; fileRef = D036995A167F77D000ED6D40 /* github.png */; };
+		D03699A1167F77D000ED6D40 /* github@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D036995B167F77D000ED6D40 /* github@2x.png */; };
+		D03699A2167F77D000ED6D40 /* gmail.png in Resources */ = {isa = PBXBuildFile; fileRef = D036995C167F77D000ED6D40 /* gmail.png */; };
+		D03699A3167F77D000ED6D40 /* gmail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D036995D167F77D000ED6D40 /* gmail@2x.png */; };
+		D03699A4167F77D000ED6D40 /* google.png in Resources */ = {isa = PBXBuildFile; fileRef = D036995E167F77D000ED6D40 /* google.png */; };
+		D03699A5167F77D000ED6D40 /* google@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D036995F167F77D000ED6D40 /* google@2x.png */; };
+		D03699A6167F77D000ED6D40 /* imgur.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369960167F77D000ED6D40 /* imgur.png */; };
+		D03699A7167F77D000ED6D40 /* imgur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369961167F77D000ED6D40 /* imgur@2x.png */; };
+		D03699A8167F77D000ED6D40 /* instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369962167F77D000ED6D40 /* instagram.png */; };
+		D03699A9167F77D000ED6D40 /* instagram@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369963167F77D000ED6D40 /* instagram@2x.png */; };
+		D03699AA167F77D000ED6D40 /* klout.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369964167F77D000ED6D40 /* klout.png */; };
+		D03699AB167F77D000ED6D40 /* klout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369965167F77D000ED6D40 /* klout@2x.png */; };
+		D03699AC167F77D000ED6D40 /* linkedin.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369966167F77D000ED6D40 /* linkedin.png */; };
+		D03699AD167F77D000ED6D40 /* linkedin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369967167F77D000ED6D40 /* linkedin@2x.png */; };
+		D03699AE167F77D000ED6D40 /* meetup.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369968167F77D000ED6D40 /* meetup.png */; };
+		D03699AF167F77D000ED6D40 /* meetup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369969167F77D000ED6D40 /* meetup@2x.png */; };
+		D03699B0167F77D000ED6D40 /* paypal.png in Resources */ = {isa = PBXBuildFile; fileRef = D036996A167F77D000ED6D40 /* paypal.png */; };
+		D03699B1167F77D000ED6D40 /* paypal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D036996B167F77D000ED6D40 /* paypal@2x.png */; };
+		D03699B2167F77D000ED6D40 /* picasa.png in Resources */ = {isa = PBXBuildFile; fileRef = D036996C167F77D000ED6D40 /* picasa.png */; };
+		D03699B3167F77D000ED6D40 /* picasa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D036996D167F77D000ED6D40 /* picasa@2x.png */; };
+		D03699B4167F77D000ED6D40 /* rdio.png in Resources */ = {isa = PBXBuildFile; fileRef = D036996E167F77D000ED6D40 /* rdio.png */; };
+		D03699B5167F77D000ED6D40 /* rdio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D036996F167F77D000ED6D40 /* rdio@2x.png */; };
+		D03699B6167F77D000ED6D40 /* reddit.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369970167F77D000ED6D40 /* reddit.png */; };
+		D03699B7167F77D000ED6D40 /* reddit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369971167F77D000ED6D40 /* reddit@2x.png */; };
+		D03699B8167F77D000ED6D40 /* runkeeper.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369972167F77D000ED6D40 /* runkeeper.png */; };
+		D03699B9167F77D000ED6D40 /* runkeeper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369973167F77D000ED6D40 /* runkeeper@2x.png */; };
+		D03699BA167F77D000ED6D40 /* shutterfly.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369974167F77D000ED6D40 /* shutterfly.png */; };
+		D03699BB167F77D000ED6D40 /* shutterfly@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369975167F77D000ED6D40 /* shutterfly@2x.png */; };
+		D03699BC167F77D000ED6D40 /* soundcloud.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369976167F77D000ED6D40 /* soundcloud.png */; };
+		D03699BD167F77D000ED6D40 /* soundcloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369977167F77D000ED6D40 /* soundcloud@2x.png */; };
+		D03699BE167F77D000ED6D40 /* stocktwits.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369978167F77D000ED6D40 /* stocktwits.png */; };
+		D03699BF167F77D000ED6D40 /* stocktwits@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369979167F77D000ED6D40 /* stocktwits@2x.png */; };
+		D03699C0167F77D000ED6D40 /* tout.png in Resources */ = {isa = PBXBuildFile; fileRef = D036997A167F77D000ED6D40 /* tout.png */; };
+		D03699C1167F77D000ED6D40 /* tout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D036997B167F77D000ED6D40 /* tout@2x.png */; };
+		D03699C2167F77D000ED6D40 /* tumblr.png in Resources */ = {isa = PBXBuildFile; fileRef = D036997C167F77D000ED6D40 /* tumblr.png */; };
+		D03699C3167F77D000ED6D40 /* tumblr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D036997D167F77D000ED6D40 /* tumblr@2x.png */; };
+		D03699C4167F77D000ED6D40 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = D036997E167F77D000ED6D40 /* twitter.png */; };
+		D03699C5167F77D000ED6D40 /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D036997F167F77D000ED6D40 /* twitter@2x.png */; };
+		D03699C6167F77D000ED6D40 /* wordpress.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369980167F77D000ED6D40 /* wordpress.png */; };
+		D03699C7167F77D000ED6D40 /* wordpress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369981167F77D000ED6D40 /* wordpress@2x.png */; };
+		D03699C8167F77D000ED6D40 /* yammer.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369982167F77D000ED6D40 /* yammer.png */; };
+		D03699C9167F77D000ED6D40 /* yammer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369983167F77D000ED6D40 /* yammer@2x.png */; };
+		D03699CA167F77D000ED6D40 /* youtube.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369984167F77D000ED6D40 /* youtube.png */; };
+		D03699CB167F77D000ED6D40 /* youtube@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369985167F77D000ED6D40 /* youtube@2x.png */; };
+		D03699CC167F77D000ED6D40 /* zeo.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369986167F77D000ED6D40 /* zeo.png */; };
+		D03699CD167F77D000ED6D40 /* zeo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369987167F77D000ED6D40 /* zeo@2x.png */; };
 		D053EF9016271BC9008B8BA1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D053EF8F16271BC9008B8BA1 /* SenTestingKit.framework */; };
 		D053EF9A16271BC9008B8BA1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D053EF9816271BC9008B8BA1 /* InfoPlist.strings */; };
 		D053EF9D16271BC9008B8BA1 /* SinglySDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D053EF9C16271BC9008B8BA1 /* SinglySDKTests.m */; };
@@ -178,6 +248,76 @@
 		D02B537116309C7700F1F535 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D02B538116309C7700F1F535 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D02B53D91630A31600F1F535 /* SinglyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SinglyConstants.h; path = ../SinglyConstants.h; sourceTree = "<group>"; };
+		D0369942167F77D000ED6D40 /* 37signals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 37signals.png; path = "Service Icons/37signals.png"; sourceTree = "<group>"; };
+		D0369943167F77D000ED6D40 /* 37signals@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "37signals@2x.png"; path = "Service Icons/37signals@2x.png"; sourceTree = "<group>"; };
+		D0369944167F77D000ED6D40 /* 500px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 500px.png; path = "Service Icons/500px.png"; sourceTree = "<group>"; };
+		D0369945167F77D000ED6D40 /* 500px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "500px@2x.png"; path = "Service Icons/500px@2x.png"; sourceTree = "<group>"; };
+		D0369946167F77D000ED6D40 /* bodymedia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bodymedia.png; path = "Service Icons/bodymedia.png"; sourceTree = "<group>"; };
+		D0369947167F77D000ED6D40 /* bodymedia@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bodymedia@2x.png"; path = "Service Icons/bodymedia@2x.png"; sourceTree = "<group>"; };
+		D0369948167F77D000ED6D40 /* dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dropbox.png; path = "Service Icons/dropbox.png"; sourceTree = "<group>"; };
+		D0369949167F77D000ED6D40 /* dropbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dropbox@2x.png"; path = "Service Icons/dropbox@2x.png"; sourceTree = "<group>"; };
+		D036994A167F77D000ED6D40 /* dwolla.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dwolla.png; path = "Service Icons/dwolla.png"; sourceTree = "<group>"; };
+		D036994B167F77D000ED6D40 /* dwolla@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dwolla@2x.png"; path = "Service Icons/dwolla@2x.png"; sourceTree = "<group>"; };
+		D036994C167F77D000ED6D40 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = facebook.png; path = "Service Icons/facebook.png"; sourceTree = "<group>"; };
+		D036994D167F77D000ED6D40 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook@2x.png"; path = "Service Icons/facebook@2x.png"; sourceTree = "<group>"; };
+		D036994E167F77D000ED6D40 /* fitbit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fitbit.png; path = "Service Icons/fitbit.png"; sourceTree = "<group>"; };
+		D036994F167F77D000ED6D40 /* fitbit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fitbit@2x.png"; path = "Service Icons/fitbit@2x.png"; sourceTree = "<group>"; };
+		D0369950167F77D000ED6D40 /* flickr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flickr.png; path = "Service Icons/flickr.png"; sourceTree = "<group>"; };
+		D0369951167F77D000ED6D40 /* flickr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "flickr@2x.png"; path = "Service Icons/flickr@2x.png"; sourceTree = "<group>"; };
+		D0369952167F77D000ED6D40 /* foursquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = foursquare.png; path = "Service Icons/foursquare.png"; sourceTree = "<group>"; };
+		D0369953167F77D000ED6D40 /* foursquare@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "foursquare@2x.png"; path = "Service Icons/foursquare@2x.png"; sourceTree = "<group>"; };
+		D0369954167F77D000ED6D40 /* gcal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gcal.png; path = "Service Icons/gcal.png"; sourceTree = "<group>"; };
+		D0369955167F77D000ED6D40 /* gcal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gcal@2x.png"; path = "Service Icons/gcal@2x.png"; sourceTree = "<group>"; };
+		D0369956167F77D000ED6D40 /* gcontacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gcontacts.png; path = "Service Icons/gcontacts.png"; sourceTree = "<group>"; };
+		D0369957167F77D000ED6D40 /* gcontacts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gcontacts@2x.png"; path = "Service Icons/gcontacts@2x.png"; sourceTree = "<group>"; };
+		D0369958167F77D000ED6D40 /* gdocs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gdocs.png; path = "Service Icons/gdocs.png"; sourceTree = "<group>"; };
+		D0369959167F77D000ED6D40 /* gdocs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gdocs@2x.png"; path = "Service Icons/gdocs@2x.png"; sourceTree = "<group>"; };
+		D036995A167F77D000ED6D40 /* github.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = github.png; path = "Service Icons/github.png"; sourceTree = "<group>"; };
+		D036995B167F77D000ED6D40 /* github@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "github@2x.png"; path = "Service Icons/github@2x.png"; sourceTree = "<group>"; };
+		D036995C167F77D000ED6D40 /* gmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gmail.png; path = "Service Icons/gmail.png"; sourceTree = "<group>"; };
+		D036995D167F77D000ED6D40 /* gmail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gmail@2x.png"; path = "Service Icons/gmail@2x.png"; sourceTree = "<group>"; };
+		D036995E167F77D000ED6D40 /* google.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = google.png; path = "Service Icons/google.png"; sourceTree = "<group>"; };
+		D036995F167F77D000ED6D40 /* google@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "google@2x.png"; path = "Service Icons/google@2x.png"; sourceTree = "<group>"; };
+		D0369960167F77D000ED6D40 /* imgur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imgur.png; path = "Service Icons/imgur.png"; sourceTree = "<group>"; };
+		D0369961167F77D000ED6D40 /* imgur@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgur@2x.png"; path = "Service Icons/imgur@2x.png"; sourceTree = "<group>"; };
+		D0369962167F77D000ED6D40 /* instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = instagram.png; path = "Service Icons/instagram.png"; sourceTree = "<group>"; };
+		D0369963167F77D000ED6D40 /* instagram@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "instagram@2x.png"; path = "Service Icons/instagram@2x.png"; sourceTree = "<group>"; };
+		D0369964167F77D000ED6D40 /* klout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = klout.png; path = "Service Icons/klout.png"; sourceTree = "<group>"; };
+		D0369965167F77D000ED6D40 /* klout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "klout@2x.png"; path = "Service Icons/klout@2x.png"; sourceTree = "<group>"; };
+		D0369966167F77D000ED6D40 /* linkedin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = linkedin.png; path = "Service Icons/linkedin.png"; sourceTree = "<group>"; };
+		D0369967167F77D000ED6D40 /* linkedin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "linkedin@2x.png"; path = "Service Icons/linkedin@2x.png"; sourceTree = "<group>"; };
+		D0369968167F77D000ED6D40 /* meetup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meetup.png; path = "Service Icons/meetup.png"; sourceTree = "<group>"; };
+		D0369969167F77D000ED6D40 /* meetup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "meetup@2x.png"; path = "Service Icons/meetup@2x.png"; sourceTree = "<group>"; };
+		D036996A167F77D000ED6D40 /* paypal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = paypal.png; path = "Service Icons/paypal.png"; sourceTree = "<group>"; };
+		D036996B167F77D000ED6D40 /* paypal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "paypal@2x.png"; path = "Service Icons/paypal@2x.png"; sourceTree = "<group>"; };
+		D036996C167F77D000ED6D40 /* picasa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = picasa.png; path = "Service Icons/picasa.png"; sourceTree = "<group>"; };
+		D036996D167F77D000ED6D40 /* picasa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "picasa@2x.png"; path = "Service Icons/picasa@2x.png"; sourceTree = "<group>"; };
+		D036996E167F77D000ED6D40 /* rdio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rdio.png; path = "Service Icons/rdio.png"; sourceTree = "<group>"; };
+		D036996F167F77D000ED6D40 /* rdio@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rdio@2x.png"; path = "Service Icons/rdio@2x.png"; sourceTree = "<group>"; };
+		D0369970167F77D000ED6D40 /* reddit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = reddit.png; path = "Service Icons/reddit.png"; sourceTree = "<group>"; };
+		D0369971167F77D000ED6D40 /* reddit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "reddit@2x.png"; path = "Service Icons/reddit@2x.png"; sourceTree = "<group>"; };
+		D0369972167F77D000ED6D40 /* runkeeper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = runkeeper.png; path = "Service Icons/runkeeper.png"; sourceTree = "<group>"; };
+		D0369973167F77D000ED6D40 /* runkeeper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "runkeeper@2x.png"; path = "Service Icons/runkeeper@2x.png"; sourceTree = "<group>"; };
+		D0369974167F77D000ED6D40 /* shutterfly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shutterfly.png; path = "Service Icons/shutterfly.png"; sourceTree = "<group>"; };
+		D0369975167F77D000ED6D40 /* shutterfly@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shutterfly@2x.png"; path = "Service Icons/shutterfly@2x.png"; sourceTree = "<group>"; };
+		D0369976167F77D000ED6D40 /* soundcloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = soundcloud.png; path = "Service Icons/soundcloud.png"; sourceTree = "<group>"; };
+		D0369977167F77D000ED6D40 /* soundcloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "soundcloud@2x.png"; path = "Service Icons/soundcloud@2x.png"; sourceTree = "<group>"; };
+		D0369978167F77D000ED6D40 /* stocktwits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stocktwits.png; path = "Service Icons/stocktwits.png"; sourceTree = "<group>"; };
+		D0369979167F77D000ED6D40 /* stocktwits@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stocktwits@2x.png"; path = "Service Icons/stocktwits@2x.png"; sourceTree = "<group>"; };
+		D036997A167F77D000ED6D40 /* tout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tout.png; path = "Service Icons/tout.png"; sourceTree = "<group>"; };
+		D036997B167F77D000ED6D40 /* tout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tout@2x.png"; path = "Service Icons/tout@2x.png"; sourceTree = "<group>"; };
+		D036997C167F77D000ED6D40 /* tumblr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tumblr.png; path = "Service Icons/tumblr.png"; sourceTree = "<group>"; };
+		D036997D167F77D000ED6D40 /* tumblr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tumblr@2x.png"; path = "Service Icons/tumblr@2x.png"; sourceTree = "<group>"; };
+		D036997E167F77D000ED6D40 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter.png; path = "Service Icons/twitter.png"; sourceTree = "<group>"; };
+		D036997F167F77D000ED6D40 /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter@2x.png"; path = "Service Icons/twitter@2x.png"; sourceTree = "<group>"; };
+		D0369980167F77D000ED6D40 /* wordpress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wordpress.png; path = "Service Icons/wordpress.png"; sourceTree = "<group>"; };
+		D0369981167F77D000ED6D40 /* wordpress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wordpress@2x.png"; path = "Service Icons/wordpress@2x.png"; sourceTree = "<group>"; };
+		D0369982167F77D000ED6D40 /* yammer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yammer.png; path = "Service Icons/yammer.png"; sourceTree = "<group>"; };
+		D0369983167F77D000ED6D40 /* yammer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "yammer@2x.png"; path = "Service Icons/yammer@2x.png"; sourceTree = "<group>"; };
+		D0369984167F77D000ED6D40 /* youtube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = youtube.png; path = "Service Icons/youtube.png"; sourceTree = "<group>"; };
+		D0369985167F77D000ED6D40 /* youtube@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "youtube@2x.png"; path = "Service Icons/youtube@2x.png"; sourceTree = "<group>"; };
+		D0369986167F77D000ED6D40 /* zeo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zeo.png; path = "Service Icons/zeo.png"; sourceTree = "<group>"; };
+		D0369987167F77D000ED6D40 /* zeo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zeo@2x.png"; path = "Service Icons/zeo@2x.png"; sourceTree = "<group>"; };
 		D053EF8D16271BC9008B8BA1 /* SinglySDK.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinglySDK.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D053EF8F16271BC9008B8BA1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		D053EF9716271BC9008B8BA1 /* SinglySDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SinglySDKTests-Info.plist"; sourceTree = "<group>"; };
@@ -365,6 +505,83 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		D0369940167F77A600ED6D40 /* Service Icons */ = {
+			isa = PBXGroup;
+			children = (
+				D0369942167F77D000ED6D40 /* 37signals.png */,
+				D0369943167F77D000ED6D40 /* 37signals@2x.png */,
+				D0369944167F77D000ED6D40 /* 500px.png */,
+				D0369945167F77D000ED6D40 /* 500px@2x.png */,
+				D0369946167F77D000ED6D40 /* bodymedia.png */,
+				D0369947167F77D000ED6D40 /* bodymedia@2x.png */,
+				D0369948167F77D000ED6D40 /* dropbox.png */,
+				D0369949167F77D000ED6D40 /* dropbox@2x.png */,
+				D036994A167F77D000ED6D40 /* dwolla.png */,
+				D036994B167F77D000ED6D40 /* dwolla@2x.png */,
+				D036994C167F77D000ED6D40 /* facebook.png */,
+				D036994D167F77D000ED6D40 /* facebook@2x.png */,
+				D036994E167F77D000ED6D40 /* fitbit.png */,
+				D036994F167F77D000ED6D40 /* fitbit@2x.png */,
+				D0369950167F77D000ED6D40 /* flickr.png */,
+				D0369951167F77D000ED6D40 /* flickr@2x.png */,
+				D0369952167F77D000ED6D40 /* foursquare.png */,
+				D0369953167F77D000ED6D40 /* foursquare@2x.png */,
+				D0369954167F77D000ED6D40 /* gcal.png */,
+				D0369955167F77D000ED6D40 /* gcal@2x.png */,
+				D0369956167F77D000ED6D40 /* gcontacts.png */,
+				D0369957167F77D000ED6D40 /* gcontacts@2x.png */,
+				D0369958167F77D000ED6D40 /* gdocs.png */,
+				D0369959167F77D000ED6D40 /* gdocs@2x.png */,
+				D036995A167F77D000ED6D40 /* github.png */,
+				D036995B167F77D000ED6D40 /* github@2x.png */,
+				D036995C167F77D000ED6D40 /* gmail.png */,
+				D036995D167F77D000ED6D40 /* gmail@2x.png */,
+				D036995E167F77D000ED6D40 /* google.png */,
+				D036995F167F77D000ED6D40 /* google@2x.png */,
+				D0369960167F77D000ED6D40 /* imgur.png */,
+				D0369961167F77D000ED6D40 /* imgur@2x.png */,
+				D0369962167F77D000ED6D40 /* instagram.png */,
+				D0369963167F77D000ED6D40 /* instagram@2x.png */,
+				D0369964167F77D000ED6D40 /* klout.png */,
+				D0369965167F77D000ED6D40 /* klout@2x.png */,
+				D0369966167F77D000ED6D40 /* linkedin.png */,
+				D0369967167F77D000ED6D40 /* linkedin@2x.png */,
+				D0369968167F77D000ED6D40 /* meetup.png */,
+				D0369969167F77D000ED6D40 /* meetup@2x.png */,
+				D036996A167F77D000ED6D40 /* paypal.png */,
+				D036996B167F77D000ED6D40 /* paypal@2x.png */,
+				D036996C167F77D000ED6D40 /* picasa.png */,
+				D036996D167F77D000ED6D40 /* picasa@2x.png */,
+				D036996E167F77D000ED6D40 /* rdio.png */,
+				D036996F167F77D000ED6D40 /* rdio@2x.png */,
+				D0369970167F77D000ED6D40 /* reddit.png */,
+				D0369971167F77D000ED6D40 /* reddit@2x.png */,
+				D0369972167F77D000ED6D40 /* runkeeper.png */,
+				D0369973167F77D000ED6D40 /* runkeeper@2x.png */,
+				D0369974167F77D000ED6D40 /* shutterfly.png */,
+				D0369975167F77D000ED6D40 /* shutterfly@2x.png */,
+				D0369976167F77D000ED6D40 /* soundcloud.png */,
+				D0369977167F77D000ED6D40 /* soundcloud@2x.png */,
+				D0369978167F77D000ED6D40 /* stocktwits.png */,
+				D0369979167F77D000ED6D40 /* stocktwits@2x.png */,
+				D036997A167F77D000ED6D40 /* tout.png */,
+				D036997B167F77D000ED6D40 /* tout@2x.png */,
+				D036997C167F77D000ED6D40 /* tumblr.png */,
+				D036997D167F77D000ED6D40 /* tumblr@2x.png */,
+				D036997E167F77D000ED6D40 /* twitter.png */,
+				D036997F167F77D000ED6D40 /* twitter@2x.png */,
+				D0369980167F77D000ED6D40 /* wordpress.png */,
+				D0369981167F77D000ED6D40 /* wordpress@2x.png */,
+				D0369982167F77D000ED6D40 /* yammer.png */,
+				D0369983167F77D000ED6D40 /* yammer@2x.png */,
+				D0369984167F77D000ED6D40 /* youtube.png */,
+				D0369985167F77D000ED6D40 /* youtube@2x.png */,
+				D0369986167F77D000ED6D40 /* zeo.png */,
+				D0369987167F77D000ED6D40 /* zeo@2x.png */,
+			);
+			name = "Service Icons";
+			sourceTree = "<group>";
+		};
 		D053EF8E16271BC9008B8BA1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -525,6 +742,7 @@
 		D077BA6016540FDD00F6EEDE /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				D0369940167F77A600ED6D40 /* Service Icons */,
 				D077BA6216540FF000F6EEDE /* Singly Folder Icon.rsrc */,
 				D077BA6116540FE800F6EEDE /* Singly Folder Icon.icns */,
 			);
@@ -778,6 +996,76 @@
 				D0DB1623162E0A93005EC7C7 /* Service Placeholder.png in Resources */,
 				D0DB1624162E0A93005EC7C7 /* Service Placeholder@2x.png in Resources */,
 				D0EA60C3163B4554001AC1DF /* Icon-512.png in Resources */,
+				D0369988167F77D000ED6D40 /* 37signals.png in Resources */,
+				D0369989167F77D000ED6D40 /* 37signals@2x.png in Resources */,
+				D036998A167F77D000ED6D40 /* 500px.png in Resources */,
+				D036998B167F77D000ED6D40 /* 500px@2x.png in Resources */,
+				D036998C167F77D000ED6D40 /* bodymedia.png in Resources */,
+				D036998D167F77D000ED6D40 /* bodymedia@2x.png in Resources */,
+				D036998E167F77D000ED6D40 /* dropbox.png in Resources */,
+				D036998F167F77D000ED6D40 /* dropbox@2x.png in Resources */,
+				D0369990167F77D000ED6D40 /* dwolla.png in Resources */,
+				D0369991167F77D000ED6D40 /* dwolla@2x.png in Resources */,
+				D0369992167F77D000ED6D40 /* facebook.png in Resources */,
+				D0369993167F77D000ED6D40 /* facebook@2x.png in Resources */,
+				D0369994167F77D000ED6D40 /* fitbit.png in Resources */,
+				D0369995167F77D000ED6D40 /* fitbit@2x.png in Resources */,
+				D0369996167F77D000ED6D40 /* flickr.png in Resources */,
+				D0369997167F77D000ED6D40 /* flickr@2x.png in Resources */,
+				D0369998167F77D000ED6D40 /* foursquare.png in Resources */,
+				D0369999167F77D000ED6D40 /* foursquare@2x.png in Resources */,
+				D036999A167F77D000ED6D40 /* gcal.png in Resources */,
+				D036999B167F77D000ED6D40 /* gcal@2x.png in Resources */,
+				D036999C167F77D000ED6D40 /* gcontacts.png in Resources */,
+				D036999D167F77D000ED6D40 /* gcontacts@2x.png in Resources */,
+				D036999E167F77D000ED6D40 /* gdocs.png in Resources */,
+				D036999F167F77D000ED6D40 /* gdocs@2x.png in Resources */,
+				D03699A0167F77D000ED6D40 /* github.png in Resources */,
+				D03699A1167F77D000ED6D40 /* github@2x.png in Resources */,
+				D03699A2167F77D000ED6D40 /* gmail.png in Resources */,
+				D03699A3167F77D000ED6D40 /* gmail@2x.png in Resources */,
+				D03699A4167F77D000ED6D40 /* google.png in Resources */,
+				D03699A5167F77D000ED6D40 /* google@2x.png in Resources */,
+				D03699A6167F77D000ED6D40 /* imgur.png in Resources */,
+				D03699A7167F77D000ED6D40 /* imgur@2x.png in Resources */,
+				D03699A8167F77D000ED6D40 /* instagram.png in Resources */,
+				D03699A9167F77D000ED6D40 /* instagram@2x.png in Resources */,
+				D03699AA167F77D000ED6D40 /* klout.png in Resources */,
+				D03699AB167F77D000ED6D40 /* klout@2x.png in Resources */,
+				D03699AC167F77D000ED6D40 /* linkedin.png in Resources */,
+				D03699AD167F77D000ED6D40 /* linkedin@2x.png in Resources */,
+				D03699AE167F77D000ED6D40 /* meetup.png in Resources */,
+				D03699AF167F77D000ED6D40 /* meetup@2x.png in Resources */,
+				D03699B0167F77D000ED6D40 /* paypal.png in Resources */,
+				D03699B1167F77D000ED6D40 /* paypal@2x.png in Resources */,
+				D03699B2167F77D000ED6D40 /* picasa.png in Resources */,
+				D03699B3167F77D000ED6D40 /* picasa@2x.png in Resources */,
+				D03699B4167F77D000ED6D40 /* rdio.png in Resources */,
+				D03699B5167F77D000ED6D40 /* rdio@2x.png in Resources */,
+				D03699B6167F77D000ED6D40 /* reddit.png in Resources */,
+				D03699B7167F77D000ED6D40 /* reddit@2x.png in Resources */,
+				D03699B8167F77D000ED6D40 /* runkeeper.png in Resources */,
+				D03699B9167F77D000ED6D40 /* runkeeper@2x.png in Resources */,
+				D03699BA167F77D000ED6D40 /* shutterfly.png in Resources */,
+				D03699BB167F77D000ED6D40 /* shutterfly@2x.png in Resources */,
+				D03699BC167F77D000ED6D40 /* soundcloud.png in Resources */,
+				D03699BD167F77D000ED6D40 /* soundcloud@2x.png in Resources */,
+				D03699BE167F77D000ED6D40 /* stocktwits.png in Resources */,
+				D03699BF167F77D000ED6D40 /* stocktwits@2x.png in Resources */,
+				D03699C0167F77D000ED6D40 /* tout.png in Resources */,
+				D03699C1167F77D000ED6D40 /* tout@2x.png in Resources */,
+				D03699C2167F77D000ED6D40 /* tumblr.png in Resources */,
+				D03699C3167F77D000ED6D40 /* tumblr@2x.png in Resources */,
+				D03699C4167F77D000ED6D40 /* twitter.png in Resources */,
+				D03699C5167F77D000ED6D40 /* twitter@2x.png in Resources */,
+				D03699C6167F77D000ED6D40 /* wordpress.png in Resources */,
+				D03699C7167F77D000ED6D40 /* wordpress@2x.png in Resources */,
+				D03699C8167F77D000ED6D40 /* yammer.png in Resources */,
+				D03699C9167F77D000ED6D40 /* yammer@2x.png in Resources */,
+				D03699CA167F77D000ED6D40 /* youtube.png in Resources */,
+				D03699CB167F77D000ED6D40 /* youtube@2x.png in Resources */,
+				D03699CC167F77D000ED6D40 /* zeo.png in Resources */,
+				D03699CD167F77D000ED6D40 /* zeo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
