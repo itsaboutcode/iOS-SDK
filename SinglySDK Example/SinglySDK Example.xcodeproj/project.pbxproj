@@ -35,6 +35,7 @@
 		D098EB891626157000B2626C /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB881626157000B2626C /* Icon-144.png */; };
 		D098EB8C1626181900B2626C /* Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB8A1626181900B2626C /* Background@2x.png */; };
 		D098EB8D1626181900B2626C /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = D098EB8B1626181900B2626C /* Background.png */; };
+		D09B2DD1167FD87100C168C6 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D09B2DCE167FD85200C168C6 /* AddressBookUI.framework */; };
 		D0D80B961628B301006F7B90 /* SinglyPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D80B951628B301006F7B90 /* SinglyPhotosViewController.m */; };
 		D0E2C73E16375B7C00AAD565 /* SinglySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E2C73D16375B7C00AAD565 /* SinglySDK.framework */; };
 		D0E2C74016375BF300AAD565 /* SinglySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D0E2C73F16375BF300AAD565 /* SinglySDK.bundle */; };
@@ -75,6 +76,7 @@
 		D098EB881626157000B2626C /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-144.png"; path = "../Icon-144.png"; sourceTree = "<group>"; };
 		D098EB8A1626181900B2626C /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
 		D098EB8B1626181900B2626C /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
+		D09B2DCE167FD85200C168C6 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		D0D80B911628A6F7006F7B90 /* SinglyConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyConfiguration.h; sourceTree = "<group>"; };
 		D0D80B941628B301006F7B90 /* SinglyPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyPhotosViewController.h; sourceTree = "<group>"; };
 		D0D80B951628B301006F7B90 /* SinglyPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyPhotosViewController.m; sourceTree = "<group>"; };
@@ -87,8 +89,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0059059167A7A2700F1374D /* AddressBook.framework in Frameworks */,
 				82B5FA711614B4B4009ADD27 /* Accounts.framework in Frameworks */,
+				D0059059167A7A2700F1374D /* AddressBook.framework in Frameworks */,
+				D09B2DD1167FD87100C168C6 /* AddressBookUI.framework in Frameworks */,
 				827E3ED615E5528200D30D96 /* CoreGraphics.framework in Frameworks */,
 				827E3ED415E5528200D30D96 /* Foundation.framework in Frameworks */,
 				8236EBD915EF226E00F3351E /* QuartzCore.framework in Frameworks */,
@@ -205,6 +208,7 @@
 			children = (
 				82B5FA701614B4B4009ADD27 /* Accounts.framework */,
 				D0059058167A7A2700F1374D /* AddressBook.framework */,
+				D09B2DCE167FD85200C168C6 /* AddressBookUI.framework */,
 				827E3ED515E5528200D30D96 /* CoreGraphics.framework */,
 				827E3ED315E5528200D30D96 /* Foundation.framework */,
 				8236EBD815EF226E00F3351E /* QuartzCore.framework */,

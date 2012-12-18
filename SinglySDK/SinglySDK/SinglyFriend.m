@@ -28,6 +28,7 @@
 //
 
 #import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 #import "SinglyRequest.h"
 #import "SinglyFriend.h"
@@ -39,6 +40,35 @@
 {
 
     ABAddressBookRef addressBook = ABAddressBookCreate();
+
+    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined)
+    {
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+        {
+            [SinglyFriend performSyncWithAddressBook:addressBook];
+        });
+    }
+    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
+    {
+        [SinglyFriend performSyncWithAddressBook:addressBook];
+    }
+    else
+    {
+        // The user has previously denied access
+        // Send an alert telling user to change privacy setting in settings app
+        NSLog(@"NOT ALLOWED TO ACCESS THE ADDRESS BOOK!");
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"Unable to sync contacts because we are not allowed to read contacts. Please enable access for this app in Settings."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+
+}
+
++ (void)performSyncWithAddressBook:(ABAddressBookRef)addressBook
+{
     CFArrayRef allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook);
     CFIndex contactsCount = ABAddressBookGetPersonCount(addressBook);
     NSMutableArray *contactsToSync = [NSMutableArray arrayWithCapacity:contactsCount];
@@ -68,9 +98,20 @@
     CFRelease(addressBook);
     CFRelease(allContacts);
 
-    NSLog(@"Contacts to Sync: %@", contactsToSync);
+    //    NSLog(@"Contacts to Sync: %@", contactsToSync);
 
     // TODO Determine self
+
+    for (NSMutableDictionary *contact in contactsToSync)
+    {
+        contact[@"self"] = @"false";
+
+
+        NSLog(@"Contact: %@", contact);
+    }
+
+
+
 
     NSError *serializationError;
     SinglyRequest *syncRequest = [SinglyRequest requestWithEndpoint:@"friends/ios"];
@@ -81,10 +122,11 @@
     NSLog(@"Serialization Error: %@", serializationError);
 
     [NSURLConnection sendAsynchronousRequest:syncRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
-    {
-        NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        NSLog(@"Response: %@", responseString);
-    }];
+     {
+         NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+         NSLog(@"Response: %@", responseString);
+     }];
+
 }
 
 @end
