@@ -3,6 +3,9 @@
 
 ## 1.1.0 — Not Released
 
+* Added support for syncing device contacts with the Singly API with the
+  `syncDeviceContacts` method on `SinglySession`.
+
 * Service icons in the login picker are now bundled with the framework and
   includes Retina versions of each.
 

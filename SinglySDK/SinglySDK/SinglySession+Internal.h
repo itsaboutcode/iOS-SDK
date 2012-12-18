@@ -41,4 +41,16 @@
 **/
 @property (nonatomic, strong) SinglyKeychainItemWrapper *accessTokenWrapper;
 
+/*!
+ *
+ * Syncs the device contacts in the given address book reference with the
+ * Singly API.
+ *
+ * @see syncDeviceContacts
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+- (void)syncDeviceContactsFromAddressBook:(ABAddressBookRef)addressBook;
+
 @end

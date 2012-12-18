@@ -27,6 +27,9 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
+
 #import "NSURL+AccessToken.h"
 
 #import "SinglyFacebookService.h"
@@ -57,27 +60,25 @@ static SinglySession *sharedInstance = nil;
     return self;
 }
 
-- (void)startSessionWithCompletionHandler:(void (^)(BOOL))block
-{
-    // If we don't have an accountID or accessToken we're definitely not ready
-    if (!self.accountID || !self.accessToken) return block(NO);
+#pragma mark - Session Configuration
 
-    dispatch_queue_t resultQueue = dispatch_get_current_queue();
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self updateProfilesWithCompletion:^(BOOL success)
-        {
-            NSString *foundAccountID = [self.profiles objectForKey:@"id"];
-            _isReady = ([foundAccountID isEqualToString:self.accountID]);
-            dispatch_sync(resultQueue, ^{
-                block(self.isReady);
-            });
-        }];
-    });
+- (void)setAccessToken:(NSString *)accessToken
+{
+    [self.accessTokenWrapper setObject:accessToken forKey:(__bridge id)kSecValueData];
 }
 
 - (void)setAccountID:(NSString *)accountID
 {
     [self.accessTokenWrapper setObject:accountID forKey:(__bridge id)kSecAttrAccount];
+}
+
+#pragma mark - Session Management
+
+- (NSString *)accessToken
+{
+    NSString *theAccessToken = [self.accessTokenWrapper objectForKey:(__bridge id)kSecValueData];
+    if (theAccessToken.length == 0) theAccessToken = nil;
+    return theAccessToken;
 }
 
 - (NSString *)accountID
@@ -87,16 +88,21 @@ static SinglySession *sharedInstance = nil;
     return theAccountID;
 }
 
-- (void)setAccessToken:(NSString *)accessToken
+- (void)startSessionWithCompletionHandler:(void (^)(BOOL))block
 {
-    [self.accessTokenWrapper setObject:accessToken forKey:(__bridge id)kSecValueData];
-}
+    // If we don't have an accountID or accessToken we're definitely not ready
+    if (!self.accountID || !self.accessToken) return block(NO);
 
-- (NSString *)accessToken
-{
-    NSString *theAccessToken = [self.accessTokenWrapper objectForKey:(__bridge id)kSecValueData];
-    if (theAccessToken.length == 0) theAccessToken = nil;
-    return theAccessToken;
+    dispatch_queue_t resultQueue = dispatch_get_current_queue();
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self updateProfilesWithCompletion:^(BOOL success) {
+            NSString *foundAccountID = [self.profiles objectForKey:@"id"];
+            _isReady = ([foundAccountID isEqualToString:self.accountID]);
+            dispatch_sync(resultQueue, ^{
+                block(self.isReady);
+            });
+        }];
+    });
 }
 
 - (void)resetSession
@@ -107,13 +113,16 @@ static SinglySession *sharedInstance = nil;
 
     // Reset Profiles
     _profiles = nil;
-    [[NSNotificationCenter defaultCenter] postNotificationName:kSinglySessionProfilesUpdatedNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSinglySessionProfilesUpdatedNotification
+                                                        object:self];
 
     // Reset Access Token & Account ID
     self.accessToken = nil;
     self.accountID = nil;
 
 }
+
+#pragma mark - Profile Management
 
 - (void)updateProfiles
 {
@@ -155,7 +164,8 @@ static SinglySession *sharedInstance = nil;
                 else
                     _profiles = responseDictionary;
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [NSNotificationCenter.defaultCenter postNotificationName:kSinglySessionProfilesUpdatedNotification object:self];
+                    [NSNotificationCenter.defaultCenter postNotificationName:kSinglySessionProfilesUpdatedNotification
+                                                                      object:self];
                 });
                 isSuccessful = YES;
             }
@@ -166,6 +176,136 @@ static SinglySession *sharedInstance = nil;
         });
     });
 }
+
+#pragma mark - Service Management
+
+- (void)applyService:(NSString *)serviceIdentifier withToken:(NSString *)token
+{
+    NSLog(@"[SinglySDK] Applying service '%@' with token '%@' to the Singly service ...", serviceIdentifier, token);
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSError *requestError;
+        NSError *parseError;
+        NSURLResponse *response;
+        SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/apply", serviceIdentifier]];
+        request.parameters = @{
+        @"client_id": self.clientID,
+        @"client_secret": self.clientSecret,
+        @"token": token
+        };
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+
+        if (!requestError && !parseError)
+        {
+            dispatch_async(dispatch_get_current_queue(), ^{
+                SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"];
+                SinglySession.sharedSession.accountID = responseDictionary[@"account"];
+                [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL successful) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [NSNotificationCenter.defaultCenter postNotificationName:kSinglyServiceAppliedNotification
+                                                                          object:serviceIdentifier];
+                    });
+                }];
+            });
+        }
+    });
+}
+
+#pragma mark - Device Contacts
+
+- (void)syncDeviceContacts
+{
+
+    ABAddressBookRef addressBook = ABAddressBookCreate();
+
+    // Ask for permission to access the device contacts...
+    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined)
+    {
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+            [self syncDeviceContactsFromAddressBook:addressBook];
+        });
+    }
+    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
+    {
+        [self syncDeviceContactsFromAddressBook:addressBook];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"Unable to sync contacts because we are not allowed to read contacts. Please enable access for this app in Settings."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+
+}
+
+- (void)syncDeviceContactsFromAddressBook:(ABAddressBookRef)addressBook
+{
+    CFArrayRef allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook);
+    CFIndex contactsCount = ABAddressBookGetPersonCount(addressBook);
+    NSMutableArray *contactsToSync = [NSMutableArray arrayWithCapacity:contactsCount];
+
+    for (int i = 0; i < contactsCount; i++)
+    {
+        ABRecordRef contactReference = CFArrayGetValueAtIndex(allContacts, i);
+        NSMutableDictionary *contact = [NSMutableDictionary dictionary];
+
+        // Record ID
+        contact[@"id"] = [NSString stringWithFormat:@"%d", ABRecordGetRecordID(contactReference)];
+
+        // Name
+        contact[@"name"] = [NSString stringWithFormat:@"%@ %@", ABRecordCopyValue(contactReference, kABPersonFirstNameProperty), ABRecordCopyValue(contactReference, kABPersonLastNameProperty)];
+
+        // Phone Numbers
+        NSArray *phoneNumbers = ((__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(ABRecordCopyValue(contactReference, kABPersonPhoneProperty)));
+        if (phoneNumbers.count > 0) contact[@"phones"] = phoneNumbers;
+
+        // Email Addresses
+        NSArray *emailAddresses = ((__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(ABRecordCopyValue(contactReference, kABPersonEmailProperty)));
+        if (emailAddresses.count > 0) contact[@"emails"] = emailAddresses;
+
+        [contactsToSync addObject:contact];
+    }
+
+    CFRelease(addressBook);
+    CFRelease(allContacts);
+
+    //    NSLog(@"Contacts to Sync: %@", contactsToSync);
+
+    // Determine self
+    for (NSMutableDictionary *contact in contactsToSync)
+    {
+        contact[@"self"] = @"false";
+        //        NSLog(@"Contact: %@", contact);
+    }
+
+    NSError *serializationError;
+    SinglyRequest *syncRequest = [SinglyRequest requestWithEndpoint:@"friends/ios"];
+    [syncRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [syncRequest setHTTPMethod:@"POST"];
+    [syncRequest setHTTPBody:[NSJSONSerialization dataWithJSONObject:contactsToSync options:kNilOptions error:&serializationError]];
+
+    NSLog(@"Serialization Error: %@", serializationError);
+
+    [NSURLConnection sendAsynchronousRequest:syncRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
+     {
+         NSError *parseError;
+         NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+         id syncedContacts = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+
+         dispatch_async(dispatch_get_main_queue(), ^{
+             [NSNotificationCenter.defaultCenter postNotificationName:kSinglyContactsSyncedNotification
+                                                               object:syncedContacts];
+         });
+
+     }];
+    
+}
+
+#pragma mark - URL Handling
 
 - (BOOL)handleOpenURL:(NSURL *)url
 {
@@ -183,39 +323,6 @@ static SinglySession *sharedInstance = nil;
 
     return NO;
 
-}
-
-- (void)applyService:(NSString *)serviceIdentifier withToken:(NSString *)token
-{
-    NSLog(@"[SinglySDK] Applying service '%@' with token '%@' to the Singly service ...", serviceIdentifier, token);
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSError *requestError;
-        NSError *parseError;
-        NSURLResponse *response;
-        SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/apply", serviceIdentifier]];
-        request.parameters = @{
-            @"client_id": self.clientID,
-            @"client_secret": self.clientSecret,
-            @"token": token
-        };
-        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
-        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
-
-        if (!requestError && !parseError)
-        {
-            dispatch_async(dispatch_get_current_queue(), ^{
-                SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"];
-                SinglySession.sharedSession.accountID = responseDictionary[@"account"];
-                [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL successful)
-                {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [NSNotificationCenter.defaultCenter postNotificationName:kSinglyServiceAppliedNotification object:serviceIdentifier];
-                    });
-                }];
-            });
-        }
-    });
 }
 
 @end

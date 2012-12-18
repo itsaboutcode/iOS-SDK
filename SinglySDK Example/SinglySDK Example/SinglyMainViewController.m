@@ -34,8 +34,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    // Override the default background
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Background"]];
+
+    // Observe for Contacts Sync Notifications
+    [NSNotificationCenter.defaultCenter addObserverForName:kSinglyContactsSyncedNotification object:nil queue:nil usingBlock:^(NSNotification *notification)
+    {
+        NSArray *syncedContacts = (NSArray *)notification.object;
+        UIAlertView *notificationAlert = [[UIAlertView alloc] initWithTitle:@"Contacts Synced"
+                                                                    message:[NSString stringWithFormat:@"Synced %d contacts with the Singly API.", syncedContacts.count]
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"Dismiss"
+                                                          otherButtonTitles:nil];
+        [notificationAlert show];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -166,8 +179,9 @@
 
 - (void)syncContacts
 {
-    NSLog(@"Syncing contacts...");
-    [SinglyFriend syncContacts];
+    NSLog(@"Syncing Device Contacts with Singly API...");
+
+    [SinglySession.sharedSession syncDeviceContacts];
 }
 
 - (void)resetApplicationState

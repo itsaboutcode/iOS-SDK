@@ -133,6 +133,29 @@ SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profiles"];
 }];
 ```
 
+### Syncing Device Contacts with the Singly API
+
+The iOS SDK allows you to sync the users' device contacts with the Singly API
+as friends. Along with adding these contacts as friends returned by the friends
+endpoint, Singly will also allow you to see which of your peers are already
+using the app. For more details, see the
+[Peers documentation](https://singly.com/docs/friends#Peers).
+
+```objective-c
+// Observe for Contacts Sync Notifications
+[NSNotificationCenter.defaultCenter addObserverForName:kSinglyContactsSyncedNotification
+                                                object:nil
+                                                queue:nil
+                                                usingBlock:^(NSNotification *notification) {
+
+    NSArray *syncedContacts = (NSArray *)notification.userInfo;
+    NSLog(@"Synced Contacts: %@", syncedContacts);
+}];
+
+// Sync Contacts
+[SinglySession.sharedSession syncDeviceContacts];
+```
+
 ## Building the Example App
 
 Singly SDK ships with an example app that illustrates all of the capabilities

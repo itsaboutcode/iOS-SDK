@@ -51,6 +51,16 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
 
 /*!
  *
+ * Notification raised when the device contacts have been synced with the
+ * Singly API.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+ **/
+static NSString *kSinglyContactsSyncedNotification = @"com.singly.notifications.ContactsSyncedNotification";
+
+/*!
+ *
  * Manages the current session state.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
@@ -73,19 +83,6 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
  *
 **/
 + (SinglySession *)sharedSession;
-
-/*!
- *
- * Get the session in a state that is ready to make API calls.
- *
- * @param completionHandler  The block to run when the check is complete. It
- *                           will be passed a `BOOL` stating whether or not the
- *                           the session is ready.
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-- (void)startSessionWithCompletionHandler:(void (^)(BOOL))completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Configuring the Session
@@ -140,6 +137,19 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
  *
 **/
 @property (nonatomic, assign, readonly) BOOL isReady;
+
+/*!
+ *
+ * Get the session in a state that is ready to make API calls.
+ *
+ * @param completionHandler  The block to run when the check is complete. It
+ *                           will be passed a `BOOL` stating whether or not the
+ *                           the session is ready.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+- (void)startSessionWithCompletionHandler:(void (^)(BOOL))completionHandler;
 
 /*!
  *
@@ -218,6 +228,19 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
  *
 **/
 - (void)applyService:(NSString *)serviceIdentifier withToken:(NSString *)token;
+
+/// ----------------------------------------------------------------------------
+/// @name Syncing Device Contacts
+/// ----------------------------------------------------------------------------
+
+/*!
+ *
+ * Syncs the device contacts with the Singly API.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+- (void)syncDeviceContacts;
 
 /// ----------------------------------------------------------------------------
 /// @name Handling App Launches by URL
