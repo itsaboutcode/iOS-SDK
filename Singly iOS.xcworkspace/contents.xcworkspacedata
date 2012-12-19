@@ -14,6 +14,9 @@
       location = "group:RELEASE_PROCESS.md">
    </FileRef>
    <FileRef
+      location = "group:SinglySDK.podspec">
+   </FileRef>
+   <FileRef
       location = "group:SinglySDK/SinglySDK.xcodeproj">
    </FileRef>
    <FileRef

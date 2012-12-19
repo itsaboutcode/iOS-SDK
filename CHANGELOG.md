@@ -1,7 +1,7 @@
 
 # Singly SDK ChangeLog
 
-## 1.1.0 — Not Released
+## 1.1.0 — December 19th, 2012
 
 * Auth tokens for services are now available in the `profiles` property on
   `SinglySession`.

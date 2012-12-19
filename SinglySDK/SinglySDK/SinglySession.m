@@ -180,7 +180,7 @@ static SinglySession *sharedInstance = nil;
             else
             {
                 NSDictionary *serviceProfiles = responseDictionary[@"services"];
-                _profile = responseDictionary; 
+                _profile = responseDictionary;
                 _profiles = serviceProfiles;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [NSNotificationCenter.defaultCenter postNotificationName:kSinglySessionProfilesUpdatedNotification
