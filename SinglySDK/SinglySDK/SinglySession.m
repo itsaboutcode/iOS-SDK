@@ -293,24 +293,40 @@ static SinglySession *sharedInstance = nil;
     CFRelease(addressBook);
     CFRelease(allContacts);
 
-    //    NSLog(@"Contacts to Sync: %@", contactsToSync);
+    NSDictionary *profile = SinglySession.sharedSession.profile;
+    NSDictionary *selfProfile;
 
-
-    
-    // Determine self
+    // Determine self by ...
     for (NSMutableDictionary *contact in contactsToSync)
     {
+        // ... comparing e-mail addresses
+        NSPredicate *emailPredicate = [NSPredicate predicateWithFormat:@"SELF IN %@", contact[@"emails"]];
+        BOOL isFound = [emailPredicate evaluateWithObject:profile[@"email"]];
+        if (isFound)
+        {
+            contact[@"self"] = @"true";
+            selfProfile = contact;
+            break;
+        }
+
         contact[@"self"] = @"false";
-        //        NSLog(@"Contact: %@", contact);
     }
 
+    if (!selfProfile)
+    {
+        NSLog(@"[SinglySDK:SinglySession] Unable to determine self for contacts sync!");
+    }
+
+    // Prepare to send contacts to the Singly API
     NSError *serializationError;
     SinglyRequest *syncRequest = [SinglyRequest requestWithEndpoint:@"friends/ios"];
     [syncRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [syncRequest setHTTPMethod:@"POST"];
     [syncRequest setHTTPBody:[NSJSONSerialization dataWithJSONObject:contactsToSync options:kNilOptions error:&serializationError]];
 
-    NSLog(@"Serialization Error: %@", serializationError);
+    // Check for serialization errors...
+    if (serializationError)
+        NSLog(@"[SinglySDK:SinglySession] Serialization error while preparing contacts for syncing: %@", serializationError);
 
     [NSURLConnection sendAsynchronousRequest:syncRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError) {
         NSError *parseError;
