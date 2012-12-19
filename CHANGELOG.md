@@ -3,6 +3,12 @@
 
 ## 1.1.0 — Not Released
 
+* Auth tokens for services are now available in the `profiles` property on
+  `SinglySession`.
+
+* The simplified profile is now fetched in places of the profiles endpoint and
+  is accessible with the `profile` property on `SinglySession`.
+
 * Added support for syncing device contacts with the Singly API with the
   `syncDeviceContacts` method on `SinglySession`.
 

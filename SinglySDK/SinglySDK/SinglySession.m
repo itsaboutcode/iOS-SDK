@@ -96,7 +96,7 @@ static SinglySession *sharedInstance = nil;
     dispatch_queue_t resultQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self updateProfilesWithCompletion:^(BOOL success) {
-            NSString *foundAccountID = [self.profiles objectForKey:@"id"];
+            NSString *foundAccountID = [self.profile objectForKey:@"id"];
             _isReady = ([foundAccountID isEqualToString:self.accountID]);
             dispatch_sync(resultQueue, ^{
                 block(self.isReady);
@@ -134,17 +134,18 @@ static SinglySession *sharedInstance = nil;
     dispatch_queue_t curQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSError *requestError;
-        NSError *parseError;
         NSURLResponse *response;
         BOOL isSuccessful = NO;
 
-        SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profiles"];
+        SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profile" andParameters:@{ @"auth" : @"true" }];
         NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
 
         // Check for invalid or expired tokens...
         if (requestError)
         {
             NSLog(@"[SinglySDK:SinglySession] An error occurred while requesting profiles: %@", requestError);
+
+            _profile = [NSDictionary dictionary];
             _profiles = [NSDictionary dictionary];
 
             if ([(NSHTTPURLResponse *)response statusCode] == 401)
@@ -152,17 +153,35 @@ static SinglySession *sharedInstance = nil;
                 NSLog(@"[SinglySDK:SinglySession] Access token is invalid or expired! Need to reauthorize...");
                 self.accessToken = nil;
             }
+
+            if (block) dispatch_sync(curQueue, ^{
+                block(isSuccessful);
+            });
+
+            return;
         }
+
+        // Parse the profiles response...
+        NSError *parseError;
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+
+        // Check for parse errors...
+        if (parseError)
+            NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to parse profiles: %@", parseError);
 
         else
         {
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
-            if (!requestError && !parseError)
+
+            // Check for service errors...
+            NSString *serviceError = [responseDictionary valueForKey:@"error"];
+            if (serviceError)
+                NSLog(@"[SinglySDK:SinglySession] A service error occurred while requesting profiles: %@", serviceError);
+
+            else
             {
-                if ([responseDictionary valueForKey:@"error"])
-                    _profiles = [NSDictionary dictionary];
-                else
-                    _profiles = responseDictionary;
+                NSDictionary *serviceProfiles = responseDictionary[@"services"];
+                _profile = responseDictionary; 
+                _profiles = serviceProfiles;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [NSNotificationCenter.defaultCenter postNotificationName:kSinglySessionProfilesUpdatedNotification
                                                                       object:self];
@@ -174,6 +193,7 @@ static SinglySession *sharedInstance = nil;
         if (block) dispatch_sync(curQueue, ^{
             block(isSuccessful);
         });
+
     });
 }
 
@@ -275,6 +295,8 @@ static SinglySession *sharedInstance = nil;
 
     //    NSLog(@"Contacts to Sync: %@", contactsToSync);
 
+
+    
     // Determine self
     for (NSMutableDictionary *contact in contactsToSync)
     {
@@ -290,18 +312,15 @@ static SinglySession *sharedInstance = nil;
 
     NSLog(@"Serialization Error: %@", serializationError);
 
-    [NSURLConnection sendAsynchronousRequest:syncRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
-     {
-         NSError *parseError;
-         NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-         id syncedContacts = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+    [NSURLConnection sendAsynchronousRequest:syncRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError) {
+        NSError *parseError;
+        id syncedContacts = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
 
-         dispatch_async(dispatch_get_main_queue(), ^{
-             [NSNotificationCenter.defaultCenter postNotificationName:kSinglyContactsSyncedNotification
-                                                               object:syncedContacts];
-         });
-
-     }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NSNotificationCenter.defaultCenter postNotificationName:kSinglyContactsSyncedNotification
+                                                              object:syncedContacts];
+        });
+    }];
     
 }
 

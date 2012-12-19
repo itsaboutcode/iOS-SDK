@@ -251,10 +251,9 @@
 - (void)disconnectFromService:(NSString *)serviceIdentifier
 {
 
-    // TODO Profile IDs return as an array. Are multiple profiles supported?
-
+    NSDictionary *serviceProfile = SinglySession.sharedSession.profiles[serviceIdentifier];
     SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profiles"];
-    NSString *postString = [NSString stringWithFormat:@"delete=%@", [NSString stringWithFormat:@"%@@%@", SinglySession.sharedSession.profiles[serviceIdentifier][0], serviceIdentifier]];
+    NSString *postString = [NSString stringWithFormat:@"delete=%@", [NSString stringWithFormat:@"%@@%@", serviceProfile[@"id"], serviceIdentifier]];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
 

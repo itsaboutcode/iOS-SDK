@@ -167,10 +167,32 @@ static NSString *kSinglyContactsSyncedNotification = @"com.singly.notifications.
 
 /*!
  *
+ * A combined profile for the user derived from normalized data from all of the
+ * services to which they are connected.
+ *
+ * This property is populated while updating profiles.
+ *
+ * @see updateProfiles
+ * @see updateProfilesWithCompletion:
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+@property (readonly) NSDictionary *profile;
+
+/*!
+ *
  * Profiles of the services that the account has connected. Will return until
  * there is a valid session.
  *
+ * This property is populated while updating profiles.
+ *
+ * @see updateProfiles
+ * @see updateProfilesWithCompletion:
+ *
  * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+ * TODO Rename profiles to serviceProfiles
  *
 **/
 @property (readonly) NSDictionary *profiles;
