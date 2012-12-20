@@ -37,22 +37,6 @@
 
     // Override the default background
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Background"]];
-
-    // Observe for Contacts Sync Notifications
-    [NSNotificationCenter.defaultCenter addObserverForName:kSinglyContactsSyncedNotification object:nil queue:nil usingBlock:^(NSNotification *notification)
-    {
-        NSArray *syncedContacts = (NSArray *)notification.object;
-
-        // Reload the table view to re-enable the "Sync Contacts" option.
-        [self.tableView reloadData];
-
-        UIAlertView *notificationAlert = [[UIAlertView alloc] initWithTitle:@"Contacts Synced"
-                                                                    message:[NSString stringWithFormat:@"Synced %d contacts with the Singly API.", syncedContacts.count]
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"Dismiss"
-                                                          otherButtonTitles:nil];
-        [notificationAlert show];
-    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -186,7 +170,19 @@
     NSLog(@"Syncing Device Contacts with Singly API...");
 
     // Tell the current Singly Session to sync the contacts.
-    [SinglySession.sharedSession syncDeviceContacts];
+    [SinglySession.sharedSession syncDeviceContactsWithCompletion:^(BOOL isSuccessful, NSArray *syncedContacts) {
+
+        // Reload the table view to re-enable the "Sync Contacts" option.
+        [self.tableView reloadData];
+
+        UIAlertView *notificationAlert = [[UIAlertView alloc] initWithTitle:@"Contacts Synced"
+                                                                    message:[NSString stringWithFormat:@"Synced %d contacts with the Singly API.", syncedContacts.count]
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"Dismiss"
+                                                          otherButtonTitles:nil];
+        [notificationAlert show];
+
+    }];
 
     // Reload the table view so that the "Sync Contacts" option will become
     // disabled...

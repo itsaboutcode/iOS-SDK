@@ -223,7 +223,7 @@ static NSString *kSinglyContactsSyncedNotification = @"com.singly.notifications.
  * completed.
  *
  * @param completionHandler  The block to call once the profiles have been
- *                           udpated.
+ *                           updated.
  *
  * @see updateProfiles
  *
@@ -273,6 +273,21 @@ static NSString *kSinglyContactsSyncedNotification = @"com.singly.notifications.
  *
 **/
 - (void)syncDeviceContacts;
+
+/*!
+ *
+ * Syncs the device contacts with the Singly API and calls the specified
+ * `completionHandler` once the sync has completed.
+ *
+ * In addition to calling the specified completion handler, a notification
+ * (`kSinglyContactsSyncedNotification`) is posted once the sync has completed.
+ *
+ * @param completionHandler  The block to call once the sync has been completed.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+- (void)syncDeviceContactsWithCompletion:(void (^)(BOOL, NSArray *))completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Handling App Launches by URL
