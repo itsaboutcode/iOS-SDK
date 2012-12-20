@@ -52,6 +52,8 @@
 	
 	<option value="//api/name/isReady">&nbsp;&nbsp;&nbsp;&nbsp;isReady</option>
 	
+	<option value="//api/name/isSyncingDeviceContacts">&nbsp;&nbsp;&nbsp;&nbsp;isSyncingDeviceContacts</option>
+	
 	<option value="//api/name/profile">&nbsp;&nbsp;&nbsp;&nbsp;profile</option>
 	
 	<option value="//api/name/profiles">&nbsp;&nbsp;&nbsp;&nbsp;profiles</option>
@@ -77,6 +79,8 @@
 	<option value="//api/name/startSessionWithCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- startSessionWithCompletionHandler:</option>
 	
 	<option value="//api/name/syncDeviceContacts">&nbsp;&nbsp;&nbsp;&nbsp;- syncDeviceContacts</option>
+	
+	<option value="//api/name/syncDeviceContactsWithCompletion:">&nbsp;&nbsp;&nbsp;&nbsp;- syncDeviceContactsWithCompletion:</option>
 	
 	<option value="//api/name/updateProfiles">&nbsp;&nbsp;&nbsp;&nbsp;- updateProfiles</option>
 	
@@ -132,6 +136,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isReady">isReady</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isSyncingDeviceContacts">isSyncingDeviceContacts</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/profile">profile</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/profiles">profiles</a></span></li>
@@ -159,6 +165,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/startSessionWithCompletionHandler:">startSessionWithCompletionHandler:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/syncDeviceContacts">syncDeviceContacts</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/syncDeviceContactsWithCompletion:">syncDeviceContactsWithCompletion:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateProfiles">updateProfiles</a></span></li>
 	
@@ -271,7 +279,7 @@
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isReady">&nbsp;&nbsp;isReady</a></code>
-		<span class="tooltip"><p>Returns whether or not the session is in a ready state (i.e. authorized and
+		<span class="tooltip"><p>Denotes whether or not the session is in a ready state (i.e. authorized and
 valid).</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
@@ -358,8 +366,23 @@ session.</p></span>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
+		<code><a href="#//api/name/isSyncingDeviceContacts">&nbsp;&nbsp;isSyncingDeviceContacts</a></code>
+		<span class="tooltip"><p>Denotes whether or not the device contacts are currently being synced with
+the Singly API.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/syncDeviceContacts">&ndash;&nbsp;syncDeviceContacts</a></code>
 		<span class="tooltip"><p>Syncs the device contacts with the Singly API.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/syncDeviceContactsWithCompletion:">&ndash;&nbsp;syncDeviceContactsWithCompletion:</a></code>
+		
 	</span>
 	
 	
@@ -617,13 +640,55 @@ app.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Returns whether or not the session is in a ready state (i.e. authorized and
+		<p>Denotes whether or not the session is in a ready state (i.e. authorized and
 valid).</p>
 	</div>		
 	
     
 
 	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, readonly) BOOL isReady</code></div>
+
+    
+	
+	
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.1.0 and later.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglySession.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isSyncingDeviceContacts" title="isSyncingDeviceContacts"></a>
+	<h3 class="subsubtitle method-title">isSyncingDeviceContacts</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Denotes whether or not the device contacts are currently being synced with
+the Singly API.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, readonly) BOOL isSyncingDeviceContacts</code></div>
 
     
 	
@@ -1077,6 +1142,17 @@ the session is ready.</p></dd>
 	</div>				
 	
 	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/syncDeviceContactsWithCompletion:" title="syncDeviceContactsWithCompletion:"></a>
+	<h3 class="subsubtitle method-title">syncDeviceContactsWithCompletion:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)syncDeviceContactsWithCompletion:(void ( ^ ) ( BOOL ))<em>completionHandler</em></code></div>
+
+    
 </div>
 						
 						<div class="section-method">

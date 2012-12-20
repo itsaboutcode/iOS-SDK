@@ -130,7 +130,7 @@ static NSString *kSinglyContactsSyncedNotification = @"com.singly.notifications.
 
 /*!
  *
- * Returns whether or not the session is in a ready state (i.e. authorized and
+ * Denotes whether or not the session is in a ready state (i.e. authorized and
  * valid).
  *
  * @available Available in Singly iOS SDK 1.1.0 and later.
@@ -254,6 +254,16 @@ static NSString *kSinglyContactsSyncedNotification = @"com.singly.notifications.
 /// ----------------------------------------------------------------------------
 /// @name Syncing Device Contacts
 /// ----------------------------------------------------------------------------
+
+/*!
+ *
+ * Denotes whether or not the device contacts are currently being synced with
+ * the Singly API.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+@property (nonatomic, assign, readonly) BOOL isSyncingDeviceContacts;
 
 /*!
  *

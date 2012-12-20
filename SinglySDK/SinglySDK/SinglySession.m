@@ -209,9 +209,9 @@ static SinglySession *sharedInstance = nil;
         NSURLResponse *response;
         SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/apply", serviceIdentifier]];
         request.parameters = @{
-        @"client_id": self.clientID,
-        @"client_secret": self.clientSecret,
-        @"token": token
+            @"client_id": self.clientID,
+            @"client_secret": self.clientSecret,
+            @"token": token
         };
         NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
         NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
@@ -237,40 +237,52 @@ static SinglySession *sharedInstance = nil;
 - (void)syncDeviceContacts
 {
 
-    ABAddressBookRef addressBook = ABAddressBookCreate();
+    // Only allow a single sync operation to be performed at a given time.
+    if (self.isSyncingDeviceContacts) return;
+    _isSyncingDeviceContacts = YES;
 
-    // Ask for permission to access the device contacts...
-    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined)
+    ABAddressBookRef addressBook;
+    __block BOOL isAuthorized = NO;
+
+    // On iOS 6+ we need to ask the user for permission to access their contacts.
+    if (ABAddressBookCreateWithOptions != NULL)
     {
+        dispatch_semaphore_t accessSemaphore = dispatch_semaphore_create(0);
+        addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
         ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
-            [self syncDeviceContactsFromAddressBook:addressBook];
+            isAuthorized = granted;
+            dispatch_semaphore_signal(accessSemaphore);
         });
+        dispatch_semaphore_wait(accessSemaphore, DISPATCH_TIME_FOREVER);
+        dispatch_release(accessSemaphore);
     }
-    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
-    {
-        [self syncDeviceContactsFromAddressBook:addressBook];
-    }
+
+    // iOS 5.x
     else
     {
+        addressBook = ABAddressBookCreate();
+        isAuthorized = YES;
+    }
+
+    // If we are not authorized, notify the user that they will need to allow
+    // the app to access their contacts in order to perform a sync.
+    if (!isAuthorized)
+    {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:@"Unable to sync contacts because we are not allowed to read contacts. Please enable access for this app in Settings."
+                                                            message:@"Unable to sync contacts because we are not allowed to access the contacts on this device. Please enable access for this app in Settings."
                                                            delegate:self
                                                   cancelButtonTitle:@"Dismiss"
                                                   otherButtonTitles:nil];
         [alertView show];
+        _isSyncingDeviceContacts = NO;
+        return;
     }
 
-}
-
-- (void)syncDeviceContactsFromAddressBook:(ABAddressBookRef)addressBook
-{
-    CFArrayRef allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook);
-    CFIndex contactsCount = ABAddressBookGetPersonCount(addressBook);
-    NSMutableArray *contactsToSync = [NSMutableArray arrayWithCapacity:contactsCount];
-
-    for (int i = 0; i < contactsCount; i++)
+    NSArray *allContacts = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+    NSMutableArray *contactsToSync = [NSMutableArray arrayWithCapacity:allContacts.count];
+    for (int i = 0; i < allContacts.count; i++)
     {
-        ABRecordRef contactReference = CFArrayGetValueAtIndex(allContacts, i);
+        ABRecordRef contactReference = (__bridge ABRecordRef)allContacts[i];
         NSMutableDictionary *contact = [NSMutableDictionary dictionary];
 
         // Record ID
@@ -280,42 +292,42 @@ static SinglySession *sharedInstance = nil;
         contact[@"name"] = [NSString stringWithFormat:@"%@ %@", ABRecordCopyValue(contactReference, kABPersonFirstNameProperty), ABRecordCopyValue(contactReference, kABPersonLastNameProperty)];
 
         // Phone Numbers
-        NSArray *phoneNumbers = ((__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(ABRecordCopyValue(contactReference, kABPersonPhoneProperty)));
+        NSArray *phoneNumbers = ((__bridge_transfer NSArray *)ABMultiValueCopyArrayOfAllValues(ABRecordCopyValue(contactReference, kABPersonPhoneProperty)));
         if (phoneNumbers.count > 0) contact[@"phones"] = phoneNumbers;
 
         // Email Addresses
-        NSArray *emailAddresses = ((__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(ABRecordCopyValue(contactReference, kABPersonEmailProperty)));
+        NSArray *emailAddresses = ((__bridge_transfer NSArray *)ABMultiValueCopyArrayOfAllValues(ABRecordCopyValue(contactReference, kABPersonEmailProperty)));
         if (emailAddresses.count > 0) contact[@"emails"] = emailAddresses;
+
+        // Self? (Determined Below...)
+        contact[@"self"] = @"false";
 
         [contactsToSync addObject:contact];
     }
 
+    // Release the address book reference, as we no longer need it to continue.
     CFRelease(addressBook);
-    CFRelease(allContacts);
 
-    NSDictionary *profile = SinglySession.sharedSession.profile;
-    NSDictionary *selfProfile;
+    NSDictionary *singlyProfile= SinglySession.sharedSession.profile;
+    NSDictionary *ownerProfile;
 
-    // Determine self by ...
+    // Attempt to determine who the device owner is by comparing their Singly
+    // profile against the local address book.
+    // TODO Match singly profile against more attributes in the local address book
     for (NSMutableDictionary *contact in contactsToSync)
     {
         // ... comparing e-mail addresses
         NSPredicate *emailPredicate = [NSPredicate predicateWithFormat:@"SELF IN %@", contact[@"emails"]];
-        BOOL isFound = [emailPredicate evaluateWithObject:profile[@"email"]];
+        BOOL isFound = [emailPredicate evaluateWithObject:singlyProfile[@"email"]];
         if (isFound)
         {
             contact[@"self"] = @"true";
-            selfProfile = contact;
+            ownerProfile = contact;
             break;
         }
-
-        contact[@"self"] = @"false";
     }
-
-    if (!selfProfile)
-    {
+    if (!ownerProfile)
         NSLog(@"[SinglySDK:SinglySession] Unable to determine self for contacts sync!");
-    }
 
     // Prepare to send contacts to the Singly API
     NSError *serializationError;
@@ -336,8 +348,10 @@ static SinglySession *sharedInstance = nil;
             [NSNotificationCenter.defaultCenter postNotificationName:kSinglyContactsSyncedNotification
                                                               object:syncedContacts];
         });
+
+        _isSyncingDeviceContacts = NO;
     }];
-    
+
 }
 
 #pragma mark - URL Handling

@@ -42,6 +42,10 @@
     [NSNotificationCenter.defaultCenter addObserverForName:kSinglyContactsSyncedNotification object:nil queue:nil usingBlock:^(NSNotification *notification)
     {
         NSArray *syncedContacts = (NSArray *)notification.object;
+
+        // Reload the table view to re-enable the "Sync Contacts" option.
+        [self.tableView reloadData];
+
         UIAlertView *notificationAlert = [[UIAlertView alloc] initWithTitle:@"Contacts Synced"
                                                                     message:[NSString stringWithFormat:@"Synced %d contacts with the Singly API.", syncedContacts.count]
                                                                    delegate:self
@@ -117,7 +121,7 @@
 
         // Sync Contacts
         case 2:
-            if (session.isReady)
+            if (session.isReady && !session.isSyncingDeviceContacts)
             {
                 cell.userInteractionEnabled = YES;
                 cell.textLabel.alpha = 1.0;
@@ -181,7 +185,12 @@
 {
     NSLog(@"Syncing Device Contacts with Singly API...");
 
+    // Tell the current Singly Session to sync the contacts.
     [SinglySession.sharedSession syncDeviceContacts];
+
+    // Reload the table view so that the "Sync Contacts" option will become
+    // disabled...
+    [self.tableView reloadData];
 }
 
 - (void)resetApplicationState

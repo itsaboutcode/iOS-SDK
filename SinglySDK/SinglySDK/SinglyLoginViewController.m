@@ -154,7 +154,6 @@
         }
         
         if ([parameters objectForKey:@"code"]) {
-            NSLog(@"Getting the tokens");
             NSURL* accessTokenURL = [NSURL URLWithString:kSinglyAccessTokenURL];
             NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:accessTokenURL];
             req.HTTPMethod = @"POST";
@@ -162,7 +161,6 @@
             self.responseData = [NSMutableData data];
             [NSURLConnection connectionWithRequest:req delegate:self];
         }
-        NSLog(@"Request the token");
         return NO;
     }
     return YES;

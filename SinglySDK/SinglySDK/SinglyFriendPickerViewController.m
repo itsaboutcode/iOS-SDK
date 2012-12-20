@@ -112,8 +112,6 @@
         NSDictionary *indexMetadata = indexDetails[@"meta"];
         NSMutableArray *friends = [NSMutableArray arrayWithArray:responseObject];
 
-        NSLog(@"Index Meta: %@", indexMetadata);
-        
         // Remove Metadata from Keys
         [indexDetails removeObjectForKey:@"meta"];
 
@@ -144,7 +142,7 @@
             return [indexDetails[obj1][@"offset"] intValue] > [indexDetails[obj2][@"offset"] intValue];
         }];
 
-        NSLog(@"[SinglySDK] Loaded %d friends ...", self.friends.count);
+        NSLog(@"[SinglySDK] Found %d friends...", self.friends.count);
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
