@@ -27,7 +27,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "NSString+URLEncoded.h"
+#import "NSString+URLEncoding.h"
 
 #import "SinglyConstants.h"
 #import "SinglyRequest.h"
