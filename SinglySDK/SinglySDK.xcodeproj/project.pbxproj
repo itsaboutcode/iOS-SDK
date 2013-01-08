@@ -10,7 +10,7 @@
 		821D088E15ED17B000ECFED0 /* SinglyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088615ED17B000ECFED0 /* SinglyLoginViewController.m */; };
 		821D089215ED17B000ECFED0 /* SinglySession.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088A15ED17B000ECFED0 /* SinglySession.m */; };
 		8236EBDE15EFE79E00F3351E /* SinglyFriendPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */; };
-		825B6D95161C99EF0034DB92 /* NSString+URLEncoded.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */; };
+		825B6D95161C99EF0034DB92 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoding.m */; };
 		82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */; };
 		D00348381665322D0048513A /* SinglyRequest+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D00348371665322D0048513A /* SinglyRequest+Internal.h */; };
 		D003483B16666C8B0048513A /* SinglyKeychainItemWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = D003483916666C8B0048513A /* SinglyKeychainItemWrapper.h */; };
@@ -27,10 +27,10 @@
 		D0059051167A4D5400F1374D /* SinglyFriendPlaceholder.h in Headers */ = {isa = PBXBuildFile; fileRef = D0059049167A492600F1374D /* SinglyFriendPlaceholder.h */; };
 		D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
 		D02B537216309C7700F1F535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B537116309C7700F1F535 /* Foundation.framework */; };
-		D02B539616309CDF00F1F535 /* NSString+URLEncoded.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */; };
+		D02B539616309CDF00F1F535 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoding.m */; };
 		D02B539716309CE200F1F535 /* UIViewController+Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */; };
 		D02B539C16309DB900F1F535 /* SinglySDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088715ED17B000ECFED0 /* SinglySDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D02B539D16309DBE00F1F535 /* NSString+URLEncoded.h in Headers */ = {isa = PBXBuildFile; fileRef = 825B6D92161C99EF0034DB92 /* NSString+URLEncoded.h */; };
+		D02B539D16309DBE00F1F535 /* NSString+URLEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 825B6D92161C99EF0034DB92 /* NSString+URLEncoding.h */; };
 		D02B539E16309DC500F1F535 /* UIViewController+Modal.h in Headers */ = {isa = PBXBuildFile; fileRef = D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */; };
 		D02B539F16309DCA00F1F535 /* SinglySession.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088915ED17B000ECFED0 /* SinglySession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D02B53A016309DD100F1F535 /* SinglySession.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088A15ED17B000ECFED0 /* SinglySession.m */; };
@@ -171,7 +171,7 @@
 		D0DB1623162E0A93005EC7C7 /* Service Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */; };
 		D0DB1624162E0A93005EC7C7 /* Service Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */; };
 		D0E2C7081637572B00AAD565 /* SinglySession.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088915ED17B000ECFED0 /* SinglySession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0E2C7091637573800AAD565 /* NSString+URLEncoded.h in Headers */ = {isa = PBXBuildFile; fileRef = 825B6D92161C99EF0034DB92 /* NSString+URLEncoded.h */; };
+		D0E2C7091637573800AAD565 /* NSString+URLEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 825B6D92161C99EF0034DB92 /* NSString+URLEncoding.h */; };
 		D0E2C70A1637573C00AAD565 /* UIViewController+Modal.h in Headers */ = {isa = PBXBuildFile; fileRef = D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */; };
 		D0E2C70B1637574200AAD565 /* SinglyLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088515ED17B000ECFED0 /* SinglyLoginViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0E2C70C1637575900AAD565 /* SinglyLoginPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -225,8 +225,8 @@
 		824DCF561607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+DEFacebookComposeViewController.m"; sourceTree = "<group>"; };
 		824DCF571607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+DEFacebookComposeViewController.h"; sourceTree = "<group>"; };
 		824DCF581607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+DEFacebookComposeViewController.m"; sourceTree = "<group>"; };
-		825B6D92161C99EF0034DB92 /* NSString+URLEncoded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoded.h"; sourceTree = "<group>"; };
-		825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoded.m"; sourceTree = "<group>"; };
+		825B6D92161C99EF0034DB92 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		825B6D93161C99EF0034DB92 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		82C6252E16011E7900BF5225 /* SinglySharingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySharingViewController.h; sourceTree = "<group>"; };
 		82C6252F16011E7900BF5225 /* SinglySharingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySharingViewController.m; sourceTree = "<group>"; };
 		82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerViewController.h; sourceTree = "<group>"; };
@@ -499,8 +499,8 @@
 			children = (
 				D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */,
 				D08C1BD71649C37000035775 /* NSDictionary+QueryString.m */,
-				825B6D92161C99EF0034DB92 /* NSString+URLEncoded.h */,
-				825B6D93161C99EF0034DB92 /* NSString+URLEncoded.m */,
+				825B6D92161C99EF0034DB92 /* NSString+URLEncoding.h */,
+				825B6D93161C99EF0034DB92 /* NSString+URLEncoding.m */,
 				D08C1BDC1649C48900035775 /* NSURL+AccessToken.h */,
 				D08C1BDD1649C48900035775 /* NSURL+AccessToken.m */,
 				D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */,
@@ -809,7 +809,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D02B539C16309DB900F1F535 /* SinglySDK.h in Headers */,
-				D02B539D16309DBE00F1F535 /* NSString+URLEncoded.h in Headers */,
+				D02B539D16309DBE00F1F535 /* NSString+URLEncoding.h in Headers */,
 				D02B539E16309DC500F1F535 /* UIViewController+Modal.h in Headers */,
 				D02B539F16309DCA00F1F535 /* SinglySession.h in Headers */,
 				D02B53A116309DD300F1F535 /* SinglyLoginViewController.h in Headers */,
@@ -848,7 +848,7 @@
 				D02B540B1630A99A00F1F535 /* SinglySDK.h in Headers */,
 				D02B540C1630AA4700F1F535 /* SinglyConstants.h in Headers */,
 				D0E2C7081637572B00AAD565 /* SinglySession.h in Headers */,
-				D0E2C7091637573800AAD565 /* NSString+URLEncoded.h in Headers */,
+				D0E2C7091637573800AAD565 /* NSString+URLEncoding.h in Headers */,
 				D0E2C70A1637573C00AAD565 /* UIViewController+Modal.h in Headers */,
 				D0E2C70B1637574200AAD565 /* SinglyLoginViewController.h in Headers */,
 				D0E2C70C1637575900AAD565 /* SinglyLoginPickerViewController.h in Headers */,
@@ -1102,7 +1102,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\nif [ ! -e /usr/local/bin/appledoc ]; then\n    echo \"warning: Unable to generate documentation because AppleDoc is not installed. Please install AppleDoc by using Homebrew (e.g. brew install appledoc).\"\n    exit 0\nfi\n\nexport SINGLY_SDK_VERSION=`grep SinglySDKVersion \"${PROJECT_DIR}/SinglySDK/SinglyConstants.h\" | sed 's/[^0-9\\.]//g'`\n\n/usr/local/bin/appledoc \\\n  --project-name \"${PROJECT_NAME}\" \\\n  --project-company \"Singly, Inc\" \\\n  --project-version \"${SINGLY_SDK_VERSION}\" \\\n  --company-id \"com.singly\" \\\n  --output \"${PROJECT_DIR}/Documentation\" \\\n  --docset-atom-filename \"SinglySDK.atom\" \\\n  --docset-feed-url \"http://singly.github.com/iOS-SDK/api/%DOCSETATOMFILENAME\" \\\n  --docset-package-url \"http://singly.github.com/iOS-SDK/api/%DOCSETPACKAGEFILENAME\" \\\n  --docset-fallback-url \"http://singly.github.com/iOS-SDK/api\" \\\n  --publish-docset \\\n  --logformat xcode \\\n  --keep-undocumented-objects \\\n  --keep-undocumented-members \\\n  --keep-intermediate-files \\\n  --no-repeat-first-par \\\n  --no-warn-invalid-crossref \\\n  --exit-threshold 2 \\\n  --ignore \".m\" \\\n  --ignore \"SinglySDKTests\" \\\n  --ignore \"SinglySDK/SinglySDK/Libraries\" \\\n  --ignore \"+Internal.h\" \\\n  --ignore \"DEFacebookGradientView.h\" \\\n  --ignore \"DEFacebookSheetCardView.h\" \\\n  --ignore \"DEFacebookTextView.h\" \\\n  --ignore \"DERuledView.h\" \\\n  --ignore \"UIApplication+DEFacebookComposeViewController.h\" \\\n  --ignore \"UIDevice+DEFacebookComposeViewController.h\" \\\n  --ignore \"SinglySharingViewController.h\" \\\n  --ignore \"SinglyActivityIndicatorView.h\" \\\n  --ignore \"SinglyKeychainItemWrapper.h\" \\\n  --ignore \"SinglyAvatarCache.h\" \\\n  --ignore \"NSDictionary+QueryString.h\" \\\n  --ignore \"NSString+URLEncoded.h\" \\\n  --ignore \"NSURL+AccessToken.h\" \\\n  --ignore \"UIViewController+Modal.h\" \\\n  \"${PROJECT_DIR}\"\n";
+			shellScript = "\nif [ ! -e /usr/local/bin/appledoc ]; then\n    echo \"warning: Unable to generate documentation because AppleDoc is not installed. Please install AppleDoc by using Homebrew (e.g. brew install appledoc).\"\n    exit 0\nfi\n\nexport SINGLY_SDK_VERSION=`grep SinglySDKVersion \"${PROJECT_DIR}/SinglySDK/SinglyConstants.h\" | sed 's/[^0-9\\.]//g'`\n\n/usr/local/bin/appledoc \\\n  --project-name \"${PROJECT_NAME}\" \\\n  --project-company \"Singly, Inc\" \\\n  --project-version \"${SINGLY_SDK_VERSION}\" \\\n  --company-id \"com.singly\" \\\n  --output \"${PROJECT_DIR}/Documentation\" \\\n  --docset-atom-filename \"SinglySDK.atom\" \\\n  --docset-feed-url \"http://singly.github.com/iOS-SDK/api/%DOCSETATOMFILENAME\" \\\n  --docset-package-url \"http://singly.github.com/iOS-SDK/api/%DOCSETPACKAGEFILENAME\" \\\n  --docset-fallback-url \"http://singly.github.com/iOS-SDK/api\" \\\n  --publish-docset \\\n  --logformat xcode \\\n  --keep-undocumented-objects \\\n  --keep-undocumented-members \\\n  --keep-intermediate-files \\\n  --no-repeat-first-par \\\n  --no-warn-invalid-crossref \\\n  --exit-threshold 2 \\\n  --ignore \".m\" \\\n  --ignore \"SinglySDKTests\" \\\n  --ignore \"SinglySDK/SinglySDK/Libraries\" \\\n  --ignore \"+Internal.h\" \\\n  --ignore \"DEFacebookGradientView.h\" \\\n  --ignore \"DEFacebookSheetCardView.h\" \\\n  --ignore \"DEFacebookTextView.h\" \\\n  --ignore \"DERuledView.h\" \\\n  --ignore \"UIApplication+DEFacebookComposeViewController.h\" \\\n  --ignore \"UIDevice+DEFacebookComposeViewController.h\" \\\n  --ignore \"SinglySharingViewController.h\" \\\n  --ignore \"SinglyActivityIndicatorView.h\" \\\n  --ignore \"SinglyKeychainItemWrapper.h\" \\\n  --ignore \"SinglyAvatarCache.h\" \\\n  --ignore \"NSDictionary+QueryString.h\" \\\n  --ignore \"NSString+URLEncoding.h\" \\\n  --ignore \"NSURL+AccessToken.h\" \\\n  --ignore \"UIViewController+Modal.h\" \\\n  \"${PROJECT_DIR}\"\n";
 		};
 		D0E158DD1631BF9B000D0BCA /* Create Universal Library */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1143,7 +1143,7 @@
 				821D089215ED17B000ECFED0 /* SinglySession.m in Sources */,
 				82CAD78C15EEB0B300D3E486 /* SinglyLoginPickerViewController.m in Sources */,
 				8236EBDE15EFE79E00F3351E /* SinglyFriendPickerViewController.m in Sources */,
-				825B6D95161C99EF0034DB92 /* NSString+URLEncoded.m in Sources */,
+				825B6D95161C99EF0034DB92 /* NSString+URLEncoding.m in Sources */,
 				D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */,
 				D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */,
 				D08B3EE7162DF3E3009001D5 /* UIViewController+Modal.m in Sources */,
@@ -1163,7 +1163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D02B539616309CDF00F1F535 /* NSString+URLEncoded.m in Sources */,
+				D02B539616309CDF00F1F535 /* NSString+URLEncoding.m in Sources */,
 				D02B539716309CE200F1F535 /* UIViewController+Modal.m in Sources */,
 				D02B53A016309DD100F1F535 /* SinglySession.m in Sources */,
 				D02B53A216309DD600F1F535 /* SinglyLoginViewController.m in Sources */,

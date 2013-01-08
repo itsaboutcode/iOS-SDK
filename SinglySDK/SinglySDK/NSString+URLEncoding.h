@@ -1,5 +1,5 @@
 //
-//  NSString+URLEncoded.m
+//  NSString+URLEncoded.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,21 +27,37 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "NSString+URLEncoded.h"
+#import <Foundation/Foundation.h>
 
-@implementation NSString (URLEncoded)
+/*!
+ *
+ * Utility methods for URL encoding and decoding of strings.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@interface NSString (URLEncoding)
 
-- (NSString *)URLEncodedString
-{
-    __autoreleasing NSString *encodedString;
-    NSString *originalString = (NSString *)self;
-    encodedString = (__bridge_transfer NSString *)
-    CFURLCreateStringByAddingPercentEscapes(NULL,
-                                            (__bridge CFStringRef)originalString,
-                                            NULL,
-                                            (CFStringRef)@":!*();@/&?#[]+$,='%’\"",
-                                            kCFStringEncodingUTF8);
-    return encodedString;
-}
+/*!
+ *
+ * Encodes the string for use in a URL.
+ *
+ * @returns The string encoded for use in a URL
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+- (NSString *)URLEncodedString;
+
+/*!
+ *
+ * Decodes the string if it was encoded for us in a URL.
+ *
+ * @returns The decoded string
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+- (NSString *)URLDecodedString;
 
 @end
