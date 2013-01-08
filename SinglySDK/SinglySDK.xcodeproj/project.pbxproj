@@ -134,6 +134,34 @@
 		D0587106164330FF007E8970 /* SinglyFacebookService.h in Headers */ = {isa = PBXBuildFile; fileRef = D058710116431AFC007E8970 /* SinglyFacebookService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D058710716433102007E8970 /* SinglyService.m in Sources */ = {isa = PBXBuildFile; fileRef = D05870FC16431ADB007E8970 /* SinglyService.m */; };
 		D058710816433105007E8970 /* SinglyFacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = D058710216431AFC007E8970 /* SinglyFacebookService.m */; };
+		D05C00071684C9B2006AD03C /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05C00051684C9B2006AD03C /* AddressBook.framework */; };
+		D05C00081684C9B2006AD03C /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05C00061684C9B2006AD03C /* AddressBookUI.framework */; };
+		D05C00091684CB35006AD03C /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05C00051684C9B2006AD03C /* AddressBook.framework */; };
+		D05C000A1684CB35006AD03C /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05C00061684C9B2006AD03C /* AddressBookUI.framework */; };
+		D05C000B1684CBB7006AD03C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D003483F16666E650048513A /* Security.framework */; };
+		D05C000C1684CBBE006AD03C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06194F11638668400A906F7 /* Social.framework */; };
+		D05C000D1684CBCE006AD03C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D021CBBB162C933D00DE9922 /* Accounts.framework */; };
+		D05C000E1684CBF5006AD03C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B537116309C7700F1F535 /* Foundation.framework */; };
+		D05C000F1684CBF8006AD03C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B538116309C7700F1F535 /* UIKit.framework */; };
+		D05C00101684D10E006AD03C /* SinglyService.m in Sources */ = {isa = PBXBuildFile; fileRef = D05870FC16431ADB007E8970 /* SinglyService.m */; };
+		D05C00111684D113006AD03C /* SinglyFacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = D058710216431AFC007E8970 /* SinglyFacebookService.m */; };
+		D05C00121684D117006AD03C /* SinglyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088615ED17B000ECFED0 /* SinglyLoginViewController.m */; };
+		D05C00131684D11B006AD03C /* SinglyLoginPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */; };
+		D05C00141684D11F006AD03C /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
+		D05C00151684D129006AD03C /* SinglyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D090E350165BE96E00FE8273 /* SinglyRequest.m */; };
+		D05C00171684D137006AD03C /* SinglyFriendPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */; };
+		D05C00181684D13B006AD03C /* SinglyFriendPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */; };
+		D05C00191684D140006AD03C /* SinglyFriendPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */; };
+		D05C001A1684D14E006AD03C /* SinglyActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EA60BD163B3B99001AC1DF /* SinglyActivityIndicatorView.m */; };
+		D05C001B1684D155006AD03C /* SinglyKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */; };
+		D05C001C1684D159006AD03C /* SinglyAvatarCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */; };
+		D05C001D1684D15F006AD03C /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C1BD71649C37000035775 /* NSDictionary+QueryString.m */; };
+		D05C001E1684D166006AD03C /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoding.m */; };
+		D05C001F1684D166006AD03C /* NSURL+AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C1BDD1649C48900035775 /* NSURL+AccessToken.m */; };
+		D05C00201684D166006AD03C /* UIViewController+Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */; };
+		D05C00221684D4D0006AD03C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05C00211684D4D0006AD03C /* QuartzCore.framework */; };
+		D05C00231684D680006AD03C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05C00211684D4D0006AD03C /* QuartzCore.framework */; };
+		D05CFFFF1683D964006AD03C /* SinglySession.m in Sources */ = {isa = PBXBuildFile; fileRef = 821D088A15ED17B000ECFED0 /* SinglySession.m */; };
 		D06194E8163864AD00A906F7 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D021CBBB162C933D00DE9922 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D06194F31638668E00A906F7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06194F11638668400A906F7 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D064F0DE16699BC000091CE5 /* SinglyFriendPickerViewController+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D064F0DD16699BC000091CE5 /* SinglyFriendPickerViewController+Internal.h */; };
@@ -144,6 +172,7 @@
 		D064F0E7166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D064F0E6166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D064F0E8166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D064F0E6166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */; };
+		D08A3DB7169B2F4F00A3130C /* NSString+URLEncodingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D08A3DB6169B2F4F00A3130C /* NSString+URLEncodingTests.m */; };
 		D08B3EE7162DF3E3009001D5 /* UIViewController+Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */; };
 		D08C1BD81649C37000035775 /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */; };
 		D08C1BD91649C37000035775 /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */; };
@@ -357,6 +386,9 @@
 		D05870FC16431ADB007E8970 /* SinglyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SinglyService.m; path = SinglySDK/SinglyService.m; sourceTree = "<group>"; };
 		D058710116431AFC007E8970 /* SinglyFacebookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SinglyFacebookService.h; path = SinglySDK/SinglyFacebookService.h; sourceTree = "<group>"; };
 		D058710216431AFC007E8970 /* SinglyFacebookService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SinglyFacebookService.m; path = SinglySDK/SinglyFacebookService.m; sourceTree = "<group>"; };
+		D05C00051684C9B2006AD03C /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		D05C00061684C9B2006AD03C /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		D05C00211684D4D0006AD03C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D06194F11638668400A906F7 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D064F0DD16699BC000091CE5 /* SinglyFriendPickerViewController+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyFriendPickerViewController+Internal.h"; sourceTree = "<group>"; };
 		D064F0E0166BF87900091CE5 /* SinglyService+Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SinglyService+Delegate.h"; path = "SinglySDK/SinglyService+Delegate.h"; sourceTree = "<group>"; };
@@ -370,6 +402,8 @@
 		D077BA63165554E500F6EEDE /* Customize Disk Image.applescript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.applescript; path = "Customize Disk Image.applescript"; sourceTree = "<group>"; };
 		D077BA6516555A3F00F6EEDE /* Disk Image Background.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Disk Image Background.psd"; sourceTree = "<group>"; };
 		D077BA6616555A3F00F6EEDE /* Disk Image Background.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "Disk Image Background.tiff"; sourceTree = "<group>"; };
+		D08A3DB5169B2F4F00A3130C /* NSString+URLEncodingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncodingTests.h"; sourceTree = "<group>"; };
+		D08A3DB6169B2F4F00A3130C /* NSString+URLEncodingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncodingTests.m"; sourceTree = "<group>"; };
 		D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Modal.h"; sourceTree = "<group>"; };
 		D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Modal.m"; sourceTree = "<group>"; };
 		D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryString.h"; sourceTree = "<group>"; };
@@ -404,7 +438,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D06194E8163864AD00A906F7 /* Accounts.framework in Frameworks */,
+				D05C00071684C9B2006AD03C /* AddressBook.framework in Frameworks */,
+				D05C00081684C9B2006AD03C /* AddressBookUI.framework in Frameworks */,
 				D02B537216309C7700F1F535 /* Foundation.framework in Frameworks */,
+				D05C00221684D4D0006AD03C /* QuartzCore.framework in Frameworks */,
 				D003484116666ED50048513A /* Security.framework in Frameworks */,
 				D06194F31638668E00A906F7 /* Social.framework in Frameworks */,
 				D003484716666EFE0048513A /* UIKit.framework in Frameworks */,
@@ -415,7 +452,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D05C000D1684CBCE006AD03C /* Accounts.framework in Frameworks */,
+				D05C00091684CB35006AD03C /* AddressBook.framework in Frameworks */,
+				D05C000A1684CB35006AD03C /* AddressBookUI.framework in Frameworks */,
+				D05C000E1684CBF5006AD03C /* Foundation.framework in Frameworks */,
+				D05C00231684D680006AD03C /* QuartzCore.framework in Frameworks */,
+				D05C000B1684CBB7006AD03C /* Security.framework in Frameworks */,
 				D053EF9016271BC9008B8BA1 /* SenTestingKit.framework in Frameworks */,
+				D05C000C1684CBBE006AD03C /* Social.framework in Frameworks */,
+				D05C000F1684CBF8006AD03C /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,8 +470,8 @@
 		821D086515ED177300ECFED0 = {
 			isa = PBXGroup;
 			children = (
-				821D087615ED177400ECFED0 /* SinglySDK */,
-				D053EF9516271BC9008B8BA1 /* SinglySDKTests */,
+				821D087615ED177400ECFED0 /* Framework */,
+				D053EF9516271BC9008B8BA1 /* Tests */,
 				D053EF8E16271BC9008B8BA1 /* Frameworks */,
 				D0E158DE1631C19E000D0BCA /* Scripts */,
 				821D087515ED177400ECFED0 /* Products */,
@@ -446,7 +491,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		821D087615ED177400ECFED0 /* SinglySDK */ = {
+		821D087615ED177400ECFED0 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
 				821D088715ED17B000ECFED0 /* SinglySDK.h */,
@@ -457,9 +502,11 @@
 				D067E1B1161B434E00B43C32 /* Friends */,
 				D067E1B0161B433D00B43C32 /* Sharing */,
 				D090E34E165BE6CC00FE8273 /* Miscellaneous Views */,
+				D0034852166672180048513A /* Extensions */,
 				825B6D91161C99CE0034DB92 /* Utilities */,
 				D06830CD1624D0AF00F398A6 /* Resources */,
 			);
+			name = Framework;
 			path = SinglySDK;
 			sourceTree = "<group>";
 		};
@@ -485,7 +532,6 @@
 		825B6D91161C99CE0034DB92 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				D0034852166672180048513A /* Extensions */,
 				D003483916666C8B0048513A /* SinglyKeychainItemWrapper.h */,
 				D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */,
 				D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */,
@@ -590,8 +636,11 @@
 			isa = PBXGroup;
 			children = (
 				D021CBBB162C933D00DE9922 /* Accounts.framework */,
+				D05C00051684C9B2006AD03C /* AddressBook.framework */,
+				D05C00061684C9B2006AD03C /* AddressBookUI.framework */,
 				D02B535B1630989A00F1F535 /* CoreFoundation.framework */,
 				D02B537116309C7700F1F535 /* Foundation.framework */,
+				D05C00211684D4D0006AD03C /* QuartzCore.framework */,
 				D003483F16666E650048513A /* Security.framework */,
 				D053EF8F16271BC9008B8BA1 /* SenTestingKit.framework */,
 				D06194F11638668400A906F7 /* Social.framework */,
@@ -600,13 +649,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D053EF9516271BC9008B8BA1 /* SinglySDKTests */ = {
+		D053EF9516271BC9008B8BA1 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				D053EF9B16271BC9008B8BA1 /* SinglySDKTests.h */,
 				D053EF9C16271BC9008B8BA1 /* SinglySDKTests.m */,
+				D0F118731694E1640031266C /* Extensions */,
 				D053EF9616271BC9008B8BA1 /* Supporting Files */,
 			);
+			name = Tests;
 			path = SinglySDKTests;
 			sourceTree = "<group>";
 		};
@@ -799,6 +850,15 @@
 				D077BA63165554E500F6EEDE /* Customize Disk Image.applescript */,
 			);
 			path = Scripts;
+			sourceTree = "<group>";
+		};
+		D0F118731694E1640031266C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D08A3DB5169B2F4F00A3130C /* NSString+URLEncodingTests.h */,
+				D08A3DB6169B2F4F00A3130C /* NSString+URLEncodingTests.m */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1188,6 +1248,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				D053EF9D16271BC9008B8BA1 /* SinglySDKTests.m in Sources */,
+				D05CFFFF1683D964006AD03C /* SinglySession.m in Sources */,
+				D05C00101684D10E006AD03C /* SinglyService.m in Sources */,
+				D05C00111684D113006AD03C /* SinglyFacebookService.m in Sources */,
+				D05C00121684D117006AD03C /* SinglyLoginViewController.m in Sources */,
+				D05C00131684D11B006AD03C /* SinglyLoginPickerViewController.m in Sources */,
+				D05C00141684D11F006AD03C /* SinglyLoginPickerServiceCell.m in Sources */,
+				D05C00151684D129006AD03C /* SinglyRequest.m in Sources */,
+				D05C00171684D137006AD03C /* SinglyFriendPickerViewController.m in Sources */,
+				D05C00181684D13B006AD03C /* SinglyFriendPickerCell.m in Sources */,
+				D05C00191684D140006AD03C /* SinglyFriendPlaceholder.m in Sources */,
+				D05C001A1684D14E006AD03C /* SinglyActivityIndicatorView.m in Sources */,
+				D05C001B1684D155006AD03C /* SinglyKeychainItemWrapper.m in Sources */,
+				D05C001C1684D159006AD03C /* SinglyAvatarCache.m in Sources */,
+				D05C001D1684D15F006AD03C /* NSDictionary+QueryString.m in Sources */,
+				D05C001E1684D166006AD03C /* NSString+URLEncoding.m in Sources */,
+				D05C001F1684D166006AD03C /* NSURL+AccessToken.m in Sources */,
+				D05C00201684D166006AD03C /* UIViewController+Modal.m in Sources */,
+				D08A3DB7169B2F4F00A3130C /* NSString+URLEncodingTests.m in Sources */,
+				D08A3DBF169B7CFB00A3130C /* SinglyServiceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
