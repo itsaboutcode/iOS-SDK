@@ -173,6 +173,7 @@
 		D064F0E8166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D064F0E6166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */; };
 		D08A3DB7169B2F4F00A3130C /* NSString+URLEncodingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D08A3DB6169B2F4F00A3130C /* NSString+URLEncodingTests.m */; };
+		D08A3DBB169B5D0200A3130C /* NSURL+AccessTokenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D08A3DBA169B5D0200A3130C /* NSURL+AccessTokenTests.m */; };
 		D08B3EE7162DF3E3009001D5 /* UIViewController+Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */; };
 		D08C1BD81649C37000035775 /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */; };
 		D08C1BD91649C37000035775 /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */; };
@@ -212,6 +213,7 @@
 		D0EA60C0163B3B9A001AC1DF /* SinglyActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EA60BD163B3B99001AC1DF /* SinglyActivityIndicatorView.m */; };
 		D0EA60C1163B3B9A001AC1DF /* SinglyActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EA60BD163B3B99001AC1DF /* SinglyActivityIndicatorView.m */; };
 		D0EA60C3163B4554001AC1DF /* Icon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = D0EA60C2163B4554001AC1DF /* Icon-512.png */; };
+		D0F118721694E14C0031266C /* NSDictionary+QueryStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F118711694E14C0031266C /* NSDictionary+QueryStringTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -404,6 +406,8 @@
 		D077BA6616555A3F00F6EEDE /* Disk Image Background.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "Disk Image Background.tiff"; sourceTree = "<group>"; };
 		D08A3DB5169B2F4F00A3130C /* NSString+URLEncodingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncodingTests.h"; sourceTree = "<group>"; };
 		D08A3DB6169B2F4F00A3130C /* NSString+URLEncodingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncodingTests.m"; sourceTree = "<group>"; };
+		D08A3DB9169B5D0200A3130C /* NSURL+AccessTokenTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+AccessTokenTests.h"; sourceTree = "<group>"; };
+		D08A3DBA169B5D0200A3130C /* NSURL+AccessTokenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+AccessTokenTests.m"; sourceTree = "<group>"; };
 		D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Modal.h"; sourceTree = "<group>"; };
 		D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Modal.m"; sourceTree = "<group>"; };
 		D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryString.h"; sourceTree = "<group>"; };
@@ -423,6 +427,8 @@
 		D0EA60BC163B3B99001AC1DF /* SinglyActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyActivityIndicatorView.h; sourceTree = "<group>"; };
 		D0EA60BD163B3B99001AC1DF /* SinglyActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyActivityIndicatorView.m; sourceTree = "<group>"; };
 		D0EA60C2163B4554001AC1DF /* Icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-512.png"; sourceTree = "<group>"; };
+		D0F118701694E14C0031266C /* NSDictionary+QueryStringTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryStringTests.h"; sourceTree = "<group>"; };
+		D0F118711694E14C0031266C /* NSDictionary+QueryStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+QueryStringTests.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -855,8 +861,12 @@
 		D0F118731694E1640031266C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D0F118701694E14C0031266C /* NSDictionary+QueryStringTests.h */,
+				D0F118711694E14C0031266C /* NSDictionary+QueryStringTests.m */,
 				D08A3DB5169B2F4F00A3130C /* NSString+URLEncodingTests.h */,
 				D08A3DB6169B2F4F00A3130C /* NSString+URLEncodingTests.m */,
+				D08A3DB9169B5D0200A3130C /* NSURL+AccessTokenTests.h */,
+				D08A3DBA169B5D0200A3130C /* NSURL+AccessTokenTests.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1265,7 +1275,9 @@
 				D05C001E1684D166006AD03C /* NSString+URLEncoding.m in Sources */,
 				D05C001F1684D166006AD03C /* NSURL+AccessToken.m in Sources */,
 				D05C00201684D166006AD03C /* UIViewController+Modal.m in Sources */,
+				D0F118721694E14C0031266C /* NSDictionary+QueryStringTests.m in Sources */,
 				D08A3DB7169B2F4F00A3130C /* NSString+URLEncodingTests.m in Sources */,
+				D08A3DBB169B5D0200A3130C /* NSURL+AccessTokenTests.m in Sources */,
 				D08A3DBF169B7CFB00A3130C /* SinglyServiceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

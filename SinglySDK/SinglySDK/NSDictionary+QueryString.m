@@ -28,6 +28,7 @@
 //
 
 #import "NSDictionary+QueryString.h"
+#import "NSString+URLEncoding.h"
 
 @implementation NSDictionary (QueryString)
 
@@ -39,10 +40,21 @@
     for (NSString *pair in pairs)
     {
         NSArray *elements = [pair componentsSeparatedByString:@"="];
-        NSString *key = [[elements objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSString *val = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        if (elements.count == 2)
+        {
+            NSString *key = elements[0];
+            NSString *value = elements[1];
+            NSString *decodedKey = [key URLDecodedString];
+            NSString *decodedValue = [value URLDecodedString];
 
-        [dictionary setObject:val forKey:key];
+            if (![key isEqualToString:decodedKey])
+                key = decodedKey;
+
+            if (![value isEqualToString:decodedValue])
+                value = decodedValue;
+
+            [dictionary setObject:value forKey:key];
+        }
     }
 
     return [NSDictionary dictionaryWithDictionary:dictionary];

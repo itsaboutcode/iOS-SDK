@@ -1,5 +1,5 @@
 //
-//  SinglySDKTests.h
+//  NSURL+AccessTokenTests.m
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,8 +27,28 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import "NSURL+AccessToken.h"
+#import "NSURL+AccessTokenTests.h"
 
-@interface SinglySDKTests : SenTestCase
+@implementation NSURL_AccessTokenTests
+
+static NSString *testAccessToken = @"1olBvHiVk4BE583qHN6lrzRxNT0.nhubPfqZfe1a25645d52c98159bfda70449380472880cdf6cca7fc92895e79f98536a21b314b6cc0a8f15cba629d185e86ea52917a4c47933557f3502b7e3d5d7f4076797eadcd70024d44ca6dc001d7fd01db3ae3a67fc0731e66b448be89aa0c861137";
+
+- (void)testShouldExtractAccessTokenAsHashParameter
+{
+    NSURL *testURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://example.com/foo#access_token=%@", testAccessToken]];
+    NSString *accessToken = [testURL extractAccessToken];
+
+    STAssertEqualObjects(accessToken, testAccessToken, @"The extracted access token does not match the test token.");
+}
+
+- (void)testShouldExtractAccessTokenAsQueryParameter
+{
+    NSURL *testURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://example.com/foo?access_token=%@", testAccessToken]];
+                      NSString *accessToken = [testURL extractAccessToken];
+
+    STAssertEqualObjects(accessToken, testAccessToken, @"The extracted access token does not match the test token.");
+}
+
 
 @end

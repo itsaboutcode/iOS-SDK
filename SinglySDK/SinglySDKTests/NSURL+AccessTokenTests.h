@@ -1,5 +1,5 @@
 //
-//  SinglySDKTests.h
+//  NSURL+AccessTokenTests.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -29,6 +29,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface SinglySDKTests : SenTestCase
+@interface NSURL_AccessTokenTests : SenTestCase
 
 @end
