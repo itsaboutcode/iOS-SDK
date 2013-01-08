@@ -28,7 +28,7 @@
 //
 
 #import "NSDictionary+QueryString.h"
-#import "NSString+URLEncoded.h"
+#import "NSString+URLEncoding.h"
 
 #import "SinglyFacebookService.h"
 #import "SinglyRequest.h"
