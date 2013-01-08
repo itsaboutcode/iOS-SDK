@@ -48,7 +48,7 @@
         [NSException raise:@"Missing Singly credentials" format:@"You must configure your Singly client id and client secret in SinglyConfiguration.h"];
     
     // Configure Shared SinglySession
-    SinglySession *session = [SinglySession sharedSession];
+    SinglySession *session = SinglySession.sharedSession;
     session.clientID = CLIENT_ID;
     session.clientSecret = CLIENT_SECRET;
 
