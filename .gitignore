@@ -25,9 +25,7 @@ build/
 *.dep
 
 # Generated Documentation
-SinglySDK/Documentation/docset-installed.txt
-SinglySDK/Documentation/docset
-SinglySDK/Documentation/publish
+SinglySDK/Documentation
 
 # Generated Resource Bundle via Cocoapods
 SinglySDK/SinglySDK/Resources/SinglySDK.bundle
