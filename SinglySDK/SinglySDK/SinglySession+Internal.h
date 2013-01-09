@@ -41,4 +41,14 @@
 **/
 @property (strong) SinglyKeychainItemWrapper *accessTokenWrapper;
 
+/*!
+ *
+ * Accessor for the static shared session instance. This is required for unit
+ * testing (and thus a private API).
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
++ (SinglySession *)sharedSessionInstance;
+
 @end

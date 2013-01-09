@@ -43,10 +43,18 @@ static SinglySession *sharedInstance = nil;
 
 @implementation SinglySession
 
-+ (SinglySession*)sharedSession
++ (SinglySession *)sharedSession
 {
-    if (sharedInstance == nil)
+    static dispatch_once_t queue;
+    dispatch_once(&queue, ^{
         sharedInstance = [[SinglySession alloc] init];
+    });
+
+    return sharedInstance;
+}
+
++ (SinglySession *)sharedSessionInstance
+{
     return sharedInstance;
 }
 
@@ -116,9 +124,11 @@ static SinglySession *sharedInstance = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kSinglySessionProfilesUpdatedNotification
                                                         object:self];
 
-    // Reset Access Token & Account ID
-    self.accessToken = nil;
-    self.accountID = nil;
+    // Reset the Keychain Item
+    [self.accessTokenWrapper resetKeychainItem];
+
+    // Clear the Singleton Instance
+    sharedInstance = nil;
 
 }
 
