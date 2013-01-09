@@ -55,6 +55,6 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSDictionary *friendInfoDictionary;
+@property (copy) NSDictionary *friendInfoDictionary;
 
 @end

@@ -39,6 +39,6 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) SinglyKeychainItemWrapper *accessTokenWrapper;
+@property (strong) SinglyKeychainItemWrapper *accessTokenWrapper;
 
 @end

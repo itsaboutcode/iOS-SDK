@@ -32,6 +32,9 @@
 
 @implementation SinglyLoginPickerServiceCell
 
+@synthesize isAuthenticated = _isAuthenticated;
+@synthesize serviceInfoDictionary = _serviceInfoDictionary;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -74,57 +77,82 @@
 
 - (void)setServiceInfoDictionary:(NSDictionary *)serviceInfoDictionary
 {
-    _serviceInfoDictionary = serviceInfoDictionary;
-    
-    // Set Text Label
-    self.textLabel.text = serviceInfoDictionary[@"name"];
-
-    // Look for the Service Icon in the bundle
-    UIImage *serviceImage = [UIImage imageNamed:[NSString stringWithFormat:@"SinglySDK.bundle/%@", self.serviceIdentifier]];
-    if (serviceImage)
+    @synchronized(self)
     {
-        self.imageView.image = serviceImage;
-    }
+        if ([_serviceInfoDictionary isEqualToDictionary:serviceInfoDictionary])
+            return;
 
-    // If there is not a bundled icon, fallback to loading from the server
-    else
-    {
+        _serviceInfoDictionary = [serviceInfoDictionary copy];
 
-        // Load Image
-        NSString *imageLocation = serviceInfoDictionary[@"icons"][2][@"source"];
-        if (imageLocation)
+        // Set Text Label
+        self.textLabel.text = serviceInfoDictionary[@"name"];
+
+        // Look for the Service Icon in the bundle
+        UIImage *serviceImage = [UIImage imageNamed:[NSString stringWithFormat:@"SinglySDK.bundle/%@", self.serviceIdentifier]];
+        if (serviceImage)
         {
-            NSURL *imageURL = [NSURL URLWithString:imageLocation];
-            NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
-            self.receivedData = [NSMutableData data];
-            self.imageConnection = [[NSURLConnection alloc] initWithRequest:imageRequest delegate:self startImmediately:NO];
-            [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-            [self.imageConnection start];
+            self.imageView.image = serviceImage;
         }
 
+        // If there is not a bundled icon, fallback to loading from the server
+        else
+        {
+
+            // Load Image
+            NSString *imageLocation = serviceInfoDictionary[@"icons"][2][@"source"];
+            if (imageLocation)
+            {
+                NSURL *imageURL = [NSURL URLWithString:imageLocation];
+                NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
+                self.receivedData = [NSMutableData data];
+                self.imageConnection = [[NSURLConnection alloc] initWithRequest:imageRequest delegate:self startImmediately:NO];
+                [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+                [self.imageConnection start];
+            }
+            
+        }
+    }
+}
+
+- (NSDictionary *)serviceInfoDictionary
+{
+    @synchronized(self)
+    {
+        return _serviceInfoDictionary;
     }
 }
 
 - (void)setIsAuthenticated:(BOOL)authenticated
 {
-    _isAuthenticated = authenticated;
-
-    if (authenticated)
+    @synchronized(self)
     {
-        [self disableColorButton:self.button];
-        [self.button setTitle:@"Logged In" forState:UIControlStateNormal];
-        [self.button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.button.enabled = NO;
-    }
-    else
-    {
-        [self enableColorButton:self.button];
-        [self.button setTitle:@"Log In" forState:UIControlStateNormal];
-        [self.button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.button.enabled = YES;
-    }
+        _isAuthenticated = authenticated;
 
-    [self.button bringSubviewToFront:self.button.titleLabel];
+        if (authenticated)
+        {
+            [self disableColorButton:self.button];
+            [self.button setTitle:@"Logged In" forState:UIControlStateNormal];
+            [self.button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.button.enabled = NO;
+        }
+        else
+        {
+            [self enableColorButton:self.button];
+            [self.button setTitle:@"Log In" forState:UIControlStateNormal];
+            [self.button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.button.enabled = YES;
+        }
+
+        [self.button bringSubviewToFront:self.button.titleLabel];
+    }
+}
+
+- (BOOL)isAuthenticated
+{
+    @synchronized(self)
+    {
+        return _isAuthenticated;
+    }
 }
 
 #pragma mark - URL Connection Delegates

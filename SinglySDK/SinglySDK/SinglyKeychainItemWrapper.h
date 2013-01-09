@@ -48,14 +48,14 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSMutableDictionary *keychainItemData;
+@property (strong) NSMutableDictionary *keychainItemData;
 
 /*!
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSMutableDictionary *genericPasswordQuery;
+@property (strong) NSMutableDictionary *genericPasswordQuery;
 
 /*!
  *

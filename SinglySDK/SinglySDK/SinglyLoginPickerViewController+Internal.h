@@ -36,7 +36,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSString *selectedService;
+@property (copy) NSString *selectedService;
 
 /*!
  *

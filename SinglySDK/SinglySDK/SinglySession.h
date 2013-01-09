@@ -136,7 +136,7 @@ static NSString *kSinglyContactsSyncedNotification = @"com.singly.notifications.
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
 **/
-@property (nonatomic, assign, readonly) BOOL isReady;
+@property (readonly) BOOL isReady;
 
 /*!
  *
@@ -263,7 +263,7 @@ static NSString *kSinglyContactsSyncedNotification = @"com.singly.notifications.
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
 **/
-@property (nonatomic, assign, readonly) BOOL isSyncingDeviceContacts;
+@property (readonly) BOOL isSyncingDeviceContacts;
 
 /*!
  *
@@ -303,7 +303,7 @@ static NSString *kSinglyContactsSyncedNotification = @"com.singly.notifications.
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) SinglyService *authorizingService;
+@property (strong) SinglyService *authorizingService;
 
 /*!
  *

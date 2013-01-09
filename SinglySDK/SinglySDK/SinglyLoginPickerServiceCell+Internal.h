@@ -36,7 +36,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSURLConnection *imageConnection;
+@property (strong) NSURLConnection *imageConnection;
 
 /*!
  *
@@ -45,7 +45,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSMutableData *receivedData;
+@property (strong) NSMutableData *receivedData;
 
 /*!
  *
@@ -54,6 +54,6 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) UIButton *button;
+@property (strong) UIButton *button;
 
 @end

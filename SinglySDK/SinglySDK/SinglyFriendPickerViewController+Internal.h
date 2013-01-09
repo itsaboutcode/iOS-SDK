@@ -36,7 +36,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong, readonly) NSMutableArray *friends;
+@property (strong, readonly) NSMutableArray *friends;
 
 /*!
  *
@@ -45,16 +45,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-//@property (nonatomic, strong) NSArray *friendsSortedKeys;
-
-/*!
- *
- *
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-@property (nonatomic, strong) UIColor *originalSeparatorColor;
+@property (strong) UIColor *originalSeparatorColor;
 
 /*!
  *
@@ -64,11 +55,11 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, assign, readonly) BOOL isRefreshing;
+@property (readonly) BOOL isRefreshing;
 
-@property (nonatomic, strong) NSArray *indexKeys;
+@property (copy) NSArray *indexKeys;
 
-@property (nonatomic, strong) NSDictionary *indexDetails;
+@property (copy) NSDictionary *indexDetails;
 
 - (void)fetchFriends;
 

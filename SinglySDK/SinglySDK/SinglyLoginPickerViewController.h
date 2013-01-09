@@ -58,7 +58,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSArray *services;
+@property (strong) NSArray *services;
 
 /*!
  *
@@ -68,7 +68,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong, readonly) NSDictionary *servicesDictionary;
+@property (strong, readonly) NSDictionary *servicesDictionary;
 
 /// ----------------------------------------------------------------------------
 /// @name Managing the Delegate
@@ -83,6 +83,6 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) id<SinglyLoginPickerViewControllerDelegate> delegate;
+@property (weak) id<SinglyLoginPickerViewControllerDelegate> delegate;
 
 @end

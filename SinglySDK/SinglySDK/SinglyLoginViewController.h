@@ -76,7 +76,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSString *serviceIdentifier;
+@property (copy) NSString *serviceIdentifier;
 
 /*!
  *
@@ -85,7 +85,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSString *serviceName;
+@property (copy) NSString *serviceName;
 
 /*!
  *
@@ -94,7 +94,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSArray *scopes;
+@property (copy) NSArray *scopes;
 
 /*!
  *
@@ -104,7 +104,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSString *flags;
+@property (copy) NSString *flags;
 
 /// ----------------------------------------------------------------------------
 /// @name Managing the Delegate
@@ -119,6 +119,6 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) id<SinglyLoginViewControllerDelegate> delegate;
+@property (weak) id<SinglyLoginViewControllerDelegate> delegate;
 
 @end

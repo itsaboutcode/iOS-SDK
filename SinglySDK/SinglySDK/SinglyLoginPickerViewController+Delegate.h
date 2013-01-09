@@ -48,7 +48,8 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
  **/
-- (void)singlyLoginPickerViewController:(SinglyLoginPickerViewController *)controller didLoginForService:(NSString *)service;
+- (void)singlyLoginPickerViewController:(SinglyLoginPickerViewController *)controller
+                     didLoginForService:(NSString *)service;
 
 /*!
  *
@@ -62,6 +63,8 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
  **/
-- (void)singlyLoginPickerViewController:(SinglyLoginPickerViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error;
+- (void)singlyLoginPickerViewController:(SinglyLoginPickerViewController *)controller
+                errorLoggingInToService:(NSString *)service
+                              withError:(NSError *)error;
 
 @end

@@ -36,19 +36,32 @@
 
 @implementation SinglyLoginViewController
 
+@synthesize serviceIdentifier = _serviceIdentifier;
+
 - (id)initWithServiceIdentifier:(NSString *)serviceIdentifier
 {
     self = [super init];
     if (self)
     {
-        _serviceIdentifier = [SinglyService normalizeServiceIdentifier:serviceIdentifier];
+        self.serviceIdentifier = serviceIdentifier;
     }
     return self;
 }
 
 - (void)setServiceIdentifier:(NSString *)serviceIdentifier
 {
-    _serviceIdentifier = [SinglyService normalizeServiceIdentifier:serviceIdentifier];
+    @synchronized(self)
+    {
+        _serviceIdentifier = [SinglyService normalizeServiceIdentifier:[serviceIdentifier copy]];
+    }
+}
+
+- (NSString *)serviceIdentifier
+{
+    @synchronized(self)
+    {
+        return _serviceIdentifier;
+    }
 }
 
 #pragma mark - View Callbacks

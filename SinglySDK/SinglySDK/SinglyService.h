@@ -82,7 +82,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSString *serviceIdentifier;
+@property (copy) NSString *serviceIdentifier;
 
 /*!
  *
@@ -92,7 +92,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSString *clientID;
+@property (copy) NSString *clientID;
 
 /// ----------------------------------------------------------------------------
 /// @name Requesting Authorization
@@ -105,7 +105,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, assign) BOOL isAuthorized;
+@property BOOL isAuthorized;
 
 /*!
  *
@@ -155,6 +155,6 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (weak, atomic) id<SinglyServiceDelegate> delegate;
+@property (weak) id<SinglyServiceDelegate> delegate;
 
 @end

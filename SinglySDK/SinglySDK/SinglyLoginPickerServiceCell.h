@@ -51,7 +51,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSDictionary *serviceInfoDictionary;
+@property (copy) NSDictionary *serviceInfoDictionary;
 
 /*!
  *
@@ -60,7 +60,7 @@
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
 **/
-@property (nonatomic, strong) NSString *serviceIdentifier;
+@property (copy) NSString *serviceIdentifier;
 
 /*!
  *
@@ -69,6 +69,6 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, assign) BOOL isAuthenticated;
+@property BOOL isAuthenticated;
 
 @end

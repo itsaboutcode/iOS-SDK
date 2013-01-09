@@ -36,6 +36,10 @@
 
 @implementation SinglyRequest
 
+@synthesize endpoint = _endpoint;
+@synthesize isAuthorizedRequest = _isAuthorizedRequest;
+@synthesize parameters = _parameters;
+
 + (id)requestWithEndpoint:(NSString *)endpoint
 {
     SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:endpoint];
@@ -59,9 +63,9 @@
     self = [super init];
     if (self)
     {
-        _endpoint = endpoint;
-        _parameters = parameters;
-        _isAuthorizedRequest = YES;
+        self.endpoint = endpoint;
+        self.parameters = parameters;
+        self.isAuthorizedRequest = YES;
         [self updateURL];
     }
     return self;
@@ -71,20 +75,53 @@
 
 - (void)setEndpoint:(NSString *)endpoint
 {
-    _endpoint = endpoint;
-    [self updateURL];
+    @synchronized(self)
+    {
+        _endpoint = [endpoint copy];
+        [self updateURL];
+    }
+}
+
+- (NSString *)endpoint
+{
+    @synchronized(self)
+    {
+        return _endpoint;
+    }
 }
 
 - (void)setIsAuthorizedRequest:(BOOL)isAuthorizedRequest
 {
-    _isAuthorizedRequest = isAuthorizedRequest;
-    [self updateURL];
+    @synchronized(self)
+    {
+        _isAuthorizedRequest = isAuthorizedRequest;
+        [self updateURL];
+    }
+}
+
+- (BOOL)isAuthorizedRequest
+{
+    @synchronized(self)
+    {
+        return _isAuthorizedRequest;
+    }
 }
 
 - (void)setParameters:(NSDictionary *)parameters
 {
-    _parameters = parameters;
-    [self updateURL];
+    @synchronized(self)
+    {
+        _parameters = [parameters copy];
+        [self updateURL];
+    }
+}
+
+- (NSDictionary *)parameters
+{
+    @synchronized(self)
+    {
+        return _parameters;
+    }
 }
 
 #pragma mark - Endpoint URLs

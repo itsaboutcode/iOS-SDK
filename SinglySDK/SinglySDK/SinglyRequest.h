@@ -152,7 +152,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSString *endpoint;
+@property (copy) NSString *endpoint;
 
 /*!
  *
@@ -162,7 +162,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, strong) NSDictionary *parameters;
+@property (copy) NSDictionary *parameters;
 
 /*!
  *
@@ -174,6 +174,6 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (nonatomic, assign) BOOL isAuthorizedRequest;
+@property BOOL isAuthorizedRequest;
 
 @end

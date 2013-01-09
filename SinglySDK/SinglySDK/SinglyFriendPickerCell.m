@@ -33,6 +33,8 @@
 
 @implementation SinglyFriendPickerCell
 
+@synthesize friendInfoDictionary = _friendInfoDictionary;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -68,35 +70,45 @@
 
 - (void)setFriendInfoDictionary:(NSDictionary *)friendInfoDictionary
 {
-    if ([_friendInfoDictionary isEqualToDictionary:friendInfoDictionary])
-        return;
-
-    _friendInfoDictionary = friendInfoDictionary;
-
-    // Set Text Label
-    self.textLabel.text = friendInfoDictionary[@"name"];
-
-    // Load Image
-    NSString *imageLocation = friendInfoDictionary[@"thumbnail_url"];
-    if (imageLocation)
+    @synchronized(self)
     {
+        if ([_friendInfoDictionary isEqualToDictionary:friendInfoDictionary])
+            return;
 
-        // Check cache...
-        if ([SinglyAvatarCache.sharedCache cachedImageExistsForURL:imageLocation])
+        _friendInfoDictionary = [friendInfoDictionary copy];
+
+        // Set Text Label
+        self.textLabel.text = friendInfoDictionary[@"name"];
+
+        // Load Image
+        NSString *imageLocation = friendInfoDictionary[@"thumbnail_url"];
+        if (imageLocation)
         {
-            self.imageView.image = (UIImage *)[SinglyAvatarCache.sharedCache cachedImageForURL:imageLocation];
-        }
-        else
-        {
-            NSURL *imageURL = [NSURL URLWithString:imageLocation];
-            NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
-            self.receivedData = [NSMutableData data];
-            self.imageConnection = [[NSURLConnection alloc] initWithRequest:imageRequest delegate:self startImmediately:NO];
-            [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-            [self.imageConnection start];
+
+            // Check cache...
+            if ([SinglyAvatarCache.sharedCache cachedImageExistsForURL:imageLocation])
+            {
+                self.imageView.image = (UIImage *)[SinglyAvatarCache.sharedCache cachedImageForURL:imageLocation];
+            }
+            else
+            {
+                NSURL *imageURL = [NSURL URLWithString:imageLocation];
+                NSURLRequest *imageRequest = [NSURLRequest requestWithURL:imageURL];
+                self.receivedData = [NSMutableData data];
+                self.imageConnection = [[NSURLConnection alloc] initWithRequest:imageRequest delegate:self startImmediately:NO];
+                [self.imageConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+                [self.imageConnection start];
+            }
         }
     }
+}
 
+- (NSDictionary *)friendInfoDictionary
+{
+    @synchronized(self)
+    {
+        return _friendInfoDictionary;
+    }
 }
 
 #pragma mark - URL Connection Delegates
