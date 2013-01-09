@@ -29,33 +29,7 @@
 
 #import <Security/Security.h>
 #import "SinglyKeychainItemWrapper.h"
-
-@interface SinglyKeychainItemWrapper ()
-
-/*!
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-- (NSMutableDictionary *)secItemFormatToDictionary:(NSDictionary *)dictionaryToConvert;
-
-/*!
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-- (NSMutableDictionary *)dictionaryToSecItemFormat:(NSDictionary *)dictionaryToConvert;
-
-/*!
- *
- * Updates the item in the keychain, or adds it if it doesn't exist.
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-- (void)writeToKeychain;
-
-@end
+#import "SinglyKeychainItemWrapper+Internal.h"
 
 @implementation SinglyKeychainItemWrapper
 

@@ -198,6 +198,8 @@
 		D090E352165BE96E00FE8273 /* SinglyRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = D090E34F165BE96E00FE8273 /* SinglyRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D090E353165BE96E00FE8273 /* SinglyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D090E350165BE96E00FE8273 /* SinglyRequest.m */; };
 		D090E354165BE96E00FE8273 /* SinglyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D090E350165BE96E00FE8273 /* SinglyRequest.m */; };
+		D09686E7169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D09686E5169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h */; };
+		D09686E8169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D09686E5169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h */; };
 		D0DB1623162E0A93005EC7C7 /* Service Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */; };
 		D0DB1624162E0A93005EC7C7 /* Service Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */; };
 		D0E2C7081637572B00AAD565 /* SinglySession.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088915ED17B000ECFED0 /* SinglySession.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -421,6 +423,7 @@
 		D090E348165B116700FE8273 /* SinglyFriendPickerCell+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyFriendPickerCell+Internal.h"; sourceTree = "<group>"; };
 		D090E34F165BE96E00FE8273 /* SinglyRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyRequest.h; sourceTree = "<group>"; };
 		D090E350165BE96E00FE8273 /* SinglyRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyRequest.m; sourceTree = "<group>"; };
+		D09686E5169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyKeychainItemWrapper+Internal.h"; sourceTree = "<group>"; };
 		D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder.png"; sourceTree = "<group>"; };
 		D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder@2x.png"; sourceTree = "<group>"; };
 		D0E158DF1631C1BD000D0BCA /* Create Universal Library.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "Create Universal Library.rb"; sourceTree = "<group>"; };
@@ -539,6 +542,7 @@
 			isa = PBXGroup;
 			children = (
 				D003483916666C8B0048513A /* SinglyKeychainItemWrapper.h */,
+				D09686E5169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h */,
 				D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */,
 				D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */,
 				D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */,
@@ -908,6 +912,7 @@
 				D064F0E7166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h in Headers */,
 				D005904B167A492600F1374D /* SinglyFriendPlaceholder.h in Headers */,
 				D04AD40B167FA3E10046C296 /* SinglyAvatarCache.h in Headers */,
+				D09686E7169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,6 +949,7 @@
 				D064F0E8166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h in Headers */,
 				D0059051167A4D5400F1374D /* SinglyFriendPlaceholder.h in Headers */,
 				D04AD40C167FA3E10046C296 /* SinglyAvatarCache.h in Headers */,
+				D09686E8169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
