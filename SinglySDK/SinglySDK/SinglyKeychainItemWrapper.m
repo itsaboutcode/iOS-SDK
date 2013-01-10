@@ -40,6 +40,12 @@
     {
 
         //
+        // Set the identifier and access group as properties on the instance.
+        //
+        _identifier = identifier;
+        _accessGroup = accessGroup;
+
+        //
         // Begin Keychain search setup. The genericPasswordQuery leverages the
         // special user defined attribute kSecAttrGeneric to distinguish itself
         // between other generic Keychain items which may be included by the
@@ -47,16 +53,16 @@
         //
         _genericPasswordQuery = [[NSMutableDictionary alloc] init];
 		[_genericPasswordQuery setObject:(__bridge id)kSecClassGenericPassword forKey:(__bridge id)kSecClass];
-        [_genericPasswordQuery setObject:identifier forKey:(__bridge id)kSecAttrGeneric];
+        [_genericPasswordQuery setObject:self.identifier forKey:(__bridge id)kSecAttrGeneric];
 
         //
 		// The keychain access group attribute determines if this item can be shared
 		// amongst multiple apps whose code signing entitlements contain the same keychain access group.
         //
-		if (accessGroup != nil)
+		if (self.accessGroup != nil)
 		{
             #if !TARGET_IPHONE_SIMULATOR
-                [_genericPasswordQuery setObject:accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
+                [_genericPasswordQuery setObject:self.accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
             #endif
 		}
 
@@ -79,11 +85,11 @@
             //
 			// Add the generic attribute and the keychain access group.
             //
-            _keychainItemData[(__bridge id)kSecAttrGeneric] = identifier;
-			if (accessGroup)
+            _keychainItemData[(__bridge id)kSecAttrGeneric] = self.identifier;
+			if (self.accessGroup)
 			{
                 #if !TARGET_IPHONE_SIMULATOR
-                    _keychainItemData[(__bridge id)kSecAttrAccessGroup] = accessGroup;
+                    _keychainItemData[(__bridge id)kSecAttrAccessGroup] = self.accessGroup;
                 #endif
 			}
 		}
