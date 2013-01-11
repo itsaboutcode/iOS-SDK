@@ -18,8 +18,8 @@
  * obtain them by signing up for a Singly account at https://singly.com/signup.
  *
  */
-#define CLIENT_ID @""
-#define CLIENT_SECRET @""
+#define CLIENT_ID @"16cb605e0c6f03359a4dcdeb633b6393"
+#define CLIENT_SECRET @"7b8c33a671a94a53d6ce2c3fe99be282"
 
 /*!
  *
@@ -27,4 +27,4 @@
  * http://www.testflight.com
  *
  */
-// #define TESTFLIGHT_TOKEN @""
+#define TESTFLIGHT_TOKEN @"bc2ae8f7806e89f141eec6521a367a41_NjUwMDcyMDEyLTAyLTIyIDIwOjA1OjQ1LjQwNTI0MQ"

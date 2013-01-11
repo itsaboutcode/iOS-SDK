@@ -1,5 +1,5 @@
 //
-//  SinglyConstants.h
+//  SinglyRequestTests.m
 //  SinglySDK
 //
 //  Copyright (c) 2012-2013 Singly, Inc. All rights reserved.
@@ -27,16 +27,8 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
+#import "SinglyRequestTests.h"
 
-/*!
- *
- * @header SinglyConstants
- *
-**/
+@implementation SinglyRequestTests
 
-static NSString *kSinglySDKVersion = @"1.1.0";
-
-static NSString *kSinglyBaseURL = @"https://api.singly.com";
-static NSString *kSinglyAccessTokenURL = @"https://api.singly.com/oauth/access_token";
-static NSString *kSinglyAuthenticateURL = @"https://api.singly.com/oauth/authenticate";
+@end

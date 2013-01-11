@@ -176,9 +176,9 @@
 			isa = PBXGroup;
 			children = (
 				827E3ED915E5528200D30D96 /* SinglySDK Example-Info.plist */,
+				827E3EDF15E5528200D30D96 /* SinglySDK Example-Prefix.pch */,
 				827E3EDA15E5528200D30D96 /* InfoPlist.strings */,
 				827E3EDD15E5528200D30D96 /* main.m */,
-				827E3EDF15E5528200D30D96 /* SinglySDK Example-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

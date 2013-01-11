@@ -2,7 +2,7 @@
 //  SinglySharingViewController.h
 //  SinglySDK
 //
-//  Copyright (c) 2012 Singly, Inc. All rights reserved.
+//  Copyright (c) 2012-2013 Singly, Inc. All rights reserved.
 //
 //  This file is based on code by Double Encore.
 //
