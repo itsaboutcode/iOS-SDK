@@ -25,6 +25,10 @@
 		D005904D167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */; };
 		D005904E167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */; };
 		D0059051167A4D5400F1374D /* SinglyFriendPlaceholder.h in Headers */ = {isa = PBXBuildFile; fileRef = D0059049167A492600F1374D /* SinglyFriendPlaceholder.h */; };
+		D013E6F416A062E2008C80A3 /* SinglyAvatarCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D013E6F316A062E2008C80A3 /* SinglyAvatarCacheTests.m */; };
+		D013E6F816A06393008C80A3 /* SinglyAvatarCache+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D013E6F616A06393008C80A3 /* SinglyAvatarCache+Internal.h */; };
+		D013E6F916A06393008C80A3 /* SinglyAvatarCache+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D013E6F616A06393008C80A3 /* SinglyAvatarCache+Internal.h */; };
+		D013E6FD16A06CAE008C80A3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D013E6FC16A06CAE008C80A3 /* CoreGraphics.framework */; };
 		D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
 		D02B537216309C7700F1F535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B537116309C7700F1F535 /* Foundation.framework */; };
 		D02B539616309CDF00F1F535 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoding.m */; };
@@ -274,6 +278,10 @@
 		D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPlaceholder.m; sourceTree = "<group>"; };
 		D0059052167A766D00F1374D /* SinglyFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriend.h; sourceTree = "<group>"; };
 		D0059053167A766D00F1374D /* SinglyFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriend.m; sourceTree = "<group>"; };
+		D013E6F216A062E2008C80A3 /* SinglyAvatarCacheTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAvatarCacheTests.h; sourceTree = "<group>"; };
+		D013E6F316A062E2008C80A3 /* SinglyAvatarCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAvatarCacheTests.m; sourceTree = "<group>"; };
+		D013E6F616A06393008C80A3 /* SinglyAvatarCache+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyAvatarCache+Internal.h"; sourceTree = "<group>"; };
+		D013E6FC16A06CAE008C80A3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D021CBBB162C933D00DE9922 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D021CBC5162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerServiceCell.h; sourceTree = "<group>"; };
 		D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerServiceCell.m; sourceTree = "<group>"; };
@@ -467,6 +475,7 @@
 				D05C000D1684CBCE006AD03C /* Accounts.framework in Frameworks */,
 				D05C00091684CB35006AD03C /* AddressBook.framework in Frameworks */,
 				D05C000A1684CB35006AD03C /* AddressBookUI.framework in Frameworks */,
+				D013E6FD16A06CAE008C80A3 /* CoreGraphics.framework in Frameworks */,
 				D05C000E1684CBF5006AD03C /* Foundation.framework in Frameworks */,
 				D05C00231684D680006AD03C /* QuartzCore.framework in Frameworks */,
 				D05C000B1684CBB7006AD03C /* Security.framework in Frameworks */,
@@ -548,6 +557,7 @@
 				D09686E5169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h */,
 				D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */,
 				D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */,
+				D013E6F616A06393008C80A3 /* SinglyAvatarCache+Internal.h */,
 				D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */,
 			);
 			name = Utilities;
@@ -652,6 +662,7 @@
 				D05C00051684C9B2006AD03C /* AddressBook.framework */,
 				D05C00061684C9B2006AD03C /* AddressBookUI.framework */,
 				D02B535B1630989A00F1F535 /* CoreFoundation.framework */,
+				D013E6FC16A06CAE008C80A3 /* CoreGraphics.framework */,
 				D02B537116309C7700F1F535 /* Foundation.framework */,
 				D05C00211684D4D0006AD03C /* QuartzCore.framework */,
 				D003483F16666E650048513A /* Security.framework */,
@@ -852,6 +863,8 @@
 			children = (
 				D09686EC169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.h */,
 				D09686ED169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m */,
+				D013E6F216A062E2008C80A3 /* SinglyAvatarCacheTests.h */,
+				D013E6F316A062E2008C80A3 /* SinglyAvatarCacheTests.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -926,6 +939,7 @@
 				D005904B167A492600F1374D /* SinglyFriendPlaceholder.h in Headers */,
 				D04AD40B167FA3E10046C296 /* SinglyAvatarCache.h in Headers */,
 				D09686E7169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h in Headers */,
+				D013E6F816A06393008C80A3 /* SinglyAvatarCache+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -963,6 +977,7 @@
 				D0059051167A4D5400F1374D /* SinglyFriendPlaceholder.h in Headers */,
 				D04AD40C167FA3E10046C296 /* SinglyAvatarCache.h in Headers */,
 				D09686E8169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h in Headers */,
+				D013E6F916A06393008C80A3 /* SinglyAvatarCache+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1299,6 +1314,7 @@
 				D08A3DBB169B5D0200A3130C /* NSURL+AccessTokenTests.m in Sources */,
 				D08A3DBF169B7CFB00A3130C /* SinglyServiceTests.m in Sources */,
 				D09686EE169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m in Sources */,
+				D013E6F416A062E2008C80A3 /* SinglyAvatarCacheTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

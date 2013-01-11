@@ -47,6 +47,10 @@
 **/
 + (SinglyAvatarCache *)sharedCache;
 
+/// ----------------------------------------------------------------------------
+/// @name Manipulating Cache Contents
+/// ----------------------------------------------------------------------------
+
 /*!
  *
  * Adds the specified image to the cache for the given URL.

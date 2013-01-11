@@ -1,5 +1,5 @@
 //
-//  SinglyAvatarCache.m
+//  SinglyAvatarCache+Internal.h
 //  SinglySDK
 //
 //  Copyright (c) 2012 Singly, Inc. All rights reserved.
@@ -27,46 +27,18 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-
 #import "SinglyAvatarCache.h"
 
-static SinglyAvatarCache *sharedInstance = nil;
+@interface SinglyAvatarCache ()
 
-@implementation SinglyAvatarCache
-
-+ (SinglyAvatarCache *)sharedCache
-{
-    static dispatch_once_t queue;
-    dispatch_once(&queue, ^{
-        sharedInstance = [[SinglyAvatarCache alloc] init];
-    });
-
-    return sharedInstance;
-}
-
-+ (SinglyAvatarCache *)sharedCacheInstance
-{
-    return sharedInstance;
-}
-
-- (void)cacheImage:(UIImage *)image forURL:(NSString *)url
-{
-    if (!url)
-    {
-        [NSException raise:NSInvalidArgumentException
-                    format:@"%s: attempt to insert nil key", __PRETTY_FUNCTION__];
-    }
-    [self setObject:image forKey:url];
-}
-
-- (UIImage *)cachedImageForURL:(NSString *)url
-{
-    return [self objectForKey:url];
-}
-
-- (BOOL)cachedImageExistsForURL:(NSString *)url
-{
-    return [self objectForKey:url] != nil;
-}
+/*!
+ *
+ * Accessor for the static shared cache instance. This is required for unit
+ * testing (and thus a private API).
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+ **/
++ (SinglyAvatarCache *)sharedCacheInstance;
 
 @end
