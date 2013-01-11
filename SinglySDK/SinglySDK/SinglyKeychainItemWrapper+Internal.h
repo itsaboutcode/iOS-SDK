@@ -27,7 +27,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-@interface SinglyKeychainItemWrapper (Internal)
+@interface SinglyKeychainItemWrapper ()
 
 /*!
  *
