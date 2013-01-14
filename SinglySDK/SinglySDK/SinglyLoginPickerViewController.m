@@ -222,8 +222,14 @@
 
 - (void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error
 {
-    [self dismissViewControllerAnimated:NO completion:nil];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    if ([error.domain isEqualToString:kSinglyErrorDomain] && error.code == kSinglyLoginAbortedErrorCode)
+        return;
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Error"
+                                                    message:[error localizedDescription]
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
     [alert show];
 }
 

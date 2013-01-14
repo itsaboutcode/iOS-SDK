@@ -85,7 +85,10 @@
 
         NSString *title = (self.serviceName ? self.serviceName : self.serviceIdentifier);
         UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:title];
-        navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(dismiss)];
+        navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                            style:UIBarButtonItemStyleBordered
+                                                                           target:self
+                                                                           action:@selector(cancel)];
         self.navigationBar.items = @[navigationItem];
 
         //
@@ -212,7 +215,9 @@
     {
         if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)])
         {
-            NSError* error = [NSError errorWithDomain:@"SinglySDK" code:100 userInfo:[NSDictionary dictionaryWithObject:loginError forKey:NSLocalizedDescriptionKey]];
+            NSError *error = [NSError errorWithDomain:kSinglyErrorDomain
+                                                 code:kSinglyLoginFailedErrorCode
+                                             userInfo:@{ NSLocalizedDescriptionKey : loginError }];
             [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:error];
         }
         return;
@@ -237,9 +242,16 @@
 
 #pragma mark -
 
-- (void)dismiss
+- (void)cancel
 {
-  [self dismissModalViewControllerAnimated:YES];
+    NSError *error = [NSError errorWithDomain:kSinglyErrorDomain
+                                         code:kSinglyLoginAbortedErrorCode
+                                     userInfo:@{ NSLocalizedDescriptionKey : @"User aborted the login process." }];
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)])
+        [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:error];
+
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

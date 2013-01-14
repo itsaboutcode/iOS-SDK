@@ -40,3 +40,7 @@ static NSString *kSinglySDKVersion = @"1.1.0";
 static NSString *kSinglyBaseURL = @"https://api.singly.com";
 static NSString *kSinglyAccessTokenURL = @"https://api.singly.com/oauth/access_token";
 static NSString *kSinglyAuthenticateURL = @"https://api.singly.com/oauth/authenticate";
+
+static NSString *kSinglyErrorDomain = @"com.singly.sdk";
+static NSInteger kSinglyLoginAbortedErrorCode = 1;
+static NSInteger kSinglyLoginFailedErrorCode = 2;
