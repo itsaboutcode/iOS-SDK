@@ -78,39 +78,22 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if (self.isModal)
+
+    //
+    // If the login view is being presented modally, we need to add our own
+    // navigation bar to the view so that the user can abort the login, if
+    // necessary.
+    //
+    if (self.isModal) [self configureNavigationBar];
+
+    //
+    // Otherwise, be sure to clean up a previously initialized navigation bar
+    // as to not display a redundant one...
+    //
+    else if (!self.isModal && self.navigationBar)
     {
-        self.webView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44);
-        self.navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
-
-        NSString *title = (self.serviceName ? self.serviceName : self.serviceIdentifier);
-        UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:title];
-        navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                            style:UIBarButtonItemStyleBordered
-                                                                           target:self
-                                                                           action:@selector(cancel)];
-        self.navigationBar.items = @[navigationItem];
-
-        //
-        // Set the tint color of our navigation bar to match the tint of the
-        // view controller's navigation bar that is responsible for presenting
-        // us modally.
-        //
-        if ([self.presentingViewController respondsToSelector:@selector(navigationBar)])
-        {
-            UIColor *presentingTintColor = ((UINavigationController *)self.presentingViewController).navigationBar.tintColor;
-            self.navigationBar.tintColor = presentingTintColor;
-        }
-
-        [self.view addSubview:self.navigationBar];
-    }
-    else
-    {
-        if (self.navigationBar)
-        {
-            [self.navigationBar removeFromSuperview];
-            self.navigationBar = nil;
-        }
+        [self.navigationBar removeFromSuperview];
+        self.navigationBar = nil;
     }
 
     NSString *urlStr = [kSinglyAuthenticateURL stringByAppendingFormat:@"?redirect_uri=fb%@://authorize&service=%@&client_id=%@",
@@ -252,6 +235,32 @@
         [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:error];
 
     [self dismissModalViewControllerAnimated:YES];
+
+- (void)configureNavigationBar
+{
+    self.webView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44);
+    self.navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+
+    NSString *title = (self.serviceName ? self.serviceName : self.serviceIdentifier);
+    UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:title];
+    navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                        style:UIBarButtonItemStyleBordered
+                                                                       target:self
+                                                                       action:@selector(cancel)];
+    self.navigationBar.items = @[navigationItem];
+
+    //
+    // Set the tint color of our navigation bar to match the tint of the
+    // view controller's navigation bar that is responsible for presenting
+    // us modally.
+    //
+    if ([self.presentingViewController respondsToSelector:@selector(navigationBar)])
+    {
+        UIColor *presentingTintColor = ((UINavigationController *)self.presentingViewController).navigationBar.tintColor;
+        self.navigationBar.tintColor = presentingTintColor;
+    }
+
+    [self.view addSubview:self.navigationBar];
 }
 
 @end
