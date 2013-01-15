@@ -807,7 +807,7 @@ static NSString * const DEFacebookLastAccountIdentifier = @"DEFacebookLastAccoun
                 self.completionHandler(DEFacebookComposeViewControllerResultDone);
             }
             else {
-                [self dismissModalViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
         }
     }];
@@ -891,7 +891,7 @@ static NSString * const DEFacebookLastAccountIdentifier = @"DEFacebookLastAccoun
                 self.completionHandler(DEFacebookComposeViewControllerResultDone);
             }
             else {
-                [self dismissModalViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
 
             NSLog(@"   ok");
@@ -910,7 +910,7 @@ static NSString * const DEFacebookLastAccountIdentifier = @"DEFacebookLastAccoun
         self.completionHandler(DEFacebookComposeViewControllerResultCancelled);
     }
     else {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -928,7 +928,7 @@ static NSString * const DEFacebookLastAccountIdentifier = @"DEFacebookLastAccoun
     // This gets called if there's an error sending the tweet.
 {
     if (alertView.tag == DEFacebookComposeViewControllerNoAccountsAlert) {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     else if (alertView.tag == DEFacebookComposeViewControllerCannotSendAlert) {
         if (buttonIndex == 1) {

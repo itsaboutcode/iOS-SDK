@@ -96,7 +96,7 @@ An example implementation of the `SinglySessionDelegate` is:
                                                     delegate:self cancelButtonTitle:@"OK"
                                                     otherButtonTitles:nil];
     [alert show];
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 ```
 
