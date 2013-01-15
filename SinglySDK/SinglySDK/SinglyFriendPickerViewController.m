@@ -170,8 +170,8 @@
 {
     [super viewDidLoad];
 
+    // Customize Table View Appearance
     self.tableView.rowHeight = 54;
-    self.tableView.delegate = self;
 
     [self fetchFriends];
 }

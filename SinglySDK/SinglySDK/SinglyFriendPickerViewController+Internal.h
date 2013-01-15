@@ -40,7 +40,9 @@
 
 /*!
  *
- *
+ * When the view is first displayed, we hide the table view separators until
+ * the initial set of friends has loaded. This property tracks the color of the
+ * separators before we cleared them.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *

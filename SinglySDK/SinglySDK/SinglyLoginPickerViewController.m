@@ -40,6 +40,14 @@
 
 @implementation SinglyLoginPickerViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    // Customize Table View Appearance
+    self.tableView.rowHeight = 54;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -65,6 +73,10 @@
 
         // Display Activity Indicator
         [SinglyActivityIndicatorView showIndicator];
+
+        // Clear Separator
+        self.originalSeparatorColor = self.tableView.separatorColor;
+        self.tableView.separatorColor = [UIColor clearColor];
 
         // Configure the Services Request
         SinglyRequest *servicesRequest = [SinglyRequest requestWithEndpoint:@"services"];
@@ -92,19 +104,19 @@
             // Dismiss the Activity Indicator
             [SinglyActivityIndicatorView dismissIndicator];
 
+            // Restore Separator Colors
+            self.tableView.separatorColor = self.originalSeparatorColor;
+            self.originalSeparatorColor = nil;
+
             // Reload the Table View
             [self.tableView reloadData];
         }];
-
-        // Customize Table View Appearance
-        self.tableView.rowHeight = 54;
 
     }
     else if (self.servicesDictionary && !self.services)
     {
         self.services = [self.servicesDictionary allKeys];
     }
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -246,11 +258,9 @@
 
 - (void)authenticateWithFacebook
 {
-
     SinglyFacebookService *facebookService = [SinglyService serviceWithIdentifier:@"facebook"];
     facebookService.delegate = self;
     [facebookService requestAuthorizationFromViewController:self];
-
 }
 
 // TODO Move this to SinglyService

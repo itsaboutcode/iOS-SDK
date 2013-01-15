@@ -40,6 +40,17 @@
 
 /*!
  *
+ * When the view is first displayed, we hide the table view separators until
+ * the list of services has loaded. This property tracks the color of the
+ * separators before we cleared them.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+ **/
+@property (strong) UIColor *originalSeparatorColor;
+
+/*!
+ *
  * Disconnect from the specified service.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
