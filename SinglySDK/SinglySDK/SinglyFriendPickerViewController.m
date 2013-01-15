@@ -107,6 +107,15 @@
             return;
         }
 
+        // Display a placeholder if no friends were returned
+        if (((NSArray *)responseObject).count == 0)
+        {
+            [SinglyActivityIndicatorView dismissIndicator];
+            self.tableView.separatorColor = self.originalSeparatorColor;
+            self.originalSeparatorColor = nil;
+            return;
+        }
+
         // Extract Response Components
         NSMutableDictionary *indexDetails = [NSMutableDictionary dictionaryWithDictionary:responseObject[0]];
         NSDictionary *indexMetadata = indexDetails[@"meta"];
