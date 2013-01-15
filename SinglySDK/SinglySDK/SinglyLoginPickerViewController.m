@@ -115,7 +115,7 @@
     }
     else if (self.servicesDictionary && !self.services)
     {
-        self.services = [self.servicesDictionary allKeys];
+        self.services = [[self.servicesDictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
     }
 }
 
