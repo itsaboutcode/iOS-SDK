@@ -42,5 +42,5 @@ static NSString *kSinglyAccessTokenURL = @"https://api.singly.com/oauth/access_t
 static NSString *kSinglyAuthenticateURL = @"https://api.singly.com/oauth/authenticate";
 
 static NSString *kSinglyErrorDomain = @"com.singly.sdk";
-static NSInteger kSinglyLoginAbortedErrorCode = 1;
-static NSInteger kSinglyLoginFailedErrorCode = 2;
+static const NSInteger kSinglyLoginAbortedErrorCode = 1;
+static const NSInteger kSinglyLoginFailedErrorCode = 2;
