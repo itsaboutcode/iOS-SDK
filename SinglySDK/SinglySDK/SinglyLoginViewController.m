@@ -27,8 +27,10 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "NSDictionary+QueryString.h"
 #import "UIViewController+Modal.h"
 
+#import "SinglyActivityIndicatorView.h"
 #import "SinglyConstants.h"
 #import "SinglyLoginViewController.h"
 #import "SinglyLoginViewController+Internal.h"
@@ -96,8 +98,8 @@
         self.navigationBar = nil;
     }
 
-    NSString *urlStr = [kSinglyAuthenticateURL stringByAppendingFormat:@"?redirect_uri=fb%@://authorize&service=%@&client_id=%@",
-                        SinglySession.sharedSession.clientID, self.serviceIdentifier, SinglySession.sharedSession.clientID];
+    NSString *urlStr = [kSinglyAuthenticateURL stringByAppendingFormat:@"?redirect_uri=singly://authorize&service=%@&client_id=%@",
+                        self.serviceIdentifier, SinglySession.sharedSession.clientID];
 
     if (SinglySession.sharedSession.accountID)
         urlStr = [urlStr stringByAppendingFormat:@"&account=%@", SinglySession.sharedSession.accountID];
@@ -113,55 +115,90 @@
     if (self.flags)
         urlStr = [urlStr stringByAppendingFormat:@"&flag=%@", self.flags];
 
-    NSLog(@"[SinglySDK:SinglyLoginViewController] Going to URL: %@", urlStr);
-
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    [SinglyActivityIndicatorView showIndicator];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+
+    [SinglyActivityIndicatorView dismissIndicator];
 }
 
 #pragma mark - Web View Delegates
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    if ([request.URL.scheme isEqualToString:[NSString stringWithFormat:@"fb%@", SinglySession.sharedSession.clientID]] && [request.URL.host isEqualToString:@"authorize"])
+
+    if ([request.URL.scheme isEqualToString:@"singly"] && [request.URL.host isEqualToString:@"authorize"])
     {
 
-        self.pendingLoginView = [[UIView alloc] initWithFrame:self.view.bounds];
-        self.pendingLoginView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
-        
-        self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        self.activityView.frame = CGRectMake(0, 0, self.activityView.bounds.size.width, self.activityView.bounds.size.height);
-        self.activityView.center = self.view.center;
-        [self.pendingLoginView addSubview:self.activityView];
-        [self.activityView startAnimating];
-        
-        [self.view addSubview:self.pendingLoginView];
-        [self.view bringSubviewToFront:self.pendingLoginView];
-        
-        // Find the code and request an access token
-        NSArray *parameterPairs = [request.URL.query componentsSeparatedByString:@"&"];
-        
-        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:[parameterPairs count]];
-        
-        for (NSString *currentPair in parameterPairs) {
-            NSArray *pairComponents = [currentPair componentsSeparatedByString:@"="];
-            
-            NSString *key = ([pairComponents count] >= 1 ? [pairComponents objectAtIndex:0] : nil);
-            if (key == nil) continue;
-            
-            NSString *value = ([pairComponents count] >= 2 ? [pairComponents objectAtIndex:1] : [NSNull null]);
-            [parameters setObject:value forKey:key];
+        // Display Activity Indicator
+        [SinglyActivityIndicatorView showIndicator];
+
+        // Get the Request Parameters
+        NSDictionary *parameters = [NSDictionary dictionaryWithQueryString:request.URL.query];
+        NSString *code = [parameters objectForKey:@"code"];
+
+        if (!code)
+        {
+            NSLog(@"[SinglySDK] Missing code on redirect!");
+            return NO;
         }
-        
-        if ([parameters objectForKey:@"code"]) {
-            NSURL* accessTokenURL = [NSURL URLWithString:kSinglyAccessTokenURL];
-            NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:accessTokenURL];
-            req.HTTPMethod = @"POST";
-            req.HTTPBody = [[NSString stringWithFormat:@"client_id=%@&client_secret=%@&code=%@", SinglySession.sharedSession.clientID, SinglySession.sharedSession.clientSecret, [parameters objectForKey:@"code"]] dataUsingEncoding:NSUTF8StringEncoding];
-            self.responseData = [NSMutableData data];
-            [NSURLConnection connectionWithRequest:req delegate:self];
-        }
+
+        // Request the Access Token from the Singly API
+        [SinglySession.sharedSession requestAccessTokenWithCode:code
+                                                     completion:^(NSString *accessToken, NSError *error)
+        {
+
+            // Handle Errors...
+            if (error)
+            {
+                NSError *loginError = [NSError errorWithDomain:kSinglyErrorDomain
+                                                          code:kSinglyLoginFailedErrorCode
+                                                      userInfo:@{ NSLocalizedDescriptionKey : @"FIXME" }];
+
+                // Dismiss the Activity Indicator
+                [SinglyActivityIndicatorView dismissIndicator];
+
+                // Dismiss the Login View
+                [self dismissViewControllerAnimated:YES completion:nil];
+
+                // Notify the Delegate
+                if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)])
+                    [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:loginError];
+
+                return;
+            }
+
+            // Update Profiles
+            [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL isSuccessful)
+            {
+
+                // Dismiss the Activity Indicator
+                [SinglyActivityIndicatorView dismissIndicator];
+
+                // Dismiss the Login View
+                [self dismissViewControllerAnimated:YES completion:nil];
+
+                // Notify the Delegate
+                if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:didLoginForService:)])
+                    [self.delegate singlyLoginViewController:self didLoginForService:self.serviceIdentifier];
+
+            }];
+
+        }];
+
         return NO;
     }
+
     return YES;
 }
 
@@ -170,57 +207,9 @@
 
 }
 
-#pragma mark - URL Connection Delegates
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+- (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [self.responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [self.responseData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-
-    NSError *error;
-    NSDictionary *jsonResult = [NSJSONSerialization JSONObjectWithData:self.responseData options:kNilOptions error:&error];
-    if (error) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:didLoginForService:)])
-            [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:error];
-        return;
-    }
-    
-    NSString *loginError = [jsonResult objectForKey:@"error"];
-    if (loginError)
-    {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)])
-        {
-            NSError *error = [NSError errorWithDomain:kSinglyErrorDomain
-                                                 code:kSinglyLoginFailedErrorCode
-                                             userInfo:@{ NSLocalizedDescriptionKey : loginError }];
-            [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:error];
-        }
-        return;
-    }
-
-    // Save the access token and account id
-    SinglySession.sharedSession.accessToken = [jsonResult objectForKey:@"access_token"];
-    SinglySession.sharedSession.accountID = [jsonResult objectForKey:@"account"];
-    [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL success)
-    {
-        NSLog(@"All set to do requests as account %@ with access token %@", SinglySession.sharedSession.accountID, SinglySession.sharedSession.accessToken);
-        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:didLoginForService:)])
-            [self.delegate singlyLoginViewController:self didLoginForService:self.serviceIdentifier];
-    }];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)])
-        [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:error];
+    [SinglyActivityIndicatorView dismissIndicator];
 }
 
 #pragma mark -

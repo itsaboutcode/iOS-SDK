@@ -2,7 +2,7 @@
 //  SinglySession.m
 //  SinglySDK
 //
-//  Copyright (c) 2012 Singly, Inc. All rights reserved.
+//  Copyright (c) 2012-2013 Singly, Inc. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions are met:
@@ -32,6 +32,7 @@
 
 #import "NSURL+AccessToken.h"
 
+#import "SinglyConstants.h"
 #import "SinglyFacebookService.h"
 #import "SinglyKeychainItemWrapper.h"
 #import "SinglyRequest.h"
@@ -75,18 +76,76 @@ static SinglySession *sharedInstance = nil;
     [self.accessTokenWrapper setObject:accessToken forKey:(__bridge id)kSecValueData];
 }
 
-- (void)setAccountID:(NSString *)accountID
-{
-    [self.accessTokenWrapper setObject:accountID forKey:(__bridge id)kSecAttrAccount];
-}
-
-#pragma mark - Session Management
-
 - (NSString *)accessToken
 {
     NSString *theAccessToken = [self.accessTokenWrapper objectForKey:(__bridge id)kSecValueData];
     if (theAccessToken.length == 0) theAccessToken = nil;
     return theAccessToken;
+}
+
+- (void)requestAccessTokenWithCode:(NSString *)code
+{
+    [self requestAccessTokenWithCode:code completion:nil];
+}
+
+- (void)requestAccessTokenWithCode:(NSString *)code completion:(void (^)(NSString *, NSError *))completionHandler
+{
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        NSError *requestError;
+        NSError *parseError;
+        NSURLResponse *response;
+
+        // Prepare Request
+        SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:@"oauth/access_token"];
+        request.HTTPMethod = @"POST";
+        request.parameters = @{
+            @"code" : code,
+            @"client_id" : self.clientID,
+            @"client_secret" : self.clientSecret
+        };
+
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+
+        // Check for Parse Errors
+        if (parseError)
+        {
+            NSLog(@"[SinglySDK] A parse error occurred while attempting to parse the response to our access token request: %@", [parseError localizedDescription]);
+
+            dispatch_sync(currentQueue, ^{ completionHandler(nil, parseError); });
+            return;
+        }
+
+        // Check for Service Errors
+        NSString *serviceErrorMessage = [responseDictionary objectForKey:@"error"];
+        if (serviceErrorMessage)
+        {
+            NSLog(@"[SinglySDK] A service error occurred while attempting to fetch the access token: %@", serviceErrorMessage);
+
+            NSError *serviceError = [NSError errorWithDomain:kSinglyErrorDomain
+                                                        code:kSinglyServiceErrorCode
+                                                    userInfo:@{ NSLocalizedDescriptionKey : serviceErrorMessage }];
+
+            dispatch_sync(currentQueue, ^{ completionHandler(nil, serviceError); });
+            return;
+        }
+
+        // Persist the Access Token and Account ID
+        self.accessToken = [responseDictionary objectForKey:@"access_token"];
+        self.accountID = [responseDictionary objectForKey:@"account"];
+
+        dispatch_sync(currentQueue, ^{
+            completionHandler(self.accessToken, nil);
+        });
+
+    });
+}
+
+- (void)setAccountID:(NSString *)accountID
+{
+    [self.accessTokenWrapper setObject:accountID forKey:(__bridge id)kSecAttrAccount];
 }
 
 - (NSString *)accountID
@@ -96,10 +155,13 @@ static SinglySession *sharedInstance = nil;
     return theAccountID;
 }
 
-- (void)startSessionWithCompletionHandler:(void (^)(BOOL))block
+#pragma mark - Session Management
+
+// TODO Rename to startSessionWithCompletion and maintain backwards compatibility
+- (void)startSessionWithCompletionHandler:(void (^)(BOOL))completionHandler
 {
     // If we don't have an accountID or accessToken we're definitely not ready
-    if (!self.accountID || !self.accessToken) return block(NO);
+    if (!self.accountID || !self.accessToken) return completionHandler(NO);
 
     dispatch_queue_t resultQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -107,7 +169,7 @@ static SinglySession *sharedInstance = nil;
             NSString *foundAccountID = [self.profile objectForKey:@"id"];
             _isReady = ([foundAccountID isEqualToString:self.accountID]);
             dispatch_sync(resultQueue, ^{
-                block(self.isReady);
+                completionHandler(self.isReady);
             });
         }];
     });

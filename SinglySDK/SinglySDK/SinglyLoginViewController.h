@@ -45,8 +45,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@interface SinglyLoginViewController : UIViewController <UIWebViewDelegate,
-    NSURLConnectionDataDelegate>
+@interface SinglyLoginViewController : UIViewController <UIWebViewDelegate>
 
 /// ----------------------------------------------------------------------------
 /// @name Initializing a Login View Controller

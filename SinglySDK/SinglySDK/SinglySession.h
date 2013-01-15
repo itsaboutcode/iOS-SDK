@@ -121,6 +121,36 @@ static NSString *kSinglyContactsSyncedNotification = @"com.singly.notifications.
 
 /*!
  *
+ * Requests your Access Token from the Singly API for the given code. The code
+ * is returned in the Redirect URI after you have successfully authenticated
+ * with a service via Singly.
+ *
+ * @param code The code to use.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+- (void)requestAccessTokenWithCode:(NSString *)code;
+
+/*!
+ *
+ * Requests your Access Token from the Singly API for the given code. The code
+ * is returned in the Redirect URI after you have successfully authenticated
+ * with a service via Singly. Once complete, the given completion handler will
+ * be called.
+ *
+ * @param code The code to use.
+ *
+ * @param completionHandler The block to call once the operation has completed.
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+- (void)requestAccessTokenWithCode:(NSString *)code
+                        completion:(void (^)(NSString *accessToken, NSError *error))completionHandler;
+
+/*!
+ *
  * The account ID associated with the current access token.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.

@@ -31,33 +31,6 @@
 
 /**
  *
- * Response data received during the connection process.
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-@property (strong) NSMutableData *responseData;
-
-/**
- *
- *
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-@property (nonatomic, strong) UIView *pendingLoginView;
-
-/**
- *
- *
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-@property (nonatomic, strong) UIActivityIndicatorView *activityView;
-
-/**
- *
  * The web view that will handle loading of the service login location.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
