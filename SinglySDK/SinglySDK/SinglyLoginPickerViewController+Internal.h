@@ -46,7 +46,7 @@
  *
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
- **/
+**/
 @property (strong) UIColor *originalSeparatorColor;
 
 @end

@@ -155,6 +155,21 @@ static SinglySession *sharedInstance = nil;
     return theAccountID;
 }
 
+- (BOOL)isReady
+{
+    BOOL ready = YES;
+
+    // The access token and account id should be set...
+    if (!self.accessToken) ready = NO;
+    if (!self.accountID) ready = NO;
+
+    // The loaded profile id should match the account id...
+    if (self.profile && ![self.profile[@"id"] isEqualToString:self.accountID])
+        ready = NO;
+
+    return ready;
+}
+
 #pragma mark - Session Management
 
 - (void)startSessionWithCompletion:(void (^)(BOOL))completionHandler
@@ -162,12 +177,10 @@ static SinglySession *sharedInstance = nil;
     // If we don't have an accountID or accessToken we're definitely not ready
     if (!self.accountID || !self.accessToken) return completionHandler(NO);
 
-    dispatch_queue_t resultQueue = dispatch_get_current_queue();
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self updateProfilesWithCompletion:^(BOOL success) {
-            NSString *foundAccountID = [self.profile objectForKey:@"id"];
-            _isReady = ([foundAccountID isEqualToString:self.accountID]);
-            dispatch_sync(resultQueue, ^{
+        [self updateProfilesWithCompletion:^(BOOL isSuccessful) {
+            dispatch_sync(currentQueue, ^{
                 completionHandler(self.isReady);
             });
         }];
@@ -182,10 +195,12 @@ static SinglySession *sharedInstance = nil;
 - (void)resetSession
 {
 
-    // Reset Session Ready State
-    _isReady = NO;
+    // Reset Access Token
+    self.accessToken = nil;
+    self.accountID = nil;
 
     // Reset Profiles
+    _profile = nil;
     _profiles = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kSinglySessionProfilesUpdatedNotification
                                                         object:self];
@@ -218,17 +233,22 @@ static SinglySession *sharedInstance = nil;
         {
             NSLog(@"[SinglySDK:SinglySession] An error occurred while requesting profiles: %@", requestError);
 
-            _profile = [NSDictionary dictionary];
-            _profiles = [NSDictionary dictionary];
+            // Reset Profiles
+            _profile = nil;
+            _profiles = nil;
 
-            if ([(NSHTTPURLResponse *)response statusCode] == 401)
+            // If the access token has become invalid and the user is denied
+            // access, reset the session.
+            if (requestError.code == NSURLErrorUserCancelledAuthentication)
             {
                 NSLog(@"[SinglySDK:SinglySession] Access token is invalid or expired! Need to reauthorize...");
-                self.accessToken = nil;
+                dispatch_sync(currentQueue, ^{
+                    [self resetSession];
+                });
             }
 
             if (completionHandler) dispatch_sync(currentQueue, ^{
-                completionHandler(isSuccessful);
+                completionHandler(NO);
             });
 
             return;

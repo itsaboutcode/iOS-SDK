@@ -57,15 +57,10 @@
     // Observe for changes to the session profiles and update the view when
     // changes occur (such as when a session is connected or disconnected).
     //
-    [[NSNotificationCenter defaultCenter] addObserverForName:kSinglySessionProfilesUpdatedNotification
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *notification)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
+    [[NSNotificationCenter defaultCenter] addObserver:self.tableView
+                                             selector:@selector(reloadData)
+                                                 name:kSinglySessionProfilesUpdatedNotification
+                                               object:nil];
 
     // Load Services Dictionary
     // TODO We may want to move this to SinglySession
@@ -118,6 +113,9 @@
     {
         self.services = [[self.servicesDictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
     }
+
+    // Reload the Table View
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -134,7 +132,7 @@
     //
     // Stop observing for updates to the session profiles.
     //
-    [[NSNotificationCenter defaultCenter] removeObserver:self
+    [[NSNotificationCenter defaultCenter] removeObserver:self.tableView
                                                     name:kSinglySessionProfilesUpdatedNotification
                                                   object:nil];
 }
@@ -216,12 +214,13 @@
                     break;
                 case 1: // Disconnect
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [[SinglyService serviceWithIdentifier:self.selectedService] disconnectWithCompletion:^(BOOL isSuccessful)
-                        {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [self.tableView reloadData];
-                            });
-                        }];
+                        [[SinglyService serviceWithIdentifier:self.selectedService] disconnect];
+//                        [[SinglyService serviceWithIdentifier:self.selectedService] disconnectWithCompletion:^(BOOL isSuccessful)
+//                        {
+//                            dispatch_async(dispatch_get_main_queue(), ^{
+//                                [self.tableView reloadData];
+//                            });
+//                        }];
                     });
                     break;
             }
