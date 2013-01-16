@@ -73,24 +73,13 @@
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
     {
+
         NSError *parseError;
-
-        // Check for Request Errors
-        if (requestError)
-        {
-            NSLog(@"[SinglySDK:SinglySession] A request error occurred while attempting to load friends: %@", requestError);
-            _isRefreshing = NO;
-
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                                message:[requestError localizedDescription]
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-            [alertView show];
-            return;
-        }
-
-        // Parse the Response
         id responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+
+        //
+        // Check for parse errors.
+        //
         if (parseError)
         {
             NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to parse friends: %@", parseError);
@@ -98,12 +87,35 @@
             return;
         }
 
-        // We are expecting an array, so if we receive a dictionary it is
-        // likely because of an error...
-        else if ([responseObject isKindOfClass:[NSDictionary class]] && responseObject[@"error"])
+        //
+        // Check for Request Errors
+        //
+        if (requestError)
         {
-            NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to request friends: %@", responseObject[@"error"]);
             _isRefreshing = NO;
+
+            //
+            // Determine the most appropriate error message, be it a message
+            // from the API or the request error itself.
+            //
+            NSString *errorMessage;
+            if (responseObject && [responseObject isKindOfClass:[NSDictionary class]] && responseObject[@"error"])
+                errorMessage = responseObject[@"error"];
+            else
+                errorMessage = [requestError localizedDescription];
+
+            NSLog(@"[SinglySDK:SinglySession] A request error occurred while attempting to load friends: %@", errorMessage);
+
+            //
+            // Display a friendly alert view to the user.
+            //
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:errorMessage
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Dismiss"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+
             return;
         }
 
