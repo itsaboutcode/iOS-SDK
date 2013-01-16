@@ -32,6 +32,7 @@
 		D013E70216A075FA008C80A3 /* SinglyRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D013E70116A075FA008C80A3 /* SinglyRequestTests.m */; };
 		D013E70416A07A70008C80A3 /* withings.png in Resources */ = {isa = PBXBuildFile; fileRef = D013E70316A07A70008C80A3 /* withings.png */; };
 		D013E70616A07A95008C80A3 /* withings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D013E70516A07A95008C80A3 /* withings@2x.png */; };
+		D013E70A16A0A4DA008C80A3 /* SinglyTestURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = D013E70916A0A4DA008C80A3 /* SinglyTestURLProtocol.m */; };
 		D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
 		D02B537216309C7700F1F535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B537116309C7700F1F535 /* Foundation.framework */; };
 		D02B539616309CDF00F1F535 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoding.m */; };
@@ -291,6 +292,8 @@
 		D013E70116A075FA008C80A3 /* SinglyRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyRequestTests.m; sourceTree = "<group>"; };
 		D013E70316A07A70008C80A3 /* withings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = withings.png; sourceTree = "<group>"; };
 		D013E70516A07A95008C80A3 /* withings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "withings@2x.png"; sourceTree = "<group>"; };
+		D013E70816A0A4DA008C80A3 /* SinglyTestURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyTestURLProtocol.h; sourceTree = "<group>"; };
+		D013E70916A0A4DA008C80A3 /* SinglyTestURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyTestURLProtocol.m; sourceTree = "<group>"; };
 		D021CBBB162C933D00DE9922 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D021CBC5162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerServiceCell.h; sourceTree = "<group>"; };
 		D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerServiceCell.m; sourceTree = "<group>"; };
@@ -599,6 +602,15 @@
 				D013E70116A075FA008C80A3 /* SinglyRequestTests.m */,
 			);
 			name = "API Requests";
+			sourceTree = "<group>";
+		};
+		D013E70716A0A4BC008C80A3 /* Test Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D013E70816A0A4DA008C80A3 /* SinglyTestURLProtocol.h */,
+				D013E70916A0A4DA008C80A3 /* SinglyTestURLProtocol.m */,
+			);
+			name = "Test Helpers";
 			sourceTree = "<group>";
 		};
 		D0369940167F77A600ED6D40 /* Service Icons */ = {
@@ -1357,6 +1369,7 @@
 				D09686EE169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m in Sources */,
 				D013E6F416A062E2008C80A3 /* SinglyAvatarCacheTests.m in Sources */,
 				D013E70216A075FA008C80A3 /* SinglyRequestTests.m in Sources */,
+				D013E70A16A0A4DA008C80A3 /* SinglyTestURLProtocol.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
