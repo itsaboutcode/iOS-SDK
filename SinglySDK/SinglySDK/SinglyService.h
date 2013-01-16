@@ -143,6 +143,37 @@
                                     withScopes:(NSArray *)scopes;
 
 /// ----------------------------------------------------------------------------
+/// @name Disconnecting from the Service
+/// ----------------------------------------------------------------------------
+
+/*!
+ *
+ * Disconnects from the service.
+ *
+ * @see disconnectWithCompletion:
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+- (void)disconnect;
+
+/*!
+ *
+ * Disconnects from the service. Calls the specified block once the operation
+ * has completed.
+ *
+ * @param completionHandler  The block to run when the check is complete. It
+ *                           will be passed a `BOOL` stating whether or not the
+ *                           the operation succeeded.
+ *
+ * @see disconnect
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+- (void)disconnectWithCompletion:(void (^)(BOOL))completionHandler;
+
+/// ----------------------------------------------------------------------------
 /// @name Managing the Delegate
 /// ----------------------------------------------------------------------------
 

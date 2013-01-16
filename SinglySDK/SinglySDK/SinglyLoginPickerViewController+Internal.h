@@ -49,13 +49,4 @@
  **/
 @property (strong) UIColor *originalSeparatorColor;
 
-/*!
- *
- * Disconnect from the specified service.
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-- (void)disconnectFromService:(NSString *)serviceIdentifier;
-
 @end

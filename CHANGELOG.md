@@ -3,6 +3,10 @@
 
 ## 1.1.0 — Not Released
 
+* You may now disconnect from services by calling `disconnect` or
+  `disconnectWithCompletion:` on instances SinglyService. This was previously
+  only possible through the use of `SinglyLoginPickerViewController`.
+
 * Auth tokens for services are now available in the `profiles` property on
   `SinglySession`.
 

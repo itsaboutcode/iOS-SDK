@@ -37,6 +37,7 @@
 #import "SinglyLoginPickerViewController.h"
 #import "SinglyLoginPickerViewController+Internal.h"
 #import "SinglyRequest.h"
+#import "SinglyService.h"
 
 @implementation SinglyLoginPickerViewController
 
@@ -214,7 +215,14 @@
                 case 0: // Cancel
                     break;
                 case 1: // Disconnect
-                    [self disconnectFromService:self.selectedService];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [[SinglyService serviceWithIdentifier:self.selectedService] disconnectWithCompletion:^(BOOL isSuccessful)
+                        {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self.tableView reloadData];
+                            });
+                        }];
+                    });
                     break;
             }
             break;
@@ -259,36 +267,6 @@
     SinglyFacebookService *facebookService = [SinglyService serviceWithIdentifier:@"facebook"];
     facebookService.delegate = self;
     [facebookService requestAuthorizationFromViewController:self];
-}
-
-// TODO Move this to SinglyService
-- (void)disconnectFromService:(NSString *)serviceIdentifier
-{
-
-    NSDictionary *serviceProfile = SinglySession.sharedSession.profiles[serviceIdentifier];
-    SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profiles"];
-    NSString *postString = [NSString stringWithFormat:@"delete=%@", [NSString stringWithFormat:@"%@@%@", serviceProfile[@"id"], serviceIdentifier]];
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
-    {
-
-        // TODO Handle Errors...
-        if (requestError)
-        {
-            NSLog(@"Error: %@", requestError);
-        }
-
-        [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL success)
-        {
-            [self.tableView reloadData];
-        }];
-
-    }];
-
 }
 
 #pragma mark - Singly Service Delegates
