@@ -30,7 +30,6 @@
 #import "SinglySession.h"
 #import "SinglySession+Internal.h"
 #import "SinglySessionTests.h"
-#import "SinglyTestURLProtocol.h"
 
 @implementation SinglySessionTests
 
