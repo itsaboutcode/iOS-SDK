@@ -157,8 +157,7 @@ static SinglySession *sharedInstance = nil;
 
 #pragma mark - Session Management
 
-// TODO Rename to startSessionWithCompletion and maintain backwards compatibility
-- (void)startSessionWithCompletionHandler:(void (^)(BOOL))completionHandler
+- (void)startSessionWithCompletion:(void (^)(BOOL))completionHandler
 {
     // If we don't have an accountID or accessToken we're definitely not ready
     if (!self.accountID || !self.accessToken) return completionHandler(NO);
@@ -173,6 +172,11 @@ static SinglySession *sharedInstance = nil;
             });
         }];
     });
+}
+
+- (void)startSessionWithCompletionHandler:(void (^)(BOOL))completionHandler // DEPRECATED
+{
+    [self startSessionWithCompletion:completionHandler];
 }
 
 - (void)resetSession

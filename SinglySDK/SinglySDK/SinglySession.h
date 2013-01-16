@@ -176,10 +176,25 @@ static NSString *kSinglyContactsSyncedNotification = @"com.singly.notifications.
  *                           will be passed a `BOOL` stating whether or not the
  *                           the session is ready.
  *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
+- (void)startSessionWithCompletion:(void (^)(BOOL))completionHandler;
+
+/*!
+ *
+ * Get the session in a state that is ready to make API calls.
+ *
+ * @param completionHandler  The block to run when the check is complete. It
+ *                           will be passed a `BOOL` stating whether or not the
+ *                           the session is ready.
+ *
+ * @see startSessionWithCompletion:
+ *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-- (void)startSessionWithCompletionHandler:(void (^)(BOOL))completionHandler;
+- (void)startSessionWithCompletionHandler:(void (^)(BOOL))completionHandler DEPRECATED_ATTRIBUTE;
 
 /*!
  *

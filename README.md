@@ -46,7 +46,7 @@ SinglySession *session = [SinglySession sharedSession];
 session.clientID = CLIENT_ID;
 session.clientSecret = CLIENT_SECRET;
 
-[session startSessionWithCompletionHandler:^(BOOL ready) {
+[session startSessionWithCompletion:^(BOOL ready) {
     if (ready) {
         // The session is ready to go!
     } else {

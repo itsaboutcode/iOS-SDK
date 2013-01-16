@@ -1,7 +1,10 @@
 
 # Singly SDK ChangeLog
 
-## 1.1.0 — Not Released
+## 1.1.0 — Not Yet Released
+
+* The method `startSessionWithCompletionHandler:` on `SinglySession` is now
+  deprecated. Please use `startSessionWithCompletion:` instead.
 
 * You may now disconnect from services by calling `disconnect` or
   `disconnectWithCompletion:` on instances SinglyService. This was previously
