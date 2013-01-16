@@ -29,6 +29,7 @@
 		D013E6F816A06393008C80A3 /* SinglyAvatarCache+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D013E6F616A06393008C80A3 /* SinglyAvatarCache+Internal.h */; };
 		D013E6F916A06393008C80A3 /* SinglyAvatarCache+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D013E6F616A06393008C80A3 /* SinglyAvatarCache+Internal.h */; };
 		D013E6FD16A06CAE008C80A3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D013E6FC16A06CAE008C80A3 /* CoreGraphics.framework */; };
+		D013E70216A075FA008C80A3 /* SinglyRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D013E70116A075FA008C80A3 /* SinglyRequestTests.m */; };
 		D013E70416A07A70008C80A3 /* withings.png in Resources */ = {isa = PBXBuildFile; fileRef = D013E70316A07A70008C80A3 /* withings.png */; };
 		D013E70616A07A95008C80A3 /* withings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D013E70516A07A95008C80A3 /* withings@2x.png */; };
 		D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
@@ -180,6 +181,7 @@
 		D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */; };
 		D08A3DB7169B2F4F00A3130C /* NSString+URLEncodingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D08A3DB6169B2F4F00A3130C /* NSString+URLEncodingTests.m */; };
 		D08A3DBB169B5D0200A3130C /* NSURL+AccessTokenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D08A3DBA169B5D0200A3130C /* NSURL+AccessTokenTests.m */; };
+		D08A3DBF169B7CFB00A3130C /* SinglyServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D08A3DBE169B7CFB00A3130C /* SinglyServiceTests.m */; };
 		D08B3EE7162DF3E3009001D5 /* UIViewController+Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */; };
 		D08C1BD81649C37000035775 /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */; };
 		D08C1BD91649C37000035775 /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */; };
@@ -207,6 +209,7 @@
 		D09686E7169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D09686E5169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h */; };
 		D09686E8169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D09686E5169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h */; };
 		D09686EE169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D09686ED169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m */; };
+		D0991E211683BD310009BCA2 /* SinglySessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0991E201683BD310009BCA2 /* SinglySessionTests.m */; };
 		D0DB1623162E0A93005EC7C7 /* Service Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */; };
 		D0DB1624162E0A93005EC7C7 /* Service Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */; };
 		D0E2C7081637572B00AAD565 /* SinglySession.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088915ED17B000ECFED0 /* SinglySession.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -284,6 +287,8 @@
 		D013E6F316A062E2008C80A3 /* SinglyAvatarCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAvatarCacheTests.m; sourceTree = "<group>"; };
 		D013E6F616A06393008C80A3 /* SinglyAvatarCache+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyAvatarCache+Internal.h"; sourceTree = "<group>"; };
 		D013E6FC16A06CAE008C80A3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D013E70016A075FA008C80A3 /* SinglyRequestTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyRequestTests.h; sourceTree = "<group>"; };
+		D013E70116A075FA008C80A3 /* SinglyRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyRequestTests.m; sourceTree = "<group>"; };
 		D013E70316A07A70008C80A3 /* withings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = withings.png; sourceTree = "<group>"; };
 		D013E70516A07A95008C80A3 /* withings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "withings@2x.png"; sourceTree = "<group>"; };
 		D021CBBB162C933D00DE9922 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -423,6 +428,8 @@
 		D08A3DB6169B2F4F00A3130C /* NSString+URLEncodingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncodingTests.m"; sourceTree = "<group>"; };
 		D08A3DB9169B5D0200A3130C /* NSURL+AccessTokenTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+AccessTokenTests.h"; sourceTree = "<group>"; };
 		D08A3DBA169B5D0200A3130C /* NSURL+AccessTokenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+AccessTokenTests.m"; sourceTree = "<group>"; };
+		D08A3DBD169B7CFB00A3130C /* SinglyServiceTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyServiceTests.h; sourceTree = "<group>"; };
+		D08A3DBE169B7CFB00A3130C /* SinglyServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyServiceTests.m; sourceTree = "<group>"; };
 		D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Modal.h"; sourceTree = "<group>"; };
 		D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Modal.m"; sourceTree = "<group>"; };
 		D08C1BD61649C37000035775 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryString.h"; sourceTree = "<group>"; };
@@ -439,6 +446,8 @@
 		D09686E5169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyKeychainItemWrapper+Internal.h"; sourceTree = "<group>"; };
 		D09686EC169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyKeychainItemWrapperTests.h; sourceTree = "<group>"; };
 		D09686ED169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyKeychainItemWrapperTests.m; sourceTree = "<group>"; };
+		D0991E1F1683BD310009BCA2 /* SinglySessionTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySessionTests.h; sourceTree = "<group>"; };
+		D0991E201683BD310009BCA2 /* SinglySessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySessionTests.m; sourceTree = "<group>"; };
 		D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder.png"; sourceTree = "<group>"; };
 		D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder@2x.png"; sourceTree = "<group>"; };
 		D0E158DF1631C1BD000D0BCA /* Create Universal Library.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "Create Universal Library.rb"; sourceTree = "<group>"; };
@@ -526,7 +535,6 @@
 				D090E33D165AE98E00FE8273 /* API Requests */,
 				D067E1B1161B434E00B43C32 /* Friends */,
 				D067E1B0161B433D00B43C32 /* Sharing */,
-				D090E34E165BE6CC00FE8273 /* Miscellaneous Views */,
 				D0034852166672180048513A /* Extensions */,
 				825B6D91161C99CE0034DB92 /* Utilities */,
 				D06830CD1624D0AF00F398A6 /* Resources */,
@@ -557,6 +565,8 @@
 		825B6D91161C99CE0034DB92 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D0EA60BC163B3B99001AC1DF /* SinglyActivityIndicatorView.h */,
+				D0EA60BD163B3B99001AC1DF /* SinglyActivityIndicatorView.m */,
 				D003483916666C8B0048513A /* SinglyKeychainItemWrapper.h */,
 				D09686E5169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h */,
 				D003483A16666C8B0048513A /* SinglyKeychainItemWrapper.m */,
@@ -580,6 +590,15 @@
 				D08B3EE5162DF3E3009001D5 /* UIViewController+Modal.m */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		D013E6FF16A075E7008C80A3 /* API Requests */ = {
+			isa = PBXGroup;
+			children = (
+				D013E70016A075FA008C80A3 /* SinglyRequestTests.h */,
+				D013E70116A075FA008C80A3 /* SinglyRequestTests.m */,
+			);
+			name = "API Requests";
 			sourceTree = "<group>";
 		};
 		D0369940167F77A600ED6D40 /* Service Icons */ = {
@@ -684,8 +703,11 @@
 			children = (
 				D053EF9B16271BC9008B8BA1 /* SinglySDKTests.h */,
 				D053EF9C16271BC9008B8BA1 /* SinglySDKTests.m */,
-				D09686EB169E1E3A00CA7D04 /* Utilities */,
+				D0F118741694E16D0031266C /* Sessions */,
+				D08A3DBC169B7CE200A3130C /* Services */,
+				D013E6FF16A075E7008C80A3 /* API Requests */,
 				D0F118731694E1640031266C /* Extensions */,
+				D09686EB169E1E3A00CA7D04 /* Utilities */,
 				D053EF9616271BC9008B8BA1 /* Supporting Files */,
 			);
 			name = Tests;
@@ -695,9 +717,10 @@
 		D053EF9616271BC9008B8BA1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D013E70716A0A4BC008C80A3 /* Test Helpers */,
 				D053EF9716271BC9008B8BA1 /* SinglySDKTests-Info.plist */,
-				D053EF9816271BC9008B8BA1 /* InfoPlist.strings */,
 				D053EF9E16271BC9008B8BA1 /* SinglySDKTests-Prefix.pch */,
+				D053EF9816271BC9008B8BA1 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -835,6 +858,15 @@
 			path = Icons;
 			sourceTree = "<group>";
 		};
+		D08A3DBC169B7CE200A3130C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D08A3DBD169B7CFB00A3130C /* SinglyServiceTests.h */,
+				D08A3DBE169B7CFB00A3130C /* SinglyServiceTests.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		D090E33D165AE98E00FE8273 /* API Requests */ = {
 			isa = PBXGroup;
 			children = (
@@ -853,15 +885,6 @@
 				821D088A15ED17B000ECFED0 /* SinglySession.m */,
 			);
 			name = Sessions;
-			sourceTree = "<group>";
-		};
-		D090E34E165BE6CC00FE8273 /* Miscellaneous Views */ = {
-			isa = PBXGroup;
-			children = (
-				D0EA60BC163B3B99001AC1DF /* SinglyActivityIndicatorView.h */,
-				D0EA60BD163B3B99001AC1DF /* SinglyActivityIndicatorView.m */,
-			);
-			name = "Miscellaneous Views";
 			sourceTree = "<group>";
 		};
 		D09686EB169E1E3A00CA7D04 /* Utilities */ = {
@@ -905,6 +928,15 @@
 				D08A3DBA169B5D0200A3130C /* NSURL+AccessTokenTests.m */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		D0F118741694E16D0031266C /* Sessions */ = {
+			isa = PBXGroup;
+			children = (
+				D0991E1F1683BD310009BCA2 /* SinglySessionTests.h */,
+				D0991E201683BD310009BCA2 /* SinglySessionTests.m */,
+			);
+			name = Sessions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1300,6 +1332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D053EF9D16271BC9008B8BA1 /* SinglySDKTests.m in Sources */,
+				D0991E211683BD310009BCA2 /* SinglySessionTests.m in Sources */,
 				D05CFFFF1683D964006AD03C /* SinglySession.m in Sources */,
 				D05C00101684D10E006AD03C /* SinglyService.m in Sources */,
 				D05C00111684D113006AD03C /* SinglyFacebookService.m in Sources */,
@@ -1323,6 +1356,7 @@
 				D08A3DBF169B7CFB00A3130C /* SinglyServiceTests.m in Sources */,
 				D09686EE169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m in Sources */,
 				D013E6F416A062E2008C80A3 /* SinglyAvatarCacheTests.m in Sources */,
+				D013E70216A075FA008C80A3 /* SinglyRequestTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

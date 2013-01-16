@@ -189,9 +189,6 @@ static SinglySession *sharedInstance = nil;
     // Reset the Keychain Item
     [self.accessTokenWrapper resetKeychainItem];
 
-    // Clear the Singleton Instance
-    sharedInstance = nil;
-
 }
 
 #pragma mark - Profile Management
