@@ -60,6 +60,10 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
+	<option value="//api/name/disconnect">&nbsp;&nbsp;&nbsp;&nbsp;- disconnect</option>
+	
+	<option value="//api/name/disconnectWithCompletion:">&nbsp;&nbsp;&nbsp;&nbsp;- disconnectWithCompletion:</option>
+	
 	<option value="//api/name/initWithIdentifier:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithIdentifier:</option>
 	
 	<option value="//api/name/requestAuthorizationFromViewController:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAuthorizationFromViewController:</option>
@@ -87,6 +91,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Configuring the Service">Configuring the Service</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Requesting Authorization">Requesting Authorization</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Disconnecting from the Service">Disconnecting from the Service</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Managing the Delegate">Managing the Delegate</a></span></li>
 	
@@ -119,6 +125,10 @@
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/disconnect">disconnect</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/disconnectWithCompletion:">disconnectWithCompletion:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithIdentifier:">initWithIdentifier:</a></span></li>
 	
@@ -258,6 +268,29 @@ login web view.</p></span>
 						</ul>
 						
 						
+						<a title="Disconnecting from the Service" name="task_Disconnecting from the Service"></a>
+						<h3 class="subsubtitle task-title">Disconnecting from the Service</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/disconnect">&ndash;&nbsp;disconnect</a></code>
+		<span class="tooltip"><p>Disconnects from the service.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/disconnectWithCompletion:">&ndash;&nbsp;disconnectWithCompletion:</a></code>
+		<span class="tooltip"><p>Disconnects from the service. Calls the specified block once the operation
+has completed.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
 						<a title="Managing the Delegate" name="task_Managing the Delegate"></a>
 						<h3 class="subsubtitle task-title">Managing the Delegate</h3>
 
@@ -295,7 +328,7 @@ automatically unless explicitly provided.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSString *clientID</code></div>
+	<div class="method-subsection method-declaration"><code>@property (copy) NSString *clientID</code></div>
 
     
 	
@@ -336,7 +369,7 @@ automatically unless explicitly provided.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (weak, atomic) id&lt;SinglyServiceDelegate&gt; delegate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (weak) id&lt;SinglyServiceDelegate&gt; delegate</code></div>
 
     
 	
@@ -382,7 +415,7 @@ automatically unless explicitly provided.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL isAuthorized</code></div>
+	<div class="method-subsection method-declaration"><code>@property BOOL isAuthorized</code></div>
 
     
 	
@@ -423,7 +456,7 @@ automatically unless explicitly provided.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSString *serviceIdentifier</code></div>
+	<div class="method-subsection method-declaration"><code>@property (copy) NSString *serviceIdentifier</code></div>
 
     
 	
@@ -520,6 +553,119 @@ by the service identifier.</p>
 					<div class="section section-methods">
 						<a title="Instance Methods" name="instance_methods"></a>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/disconnect" title="disconnect"></a>
+	<h3 class="subsubtitle method-title">disconnect</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Disconnects from the service.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)disconnect</code></div>
+
+    
+	
+	
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.1.0 and later.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/disconnectWithCompletion:">&ndash; disconnectWithCompletion:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/disconnectWithCompletion:" title="disconnectWithCompletion:"></a>
+	<h3 class="subsubtitle method-title">disconnectWithCompletion:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Disconnects from the service. Calls the specified block once the operation
+has completed.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)disconnectWithCompletion:(void ( ^ ) ( BOOL ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>The block to run when the check is complete. It
+will be passed a <code>BOOL</code> stating whether or not the
+the operation succeeded.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.1.0 and later.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/disconnect">&ndash; disconnect</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyService.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/initWithIdentifier:" title="initWithIdentifier:"></a>
@@ -717,7 +863,7 @@ authorization request.</p></dd>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Singly, Inc. All rights reserved. (Last updated: 2012-12-03)</span><br />
+						<p><span class="copyright">&copy; 2013 Singly, Inc. All rights reserved. (Last updated: 2013-01-17)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
