@@ -61,7 +61,9 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kSinglySessionProfilesUpdatedNotification
+                                                  object:nil];
 
     [super viewDidDisappear:animated];
 }
