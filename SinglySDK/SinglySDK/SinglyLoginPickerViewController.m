@@ -41,6 +41,22 @@
 
 @implementation SinglyLoginPickerViewController
 
+- (void)authenticateWithService:(NSString *)serviceIdentifier
+{
+    SinglyService *service = [SinglyService serviceWithIdentifier:serviceIdentifier];
+    service.delegate = self;
+    [service requestAuthorizationFromViewController:self];
+}
+
+- (void)authenticateWithFacebook
+{
+    SinglyFacebookService *facebookService = [SinglyService serviceWithIdentifier:@"facebook"];
+    facebookService.delegate = self;
+    [facebookService requestAuthorizationFromViewController:self];
+}
+
+#pragma mark - View Callbacks
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -137,7 +153,7 @@
                                                   object:nil];
 }
 
-#pragma mark - Table View
+#pragma mark - Table View DataSource & Delegates
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -158,12 +174,13 @@
     if (!cell)
         cell = [[SinglyLoginPickerServiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
-    NSString *service = [self.services objectAtIndex:indexPath.row];
+    NSString *service = self.services[indexPath.row];
+    NSDictionary *serviceInfoDictionary = self.servicesDictionary[service];
+
     cell.serviceIdentifier = service;
-    NSDictionary *serviceInfoDictionary = [self.servicesDictionary objectForKey:service];
     cell.serviceInfoDictionary = serviceInfoDictionary;
 
-    if ([SinglySession.sharedSession.profiles objectForKey:service])
+    if (SinglySession.sharedSession.profiles[service])
         cell.isAuthenticated = YES;
     else
         cell.isAuthenticated = NO;
@@ -173,11 +190,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *service = [self.services objectAtIndex:indexPath.row];
+    NSString *service = self.services[indexPath.row];
     self.selectedService = service;
 
     // Do nothing if we are already authenticated against the selected service
-    if ([SinglySession.sharedSession.profiles objectForKey:service])
+    if (SinglySession.sharedSession.profiles[service])
     {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Disconnect from %@?", self.servicesDictionary[service][@"name"]]
@@ -209,21 +226,15 @@
     {
         case 0: // Disconnect
             switch (buttonIndex)
-            {
-                case 0: // Cancel
-                    break;
-                case 1: // Disconnect
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [[SinglyService serviceWithIdentifier:self.selectedService] disconnect];
-//                        [[SinglyService serviceWithIdentifier:self.selectedService] disconnectWithCompletion:^(BOOL isSuccessful)
-//                        {
-//                            dispatch_async(dispatch_get_main_queue(), ^{
-//                                [self.tableView reloadData];
-//                            });
-//                        }];
-                    });
-                    break;
-            }
+        {
+            case 0: // Cancel
+                break;
+            case 1: // Disconnect
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[SinglyService serviceWithIdentifier:self.selectedService] disconnect];
+                });
+                break;
+        }
             break;
 
         default:
@@ -231,7 +242,21 @@
     }
 }
 
-#pragma mark - Singly Login View Controller delegate
+#pragma mark - Singly Service Delegates
+
+- (void)singlyServiceDidAuthorize:(SinglyService *)service
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:didLoginForService:)])
+        [self.delegate singlyLoginPickerViewController:self didLoginForService:[service serviceIdentifier]];
+}
+
+- (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:errorLoggingInToService:withError:)])
+        [self.delegate singlyLoginPickerViewController:self errorLoggingInToService:[service serviceIdentifier] withError:error];
+}
+
+#pragma mark - Singly Login View Controller Delegates
 
 - (void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service
 {
@@ -250,36 +275,6 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-}
-
-#pragma mark - Service-Specific Authentication
-
-- (void)authenticateWithService:(NSString *)serviceIdentifier
-{
-    SinglyService *service = [SinglyService serviceWithIdentifier:serviceIdentifier];
-    service.delegate = self;
-    [service requestAuthorizationFromViewController:self];
-}
-
-- (void)authenticateWithFacebook
-{
-    SinglyFacebookService *facebookService = [SinglyService serviceWithIdentifier:@"facebook"];
-    facebookService.delegate = self;
-    [facebookService requestAuthorizationFromViewController:self];
-}
-
-#pragma mark - Singly Service Delegates
-
-- (void)singlyServiceDidAuthorize:(SinglyService *)service
-{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:didLoginForService:)])
-        [self.delegate singlyLoginPickerViewController:self didLoginForService:[service serviceIdentifier]];
-}
-
-- (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error
-{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:errorLoggingInToService:withError:)])
-        [self.delegate singlyLoginPickerViewController:self errorLoggingInToService:[service serviceIdentifier] withError:error];
 }
 
 @end

@@ -62,10 +62,16 @@
 {
     [super prepareForReuse];
 
+    // Cancel Image Downloads
     if (self.imageConnection)
         [self.imageConnection cancel];
+
+    // Clear the Friend Info Dictionary
+    _friendInfoDictionary = nil;
+
+    // Clear the Image and Text Views
+    self.textLabel.text = @"";
     self.imageView.image = [UIImage imageNamed:@"SinglySDK.bundle/Avatar Placeholder"];
-    self.friendInfoDictionary = nil;
 }
 
 - (void)setFriendInfoDictionary:(NSDictionary *)friendInfoDictionary
