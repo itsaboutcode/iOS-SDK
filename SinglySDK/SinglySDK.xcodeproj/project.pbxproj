@@ -717,7 +717,6 @@
 		D053EF9616271BC9008B8BA1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D013E70716A0A4BC008C80A3 /* Test Helpers */,
 				D053EF9716271BC9008B8BA1 /* SinglySDKTests-Info.plist */,
 				D053EF9E16271BC9008B8BA1 /* SinglySDKTests-Prefix.pch */,
 				D053EF9816271BC9008B8BA1 /* InfoPlist.strings */,

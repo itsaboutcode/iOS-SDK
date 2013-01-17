@@ -18,7 +18,7 @@ that is already bootstrapped for the Singly iOS SDK.
 ### Download the Singly SDK
 
 The easiest way to get started with the Singly SDK is to [download our
-pre-packaged distribution](http://github.com/singly/iOS-SDK/downloads).
+pre-packaged distribution](http://singly.github.com/iOS-SDK/downloads).
 
 ### Include the Singly SDK in Your Project
 
