@@ -133,8 +133,11 @@
 {
     NSString *imageLocation = [[connection.originalRequest URL] absoluteString];
     UIImage *receivedImage = [UIImage imageWithData:self.receivedData];
-    if (receivedImage) self.imageView.image = receivedImage;
-    [SinglyAvatarCache.sharedCache cacheImage:receivedImage forURL:imageLocation];
+    if (receivedImage)
+    {
+        self.imageView.image = receivedImage;
+        [SinglyAvatarCache.sharedCache cacheImage:receivedImage forURL:imageLocation];
+    }
     self.imageConnection = nil;
     self.receivedData = nil;
 }
