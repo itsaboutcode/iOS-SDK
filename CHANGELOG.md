@@ -1,6 +1,11 @@
 
 # Singly SDK ChangeLog
 
+## 1.1.1 — **Not Yet Released**
+
+* An exception is now raised if you attempt to start a session without providing
+  your client id and client secret.
+
 ## 1.1.0 — January 17th, 2013
 
 * The method `startSessionWithCompletionHandler:` on `SinglySession` is now

@@ -174,15 +174,29 @@ static SinglySession *sharedInstance = nil;
 
 - (void)startSessionWithCompletion:(void (^)(BOOL))completionHandler
 {
-    // If we don't have an accountID or accessToken we're definitely not ready
-    if (!self.accountID || !self.accessToken) return completionHandler(NO);
+    // Raise an error if the Client ID and Client Secret have not been provided!
+    if (!self.clientID || !self.clientSecret)
+    {
+        [NSException raise:kSinglyCredentialsMissingException
+                    format:@"%s: missing client id and/or client secret!", __PRETTY_FUNCTION__];
+    }
+
+    // Ensure that we have an Access Token and Account ID...
+    if (!self.accountID || !self.accessToken)
+    {
+        if (completionHandler) completionHandler(NO);
+        return;
+    }
 
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self updateProfilesWithCompletion:^(BOOL isSuccessful) {
-            dispatch_sync(currentQueue, ^{
-                completionHandler(self.isReady);
-            });
+            if (completionHandler)
+            {
+                dispatch_sync(currentQueue, ^{
+                    completionHandler(self.isReady);
+                });
+            }
         }];
     });
 }
@@ -495,3 +509,4 @@ static SinglySession *sharedInstance = nil;
 }
 
 @end
+
