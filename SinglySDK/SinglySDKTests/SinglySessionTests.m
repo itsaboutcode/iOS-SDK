@@ -27,11 +27,18 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "SinglyConstants.h"
 #import "SinglySession.h"
 #import "SinglySession+Internal.h"
 #import "SinglySessionTests.h"
 
 @implementation SinglySessionTests
+
+- (void)setUp
+{
+    SinglySession.sharedSession.clientID = @"test-client-id";
+    SinglySession.sharedSession.clientSecret = @"test-client-secret";
+}
 
 - (void)tearDown
 {
@@ -63,17 +70,17 @@
 - (void)testShouldSetClientID
 {
     SinglySession *testSession = [[SinglySession alloc] init];
-    testSession.clientID = @"test-client-id";
+    testSession.clientID = @"another-test-client-id";
 
-    STAssertEqualObjects(testSession.clientID, @"test-client-id", @"The client ID should match 'test-client-id'.");
+    STAssertEqualObjects(testSession.clientID, @"another-test-client-id", @"The client id should match 'another-test-client-id'.");
 }
 
 - (void)testShouldSetClientSecret
 {
     SinglySession *testSession = [[SinglySession alloc] init];
-    testSession.clientSecret = @"test-client-secret";
+    testSession.clientSecret = @"another-test-client-secret";
 
-    STAssertEqualObjects(testSession.clientSecret, @"test-client-secret", @"The client ID should match 'test-client-secret'.");
+    STAssertEqualObjects(testSession.clientSecret, @"another-test-client-secret", @"The client secret should match 'another-test-client-secret'.");
 }
 
 - (void)testShouldResetSession
@@ -103,7 +110,7 @@
 
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
-    [testSession startSessionWithCompletionHandler:^(BOOL isReady) {
+    [testSession startSessionWithCompletion:^(BOOL isReady) {
         STAssertFalse(isReady, @"The session should not be ready.");
         dispatch_semaphore_signal(semaphore);
     }];
@@ -122,13 +129,21 @@
 
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
-    [testSession startSessionWithCompletionHandler:^(BOOL isReady) {
+    [testSession startSessionWithCompletion:^(BOOL isReady) {
         STAssertFalse(isReady, @"The session should not be ready.");
         dispatch_semaphore_signal(semaphore);
     }];
 
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     dispatch_release(semaphore);
+}
+
+- (void)testShouldThrowError
+{
+    SinglySession.sharedSession.clientID = nil;
+    SinglySession.sharedSession.clientSecret = nil;
+
+    STAssertThrowsSpecificNamed([SinglySession.sharedSession startSessionWithCompletion:nil], NSException, kSinglyCredentialsMissingException, @"Should throw SinglyCredentialsMissingException when client id or client secret are missing!");
 }
 
 - (void)testShouldUpdateProfiles
