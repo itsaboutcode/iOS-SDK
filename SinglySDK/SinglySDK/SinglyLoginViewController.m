@@ -163,7 +163,7 @@
             {
                 NSError *loginError = [NSError errorWithDomain:kSinglyErrorDomain
                                                           code:kSinglyLoginFailedErrorCode
-                                                      userInfo:@{ NSLocalizedDescriptionKey : @"FIXME" }];
+                                                      userInfo:@{ NSLocalizedDescriptionKey : [error localizedDescription] }];
 
                 // Dismiss the Activity Indicator
                 [SinglyActivityIndicatorView dismissIndicator];

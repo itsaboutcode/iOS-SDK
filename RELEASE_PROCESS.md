@@ -16,6 +16,3 @@
 
 4. **Tag Release** — If all is succesful, tag the release in git and push the
    tag to GitHub. The tag should be formatted as "vX.X.X".
-
-5. **Upload to GitHub** — Ensure that the generated disk image is named in the
-   format "Singly iOS SDK X.X.X.dmg" and upload it to the GitHub project.

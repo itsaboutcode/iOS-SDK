@@ -52,11 +52,14 @@
     session.clientID = CLIENT_ID;
     session.clientSecret = CLIENT_SECRET;
 
-    [[NSNotificationCenter defaultCenter] addObserverForName:kSinglySessionProfilesUpdatedNotification object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:kSinglySessionProfilesUpdatedNotification
+                                                      object:self
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
         NSLog(@"**** Profiles were updated");
     }];
     
-    [session startSessionWithCompletionHandler:^(BOOL ready) {
+    [session startSessionWithCompletion:^(BOOL ready) {
         if (ready)
         {
             NSLog(@"Singly Session\n  - Account: %@\n  - Access Token: %@)", session.accountID, session.accessToken);
@@ -72,7 +75,7 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-  return [SinglySession.sharedSession handleOpenURL:url];
+    return [SinglySession.sharedSession handleOpenURL:url];
 }
 
 @end

@@ -1,28 +1,38 @@
 
 # Singly SDK ChangeLog
 
-## 1.1.0 — Not Released
+## 1.1.1 — **Not Yet Released**
+
+* An exception is now raised if you attempt to start a session without providing
+  your client id and client secret.
+
+## 1.1.0 — January 17th, 2013
+
+* The method `startSessionWithCompletionHandler:` on `SinglySession` is now
+  deprecated. Please use `startSessionWithCompletion:` instead.
+
+* You may now disconnect from services by calling `disconnect` or
+  `disconnectWithCompletion:` on instances SinglyService. This was previously
+  only possible through the use of `SinglyLoginPickerViewController`.
 
 * Auth tokens for services are now available in the `profiles` property on
   `SinglySession`.
 
-* The simplified profile is now fetched in places of the profiles endpoint and
+* The simplified profile is now fetched in place of the profiles endpoint and
   is accessible with the `profile` property on `SinglySession`.
 
-* Added support for syncing device contacts with the Singly API with the
+* Device contacts may now be synced with the Singly API by calling the
   `syncDeviceContacts` method on `SinglySession`.
 
-* Service icons in the login picker are now bundled with the framework and
-  includes Retina versions of each.
+* Service icons are now bundled with the framework for performance.
 
-* Avatar images for friends that are loaded and displayed in the friends picker
-  are now cached.
+* Avatar images for friends in the friends picker are now cached.
 
-* Updated the friends picker to be an indexed view with on-demand loading of
-  friends.
+* The friends picker is now an indexed table view with on-demand loading of
+  friends as you scroll through the list.
 
-* Placeholder images in the login and friend picker view controllers are no
-  longer cleared if the image failed to load.
+* Placeholder images in the login and friend pickers are no longer cleared if
+  the image fails to load.
 
 ## 1.0.3 — December 17th, 2012
 

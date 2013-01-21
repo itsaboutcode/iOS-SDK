@@ -70,8 +70,15 @@
 {
     [super prepareForReuse];
 
+    // Cancel Image Downloads
     if (self.imageConnection)
         [self.imageConnection cancel];
+
+    // Clear the Service Info Dictionary
+    _serviceInfoDictionary = nil;
+
+    // Clear the Image and Text Views
+    self.textLabel.text = @"";
     self.imageView.image = [UIImage imageNamed:@"SinglySDK.bundle/Service Placeholder"];
 }
 
@@ -90,9 +97,7 @@
         // Look for the Service Icon in the bundle
         UIImage *serviceImage = [UIImage imageNamed:[NSString stringWithFormat:@"SinglySDK.bundle/%@", self.serviceIdentifier]];
         if (serviceImage)
-        {
             self.imageView.image = serviceImage;
-        }
 
         // If there is not a bundled icon, fallback to loading from the server
         else

@@ -35,7 +35,7 @@
  *
 **/
 
-static NSString *kSinglySDKVersion = @"1.1.0";
+static NSString *kSinglySDKVersion = @"1.1.1";
 
 static NSString *kSinglyBaseURL = @"https://api.singly.com";
 static NSString *kSinglyAccessTokenURL = @"https://api.singly.com/oauth/access_token";
@@ -45,3 +45,5 @@ static NSString *kSinglyErrorDomain = @"com.singly.sdk";
 static const NSInteger kSinglyServiceErrorCode = 0;
 static const NSInteger kSinglyLoginAbortedErrorCode = 1;
 static const NSInteger kSinglyLoginFailedErrorCode = 2;
+
+static NSString *kSinglyCredentialsMissingException = @"SinglyCredentialsMissingException";

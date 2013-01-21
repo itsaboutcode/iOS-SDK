@@ -56,6 +56,12 @@
     return serviceInstance;
 }
 
++ (NSString *)normalizeServiceIdentifier:(NSString *)serviceIdentifier
+{
+    serviceIdentifier = [serviceIdentifier lowercaseString];
+    return serviceIdentifier;
+}
+
 - (id)initWithIdentifier:(NSString *)serviceIdentifier
 {
     if (self = [self init])
@@ -64,6 +70,105 @@
         _serviceIdentifier = serviceIdentifier;
     }
     return self;
+}
+
+#pragma mark - Requesting Authorization
+
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
+{
+    [self requestAuthorizationFromViewController:viewController withScopes:nil];
+}
+
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
+{
+
+    self.isAuthorized = NO;
+
+    dispatch_queue_t authorizationQueue;
+    authorizationQueue = dispatch_queue_create("com.singly.AuthorizationQueue", NULL);
+
+    dispatch_async(authorizationQueue, ^{
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes];
+        });
+
+    });
+    
+}
+
+- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
+{
+    [self requestAuthorizationFromViewController:viewController withScopes:nil];
+}
+
+- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
+{
+
+    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithServiceIdentifier:self.serviceIdentifier];
+    loginViewController.scopes = scopes;
+    loginViewController.delegate = self;
+    [viewController presentModalViewController:loginViewController animated:YES];
+
+}
+
+#pragma mark - Service Disconnection
+
+- (void)disconnect
+{
+    [self disconnectWithCompletion:nil];
+}
+
+- (void)disconnectWithCompletion:(void (^)(BOOL))completionHandler
+{
+    NSDictionary *serviceProfile = SinglySession.sharedSession.profiles[self.serviceIdentifier];
+    SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profiles"];
+    NSString *postString = [NSString stringWithFormat:@"delete=%@", [NSString stringWithFormat:@"%@@%@", serviceProfile[@"id"], self.serviceIdentifier]];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
+    {
+
+        // TODO Handle Errors...
+        if (requestError)
+        {
+            NSLog(@"Error: %@", requestError);
+
+            if (completionHandler)
+                completionHandler(NO);
+
+            return;
+        }
+
+        // Update profiles from the Singly API
+        [SinglySession.sharedSession updateProfiles];
+
+        // Call Completion Handler
+        if (completionHandler)
+            completionHandler(YES);
+
+    }];
+}
+
+#pragma mark - Login View Controller Delegates
+
+- (void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
+        [self.delegate singlyServiceDidAuthorize:self];
+}
+
+- (void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error
+{
+    [controller dismissViewControllerAnimated:NO completion:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
+        [self.delegate singlyServiceDidFail:self withError:error];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 #pragma mark -
@@ -108,73 +213,7 @@
     self.clientID = responseDictionary[self.serviceIdentifier];
 
     NSLog(@"[SinglySDK] Retrieved Client ID for '%@': %@", self.serviceIdentifier, self.clientID);
-
-}
-
-#pragma mark -
-
-+ (NSString *)normalizeServiceIdentifier:(NSString *)serviceIdentifier
-{
-    serviceIdentifier = [serviceIdentifier lowercaseString];
-    return serviceIdentifier;
-}
-
-#pragma mark -
-
-- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
-{
-    [self requestAuthorizationFromViewController:viewController withScopes:nil];
-}
-
-- (void)requestAuthorizationFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
-{
-
-    self.isAuthorized = NO;
-
-    dispatch_queue_t authorizationQueue;
-    authorizationQueue = dispatch_queue_create("com.singly.AuthorizationQueue", NULL);
-
-    dispatch_async(authorizationQueue, ^{
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes];
-        });
-
-    });
     
-}
-
-- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
-{
-    [self requestAuthorizationFromViewController:viewController withScopes:nil];
-}
-
-- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
-{
-
-    SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithServiceIdentifier:self.serviceIdentifier];
-    loginViewController.scopes = scopes;
-    loginViewController.delegate = self;
-    [viewController presentModalViewController:loginViewController animated:YES];
-
-}
-
-#pragma mark - Login View Controller Delegates
-
-- (void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service
-{
-    [controller dismissViewControllerAnimated:YES completion:nil];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
-        [self.delegate singlyServiceDidAuthorize:self];
-}
-
-- (void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error
-{
-    [controller dismissViewControllerAnimated:NO completion:nil];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
-        [self.delegate singlyServiceDidFail:self withError:error];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
 }
 
 @end

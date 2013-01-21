@@ -27,8 +27,6 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-//#import <QuartzCore/QuartzCore.h>
-
 #import "SinglyAvatarCache.h"
 #import "SinglyAvatarCache+Internal.h"
 #import "SinglyAvatarCacheTests.h"
