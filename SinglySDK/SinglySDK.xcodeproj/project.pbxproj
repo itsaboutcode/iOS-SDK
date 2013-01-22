@@ -23,6 +23,8 @@
 		D00348551666B56F0048513A /* SinglySession+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D00348531666B56F0048513A /* SinglySession+Internal.h */; };
 		D003CDB016ADB41400D2B17A /* SinglyTestURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = D003CDAF16ADB41400D2B17A /* SinglyTestURLProtocol.m */; };
 		D003CDB416AEF33F00D2B17A /* SenTestCase+AsynchronousSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = D003CDB316AEF33F00D2B17A /* SenTestCase+AsynchronousSupport.m */; };
+		D003CDB716AF26F100D2B17A /* profiles.json in Resources */ = {isa = PBXBuildFile; fileRef = D003CDB616AF26F100D2B17A /* profiles.json */; };
+		D003CDBA16AF3ADE00D2B17A /* SenTestCase+Fixtures.m in Sources */ = {isa = PBXBuildFile; fileRef = D003CDB916AF3ADE00D2B17A /* SenTestCase+Fixtures.m */; };
 		D005904B167A492600F1374D /* SinglyFriendPlaceholder.h in Headers */ = {isa = PBXBuildFile; fileRef = D0059049167A492600F1374D /* SinglyFriendPlaceholder.h */; };
 		D005904D167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */; };
 		D005904E167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */; };
@@ -285,6 +287,9 @@
 		D003CDAF16ADB41400D2B17A /* SinglyTestURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyTestURLProtocol.m; sourceTree = "<group>"; };
 		D003CDB216AEF33F00D2B17A /* SenTestCase+AsynchronousSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SenTestCase+AsynchronousSupport.h"; sourceTree = "<group>"; };
 		D003CDB316AEF33F00D2B17A /* SenTestCase+AsynchronousSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SenTestCase+AsynchronousSupport.m"; sourceTree = "<group>"; };
+		D003CDB616AF26F100D2B17A /* profiles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profiles.json; sourceTree = "<group>"; };
+		D003CDB816AF3ADE00D2B17A /* SenTestCase+Fixtures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SenTestCase+Fixtures.h"; sourceTree = "<group>"; };
+		D003CDB916AF3ADE00D2B17A /* SenTestCase+Fixtures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SenTestCase+Fixtures.m"; sourceTree = "<group>"; };
 		D0059049167A492600F1374D /* SinglyFriendPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendPlaceholder.h; sourceTree = "<group>"; };
 		D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPlaceholder.m; sourceTree = "<group>"; };
 		D0059052167A766D00F1374D /* SinglyFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriend.h; sourceTree = "<group>"; };
@@ -598,6 +603,14 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		D003CDB516AF26F100D2B17A /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				D003CDB616AF26F100D2B17A /* profiles.json */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
 		D013E6FF16A075E7008C80A3 /* API Requests */ = {
 			isa = PBXGroup;
 			children = (
@@ -723,10 +736,13 @@
 		D053EF9616271BC9008B8BA1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D003CDB516AF26F100D2B17A /* Fixtures */,
 				D003CDAE16ADB41400D2B17A /* SinglyTestURLProtocol.h */,
 				D003CDAF16ADB41400D2B17A /* SinglyTestURLProtocol.m */,
 				D003CDB216AEF33F00D2B17A /* SenTestCase+AsynchronousSupport.h */,
 				D003CDB316AEF33F00D2B17A /* SenTestCase+AsynchronousSupport.m */,
+				D003CDB816AF3ADE00D2B17A /* SenTestCase+Fixtures.h */,
+				D003CDB916AF3ADE00D2B17A /* SenTestCase+Fixtures.m */,
 				D053EF9716271BC9008B8BA1 /* SinglySDKTests-Info.plist */,
 				D053EF9E16271BC9008B8BA1 /* SinglySDKTests-Prefix.pch */,
 				D053EF9816271BC9008B8BA1 /* InfoPlist.strings */,
@@ -1139,6 +1155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D053EF9A16271BC9008B8BA1 /* InfoPlist.strings in Resources */,
+				D003CDB716AF26F100D2B17A /* profiles.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1368,6 +1385,7 @@
 				D013E70216A075FA008C80A3 /* SinglyRequestTests.m in Sources */,
 				D003CDB016ADB41400D2B17A /* SinglyTestURLProtocol.m in Sources */,
 				D003CDB416AEF33F00D2B17A /* SenTestCase+AsynchronousSupport.m in Sources */,
+				D003CDBA16AF3ADE00D2B17A /* SenTestCase+Fixtures.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
