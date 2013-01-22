@@ -1,5 +1,5 @@
 //
-//  SinglyTestURLProtocol.h
+//  SenTestCase+AsynchronousSupport.h
 //  SinglySDK
 //
 //  Copyright (c) 2012-2013 Singly, Inc. All rights reserved.
@@ -27,14 +27,10 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
+#import <SenTestingKit/SenTestingKit.h>
 
-@interface SinglyTestURLProtocol : NSURLProtocol
+@interface SenTestCase (AsynchronousSupport)
 
-+ (void)setCannedResponseData:(NSData *)data;
-+ (void)setCannedHeaders:(NSDictionary *)headers;
-+ (void)setCannedStatusCode:(NSInteger)statusCode;
-+ (void)setCannedError:(NSError *)error;
-+ (void)reset;
+- (void)waitForCompletion:(BOOL (^)())predicate;
 
 @end
