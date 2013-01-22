@@ -1,5 +1,5 @@
 //
-//  SinglyTestURLProtocol.h
+//  SenTestCase+AsynchronousSupport.m
 //  SinglySDK
 //
 //  Copyright (c) 2012-2013 Singly, Inc. All rights reserved.
@@ -27,14 +27,19 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
+#import "SenTestCase+AsynchronousSupport.h"
 
-@interface SinglyTestURLProtocol : NSURLProtocol
+@implementation SenTestCase (AsynchronousSupport)
 
-+ (void)setCannedResponseData:(NSData *)data;
-+ (void)setCannedHeaders:(NSDictionary *)headers;
-+ (void)setCannedStatusCode:(NSInteger)statusCode;
-+ (void)setCannedError:(NSError *)error;
-+ (void)reset;
+- (void)waitForCompletion:(BOOL (^)())predicate
+{
+    NSDate *timeout = [NSDate dateWithTimeIntervalSinceNow:10];
+
+    while (!predicate() && [timeout timeIntervalSinceNow] > 0)
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:timeout];
+
+    STAssertTrue([timeout timeIntervalSinceNow] > 0, @"Test timed out!");
+}
 
 @end
