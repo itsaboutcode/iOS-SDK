@@ -1,0 +1,38 @@
+{
+	"id": "b6ce9db79d60117f99fd6f2a1f764a58",
+	"url": "http://jeremie.com",
+	"thumbnail_url": "http://images.instagram.com/profiles/profile_10726078_75sq_1320215292.jpg",
+	"name": "Jeremie Miller",
+	"description": "http://en.wikipedia.org/wiki/Jeremie_Miller",
+	"email": "jeremie@jabber.org",
+	"services": {
+		"instagram": {
+			"url": "http://jeremie.com",
+			"thumbnail_url": "http://images.instagram.com/profiles/profile_10726078_75sq_1320215292.jpg",
+			"name": "Jeremie Miller"
+		},
+		"facebook": {
+			"url": "http://www.facebook.com/jeremie.miller",
+			"description": "http://en.wikipedia.org/wiki/Jeremie_Miller",
+			"thumbnail_url": "https://graph.facebook.com/580342594/picture?type=large&date_format=U",
+			"name": "Jeremie Miller"
+		},
+		"foursquare": {
+			"thumbnail_url": "https://is1.4sqi.net/userpix_thumbs/L03YJDFVXLBPSFYE.jpg",
+			"email": "jeremie@jabber.org",
+			"name": "Jeremie Miller"
+		},
+		"github": {
+			"email": "jeremie@jabber.org",
+			"thumbnail_url": "https://secure.gravatar.com/avatar/37f35d1f68254e700446b361d3c61782?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+			"url": "https://github.com/quartzjer",
+			"name": "Jeremie Miller"
+		},
+		"twitter": {
+			"url": "http://twitter.com/jeremie",
+			"description": "Singly co-founder, working on empowering awesome apps for people. Helped found Jabber/XMPP, open platforms FTW!",
+			"thumbnail_url": "https://si0.twimg.com/profile_images/565991047/jer.jpg",
+			"name": "Jeremie Miller"
+		}
+	}
+}
