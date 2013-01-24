@@ -222,8 +222,6 @@
 
     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)])
         [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:error];
-
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)configureNavigationBar

@@ -1,6 +1,11 @@
 
 # Singly SDK ChangeLog
 
+## 1.1.1 — January 23rd, 2013
+
+* Fixed an issue where delegate methods were not being called after successful
+  (or failed) logins attempts with the login view controller.
+
 ## 1.1.0 — January 17th, 2013
 
 * The method `startSessionWithCompletionHandler:` on `SinglySession` is now
