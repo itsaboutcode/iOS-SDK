@@ -1,6 +1,11 @@
 
 # Singly SDK ChangeLog
 
+## 1.1.2 — January 25th, 2013
+
+* Fixed a GCD memory management issue that was causing compilation failures for
+  applications that are targeted for iOS 6.
+
 ## 1.1.1 — January 23rd, 2013
 
 * Fixed an issue where delegate methods were not being called after successful

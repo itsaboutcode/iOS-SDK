@@ -109,7 +109,9 @@
     }];
 
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    dispatch_release(semaphore);
+    #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+        dispatch_release(semaphore);
+    #endif
 }
 
 - (void)testShouldStartSession
@@ -128,7 +130,9 @@
     }];
 
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    dispatch_release(semaphore);
+    #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+        dispatch_release(semaphore);
+    #endif
 }
 
 - (void)testShouldUpdateProfiles
