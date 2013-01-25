@@ -6,6 +6,8 @@
 * Fixed a GCD memory management issue that was causing compilation failures for
   applications that are targeted for iOS 6.
 
+* Modernized some deprecated calls for iOS 6.
+
 ## 1.1.1 — January 23rd, 2013
 
 * Fixed an issue where delegate methods were not being called after successful

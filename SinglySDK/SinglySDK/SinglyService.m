@@ -108,7 +108,7 @@
     SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithServiceIdentifier:self.serviceIdentifier];
     loginViewController.scopes = scopes;
     loginViewController.delegate = self;
-    [viewController presentModalViewController:loginViewController animated:YES];
+    [viewController presentViewController:loginViewController animated:YES completion:nil];
 
 }
 
