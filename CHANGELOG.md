@@ -1,6 +1,11 @@
 
 # Singly SDK ChangeLog
 
+## 1.1.3 — **Not Yet Released**
+
+* Updated project settings for Xcode 4.6 and fixed additional code warnings that
+  it exposed.
+
 ## 1.1.2 — January 25th, 2013
 
 * Fixed a GCD memory management issue that was causing compilation failures for
