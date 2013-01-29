@@ -150,6 +150,14 @@
     STAssertThrowsSpecificNamed([SinglySession.sharedSession startSessionWithCompletion:nil], NSException, kSinglyCredentialsMissingException, @"Should throw SinglyCredentialsMissingException when client id or client secret are missing!");
 }
 
+- (void)testShouldThrowError
+{
+    SinglySession.sharedSession.clientID = nil;
+    SinglySession.sharedSession.clientSecret = nil;
+
+    STAssertThrowsSpecificNamed([SinglySession.sharedSession startSessionWithCompletion:nil], NSException, kSinglyCredentialsMissingException, @"Should throw SinglyCredentialsMissingException when client id or client secret are missing!");
+}
+
 - (void)testShouldUpdateProfiles
 {
     
