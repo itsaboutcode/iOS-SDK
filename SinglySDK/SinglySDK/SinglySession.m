@@ -310,6 +310,7 @@ static SinglySession *sharedInstance = nil;
 {
     NSLog(@"[SinglySDK] Applying service '%@' with token '%@' to the Singly service ...", serviceIdentifier, token);
 
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSError *requestError;
         NSError *parseError;
@@ -325,7 +326,7 @@ static SinglySession *sharedInstance = nil;
 
         if (!requestError && !parseError)
         {
-            dispatch_async(dispatch_get_current_queue(), ^{
+            dispatch_async(currentQueue, ^{
                 SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"];
                 SinglySession.sharedSession.accountID = responseDictionary[@"account"];
                 [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL successful) {
@@ -367,7 +368,6 @@ static SinglySession *sharedInstance = nil;
                 dispatch_semaphore_signal(accessSemaphore);
             });
             dispatch_semaphore_wait(accessSemaphore, DISPATCH_TIME_FOREVER);
-            dispatch_release(accessSemaphore);
         }
 
         // iOS 5.x

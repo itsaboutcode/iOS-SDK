@@ -38,7 +38,7 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-static NSString *kSinglySessionProfilesUpdatedNotification = @"com.singly.notifications.SessionProfilesUpdatedNotification";
+static NSString * const kSinglySessionProfilesUpdatedNotification = @"com.singly.notifications.SessionProfilesUpdatedNotification";
 
 /*!
  *
@@ -47,7 +47,7 @@ static NSString *kSinglySessionProfilesUpdatedNotification = @"com.singly.notifi
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.ServiceAppliedNotification";
+static NSString * const kSinglyServiceAppliedNotification = @"com.singly.notifications.ServiceAppliedNotification";
 
 /*!
  *
@@ -57,7 +57,7 @@ static NSString *kSinglyServiceAppliedNotification = @"com.singly.notifications.
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
  **/
-static NSString *kSinglyContactsSyncedNotification = @"com.singly.notifications.ContactsSyncedNotification";
+static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notifications.ContactsSyncedNotification";
 
 /*!
  *

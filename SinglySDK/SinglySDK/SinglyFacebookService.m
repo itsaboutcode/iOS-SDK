@@ -230,7 +230,9 @@
     }];
 
     dispatch_semaphore_wait(authorizationSemaphore, DISPATCH_TIME_FOREVER);
-    dispatch_release(authorizationSemaphore);
+    #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+        dispatch_release(authorizationSemaphore);
+    #endif
 }
 
 - (BOOL)requestApplicationAuthorization:(NSArray *)scopes

@@ -118,6 +118,6 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (weak) id<SinglyLoginViewControllerDelegate> delegate;
+@property (strong) id<SinglyLoginViewControllerDelegate> delegate;
 
 @end

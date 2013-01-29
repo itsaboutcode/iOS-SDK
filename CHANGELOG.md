@@ -1,10 +1,29 @@
 
 # Singly SDK ChangeLog
 
-## 1.1.1 — **Not Yet Released**
+## 1.2.0 — **Not Yet Released**
 
 * An exception is now raised if you attempt to start a session without providing
   your client id and client secret.
+
+## 1.1.3 — **Not Yet Released**
+
+* Added `X-Singly-SDK` and `X-Singly-SDK-Version` headers to `SinglyRequest`.
+
+* Updated project settings for Xcode 4.6 and fixed additional code warnings that
+  it exposed.
+
+## 1.1.2 — January 25th, 2013
+
+* Fixed a GCD memory management issue that was causing compilation failures for
+  applications that are targeted for iOS 6.
+
+* Modernized some deprecated calls for iOS 6.
+
+## 1.1.1 — January 23rd, 2013
+
+* Fixed an issue where delegate methods were not being called after successful
+  (or failed) logins attempts with the login view controller.
 
 ## 1.1.0 — January 17th, 2013
 

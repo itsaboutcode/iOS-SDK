@@ -108,7 +108,7 @@
     SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithServiceIdentifier:self.serviceIdentifier];
     loginViewController.scopes = scopes;
     loginViewController.delegate = self;
-    [viewController presentModalViewController:loginViewController animated:YES];
+    [viewController presentViewController:loginViewController animated:YES completion:nil];
 
 }
 
@@ -162,13 +162,11 @@
         [self.delegate singlyServiceDidAuthorize:self];
 }
 
-- (void)singlyLoginViewController:(SinglyLoginViewController *)controller errorLoggingInToService:(NSString *)service withError:(NSError *)error
+- (void)singlyLoginViewController:(SinglyLoginViewController *)viewController errorLoggingInToService:(NSString *)serviceIdentifier withError:(NSError *)error
 {
-    [controller dismissViewControllerAnimated:NO completion:nil];
+    [viewController dismissViewControllerAnimated:NO completion:nil];
     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
         [self.delegate singlyServiceDidFail:self withError:error];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
 }
 
 #pragma mark -
