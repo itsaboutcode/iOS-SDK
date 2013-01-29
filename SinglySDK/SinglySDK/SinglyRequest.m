@@ -63,10 +63,18 @@
     self = [super init];
     if (self)
     {
+
+        // Default Values
         self.endpoint = endpoint;
         self.parameters = parameters;
         self.isAuthorizedRequest = YES;
+
+        // Add Custom Headers
+        [self setCustomHeaders];
+
+        // Update Request URL
         [self updateURL];
+
     }
     return self;
 }
@@ -162,9 +170,21 @@
     if (isAuthorized && SinglySession.sharedSession.accessToken)
         [apiURLString appendFormat:@"&access_token=%@", SinglySession.sharedSession.accessToken];
 
-//    NSLog(@"[SinglySDK:SinglyRequest] Generated URL: %@", apiURLString);
-
     return [NSURL URLWithString:apiURLString];
+}
+
+#pragma mark - Custom Headers
+
+- (void)setAllHTTPHeaderFields:(NSDictionary *)headerFields
+{
+    [self setCustomHeaders];
+    [super setAllHTTPHeaderFields:headerFields];
+}
+
+- (void)setCustomHeaders
+{
+    [self setValue:@"iOS" forHTTPHeaderField:@"X-Singly-SDK"];
+    [self setValue:kSinglySDKVersion forHTTPHeaderField:@"X-Singly-SDK-Version"];
 }
 
 @end

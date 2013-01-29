@@ -27,8 +27,40 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "SinglyConstants.h"
+#import "SinglyRequest.h"
+#import "SinglyRequest+Internal.h"
 #import "SinglyRequestTests.h"
 
 @implementation SinglyRequestTests
+
+- (void)testShouldAddSinglySDKHeaders
+{
+    SinglyRequest *testRequest = [SinglyRequest requestWithEndpoint:@"foo"];
+    NSDictionary  *allHeaders  = testRequest.allHTTPHeaderFields;
+
+    STAssertNotNil(allHeaders[@"X-Singly-SDK"], @"");
+    STAssertEqualObjects(allHeaders[@"X-Singly-SDK"], @"iOS", @"The HTTP header 'X-Singly-SDK' should match 'iOS'.");
+
+    STAssertNotNil(allHeaders[@"X-Singly-SDK-Version"], @"");
+    STAssertEqualObjects(allHeaders[@"X-Singly-SDK-Version"], kSinglySDKVersion, [NSString stringWithFormat:@"The HTTP header 'X-Singly-SDK-Version' should match '%@'.", kSinglySDKVersion]);
+}
+
+- (void)testSetAllHTTPHeaderFieldsShouldKeepSinglySDKHeaders
+{
+    SinglyRequest *testRequest = [SinglyRequest requestWithEndpoint:@"foo"];
+    [testRequest setAllHTTPHeaderFields:@{
+        @"Content-Type": @"application/json"
+    }];
+
+    NSDictionary *allHeaders = testRequest.allHTTPHeaderFields;
+    STAssertEqualObjects(allHeaders[@"Content-Type"], @"application/json", @"Custom HTTP header 'Content-Type' should match 'application/json'.");
+
+    STAssertNotNil(allHeaders[@"X-Singly-SDK"], @"");
+    STAssertEqualObjects(allHeaders[@"X-Singly-SDK"], @"iOS", @"The HTTP header 'X-Singly-SDK' should match 'iOS'.");
+
+    STAssertNotNil(allHeaders[@"X-Singly-SDK-Version"], @"");
+    STAssertEqualObjects(allHeaders[@"X-Singly-SDK-Version"], kSinglySDKVersion, [NSString stringWithFormat:@"The HTTP header 'X-Singly-SDK-Version' should match '%@'.", kSinglySDKVersion]);
+}
 
 @end

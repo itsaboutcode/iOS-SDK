@@ -3,6 +3,8 @@
 
 ## 1.1.3 — **Not Yet Released**
 
+* Added `X-Singly-SDK` and `X-Singly-SDK-Version` headers to `SinglyRequest`.
+
 * Updated project settings for Xcode 4.6 and fixed additional code warnings that
   it exposed.
 
