@@ -24,7 +24,7 @@
 /*!
  *
  * TestFlight token for distribution (optional). Learn more about TestFlight at
- * http://www.testflight.com
+ * http://www.testflightapp.com
  *
 **/
 #define TESTFLIGHT_TOKEN @""
