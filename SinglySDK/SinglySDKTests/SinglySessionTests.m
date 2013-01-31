@@ -57,6 +57,8 @@
     [SinglyTestURLProtocol reset];
 }
 
+#pragma mark -
+
 - (void)testSharedSessionInitialization
 {
     STAssertNotNil(SinglySession.sharedSessionInstance, @"The shared session instance was not initialized!");

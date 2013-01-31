@@ -27,10 +27,36 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "SenTestCase+AsynchronousSupport.h"
+#import "SenTestCase+Fixtures.h"
+
 #import "SinglyService.h"
+#import "SinglyService+Internal.h"
 #import "SinglyServiceTests.h"
+#import "SinglyTestURLProtocol.h"
 
 @implementation SinglyServiceTests
+
+- (void)setUp
+{
+    [super setUp];
+
+    SinglySession.sharedSession.clientID = @"test-client-id";
+    SinglySession.sharedSession.clientSecret = @"test-client-secret";
+
+    [NSURLProtocol registerClass:[SinglyTestURLProtocol class]];
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+
+    [SinglySession.sharedSession resetSession];
+
+    [SinglyTestURLProtocol reset];
+}
+
+#pragma mark -
 
 - (void)testShouldReturnInitializedServiceWithIdentifier
 {
@@ -46,5 +72,66 @@
     STAssertEqualObjects(testService.serviceIdentifier, @"someservice", @"Service instance should be initialized for 'someservice'.");
 }
 
+#pragma mark - Service Disconnection
+
+- (void)testShouldDisconnectFromService
+{
+    SinglyService *testService = [SinglyService serviceWithIdentifier:@"facebook"];
+
+    NSData *responseData = [self dataForFixture:@"profiles-delete"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    BOOL isSuccessful = [testService disconnect:nil];
+
+    STAssertTrue(isSuccessful, @"Return value of disconnect: should be true.");
+}
+
+- (void)testShouldDisconnectFromServiceWithCompletion
+{
+    __block BOOL isComplete = NO;
+
+    SinglyService *testService = [SinglyService serviceWithIdentifier:@"facebook"];
+
+    NSData *responseData = [self dataForFixture:@"profiles-delete"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    [testService disconnectWithCompletion:^(BOOL isSuccessful, NSError *error) {
+        STAssertTrue(isSuccessful, @"Parameter value 'isSuccessful' should be true.");
+        isComplete = YES;
+    }];
+
+    [self waitForCompletion:^{ return isComplete; }];
+}
+
+#pragma mark - Service Client Identifiers
+
+- (void)testShouldFetchClientID
+{
+    SinglyService *testService = [SinglyService serviceWithIdentifier:@"facebook"];
+
+    NSData *responseData = [self dataForFixture:@"auth-client_id-facebook"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    NSString *testClientID = [testService fetchClientID:nil];
+
+    STAssertNotNil(testClientID, @"Return value of fetchClientID: should not be nil.");
+}
+
+- (void)testShouldFetchClientIDWithCompletion
+{
+    __block BOOL isComplete = NO;
+
+    SinglyService *testService = [SinglyService serviceWithIdentifier:@"facebook"];
+
+    NSData *responseData = [self dataForFixture:@"auth-client_id-facebook"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    [testService fetchClientIDWithCompletion:^(NSString *clientID, NSError *error) {
+        STAssertNotNil(clientID, @"Parameter 'clientID' value should not be nil.");
+        isComplete = YES;
+    }];
+
+    [self waitForCompletion:^{ return isComplete; }];
+}
 
 @end

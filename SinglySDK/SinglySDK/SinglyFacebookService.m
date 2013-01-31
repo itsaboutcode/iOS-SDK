@@ -110,7 +110,7 @@
         // Step 1 - Fetch the Client ID from Singly
         //
         if (!self.clientID)
-            [self fetchClientID];
+            [self fetchClientID:nil];
 
         //
         // Step 2 - Attempt Integrated Authorization

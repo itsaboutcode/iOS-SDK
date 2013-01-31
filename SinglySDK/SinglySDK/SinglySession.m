@@ -575,24 +575,18 @@ static SinglySession *sharedInstance = nil;
     if (parseError)
     {
         SinglyLog(@"An error occurred while attempting to parse service response: %@", parseError);
-
-        if (error)
-        {
-            if (responseObject && [responseObject isKindOfClass:[NSDictionary class]] && responseObject[@"error"])
-            {
-                NSString *serviceErrorMessage = responseObject[@"error"];
-                *error = [NSError errorWithDomain:kSinglyErrorDomain
-                                             code:kSinglyServiceErrorCode
-                                         userInfo:@{ NSLocalizedDescriptionKey : serviceErrorMessage }];
-            }
-            else
-            {
-                *error = parseError;
-            }
-        }
-
+        if (error) *error = parseError;
         _isSyncingDeviceContacts = NO;
         return NO;
+    }
+
+    // Check for Service Errors
+    if (responseObject && [responseObject isKindOfClass:[NSDictionary class]] && responseObject[@"error"])
+    {
+        NSString *serviceErrorMessage = responseObject[@"error"];
+        if (error) *error = [NSError errorWithDomain:kSinglyErrorDomain
+                                                code:kSinglyServiceErrorCode
+                                            userInfo:@{ NSLocalizedDescriptionKey : serviceErrorMessage }];
     }
 
     _isSyncingDeviceContacts = NO;

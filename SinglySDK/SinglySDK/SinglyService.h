@@ -51,8 +51,8 @@
  * Convenience method that will return an instance of SinglyService initialized
  * by the service identifier.
  *
- * @param serviceIdentifier  The identifier of the service (e.g. "facebook",
- *                           "twitter", etc).
+ * @param serviceIdentifier The identifier of the service (e.g. "facebook",
+ *                          "twitter", etc).
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
@@ -63,8 +63,8 @@
  *
  * Initializes with serviceIdentifier.
  *
- * @param serviceIdentifier  The identifier of the service (e.g. "facebook",
- *                           "twitter", etc).
+ * @param serviceIdentifier The identifier of the service (e.g. "facebook",
+ *                          "twitter", etc).
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
@@ -113,8 +113,8 @@
  * from integrated auth, app-based auth then Singly auth via our standard
  * login web view.
  *
- * @param viewController  The view controller instance that is presenting the
- *                        authorization request.
+ * @param viewController The view controller instance that is presenting the
+ *                       authorization request.
  *
  * @see requestAuthorizationFromViewController:withScopes:
  *
@@ -129,10 +129,10 @@
  * from integrated auth, app-based auth then Singly auth via our standard
  * login web view.
  *
- * @param viewController  The view controller instance that is presenting the
- *                        authorization request.
+ * @param viewController The view controller instance that is presenting the
+ *                       authorization request.
  *
- * @param scopes          The scope(s) to request from the service.
+ * @param scopes The scope(s) to request from the service.
  *
  * @see requestAuthorizationFromViewController:
  *
@@ -150,28 +150,47 @@
  *
  * Disconnects from the service.
  *
+ * @see disconnect:
  * @see disconnectWithCompletion:
  *
- * @available Available in Singly iOS SDK 1.1.0 and later.
+ * @available Available in Singly iOS SDK 1.1.0 and later. This method is
+ *            **deprecated** and will be removed in a future release. Please use
+ *            disconnect: instead.
  *
 **/
-- (void)disconnect;
+- (void)disconnect DEPRECATED_ATTRIBUTE;
+
+/*!
+ *
+ * Disconnects from the service.
+ *
+ * @param error Out parameter used if an error occurs while disconnceting from
+ *              the service. May be `NULL`.
+ *
+ * @returns `YES` if the operation was successful.
+ *
+ * @see disconnectWithCompletion:
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (BOOL)disconnect:(NSError **)error;
 
 /*!
  *
  * Disconnects from the service. Calls the specified block once the operation
  * has completed.
  *
- * @param completionHandler  The block to run when the check is complete. It
- *                           will be passed a `BOOL` stating whether or not the
- *                           the operation succeeded.
+ * @param completionHandler The block to run when the check is complete. It will
+ *                          be passed a `BOOL` stating whether or not the
+ *                          operation succeeded.
  *
- * @see disconnect
+ * @see disconnect:
  *
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
 **/
-- (void)disconnectWithCompletion:(void (^)(BOOL))completionHandler;
+- (void)disconnectWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Managing the Delegate

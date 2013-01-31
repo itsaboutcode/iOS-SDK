@@ -184,6 +184,8 @@
 		D064F0E8166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D064F0E6166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */; };
 		D06F113016BAF2CE00809E3E /* friends-ios.json in Resources */ = {isa = PBXBuildFile; fileRef = D06F112F16BAF2CE00809E3E /* friends-ios.json */; };
+		D06F113216BB21D400809E3E /* profiles-delete.json in Resources */ = {isa = PBXBuildFile; fileRef = D06F113116BB21D400809E3E /* profiles-delete.json */; };
+		D06F113416BB287F00809E3E /* auth-client_id-facebook.json in Resources */ = {isa = PBXBuildFile; fileRef = D06F113316BB287F00809E3E /* auth-client_id-facebook.json */; };
 		D079145A16B8356700F3D98E /* SinglyLog.h in Headers */ = {isa = PBXBuildFile; fileRef = D079145816B8356700F3D98E /* SinglyLog.h */; };
 		D079145B16B8356700F3D98E /* SinglyLog.h in Headers */ = {isa = PBXBuildFile; fileRef = D079145816B8356700F3D98E /* SinglyLog.h */; };
 		D079146616B87BCC00F3D98E /* auth-facebook-apply.json in Resources */ = {isa = PBXBuildFile; fileRef = D079146216B87BCC00F3D98E /* auth-facebook-apply.json */; };
@@ -437,6 +439,8 @@
 		D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPickerCell.m; sourceTree = "<group>"; };
 		D06D8DAC165193AB00E8750C /* Create Disk Image.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "Create Disk Image.rb"; sourceTree = "<group>"; };
 		D06F112F16BAF2CE00809E3E /* friends-ios.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "friends-ios.json"; sourceTree = "<group>"; };
+		D06F113116BB21D400809E3E /* profiles-delete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "profiles-delete.json"; sourceTree = "<group>"; };
+		D06F113316BB287F00809E3E /* auth-client_id-facebook.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "auth-client_id-facebook.json"; sourceTree = "<group>"; };
 		D077BA6116540FE800F6EEDE /* Singly Folder Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Singly Folder Icon.icns"; sourceTree = "<group>"; };
 		D077BA6216540FF000F6EEDE /* Singly Folder Icon.rsrc */ = {isa = PBXFileReference; lastKnownFileType = archive.rsrc; path = "Singly Folder Icon.rsrc"; sourceTree = "<group>"; };
 		D077BA63165554E500F6EEDE /* Customize Disk Image.applescript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.applescript; path = "Customize Disk Image.applescript"; sourceTree = "<group>"; };
@@ -623,6 +627,8 @@
 				D079146516B87BCC00F3D98E /* oauth-access_token.json */,
 				D003CDB616AF26F100D2B17A /* profiles.json */,
 				D06F112F16BAF2CE00809E3E /* friends-ios.json */,
+				D06F113116BB21D400809E3E /* profiles-delete.json */,
+				D06F113316BB287F00809E3E /* auth-client_id-facebook.json */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -1178,6 +1184,8 @@
 				D079146716B87BCC00F3D98E /* oauth-access_token.json in Resources */,
 				D079146916B87BFD00F3D98E /* oauth-access_token-invalid.json in Resources */,
 				D06F113016BAF2CE00809E3E /* friends-ios.json in Resources */,
+				D06F113216BB21D400809E3E /* profiles-delete.json in Resources */,
+				D06F113416BB287F00809E3E /* auth-client_id-facebook.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

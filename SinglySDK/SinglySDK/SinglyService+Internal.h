@@ -43,12 +43,48 @@
 
 /*!
  *
- * Fetches the client id from Singly.
+ * Fetches the client id for the service from the Singly API.
  *
- * @available Available in Singly iOS SDK 1.0.0 and later.
+ * @see fetchClientID:
+ * @see fetchClientIDWithCompletion:
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later. This method is
+ *            **deprecated** and will be removed in a future release. Please use
+ *            fetchClientID: or fetchClientIDWithCompletion: instead.
  *
 **/
-- (void)fetchClientID;
+- (void)fetchClientID DEPRECATED_ATTRIBUTE;
+
+/*!
+ *
+ * Fetches the client id for the service from the Singly API.
+ *
+ * @param error Out parameter used if an error occurs while fetching the client
+ *              id. May be `NULL`.
+ *
+ * @returns `YES` if the request was successful.
+ *
+ * @see fetchClientIDWithCompletion:
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (NSString *)fetchClientID:(NSError **)error;
+
+/*!
+ *
+ * Fetches the client id for the service from the Singly API.
+ *
+ * @param completionHandler The block to run when the check is complete. It will
+ *                          be passed a `BOOL` stating whether or not the
+ *                          operation succeeded.
+ *
+ * @see fetchClientID:
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+ **/
+- (void)fetchClientIDWithCompletion:(void (^)(NSString *clientID, NSError *error))completionHandler;
 
 /*!
  *

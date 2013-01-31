@@ -27,6 +27,8 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "SinglyConstants.h"
+#import "SinglyLog.h"
 #import "SinglyRequest.h"
 #import "SinglySession.h"
 #import "SinglyService.h"
@@ -114,43 +116,145 @@
 
 #pragma mark - Service Disconnection
 
-- (void)disconnect
+- (void)disconnect // DEPRECATED
 {
     [self disconnectWithCompletion:nil];
 }
 
-- (void)disconnectWithCompletion:(void (^)(BOOL))completionHandler
+- (BOOL)disconnect:(NSError **)error
 {
     NSDictionary *serviceProfile = SinglySession.sharedSession.profiles[self.serviceIdentifier];
+
+    // Prepare the Request
     SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profiles"];
     NSString *postString = [NSString stringWithFormat:@"delete=%@", [NSString stringWithFormat:@"%@@%@", serviceProfile[@"id"], self.serviceIdentifier]];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
 
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
+    // Perform the Request
+    NSError *requestError;
+    NSURLResponse *response;
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
+    if (requestError)
     {
+        if (error) *error = requestError;
+        return NO;
+    }
 
-        // TODO Handle Errors...
-        if (requestError)
-        {
-            NSLog(@"Error: %@", requestError);
+    // Parse the Response
+    NSError *parseError;
+    id responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+    if (parseError)
+    {
+        if (error) *error = parseError;
+        return NO;
+    }
 
-            if (completionHandler)
-                completionHandler(NO);
+    // Check for Service Errors
+    if (responseObject && [responseObject isKindOfClass:[NSDictionary class]] && responseObject[@"error"])
+    {
+        NSString *serviceErrorMessage = responseObject[@"error"];
+        if (error) *error = [NSError errorWithDomain:kSinglyErrorDomain
+                                                code:kSinglyServiceErrorCode
+                                            userInfo:@{ NSLocalizedDescriptionKey : serviceErrorMessage }];
+        return NO;
+    }
 
-            return;
-        }
+    // Update Profiles
+    NSError *profilesError;
+    [SinglySession.sharedSession updateProfiles:&profilesError];
+    if (profilesError)
+    {
+        if (error) *error = profilesError;
+        return NO;
+    }
 
-        // Update profiles from the Singly API
-        [SinglySession.sharedSession updateProfiles:nil];
+    return YES;
+}
 
-        // Call Completion Handler
-        if (completionHandler)
-            completionHandler(YES);
+- (void)disconnectWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler
+{
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-    }];
+        NSError *disconnectError;
+        BOOL isSuccessful = [self disconnect:&disconnectError];
+
+        if (completionHandler) dispatch_sync(currentQueue, ^{
+            completionHandler(isSuccessful, disconnectError);
+        });
+
+    });
+}
+
+#pragma mark - Service Client Identifiers
+
+- (void)fetchClientID // DEPRECATED
+{
+
+    [self fetchClientIDWithCompletion:nil];
+}
+
+- (NSString *)fetchClientID:(NSError **)error
+{
+
+    // If we already have the Client ID, do not attempt to fetch it again...
+    if (self.clientID) return self.clientID;
+
+    // Configure the Request
+    NSError *requestError;
+    NSError *parseError;
+    NSURLResponse *response;
+    SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/client_id/%@", SinglySession.sharedSession.clientID, self.serviceIdentifier]];
+    request.isAuthorizedRequest = NO;
+
+    // Send the request and check for errors...
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
+    if (requestError)
+    {
+        SinglyLog(@"A request error occurred while attempting to fetch the client id from '%@': %@", request.URL, requestError);
+        if (error) *error = requestError;
+        return nil;
+    }
+
+    // Parse the response and check for errors...
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+    if (parseError)
+    {
+        SinglyLog(@"A parse error occurred while attempting to parse the client id response for '%@': %@", self.serviceIdentifier, parseError);
+        if (error) *error = parseError;
+        return nil;
+    }
+
+    // Check for service errors...
+    NSError *serviceError = responseDictionary[@"error"];
+    if (serviceError)
+    {
+        SinglyLog(@"A service error occured while attempting to fetch the client id for '%@': %@", self.serviceIdentifier, serviceError);
+        if (error) *error = serviceError;
+        return nil;
+    }
+
+    self.clientID = responseDictionary[self.serviceIdentifier];
+
+    SinglyLog(@"Retrieved Client ID for '%@': %@", self.serviceIdentifier, self.clientID);
+
+    return self.clientID;
+}
+
+- (void)fetchClientIDWithCompletion:(void (^)(NSString *clientID, NSError *error))completionHandler
+{
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        NSError *error;
+        NSString *clientID = [self fetchClientID:&error];
+
+        if (completionHandler) dispatch_sync(currentQueue, ^{
+            completionHandler(clientID, error);
+        });
+        
+    });
 }
 
 #pragma mark - Login View Controller Delegates
@@ -167,51 +271,6 @@
     [viewController dismissViewControllerAnimated:NO completion:nil];
     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
         [self.delegate singlyServiceDidFail:self withError:error];
-}
-
-#pragma mark -
-
-- (void)fetchClientID
-{
-
-    // If we already have the Client ID, do not attempt to fetch it again...
-    if (self.clientID) return;
-
-    // Configure the Request
-    NSError *requestError;
-    NSError *parseError;
-    NSURLResponse *response;
-    SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/client_id/%@", SinglySession.sharedSession.clientID, self.serviceIdentifier]];
-    request.isAuthorizedRequest = NO;
-
-    // Send the request and check for errors...
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
-    if (requestError)
-    {
-        NSLog(@"[SinglySDK] A request error occurred while attempting to fetch the client id from '%@': %@", request.URL, requestError);
-        return;
-    }
-
-    // Parse the response and check for errors...
-    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
-    if (parseError)
-    {
-        NSLog(@"[SinglySDK] A parse error occurred while attempting to parse the client id response for '%@': %@", self.serviceIdentifier, parseError);
-        return;
-    }
-
-    // Check for service errors...
-    NSError *serviceError = responseDictionary[@"error"];
-    if (serviceError)
-    {
-        NSLog(@"[SinglySDK] A service error occured while attempting to fetch the client id for '%@': %@", self.serviceIdentifier, serviceError);
-        return;
-    }
-
-    self.clientID = responseDictionary[self.serviceIdentifier];
-
-    NSLog(@"[SinglySDK] Retrieved Client ID for '%@': %@", self.serviceIdentifier, self.clientID);
-    
 }
 
 @end
