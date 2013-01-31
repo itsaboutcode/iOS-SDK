@@ -172,13 +172,13 @@
     NSLog(@"Syncing Device Contacts with Singly API...");
 
     // Tell the current Singly Session to sync the contacts.
-    [SinglySession.sharedSession syncDeviceContactsWithCompletion:^(BOOL isSuccessful, NSArray *syncedContacts) {
+    [SinglySession.sharedSession syncDeviceContactsWithCompletion:^(BOOL isSuccessful, NSError *error) {
 
         // Reload the table view to re-enable the "Sync Contacts" option.
         [self.tableView reloadData];
 
         UIAlertView *notificationAlert = [[UIAlertView alloc] initWithTitle:@"Contacts Synced"
-                                                                    message:[NSString stringWithFormat:@"Synced %d contacts with the Singly API.", syncedContacts.count]
+                                                                    message:[NSString stringWithFormat:@"Synced contacts with the Singly API."]
                                                                    delegate:self
                                                           cancelButtonTitle:@"Dismiss"
                                                           otherButtonTitles:nil];

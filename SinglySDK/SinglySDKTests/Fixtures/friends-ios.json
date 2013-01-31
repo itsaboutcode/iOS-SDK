@@ -1,0 +1,149 @@
+[
+	{
+		"data": {
+		"name": "Kate Bell",
+			"id": "1",
+			"phones": [
+				"(555) 564-8583",
+				"(415) 555-3695"
+			],
+			"emails": [
+				"kate-bell@mac.com",
+				"www.creative-consulting-inc.com"
+			],
+			"self": "false"
+		},
+		"idr": "contact:ios.f89755e277182e378f32941c237d1d38.16cb605e0c6f03359a4dcdeb633b6393@devices/contacts#1",
+		"at": 1359657737004,
+		"_v": "036d68fda6ffcbf88963b542448acf34",
+		"id": "6f07ee307383e9858762f244bf206865_f1065756c",
+		"saved": 1359657737052,
+		"store": {
+			"path": "f1065756c4523590858961e47a31f236/ijod.1359657737026.11089",
+			"len": 296,
+			"offset": 0,
+			"hash": "ac657642390cf3bab288d6c4eef6f634"
+		}
+	},
+	{
+		"data": {
+			"name": "Daniel Higgins",
+			"id": "2",
+			"phones": [
+				"555-478-7672",
+				"(408) 439-5270",
+				"(408) 555-3514"
+			],
+			"emails": [
+				"d-higgins@mac.com"
+			],
+			"self": "false"
+		},
+		"idr": "contact:ios.f89755e277182e378f32941c237d1d38.16cb605e0c6f03359a4dcdeb633b6393@devices/contacts#2",
+		"at":1359657737004,
+		"_v": "036d68fda6ffcbf88963b542448acf34",
+		"id": "01331343062a37db700be29cc5429e9e_f1065756c",
+		"saved":1359657737054,
+		"store": {
+			"path": "f1065756c4523590858961e47a31f236/ijod.1359657737026.11089",
+			"len":279,
+			"offset":296,
+			"hash": "6f0bf225515bae776c277bbe52ae7120"
+		}
+	},
+	{
+		"data": {
+			"name": "John Appleseed",
+			"id": "3",
+			"phones": [
+				"888-555-5512",
+				"888-555-1212"
+			],
+			"emails": [
+				"John-Appleseed@mac.com"
+			],
+			"self": "false"
+		},
+		"idr": "contact:ios.f89755e277182e378f32941c237d1d38.16cb605e0c6f03359a4dcdeb633b6393@devices/contacts#3",
+		"at":1359657737004,
+		"_v": "036d68fda6ffcbf88963b542448acf34",
+		"id": "79f28e6314f9081f4eb9965d8ba9cf19_f1065756c",
+		"saved":1359657737055,
+		"store": {
+			"path": "f1065756c4523590858961e47a31f236/ijod.1359657737026.11089",
+			"len":265,
+			"offset":575,
+			"hash": "bb96e55c4b7d20854fa9151843eb2bef"
+		}
+	},
+	{
+		"data": {
+			"name": "Anna Haro",
+			"id": "4",
+			"phones": [
+				"555-522-8243"
+			],
+			"emails": [
+				"anna-haro@mac.com"
+			],
+			"self": "false"
+		},
+		"idr": "contact:ios.f89755e277182e378f32941c237d1d38.16cb605e0c6f03359a4dcdeb633b6393@devices/contacts#4",
+		"at":1359657737004,
+		"_v": "036d68fda6ffcbf88963b542448acf34",
+		"id": "028a3fa1401d99fd95a52372e8244b0e_f1065756c",
+		"saved":1359657737056,
+		"store": {
+			"path": "f1065756c4523590858961e47a31f236/ijod.1359657737026.11089",
+			"len":257,
+			"offset":840,
+			"hash": "4ada648737ee34f01da5c28b17d5b588"
+		}
+	},
+	{
+		"data": {
+			"name": "Hank Zakroff",
+			"id": "5",
+			"phones": [
+				"(555) 766-4823",
+				"(707) 555-1854"
+			],
+			"emails": [
+				"hank-zakroff@mac.com"
+			],
+			"self": "false"
+		},
+		"idr": "contact:ios.f89755e277182e378f32941c237d1d38.16cb605e0c6f03359a4dcdeb633b6393@devices/contacts#5",
+		"at":1359657737004,
+		"_v": "036d68fda6ffcbf88963b542448acf34",
+		"id": "cc5f93ba4290fd753eefb9587d532ebc_f1065756c",
+		"saved":1359657737058,
+		"store": {
+			"path": "f1065756c4523590858961e47a31f236/ijod.1359657737026.11089",
+			"len":278,
+			"offset":1097,
+			"hash": "8753cce0a3640388ca2dc36700cf703e"
+		}
+	},
+	{
+		"data": {
+			"name": "David Taylor",
+			"id": "6",
+			"phones": [
+				"555-610-6679"
+			],
+			"self": "false"
+		},
+		"idr": "contact:ios.f89755e277182e378f32941c237d1d38.16cb605e0c6f03359a4dcdeb633b6393@devices/contacts#6",
+		"at":1359657737004,
+		"_v": "036d68fda6ffcbf88963b542448acf34",
+		"id": "3ab1b2734bd4961d50ad918533b82c92_f1065756c",
+		"saved":1359657737059,
+		"store": {
+			"path": "f1065756c4523590858961e47a31f236/ijod.1359657737026.11089",
+			"len":243,
+			"offset":1375,
+			"hash": "3d9399583dcf82df0a642a912781e34c"
+		}
+	}
+]

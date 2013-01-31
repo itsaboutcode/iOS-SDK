@@ -34,6 +34,7 @@
 #import "SinglyRequest.h"
 #import "SinglyService+Internal.h"
 #import "SinglySession.h"
+#import "SinglySession+Internal.h"
 
 @implementation SinglyFacebookService
 
@@ -148,7 +149,10 @@
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
 
     if (!accountType)
+    {
+        NSLog(@"[SinglySDK]   No integrated accounts available.");
         return;
+    }
 
     NSArray *permissions = (scopes != nil) ? scopes : @[ @"email", @"user_location", @"user_birthday" ];
     NSDictionary *options = @{
@@ -204,7 +208,12 @@
                     NSLog(@"Token is expired... Renewed! %d", renewResult);
                     NSLog(@"Error: %@", error);
                     NSLog(@"Token: %@", account.credential.oauthToken);
-                    [SinglySession.sharedSession applyService:self.serviceIdentifier withToken:account.credential.oauthToken];
+                    NSError *applyError;
+                    [SinglySession.sharedSession applyService:self.serviceIdentifier withToken:account.credential.oauthToken error:&applyError];
+                    if (applyError)
+                    {
+                        // TODO Handle errors!
+                    }
                 }];
             }
 
@@ -213,7 +222,7 @@
                 NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
                 SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"];
                 SinglySession.sharedSession.accountID = responseDictionary[@"account"];
-                [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL success)
+                [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL isSuccessful, NSError *error)
                 {
                     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
                         [self.delegate singlyServiceDidAuthorize:self];

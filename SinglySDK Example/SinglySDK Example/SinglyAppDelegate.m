@@ -59,11 +59,9 @@
         NSLog(@"**** Profiles were updated");
     }];
     
-    [session startSessionWithCompletion:^(BOOL ready) {
-        if (ready)
-        {
+    [session startSessionWithCompletion:^(BOOL isReady, NSError *error) {
+        if (isReady)
             NSLog(@"Singly Session\n  - Account: %@\n  - Access Token: %@)", session.accountID, session.accessToken);
-        }
     }];
 
     return YES;

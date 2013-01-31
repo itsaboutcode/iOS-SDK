@@ -179,7 +179,7 @@
             }
 
             // Update Profiles
-            [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL isSuccessful)
+            [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL isSuccessful, NSError *error)
             {
 
                 // Dismiss the Activity Indicator

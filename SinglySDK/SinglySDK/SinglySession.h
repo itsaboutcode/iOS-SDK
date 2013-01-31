@@ -33,6 +33,24 @@
 
 /*!
  *
+ * Notification raised when the session has been started.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+static NSString * const kSinglySessionStartedNotification = @"com.singly.notifications.SessionStartedNotification";
+
+/*!
+ *
+ * Notification raised when the session has been reset.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+static NSString * const kSinglySessionResetNotification = @"com.singly.notifications.SessionResetNotification";
+
+/*!
+ *
  * Notification raised when a session's profiles have been updated.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
@@ -56,7 +74,7 @@ static NSString * const kSinglyServiceAppliedNotification = @"com.singly.notific
  *
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
- **/
+**/
 static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notifications.ContactsSyncedNotification";
 
 /*!
@@ -74,10 +92,8 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
 
 /*!
  *
- * Access the shared session object
- *
- * This is the preferred way to use the SinglySession and you should only create
- * a new instance if you must use multiple sessions inside one app.
+ * Access the shared session object. If a shared session has not yet been
+ * initialized, this method will initialize and return the shared instance.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
@@ -106,18 +122,33 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
 **/
 @property (copy) NSString *clientSecret;
 
-/// ----------------------------------------------------------------------------
-/// @name Managing the Session
-/// ----------------------------------------------------------------------------
-
 /*!
  *
- * The access token that will be used for all Singly API requests.
+ * The access token that will be used for all Singly API requests. This property
+ * will be set automatically when authorizing against a supported service, but
+ * you may also set it manually if your use case requires it.
+ *
+ * @see requestAccessTokenWithCode:
+ * @see requestAccessTokenWithCode:completion:
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 @property (copy) NSString *accessToken;
+
+/*!
+ *
+ * The account ID associated with the current access token. This property will
+ * be set automatically when authorizing against a supported service.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (copy) NSString *accountID;
+
+/// ----------------------------------------------------------------------------
+/// @name Managing the Session
+/// ----------------------------------------------------------------------------
 
 /*!
  *
@@ -127,10 +158,35 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  *
  * @param code The code to use.
  *
- * @available Available in Singly iOS SDK 1.1.0 and later.
+ * @see requestAccessTokenWithCode:error:
+ * @see requestAccessTokenWithCode:completion:
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later. This method is
+ *            **deprecated** and will be removed in a future release. Please use
+ *            requestAccessTokenWithCode:error: instead.
+ *
  *
 **/
-- (void)requestAccessTokenWithCode:(NSString *)code;
+- (void)requestAccessTokenWithCode:(NSString *)code DEPRECATED_ATTRIBUTE;
+
+/*!
+ *
+ * Requests your Access Token from the Singly API for the given code. The code
+ * is returned in the Redirect URI after you have successfully authenticated
+ * with a service via Singly.
+ *
+ * @param code The code to use.
+ *
+ * @param error Out parameter used if an error occurs while requesting the
+ *              access token. May be `NULL`.
+ *
+ * @returns The retrieved access token, if no errors occurred (otherwise nil).
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (NSString *)requestAccessTokenWithCode:(NSString *)code
+                                   error:(NSError **)error;
 
 /*!
  *
@@ -151,15 +207,6 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
 
 /*!
  *
- * The account ID associated with the current access token.
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-@property (copy) NSString *accountID;
-
-/*!
- *
  * Denotes whether or not the session is in a ready state (i.e. authorized and
  * valid).
  *
@@ -170,20 +217,56 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
 
 /*!
  *
- * Get the session in a state that is ready to make API calls.
+ * Gets the session into a state that is ready for your application to make API
+ * calls.
+ *
+ * This method will execute synchronously, waiting for each operation to
+ * complete before returning. In most cases, you will actually want to call
+ * startSessionWithCompletion: to perform these steps asyncronously.
+ *
+ * A notification (`kSinglySessionStartedNotification`) is posted once the
+ * session has been started.
+ *
+ * @param error Out parameter used if an error occurs while starting the
+ *              session. May be `NULL`.
+ *
+ * @returns `YES` if the session was started, otherwise `NO`.
+ *
+ * @see startSessionWithCompletion:
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (BOOL)startSession:(NSError **)error;
+
+/*!
+ *
+ * Gets the session into a state that is ready for your application to make API
+ * calls. Once the steps have finished, the provided completion block will be
+ * called.
+ *
+ * A notification (`kSinglySessionStartedNotification`) is posted once the
+ * session has been started.
  *
  * @param completionHandler  The block to run when the check is complete. It
  *                           will be passed a `BOOL` stating whether or not the
  *                           the session is ready.
  *
+ * @see startSession:
+ *
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
 **/
-- (void)startSessionWithCompletion:(void (^)(BOOL))completionHandler;
+- (void)startSessionWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
 
 /*!
  *
- * Get the session in a state that is ready to make API calls.
+ * Gets the session into a state that is ready for your application to make API
+ * calls. Once the steps have finished, the provided completion block will be
+ * called.
+ *
+ * A notification (`kSinglySessionStartedNotification`) is posted once the
+ * session has been started.
  *
  * @param completionHandler  The block to run when the check is complete. It
  *                           will be passed a `BOOL` stating whether or not the
@@ -191,20 +274,24 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  *
  * @see startSessionWithCompletion:
  *
- * @available Available in Singly iOS SDK 1.0.0 and later.
+ * @available Available in Singly iOS SDK 1.0.0 and later. This method is
+ *            **deprecated** and will be removed in a future release. Please use
+ *            startSessionWithCompletion: instead.
  *
 **/
-- (void)startSessionWithCompletionHandler:(void (^)(BOOL))completionHandler DEPRECATED_ATTRIBUTE;
+- (void)startSessionWithCompletionHandler:(void (^)(BOOL isSuccessful, NSError *error))completionHandler DEPRECATED_ATTRIBUTE;
 
 /*!
  *
- * Resets the current session by clearing the access token, account id and
+ * Resets the current session by clearing the access token, account id and the
  * loaded profiles.
+ *
+ * @returns `YES` if the session was successfully reset.
  *
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
 **/
-- (void)resetSession;
+- (BOOL)resetSession;
 
 /// ----------------------------------------------------------------------------
 /// @name Managing Session Profiles
@@ -217,7 +304,7 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  *
  * This property is populated while updating profiles.
  *
- * @see updateProfiles
+ * @see updateProfiles:
  * @see updateProfilesWithCompletion:
  *
  * @available Available in Singly iOS SDK 1.1.0 and later.
@@ -232,7 +319,7 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  *
  * This property is populated while updating profiles.
  *
- * @see updateProfiles
+ * @see updateProfiles:
  * @see updateProfilesWithCompletion:
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
@@ -245,17 +332,20 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
 /*!
  *
  * Updates the profiles by connecting to the Singly API and fetching the latest
- * version.
+ * version. This method is called synchronously.
  *
  * A notification (`kSinglySessionProfilesUpdatedNotification`) is posted once
  * the update has completed.
+ *
+ * @param error Out parameter used if an error occurs while starting the
+ *              session. May be `NULL`.
  *
  * @see updateProfilesWithCompletion:
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-- (void)updateProfiles;
+- (BOOL)updateProfiles:(NSError **)error;
 
 /*!
  *
@@ -270,12 +360,23 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  * @param completionHandler  The block to call once the profiles have been
  *                           updated.
  *
- * @see updateProfiles
+ * @see updateProfiles:
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-- (void)updateProfilesWithCompletion:(void (^)(BOOL))completionHandler;
+- (void)updateProfilesWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
+
+/*!
+ *
+ * Resets the loaded profiles.
+ *
+ * @returns `YES` if the profiles were reset.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (BOOL)resetProfiles;
 
 /// ----------------------------------------------------------------------------
 /// @name Managing Services
@@ -289,12 +390,63 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  * @param serviceIdentifier  The identifier of the service (e.g. "facebook",
  *                           "twitter", etc).
  *
- * @param token              The access token to associate with the session.
+ * @param accessToken        The access token to associate with the session.
  *
- * @available Available in Singly iOS SDK 1.0.0 and later.
+ * @see applyService:withToken:error:
+ * @see applyService:withToken:completion:
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later. This method is
+ *            **deprecated** and will be removed in a future release. Please use
+ *            applyService:withToken:error: instead.
  *
 **/
-- (void)applyService:(NSString *)serviceIdentifier withToken:(NSString *)token;
+- (void)applyService:(NSString *)serviceIdentifier
+           withToken:(NSString *)accessToken DEPRECATED_ATTRIBUTE;
+
+/*!
+ *
+ * Allows you to associate a service with an existing access token to the Singly
+ * session.
+ *
+ * @param serviceIdentifier The identifier of the service (e.g. "facebook",
+ *                          "twitter", etc).
+ *
+ * @param accessToken The access token to associate with the session.
+ *
+ * @param error Out parameter used if an error occurs while starting the
+ *              session. May be `NULL`.
+ *
+ * @returns `YES` if the operation was successful.
+ *
+ * @see applyService:withToken:completion:
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (BOOL)applyService:(NSString *)serviceIdentifier
+           withToken:(NSString *)accessToken
+               error:(NSError **)error;
+
+/*!
+ *
+ * Allows you to associate a service with an existing access token to the Singly
+ * session.
+ *
+ * @param serviceIdentifier The identifier of the service (e.g. "facebook",
+ *                          "twitter", etc).
+ *
+ * @param accessToken The access token to associate with the session.
+ *
+ * @param completionHandler The block to call once the service has been applied.
+ *
+ * @see applyService:withToken:error:
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (void)applyService:(NSString *)serviceIdentifier
+           withToken:(NSString *)accessToken
+          completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Syncing Device Contacts
@@ -314,10 +466,39 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  *
  * Syncs the device contacts with the Singly API.
  *
- * @available Available in Singly iOS SDK 1.1.0 and later.
+ * This method will execute synchronously, waiting for the synchronization to
+ * complete before returning. In most cases, you will actually want to call
+ * syncDeviceContactsWithCompletion: to perform these steps asyncronously.
  *
-**/
-- (void)syncDeviceContacts;
+ * @param error Out parameter used if an error occurs while syncing device
+ *              contacts. May be `NULL`.
+ *
+ * @see syncDeviceContactsWithCompletion:
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+ **/
+- (BOOL)syncDeviceContacts:(NSError **)error;
+
+/*!
+ *
+ * Syncs the device contacts with the Singly API. This method is syncronous. For
+ * an asyncronous version, use syncDeviceContactsWithCompletion:.
+ *
+ * This method will execute synchronously, waiting for the synchronization to
+ * complete before returning. In most cases, you will actually want to call
+ * syncDeviceContactsWithCompletion: to perform these steps asyncronously.
+ *
+ * @see syncDeviceContacts:
+ * @see syncDeviceContactsWithCompletion:
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later. This method is
+ *            **deprecated** and will be removed in a future release. Please use
+ *            syncDeviceContacts: instead.
+
+ *
+ **/
+- (void)syncDeviceContacts DEPRECATED_ATTRIBUTE;
 
 /*!
  *
@@ -327,12 +508,14 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  * In addition to calling the specified completion handler, a notification
  * (`kSinglyContactsSyncedNotification`) is posted once the sync has completed.
  *
- * @param completionHandler  The block to call once the sync has been completed.
+ * @param completionHandler The block to call once the sync has been completed.
+ *
+ * @see syncDeviceContacts:
  *
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
 **/
-- (void)syncDeviceContactsWithCompletion:(void (^)(BOOL, NSArray *))completionHandler;
+- (void)syncDeviceContactsWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Handling App Launches by URL
@@ -340,22 +523,10 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
 
 /*!
  *
- * The service the is currently being authorized. This is necessary for
- * integration with 3rd party apps installed on the device so that we know which
- * service has been authorized after our app is relaunched by the authorizing
- * app.
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-@property (strong) SinglyService *authorizingService;
-
-/*!
- *
  * Handles app launches by oauth redirection requests and maps them appropriately
  * based on the service.
  *
- * @param url The redirection URL that should be handled
+ * @param url The URL to be handled.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *

@@ -144,7 +144,7 @@
         }
 
         // Update profiles from the Singly API
-        [SinglySession.sharedSession updateProfiles];
+        [SinglySession.sharedSession updateProfiles:nil];
 
         // Call Completion Handler
         if (completionHandler)

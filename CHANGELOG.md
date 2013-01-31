@@ -3,10 +3,15 @@
 
 ## 1.2.0 — **Not Yet Released**
 
+* Improved error handling and many of the method signatures to allow for passing
+  errors by reference.
+
+* Notifications are now posted when the session is started and reset.
+
 * An exception is now raised if you attempt to start a session without providing
   your client id and client secret.
 
-## 1.1.3 — **Not Yet Released**
+## 1.1.3 — **January 31st, 2013**
 
 * Added `X-Singly-SDK` and `X-Singly-SDK-Version` headers to `SinglyRequest`.
 

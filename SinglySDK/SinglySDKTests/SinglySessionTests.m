@@ -27,35 +27,40 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "SenTestCase+AsynchronousSupport.h"
+#import "SenTestCase+Fixtures.h"
+
 #import "SinglyConstants.h"
 #import "SinglySession.h"
 #import "SinglySession+Internal.h"
 #import "SinglySessionTests.h"
+#import "SinglyTestURLProtocol.h"
 
 @implementation SinglySessionTests
 
 - (void)setUp
 {
+    [super setUp];
+    
     SinglySession.sharedSession.clientID = @"test-client-id";
     SinglySession.sharedSession.clientSecret = @"test-client-secret";
+
+    [NSURLProtocol registerClass:[SinglyTestURLProtocol class]];
 }
 
 - (void)tearDown
 {
+    [super tearDown];
+    
     [SinglySession.sharedSession resetSession];
+
+    [SinglyTestURLProtocol reset];
 }
 
 - (void)testSharedSessionInitialization
 {
     STAssertNotNil(SinglySession.sharedSessionInstance, @"The shared session instance was not initialized!");
     STAssertNotNil(SinglySession.sharedSession, @"The shared session was not initialized!");
-}
-
-- (void)testNewlyInitializedSessionShouldNotBeReady
-{
-    SinglySession *testSession = [[SinglySession alloc] init];
-
-    STAssertFalse(testSession.isReady, @"Newly initialized session should not be in a ready state.");
 }
 
 - (void)testSubsequentCallsToSharedSessionShouldReturnSingletonInstance
@@ -66,6 +71,7 @@
     STAssertEquals(sessionOne, sessionTwo, @"Both session pointers should be identical.");
 }
 
+#pragma mark - Session Configuration
 
 - (void)testShouldSetClientID
 {
@@ -83,89 +89,336 @@
     STAssertEqualObjects(testSession.clientSecret, @"another-test-client-secret", @"The client secret should match 'another-test-client-secret'.");
 }
 
-- (void)testShouldResetSession
-{
-    SinglySession *testSession = [[SinglySession alloc] init];
-    testSession.accessToken = @"test-access-token";
-    testSession.accountID = @"test-account-id";
-
-    STAssertEqualObjects(testSession.accessToken, @"test-access-token", @"The accessToken property should equal 'test-access-token'.");
-    STAssertEqualObjects(testSession.accountID, @"test-account-id", @"The accountID property should equal 'test-account-id'.");
-
-    [testSession resetSession];
-
-    // TODO Test isReady, profiles and watch for notification: kSinglySessionProfilesUpdatedNotification
-
-    STAssertNil(testSession.accessToken, @"The accessToken property should be nil.");
-    STAssertNil(testSession.accountID, @"The accountID property should be nil.");
-}
-
-- (void)testStartingSessionWithoutCredentialsShouldReturnNotReady
-{
-    SinglySession *testSession = SinglySession.sharedSession;
-    [testSession resetSession];
-
-    STAssertNil(testSession.accessToken, @"The accessToken property should be nil.");
-    STAssertNil(testSession.accountID, @"The accessToken property should be nil.");
-
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-
-    [testSession startSessionWithCompletion:^(BOOL isReady) {
-        STAssertFalse(isReady, @"The session should not be ready.");
-        dispatch_semaphore_signal(semaphore);
-    }];
-
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
-        dispatch_release(semaphore);
-    #endif
-}
+#pragma mark - Session Management
 
 - (void)testShouldStartSession
 {
-    SinglySession *testSession = SinglySession.sharedSession;
-    [testSession resetSession];
+    NSData *responseData = [self dataForFixture:@"profiles"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
 
-    STAssertNil(testSession.accessToken, @"The accessToken property should be nil.");
-    STAssertNil(testSession.accountID, @"The accessToken property should be nil.");
+    SinglySession.sharedSession.accountID = @"test-account-id";
+    SinglySession.sharedSession.accessToken = @"test-access-token";
 
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    BOOL isStarted = [SinglySession.sharedSession startSession:nil];
 
-    [testSession startSessionWithCompletion:^(BOOL isReady) {
-        STAssertFalse(isReady, @"The session should not be ready.");
-        dispatch_semaphore_signal(semaphore);
+    STAssertTrue(isStarted, @"Session should be started.");
+}
+
+- (void)testShouldStartSessionWithCompletion
+{
+    __block BOOL isComplete = NO;
+
+    NSData *responseData = [self dataForFixture:@"profiles"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    SinglySession.sharedSession.accountID = @"test-account-id";
+    SinglySession.sharedSession.accessToken = @"test-access-token";
+
+    [SinglySession.sharedSession startSessionWithCompletion:^(BOOL isReady, NSError *error) {
+        STAssertTrue(isReady, @"The session should be started.");
+        isComplete = YES;
     }];
 
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
-        dispatch_release(semaphore);
-    #endif
+    [self waitForCompletion:^{ return isComplete; }];
 }
 
-- (void)testShouldThrowError
+- (void)testStartSessionShouldPostNotification
+{
+    __block BOOL isComplete = NO;
+
+    NSData *responseData = [self dataForFixture:@"profiles"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    id testObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kSinglySessionStartedNotification
+                                                                        object:nil
+                                                                         queue:[NSOperationQueue mainQueue]
+                                                                    usingBlock:^(NSNotification *notification)
+    {
+        STAssertTrue(SinglySession.sharedSession.isReady, @"Session should be in a ready state.");
+        isComplete = YES;
+    }];
+
+    // Start Session
+    SinglySession.sharedSession.accessToken = @"S0meAcc3ssT0k3n";
+    SinglySession.sharedSession.accountID = @"36b62eda6b24f323657c07c7bb764140";
+    [SinglySession.sharedSession startSession:nil];
+
+    [self waitForCompletion:^{ return isComplete; }];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:testObserver];
+}
+
+- (void)testShouldNotStartSessionWithMissingAccountCredentials
+{
+    [SinglySession.sharedSession resetSession];
+
+    STAssertNil(SinglySession.sharedSession.accessToken, @"The accessToken property should be nil.");
+    STAssertNil(SinglySession.sharedSession.accountID, @"The accessToken property should be nil.");
+
+    BOOL isStarted = [SinglySession.sharedSession startSession:nil];
+
+    STAssertFalse(isStarted, @"The session should not be started or ready.");
+}
+
+- (void)testShouldThrowExceptionForMissingSinglyCredentials
 {
     SinglySession.sharedSession.clientID = nil;
     SinglySession.sharedSession.clientSecret = nil;
 
-    STAssertThrowsSpecificNamed([SinglySession.sharedSession startSessionWithCompletion:nil], NSException, kSinglyCredentialsMissingException, @"Should throw SinglyCredentialsMissingException when client id or client secret are missing!");
+    STAssertThrowsSpecificNamed([SinglySession.sharedSession startSession:nil], NSException, kSinglyCredentialsMissingException, @"Should throw SinglyCredentialsMissingException when client id or client secret are missing!");
 }
 
-- (void)testShouldThrowError
+- (void)testShouldResetSession
 {
-    SinglySession.sharedSession.clientID = nil;
-    SinglySession.sharedSession.clientSecret = nil;
+    SinglySession.sharedSession.accessToken = @"test-access-token";
+    SinglySession.sharedSession.accountID = @"test-account-id";
 
-    STAssertThrowsSpecificNamed([SinglySession.sharedSession startSessionWithCompletion:nil], NSException, kSinglyCredentialsMissingException, @"Should throw SinglyCredentialsMissingException when client id or client secret are missing!");
+    STAssertEqualObjects(SinglySession.sharedSession.accessToken, @"test-access-token", @"The accessToken property should equal 'test-access-token'.");
+    STAssertEqualObjects(SinglySession.sharedSession.accountID, @"test-account-id", @"The accountID property should equal 'test-account-id'.");
+
+    [SinglySession.sharedSession resetSession];
+
+    STAssertNil(SinglySession.sharedSession.accessToken, @"The accessToken property should be nil.");
+    STAssertNil(SinglySession.sharedSession.accountID, @"The accountID property should be nil.");
+    STAssertFalse(SinglySession.sharedSession.isReady, @"The session should not be in a ready state.");
+    STAssertNil(SinglySession.sharedSession.profile, @"The profile property should be nil");
+    STAssertNil(SinglySession.sharedSession.profiles, @"The profiles property should be nil");
 }
+
+- (void)testResetSessionShouldPostSessionResetNotification
+{
+    __block BOOL isComplete = NO;
+
+    id testObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kSinglySessionResetNotification
+                                                                        object:nil
+                                                                         queue:[NSOperationQueue mainQueue]
+                                                                    usingBlock:^(NSNotification *notification)
+    {
+        isComplete = YES;
+    }];
+
+    [SinglySession.sharedSession resetSession];
+
+    [self waitForCompletion:^{ return isComplete; }];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:testObserver];
+}
+
+- (void)testResetSessionShouldPostProfilesUpdatedNotification
+{
+    __block BOOL isComplete = NO;
+
+    id testObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kSinglySessionProfilesUpdatedNotification
+                                                                        object:nil
+                                                                         queue:[NSOperationQueue mainQueue]
+                                                                    usingBlock:^(NSNotification *notification)
+    {
+        isComplete = YES;
+    }];
+
+    [SinglySession.sharedSession resetSession];
+    
+    [self waitForCompletion:^{ return isComplete; }];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:testObserver];
+}
+
+- (void)testShouldRequestAccessTokenWithCode
+{
+    NSData *responseData = [self dataForFixture:@"oauth-access_token"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    NSString *testCode = @"test-code";
+    NSString *accessToken = [SinglySession.sharedSession requestAccessTokenWithCode:testCode error:nil];
+
+    STAssertEqualObjects(accessToken, @"S0meAcc3ssT0k3n", @"The returned access token should equal 'S0meAcc3ssT0k3n'.");
+}
+
+- (void)testShouldRequestAccessTokenWithCodeAndCompletion
+{
+    __block BOOL isComplete = NO;
+
+    NSData *responseData = [self dataForFixture:@"oauth-access_token"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    NSString *testCode = @"test-code";
+    [SinglySession.sharedSession requestAccessTokenWithCode:testCode completion:^(NSString *accessToken, NSError *error) {
+        STAssertEqualObjects(accessToken, @"S0meAcc3ssT0k3n", @"The passed access token should equal 'S0meAcc3ssT0k3n'.");
+        isComplete = YES;
+    }];
+
+    [self waitForCompletion:^{ return isComplete; }];
+}
+
+- (void)testRequestingAccessTokenWithInvalidCodeShouldFailWithError
+{
+    NSData *responseData = [self dataForFixture:@"oauth-access_token-invalid"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    NSError *error;
+    NSString *testCode = @"invalid-code";
+    NSString *accessToken = [SinglySession.sharedSession requestAccessTokenWithCode:testCode error:&error];
+
+    STAssertNil(accessToken, @"The returned access token should be nil.");
+    STAssertNotNil(error, @"The error should not be nil.");
+}
+
+- (void)testRequestingAccessTokenWithInvalidCodeAndCompletionShouldFailWithError
+{
+    __block BOOL isComplete = NO;
+
+    NSData *responseData = [self dataForFixture:@"oauth-access_token-invalid"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    NSString *testCode = @"invalid-code";
+    [SinglySession.sharedSession requestAccessTokenWithCode:testCode completion:^(NSString *accessToken, NSError *error) {
+        STAssertNil(accessToken, @"The passed access token should be nil.");
+        STAssertNotNil(error, @"The passed error should not be nil.");
+        isComplete = YES;
+    }];
+
+    [self waitForCompletion:^{ return isComplete; }];
+}
+
+#pragma mark - Profiles
 
 - (void)testShouldUpdateProfiles
 {
-    
+    NSData *responseData = [self dataForFixture:@"profiles"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    BOOL isSuccessful = [SinglySession.sharedSession updateProfiles:nil];
+
+    STAssertTrue(isSuccessful, @"Return value from updateProfiles: should be true.");
 }
 
-- (void)testShouldHandleOpenURL
+- (void)testShouldUpdateProfilesWithCompletion
+{
+    __block BOOL isComplete = NO;
+
+    NSData *responseData = [self dataForFixture:@"profiles"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL isSuccessful, NSError *error) {
+        STAssertTrue(isSuccessful, @"Parameter value 'isSuccessful' should be true.");
+        isComplete = YES;
+    }];
+
+    [self waitForCompletion:^{ return isComplete; }];
+}
+
+- (void)testUpdateProfilesShouldPostNotification
+{
+    __block BOOL isComplete = NO;
+
+    NSData *responseData = [self dataForFixture:@"profiles"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    id testObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kSinglySessionProfilesUpdatedNotification
+                                                                        object:nil
+                                                                         queue:[NSOperationQueue mainQueue]
+                                                                    usingBlock:^(NSNotification *notification)
+    {
+        isComplete = YES;
+    }];
+
+    [SinglySession.sharedSession updateProfiles:nil];
+
+    [self waitForCompletion:^{ return isComplete; }];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:testObserver];
+}
+
+- (void)testShouldResetProfiles
 {
 
+    // Mock Profiles Response
+    NSData *responseData = [self dataForFixture:@"profiles"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    [SinglySession.sharedSession updateProfiles:nil];
+
+    STAssertNotNil(SinglySession.sharedSession.profile, @"Profile property should not be nil.");
+    STAssertNotNil(SinglySession.sharedSession.profiles, @"Profiles property should not be nil.");
+
+    [SinglySession.sharedSession resetProfiles];
+
+    STAssertNil(SinglySession.sharedSession.profile, @"Profile property should be nil.");
+    STAssertNil(SinglySession.sharedSession.profiles, @"Profiles property should be nil.");
+
+}
+
+- (void)testResetProfilesShouldPostNotification
+{
+    __block BOOL isComplete = NO;
+
+    id testObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kSinglySessionProfilesUpdatedNotification
+                                                                        object:nil
+                                                                         queue:[NSOperationQueue mainQueue]
+                                                                    usingBlock:^(NSNotification *notification)
+    {
+        isComplete = YES;
+    }];
+
+    [SinglySession.sharedSession resetProfiles];
+
+    [self waitForCompletion:^{ return isComplete; }];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:testObserver];
+}
+
+#pragma mark - Service Management
+
+- (void)testShouldApplyService
+{
+    NSData *responseData = [self dataForFixture:@"auth-facebook-apply"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    BOOL isSuccessful = [SinglySession.sharedSession applyService:@"facebook" withToken:@"test-token" error:nil];
+
+    STAssertTrue(isSuccessful, @"Return value for applyService: should be true.");
+}
+
+- (void)testShouldApplyServiceWithCompletion
+{
+    __block BOOL isComplete = NO;
+
+    NSData *responseData = [self dataForFixture:@"auth-facebook-apply"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    [SinglySession.sharedSession applyService:@"facebook" withToken:@"test-token" completion:^(BOOL isSuccessful, NSError *error) {
+        STAssertTrue(isSuccessful, @"Parameter value 'isSuccessful' should be true.");
+        isComplete = YES;
+    }];
+
+    [self waitForCompletion:^{ return isComplete; }];
+}
+
+#pragma mark - Device Contacts
+
+- (void)testShouldSyncDeviceContacts
+{
+    NSData *responseData = [self dataForFixture:@"friends-ios"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    BOOL isSuccessful = [SinglySession.sharedSession syncDeviceContacts:nil];
+
+    STAssertTrue(isSuccessful, @"Return value for syncDeviceContacts: should be true.");
+}
+
+- (void)testShouldSyncDeviceContactsWithCompletion
+{
+    __block BOOL isComplete = NO;
+
+    NSData *responseData = [self dataForFixture:@"friends-ios"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    [SinglySession.sharedSession syncDeviceContactsWithCompletion:^(BOOL isSuccessful, NSError *error) {
+        STAssertTrue(isSuccessful, @"Parameter value 'isSuccessful' should be true.");
+        isComplete = YES;
+    }];
+
+    [self waitForCompletion:^{ return isComplete; }];
 }
 
 @end
