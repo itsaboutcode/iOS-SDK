@@ -51,4 +51,16 @@
 **/
 + (SinglySession *)sharedSessionInstance;
 
+/*!
+ *
+ * The service the is currently being authorized. This is necessary for
+ * integration with 3rd party apps installed on the device so that we know which
+ * service has been authorized after our app is relaunched by the authorizing
+ * app.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (strong) SinglyService *authorizingService;
+
 @end
