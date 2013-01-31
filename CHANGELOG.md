@@ -1,7 +1,7 @@
 
 # Singly SDK ChangeLog
 
-## 1.1.3 — **Not Yet Released**
+## 1.1.3 — January 31st, 2013
 
 * Added `X-Singly-SDK` and `X-Singly-SDK-Version` headers to `SinglyRequest`.
 
