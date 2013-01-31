@@ -11,7 +11,7 @@
 * An exception is now raised if you attempt to start a session without providing
   your client id and client secret.
 
-## 1.1.3 — **January 31st, 2013**
+## 1.1.3 — January 31st, 2013
 
 * Added `X-Singly-SDK` and `X-Singly-SDK-Version` headers to `SinglyRequest`.
 
