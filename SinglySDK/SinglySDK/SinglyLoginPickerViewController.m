@@ -31,6 +31,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "SinglyActivityIndicatorView.h"
+#import "SinglyConnection.h"
 #import "SinglyConstants.h"
 #import "SinglyFacebookService.h"
 #import "SinglyLoginPickerServiceCell.h"
@@ -79,7 +80,6 @@
                                                object:nil];
 
     // Load Services Dictionary
-    // TODO We may want to move this to SinglySession
     if (!self.servicesDictionary)
     {
 
@@ -90,38 +90,42 @@
         self.originalSeparatorColor = self.tableView.separatorColor;
         self.tableView.separatorColor = [UIColor clearColor];
 
-        // Configure the Services Request
+        // Prepare the Request
         SinglyRequest *servicesRequest = [SinglyRequest requestWithEndpoint:@"services"];
         servicesRequest.isAuthorizedRequest = NO;
 
-        // Load Services Dictionary
-        [NSURLConnection sendAsynchronousRequest:servicesRequest
-                                           queue:[NSOperationQueue mainQueue]
-                               completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
-        {
-            if (requestError)
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                                    message:[requestError localizedDescription]
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-                [alertView show];
-                return;
-            }
-
-            _servicesDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
-            if (!self.services)
-                self.services = [[self.servicesDictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
+        // Perform the Request
+        SinglyConnection *connection = [SinglyConnection connectionWithRequest:servicesRequest];
+        [connection performRequestWithCompletion:^(id responseObject, NSError *error) {
 
             // Dismiss the Activity Indicator
             [SinglyActivityIndicatorView dismissIndicator];
 
-            // Restore Separator Colors
-            self.tableView.separatorColor = self.originalSeparatorColor;
-            self.originalSeparatorColor = nil;
+            // Check for Errors
+            if (error)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                        message:[error localizedDescription]
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+                    [alertView show];
+                });
+                return;
+            }
 
-            // Reload the Table View
-            [self.tableView reloadData];
+            // Update Services
+            _servicesDictionary = responseObject;
+            if (!self.services)
+                self.services = [[self.servicesDictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
+
+            // Refresh the Table View
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.tableView.separatorColor = self.originalSeparatorColor;
+                self.originalSeparatorColor = nil;
+                [self.tableView reloadData];
+            });
+
         }];
 
     }
@@ -231,7 +235,8 @@
                 break;
             case 1: // Disconnect
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[SinglyService serviceWithIdentifier:self.selectedService] disconnect];
+                    NSError *error;
+                    [[SinglyService serviceWithIdentifier:self.selectedService] disconnect:&error];
                 });
                 break;
         }
