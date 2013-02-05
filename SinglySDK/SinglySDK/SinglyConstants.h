@@ -42,8 +42,12 @@ static NSString * const kSinglyAccessTokenURL = @"https://api.singly.com/oauth/a
 static NSString * const kSinglyAuthenticateURL = @"https://api.singly.com/oauth/authenticate";
 
 static NSString * const kSinglyErrorDomain = @"com.singly.sdk";
-static NSInteger  const kSinglyServiceErrorCode = 0;
-static NSInteger  const kSinglyLoginAbortedErrorCode = 1;
-static NSInteger  const kSinglyLoginFailedErrorCode = 2;
+
+static NSInteger  const kSinglyInvalidAccessTokenErrorCode = 0;
+static NSString * const kSinglyInvalidAccessTokenErrorMessage = @"Singly access token is expired or invalid.";
+
+static NSInteger  const kSinglyServiceErrorCode = 1;
+static NSInteger  const kSinglyLoginAbortedErrorCode = 2;
+static NSInteger  const kSinglyLoginFailedErrorCode = 3;
 
 static NSString * const kSinglyCredentialsMissingException = @"SinglyCredentialsMissingException";
