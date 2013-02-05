@@ -477,7 +477,7 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  *
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
- **/
+**/
 - (BOOL)syncDeviceContacts:(NSError **)error;
 
 /*!
@@ -495,9 +495,8 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  * @available Available in Singly iOS SDK 1.1.0 and later. This method is
  *            **deprecated** and will be removed in a future release. Please use
  *            syncDeviceContacts: instead.
-
  *
- **/
+**/
 - (void)syncDeviceContacts DEPRECATED_ATTRIBUTE;
 
 /*!

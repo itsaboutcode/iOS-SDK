@@ -32,6 +32,7 @@
 
 #import "NSURL+AccessToken.h"
 
+#import "SinglyConnection.h"
 #import "SinglyConstants.h"
 #import "SinglyFacebookService.h"
 #import "SinglyKeychainItemWrapper.h"
@@ -212,10 +213,10 @@ static SinglySession *sharedInstance = nil;
 
     // Perform the Request
     NSError *requestError;
-    NSURLResponse *response;
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
+    SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
+    id responseObject = [connection performRequest:&requestError];
 
-    // Check for Request Errors
+    // Check for Errors
     if (requestError)
     {
         SinglyLog(@"A request error occurred: %@", requestError.localizedDescription);
@@ -223,35 +224,9 @@ static SinglySession *sharedInstance = nil;
         return nil;
     }
 
-    // Parse the Response
-    NSError *parseError;
-    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
-    if (parseError)
-    {
-        SinglyLog(@"A parse error occurred while attempting to parse the response to our access token request: %@", parseError.localizedDescription);
-        if (error) *error = parseError;
-        return nil;
-    }
-
-    // Check for Service Errors
-    NSString *serviceErrorMessage = [responseDictionary objectForKey:@"error"];
-    if (serviceErrorMessage)
-    {
-        SinglyLog(@"A service error occurred while attempting to fetch the access token: %@", serviceErrorMessage);
-
-        if (error)
-        {
-            *error = [NSError errorWithDomain:kSinglyErrorDomain
-                                         code:kSinglyServiceErrorCode
-                                     userInfo:@{ NSLocalizedDescriptionKey : serviceErrorMessage }];
-        }
-
-        return nil;
-    }
-
     // Persist the Access Token and Account ID
-    self.accessToken = responseDictionary[@"access_token"];
-    self.accountID = responseDictionary[@"account"];
+    self.accessToken = responseObject[@"access_token"];
+    self.accountID = responseObject[@"account"];
 
     return self.accessToken;
 }
@@ -277,62 +252,41 @@ static SinglySession *sharedInstance = nil;
 - (BOOL)updateProfiles:(NSError **)error
 {
     NSError *requestError;
-    NSURLResponse *response;
-    BOOL isSuccessful = NO;
-
     SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profile" andParameters:@{ @"auth" : @"true" }];
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
+    SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
+    id responseObject = [connection performRequest:&requestError];
 
     // Check for invalid or expired tokens...
     if (requestError)
     {
-        NSLog(@"[SinglySDK:SinglySession] An error occurred while requesting profiles: %@", requestError);
+        SinglyLog(@"An error occurred while requesting profiles: %@", requestError);
 
         // Reset Profiles
         _profile = nil;
         _profiles = nil;
 
-        // If the access token has become invalid and the user is denied
-        // access, reset the session.
-        if (requestError.code == NSURLErrorUserCancelledAuthentication)
+        // If the access token has become invalid, reset the session...
+        if ([requestError.domain isEqualToString:kSinglyErrorDomain] && requestError.code == kSinglyInvalidAccessTokenErrorCode)
         {
-            NSLog(@"[SinglySDK:SinglySession] Access token is invalid or expired! Need to reauthorize...");
+            SinglyLog(@"Access token is invalid or expired! Need to reauthorize...");
             [self resetSession];
         }
+
+        if (error) *error = requestError;
 
         return NO;
     }
 
-    // Parse the profiles response...
-    NSError *parseError;
-    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
+    NSDictionary *serviceProfiles = responseObject[@"services"];
+    _profiles = serviceProfiles;
+    _profile = responseObject;
 
-    // Check for parse errors...
-    if (parseError)
-        NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to parse profiles: %@", parseError);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [NSNotificationCenter.defaultCenter postNotificationName:kSinglySessionProfilesUpdatedNotification
+                                                          object:self];
+    });
 
-    else
-    {
-
-        // Check for service errors...
-        NSString *serviceError = responseDictionary[@"error"];
-        if (serviceError)
-            NSLog(@"[SinglySDK:SinglySession] A service error occurred while requesting profiles: %@", serviceError);
-
-        else
-        {
-            NSDictionary *serviceProfiles = responseDictionary[@"services"];
-            _profile = responseDictionary;
-            _profiles = serviceProfiles;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [NSNotificationCenter.defaultCenter postNotificationName:kSinglySessionProfilesUpdatedNotification
-                                                                  object:self];
-            });
-            isSuccessful = YES;
-        }
-    }
-
-    return isSuccessful;
+    return YES;
 }
 
 - (void)updateProfilesWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler
@@ -383,22 +337,15 @@ static SinglySession *sharedInstance = nil;
         @"token": accessToken
     };
 
-    // Perform Request
-    NSError *requestError;
-    NSURLResponse *response;
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
-    if (requestError)
-    {
-        if (error) *error = requestError;
-        return NO;
-    }
+    SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
 
-    // Parse Response
-    NSError *parseError;
-    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
-    if (parseError)
+    NSError *applyError;
+    NSDictionary *responseDictionary = [connection performRequest:&applyError];
+
+    // Check for Errors
+    if (applyError)
     {
-        if (error) *error = parseError;
+        if (error) *error = applyError;
         return NO;
     }
 
@@ -551,42 +498,21 @@ static SinglySession *sharedInstance = nil;
         return NO;
     }
 
-    // Prepare Request
+    // Prepare the Request
     SinglyRequest *syncRequest = [SinglyRequest requestWithEndpoint:@"friends/ios"];
     [syncRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [syncRequest setHTTPMethod:@"POST"];
     [syncRequest setHTTPBody:serializedContacts];
 
-    // Perform Request
-    NSError *requestError;
-    NSURLResponse *response;
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:syncRequest returningResponse:&response error:&requestError];
-    if (requestError)
+    // Perform the Request
+    NSError *syncError;
+    SinglyConnection *connection = [SinglyConnection connectionWithRequest:syncRequest];
+    [connection performRequest:&syncError];
+    if (syncError)
     {
-        SinglyLog(@"An error occurred while syncing contacts: %@", requestError);
-        if (error) *error = requestError;
+        if (error) *error = syncError;
         _isSyncingDeviceContacts = NO;
         return NO;
-    }
-
-    // Parse Response
-    NSError *parseError;
-    id responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
-    if (parseError)
-    {
-        SinglyLog(@"An error occurred while attempting to parse service response: %@", parseError);
-        if (error) *error = parseError;
-        _isSyncingDeviceContacts = NO;
-        return NO;
-    }
-
-    // Check for Service Errors
-    if (responseObject && [responseObject isKindOfClass:[NSDictionary class]] && responseObject[@"error"])
-    {
-        NSString *serviceErrorMessage = responseObject[@"error"];
-        if (error) *error = [NSError errorWithDomain:kSinglyErrorDomain
-                                                code:kSinglyServiceErrorCode
-                                            userInfo:@{ NSLocalizedDescriptionKey : serviceErrorMessage }];
     }
 
     _isSyncingDeviceContacts = NO;
