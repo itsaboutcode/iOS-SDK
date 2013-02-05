@@ -83,7 +83,7 @@ service.delegate = self;
 ```
 
 The delegate for the service you are requesting authorization from should
-adhere to the `SinglySessionDelegate` protocol. These methods will be called
+adhere to the `SinglyServiceDelegate` protocol. These methods will be called
 after the authorization request has completed:
 
 ```objective-c
