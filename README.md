@@ -51,7 +51,9 @@ session.clientSecret = CLIENT_SECRET;
     if (ready) {
         // The session is ready to go!
     } else {
-        // You will need to auth with a service...
+        // A valid session could not be started. You will need to authenticate
+        // with a service (from a view controller) to establish a valid
+        // session.
     }
 }];
 ```
@@ -70,7 +72,9 @@ setup using `SinglyService` or a `SinglyLoginViewController` instance.
 
 The Singly iOS SDK attempts to provide the best possible user experience, based
 on the service the user wishes to authenticate with and the support that we
-have for that service on the device they are using.
+have for that service on the device they are using. To request authorization,
+call the following from a view controller to present the login view for a
+given service:
 
 ```objective-c
 SinglyService *service = [SinglyService serviceWithIdentifier:@"facebook"];
@@ -78,21 +82,20 @@ service.delegate = self;
 [service requestAuthorizationFromViewController:self];
 ```
 
-The service that you define can be any string of the services that Singly
-supports.
-
-An example implementation of the `SinglySessionDelegate` is:
+The delegate for the service you are requesting authorization from should
+adhere to the `SinglyServiceDelegate` protocol. These methods will be called
+after the authorization request has completed:
 
 ```objective-c
 - (void)singlyServiceDidAuthorize:(SinglyService *)service
 {
-    // We're ready to rock!  Go do something amazing!
+    // We're ready to rock! Go do something amazing!
 }
 
 - (void)singlyServiceDidFail:(SinglyService *)service
                    withError:(NSError *)error
 {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Error"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Error"
                                                     message:[error localizedDescription]
                                                     delegate:self cancelButtonTitle:@"OK"
                                                     otherButtonTitles:nil];
