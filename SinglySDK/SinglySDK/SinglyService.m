@@ -27,6 +27,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "SinglyConnection.h"
 #import "SinglyConstants.h"
 #import "SinglyLog.h"
 #import "SinglyRequest.h"
@@ -133,30 +134,13 @@
 
     // Perform the Request
     NSError *requestError;
-    NSURLResponse *response;
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
+    SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
+    [connection performRequest:&requestError];
+
+    // Check for Errors
     if (requestError)
     {
         if (error) *error = requestError;
-        return NO;
-    }
-
-    // Parse the Response
-    NSError *parseError;
-    id responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
-    if (parseError)
-    {
-        if (error) *error = parseError;
-        return NO;
-    }
-
-    // Check for Service Errors
-    if (responseObject && [responseObject isKindOfClass:[NSDictionary class]] && responseObject[@"error"])
-    {
-        NSString *serviceErrorMessage = responseObject[@"error"];
-        if (error) *error = [NSError errorWithDomain:kSinglyErrorDomain
-                                                code:kSinglyServiceErrorCode
-                                            userInfo:@{ NSLocalizedDescriptionKey : serviceErrorMessage }];
         return NO;
     }
 
@@ -201,15 +185,16 @@
     // If we already have the Client ID, do not attempt to fetch it again...
     if (self.clientID) return self.clientID;
 
-    // Configure the Request
-    NSError *requestError;
-    NSError *parseError;
-    NSURLResponse *response;
+    // Prepare the Request
     SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/client_id/%@", SinglySession.sharedSession.clientID, self.serviceIdentifier]];
     request.isAuthorizedRequest = NO;
 
-    // Send the request and check for errors...
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&requestError];
+    // Perform the Request
+    NSError *requestError;
+    SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
+    id responseObject = [connection performRequest:&requestError];
+
+    // Check for Errors
     if (requestError)
     {
         SinglyLog(@"A request error occurred while attempting to fetch the client id from '%@': %@", request.URL, requestError);
@@ -217,25 +202,7 @@
         return nil;
     }
 
-    // Parse the response and check for errors...
-    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
-    if (parseError)
-    {
-        SinglyLog(@"A parse error occurred while attempting to parse the client id response for '%@': %@", self.serviceIdentifier, parseError);
-        if (error) *error = parseError;
-        return nil;
-    }
-
-    // Check for service errors...
-    NSError *serviceError = responseDictionary[@"error"];
-    if (serviceError)
-    {
-        SinglyLog(@"A service error occured while attempting to fetch the client id for '%@': %@", self.serviceIdentifier, serviceError);
-        if (error) *error = serviceError;
-        return nil;
-    }
-
-    self.clientID = responseDictionary[self.serviceIdentifier];
+    self.clientID = responseObject[self.serviceIdentifier];
 
     SinglyLog(@"Retrieved Client ID for '%@': %@", self.serviceIdentifier, self.clientID);
 
