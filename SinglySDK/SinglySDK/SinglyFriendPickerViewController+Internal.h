@@ -59,15 +59,83 @@
 **/
 @property (readonly) BOOL isRefreshing;
 
+/*!
+ *
+ *
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
 @property (copy) NSArray *indexKeys;
 
+/*!
+ *
+ *
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+**/
 @property (copy) NSDictionary *indexDetails;
 
-- (void)fetchFriends;
+/*!
+ *
+ *
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (BOOL)fetchFriends:(NSError **)error;
 
-- (void)fetchFriendsAtOffset:(NSInteger)offset;
+/*!
+ *
+ *
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (void)fetchFriendsWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
 
-- (void)fetchFriendsAtOffset:(NSInteger)offset withLimit:(NSInteger)limit;
+/*!
+ *
+ *
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (BOOL)fetchFriendsAtOffset:(NSInteger)offset
+                       error:(NSError **)error;
+
+/*!
+ *
+ *
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (void)fetchFriendsAtOffset:(NSInteger)offset
+                  completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
+
+/*!
+ *
+ *
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (BOOL)fetchFriendsAtOffset:(NSInteger)offset
+                       limit:(NSInteger)limit
+                       error:(NSError **)error;
+
+/*!
+ *
+ *
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (void)fetchFriendsAtOffset:(NSInteger)offset
+                       limit:(NSInteger)limit
+                  completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
 
 @end
 

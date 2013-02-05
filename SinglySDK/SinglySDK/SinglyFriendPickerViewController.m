@@ -28,6 +28,7 @@
 //
 
 #import "SinglyActivityIndicatorView.h"
+#import "SinglyConnection.h"
 #import "SinglyFriendPickerCell.h"
 #import "SinglyFriendPickerViewController.h"
 #import "SinglyFriendPickerViewController+Internal.h"
@@ -37,19 +38,49 @@
 
 @implementation SinglyFriendPickerViewController
 
-- (void)fetchFriends
+- (BOOL)fetchFriends:(NSError **)error
 {
-    [self fetchFriendsAtOffset:0 withLimit:0];
+    return [self fetchFriendsAtOffset:0 limit:0 error:error];
 }
 
-- (void)fetchFriendsAtOffset:(NSInteger)offset
+- (void)fetchFriendsWithCompletion:(void (^)(BOOL, NSError *))completionHandler
 {
-    [self fetchFriendsAtOffset:offset withLimit:0];
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        NSError *error;
+        BOOL isSuccessful = [self fetchFriends:&error];
+
+        if (completionHandler) dispatch_sync(currentQueue, ^{
+            completionHandler(isSuccessful, error);
+        });
+
+    });
 }
 
-- (void)fetchFriendsAtOffset:(NSInteger)offset withLimit:(NSInteger)limit
+- (BOOL)fetchFriendsAtOffset:(NSInteger)offset error:(NSError **)error
 {
-    if (self.isRefreshing) return;
+    return [self fetchFriendsAtOffset:offset limit:0 error:error];
+}
+
+- (void)fetchFriendsAtOffset:(NSInteger)offset completion:(void (^)(BOOL, NSError *))completionHandler
+{
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        NSError *error;
+        BOOL isSuccessful = [self fetchFriendsAtOffset:offset error:&error];
+
+        if (completionHandler) dispatch_sync(currentQueue, ^{
+            completionHandler(isSuccessful, error);
+        });
+        
+    });
+}
+
+- (BOOL)fetchFriendsAtOffset:(NSInteger)offset limit:(NSInteger)limit error:(NSError **)error
+{
+    if (self.isRefreshing) return NO;
     _isRefreshing = YES;
 
     // Offset & Limit
@@ -59,7 +90,7 @@
 
     NSLog(@"[SinglySDK] Fetching friends...");
 
-    // Configure the Request
+    // Prepare the Request
     NSDictionary *requestParameters = @{
         @"limit": limitString,
         @"offset": offsetString,
@@ -68,112 +99,102 @@
     SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"friends/all"
                                                   andParameters:requestParameters];
 
-    // Send the Request to the Singly API
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
+    // Send the Request
+    NSError *fetchError;
+    SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
+    id responseObject = [connection performRequest:&fetchError];
+
+    // Check for Errors
+    if (fetchError)
     {
-
-        NSError *parseError;
-        id responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&parseError];
-
-        //
-        // Check for parse errors.
-        //
-        if (parseError)
-        {
-            NSLog(@"[SinglySDK:SinglySession] An error occurred while attempting to parse friends: %@", parseError);
-            _isRefreshing = NO;
-            return;
-        }
-
-        //
-        // Check for Request Errors
-        //
-        if (requestError)
-        {
-            _isRefreshing = NO;
-
-            //
-            // Determine the most appropriate error message, be it a message
-            // from the API or the request error itself.
-            //
-            NSString *errorMessage;
-            if (responseObject && [responseObject isKindOfClass:[NSDictionary class]] && responseObject[@"error"])
-                errorMessage = responseObject[@"error"];
-            else
-                errorMessage = [requestError localizedDescription];
-
-            NSLog(@"[SinglySDK:SinglySession] A request error occurred while attempting to load friends: %@", errorMessage);
-
-            //
-            // Display a friendly alert view to the user.
-            //
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                                message:errorMessage
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Dismiss"
-                                                      otherButtonTitles:nil];
-            [alertView show];
-
-            return;
-        }
-
-        // Display a placeholder if no friends were returned
-        if (((NSArray *)responseObject).count == 0)
-        {
-            [SinglyActivityIndicatorView dismissIndicator];
-            self.tableView.separatorColor = self.originalSeparatorColor;
-            self.originalSeparatorColor = nil;
-            return;
-        }
-
-        // Extract Response Components
-        NSMutableDictionary *indexDetails = [NSMutableDictionary dictionaryWithDictionary:responseObject[0]];
-        NSDictionary *indexMetadata = indexDetails[@"meta"];
-        NSMutableArray *friends = [NSMutableArray arrayWithArray:responseObject];
-
-        // Remove Metadata from Keys
-        [indexDetails removeObjectForKey:@"meta"];
-
-        // Remove Metadata from Friends
-        [friends removeObjectAtIndex:0];
-
-        // TODO Compare returned metadata from friends array size and reset if
-        //      necessary
-
-        // Prepare Index Keys
-
-        if (!_friends)
-        {
-            int friendsCount = [indexMetadata[@"length"] intValue];
-            _friends = [NSMutableArray arrayWithCapacity:friendsCount];
-            for (int i = 0; i < friendsCount; i++)
-            {
-                SinglyFriendPlaceholder *placeholder = [[SinglyFriendPlaceholder alloc] init];
-                placeholder.isLoading = NO;
-                [_friends insertObject:placeholder atIndex:i];
-            }
-        }
-
-        [_friends replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(offset, friends.count)] withObjects:friends];
-        _indexDetails = indexDetails;
-        _indexKeys = [[indexDetails allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
-        {
-            return [indexDetails[obj1][@"offset"] intValue] > [indexDetails[obj2][@"offset"] intValue];
-        }];
-
-        NSLog(@"[SinglySDK] Found %d friends...", self.friends.count);
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            [SinglyActivityIndicatorView dismissIndicator];
-            self.tableView.separatorColor = self.originalSeparatorColor;
-            self.originalSeparatorColor = nil;
-        });
+        if (error) *error = fetchError;
 
         _isRefreshing = NO;
+
+        //
+        // Display a friendly alert view to the user.
+        //
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:[fetchError localizedDescription]
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+
+        return NO;
+    }
+
+    // Display a placeholder if no friends were returned
+    if (((NSArray *)responseObject).count == 0)
+    {
+        [SinglyActivityIndicatorView dismissIndicator];
+        self.tableView.separatorColor = self.originalSeparatorColor;
+        self.originalSeparatorColor = nil;
+        return YES;
+    }
+
+    // Extract Response Components
+    NSMutableDictionary *indexDetails = [NSMutableDictionary dictionaryWithDictionary:responseObject[0]];
+    NSDictionary *indexMetadata = indexDetails[@"meta"];
+    NSMutableArray *friends = [NSMutableArray arrayWithArray:responseObject];
+
+    // Remove Metadata from Keys
+    [indexDetails removeObjectForKey:@"meta"];
+
+    // Remove Metadata from Friends
+    [friends removeObjectAtIndex:0];
+
+    // TODO Compare returned metadata from friends array size and reset if
+    //      necessary
+
+    // Prepare Index Keys
+
+    if (!_friends)
+    {
+        int friendsCount = [indexMetadata[@"length"] intValue];
+        _friends = [NSMutableArray arrayWithCapacity:friendsCount];
+        for (int i = 0; i < friendsCount; i++)
+        {
+            SinglyFriendPlaceholder *placeholder = [[SinglyFriendPlaceholder alloc] init];
+            placeholder.isLoading = NO;
+            [_friends insertObject:placeholder atIndex:i];
+        }
+    }
+
+    [_friends replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(offset, friends.count)] withObjects:friends];
+    _indexDetails = indexDetails;
+    _indexKeys = [[indexDetails allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
+    {
+        return [indexDetails[obj1][@"offset"] intValue] > [indexDetails[obj2][@"offset"] intValue];
     }];
+
+    NSLog(@"[SinglySDK] Found %d friends...", self.friends.count);
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+        [SinglyActivityIndicatorView dismissIndicator];
+        self.tableView.separatorColor = self.originalSeparatorColor;
+        self.originalSeparatorColor = nil;
+    });
+
+    _isRefreshing = NO;
+
+    return YES;
+}
+
+- (void)fetchFriendsAtOffset:(NSInteger)offset limit:(NSInteger)limit completion:(void (^)(BOOL, NSError *))completionHandler
+{
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        NSError *error;
+        BOOL isSuccessful = [self fetchFriendsAtOffset:offset limit:limit error:&error];
+
+        if (completionHandler) dispatch_sync(currentQueue, ^{
+            completionHandler(isSuccessful, error);
+        });
+        
+    });
 }
 
 #pragma mark - View Callbacks
@@ -185,7 +206,7 @@
     // Customize Table View Appearance
     self.tableView.rowHeight = 54;
 
-    [self fetchFriends];
+    [self fetchFriendsWithCompletion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -305,7 +326,9 @@
 
     if (indexesToLoad.count > 0)
     {
-        [self fetchFriendsAtOffset:[indexesToLoad[0] intValue] - 10 withLimit:[[indexesToLoad lastObject] intValue] - [indexesToLoad[0] intValue] * 2];
+        int offset = [indexesToLoad[0] intValue] - 10;
+        int limit  = [[indexesToLoad lastObject] intValue] - [indexesToLoad[0] intValue] * 2;
+        [self fetchFriendsAtOffset:offset limit:limit error:nil];
     }
 
 }
