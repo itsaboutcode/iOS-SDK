@@ -3,6 +3,8 @@
 
 ## 1.2.0 — **Not Yet Released**
 
+* Added support for setting the base URL for the Singly API on `SinglySession`.
+
 * Improved error handling and many of the method signatures to allow for passing
   errors by reference.
 

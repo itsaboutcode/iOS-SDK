@@ -41,7 +41,6 @@
 #import "SinglySession.h"
 #import "SinglySession+Internal.h"
 
-static NSString *kSinglyAccessTokenKey = @"com.singly.accessToken";
 static SinglySession *sharedInstance = nil;
 
 @implementation SinglySession
@@ -67,6 +66,7 @@ static SinglySession *sharedInstance = nil;
     if (self)
     {
         _accessTokenWrapper = [[SinglyKeychainItemWrapper alloc] initWithIdentifier:kSinglyAccessTokenKey accessGroup:nil];
+        _baseURL = kSinglyBaseURL;
     }
     return self;
 }

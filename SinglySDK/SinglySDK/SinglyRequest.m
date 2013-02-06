@@ -150,25 +150,24 @@
 
 + (NSURL *)URLForEndpoint:(NSString *)endpoint withParameters:(NSDictionary *)parameters andAuthorization:(BOOL)isAuthorized
 {
-    NSMutableString *apiURLString = [NSMutableString stringWithFormat:@"%@/%@", kSinglyBaseURL, endpoint];
-
-    // Add Query Parameter Separator to URL
-    if (isAuthorized || parameters.count > 0)
-        [apiURLString appendString:@"?"];
+    NSMutableString *apiURLString = [NSMutableString stringWithFormat:@"%@/%@", SinglySession.sharedSession.baseURL, endpoint];
 
     // Add Parameters to URL
-    if (parameters)
+    if (parameters && parameters.count > 0)
     {
-        [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop)
-         {
-             if (![value isKindOfClass:[NSNull class]])
-                 [apiURLString appendFormat:@"&%@=%@", [key URLEncodedString], [value URLEncodedString]];
-         }];
+        [apiURLString appendString:@"?"];
+        [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+            if (![value isKindOfClass:[NSNull class]])
+                [apiURLString appendFormat:@"&%@=%@", [key URLEncodedString], [value URLEncodedString]];
+        }];
     }
 
     // Add Singly Access Token to URL
     if (isAuthorized && SinglySession.sharedSession.accessToken)
+    {
+        [apiURLString appendString:(!parameters || parameters.count == 0) ? @"?" : @"&"];
         [apiURLString appendFormat:@"&access_token=%@", SinglySession.sharedSession.accessToken];
+    }
 
     return [NSURL URLWithString:apiURLString];
 }

@@ -106,6 +106,16 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
 
 /*!
  *
+ * The base URL of the Singly API to use for the session. Defaults to
+ * `https://api.singly.com`.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+@property (copy) NSString *baseURL;
+
+/*!
+ *
  * The client ID to be used while authenticating against the Singly API.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.

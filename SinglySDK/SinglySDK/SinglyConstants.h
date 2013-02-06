@@ -38,9 +38,8 @@
 static NSString * const kSinglySDKVersion = @"1.2.0";
 
 static NSString * const kSinglyBaseURL = @"https://api.singly.com";
-static NSString * const kSinglyAccessTokenURL = @"https://api.singly.com/oauth/access_token";
-static NSString * const kSinglyAuthenticateURL = @"https://api.singly.com/oauth/authenticate";
 
+static NSString * const kSinglyAccessTokenKey = @"com.singly.accessToken";
 static NSString * const kSinglyErrorDomain = @"com.singly.sdk";
 
 static NSInteger  const kSinglyInvalidAccessTokenErrorCode = 0;

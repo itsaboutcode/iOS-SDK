@@ -73,7 +73,23 @@
     STAssertEquals(sessionOne, sessionTwo, @"Both session pointers should be identical.");
 }
 
+- (void)testSessionShouldInitializeWithDefaults
+{
+    SinglySession *testSession = [[SinglySession alloc] init];
+
+    STAssertEqualObjects(kSinglyAccessTokenKey,testSession.accessTokenWrapper.identifier, [NSString stringWithFormat:@"The accessTokenWrapper.identifier property should be equal to '%@'.", kSinglyAccessTokenKey]);
+    STAssertEqualObjects(kSinglyBaseURL, testSession.baseURL, [NSString stringWithFormat:@"The baseURL property should equal '%@'.", kSinglyBaseURL]);
+}
+
 #pragma mark - Session Configuration
+
+- (void)testShouldSetBaseURL
+{
+    SinglySession *testSession = [[SinglySession alloc] init];
+    testSession.baseURL = @"http://localhost:8042";
+
+    STAssertEqualObjects(testSession.baseURL, @"http://localhost:8042", @"The client id should match 'http://localhost:8042'.");
+}
 
 - (void)testShouldSetClientID
 {

@@ -98,7 +98,7 @@
         self.navigationBar = nil;
     }
 
-    NSString *urlStr = [kSinglyAuthenticateURL stringByAppendingFormat:@"?redirect_uri=singly://authorize&service=%@&client_id=%@",
+    NSString *urlStr = [SinglySession.sharedSession.baseURL stringByAppendingFormat:@"/oauth/authenticate?redirect_uri=singly://authorize&service=%@&client_id=%@",
                         self.serviceIdentifier, SinglySession.sharedSession.clientID];
 
     if (SinglySession.sharedSession.accountID)

@@ -31,6 +31,7 @@
 #import "SinglyRequest.h"
 #import "SinglyRequest+Internal.h"
 #import "SinglyRequestTests.h"
+#import "SinglySession.h"
 
 @implementation SinglyRequestTests
 
@@ -61,6 +62,18 @@
 
     STAssertNotNil(allHeaders[@"X-Singly-SDK-Version"], @"");
     STAssertEqualObjects(allHeaders[@"X-Singly-SDK-Version"], kSinglySDKVersion, [NSString stringWithFormat:@"The HTTP header 'X-Singly-SDK-Version' should match '%@'.", kSinglySDKVersion]);
+}
+
+- (void)testShouldUseBaseURLFromSinglySession
+{
+    NSURL *testURL = [NSURL URLWithString:@"http://localhost:8042/foo"];
+    NSString *oldBaseURL = SinglySession.sharedSession.baseURL;
+    SinglySession.sharedSession.baseURL = @"http://localhost:8042";
+    SinglyRequest *testRequest = [SinglyRequest requestWithEndpoint:@"foo"];
+
+    STAssertEqualObjects(testRequest.URL, testURL, @"The constructed URL for the request should equal 'http://localhost:8042'.");
+
+    SinglySession.sharedSession.baseURL = oldBaseURL;
 }
 
 @end
