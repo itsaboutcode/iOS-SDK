@@ -458,6 +458,57 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
            withToken:(NSString *)accessToken
           completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
 
+/*!
+ *
+ * Allows you to associate a service with an existing access token to the Singly
+ * session.
+ *
+ * @param serviceIdentifier The identifier of the service (e.g. "facebook",
+ *                          "twitter", etc).
+ *
+ * @param accessToken The access token to associate with the session.
+ *
+ * @param tokenSecret The token secret, for OAuth 1.
+ *
+ * @param error Out parameter used if an error occurs while starting the
+ *              session. May be `NULL`.
+ *
+ * @returns `YES` if the operation was successful.
+ *
+ * @see applyService:withToken:completion:
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (BOOL)applyService:(NSString *)serviceIdentifier
+           withToken:(NSString *)accessToken
+         tokenSecret:(NSString *)tokenSecret
+               error:(NSError **)error;
+
+/*!
+ *
+ * Allows you to associate a service with an existing access token to the Singly
+ * session.
+ *
+ * @param serviceIdentifier The identifier of the service (e.g. "facebook",
+ *                          "twitter", etc).
+ *
+ * @param accessToken The access token to associate with the session.
+ *
+ * @param tokenSecret The token secret, for OAuth 1.
+ *
+ * @param completionHandler The block to call once the service has been applied.
+ *
+ * @see applyService:withToken:error:
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (void)applyService:(NSString *)serviceIdentifier
+           withToken:(NSString *)accessToken
+         tokenSecret:(NSString *)tokenSecret
+          completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
+
 /// ----------------------------------------------------------------------------
 /// @name Syncing Device Contacts
 /// ----------------------------------------------------------------------------

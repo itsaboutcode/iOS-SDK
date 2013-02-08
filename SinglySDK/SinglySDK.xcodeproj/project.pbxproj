@@ -29,6 +29,11 @@
 		D005904D167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */; };
 		D005904E167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */; };
 		D0059051167A4D5400F1374D /* SinglyFriendPlaceholder.h in Headers */ = {isa = PBXBuildFile; fileRef = D0059049167A492600F1374D /* SinglyFriendPlaceholder.h */; };
+		D00D662416C1A64B00746AA3 /* SinglyTwitterService.h in Headers */ = {isa = PBXBuildFile; fileRef = D00D662216C1A64B00746AA3 /* SinglyTwitterService.h */; };
+		D00D662516C1A64B00746AA3 /* SinglyTwitterService.h in Headers */ = {isa = PBXBuildFile; fileRef = D00D662216C1A64B00746AA3 /* SinglyTwitterService.h */; };
+		D00D662616C1A64B00746AA3 /* SinglyTwitterService.m in Sources */ = {isa = PBXBuildFile; fileRef = D00D662316C1A64B00746AA3 /* SinglyTwitterService.m */; };
+		D00D662716C1A64B00746AA3 /* SinglyTwitterService.m in Sources */ = {isa = PBXBuildFile; fileRef = D00D662316C1A64B00746AA3 /* SinglyTwitterService.m */; };
+		D00D662816C1A64B00746AA3 /* SinglyTwitterService.m in Sources */ = {isa = PBXBuildFile; fileRef = D00D662316C1A64B00746AA3 /* SinglyTwitterService.m */; };
 		D013E6F416A062E2008C80A3 /* SinglyAvatarCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D013E6F316A062E2008C80A3 /* SinglyAvatarCacheTests.m */; };
 		D013E6F816A06393008C80A3 /* SinglyAvatarCache+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D013E6F616A06393008C80A3 /* SinglyAvatarCache+Internal.h */; };
 		D013E6F916A06393008C80A3 /* SinglyAvatarCache+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D013E6F616A06393008C80A3 /* SinglyAvatarCache+Internal.h */; };
@@ -227,6 +232,7 @@
 		D09686E8169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D09686E5169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h */; };
 		D09686EE169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D09686ED169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m */; };
 		D0991E211683BD310009BCA2 /* SinglySessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0991E201683BD310009BCA2 /* SinglySessionTests.m */; };
+		D0D96E3416C5569400283404 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D96E3316C5569400283404 /* Twitter.framework */; };
 		D0DB1623162E0A93005EC7C7 /* Service Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */; };
 		D0DB1624162E0A93005EC7C7 /* Service Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */; };
 		D0E2C7081637572B00AAD565 /* SinglySession.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088915ED17B000ECFED0 /* SinglySession.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -307,6 +313,8 @@
 		D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPlaceholder.m; sourceTree = "<group>"; };
 		D0059052167A766D00F1374D /* SinglyFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriend.h; sourceTree = "<group>"; };
 		D0059053167A766D00F1374D /* SinglyFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriend.m; sourceTree = "<group>"; };
+		D00D662216C1A64B00746AA3 /* SinglyTwitterService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SinglyTwitterService.h; path = SinglySDK/SinglyTwitterService.h; sourceTree = "<group>"; };
+		D00D662316C1A64B00746AA3 /* SinglyTwitterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SinglyTwitterService.m; path = SinglySDK/SinglyTwitterService.m; sourceTree = "<group>"; };
 		D013E6F216A062E2008C80A3 /* SinglyAvatarCacheTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAvatarCacheTests.h; sourceTree = "<group>"; };
 		D013E6F316A062E2008C80A3 /* SinglyAvatarCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAvatarCacheTests.m; sourceTree = "<group>"; };
 		D013E6F616A06393008C80A3 /* SinglyAvatarCache+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyAvatarCache+Internal.h"; sourceTree = "<group>"; };
@@ -481,6 +489,7 @@
 		D09686ED169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyKeychainItemWrapperTests.m; sourceTree = "<group>"; };
 		D0991E1F1683BD310009BCA2 /* SinglySessionTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySessionTests.h; sourceTree = "<group>"; };
 		D0991E201683BD310009BCA2 /* SinglySessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySessionTests.m; sourceTree = "<group>"; };
+		D0D96E3316C5569400283404 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder.png"; sourceTree = "<group>"; };
 		D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder@2x.png"; sourceTree = "<group>"; };
 		D0E158DF1631C1BD000D0BCA /* Create Universal Library.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "Create Universal Library.rb"; sourceTree = "<group>"; };
@@ -510,6 +519,7 @@
 				D05C00221684D4D0006AD03C /* QuartzCore.framework in Frameworks */,
 				D003484116666ED50048513A /* Security.framework in Frameworks */,
 				D06194F31638668E00A906F7 /* Social.framework in Frameworks */,
+				D0D96E3416C5569400283404 /* Twitter.framework in Frameworks */,
 				D003484716666EFE0048513A /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -741,6 +751,7 @@
 				D003483F16666E650048513A /* Security.framework */,
 				D053EF8F16271BC9008B8BA1 /* SenTestingKit.framework */,
 				D06194F11638668400A906F7 /* Social.framework */,
+				D0D96E3316C5569400283404 /* Twitter.framework */,
 				D02B538116309C7700F1F535 /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -839,6 +850,8 @@
 				D05870FC16431ADB007E8970 /* SinglyService.m */,
 				D058710116431AFC007E8970 /* SinglyFacebookService.h */,
 				D058710216431AFC007E8970 /* SinglyFacebookService.m */,
+				D00D662216C1A64B00746AA3 /* SinglyTwitterService.h */,
+				D00D662316C1A64B00746AA3 /* SinglyTwitterService.m */,
 			);
 			name = Services;
 			path = ..;
@@ -1036,6 +1049,7 @@
 				D013E6F816A06393008C80A3 /* SinglyAvatarCache+Internal.h in Headers */,
 				D079145A16B8356700F3D98E /* SinglyLog.h in Headers */,
 				D06F113716BC169600809E3E /* SinglyConnection.h in Headers */,
+				D00D662416C1A64B00746AA3 /* SinglyTwitterService.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1076,6 +1090,7 @@
 				D013E6F916A06393008C80A3 /* SinglyAvatarCache+Internal.h in Headers */,
 				D079145B16B8356700F3D98E /* SinglyLog.h in Headers */,
 				D06F113816BC169600809E3E /* SinglyConnection.h in Headers */,
+				D00D662516C1A64B00746AA3 /* SinglyTwitterService.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1368,6 +1383,7 @@
 				D005904E167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */,
 				D04AD40E167FA3E10046C296 /* SinglyAvatarCache.m in Sources */,
 				D06F113A16BC169600809E3E /* SinglyConnection.m in Sources */,
+				D00D662716C1A64B00746AA3 /* SinglyTwitterService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1393,6 +1409,7 @@
 				D005904D167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */,
 				D04AD40D167FA3E10046C296 /* SinglyAvatarCache.m in Sources */,
 				D06F113916BC169600809E3E /* SinglyConnection.m in Sources */,
+				D00D662616C1A64B00746AA3 /* SinglyTwitterService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1430,6 +1447,7 @@
 				D003CDB416AEF33F00D2B17A /* SenTestCase+AsynchronousSupport.m in Sources */,
 				D003CDBA16AF3ADE00D2B17A /* SenTestCase+Fixtures.m in Sources */,
 				D06F113B16BC169600809E3E /* SinglyConnection.m in Sources */,
+				D00D662816C1A64B00746AA3 /* SinglyTwitterService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,6 +28,7 @@
 //
 
 #import "SinglyFacebookService.h"
+#import "SinglyTwitterService.h"
 
 @interface SinglyService ()
 
@@ -40,6 +41,16 @@
  *
 **/
 + (SinglyFacebookService *)facebookService;
+
+/*!
+ *
+ * A convenience accessor for creating and returning an instance of the Twitter
+ * service.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
++ (SinglyTwitterService *)twitterService;
 
 /*!
  *

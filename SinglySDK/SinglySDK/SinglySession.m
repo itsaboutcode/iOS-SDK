@@ -321,31 +321,52 @@ static SinglySession *sharedInstance = nil;
 
 #pragma mark - Service Management
 
-- (void)applyService:(NSString *)serviceIdentifier withToken:(NSString *)accessToken // DEPRECATED
+- (void)applyService:(NSString *)serviceIdentifier
+           withToken:(NSString *)accessToken // DEPRECATED
 {
     [self applyService:serviceIdentifier withToken:accessToken error:nil];
 }
 
-- (BOOL)applyService:(NSString *)serviceIdentifier withToken:(NSString *)accessToken error:(NSError **)error
+- (BOOL)applyService:(NSString *)serviceIdentifier
+           withToken:(NSString *)accessToken
+               error:(NSError **)error
 {
-//    NSLog(@"[SinglySDK] Applying service '%@' with token '%@' to the Singly service ...", serviceIdentifier, accessToken);
+    return [self applyService:serviceIdentifier withToken:accessToken tokenSecret:nil error:nil];
+}
 
+- (BOOL)applyService:(NSString *)serviceIdentifier
+           withToken:(NSString *)accessToken
+         tokenSecret:(NSString *)tokenSecret
+               error:(NSError **)error
+{
+
+    //    NSLog(@"[SinglySDK] Applying service '%@' with token '%@' to the Singly service ...", serviceIdentifier, accessToken);
+
+    // Prepare the Request
     SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/apply", serviceIdentifier]];
-    request.parameters = @{
-        @"client_id": self.clientID,
-        @"client_secret": self.clientSecret,
-        @"token": accessToken
-    };
+    if (tokenSecret)
+        request.parameters = @{
+            @"client_id": self.clientID,
+            @"client_secret": self.clientSecret,
+            @"token": accessToken,
+            @"token_secret": tokenSecret
+        };
+    else
+        request.parameters = @{
+            @"client_id": self.clientID,
+            @"client_secret": self.clientSecret,
+            @"token": accessToken
+        };
 
+    // Perform the Request
+    NSError *requestError;
     SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
-
-    NSError *applyError;
-    NSDictionary *responseDictionary = [connection performRequest:&applyError];
+    NSDictionary *responseDictionary = [connection performRequest:&requestError];
 
     // Check for Errors
-    if (applyError)
+    if (requestError)
     {
-        if (error) *error = applyError;
+        if (error) *error = requestError;
         return NO;
     }
 
@@ -364,22 +385,36 @@ static SinglySession *sharedInstance = nil;
         [NSNotificationCenter.defaultCenter postNotificationName:kSinglyServiceAppliedNotification
                                                           object:serviceIdentifier];
     });
-
+    
     return YES;
+
 }
 
-- (void)applyService:(NSString *)serviceIdentifier withToken:(NSString *)accessToken completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler
+- (void)applyService:(NSString *)serviceIdentifier
+           withToken:(NSString *)accessToken
+          completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler
+{
+    [self applyService:serviceIdentifier
+             withToken:accessToken
+           tokenSecret:nil
+            completion:completionHandler];
+}
+
+- (void)applyService:(NSString *)serviceIdentifier
+           withToken:(NSString *)accessToken
+         tokenSecret:(NSString *)tokenSecret
+          completion:(void (^)(BOOL, NSError *))completionHandler
 {
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         NSError *error;
-        BOOL isApplied = [self applyService:serviceIdentifier withToken:accessToken error:&error];
+        BOOL isApplied = [self applyService:serviceIdentifier withToken:accessToken tokenSecret:tokenSecret error:&error];
 
         dispatch_sync(currentQueue, ^{
             if (completionHandler) completionHandler(isApplied, error);
         });
-
+        
     });
 }
 

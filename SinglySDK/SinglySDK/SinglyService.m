@@ -34,7 +34,6 @@
 #import "SinglySession.h"
 #import "SinglyService.h"
 #import "SinglyService+Internal.h"
-#import "SinglyFacebookService.h"
 
 @implementation SinglyService
 
@@ -48,6 +47,10 @@
     if ([serviceIdentifier isEqualToString:@"facebook"])
         return [self facebookService];
 
+    // Custom Service for Facebook
+    else if ([serviceIdentifier isEqualToString:@"twitter"])
+        return [self twitterService];
+
     SinglyService *serviceInstance = [[SinglyService alloc] initWithIdentifier:serviceIdentifier];
     return serviceInstance;
 
@@ -55,7 +58,15 @@
 
 + (SinglyFacebookService *)facebookService
 {
+    // TODO This should be simply init, serviceIdentifier should be hardcoded
     SinglyFacebookService *serviceInstance = [[SinglyFacebookService alloc] initWithIdentifier:@"facebook"];
+    return serviceInstance;
+}
+
++ (SinglyTwitterService *)twitterService
+{
+    // TODO This should be simply init, serviceIdentifier should be hardcoded
+    SinglyTwitterService *serviceInstance = [[SinglyTwitterService alloc] initWithIdentifier:@"twitter"];
     return serviceInstance;
 }
 
