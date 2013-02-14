@@ -136,4 +136,14 @@
 - (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
                                              withScopes:(NSArray *)scopes;
 
+/*!
+ *
+ * Stores the completion handler to be used after authorization requests are
+ * completed.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+@property (nonatomic, strong) SinglyAuthorizationCompletionBlock completionHandler;
+
 @end

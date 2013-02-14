@@ -90,40 +90,51 @@
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
 {
-    [self requestAuthorizationFromViewController:viewController withScopes:nil];
+    [self requestAuthorizationFromViewController:viewController withScopes:nil completion:nil];
 }
 
-- (void)requestAuthorizationFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
+                                    completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler
 {
+    [self requestAuthorizationFromViewController:viewController withScopes:nil completion:completionHandler];
+}
 
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
+                                    withScopes:(NSArray *)scopes
+{
+    [self requestAuthorizationFromViewController:viewController withScopes:scopes completion:nil];
+}
+
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
+                                    withScopes:(NSArray *)scopes
+                                    completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler
+{
     self.isAuthorized = NO;
-
-    dispatch_queue_t authorizationQueue;
-    authorizationQueue = dispatch_queue_create("com.singly.AuthorizationQueue", NULL);
-
-    dispatch_async(authorizationQueue, ^{
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes];
-        });
-
-    });
-    
+    [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes completion:completionHandler];
 }
 
 - (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
 {
-    [self requestAuthorizationFromViewController:viewController withScopes:nil];
+    [self requestAuthorizationFromViewController:viewController withScopes:nil completion:nil];
 }
 
-- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
+- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
+                                             withScopes:(NSArray *)scopes
 {
+    [self requestAuthorizationFromViewController:viewController withScopes:scopes completion:nil];
+}
+
+- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
+                                             withScopes:(NSArray *)scopes
+                                             completion:(SinglyAuthorizationCompletionBlock)completionHandler
+{
+    self.completionHandler = completionHandler;
 
     SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithServiceIdentifier:self.serviceIdentifier];
     loginViewController.scopes = scopes;
     loginViewController.delegate = self;
-    [viewController presentViewController:loginViewController animated:YES completion:nil];
 
+    [viewController presentViewController:loginViewController animated:YES completion:nil];
 }
 
 #pragma mark - Service Disconnection
@@ -237,18 +248,37 @@
 
 #pragma mark - Login View Controller Delegates
 
-- (void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service
+- (void)singlyLoginViewController:(SinglyLoginViewController *)controller
+               didLoginForService:(NSString *)service
 {
-    [controller dismissViewControllerAnimated:YES completion:nil];
+    // Call the Delegate
     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
         [self.delegate singlyServiceDidAuthorize:self];
+
+    // Call the Completion Handler
+    if (self.completionHandler)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.completionHandler(YES, nil);
+        });
+    }
 }
 
-- (void)singlyLoginViewController:(SinglyLoginViewController *)viewController errorLoggingInToService:(NSString *)serviceIdentifier withError:(NSError *)error
+- (void)singlyLoginViewController:(SinglyLoginViewController *)viewController
+          errorLoggingInToService:(NSString *)serviceIdentifier
+                        withError:(NSError *)error
 {
-    [viewController dismissViewControllerAnimated:NO completion:nil];
+    // Call the Delegate
     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
         [self.delegate singlyServiceDidFail:self withError:error];
+
+    // Call the Completion Handler
+    if (self.completionHandler)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.completionHandler(NO, error);
+        });
+    }
 }
 
 @end

@@ -45,15 +45,19 @@
 - (void)authenticateWithService:(NSString *)serviceIdentifier
 {
     SinglyService *service = [SinglyService serviceWithIdentifier:serviceIdentifier];
-    service.delegate = self;
-    [service requestAuthorizationFromViewController:self];
+    [service requestAuthorizationFromViewController:self withScopes:nil completion:^(BOOL isSuccessful, NSError *error) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:didLoginForService:)])
+            [self.delegate singlyLoginPickerViewController:self didLoginForService:[service serviceIdentifier]];
+    }];
 }
 
 - (void)authenticateWithFacebook
 {
     SinglyFacebookService *facebookService = [SinglyService serviceWithIdentifier:@"facebook"];
-    facebookService.delegate = self;
-    [facebookService requestAuthorizationFromViewController:self];
+    [facebookService requestAuthorizationFromViewController:self withScopes:nil completion:^(BOOL isSuccessful, NSError *error) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:errorLoggingInToService:withError:)])
+            [self.delegate singlyLoginPickerViewController:self errorLoggingInToService:[facebookService serviceIdentifier] withError:error];
+    }];
 }
 
 #pragma mark - View Callbacks
@@ -245,20 +249,6 @@
         default:
             break;
     }
-}
-
-#pragma mark - Singly Service Delegates
-
-- (void)singlyServiceDidAuthorize:(SinglyService *)service
-{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:didLoginForService:)])
-        [self.delegate singlyLoginPickerViewController:self didLoginForService:[service serviceIdentifier]];
-}
-
-- (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error
-{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:errorLoggingInToService:withError:)])
-        [self.delegate singlyLoginPickerViewController:self errorLoggingInToService:[service serviceIdentifier] withError:error];
 }
 
 #pragma mark - Singly Login View Controller Delegates

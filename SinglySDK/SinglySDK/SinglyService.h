@@ -32,6 +32,14 @@
 #import "SinglyLoginViewController.h"
 #import "SinglyService+Delegate.h"
 
+/**
+ *
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglyAuthorizationCompletionBlock)(BOOL isSuccessful, NSError *error);
+
 /*!
  *
  * Authentication and state handling for a service (such as Facebook, Twitter,
@@ -117,6 +125,8 @@
  *                       authorization request.
  *
  * @see requestAuthorizationFromViewController:withScopes:
+ * @see requestAuthorizationFromViewController:completion:
+ * @see requestAuthorizationFromViewController:withScopes:completion:
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
@@ -132,15 +142,66 @@
  * @param viewController The view controller instance that is presenting the
  *                       authorization request.
  *
+ * @param completionHandler The block to run when the request is complete. It
+ *                          will be passed a `BOOL` stating whether or not the
+ *                          operation succeeded.
+ *
+ * @see requestAuthorizationFromViewController:
+ * @see requestAuthorizationFromViewController:withScopes:
+ * @see requestAuthorizationFromViewController:withScopes:completion:
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
+                                    completion:(SinglyAuthorizationCompletionBlock)completionHandler;
+
+/*!
+ *
+ * Requests authorization from the user through any means possible, falling back
+ * from integrated auth, app-based auth then Singly auth via our standard
+ * login web view.
+ *
+ * @param viewController The view controller instance that is presenting the
+ *                       authorization request.
+ *
  * @param scopes The scope(s) to request from the service.
  *
  * @see requestAuthorizationFromViewController:
+ * @see requestAuthorizationFromViewController:completion:
+ * @see requestAuthorizationFromViewController:withScopes:completion:
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
                                     withScopes:(NSArray *)scopes;
+
+/*!
+ *
+ * Requests authorization from the user through any means possible, falling back
+ * from integrated auth, app-based auth then Singly auth via our standard
+ * login web view.
+ *
+ * @param viewController The view controller instance that is presenting the
+ *                       authorization request.
+ *
+ * @param scopes The scope(s) to request from the service.
+ *
+ * @param completionHandler The block to run when the request is complete. It
+ *                          will be passed a `BOOL` stating whether or not the
+ *                          operation succeeded.
+ *
+ * @see requestAuthorizationFromViewController:
+ * @see requestAuthorizationFromViewController:completion:
+ * @see requestAuthorizationFromViewController:withScopes:
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
+                                    withScopes:(NSArray *)scopes
+                                    completion:(SinglyAuthorizationCompletionBlock)completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Disconnecting from the Service

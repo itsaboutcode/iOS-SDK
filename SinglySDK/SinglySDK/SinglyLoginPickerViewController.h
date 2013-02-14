@@ -43,7 +43,7 @@
  *
 **/
 @interface SinglyLoginPickerViewController : UITableViewController <SinglyLoginViewControllerDelegate,
-    SinglyServiceDelegate, UIAlertViewDelegate>
+    UIAlertViewDelegate>
 
 /// ----------------------------------------------------------------------------
 /// @name Managing Available Services
