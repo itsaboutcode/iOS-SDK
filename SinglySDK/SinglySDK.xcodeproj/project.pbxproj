@@ -133,6 +133,7 @@
 		D03699CB167F77D000ED6D40 /* youtube@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369985167F77D000ED6D40 /* youtube@2x.png */; };
 		D03699CC167F77D000ED6D40 /* zeo.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369986167F77D000ED6D40 /* zeo.png */; };
 		D03699CD167F77D000ED6D40 /* zeo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0369987167F77D000ED6D40 /* zeo@2x.png */; };
+		D036DB4416CD968600815856 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D96E3316C5569400283404 /* Twitter.framework */; };
 		D04AD40B167FA3E10046C296 /* SinglyAvatarCache.h in Headers */ = {isa = PBXBuildFile; fileRef = D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */; };
 		D04AD40C167FA3E10046C296 /* SinglyAvatarCache.h in Headers */ = {isa = PBXBuildFile; fileRef = D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */; };
 		D04AD40D167FA3E10046C296 /* SinglyAvatarCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */; };
@@ -537,6 +538,7 @@
 				D05C000B1684CBB7006AD03C /* Security.framework in Frameworks */,
 				D053EF9016271BC9008B8BA1 /* SenTestingKit.framework in Frameworks */,
 				D05C000C1684CBBE006AD03C /* Social.framework in Frameworks */,
+				D036DB4416CD968600815856 /* Twitter.framework in Frameworks */,
 				D05C000F1684CBF8006AD03C /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
