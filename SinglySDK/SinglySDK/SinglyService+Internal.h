@@ -114,7 +114,7 @@
  * instance.
  *
  * @see requestAuthorizationViaSinglyFromViewController:withScopes:
- * @see SinglyLoginViewController
+ * @see requestAuthorizationViaSinglyFromViewController:withScopes:completion:
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
@@ -128,13 +128,30 @@
  * instance and any custom scope(s).
  *
  * @see requestAuthorizationViaSinglyFromViewController:
- * @see SinglyLoginViewController
+ * @see requestAuthorizationViaSinglyFromViewController:withScopes:completion:
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
-**/
+ **/
 - (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
                                              withScopes:(NSArray *)scopes;
+
+/*!
+ *
+ * Requests authorization from Singly by initializing an instance of the login
+ * view controller and configuring it for the service identified by the current
+ * instance and any custom scope(s). The specified `completionHandler` will be
+ * called once the operation has completed.
+ *
+ * @see requestAuthorizationViaSinglyFromViewController:
+ * @see requestAuthorizationViaSinglyFromViewController:withScopes:
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
+                                             withScopes:(NSArray *)scopes
+                                             completion:(SinglyAuthorizationCompletionBlock)completionHandler;
 
 /*!
  *

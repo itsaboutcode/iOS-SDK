@@ -214,13 +214,9 @@
         return;
     }
     
-    // Override the standard behavior for Facebook
-    if ([service isEqualToString:@"facebook"])
-    {
+    // Override the standard behavior for Facebook and Twitter
+    if ([service isEqualToString:@"facebook"] || [service isEqualToString:@"twitter"])
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-        [self authenticateWithFacebook];
-        return;
-    }
     
     // Display the standard login view controller
     [self authenticateWithService:service];

@@ -45,4 +45,13 @@
 **/
 + (NSDictionary *)dictionaryWithQueryString:(NSString *)queryString;
 
+/*!
+ *
+ * Returns the dictionary as a query string.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (NSString *)queryStringValue;
+
 @end

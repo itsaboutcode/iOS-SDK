@@ -43,11 +43,11 @@
     // Normalize the Service Identifier
     serviceIdentifier = [SinglyService normalizeServiceIdentifier:serviceIdentifier];
 
-    // Custom Service for Facebook
+    // Custom Service Implementation for Facebook
     if ([serviceIdentifier isEqualToString:@"facebook"])
         return [self facebookService];
 
-    // Custom Service for Facebook
+    // Custom Service Implementation for Twitter
     else if ([serviceIdentifier isEqualToString:@"twitter"])
         return [self twitterService];
 
@@ -58,15 +58,13 @@
 
 + (SinglyFacebookService *)facebookService
 {
-    // TODO This should be simply init, serviceIdentifier should be hardcoded
-    SinglyFacebookService *serviceInstance = [[SinglyFacebookService alloc] initWithIdentifier:@"facebook"];
+    SinglyFacebookService *serviceInstance = [[SinglyFacebookService alloc] init];
     return serviceInstance;
 }
 
 + (SinglyTwitterService *)twitterService
 {
-    // TODO This should be simply init, serviceIdentifier should be hardcoded
-    SinglyTwitterService *serviceInstance = [[SinglyTwitterService alloc] initWithIdentifier:@"twitter"];
+    SinglyTwitterService *serviceInstance = [[SinglyTwitterService alloc] init];
     return serviceInstance;
 }
 

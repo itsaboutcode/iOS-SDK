@@ -39,8 +39,16 @@
 #import "SinglySession.h"
 #import "SinglySession+Internal.h"
 #import "SinglyTwitterService.h"
+#import "SinglyTwitterService+Internal.h"
 
 @implementation SinglyTwitterService
+
+- (NSString *)serviceIdentifier
+{
+    return @"twitter";
+}
+
+#pragma mark - 
 
 - (BOOL)isIntegratedAuthorizationConfigured
 {
@@ -48,30 +56,24 @@
 
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    NSArray *accounts = [accountStore accountsWithAccountType:accountType];
 
-    // iOS 5+
-    if (accountType)
-    {
-        NSArray *accounts = [accountStore accountsWithAccountType:accountType];
+    NSLog(@"Accounts: %@", accounts);
 
-        NSLog(@"Accounts: %@", accounts);
+    if ([accounts respondsToSelector:@selector(count)])
+        isConfigured = YES;
 
-        if ([accounts respondsToSelector:@selector(count)])
-            isConfigured = YES;
-
-        if (!isConfigured)
-            SinglyLog(@"Integrated Twitter auth is not available because this device is not signed in to Twitter.");
-    }
+    if (!isConfigured)
+        SinglyLog(@"Integrated Twitter auth is not available because this device is not signed in to Twitter.");
 
     return isConfigured;
 }
 
-- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
-{
-    [self requestAuthorizationFromViewController:viewController withScopes:nil];
-}
+#pragma mark - Requesting Authorization
 
-- (void)requestAuthorizationFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
+                                    withScopes:(NSArray *)scopes
+                                    completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
 
     self.isAuthorized = NO;
@@ -99,7 +101,7 @@
         if (!self.isAuthorized)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes];
+                [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes completion:completionHandler];
             });
         }
 
@@ -189,60 +191,19 @@
             NSDictionary *responseDictionary = [NSDictionary dictionaryWithQueryString:responseString];
 
             NSLog(@"Response: %@", responseString);
-            
-            NSError *applyError;
+
+            id applyServiceHandler = ^(BOOL isSuccessful, NSError *error)
+            {
+                if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
+                    [self.delegate singlyServiceDidAuthorize:self];
+            };
+
             [SinglySession.sharedSession applyService:@"twitter"
                                             withToken:responseDictionary[@"oauth_token"]
                                           tokenSecret:responseDictionary[@"oauth_token_secret"]
-                                                error:&applyError];
+                                           completion:applyServiceHandler];
+        }];
 
-//        //
-//    // Apply the Twitter service to our current session.
-//    //
-//SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:@"auth/twitter/apply"];
-//request.parameters = @{
-//@"token": account.credential.oauthToken,
-//@"client_id": SinglySession.sharedSession.clientID,
-//@"client_secret": SinglySession.sharedSession.clientSecret
-//};
-
-
-            }];
-
-         //         NSError *requestError;
-         //         SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
-         //         id responseObject = [connection performRequest:&requestError];
-         //
-         //         NSLog(@"Request Error: %@", requestError);
-         //
-         //         //        // TODO Assume this means the token is expired. It may not be. Need to update how errors are returned from the apply endpoint for expired tokens.
-         //         //        if (((NSHTTPURLResponse *)response).statusCode != 200)
-         //         //        {
-         //         //            NSLog(@"Request Error: %@", requestError);
-         //         //            [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
-         //         //                NSLog(@"Token is expired... Renewed! %d", renewResult);
-         //         //                NSLog(@"Error: %@", error);
-         //         //                NSLog(@"Token: %@", account.credential.oauthToken);
-         //         //                NSError *applyError;
-         //         //                [SinglySession.sharedSession applyService:self.serviceIdentifier withToken:account.credential.oauthToken error:&applyError];
-         //         //                if (applyError)
-         //         //                {
-         //         //                    // TODO Handle errors!
-         //         //                }
-         //         //            }];
-         //         //        }
-         //
-         //         SinglySession.sharedSession.accessToken = responseObject[@"access_token"];
-         //         SinglySession.sharedSession.accountID = responseObject[@"account"];
-         //
-         //         dispatch_async(dispatch_get_main_queue(), ^{
-         //             [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL isSuccessful, NSError *error)
-         //              {
-         //                  if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
-         //                      [self.delegate singlyServiceDidAuthorize:self];
-         //              }];
-         //         });
-         
          //
          // We are now authorized. Do not attempt any further authorizations.
          //
@@ -257,6 +218,8 @@
     #endif
 }
 
+#pragma mark -
+
 - (void)handleServiceAppliedNotification:(NSNotification *)notification
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -266,46 +229,10 @@
     [SinglySession sharedSession].authorizingService = nil;
 }
 
-//#pragma mark - get rid of these
-//
-//+ (NSString *)serializeURL:(NSString *)baseUrl
-//                    params:(NSDictionary *)params {
-////    return [self serializeURL:baseUrl params:params httpMethod:@"get"];
-//}
-//
-//+ (NSString*)serializeURL:(NSString *)baseUrl
-//                   params:(NSDictionary *)params
-//               httpMethod:(NSString *)httpMethod {
-//
-////    NSURL* parsedURL = [NSURL URLWithString:baseUrl];
-////    NSString* queryPrefix = parsedURL.query ? @"&" : @"?";
-////    
-////    NSMutableArray* pairs = [NSMutableArray array];
-////    for (NSString* key in [params keyEnumerator]) {
-////        id value = [params objectForKey:key];
-////        if ([value isKindOfClass:[UIImage class]]
-////            || [value isKindOfClass:[NSData class]]) {
-////            if ([httpMethod isEqualToString:@"get"]) {
-////                NSLog(@"can not use GET to upload a file");
-////            }
-////            continue;
-////        }
-////        
-////        NSString *escaped_value = [value URLEncodedString];
-////        [pairs addObject:[NSString stringWithFormat:@"%@=%@", key, escaped_value]];
-////    }
-////    NSString* query = [pairs componentsJoinedByString:@"&"];
-////
-////    return [NSString stringWithFormat:@"%@%@%@", baseUrl, queryPrefix, query];
-//}
-//
+#pragma mark -
 
 - (NSString *)fetchReverseAuthParameters:(NSError **)error
 {
-
-    // If we already have the Client ID, do not attempt to fetch it again...
-//    if (self.clientID) return self.clientID;
-
     // Prepare the Request
     SinglyRequest *request = [SinglyRequest requestWithEndpoint:[NSString stringWithFormat:@"auth/%@/reverse_auth_parameters/%@", SinglySession.sharedSession.clientID, self.serviceIdentifier]];
     request.isAuthorizedRequest = NO;

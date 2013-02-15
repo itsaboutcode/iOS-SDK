@@ -41,6 +41,8 @@
 		D013E70216A075FA008C80A3 /* SinglyRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D013E70116A075FA008C80A3 /* SinglyRequestTests.m */; };
 		D013E70416A07A70008C80A3 /* withings.png in Resources */ = {isa = PBXBuildFile; fileRef = D013E70316A07A70008C80A3 /* withings.png */; };
 		D013E70616A07A95008C80A3 /* withings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D013E70516A07A95008C80A3 /* withings@2x.png */; };
+		D015CCF716CEEF7900CC5230 /* SinglyTwitterService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D015CCF616CEEF7900CC5230 /* SinglyTwitterService+Internal.h */; };
+		D015CCF816CEEF7900CC5230 /* SinglyTwitterService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D015CCF616CEEF7900CC5230 /* SinglyTwitterService+Internal.h */; };
 		D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
 		D02B537216309C7700F1F535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B537116309C7700F1F535 /* Foundation.framework */; };
 		D02B539616309CDF00F1F535 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoding.m */; };
@@ -324,6 +326,7 @@
 		D013E70116A075FA008C80A3 /* SinglyRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyRequestTests.m; sourceTree = "<group>"; };
 		D013E70316A07A70008C80A3 /* withings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = withings.png; sourceTree = "<group>"; };
 		D013E70516A07A95008C80A3 /* withings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "withings@2x.png"; sourceTree = "<group>"; };
+		D015CCF616CEEF7900CC5230 /* SinglyTwitterService+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SinglyTwitterService+Internal.h"; path = "SinglySDK/SinglyTwitterService+Internal.h"; sourceTree = "<group>"; };
 		D021CBBB162C933D00DE9922 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D021CBC5162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerServiceCell.h; sourceTree = "<group>"; };
 		D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerServiceCell.m; sourceTree = "<group>"; };
@@ -853,6 +856,7 @@
 				D058710116431AFC007E8970 /* SinglyFacebookService.h */,
 				D058710216431AFC007E8970 /* SinglyFacebookService.m */,
 				D00D662216C1A64B00746AA3 /* SinglyTwitterService.h */,
+				D015CCF616CEEF7900CC5230 /* SinglyTwitterService+Internal.h */,
 				D00D662316C1A64B00746AA3 /* SinglyTwitterService.m */,
 			);
 			name = Services;
@@ -1052,6 +1056,7 @@
 				D079145A16B8356700F3D98E /* SinglyLog.h in Headers */,
 				D06F113716BC169600809E3E /* SinglyConnection.h in Headers */,
 				D00D662416C1A64B00746AA3 /* SinglyTwitterService.h in Headers */,
+				D015CCF716CEEF7900CC5230 /* SinglyTwitterService+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1093,6 +1098,7 @@
 				D079145B16B8356700F3D98E /* SinglyLog.h in Headers */,
 				D06F113816BC169600809E3E /* SinglyConnection.h in Headers */,
 				D00D662516C1A64B00746AA3 /* SinglyTwitterService.h in Headers */,
+				D015CCF816CEEF7900CC5230 /* SinglyTwitterService+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

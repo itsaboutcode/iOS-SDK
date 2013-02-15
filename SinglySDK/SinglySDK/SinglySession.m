@@ -405,16 +405,13 @@ static SinglySession *sharedInstance = nil;
          tokenSecret:(NSString *)tokenSecret
           completion:(void (^)(BOOL, NSError *))completionHandler
 {
-    dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         NSError *error;
         BOOL isApplied = [self applyService:serviceIdentifier withToken:accessToken tokenSecret:tokenSecret error:&error];
 
-        dispatch_sync(currentQueue, ^{
-            if (completionHandler) completionHandler(isApplied, error);
-        });
-        
+        if (completionHandler) completionHandler(isApplied, error);
+
     });
 }
 

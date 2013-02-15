@@ -27,36 +27,37 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Accounts/Accounts.h>
-
-#import "SinglyLoginViewController.h"
-#import "SinglyService.h"
+@interface SinglyTwitterService ()
 
 /*!
  *
- * A custom implementation of a service specifically for Twitter that adds
- * support for authorization via the integrated support on iOS 5+. If integrated
- * support is not available, the installed Twitter app is tried. If neither
- * integrated authorization is available or the native app is not installed,
- * the standard Singly login workflow will be used.
+ * Retrieves the reverse auth parameters from Twitter to be used when requesting
+ * an access token.
+ *
+ * @param error Out parameter used if an error occurs while retrieving the
+ *              reverse auth parameters. May be `NULL`.
+ *
+ * @returns The reverse auth parameters from Twitter.
  *
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
 **/
-@interface SinglyTwitterService : SinglyService
+- (NSString *)fetchReverseAuthParameters:(NSError **)error;
 
 /*!
  *
- * Determines whether or not the current device is authenticated with Twitter
- * in the Settings app using the authorization support featured in iOS 5 and
- * higher.
+ * Retrieves the reverse auth parameters from Twitter to be used when requesting
+ * an access token. Once the request has completed, the specified
+ * `completionHandler` will be called.
  *
- * @returns Whether or not the current device is configured for integrated
- *          authorization.
+ * @param completionHandler The block to run when the request is complete. It
+ *                          be passed the access token or the error.
+ *
+ * @returns The reverse auth parameters from Twitter.
  *
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
 **/
-- (BOOL)isIntegratedAuthorizationConfigured;
+- (void)fetchReverseAuthParametersWithCompletion:(void (^)(NSString *accessToken, NSError *error))completionHandler;
 
 @end

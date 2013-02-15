@@ -30,13 +30,22 @@
 #import "NSDictionary+QueryString.h"
 #import "NSString+URLEncoding.h"
 
+#import "SinglyConnection.h"
 #import "SinglyFacebookService.h"
+#import "SinglyLog.h"
 #import "SinglyRequest.h"
 #import "SinglyService+Internal.h"
 #import "SinglySession.h"
 #import "SinglySession+Internal.h"
 
 @implementation SinglyFacebookService
+
+- (NSString *)serviceIdentifier
+{
+    return @"facebook";
+}
+
+#pragma mark -
 
 - (BOOL)isAppAuthorizationConfigured
 {
@@ -64,7 +73,7 @@
     }
 
     if (!isConfigured)
-        NSLog(@"[SinglySDK] Native Facebook auth is not available because Info.plist is not configured to handle Facebook URLs.");
+        SinglyLog(@"Native Facebook auth is not available because Info.plist is not configured to handle Facebook URLs.");
 
     return isConfigured;
 }
@@ -85,18 +94,17 @@
             isConfigured = YES;
 
         if (!isConfigured)
-            NSLog(@"[SinglySDK] Integrated Facebook auth is not available because this device is not signed in to Facebook.");
+            SinglyLog(@"Integrated Facebook auth is not available because this device is not signed in to Facebook.");
     }
 
     return isConfigured;
 }
 
-- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
-{
-    [self requestAuthorizationFromViewController:viewController withScopes:nil];
-}
+#pragma mark - Requesting Authorization
 
-- (void)requestAuthorizationFromViewController:(UIViewController *)viewController withScopes:(NSArray *)scopes
+- (void)requestAuthorizationFromViewController:(UIViewController *)viewController
+                                    withScopes:(NSArray *)scopes
+                                    completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
 
     self.isAuthorized = NO;
@@ -131,7 +139,7 @@
         if (!self.isAuthorized && !isAuthorizingViaApplication)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes];
+                [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes completion:completionHandler];
             });
         }
 
@@ -141,7 +149,7 @@
 
 - (void)requestIntegratedAuthorization:(NSArray *)scopes
 {
-    NSLog(@"[SinglySDK] Attempting integrated authorization...");
+    SinglyLog(@"Attempting integrated authorization with Facebook...");
 
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
 
@@ -197,38 +205,45 @@
         // Apply the Facebook service to our current session.
         //
         SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:@"auth/facebook/apply"];
-        request.parameters = @{ @"token": account.credential.oauthToken, @"client_id": SinglySession.sharedSession.clientID, @"client_secret": SinglySession.sharedSession.clientSecret };
-        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *requestError)
-        {
-            // TODO Assume this means the token is expired. It may not be. Need to update how errors are returned from the apply endpoint for expired tokens.
-            if (((NSHTTPURLResponse *)response).statusCode != 200)
-            {
-                NSLog(@"Request Error: %@", requestError);
-                [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
-                    NSLog(@"Token is expired... Renewed! %d", renewResult);
-                    NSLog(@"Error: %@", error);
-                    NSLog(@"Token: %@", account.credential.oauthToken);
-                    NSError *applyError;
-                    [SinglySession.sharedSession applyService:self.serviceIdentifier withToken:account.credential.oauthToken error:&applyError];
-                    if (applyError)
-                    {
-                        // TODO Handle errors!
-                    }
-                }];
-            }
+        request.parameters = @{
+            @"token": account.credential.oauthToken,
+            @"client_id": SinglySession.sharedSession.clientID,
+            @"client_secret": SinglySession.sharedSession.clientSecret
+        };
 
-            else
-            {
-                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
-                SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"];
-                SinglySession.sharedSession.accountID = responseDictionary[@"account"];
-                [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL isSuccessful, NSError *error)
-                {
-                    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
-                        [self.delegate singlyServiceDidAuthorize:self];
-                }];
-            }
-        }];
+        NSError *requestError;
+        SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
+        id responseObject = [connection performRequest:&requestError];
+
+        NSLog(@"Request Error: %@", requestError);
+
+//        // TODO Assume this means the token is expired. It may not be. Need to update how errors are returned from the apply endpoint for expired tokens.
+//        if (((NSHTTPURLResponse *)response).statusCode != 200)
+//        {
+//            NSLog(@"Request Error: %@", requestError);
+//            [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
+//                NSLog(@"Token is expired... Renewed! %d", renewResult);
+//                NSLog(@"Error: %@", error);
+//                NSLog(@"Token: %@", account.credential.oauthToken);
+//                NSError *applyError;
+//                [SinglySession.sharedSession applyService:self.serviceIdentifier withToken:account.credential.oauthToken error:&applyError];
+//                if (applyError)
+//                {
+//                    // TODO Handle errors!
+//                }
+//            }];
+//        }
+
+        SinglySession.sharedSession.accessToken = responseObject[@"access_token"];
+        SinglySession.sharedSession.accountID = responseObject[@"account"];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL isSuccessful, NSError *error)
+             {
+                 if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
+                     [self.delegate singlyServiceDidAuthorize:self];
+             }];
+        });
 
         //
         // We are now authorized. Do not attempt any further authorizations.
@@ -247,7 +262,7 @@
 - (BOOL)requestApplicationAuthorization:(NSArray *)scopes
 {
 
-    NSLog(@"[SinglySDK] Attempting to authorize with the installed Facebook app...");
+    SinglyLog(@"Attempting to authorize with the installed Facebook app...");
 
     NSArray *permissions = (scopes != nil) ? scopes : @[ @"email", @"user_location", @"user_birthday" ];
     NSDictionary *params = @{
@@ -259,13 +274,13 @@
         @"scope": [permissions componentsJoinedByString:@","]
     };
 
-    NSString *urlPrefix = @"fbauth://authorize";
-    NSString *fbAppUrl = [SinglyFacebookService serializeURL:urlPrefix params:params];
-
-    BOOL isAppInstalled = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:fbAppUrl]];
+    NSString *facebookAppURL = [NSString stringWithFormat:@"fbauth://authorize?%@", [params queryStringValue]];
+    BOOL isAppInstalled = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:facebookAppURL]];
 
     if (!isAppInstalled)
-        NSLog(@"[SinglySDK]   Facebook app is not installed.");
+    {
+        SinglyLog(@"   Facebook app is not installed.");
+    }
     else
     {
         [SinglySession sharedSession].authorizingService = self;
@@ -279,6 +294,8 @@
 
 }
 
+#pragma mark -
+
 - (void)handleServiceAppliedNotification:(NSNotification *)notification
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -286,39 +303,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
         [self.delegate singlyServiceDidAuthorize:self];
     [SinglySession sharedSession].authorizingService = nil;
-}
-
-#pragma mark - get rid of these
-
-+ (NSString *)serializeURL:(NSString *)baseUrl
-                    params:(NSDictionary *)params {
-    return [self serializeURL:baseUrl params:params httpMethod:@"get"];
-}
-
-+ (NSString*)serializeURL:(NSString *)baseUrl
-                   params:(NSDictionary *)params
-               httpMethod:(NSString *)httpMethod {
-
-    NSURL* parsedURL = [NSURL URLWithString:baseUrl];
-    NSString* queryPrefix = parsedURL.query ? @"&" : @"?";
-
-    NSMutableArray* pairs = [NSMutableArray array];
-    for (NSString* key in [params keyEnumerator]) {
-        id value = [params objectForKey:key];
-        if ([value isKindOfClass:[UIImage class]]
-            || [value isKindOfClass:[NSData class]]) {
-            if ([httpMethod isEqualToString:@"get"]) {
-                NSLog(@"can not use GET to upload a file");
-            }
-            continue;
-        }
-
-        NSString *escaped_value = [value URLEncodedString];
-        [pairs addObject:[NSString stringWithFormat:@"%@=%@", key, escaped_value]];
-    }
-    NSString* query = [pairs componentsJoinedByString:@"&"];
-
-    return [NSString stringWithFormat:@"%@%@%@", baseUrl, queryPrefix, query];
 }
 
 @end
