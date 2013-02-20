@@ -33,6 +33,7 @@
 #import "SinglyLoginViewController.h"
 #import "SinglyService.h"
 #import "SinglySession.h"
+#import "SinglyTwitterService.h"
 
 /*!
  *
@@ -42,8 +43,12 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@interface SinglyLoginPickerViewController : UITableViewController <SinglyLoginViewControllerDelegate,
-    UIAlertViewDelegate>
+@interface SinglyLoginPickerViewController : UITableViewController
+    <SinglyLoginViewControllerDelegate,
+     SinglyServiceDelegate,
+     SinglyTwitterServiceDelegate,
+     UIActionSheetDelegate,
+     UIAlertViewDelegate>
 
 /// ----------------------------------------------------------------------------
 /// @name Managing Available Services

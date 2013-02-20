@@ -30,10 +30,11 @@
 #import <Accounts/Accounts.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "SinglyActionSheet.h"
 #import "SinglyActivityIndicatorView.h"
+#import "SinglyAlertView.h"
 #import "SinglyConnection.h"
 #import "SinglyConstants.h"
-#import "SinglyFacebookService.h"
 #import "SinglyLoginPickerServiceCell.h"
 #import "SinglyLoginPickerViewController.h"
 #import "SinglyLoginPickerViewController+Internal.h"
@@ -45,18 +46,25 @@
 - (void)authenticateWithService:(NSString *)serviceIdentifier
 {
     SinglyService *service = [SinglyService serviceWithIdentifier:serviceIdentifier];
-    [service requestAuthorizationFromViewController:self withScopes:nil completion:^(BOOL isSuccessful, NSError *error) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:didLoginForService:)])
-            [self.delegate singlyLoginPickerViewController:self didLoginForService:[service serviceIdentifier]];
-    }];
-}
+    service.delegate = self;
 
-- (void)authenticateWithFacebook
-{
-    SinglyFacebookService *facebookService = [SinglyService serviceWithIdentifier:@"facebook"];
-    [facebookService requestAuthorizationFromViewController:self withScopes:nil completion:^(BOOL isSuccessful, NSError *error) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:errorLoggingInToService:withError:)])
-            [self.delegate singlyLoginPickerViewController:self errorLoggingInToService:[facebookService serviceIdentifier] withError:error];
+    [service requestAuthorizationFromViewController:self withScopes:nil completion:^(BOOL isSuccessful, NSError *error)
+    {
+
+        // Success!
+        if (isSuccessful)
+        {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:didLoginForService:)])
+                [self.delegate singlyLoginPickerViewController:self didLoginForService:[service serviceIdentifier]];
+        }
+
+        // Handle Errors...
+        else
+        {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:errorLoggingInToService:withError:)])
+                [self.delegate singlyLoginPickerViewController:self errorLoggingInToService:serviceIdentifier withError:error];
+        }
+
     }];
 }
 
@@ -222,6 +230,13 @@
     [self authenticateWithService:service];
 }
 
+#pragma mark - Action Sheet Delegates
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+}
+
 #pragma mark - Alert View Delegates
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -230,16 +245,16 @@
     {
         case 0: // Disconnect
             switch (buttonIndex)
-        {
-            case 0: // Cancel
-                break;
-            case 1: // Disconnect
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSError *error;
-                    [[SinglyService serviceWithIdentifier:self.selectedService] disconnect:&error];
-                });
-                break;
-        }
+            {
+                case 0: // Cancel
+                    break;
+                case 1: // Disconnect
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        NSError *error;
+                        [[SinglyService serviceWithIdentifier:self.selectedService] disconnect:&error];
+                    });
+                    break;
+            }
             break;
 
         default:
@@ -266,6 +281,46 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
+}
+
+#pragma mark - Singly Service Delegates
+
+- (void)singlyServiceDidAuthorize:(SinglyService *)service
+{
+    // TODO Implement
+}
+
+- (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error
+{
+    // TODO Implement
+}
+
+- (ACAccount *)accountForTwitterAuthorization:(NSArray *)availableAccounts
+{
+    __block ACAccount *chosenAccount;
+
+    dispatch_semaphore_t actionSheetSemaphore = dispatch_semaphore_create(0);
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        SinglyActionSheet *actionSheet = [[SinglyActionSheet alloc] initWithTitle:@"Select Account"];
+
+        for (ACAccount *account in availableAccounts)
+        {
+            [actionSheet addButtonWithTitle:account.accountDescription block:^{
+                chosenAccount = account;
+                dispatch_semaphore_signal(actionSheetSemaphore);
+            }];
+        }
+
+        [actionSheet addCancelButtonWithTitle:@"Cancel"];
+        [actionSheet showInView:self.view];
+    });
+
+    dispatch_semaphore_wait(actionSheetSemaphore, DISPATCH_TIME_FOREVER);
+    #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+        dispatch_release(accessTokenSemaphore);
+    #endif
+
+    return chosenAccount;
 }
 
 @end
