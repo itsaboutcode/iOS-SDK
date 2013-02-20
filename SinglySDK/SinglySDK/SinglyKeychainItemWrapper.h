@@ -40,6 +40,8 @@
  * This class is heavily based on KeychainItemWrapper from Apple, but has been
  * modernized with ARC and Objective-C 2.0 syntax.
  *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
 **/
 @interface SinglyKeychainItemWrapper : NSObject
 

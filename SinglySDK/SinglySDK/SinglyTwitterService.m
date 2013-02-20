@@ -129,8 +129,6 @@
                                        completion:^(BOOL granted, NSError *error)
     {
 
-        NSLog(@"Granted? %d %@", granted, error);
-
         // Check for Access
         if (!granted)
         {
@@ -167,49 +165,52 @@
             return;
         }
 
-        // Configure the Request
-        NSURL *accessTokenURL = [NSURL URLWithString:@"https://api.twitter.com/oauth/access_token"];
-        NSString *reverseAuthParameters = [self fetchReverseAuthParameters:nil];
-        NSDictionary *accessTokenParameters = @{
-            @"x_reverse_auth_target": self.clientID,
-            @"x_reverse_auth_parameters": reverseAuthParameters
-        };
-        TWRequest *accessTokenRequest = [[TWRequest alloc] initWithURL:accessTokenURL
-                                                            parameters:accessTokenParameters
-                                                         requestMethod:TWRequestMethodPOST];
-
         // Select the Account
-        #warning Implement a UI for slecting the Twitter account to use...
         NSArray *accounts = [accountStore accountsWithAccountType:accountType];
-        ACAccount *account = [accounts lastObject];
-        [accessTokenRequest setAccount:account];
+        ACAccount *account;
 
-        // Perform the Request
-        [accessTokenRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
+        if (accounts.count > 1)
         {
-            NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-            NSDictionary *responseDictionary = [NSDictionary dictionaryWithQueryString:responseString];
-
-            NSLog(@"Response: %@", responseString);
-
-            id applyServiceHandler = ^(BOOL isSuccessful, NSError *error)
+            if (self.delegate && [self.delegate respondsToSelector:@selector(accountForTwitterAuthorization:)])
+                account = [self.delegate accountForTwitterAuthorization:accounts];
+            else
             {
+                SinglyLog(@"Unable to select account!");
+                return;
+            }
+        }
+        else
+        {
+            account = [accounts lastObject];
+        }
+
+        //
+        // Request Access Token from Twitter
+        //
+        [self fetchAccessTokenForAccount:account completion:^(NSDictionary *accessToken, NSError *error) {
+
+            // TODO Check for errors!
+
+            id applyServiceHandler = ^(BOOL isSuccessful, NSError *applyError)
+            {
+                // TODO Check for errors!
                 if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
                     [self.delegate singlyServiceDidAuthorize:self];
             };
 
-            [SinglySession.sharedSession applyService:@"twitter"
-                                            withToken:responseDictionary[@"oauth_token"]
-                                          tokenSecret:responseDictionary[@"oauth_token_secret"]
+            // Apply Service to Singly
+            [SinglySession.sharedSession applyService:self.serviceIdentifier
+                                            withToken:accessToken[@"oauth_token"]
+                                          tokenSecret:accessToken[@"oauth_token_secret"]
                                            completion:applyServiceHandler];
+
+            dispatch_semaphore_signal(authorizationSemaphore);
         }];
 
-         //
-         // We are now authorized. Do not attempt any further authorizations.
-         //
-         self.isAuthorized = YES;
-
-         dispatch_semaphore_signal(authorizationSemaphore);
+        //
+        // We are now authorized. Do not attempt any further authorizations.
+        //
+        self.isAuthorized = YES;
     }];
 
     dispatch_semaphore_wait(authorizationSemaphore, DISPATCH_TIME_FOREVER);
@@ -257,18 +258,74 @@
     return reverseAuthParameters;
 }
 
-- (void)fetchReverseAuthParametersWithCompletion:(void (^)(NSString *accessToken, NSError *error))completionHandler
+- (void)fetchReverseAuthParametersWithCompletion:(void (^)(NSString *parameters, NSError *error))completionHandler
 {
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         NSError *error;
-        NSString *accessToken = [self fetchReverseAuthParameters:&error];
+        NSString *parameters = [self fetchReverseAuthParameters:&error];
 
         if (completionHandler) dispatch_sync(currentQueue, ^{
-            completionHandler(accessToken, error);
+            completionHandler(parameters, error);
         });
         
+    });
+}
+
+- (NSDictionary *)fetchAccessTokenForAccount:(ACAccount *)account error:(NSError **)error
+{
+    dispatch_semaphore_t accessTokenSemaphore = dispatch_semaphore_create(0);
+    __block NSDictionary *accessTokenDictionary;
+
+    // Configure the Request
+    NSURL *accessTokenURL = [NSURL URLWithString:@"https://api.twitter.com/oauth/access_token"];
+    NSString *reverseAuthParameters = [self fetchReverseAuthParameters:nil];
+    NSDictionary *accessTokenParameters = @{
+        @"x_reverse_auth_target": self.clientID,
+        @"x_reverse_auth_parameters": reverseAuthParameters
+    };
+    TWRequest *accessTokenRequest = [[TWRequest alloc] initWithURL:accessTokenURL
+                                                        parameters:accessTokenParameters
+                                                     requestMethod:TWRequestMethodPOST];
+
+    // Set the Account
+    [accessTokenRequest setAccount:account];
+
+    // Perform the Request
+    [accessTokenRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
+    {
+        NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        NSDictionary *responseDictionary = [NSDictionary dictionaryWithQueryString:responseString];
+
+        NSLog(@"Response: %@", responseString);
+
+        accessTokenDictionary = responseDictionary;
+
+        dispatch_semaphore_signal(accessTokenSemaphore);
+    }];
+
+    dispatch_semaphore_wait(accessTokenSemaphore, DISPATCH_TIME_FOREVER);
+    #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+        dispatch_release(accessTokenSemaphore);
+    #endif
+
+    return accessTokenDictionary;
+}
+
+- (void)fetchAccessTokenForAccount:(ACAccount *)account
+                        completion:(void (^)(NSDictionary *accessToken, NSError *error))completionHandler
+{
+//    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        NSError *error;
+        NSDictionary *accessToken = [self fetchAccessTokenForAccount:account error:&error];
+
+        if (completionHandler) // dispatch_sync(currentQueue, ^{
+            completionHandler(accessToken, error);
+//        });
+
     });
 }
 

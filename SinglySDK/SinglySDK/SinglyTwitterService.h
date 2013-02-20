@@ -31,14 +31,32 @@
 
 #import "SinglyLoginViewController.h"
 #import "SinglyService.h"
+#import "SinglyTwitterService+Delegate.h"
 
 /*!
  *
  * A custom implementation of a service specifically for Twitter that adds
  * support for authorization via the integrated support on iOS 5+. If integrated
- * support is not available, the installed Twitter app is tried. If neither
- * integrated authorization is available or the native app is not installed,
- * the standard Singly login workflow will be used.
+ * support is not available, the standard Singly login workflow will be used.
+ *
+ * This class requires a delegate that adheres to the `SinglyTwitterServiceDelegate`
+ * protocol.
+ *
+ * ### Choosing the Twitter Account to Authorize
+ *
+ * The user may have multiple Twitter accounts authorized on their device. When
+ * integrated authorization is available, you will need to prompt the user for
+ * which account they wish to authorize using the
+ * [accountForTwitterAuthorization:]([SinglyTwitterServiceDelegate accountForTwitterAuthorization:])
+ * delegate method.
+ *
+ *     	- (ACAccount *)accountForTwitterAuthorization:(NSArray *)availableAccounts
+ *     	{
+ *     	    // Present the list of accounts to the user and allow them to
+ *     	    // decide which account to use...
+ *     	
+ *     	    return theChosenAccount;
+ *     	}
  *
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
@@ -58,5 +76,16 @@
  *
 **/
 - (BOOL)isIntegratedAuthorizationConfigured;
+
+/*!
+ *
+ * The object that acts as the delegate of the service.
+ *
+ * The delegate must adopt the SinglyServiceDelegate protocol.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+@property (weak) id<SinglyTwitterServiceDelegate> delegate;
 
 @end

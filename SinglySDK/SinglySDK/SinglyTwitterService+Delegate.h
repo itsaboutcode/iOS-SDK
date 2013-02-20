@@ -1,5 +1,5 @@
 //
-//  SinglyService+Delegate.h
+//  SinglyTwitterService+Delegate.h
 //  SinglySDK
 //
 //  Copyright (c) 2012-2013 Singly, Inc. All rights reserved.
@@ -27,42 +27,32 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-@class SinglyService;
+@class SinglyTwitterService;
 
 /*!
  *
- * Delegate methods related to a SinglyService instance.
+ * Delegate methods related to a SinglyTwitterService instance.
  *
- * @available Available in Singly iOS SDK 1.0.0 and later.
+ * @available Available in Singly iOS SDK 1.2.0 and later.
  *
- **/
-@protocol SinglyServiceDelegate <NSObject>
+**/
+@protocol SinglyTwitterServiceDelegate <NSObject, SinglyServiceDelegate>
 
 @required
 
 /*!
  *
- * Delegate method for a successful service login.
+ * Delegate method that is called when the device has more than one Twitter
+ * account authenticated. This method should return the account that should be
+ * used for authentication.
  *
- * @param service  The service instance that this delegate is firing for.
+ * @param availableAccounts An array containing each of the available accounts
+ *                          to choose from.
  *
- * @available Available in Singly iOS SDK 1.0.0 and later.
+ * @available Available in Singly iOS SDK 1.2.0 and later.
  *
- **/
-- (void)singlyServiceDidAuthorize:(SinglyService *)service;
-
-/*!
- *
- * Delegate method for an error during service login
- *
- * @param service The service where the error occurred
- *
- * @param error   The error that occured during login
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
- **/
-- (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error;
+**/
+- (ACAccount *)accountForTwitterAuthorization:(NSArray *)availableAccounts;
 
 @end
 
