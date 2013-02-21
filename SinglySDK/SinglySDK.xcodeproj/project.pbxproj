@@ -148,6 +148,8 @@
 		D044C9C016D56A7A00BA1305 /* SinglyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D044C9BD16D56A7A00BA1305 /* SinglyAlertView.m */; };
 		D044C9C116D56A7A00BA1305 /* SinglyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D044C9BD16D56A7A00BA1305 /* SinglyAlertView.m */; };
 		D044C9C216D56A7A00BA1305 /* SinglyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D044C9BD16D56A7A00BA1305 /* SinglyAlertView.m */; };
+		D044C9C516D693C900BA1305 /* SinglyFacebookService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */; };
+		D044C9C616D693C900BA1305 /* SinglyFacebookService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */; };
 		D04AD40B167FA3E10046C296 /* SinglyAvatarCache.h in Headers */ = {isa = PBXBuildFile; fileRef = D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */; };
 		D04AD40C167FA3E10046C296 /* SinglyAvatarCache.h in Headers */ = {isa = PBXBuildFile; fileRef = D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */; };
 		D04AD40D167FA3E10046C296 /* SinglyAvatarCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */; };
@@ -422,6 +424,7 @@
 		D044C9B616D5341500BA1305 /* SinglyActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyActionSheet.m; sourceTree = "<group>"; };
 		D044C9BC16D56A7A00BA1305 /* SinglyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAlertView.h; sourceTree = "<group>"; };
 		D044C9BD16D56A7A00BA1305 /* SinglyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAlertView.m; sourceTree = "<group>"; };
+		D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyFacebookService+Internal.h"; sourceTree = "<group>"; };
 		D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAvatarCache.h; sourceTree = "<group>"; };
 		D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAvatarCache.m; sourceTree = "<group>"; };
 		D053EF8D16271BC9008B8BA1 /* SinglySDK.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinglySDK.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -875,6 +878,7 @@
 				D08C1BE8164C780B00035775 /* SinglyService+Internal.h */,
 				D05870FC16431ADB007E8970 /* SinglyService.m */,
 				D058710116431AFC007E8970 /* SinglyFacebookService.h */,
+				D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */,
 				D058710216431AFC007E8970 /* SinglyFacebookService.m */,
 				D00D662216C1A64B00746AA3 /* SinglyTwitterService.h */,
 				D015CD0016D3F0B300CC5230 /* SinglyTwitterService+Delegate.h */,
@@ -1082,6 +1086,7 @@
 				D015CD0216D3F0B300CC5230 /* SinglyTwitterService+Delegate.h in Headers */,
 				D044C9B716D5341500BA1305 /* SinglyActionSheet.h in Headers */,
 				D044C9BE16D56A7A00BA1305 /* SinglyAlertView.h in Headers */,
+				D044C9C516D693C900BA1305 /* SinglyFacebookService+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1127,6 +1132,7 @@
 				D015CD0316D3F0B300CC5230 /* SinglyTwitterService+Delegate.h in Headers */,
 				D044C9B816D5341500BA1305 /* SinglyActionSheet.h in Headers */,
 				D044C9BF16D56A7A00BA1305 /* SinglyAlertView.h in Headers */,
+				D044C9C616D693C900BA1305 /* SinglyFacebookService+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

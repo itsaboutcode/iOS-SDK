@@ -33,6 +33,7 @@
 #import "SinglyAlertView.h"
 #import "SinglyConnection.h"
 #import "SinglyFacebookService.h"
+#import "SinglyFacebookService+Internal.h"
 #import "SinglyLog.h"
 #import "SinglyRequest.h"
 #import "SinglyService+Internal.h"
@@ -56,7 +57,7 @@
     if (!urlTypesDictionary)
         isConfigured = NO;
 
-    NSArray *urlSchemesArray = [urlTypesDictionary valueForKey:@"CFBundleURLSchemes"];
+    NSArray *urlSchemesArray = urlTypesDictionary[@"CFBundleURLSchemes"];
     if (!urlSchemesArray)
         isConfigured = NO;
     else
@@ -74,12 +75,12 @@
     }
 
     if (!isConfigured)
-        SinglyLog(@"Native Facebook auth is not available because Info.plist is not configured to handle Facebook URLs.");
+        SinglyLog(@"Authorization via the installed Facebook app is not available because your Info.plist is not configured to handle Facebook URLs.");
 
     return isConfigured;
 }
 
-- (BOOL)isIntegratedAuthorizationConfigured
+- (BOOL)isNativeAuthorizationConfigured
 {
     BOOL isConfigured = NO;
 
@@ -95,7 +96,7 @@
             isConfigured = YES;
 
         if (!isConfigured)
-            SinglyLog(@"Integrated Facebook auth is not available because this device is not signed in to Facebook.");
+            SinglyLog(@"Native Facebook authorization is not available because this device is not signed into Facebook.");
     }
 
     return isConfigured;
@@ -122,13 +123,13 @@
             [self fetchClientID:nil];
 
         //
-        // Step 2 - Attempt Integrated Authorization
+        // Step 2 - Attempt Native Authorization (iOS 6+)
         //
-        if (self.clientID && !self.isAuthorized && [self isIntegratedAuthorizationConfigured])
-            [self requestIntegratedAuthorization:scopes];
+        if (self.clientID && !self.isAuthorized && [self isNativeAuthorizationConfigured])
+            [self requestNativeAuthorization:scopes];
 
         //
-        // Step 3 - Attempt Native Application Authorization
+        // Step 3 - Attempt Authorization via Facebook App
         //
         BOOL isAuthorizingViaApplication = NO;
         if (self.clientID && !self.isAuthorized && [self isAppAuthorizationConfigured])
@@ -148,10 +149,8 @@
     
 }
 
-- (void)requestIntegratedAuthorization:(NSArray *)scopes
+- (void)requestNativeAuthorization:(NSArray *)scopes
 {
-    SinglyLog(@"Attempting integrated authorization with Facebook...");
-
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
 
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
@@ -159,7 +158,7 @@
 
     if (!accountType)
     {
-        NSLog(@"[SinglySDK]   No integrated accounts available.");
+        SinglyLog(@"Native Facebook authorization is not available because this device is not signed into Facebook.");
         return;
     }
 
@@ -178,15 +177,18 @@
         {
             if (error.code == ACErrorAccountNotFound)
             {
-                NSLog(@"[SinglySDK] Integrated authorization is not available because the device is not authenticated with Facebook. Skipping...");
+                SinglyLog(@"Native Facebook authorization is not available because this device is not signed into Facebook.");
                 return;
             }
 
-            NSLog(@"[SinglySDK] Unhandled error: %@", error);
+            SinglyLog(@"Unhandled error! %@", error);
 
+            // Inform the Delegate
             if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
                 [self.delegate singlyServiceDidFail:self withError:error];
 
+            // Display an Alert to the User
+            // TODO Remove this, errors should be displayed by the consuming apps, not us...
             dispatch_async(dispatch_get_main_queue(), ^{
                 SinglyAlertView *alertView = [[SinglyAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription]];
                 [alertView addCancelButtonWithTitle:@"Dismiss"];
@@ -202,7 +204,7 @@
         //
         // Apply the Facebook service to our current session.
         //
-        SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:@"auth/facebook/apply"];
+        SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"auth/facebook/apply"];
         request.parameters = @{
             @"token": account.credential.oauthToken,
             @"client_id": SinglySession.sharedSession.clientID,
@@ -213,8 +215,8 @@
         SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
         id responseObject = [connection performRequest:&requestError];
 
-        NSLog(@"Request Error: %@", requestError);
-
+//        NSLog(@"Request Error: %@", requestError);
+//
 //        // TODO Assume this means the token is expired. It may not be. Need to update how errors are returned from the apply endpoint for expired tokens.
 //        if (((NSHTTPURLResponse *)response).statusCode != 200)
 //        {
@@ -237,10 +239,10 @@
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL isSuccessful, NSError *error)
-             {
-                 if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
-                     [self.delegate singlyServiceDidAuthorize:self];
-             }];
+            {
+                if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
+                    [self.delegate singlyServiceDidAuthorize:self];
+            }];
         });
 
         //
@@ -259,9 +261,6 @@
 
 - (BOOL)requestApplicationAuthorization:(NSArray *)scopes
 {
-
-    SinglyLog(@"Attempting to authorize with the installed Facebook app...");
-
     NSArray *permissions = (scopes != nil) ? scopes : @[ @"email", @"user_location", @"user_birthday" ];
     NSDictionary *params = @{
         @"client_id": self.clientID,
@@ -277,10 +276,12 @@
 
     if (!isAppInstalled)
     {
-        SinglyLog(@"   Facebook app is not installed.");
+        SinglyLog(@"Authorization via the Facebook app is not possible because the Facebook app is not installed.");
     }
     else
     {
+        SinglyLog(@"Attempting to authorize via the installed Facebook app...");
+
         [SinglySession sharedSession].authorizingService = self;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleServiceAppliedNotification:)
@@ -289,10 +290,9 @@
     }
 
     return isAppInstalled;
-
 }
 
-#pragma mark -
+#pragma mark - Notifications
 
 - (void)handleServiceAppliedNotification:(NSNotification *)notification
 {
