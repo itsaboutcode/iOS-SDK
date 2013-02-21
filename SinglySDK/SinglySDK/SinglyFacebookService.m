@@ -47,8 +47,6 @@
     return @"facebook";
 }
 
-#pragma mark -
-
 - (BOOL)isAppAuthorizationConfigured
 {
     BOOL isConfigured = YES;
@@ -102,7 +100,7 @@
     return isConfigured;
 }
 
-#pragma mark - Requesting Authorization
+#pragma mark - Authorization
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
                                     withScopes:(NSArray *)scopes
@@ -173,11 +171,22 @@
                                           options:options
                                        completion:^(BOOL granted, NSError *error)
     {
+
+        // Check for Access
+//        if (!granted)
+//        {
+//            SinglyLog(@"We were not granted access to the device accounts.");
+//            dispatch_semaphore_signal(authorizationSemaphore);
+//            return;
+//        }
+
+        // Check for Errors
         if (error)
         {
             if (error.code == ACErrorAccountNotFound)
             {
                 SinglyLog(@"Native Facebook authorization is not available because this device is not signed into Facebook.");
+                dispatch_semaphore_signal(authorizationSemaphore);
                 return;
             }
 
@@ -194,6 +203,8 @@
                 [alertView addCancelButtonWithTitle:@"Dismiss"];
                 [alertView show];
             });
+
+            dispatch_semaphore_signal(authorizationSemaphore);
 
             return;
         }

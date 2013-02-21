@@ -29,6 +29,26 @@
 
 @interface SinglyTwitterService ()
 
+/// ----------------------------------------------------------------------------
+/// @name Requesting Authorization
+/// ----------------------------------------------------------------------------
+
+/*!
+ *
+ * Attempts to request authorization from the device using the native Twitter
+ * support available on iOS 5+.
+ *
+ * @param scopes The optional scopes to request permissions for.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (void)requestNativeAuthorization:(NSArray *)scopes;
+
+/// ----------------------------------------------------------------------------
+/// @name Handling Reverse Authentication
+/// ----------------------------------------------------------------------------
+
 /*!
  *
  * Retrieves the reverse auth parameters from Twitter to be used when requesting
@@ -59,5 +79,44 @@
  *
 **/
 - (void)fetchReverseAuthParametersWithCompletion:(void (^)(NSString *accessToken, NSError *error))completionHandler;
+
+/// ----------------------------------------------------------------------------
+/// @name Retrieving Access Tokens
+/// ----------------------------------------------------------------------------
+
+/*!
+ *
+ * Retrieves the access token and token secret from Twitter.
+ *
+ * @param account The Twitter account to request access token and token secret
+ *                for.
+ *
+ * @param error Out parameter used if an error occurs while retrieving the
+ *              access token and token secret. May be `NULL`.
+ *
+ * @returns The access token and token secret from Twitter.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (NSDictionary *)fetchAccessTokenForAccount:(ACAccount *)account
+                                       error:(NSError **)error;
+
+/*!
+ *
+ * Retrieves the access token and token secret from Twitter. Once the request
+ * has completed, the specified `completionHandler` will be called.
+ *
+ * @param account The Twitter account to request access token and token secret
+ *                for.
+ *
+ * @param completionHandler The block to run when the request is complete. It
+ *                          be passed the access token or the error.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (void)fetchAccessTokenForAccount:(ACAccount *)account
+                        completion:(void (^)(NSDictionary *accessToken, NSError *error))completionHandler;
 
 @end

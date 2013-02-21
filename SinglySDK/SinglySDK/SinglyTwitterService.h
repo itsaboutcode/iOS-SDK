@@ -35,12 +35,12 @@
 
 /*!
  *
- * A custom implementation of a service specifically for Twitter that adds
- * support for authorization via the integrated support on iOS 5+. If integrated
- * support is not available, the standard Singly login workflow will be used.
+ * A subclass of `SinglyService` that adds support for authorization using
+ * the native support available on iOS 5+. If native support is not available,
+ * the standard web-based workflow will be attempted.
  *
- * This class requires a delegate that adheres to the `SinglyTwitterServiceDelegate`
- * protocol.
+ * Instances of this service requires that you set a delegate that adheres to
+ * the `SinglyTwitterServiceDelegate` protocol.
  *
  * ### Choosing the Twitter Account to Authorize
  *
@@ -65,17 +65,15 @@
 
 /*!
  *
- * Determines whether or not the current device is authenticated with Twitter
- * in the Settings app using the authorization support featured in iOS 5 and
- * higher.
+ * Determines whether or not the current device is signed into Twitter (in
+ * Settings) using the native support offered in iOS 5 and higher.
  *
- * @returns Whether or not the current device is configured for integrated
- *          authorization.
+ * @returns `YES` if the device is configured for native authorization.
  *
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
 **/
-- (BOOL)isIntegratedAuthorizationConfigured;
+- (BOOL)isNativeAuthorizationConfigured;
 
 /*!
  *
@@ -86,6 +84,6 @@
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
 **/
-@property (weak) id<SinglyTwitterServiceDelegate> delegate;
+@property (weak) id <SinglyTwitterServiceDelegate> delegate;
 
 @end

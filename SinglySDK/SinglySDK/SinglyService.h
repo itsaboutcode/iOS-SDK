@@ -32,7 +32,7 @@
 #import "SinglyLoginViewController.h"
 #import "SinglyService+Delegate.h"
 
-/**
+/*!
  *
  *
  * @available Available in Singly iOS SDK 1.2.0 and later.
@@ -266,6 +266,6 @@ typedef void (^SinglyAuthorizationCompletionBlock)(BOOL isSuccessful, NSError *e
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (weak) id<SinglyServiceDelegate> delegate;
+@property (weak) id <SinglyServiceDelegate> delegate;
 
 @end

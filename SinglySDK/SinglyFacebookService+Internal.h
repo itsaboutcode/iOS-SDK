@@ -31,6 +31,10 @@
 
 @interface SinglyFacebookService ()
 
+/// ----------------------------------------------------------------------------
+/// @name Requesting Authorization
+/// ----------------------------------------------------------------------------
+
 /*!
  *
  * Attempts to request authorization from the Facebook app installed on the

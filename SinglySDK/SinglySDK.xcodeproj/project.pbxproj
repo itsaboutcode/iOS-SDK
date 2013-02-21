@@ -767,6 +767,27 @@
 			name = "Service Icons";
 			sourceTree = "<group>";
 		};
+		D044C9CA16D6B5E000BA1305 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				D00D662216C1A64B00746AA3 /* SinglyTwitterService.h */,
+				D015CD0016D3F0B300CC5230 /* SinglyTwitterService+Delegate.h */,
+				D015CCF616CEEF7900CC5230 /* SinglyTwitterService+Internal.h */,
+				D00D662316C1A64B00746AA3 /* SinglyTwitterService.m */,
+			);
+			name = Twitter;
+			sourceTree = "<group>";
+		};
+		D044C9CB16D6B5E700BA1305 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				D058710116431AFC007E8970 /* SinglyFacebookService.h */,
+				D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */,
+				D058710216431AFC007E8970 /* SinglyFacebookService.m */,
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
 		D053EF8E16271BC9008B8BA1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -873,17 +894,12 @@
 		D058710016431AE3007E8970 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D044C9CB16D6B5E700BA1305 /* Facebook */,
+				D044C9CA16D6B5E000BA1305 /* Twitter */,
 				D05870FB16431ADB007E8970 /* SinglyService.h */,
 				D064F0E0166BF87900091CE5 /* SinglyService+Delegate.h */,
 				D08C1BE8164C780B00035775 /* SinglyService+Internal.h */,
 				D05870FC16431ADB007E8970 /* SinglyService.m */,
-				D058710116431AFC007E8970 /* SinglyFacebookService.h */,
-				D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */,
-				D058710216431AFC007E8970 /* SinglyFacebookService.m */,
-				D00D662216C1A64B00746AA3 /* SinglyTwitterService.h */,
-				D015CD0016D3F0B300CC5230 /* SinglyTwitterService+Delegate.h */,
-				D015CCF616CEEF7900CC5230 /* SinglyTwitterService+Internal.h */,
-				D00D662316C1A64B00746AA3 /* SinglyTwitterService.m */,
 			);
 			name = Services;
 			path = ..;

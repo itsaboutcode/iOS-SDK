@@ -49,17 +49,13 @@
     return @"twitter";
 }
 
-#pragma mark - 
-
-- (BOOL)isIntegratedAuthorizationConfigured
+- (BOOL)isNativeAuthorizationConfigured
 {
     BOOL isConfigured = NO;
 
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     NSArray *accounts = [accountStore accountsWithAccountType:accountType];
-
-    NSLog(@"Accounts: %@", accounts);
 
     if ([accounts respondsToSelector:@selector(count)])
         isConfigured = YES;
@@ -70,7 +66,7 @@
     return isConfigured;
 }
 
-#pragma mark - Requesting Authorization
+#pragma mark - Authorization
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
                                     withScopes:(NSArray *)scopes
@@ -91,10 +87,10 @@
             [self fetchClientID:nil];
 
         //
-        // Step 2 - Attempt Integrated Authorization
+        // Step 2 - Attempt Native Authorization
         //
-        if (self.clientID && !self.isAuthorized && [self isIntegratedAuthorizationConfigured])
-            [self requestIntegratedAuthorization:scopes];
+        if (self.clientID && !self.isAuthorized && [self isNativeAuthorizationConfigured])
+            [self requestNativeAuthorization:scopes];
 
         //
         // Step 3 - Fallback to Singly Authorization
@@ -102,7 +98,9 @@
         if (!self.isAuthorized)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes completion:completionHandler];
+                [self requestAuthorizationViaSinglyFromViewController:viewController
+                                                           withScopes:scopes
+                                                           completion:completionHandler];
             });
         }
 
@@ -110,10 +108,8 @@
 
 }
 
-- (void)requestIntegratedAuthorization:(NSArray *)scopes
+- (void)requestNativeAuthorization:(NSArray *)scopes
 {
-    SinglyLog(@"Attempting integrated authorization...");
-
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
 
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
@@ -121,7 +117,7 @@
 
     if (!accountType)
     {
-        SinglyLog(@"  No integrated accounts available.");
+        SinglyLog(@"Native Facebook authorization is not available because this device is not signed into Facebook.");
         return;
     }
 
@@ -143,15 +139,19 @@
         {
             if (error.code == ACErrorAccountNotFound)
             {
-                SinglyLog(@"Integrated authorization is not available because the device is not authenticated with Twitter.");
+                SinglyLog(@"Native Twitter authorization is not available because this device is not signed into Twitter.");
+                dispatch_semaphore_signal(authorizationSemaphore);
                 return;
             }
 
-            NSLog(@"[SinglySDK] Unhandled error: %@", error);
+            SinglyLog(@"Unhandled error! %@", error);
 
+            // Inform the Delegate
             if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
                 [self.delegate singlyServiceDidFail:self withError:error];
 
+            // Display an Alert to the User
+            // TODO Remove this, errors should be displayed by the consuming apps, not us...
             dispatch_async(dispatch_get_main_queue(), ^{
                 SinglyAlertView *alertView = [[SinglyAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription]];
                 [alertView addCancelButtonWithTitle:@"Dissmiss"];
@@ -173,7 +173,8 @@
                 account = [self.delegate accountForTwitterAuthorization:accounts];
             else
             {
-                SinglyLog(@"Unable to select account!");
+                SinglyLog(@"You must implement the accountForTwitterAuthorization: delegate method and return the account to authorize.");
+                dispatch_semaphore_signal(authorizationSemaphore);
                 return;
             }
         }
@@ -217,18 +218,7 @@
     #endif
 }
 
-#pragma mark -
-
-- (void)handleServiceAppliedNotification:(NSNotification *)notification
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:kSinglyServiceAppliedNotification object:nil];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
-        [self.delegate singlyServiceDidAuthorize:self];
-    [SinglySession sharedSession].authorizingService = nil;
-}
-
-#pragma mark -
+#pragma mark - Reverse Authentication
 
 - (NSString *)fetchReverseAuthParameters:(NSError **)error
 {
@@ -271,6 +261,8 @@
     });
 }
 
+#pragma mark - Access Tokens
+
 - (NSDictionary *)fetchAccessTokenForAccount:(ACAccount *)account error:(NSError **)error
 {
     dispatch_semaphore_t accessTokenSemaphore = dispatch_semaphore_create(0);
@@ -296,8 +288,6 @@
         NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSDictionary *responseDictionary = [NSDictionary dictionaryWithQueryString:responseString];
 
-        NSLog(@"Response: %@", responseString);
-
         accessTokenDictionary = responseDictionary;
 
         dispatch_semaphore_signal(accessTokenSemaphore);
@@ -320,6 +310,17 @@
 
         if (completionHandler) completionHandler(accessToken, error);
     });
+}
+
+#pragma mark - Notifications
+
+- (void)handleServiceAppliedNotification:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kSinglyServiceAppliedNotification object:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
+        [self.delegate singlyServiceDidAuthorize:self];
+    [SinglySession sharedSession].authorizingService = nil;
 }
 
 @end

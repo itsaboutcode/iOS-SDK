@@ -44,7 +44,7 @@
  *
  * Delegate method for a successful service login.
  *
- * @param service  The service instance that this delegate is firing for.
+ * @param service The service instance that this delegate is firing for.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
@@ -55,14 +55,15 @@
  *
  * Delegate method for an error during service login
  *
- * @param service The service where the error occurred
+ * @param service The service where the error occurred.
  *
- * @param error   The error that occured during login
+ * @param error The error that occured during login.
  *
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
  **/
-- (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error;
+- (void)singlyServiceDidFail:(SinglyService *)service
+                   withError:(NSError *)error;
 
 @end
 
