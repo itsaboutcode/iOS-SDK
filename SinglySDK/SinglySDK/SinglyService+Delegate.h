@@ -38,7 +38,7 @@
  **/
 @protocol SinglyServiceDelegate <NSObject>
 
-@required
+@optional
 
 /*!
  *

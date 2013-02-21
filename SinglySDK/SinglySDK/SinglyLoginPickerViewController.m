@@ -285,16 +285,6 @@
 
 #pragma mark - Singly Service Delegates
 
-- (void)singlyServiceDidAuthorize:(SinglyService *)service
-{
-    // TODO Implement
-}
-
-- (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error
-{
-    // TODO Implement
-}
-
 - (ACAccount *)accountForTwitterAuthorization:(NSArray *)availableAccounts
 {
     __block ACAccount *chosenAccount;
