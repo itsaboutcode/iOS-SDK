@@ -86,6 +86,6 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@property (weak) id<SinglyLoginPickerViewControllerDelegate> delegate;
+@property (weak) id <SinglyLoginPickerViewControllerDelegate> delegate;
 
 @end

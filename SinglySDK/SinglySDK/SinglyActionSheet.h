@@ -29,6 +29,11 @@
 
 #import <UIKit/UIKit.h>
 
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
 typedef void (^SinglyActionSheetBlock)(void);
 
 /*!

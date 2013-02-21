@@ -92,7 +92,7 @@
 }
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
-                                    completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler
+                                    completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
     [self requestAuthorizationFromViewController:viewController withScopes:nil completion:completionHandler];
 }
@@ -105,7 +105,7 @@
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
                                     withScopes:(NSArray *)scopes
-                                    completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler
+                                    completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
     self.isAuthorized = NO;
     [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes completion:completionHandler];
@@ -176,7 +176,7 @@
     return YES;
 }
 
-- (void)disconnectWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler
+- (void)disconnectWithCompletion:(SinglyDisconnectCompletionBlock)completionHandler
 {
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -229,7 +229,7 @@
     return self.clientID;
 }
 
-- (void)fetchClientIDWithCompletion:(void (^)(NSString *clientID, NSError *error))completionHandler
+- (void)fetchClientIDWithCompletion:(SinglyFetchClientIDCompletionBlock)completionHandler
 {
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

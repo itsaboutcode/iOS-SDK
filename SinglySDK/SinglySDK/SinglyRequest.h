@@ -74,7 +74,8 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-+ (id)requestWithEndpoint:(NSString *)endpoint andParameters:(NSDictionary *)parameters;
++ (id)requestWithEndpoint:(NSString *)endpoint
+            andParameters:(NSDictionary *)parameters;
 
 /*!
  *
@@ -105,7 +106,8 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-- (id)initWithEndpoint:(NSString *)endpoint andParameters:(NSDictionary *)parameters;
+- (id)initWithEndpoint:(NSString *)endpoint
+         andParameters:(NSDictionary *)parameters;
 
 /*!
  *
@@ -120,7 +122,8 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-+ (NSURL *)URLForEndpoint:(NSString *)endpoint withParameters:(NSDictionary *)parameters;
++ (NSURL *)URLForEndpoint:(NSString *)endpoint
+           withParameters:(NSDictionary *)parameters;
 
 /*!
  *
@@ -138,7 +141,9 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-+ (NSURL *)URLForEndpoint:(NSString *)endpoint withParameters:(NSDictionary *)parameters andAuthorization:(BOOL)authorization;
++ (NSURL *)URLForEndpoint:(NSString *)endpoint
+           withParameters:(NSDictionary *)parameters
+         andAuthorization:(BOOL)authorization;
 
 /// ----------------------------------------------------------------------------
 /// @name Configuring the Request

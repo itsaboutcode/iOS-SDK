@@ -32,6 +32,13 @@
 
 /*!
  *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglyConnectionRequestCompletionBlock)(id responseObject, NSError *error);
+
+/*!
+ *
  * Provides a simple wrapper around NSURLConnection that handles some basic
  * assumptions about sending requests to the Singly API. It also automatically
  * parses JSON responses and handles errors consistently.
@@ -103,6 +110,6 @@
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
 **/
-- (void)performRequestWithCompletion:(void (^)(id responseObject, NSError *error))completionHandler;
+- (void)performRequestWithCompletion:(SinglyConnectionRequestCompletionBlock)completionHandler;
 
 @end

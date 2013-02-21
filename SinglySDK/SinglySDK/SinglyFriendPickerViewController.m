@@ -44,7 +44,7 @@
     return [self fetchFriendsAtOffset:0 limit:0 error:error];
 }
 
-- (void)fetchFriendsWithCompletion:(void (^)(BOOL, NSError *))completionHandler
+- (void)fetchFriendsWithCompletion:(SinglyFetchFriendsCompletionBlock)completionHandler
 {
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -64,7 +64,7 @@
     return [self fetchFriendsAtOffset:offset limit:0 error:error];
 }
 
-- (void)fetchFriendsAtOffset:(NSInteger)offset completion:(void (^)(BOOL, NSError *))completionHandler
+- (void)fetchFriendsAtOffset:(NSInteger)offset completion:(SinglyFetchFriendsCompletionBlock)completionHandler
 {
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -180,7 +180,7 @@
     return YES;
 }
 
-- (void)fetchFriendsAtOffset:(NSInteger)offset limit:(NSInteger)limit completion:(void (^)(BOOL, NSError *))completionHandler
+- (void)fetchFriendsAtOffset:(NSInteger)offset limit:(NSInteger)limit completion:(SinglyFetchFriendsCompletionBlock)completionHandler
 {
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

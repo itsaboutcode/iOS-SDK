@@ -30,6 +30,13 @@
 #import "SinglyFacebookService.h"
 #import "SinglyTwitterService.h"
 
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglyFetchClientIDCompletionBlock)(NSString *clientID, NSError *error);
+
 @interface SinglyService ()
 
 /*!
@@ -95,7 +102,7 @@
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
  **/
-- (void)fetchClientIDWithCompletion:(void (^)(NSString *clientID, NSError *error))completionHandler;
+- (void)fetchClientIDWithCompletion:(SinglyFetchClientIDCompletionBlock)completionHandler;
 
 /*!
  *

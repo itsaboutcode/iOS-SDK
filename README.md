@@ -47,8 +47,8 @@ SinglySession *session = [SinglySession sharedSession];
 session.clientID = CLIENT_ID;
 session.clientSecret = CLIENT_SECRET;
 
-[session startSessionWithCompletion:^(BOOL ready) {
-    if (ready) {
+[session startSessionWithCompletion:^(BOOL isReady, NSError *error) {
+    if (isReady) {
         // The session is ready to go!
     } else {
         // A valid session could not be started. You will need to authenticate

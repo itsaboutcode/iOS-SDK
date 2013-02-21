@@ -246,7 +246,7 @@
     return reverseAuthParameters;
 }
 
-- (void)fetchReverseAuthParametersWithCompletion:(void (^)(NSString *parameters, NSError *error))completionHandler
+- (void)fetchReverseAuthParametersWithCompletion:(SinglyAuthParametersCompletionBlock)completionHandler
 {
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -302,7 +302,7 @@
 }
 
 - (void)fetchAccessTokenForAccount:(ACAccount *)account
-                        completion:(void (^)(NSDictionary *accessToken, NSError *error))completionHandler
+                        completion:(SinglyTwitterAccessTokenCompletionBlock)completionHandler
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSError *error;

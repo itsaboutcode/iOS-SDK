@@ -33,6 +33,41 @@
 
 /*!
  *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglyAccessTokenCompletionBlock)(NSString *accessToken, NSError *error);
+
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglySessionCompletionBlock)(BOOL isReady, NSError *error);
+
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglyUpdateProfilesCompletionBlock)(BOOL isSuccessful, NSError *error);
+
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglyApplyServiceCompletionBlock)(BOOL isSuccessful, NSError *error);
+
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglyContactsSyncCompletionBlock)(BOOL isSuccessful, NSError *error);
+
+/*!
+ *
  * Notification raised when the session has been started.
  *
  * @available Available in Singly iOS SDK 1.2.0 and later.
@@ -213,7 +248,7 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  *
 **/
 - (void)requestAccessTokenWithCode:(NSString *)code
-                        completion:(void (^)(NSString *accessToken, NSError *error))completionHandler;
+                        completion:(SinglyAccessTokenCompletionBlock)completionHandler;
 
 /*!
  *
@@ -267,7 +302,7 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
 **/
-- (void)startSessionWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
+- (void)startSessionWithCompletion:(SinglySessionCompletionBlock)completionHandler;
 
 /*!
  *
@@ -289,7 +324,7 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  *            startSessionWithCompletion: instead.
  *
 **/
-- (void)startSessionWithCompletionHandler:(void (^)(BOOL isSuccessful, NSError *error))completionHandler DEPRECATED_ATTRIBUTE;
+- (void)startSessionWithCompletionHandler:(SinglySessionCompletionBlock)completionHandler DEPRECATED_ATTRIBUTE;
 
 /*!
  *
@@ -375,7 +410,7 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-- (void)updateProfilesWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
+- (void)updateProfilesWithCompletion:(SinglyUpdateProfilesCompletionBlock)completionHandler;
 
 /*!
  *
@@ -456,7 +491,7 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
 **/
 - (void)applyService:(NSString *)serviceIdentifier
            withToken:(NSString *)accessToken
-          completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
+          completion:(SinglyApplyServiceCompletionBlock)completionHandler;
 
 /*!
  *
@@ -507,7 +542,7 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
 - (void)applyService:(NSString *)serviceIdentifier
            withToken:(NSString *)accessToken
          tokenSecret:(NSString *)tokenSecret
-          completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
+          completion:(SinglyApplyServiceCompletionBlock)completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Syncing Device Contacts
@@ -575,7 +610,7 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
 **/
-- (void)syncDeviceContactsWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
+- (void)syncDeviceContactsWithCompletion:(SinglyContactsSyncCompletionBlock)completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Handling App Launches by URL

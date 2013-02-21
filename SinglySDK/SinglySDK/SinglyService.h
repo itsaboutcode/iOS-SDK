@@ -42,6 +42,14 @@ typedef void (^SinglyAuthorizationCompletionBlock)(BOOL isSuccessful, NSError *e
 
 /*!
  *
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglyDisconnectCompletionBlock)(BOOL isSuccessful, NSError *error);
+
+/*!
+ *
  * Authentication and state handling for a service (such as Facebook, Twitter,
  * etc) is managed by a SinglyService instance.
  *
@@ -251,7 +259,7 @@ typedef void (^SinglyAuthorizationCompletionBlock)(BOOL isSuccessful, NSError *e
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
 **/
-- (void)disconnectWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
+- (void)disconnectWithCompletion:(SinglyDisconnectCompletionBlock)completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Managing the Delegate

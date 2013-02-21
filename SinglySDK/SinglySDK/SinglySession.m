@@ -148,7 +148,7 @@ static SinglySession *sharedInstance = nil;
     return isSuccessful;
 }
 
-- (void)startSessionWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler
+- (void)startSessionWithCompletion:(SinglySessionCompletionBlock)completionHandler
 {
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -169,7 +169,7 @@ static SinglySession *sharedInstance = nil;
     });
 }
 
-- (void)startSessionWithCompletionHandler:(void (^)(BOOL isSuccessful, NSError *error))completionHandler // DEPRECATED
+- (void)startSessionWithCompletionHandler:(SinglySessionCompletionBlock)completionHandler // DEPRECATED
 {
     [self startSessionWithCompletion:completionHandler];
 }
@@ -233,7 +233,7 @@ static SinglySession *sharedInstance = nil;
 }
 
 - (void)requestAccessTokenWithCode:(NSString *)code
-                        completion:(void (^)(NSString *accessToken, NSError *error))completionHandler
+                        completion:(SinglyAccessTokenCompletionBlock)completionHandler
 {
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -393,7 +393,7 @@ static SinglySession *sharedInstance = nil;
 
 - (void)applyService:(NSString *)serviceIdentifier
            withToken:(NSString *)accessToken
-          completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler
+          completion:(SinglyApplyServiceCompletionBlock)completionHandler
 {
     [self applyService:serviceIdentifier
              withToken:accessToken
@@ -404,7 +404,7 @@ static SinglySession *sharedInstance = nil;
 - (void)applyService:(NSString *)serviceIdentifier
            withToken:(NSString *)accessToken
          tokenSecret:(NSString *)tokenSecret
-          completion:(void (^)(BOOL, NSError *))completionHandler
+          completion:(SinglyApplyServiceCompletionBlock)completionHandler
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
@@ -574,7 +574,6 @@ static SinglySession *sharedInstance = nil;
 
 - (BOOL)handleOpenURL:(NSURL *)url
 {
-
     NSError *error;
 
     // Facebook
@@ -594,7 +593,6 @@ static SinglySession *sharedInstance = nil;
     }
 
     return NO;
-
 }
 
 @end

@@ -37,7 +37,8 @@
  * @available Available in Singly iOS SDK 1.0.0 and later.
  *
 **/
-@interface SinglyLoginPickerServiceCell : UITableViewCell <NSURLConnectionDelegate,
+@interface SinglyLoginPickerServiceCell : UITableViewCell
+    <NSURLConnectionDelegate,
     NSURLConnectionDataDelegate>
 
 /// ----------------------------------------------------------------------------

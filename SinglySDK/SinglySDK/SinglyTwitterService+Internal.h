@@ -27,6 +27,20 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglyAuthParametersCompletionBlock)(NSString *authParameters, NSError *error);
+
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglyTwitterAccessTokenCompletionBlock)(NSDictionary *accessToken, NSError *error);
+
 @interface SinglyTwitterService ()
 
 /// ----------------------------------------------------------------------------
@@ -71,14 +85,14 @@
  * `completionHandler` will be called.
  *
  * @param completionHandler The block to run when the request is complete. It
- *                          be passed the access token or the error.
+ *                          be passed the reverse auth parameters or the error.
  *
  * @returns The reverse auth parameters from Twitter.
  *
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
 **/
-- (void)fetchReverseAuthParametersWithCompletion:(void (^)(NSString *accessToken, NSError *error))completionHandler;
+- (void)fetchReverseAuthParametersWithCompletion:(SinglyAuthParametersCompletionBlock)completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Retrieving Access Tokens
@@ -117,6 +131,6 @@
  *
 **/
 - (void)fetchAccessTokenForAccount:(ACAccount *)account
-                        completion:(void (^)(NSDictionary *accessToken, NSError *error))completionHandler;
+                        completion:(SinglyTwitterAccessTokenCompletionBlock)completionHandler;
 
 @end

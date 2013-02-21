@@ -27,6 +27,13 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+/*!
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglyFetchFriendsCompletionBlock)(BOOL isSuccessful, NSError *error);
+
 @interface SinglyFriendPickerViewController ()
 
 /*!
@@ -93,7 +100,7 @@
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
 **/
-- (void)fetchFriendsWithCompletion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
+- (void)fetchFriendsWithCompletion:(SinglyFetchFriendsCompletionBlock)completionHandler;
 
 /*!
  *
@@ -113,7 +120,7 @@
  *
 **/
 - (void)fetchFriendsAtOffset:(NSInteger)offset
-                  completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
+                  completion:(SinglyFetchFriendsCompletionBlock)completionHandler;
 
 /*!
  *
@@ -135,7 +142,7 @@
 **/
 - (void)fetchFriendsAtOffset:(NSInteger)offset
                        limit:(NSInteger)limit
-                  completion:(void (^)(BOOL isSuccessful, NSError *error))completionHandler;
+                  completion:(SinglyFetchFriendsCompletionBlock)completionHandler;
 
 @end
 
