@@ -28,6 +28,7 @@
 //
 
 #import "SinglyActivityIndicatorView.h"
+#import "SinglyAlertView.h"
 #import "SinglyConnection.h"
 #import "SinglyFriendPickerCell.h"
 #import "SinglyFriendPickerViewController.h"
@@ -112,13 +113,10 @@
         _isRefreshing = NO;
 
         //
-        // Display a friendly alert view to the user.
+        // Display a friendly alert to the user.
         //
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:[fetchError localizedDescription]
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Dismiss"
-                                                  otherButtonTitles:nil];
+        SinglyAlertView *alertView = [[SinglyAlertView alloc] initWithTitle:nil message:[fetchError localizedDescription]];
+        [alertView addCancelButtonWithTitle:@"Dismiss"];
         [alertView show];
 
         return NO;

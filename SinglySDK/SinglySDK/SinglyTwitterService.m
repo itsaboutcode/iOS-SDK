@@ -32,6 +32,7 @@
 #import "NSDictionary+QueryString.h"
 #import "NSString+URLEncoding.h"
 
+#import "SinglyAlertView.h"
 #import "SinglyConnection.h"
 #import "SinglyLog.h"
 #import "SinglyRequest.h"
@@ -152,11 +153,8 @@
                 [self.delegate singlyServiceDidFail:self withError:error];
 
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                    message:[error localizedDescription]
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"Dismiss"
-                                                          otherButtonTitles:nil];
+                SinglyAlertView *alertView = [[SinglyAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription]];
+                [alertView addCancelButtonWithTitle:@"Dissmiss"];
                 [alertView show];
             });
 

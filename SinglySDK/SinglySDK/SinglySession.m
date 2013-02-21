@@ -32,6 +32,7 @@
 
 #import "NSURL+AccessToken.h"
 
+#import "SinglyAlertView.h"
 #import "SinglyConnection.h"
 #import "SinglyConstants.h"
 #import "SinglyFacebookService.h"
@@ -456,11 +457,8 @@ static SinglySession *sharedInstance = nil;
     if (!isAuthorized)
     {
         // TODO Return an error, don't present UI...
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:@"Unable to sync contacts because we are not allowed to access the contacts on this device. Please enable access for this app in Settings."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Dismiss"
-                                                  otherButtonTitles:nil];
+        SinglyAlertView *alertView = [[SinglyAlertView alloc] initWithTitle:nil message:@"Unable to sync contacts because we are not allowed to access the contacts on this device. Please enable access for this app in Settings."];
+        [alertView addCancelButtonWithTitle:@"Dismiss"];
         [alertView show];
         _isSyncingDeviceContacts = NO;
         return NO;

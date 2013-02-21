@@ -117,10 +117,8 @@
             if (error)
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                                        message:[error localizedDescription]
-                                                                       delegate:self
-                                                              cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+                    SinglyAlertView *alertView = [[SinglyAlertView alloc] initWithTitle:nil message:[error localizedDescription]];
+                    [alertView addCancelButtonWithTitle:@"Dismiss"];
                     [alertView show];
                 });
                 return;
@@ -213,11 +211,14 @@
     if (SinglySession.sharedSession.profiles[service])
     {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Disconnect from %@?", self.servicesDictionary[service][@"name"]]
-                                                            message:nil
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Cancel"
-                                                  otherButtonTitles:@"Disconnect", nil];
+        SinglyAlertView *alertView = [[SinglyAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Disconnect from %@?", self.servicesDictionary[service][@"name"]] message:nil];
+        [alertView addCancelButtonWithTitle:@"Cancel"];
+        [alertView addButtonWithTitle:@"Disconnect" block:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSError *error;
+                [[SinglyService serviceWithIdentifier:self.selectedService] disconnect:&error];
+            });
+        }];
         [alertView show];
         return;
     }
@@ -228,38 +229,6 @@
     
     // Display the standard login view controller
     [self authenticateWithService:service];
-}
-
-#pragma mark - Action Sheet Delegates
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    
-}
-
-#pragma mark - Alert View Delegates
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (alertView.tag)
-    {
-        case 0: // Disconnect
-            switch (buttonIndex)
-            {
-                case 0: // Cancel
-                    break;
-                case 1: // Disconnect
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        NSError *error;
-                        [[SinglyService serviceWithIdentifier:self.selectedService] disconnect:&error];
-                    });
-                    break;
-            }
-            break;
-
-        default:
-            break;
-    }
 }
 
 #pragma mark - Singly Login View Controller Delegates
@@ -275,12 +244,9 @@
     if ([error.domain isEqualToString:kSinglyErrorDomain] && error.code == kSinglyLoginAbortedErrorCode)
         return;
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Error"
-                                                    message:[error localizedDescription]
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+    SinglyAlertView *alertView = [[SinglyAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription]];
+    [alertView addCancelButtonWithTitle:@"Dismiss"];
+    [alertView show];
 }
 
 #pragma mark - Singly Service Delegates
