@@ -150,6 +150,7 @@
 		D044C9C216D56A7A00BA1305 /* SinglyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D044C9BD16D56A7A00BA1305 /* SinglyAlertView.m */; };
 		D044C9C516D693C900BA1305 /* SinglyFacebookService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */; };
 		D044C9C616D693C900BA1305 /* SinglyFacebookService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */; };
+		D0467FF116D6E38900F4F981 /* profiles-delete.json in Resources */ = {isa = PBXBuildFile; fileRef = D0467FF016D6DFD800F4F981 /* profiles-delete.json */; };
 		D04AD40B167FA3E10046C296 /* SinglyAvatarCache.h in Headers */ = {isa = PBXBuildFile; fileRef = D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */; };
 		D04AD40C167FA3E10046C296 /* SinglyAvatarCache.h in Headers */ = {isa = PBXBuildFile; fileRef = D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */; };
 		D04AD40D167FA3E10046C296 /* SinglyAvatarCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */; };
@@ -206,7 +207,7 @@
 		D064F0E8166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D064F0E6166C00AE00091CE5 /* SinglyLoginPickerViewController+Delegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D06830BC1624BAFC00F398A6 /* SinglyFriendPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */; };
 		D06F113016BAF2CE00809E3E /* friends-ios.json in Resources */ = {isa = PBXBuildFile; fileRef = D06F112F16BAF2CE00809E3E /* friends-ios.json */; };
-		D06F113216BB21D400809E3E /* profiles-delete.json in Resources */ = {isa = PBXBuildFile; fileRef = D06F113116BB21D400809E3E /* profiles-delete.json */; };
+		D06F113216BB21D400809E3E /* profiles-service-delete.json in Resources */ = {isa = PBXBuildFile; fileRef = D06F113116BB21D400809E3E /* profiles-service-delete.json */; };
 		D06F113416BB287F00809E3E /* auth-client_id-facebook.json in Resources */ = {isa = PBXBuildFile; fileRef = D06F113316BB287F00809E3E /* auth-client_id-facebook.json */; };
 		D06F113716BC169600809E3E /* SinglyConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = D06F113516BC169600809E3E /* SinglyConnection.h */; };
 		D06F113816BC169600809E3E /* SinglyConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = D06F113516BC169600809E3E /* SinglyConnection.h */; };
@@ -425,6 +426,7 @@
 		D044C9BC16D56A7A00BA1305 /* SinglyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAlertView.h; sourceTree = "<group>"; };
 		D044C9BD16D56A7A00BA1305 /* SinglyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAlertView.m; sourceTree = "<group>"; };
 		D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyFacebookService+Internal.h"; sourceTree = "<group>"; };
+		D0467FF016D6DFD800F4F981 /* profiles-delete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "profiles-delete.json"; sourceTree = "<group>"; };
 		D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAvatarCache.h; sourceTree = "<group>"; };
 		D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAvatarCache.m; sourceTree = "<group>"; };
 		D053EF8D16271BC9008B8BA1 /* SinglySDK.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinglySDK.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -476,7 +478,7 @@
 		D06830BA1624BAFC00F398A6 /* SinglyFriendPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPickerCell.m; sourceTree = "<group>"; };
 		D06D8DAC165193AB00E8750C /* Create Disk Image.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "Create Disk Image.rb"; sourceTree = "<group>"; };
 		D06F112F16BAF2CE00809E3E /* friends-ios.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "friends-ios.json"; sourceTree = "<group>"; };
-		D06F113116BB21D400809E3E /* profiles-delete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "profiles-delete.json"; sourceTree = "<group>"; };
+		D06F113116BB21D400809E3E /* profiles-service-delete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "profiles-service-delete.json"; sourceTree = "<group>"; };
 		D06F113316BB287F00809E3E /* auth-client_id-facebook.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "auth-client_id-facebook.json"; sourceTree = "<group>"; };
 		D06F113516BC169600809E3E /* SinglyConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyConnection.h; sourceTree = "<group>"; };
 		D06F113616BC169600809E3E /* SinglyConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyConnection.m; sourceTree = "<group>"; };
@@ -673,7 +675,8 @@
 				D079146516B87BCC00F3D98E /* oauth-access_token.json */,
 				D003CDB616AF26F100D2B17A /* profiles.json */,
 				D06F112F16BAF2CE00809E3E /* friends-ios.json */,
-				D06F113116BB21D400809E3E /* profiles-delete.json */,
+				D06F113116BB21D400809E3E /* profiles-service-delete.json */,
+				D0467FF016D6DFD800F4F981 /* profiles-delete.json */,
 				D06F113316BB287F00809E3E /* auth-client_id-facebook.json */,
 			);
 			path = Fixtures;
@@ -1268,8 +1271,9 @@
 				D079146716B87BCC00F3D98E /* oauth-access_token.json in Resources */,
 				D079146916B87BFD00F3D98E /* oauth-access_token-invalid.json in Resources */,
 				D06F113016BAF2CE00809E3E /* friends-ios.json in Resources */,
-				D06F113216BB21D400809E3E /* profiles-delete.json in Resources */,
+				D06F113216BB21D400809E3E /* profiles-service-delete.json in Resources */,
 				D06F113416BB287F00809E3E /* auth-client_id-facebook.json in Resources */,
+				D0467FF116D6E38900F4F981 /* profiles-delete.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

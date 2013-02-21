@@ -195,6 +195,47 @@ static SinglySession *sharedInstance = nil;
 
 }
 
+- (BOOL)removeAccount:(NSError **)error
+{
+
+    // Prepare the Request
+    SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"profiles"];
+    request.HTTPMethod = @"DELETE";
+
+    // Perform the Request
+    NSError *requestError;
+    SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
+    [connection performRequest:&requestError];
+
+    // Check for Errors
+    if (requestError)
+    {
+        SinglyLog(@"A request error occurred: %@", requestError.localizedDescription);
+        if (error) *error = requestError;
+        return NO;
+    }
+
+    [self resetSession];
+
+    return YES;
+
+}
+
+- (void)removeAccountWithCompletion:(SinglyRemoveAccountCompletionBlock)completionHandler
+{
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        NSError *error;
+        BOOL isSuccessful = [self removeAccount:&error];
+
+        dispatch_sync(currentQueue, ^{
+            completionHandler(isSuccessful, error);
+        });
+        
+    });
+}
+
 - (void)requestAccessTokenWithCode:(NSString *)code // DEPRECATED
 {
     [self requestAccessTokenWithCode:code completion:nil];
@@ -204,7 +245,7 @@ static SinglySession *sharedInstance = nil;
 {
 
     // Prepare the Request
-    SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:@"oauth/access_token"];
+    SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"oauth/access_token"];
     request.HTTPMethod = @"POST";
     request.parameters = @{
         @"code" : code,

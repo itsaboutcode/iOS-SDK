@@ -68,6 +68,13 @@ typedef void (^SinglyContactsSyncCompletionBlock)(BOOL isSuccessful, NSError *er
 
 /*!
  *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+typedef void (^SinglyRemoveAccountCompletionBlock)(BOOL isSuccessful, NSError *error);
+
+/*!
+ *
  * Notification raised when the session has been started.
  *
  * @available Available in Singly iOS SDK 1.2.0 and later.
@@ -337,6 +344,37 @@ static NSString * const kSinglyContactsSyncedNotification = @"com.singly.notific
  *
 **/
 - (BOOL)resetSession;
+
+/*!
+ *
+ * Completely removes (destroys) the account on Singly for the current session
+ * and resets the session state to a blank slate. Use with caution!
+ *
+ * @param error Out parameter used if an error occurs while removing the
+ *              account. May be `NULL`.
+ *
+ * @returns `YES` if the account was successfully removed.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (BOOL)removeAccount:(NSError **)error;
+
+/*!
+ *
+ * Completely removes (destroys) the account on Singly for the current session
+ * and resets the session state to a blank slate. Use with caution! Calls the
+ * `completionHandler` when the operation has completed.
+ *
+ * @param completionHandler The block to run once the request to remove the
+ *                          account has been removed. It will be passed a
+ *                          `BOOL` denoting whether or not the operation
+ *                          succeeded and an NSError object if one is available.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+- (void)removeAccountWithCompletion:(SinglyRemoveAccountCompletionBlock)completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Managing Session Profiles

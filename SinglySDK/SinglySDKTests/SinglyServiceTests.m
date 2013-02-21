@@ -78,7 +78,7 @@
 {
     SinglyService *testService = [SinglyService serviceWithIdentifier:@"facebook"];
 
-    NSData *responseData = [self dataForFixture:@"profiles-delete"];
+    NSData *responseData = [self dataForFixture:@"profiles-service-delete"];
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
     BOOL isSuccessful = [testService disconnect:nil];
@@ -92,7 +92,7 @@
 
     SinglyService *testService = [SinglyService serviceWithIdentifier:@"facebook"];
 
-    NSData *responseData = [self dataForFixture:@"profiles-delete"];
+    NSData *responseData = [self dataForFixture:@"profiles-service-delete"];
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
     [testService disconnectWithCompletion:^(BOOL isSuccessful, NSError *error) {

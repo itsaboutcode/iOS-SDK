@@ -3,6 +3,10 @@
 
 ## 1.2.0 — **Not Yet Released**
 
+* Added support for removing Singly accounts by calling `removeAccount:` or
+  `removeAccountWithCompletion:` on the shared SinglySession instance. This will
+  destroy the account at Singly, disconnecting the user from all services.
+
 * Added support for setting the base URL for the Singly API on `SinglySession`.
 
 * Improved error handling and many of the method signatures to allow for passing

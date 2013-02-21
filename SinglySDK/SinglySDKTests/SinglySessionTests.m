@@ -241,6 +241,40 @@
     [[NSNotificationCenter defaultCenter] removeObserver:testObserver];
 }
 
+- (void)testShouldRemoveAccount
+{
+    NSData *responseData = [self dataForFixture:@"profiles-delete"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    SinglySession.sharedSession.accessToken = @"test-access-token";
+    SinglySession.sharedSession.accountID = @"test-account-id";
+
+    NSError *error;
+    BOOL isSuccessful = [SinglySession.sharedSession removeAccount:&error];
+
+    STAssertTrue(isSuccessful, @"The return value should be true.");
+    STAssertNil(error, @"The error object should be nil.");
+}
+
+- (void)testShouldRemoveAccountWithCompletion
+{
+    __block BOOL isComplete = NO;
+
+    NSData *responseData = [self dataForFixture:@"profiles-delete"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    SinglySession.sharedSession.accessToken = @"test-access-token";
+    SinglySession.sharedSession.accountID = @"test-account-id";
+
+    [SinglySession.sharedSession removeAccountWithCompletion:^(BOOL isSuccessful, NSError *error) {
+        STAssertTrue(isSuccessful, @"The isSuccessful parameter should be true.");
+        STAssertNil(error, @"The error parameter should be nil.");
+        isComplete = YES;
+    }];
+
+    [self waitForCompletion:^{ return isComplete; }];
+}
+
 - (void)testShouldRequestAccessTokenWithCode
 {
     NSData *responseData = [self dataForFixture:@"oauth-access_token"];
