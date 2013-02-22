@@ -108,6 +108,7 @@
 {
 
     self.isAuthorized = NO;
+    self.isAborted = NO;
 
     dispatch_queue_t authorizationQueue;
     authorizationQueue = dispatch_queue_create("com.singly.AuthorizationQueue", NULL);
@@ -123,20 +124,20 @@
         //
         // Step 2 - Attempt Native Authorization (iOS 6+)
         //
-        if (self.clientID && !self.isAuthorized && [self isNativeAuthorizationConfigured])
+        if (self.clientID && !self.isAuthorized && !self.isAborted && [self isNativeAuthorizationConfigured])
             [self requestNativeAuthorization:scopes];
 
         //
         // Step 3 - Attempt Authorization via Facebook App
         //
         BOOL isAuthorizingViaApplication = NO;
-        if (self.clientID && !self.isAuthorized && [self isAppAuthorizationConfigured])
+        if (self.clientID && !self.isAuthorized && !self.isAborted && [self isAppAuthorizationConfigured])
             isAuthorizingViaApplication = [self requestApplicationAuthorization:scopes];
 
         //
         // Step 4 - Fallback to Singly Authorization
         //
-        if (!self.isAuthorized && !isAuthorizingViaApplication)
+        if (!self.isAuthorized && !self.isAborted && !isAuthorizingViaApplication)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes completion:completionHandler];
@@ -173,12 +174,23 @@
     {
 
         // Check for Access
-//        if (!granted)
-//        {
-//            SinglyLog(@"We were not granted access to the device accounts.");
-//            dispatch_semaphore_signal(authorizationSemaphore);
-//            return;
-//        }
+        if (!granted)
+        {
+            // If there was an error object, it means that the user denied
+            // access, so we should be in an aborted state...
+            if (error)
+                self.isAborted = YES;
+
+            // If the error is nil, it means access was already denied (in
+            // Settings) so we should fall-back to the next method.
+            else
+                self.isAborted = NO;
+
+            SinglyLog(@"We were not granted access to the device accounts.");
+
+            dispatch_semaphore_signal(authorizationSemaphore);
+            return;
+        }
 
         // Check for Errors
         if (error)

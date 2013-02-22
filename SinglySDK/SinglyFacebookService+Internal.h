@@ -61,4 +61,13 @@
 **/
 - (void)requestNativeAuthorization:(NSArray *)scopes;
 
+/*!
+ *
+ * Denotes whether the user has aborted the authorization process.
+ *
+ * @available Available in Singly iOS SDK 1.2.0 and later.
+ *
+**/
+@property BOOL isAborted;
+
 @end
