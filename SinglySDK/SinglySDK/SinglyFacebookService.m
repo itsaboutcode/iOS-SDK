@@ -55,7 +55,7 @@
     if (!urlTypesDictionary)
         isConfigured = NO;
 
-    NSArray *urlSchemesArray = urlTypesDictionary[@"CFBundleURLSchemes"];
+    NSArray *urlSchemesArray = [urlTypesDictionary valueForKey:@"CFBundleURLSchemes"];
     if (!urlSchemesArray)
         isConfigured = NO;
     else
