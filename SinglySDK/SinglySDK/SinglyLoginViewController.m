@@ -31,6 +31,7 @@
 #import "UIViewController+Modal.h"
 
 #import "SinglyActivityIndicatorView.h"
+#import "SinglyAlertView.h"
 #import "SinglyConstants.h"
 #import "SinglyLoginViewController.h"
 #import "SinglyLoginViewController+Internal.h"
@@ -204,7 +205,11 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    [SinglyActivityIndicatorView dismissIndicator];
 
+    SinglyAlertView *alertView = [[SinglyAlertView alloc] initWithTitle:nil message:[error localizedDescription]];
+    [alertView addCancelButtonWithTitle:@"Dismiss"];
+    [alertView show];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
