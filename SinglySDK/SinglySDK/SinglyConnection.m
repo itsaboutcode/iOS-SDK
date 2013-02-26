@@ -67,6 +67,8 @@
                                          returningResponse:&response
                                                      error:&requestError];
 
+    NSLog(@"Response: %@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
+
     // Check for Request Errors
     if (requestError)
     {
@@ -111,7 +113,7 @@
                                                     userInfo:@{ NSLocalizedDescriptionKey : serviceErrorMessage }];
             *error = serviceError;
         }
-        return nil;
+        return responseObject;
     }
     
     return responseObject;
