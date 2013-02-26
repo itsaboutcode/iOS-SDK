@@ -67,8 +67,6 @@
                                          returningResponse:&response
                                                      error:&requestError];
 
-    NSLog(@"Response: %@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
-
     // Check for Request Errors
     if (requestError)
     {

@@ -238,25 +238,36 @@
         SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
         id responseObject = [connection performRequest:&requestError];
 
-//        NSLog(@"Request Error: %@", requestError);
-//
-//        // TODO Assume this means the token is expired. It may not be. Need to update how errors are returned from the apply endpoint for expired tokens.
-//        if (((NSHTTPURLResponse *)response).statusCode != 200)
-//        {
-//            NSLog(@"Request Error: %@", requestError);
-//            [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
-//                NSLog(@"Token is expired... Renewed! %d", renewResult);
-//                NSLog(@"Error: %@", error);
-//                NSLog(@"Token: %@", account.credential.oauthToken);
-//                NSError *applyError;
-//                [SinglySession.sharedSession applyService:self.serviceIdentifier withToken:account.credential.oauthToken error:&applyError];
-//                if (applyError)
-//                {
-//                    // TODO Handle errors!
-//                }
-//            }];
-//        }
+        if (requestError)
+        {
+            // Check for Token Errors
+            if (responseObject && [responseObject isKindOfClass:[NSDictionary class]] && responseObject[@"originalError"])
+            {
+                NSDictionary *facebookError = responseObject[@"originalError"][@"error"];
+                NSLog(@"Facebook Error: %@", facebookError);
 
+                if ([facebookError[@"code"] intValue] == 190)
+                {
+                    SinglyLog(@"Facebook token is invalid. Attempting to renew credentials...");
+                    [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
+                        NSError *applyError;
+                        [SinglySession.sharedSession applyService:self.serviceIdentifier withToken:account.credential.oauthToken error:&applyError];
+                        if (applyError)
+                        {
+                            // TODO Handle errors!
+                        }
+                    }];
+                }
+            }
+            else
+            {
+                dispatch_semaphore_signal(authorizationSemaphore);
+                return;
+            }
+        }
+        //
+        // Set Access Token & Account on the Singly Session
+        //
         SinglySession.sharedSession.accessToken = responseObject[@"access_token"];
         SinglySession.sharedSession.accountID = responseObject[@"account"];
 
