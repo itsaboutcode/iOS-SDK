@@ -95,7 +95,7 @@
 
     // Parse the JSON Response
     id responseObject = [NSJSONSerialization JSONObjectWithData:responseData
-                                                        options:kNilOptions
+                                                        options:NSJSONReadingAllowFragments
                                                           error:&parseError];
 
     // Check for Parse Errors
