@@ -35,6 +35,11 @@
 
 @implementation SinglyRequestTests
 
+- (void)setUp
+{
+    [SinglySession.sharedSession resetSession];
+}
+
 - (void)testShouldAddSinglySDKHeaders
 {
     SinglyRequest *testRequest = [SinglyRequest requestWithEndpoint:@"foo"];
