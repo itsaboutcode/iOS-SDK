@@ -170,7 +170,7 @@
 
     [accountStore requestAccessToAccountsWithType:accountType
                                           options:options
-                                       completion:^(BOOL granted, NSError *error)
+                                       completion:^(BOOL granted, NSError *accessError)
     {
 
         // Check for Access
@@ -178,7 +178,7 @@
         {
             // If there was an error object, it means that the user denied
             // access, so we should be in an aborted state...
-            if (error)
+            if (accessError)
                 self.isAborted = YES;
 
             // If the error is nil, it means access was already denied (in
@@ -193,31 +193,22 @@
         }
 
         // Check for Errors
-        if (error)
+        if (accessError)
         {
-            if (error.code == ACErrorAccountNotFound)
+            if (accessError.code == ACErrorAccountNotFound)
             {
                 SinglyLog(@"Native Facebook authorization is not available because this device is not signed into Facebook.");
                 dispatch_semaphore_signal(authorizationSemaphore);
                 return;
             }
 
-            SinglyLog(@"Unhandled error! %@", error);
+            SinglyLog(@"Unhandled error! %@", accessError);
 
             // Inform the Delegate
             if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
-                [self.delegate singlyServiceDidFail:self withError:error];
-
-            // Display an Alert to the User
-            // TODO Remove this, errors should be displayed by the consuming apps, not us...
-            dispatch_async(dispatch_get_main_queue(), ^{
-                SinglyAlertView *alertView = [[SinglyAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription]];
-                [alertView addCancelButtonWithTitle:@"Dismiss"];
-                [alertView show];
-            });
+                [self.delegate singlyServiceDidFail:self withError:accessError];
 
             dispatch_semaphore_signal(authorizationSemaphore);
-
             return;
         }
 
@@ -227,37 +218,54 @@
         //
         // Apply the Facebook service to our current session.
         //
-        SinglyRequest *request = [SinglyRequest requestWithEndpoint:@"auth/facebook/apply"];
-        request.parameters = @{
-            @"token": account.credential.oauthToken,
-            @"client_id": SinglySession.sharedSession.clientID,
-            @"client_secret": SinglySession.sharedSession.clientSecret
-        };
+        NSError *applyError;
+        [SinglySession.sharedSession applyService:self.serviceIdentifier
+                                        withToken:account.credential.oauthToken
+                                            error:&applyError];
 
-        NSError *requestError;
-        SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
-        id responseObject = [connection performRequest:&requestError];
-
-        if (requestError)
+        //
+        // Handle Errors (Service, Token, etc)
+        //
+        if (applyError)
         {
-            // Check for Token Errors
+            NSLog(@"Apply Error: %@", applyError);
+
+            //
+            // Parse Original Response from Singly
+            //
+            NSData *responseData = [applyError.userInfo[kSinglyResponseKey] dataUsingEncoding:NSUTF8StringEncoding];
+            id responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
+
+            //
+            // Check for Facebook Errors
+            //
             if (responseObject && [responseObject isKindOfClass:[NSDictionary class]] && responseObject[@"originalError"])
             {
                 NSDictionary *facebookError = responseObject[@"originalError"][@"error"];
                 NSLog(@"Facebook Error: %@", facebookError);
 
+                //
+                // Handle Token Errors
+                //
                 if ([facebookError[@"code"] intValue] == 190)
                 {
                     SinglyLog(@"Facebook token is invalid. Attempting to renew credentials...");
-                    [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
+                    [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error)
+                    {
                         NSError *applyError;
-                        [SinglySession.sharedSession applyService:self.serviceIdentifier withToken:account.credential.oauthToken error:&applyError];
+                        [SinglySession.sharedSession applyService:self.serviceIdentifier
+                                                        withToken:account.credential.oauthToken
+                                                            error:&applyError];
+
                         if (applyError)
                         {
-                            // TODO Handle errors!
+                            SinglyLog(@"Unhandled error: %@", applyError);
+                            dispatch_semaphore_signal(authorizationSemaphore);
+                            return;
                         }
                     }];
                 }
+
             }
             else
             {
@@ -265,24 +273,17 @@
                 return;
             }
         }
-        //
-        // Set Access Token & Account on the Singly Session
-        //
-        SinglySession.sharedSession.accessToken = responseObject[@"access_token"];
-        SinglySession.sharedSession.accountID = responseObject[@"account"];
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SinglySession.sharedSession updateProfilesWithCompletion:^(BOOL isSuccessful, NSError *error)
-            {
-                if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
-                    [self.delegate singlyServiceDidAuthorize:self];
-            }];
-        });
 
         //
         // We are now authorized. Do not attempt any further authorizations.
         //
         self.isAuthorized = YES;
+
+        //
+        // Notify the Delegate
+        //
+        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
+            [self.delegate singlyServiceDidAuthorize:self];
 
         dispatch_semaphore_signal(authorizationSemaphore);
     }];

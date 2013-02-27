@@ -382,8 +382,6 @@ static SinglySession *sharedInstance = nil;
                error:(NSError **)error
 {
 
-    //    NSLog(@"[SinglySDK] Applying service '%@' with token '%@' to the Singly service ...", serviceIdentifier, accessToken);
-
     // Prepare the Request
     SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/apply", serviceIdentifier]];
     if (tokenSecret)
@@ -403,7 +401,7 @@ static SinglySession *sharedInstance = nil;
     // Perform the Request
     NSError *requestError;
     SinglyConnection *connection = [SinglyConnection connectionWithRequest:request];
-    NSDictionary *responseDictionary = [connection performRequest:&requestError];
+    id responseObject = [connection performRequest:&requestError];
 
     // Check for Errors
     if (requestError)
@@ -412,8 +410,8 @@ static SinglySession *sharedInstance = nil;
         return NO;
     }
 
-    SinglySession.sharedSession.accessToken = responseDictionary[@"access_token"];
-    SinglySession.sharedSession.accountID = responseDictionary[@"account"];
+    SinglySession.sharedSession.accessToken = responseObject[@"access_token"];
+    SinglySession.sharedSession.accountID   = responseObject[@"account"];
 
     NSError *profilesError;
     [SinglySession.sharedSession updateProfiles:&profilesError];
