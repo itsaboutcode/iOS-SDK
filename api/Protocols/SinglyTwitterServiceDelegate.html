@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>SinglyFriend Class Reference</title>
+		<title>SinglyTwitterServiceDelegate Protocol Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">SinglyFriend Class Reference</h1>
+				<h1 class="hideInXcode">SinglyTwitterServiceDelegate Protocol Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -32,12 +32,19 @@
 	
 	
 	
+	<option value="tasks">Tasks</option>
 	
 	
 	
 	
 	
 	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/accountForTwitterAuthorization:">&nbsp;&nbsp;&nbsp;&nbsp;- accountForTwitterAuthorization:</option>
 	
 	
 	
@@ -53,6 +60,9 @@
 
 
 
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
 
 
 
@@ -60,13 +70,20 @@
 
 
 
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/accountForTwitterAuthorization:">accountForTwitterAuthorization:</a></span></li>
+	
+</ul></li>
 
 
 			</ul>
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="SinglyFriend Class Reference" name="top"></a>
+				<a title="SinglyTwitterServiceDelegate Protocol Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -75,18 +92,18 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">SinglyFriend Class Reference</h1>
+						<h1 class="title title-header">SinglyTwitterServiceDelegate Protocol Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
-	<td class="specification-title">Inherits from</td>
-	<td class="specification-value">NSObject</td>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">NSObject<br /><a href="../Protocols/SinglyServiceDelegate.html">SinglyServiceDelegate</a></td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">SinglyFriend.h</td>
+	<td class="specification-value">SinglyTwitterService+Delegate.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -96,7 +113,34 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Represents a friend model within the Singly service.</p>
+						<p>Delegate methods related to a <a href="../Classes/SinglyTwitterService.html">SinglyTwitterService</a> instance.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/accountForTwitterAuthorization:">&ndash;&nbsp;accountForTwitterAuthorization:</a></code>
+		<span class="tooltip"><p>Delegate method that is called when the device has more than one Twitter
+account authenticated. This method should return the account that should be
+used for authentication.</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li>
+						</ul>
+						
 					</div>
 					
 					
@@ -107,9 +151,65 @@
 					
 					
 					
-					
-					
-					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/accountForTwitterAuthorization:" title="accountForTwitterAuthorization:"></a>
+	<h3 class="subsubtitle method-title">accountForTwitterAuthorization:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Delegate method that is called when the device has more than one Twitter
+account authenticated. This method should return the account that should be
+used for authentication.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (ACAccount *)accountForTwitterAuthorization:(NSArray *)<em>availableAccounts</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>availableAccounts</em></dt>
+			<dd><p>An array containing each of the available accounts
+to choose from.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.2.0 and later.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyTwitterService+Delegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
 					
 					
 				</div>
@@ -122,7 +222,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Singly, Inc. All rights reserved. (Last updated: 2013-01-17)</span><br />
+						<p><span class="copyright">&copy; 2013 Singly, Inc. All rights reserved. (Last updated: 2013-02-27)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

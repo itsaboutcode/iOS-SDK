@@ -62,13 +62,19 @@
 	
 	<option value="//api/name/disconnect">&nbsp;&nbsp;&nbsp;&nbsp;- disconnect</option>
 	
+	<option value="//api/name/disconnect:">&nbsp;&nbsp;&nbsp;&nbsp;- disconnect:</option>
+	
 	<option value="//api/name/disconnectWithCompletion:">&nbsp;&nbsp;&nbsp;&nbsp;- disconnectWithCompletion:</option>
 	
 	<option value="//api/name/initWithIdentifier:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithIdentifier:</option>
 	
 	<option value="//api/name/requestAuthorizationFromViewController:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAuthorizationFromViewController:</option>
 	
+	<option value="//api/name/requestAuthorizationFromViewController:completion:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAuthorizationFromViewController:completion:</option>
+	
 	<option value="//api/name/requestAuthorizationFromViewController:withScopes:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAuthorizationFromViewController:withScopes:</option>
+	
+	<option value="//api/name/requestAuthorizationFromViewController:withScopes:completion:">&nbsp;&nbsp;&nbsp;&nbsp;- requestAuthorizationFromViewController:withScopes:completion:</option>
 	
 	
 	
@@ -128,13 +134,19 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/disconnect">disconnect</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/disconnect:">disconnect:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/disconnectWithCompletion:">disconnectWithCompletion:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithIdentifier:">initWithIdentifier:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAuthorizationFromViewController:">requestAuthorizationFromViewController:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAuthorizationFromViewController:completion:">requestAuthorizationFromViewController:completion:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAuthorizationFromViewController:withScopes:">requestAuthorizationFromViewController:withScopes:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestAuthorizationFromViewController:withScopes:completion:">requestAuthorizationFromViewController:withScopes:completion:</a></span></li>
 	
 </ul></li>
 
@@ -257,7 +269,25 @@ login web view.</p></span>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/requestAuthorizationFromViewController:completion:">&ndash;&nbsp;requestAuthorizationFromViewController:completion:</a></code>
+		<span class="tooltip"><p>Requests authorization from the user through any means possible, falling back
+from integrated auth, app-based auth then Singly auth via our standard
+login web view.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/requestAuthorizationFromViewController:withScopes:">&ndash;&nbsp;requestAuthorizationFromViewController:withScopes:</a></code>
+		<span class="tooltip"><p>Requests authorization from the user through any means possible, falling back
+from integrated auth, app-based auth then Singly auth via our standard
+login web view.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestAuthorizationFromViewController:withScopes:completion:">&ndash;&nbsp;requestAuthorizationFromViewController:withScopes:completion:</a></code>
 		<span class="tooltip"><p>Requests authorization from the user through any means possible, falling back
 from integrated auth, app-based auth then Singly auth via our standard
 login web view.</p></span>
@@ -275,6 +305,13 @@ login web view.</p></span>
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/disconnect">&ndash;&nbsp;disconnect</a></code>
+		<span class="tooltip"><p>Disconnects from the service.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/disconnect:">&ndash;&nbsp;disconnect:</a></code>
 		<span class="tooltip"><p>Disconnects from the service.</p></span>
 	</span>
 	
@@ -576,7 +613,77 @@ by the service identifier.</p>
 	
 	<div class="method-subsection availability">
 		<h4 class="method-subtitle parameter-title">Availability</h4>
-		<p>Available in Singly iOS SDK 1.1.0 and later.</p>
+		<p>Available in Singly iOS SDK 1.1.0 and later. This method is
+<strong>deprecated</strong> and will be removed in a future release. Please use
+<a href="#//api/name/disconnect:">disconnect:</a> instead.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/disconnect:">&ndash; disconnect:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/disconnectWithCompletion:">&ndash; disconnectWithCompletion:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/disconnect:" title="disconnect:"></a>
+	<h3 class="subsubtitle method-title">disconnect:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Disconnects from the service.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)disconnect:(NSError **)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>Out parameter used if an error occurs while disconnceting from
+the service. May be <code>NULL</code>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p><code>YES</code> if the operation was successful.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.2.0 and later.</p>
 	</div>
 	
 	
@@ -617,7 +724,7 @@ has completed.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)disconnectWithCompletion:(void ( ^ ) ( BOOL ))<em>completionHandler</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)disconnectWithCompletion:(SinglyDisconnectCompletionBlock)<em>completionHandler</em></code></div>
 
     
 	
@@ -626,9 +733,9 @@ has completed.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>completionHandler</em></dt>
-			<dd><p>The block to run when the check is complete. It
-will be passed a <code>BOOL</code> stating whether or not the
-the operation succeeded.</p></dd>
+			<dd><p>The block to run when the check is complete. It will
+be passed a <code>BOOL</code> stating whether or not the
+operation succeeded.</p></dd>
 		</dl>
 		
 	</div>
@@ -652,7 +759,7 @@ the operation succeeded.</p></dd>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/disconnect">&ndash; disconnect</a></p></code></li>
+			<li><code><p><a href="#//api/name/disconnect:">&ndash; disconnect:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -769,6 +876,84 @@ authorization request.</p></dd>
 			
 			<li><code><p><a href="#//api/name/requestAuthorizationFromViewController:withScopes:">&ndash; requestAuthorizationFromViewController:withScopes:</a></p></code></li>
 			
+			<li><code><p><a href="#//api/name/requestAuthorizationFromViewController:completion:">&ndash; requestAuthorizationFromViewController:completion:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/requestAuthorizationFromViewController:withScopes:completion:">&ndash; requestAuthorizationFromViewController:withScopes:completion:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/requestAuthorizationFromViewController:completion:" title="requestAuthorizationFromViewController:completion:"></a>
+	<h3 class="subsubtitle method-title">requestAuthorizationFromViewController:completion:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Requests authorization from the user through any means possible, falling back
+from integrated auth, app-based auth then Singly auth via our standard
+login web view.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)requestAuthorizationFromViewController:(UIViewController *)<em>viewController</em> completion:(SinglyAuthorizationCompletionBlock)<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>viewController</em></dt>
+			<dd><p>The view controller instance that is presenting the
+authorization request.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>The block to run when the request is complete. It
+will be passed a <code>BOOL</code> stating whether or not the
+operation succeeded.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.2.0 and later.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/requestAuthorizationFromViewController:">&ndash; requestAuthorizationFromViewController:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/requestAuthorizationFromViewController:withScopes:">&ndash; requestAuthorizationFromViewController:withScopes:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/requestAuthorizationFromViewController:withScopes:completion:">&ndash; requestAuthorizationFromViewController:withScopes:completion:</a></p></code></li>
+			
 		</ul>
 	</div>
 	
@@ -837,6 +1022,89 @@ authorization request.</p></dd>
 			
 			<li><code><p><a href="#//api/name/requestAuthorizationFromViewController:">&ndash; requestAuthorizationFromViewController:</a></p></code></li>
 			
+			<li><code><p><a href="#//api/name/requestAuthorizationFromViewController:completion:">&ndash; requestAuthorizationFromViewController:completion:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/requestAuthorizationFromViewController:withScopes:completion:">&ndash; requestAuthorizationFromViewController:withScopes:completion:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SinglyService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/requestAuthorizationFromViewController:withScopes:completion:" title="requestAuthorizationFromViewController:withScopes:completion:"></a>
+	<h3 class="subsubtitle method-title">requestAuthorizationFromViewController:withScopes:completion:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Requests authorization from the user through any means possible, falling back
+from integrated auth, app-based auth then Singly auth via our standard
+login web view.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)requestAuthorizationFromViewController:(UIViewController *)<em>viewController</em> withScopes:(NSArray *)<em>scopes</em> completion:(SinglyAuthorizationCompletionBlock)<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>viewController</em></dt>
+			<dd><p>The view controller instance that is presenting the
+authorization request.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>scopes</em></dt>
+			<dd><p>The scope(s) to request from the service.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>The block to run when the request is complete. It
+will be passed a <code>BOOL</code> stating whether or not the
+operation succeeded.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>Available in Singly iOS SDK 1.2.0 and later.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/requestAuthorizationFromViewController:">&ndash; requestAuthorizationFromViewController:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/requestAuthorizationFromViewController:completion:">&ndash; requestAuthorizationFromViewController:completion:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/requestAuthorizationFromViewController:withScopes:">&ndash; requestAuthorizationFromViewController:withScopes:</a></p></code></li>
+			
 		</ul>
 	</div>
 	
@@ -863,7 +1131,7 @@ authorization request.</p></dd>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Singly, Inc. All rights reserved. (Last updated: 2013-01-17)</span><br />
+						<p><span class="copyright">&copy; 2013 Singly, Inc. All rights reserved. (Last updated: 2013-02-27)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
