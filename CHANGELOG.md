@@ -1,7 +1,7 @@
 
 # Singly SDK ChangeLog
 
-## 1.2.0 — **Not Yet Released**
+## 1.2.0 — February 27th, 2013
 
 * Added support for removing Singly accounts by calling `removeAccount:` or
   `removeAccountWithCompletion:` on the shared SinglySession instance. This will
