@@ -373,7 +373,7 @@ static SinglySession *sharedInstance = nil;
            withToken:(NSString *)accessToken
                error:(NSError **)error
 {
-    return [self applyService:serviceIdentifier withToken:accessToken tokenSecret:nil error:nil];
+    return [self applyService:serviceIdentifier withToken:accessToken tokenSecret:nil error:error];
 }
 
 - (BOOL)applyService:(NSString *)serviceIdentifier
