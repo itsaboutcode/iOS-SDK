@@ -35,18 +35,32 @@
  *
 **/
 
+// Singly SDK Version
 static NSString * const kSinglySDKVersion = @"1.2.0";
 
+// Default Base URL
 static NSString * const kSinglyBaseURL = @"https://api.singly.com";
 
+// Preference Keys
 static NSString * const kSinglyAccessTokenKey = @"com.singly.accessToken";
+
+// Error Domain
 static NSString * const kSinglyErrorDomain = @"com.singly.sdk";
 
+// Info Keys
+static NSString * const kSinglyResponseKey = @"SinglyResponse";
+
+// Access Token Errors
 static NSInteger  const kSinglyInvalidAccessTokenErrorCode = 0;
 static NSString * const kSinglyInvalidAccessTokenErrorMessage = @"Singly access token is expired or invalid.";
 
+// Service Errors
 static NSInteger  const kSinglyServiceErrorCode = 1;
+static NSString * const kSinglyServiceErrorMessage = @"An error occurred while communicating with the Singly service.";
+
+// Login Errors
 static NSInteger  const kSinglyLoginAbortedErrorCode = 2;
 static NSInteger  const kSinglyLoginFailedErrorCode = 3;
 
+// Credentials Exception
 static NSString * const kSinglyCredentialsMissingException = @"SinglyCredentialsMissingException";

@@ -58,6 +58,7 @@
 - (id)performRequest:(NSError **)error
 {
     NSData *responseData;
+    NSString *responseString;
     NSURLResponse *response;
     NSError *requestError;
     NSError *parseError;
@@ -66,6 +67,10 @@
     responseData = [NSURLConnection sendSynchronousRequest:self.request
                                          returningResponse:&response
                                                      error:&requestError];
+
+    // Parse Response Data
+    responseString = [[NSString alloc] initWithData:responseData
+                                           encoding:NSUTF8StringEncoding];
 
     // Check for Request Errors
     if (requestError)
@@ -90,7 +95,7 @@
 
     // Parse the JSON Response
     id responseObject = [NSJSONSerialization JSONObjectWithData:responseData
-                                                        options:NSJSONReadingAllowFragments
+                                                        options:kNilOptions
                                                           error:&parseError];
 
     // Check for Parse Errors
@@ -105,10 +110,16 @@
     {
         if (error)
         {
-            NSString *serviceErrorMessage = responseObject[@"error"];
+            NSDictionary *errorDetails = @{
+                NSLocalizedDescriptionKey : responseObject[@"error"],
+//                NSUnderlyingErrorKey      : requestError,
+                kSinglyResponseKey        : responseString
+            };
+
             NSError *serviceError = [NSError errorWithDomain:kSinglyErrorDomain
                                                         code:kSinglyServiceErrorCode
-                                                    userInfo:@{ NSLocalizedDescriptionKey : serviceErrorMessage }];
+                                                    userInfo:errorDetails];
+
             *error = serviceError;
         }
         return responseObject;
