@@ -29,8 +29,8 @@ pre-packaged distribution](http://singly.github.com/iOS-SDK/downloads).
    already be linking to. Under your Build Phases setting, add the `Accounts`,
    `AddressBook`, `AddressBookUI`, `Security`, `Social`, `Twitter` and
    `QuartzCore` frameworks to the "Link Binary With Libraries" phase. If you are
-   targeting iOS 5, be sure to mark Accounts and Social as "Optional" instead of
-   "Required".
+   targeting iOS 5, be sure to mark the `Social` framework as "Optional" instead
+   of "Required".
 
 3. Import the Singly SDK into the source files you wish to use the SDK in by
    using `#import <SinglySDK/SinglySDK.h>`.

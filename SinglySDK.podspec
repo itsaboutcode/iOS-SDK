@@ -37,7 +37,8 @@ Pod::Spec.new do |spec|
     files.exclude /UIDevice\+DEFacebookComposeViewController/
     files.exclude /UIViewController\+Modal/
   end
-  spec.frameworks = 'Accounts', 'AddressBook', 'AddressBookUI', 'QuartzCore', 'Security', 'Social', 'Twitter'
+  spec.frameworks = 'Accounts', 'AddressBook', 'AddressBookUI', 'QuartzCore', 'Security', 'Twitter'
+  spec.weak_frameworks = 'Social'
   spec.requires_arc = true
   spec.preserve_paths = [
     "SinglySDK/SinglySDK.xcodeproj",

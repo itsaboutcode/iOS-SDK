@@ -1,6 +1,10 @@
 
 # Singly SDK ChangeLog
 
+## 1.2.1 (in Development)
+
+* 
+
 ## 1.2.0 — February 27th, 2013
 
 * Added support for removing Singly accounts by calling `removeAccount:` or
