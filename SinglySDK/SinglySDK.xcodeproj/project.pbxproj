@@ -45,6 +45,8 @@
 		D015CCF816CEEF7900CC5230 /* SinglyTwitterService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D015CCF616CEEF7900CC5230 /* SinglyTwitterService+Internal.h */; };
 		D015CD0216D3F0B300CC5230 /* SinglyTwitterService+Delegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D015CD0016D3F0B300CC5230 /* SinglyTwitterService+Delegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D015CD0316D3F0B300CC5230 /* SinglyTwitterService+Delegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D015CD0016D3F0B300CC5230 /* SinglyTwitterService+Delegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0171BE416E11C6800A80D6E /* SinglyFacebookService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D0171BE316E11C6800A80D6E /* SinglyFacebookService+Internal.h */; };
+		D0171BE516E11C6800A80D6E /* SinglyFacebookService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D0171BE316E11C6800A80D6E /* SinglyFacebookService+Internal.h */; };
 		D021CBC8162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */; };
 		D02B537216309C7700F1F535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B537116309C7700F1F535 /* Foundation.framework */; };
 		D02B539616309CDF00F1F535 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B6D93161C99EF0034DB92 /* NSString+URLEncoding.m */; };
@@ -148,8 +150,6 @@
 		D044C9C016D56A7A00BA1305 /* SinglyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D044C9BD16D56A7A00BA1305 /* SinglyAlertView.m */; };
 		D044C9C116D56A7A00BA1305 /* SinglyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D044C9BD16D56A7A00BA1305 /* SinglyAlertView.m */; };
 		D044C9C216D56A7A00BA1305 /* SinglyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D044C9BD16D56A7A00BA1305 /* SinglyAlertView.m */; };
-		D044C9C516D693C900BA1305 /* SinglyFacebookService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */; };
-		D044C9C616D693C900BA1305 /* SinglyFacebookService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */; };
 		D0467FF116D6E38900F4F981 /* profiles-delete.json in Resources */ = {isa = PBXBuildFile; fileRef = D0467FF016D6DFD800F4F981 /* profiles-delete.json */; };
 		D04AD40B167FA3E10046C296 /* SinglyAvatarCache.h in Headers */ = {isa = PBXBuildFile; fileRef = D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */; };
 		D04AD40C167FA3E10046C296 /* SinglyAvatarCache.h in Headers */ = {isa = PBXBuildFile; fileRef = D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */; };
@@ -343,6 +343,7 @@
 		D013E70516A07A95008C80A3 /* withings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "withings@2x.png"; sourceTree = "<group>"; };
 		D015CCF616CEEF7900CC5230 /* SinglyTwitterService+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SinglyTwitterService+Internal.h"; path = "SinglySDK/SinglyTwitterService+Internal.h"; sourceTree = "<group>"; };
 		D015CD0016D3F0B300CC5230 /* SinglyTwitterService+Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SinglyTwitterService+Delegate.h"; path = "SinglySDK/SinglyTwitterService+Delegate.h"; sourceTree = "<group>"; };
+		D0171BE316E11C6800A80D6E /* SinglyFacebookService+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SinglyFacebookService+Internal.h"; path = "SinglySDK/SinglyFacebookService+Internal.h"; sourceTree = "<group>"; };
 		D021CBBB162C933D00DE9922 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D021CBC5162DB7D800DE9922 /* SinglyLoginPickerServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerServiceCell.h; sourceTree = "<group>"; };
 		D021CBC6162DB7D800DE9922 /* SinglyLoginPickerServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerServiceCell.m; sourceTree = "<group>"; };
@@ -425,7 +426,6 @@
 		D044C9B616D5341500BA1305 /* SinglyActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyActionSheet.m; sourceTree = "<group>"; };
 		D044C9BC16D56A7A00BA1305 /* SinglyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAlertView.h; sourceTree = "<group>"; };
 		D044C9BD16D56A7A00BA1305 /* SinglyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAlertView.m; sourceTree = "<group>"; };
-		D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyFacebookService+Internal.h"; sourceTree = "<group>"; };
 		D0467FF016D6DFD800F4F981 /* profiles-delete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "profiles-delete.json"; sourceTree = "<group>"; };
 		D04AD409167FA3E10046C296 /* SinglyAvatarCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAvatarCache.h; sourceTree = "<group>"; };
 		D04AD40A167FA3E10046C296 /* SinglyAvatarCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyAvatarCache.m; sourceTree = "<group>"; };
@@ -785,7 +785,7 @@
 			isa = PBXGroup;
 			children = (
 				D058710116431AFC007E8970 /* SinglyFacebookService.h */,
-				D044C9C316D693C800BA1305 /* SinglyFacebookService+Internal.h */,
+				D0171BE316E11C6800A80D6E /* SinglyFacebookService+Internal.h */,
 				D058710216431AFC007E8970 /* SinglyFacebookService.m */,
 			);
 			name = Facebook;
@@ -1105,7 +1105,7 @@
 				D015CD0216D3F0B300CC5230 /* SinglyTwitterService+Delegate.h in Headers */,
 				D044C9B716D5341500BA1305 /* SinglyActionSheet.h in Headers */,
 				D044C9BE16D56A7A00BA1305 /* SinglyAlertView.h in Headers */,
-				D044C9C516D693C900BA1305 /* SinglyFacebookService+Internal.h in Headers */,
+				D0171BE416E11C6800A80D6E /* SinglyFacebookService+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1151,7 +1151,7 @@
 				D015CD0316D3F0B300CC5230 /* SinglyTwitterService+Delegate.h in Headers */,
 				D044C9B816D5341500BA1305 /* SinglyActionSheet.h in Headers */,
 				D044C9BF16D56A7A00BA1305 /* SinglyAlertView.h in Headers */,
-				D044C9C616D693C900BA1305 /* SinglyFacebookService+Internal.h in Headers */,
+				D0171BE516E11C6800A80D6E /* SinglyFacebookService+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
