@@ -7,6 +7,8 @@
 
 * Fixed native Twitter authorization on iOS 5.x.
 
+* Fixed CocoaPods spec for iOS 5.x.
+
 ## 1.2.0 — February 27th, 2013
 
 * Added support for removing Singly accounts by calling `removeAccount:` or
