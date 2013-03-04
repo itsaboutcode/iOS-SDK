@@ -120,10 +120,9 @@
         SinglyLog(@"Native Facebook authorization is not available because this device is not signed into Facebook.");
         return;
     }
-
+    
     [accountStore requestAccessToAccountsWithType:accountType
-                                          options:nil
-                                       completion:^(BOOL granted, NSError *error)
+                            withCompletionHandler:^(BOOL granted, NSError *error)
     {
 
         // Check for Access

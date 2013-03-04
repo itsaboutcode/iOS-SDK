@@ -3,7 +3,7 @@
 
 ## 1.2.1 (in Development)
 
-* 
+* Fixed native Twitter authorization on iOS 5.x.
 
 ## 1.2.0 — February 27th, 2013
 
