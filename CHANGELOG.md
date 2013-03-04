@@ -1,7 +1,7 @@
 
 # Singly SDK ChangeLog
 
-## 1.2.1 (in Development)
+## 1.2.1 - March 4th, 2013
 
 * Fixed example in documentation for the SinglyLoginPickerViewController.
 
