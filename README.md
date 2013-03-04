@@ -110,8 +110,7 @@ If you wish to login multiple services, or offer multiple services for login,
 then you can use the `SinglyLoginPickerViewController`.
 
 ```
-SinglyLoginPickerViewController *viewController = [[SinglyLoginPickerViewController alloc]
-    initWithSession:[SinglySession sharedSession]];
+SinglyLoginPickerViewController *viewController = [[SinglyLoginPickerViewController alloc] init];
 [self presentModalViewController:viewController animated:YES];
 ```
 
