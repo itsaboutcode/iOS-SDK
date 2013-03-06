@@ -1,6 +1,10 @@
 
 # Singly SDK ChangeLog
 
+## 1.2.2 - In Development
+
+* Delegate methods are now dispatched on the main thread.
+
 ## 1.2.1 - March 4th, 2013
 
 * Fixed example in documentation for the SinglyLoginPickerViewController.

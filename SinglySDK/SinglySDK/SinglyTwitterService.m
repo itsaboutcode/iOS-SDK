@@ -147,7 +147,11 @@
 
             // Inform the Delegate
             if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
-                [self.delegate singlyServiceDidFail:self withError:error];
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate singlyServiceDidFail:self withError:error];
+                });
+            }
 
             // Display an Alert to the User
             // TODO Remove this, errors should be displayed by the consuming apps, not us...
@@ -164,12 +168,16 @@
 
         // Select the Account
         NSArray *accounts = [accountStore accountsWithAccountType:accountType];
-        ACAccount *account;
+        __block ACAccount *account;
 
         if (accounts.count > 1)
         {
             if (self.delegate && [self.delegate respondsToSelector:@selector(accountForTwitterAuthorization:)])
-                account = [self.delegate accountForTwitterAuthorization:accounts];
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    account = [self.delegate accountForTwitterAuthorization:accounts];
+                });
+            }
             else
             {
                 SinglyLog(@"You must implement the accountForTwitterAuthorization: delegate method and return the account to authorize.");
@@ -185,7 +193,8 @@
         //
         // Request Access Token from Twitter
         //
-        [self fetchAccessTokenForAccount:account completion:^(NSDictionary *accessToken, NSError *error) {
+        [self fetchAccessTokenForAccount:account completion:^(NSDictionary *accessToken, NSError *error)
+        {
 
             // TODO Check for errors!
 
@@ -193,7 +202,11 @@
             {
                 // TODO Check for errors!
                 if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
-                    [self.delegate singlyServiceDidAuthorize:self];
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate singlyServiceDidAuthorize:self];
+                    });
+                }
             };
 
             // Apply Service to Singly

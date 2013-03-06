@@ -206,7 +206,11 @@
 
             // Inform the Delegate
             if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
-                [self.delegate singlyServiceDidFail:self withError:accessError];
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate singlyServiceDidFail:self withError:accessError];
+                });
+            }
 
             dispatch_semaphore_signal(authorizationSemaphore);
             return;
@@ -283,7 +287,11 @@
         // Notify the Delegate
         //
         if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
-            [self.delegate singlyServiceDidAuthorize:self];
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate singlyServiceDidAuthorize:self];
+            });
+        }
 
         dispatch_semaphore_signal(authorizationSemaphore);
     }];

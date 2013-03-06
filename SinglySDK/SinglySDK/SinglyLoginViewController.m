@@ -174,7 +174,11 @@
 
                 // Notify the Delegate
                 if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:errorLoggingInToService:withError:)])
-                    [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:loginError];
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate singlyLoginViewController:self errorLoggingInToService:self.serviceIdentifier withError:loginError];
+                    });
+                }
 
                 return;
             }
@@ -191,7 +195,11 @@
 
                 // Notify the Delegate
                 if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginViewController:didLoginForService:)])
-                    [self.delegate singlyLoginViewController:self didLoginForService:self.serviceIdentifier];
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate singlyLoginViewController:self didLoginForService:self.serviceIdentifier];
+                    });
+                }
 
             }];
 
