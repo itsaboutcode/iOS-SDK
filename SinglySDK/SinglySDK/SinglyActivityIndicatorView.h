@@ -55,6 +55,8 @@
 **/
 + (SinglyActivityIndicatorView *)sharedIndicator;
 
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+
 /// ----------------------------------------------------------------------------
 /// @name Controlling Visibility
 /// ----------------------------------------------------------------------------

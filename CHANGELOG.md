@@ -5,6 +5,8 @@
 
 * Delegate methods are now dispatched on the main thread.
 
+* The Singly logo is no longer used as the default loading indicator.
+
 ## 1.2.1 - March 4th, 2013
 
 * Fixed example in documentation for the SinglyLoginPickerViewController.

@@ -46,6 +46,7 @@ static SinglyActivityIndicatorView *sharedInstance = nil;
 + (void)showIndicator
 {
     UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
+    [self.sharedIndicator.activityIndicatorView startAnimating];
     self.sharedIndicator.alpha = 0;
     [mainWindow addSubview:self.sharedIndicator];
 
@@ -56,9 +57,10 @@ static SinglyActivityIndicatorView *sharedInstance = nil;
 
 + (void)dismissIndicator
 {
-    [UIView animateWithDuration:0.5 animations:^{
-        self.sharedIndicator.alpha = 0;
+    [UIView animateWithDuration:0.35 animations:^{
+         self.sharedIndicator.alpha = 0;
     } completion:^(BOOL finished) {
+        [self.sharedIndicator.activityIndicatorView stopAnimating];
         [self.sharedIndicator removeFromSuperview];
     }];
 }
@@ -69,24 +71,29 @@ static SinglyActivityIndicatorView *sharedInstance = nil;
     if (self)
     {
 
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
         self.layer.cornerRadius = 5.0;
-        self.layer.borderColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.15] CGColor];
-        self.layer.borderWidth = 1.0;
+//        self.layer.borderColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.15] CGColor];
+//        self.layer.borderWidth = 1.0;
         self.clipsToBounds = YES;
 
-        UIImageView *spinner = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SinglySDK.bundle/Icon-512"]];
-        spinner.contentMode = UIViewContentModeScaleAspectFill;
-        spinner.center = self.center;
-        spinner.frame = self.bounds;
-        CABasicAnimation *fullRotation;
-        fullRotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-        fullRotation.fromValue = [NSNumber numberWithFloat:0];
-        fullRotation.toValue = [NSNumber numberWithFloat:(2 * M_PI)];
-        fullRotation.duration = 1.0;
-        fullRotation.repeatCount = MAXFLOAT;
-        [spinner.layer addAnimation:fullRotation forKey:@"spinner"];
-        [self addSubview:spinner];
+        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        self.activityIndicatorView.center = self.center;
+        self.activityIndicatorView.frame = self.bounds;
+        self.activityIndicatorView.color = [UIColor whiteColor];
+        [self addSubview:self.activityIndicatorView];
+
+//        UIImageView *spinner = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SinglySDK.bundle/Icon-512"]];
+//        spinner.contentMode = UIViewContentModeScaleAspectFill;
+//        spinner.center = self.center;
+//        spinner.frame = self.bounds;
+//        CABasicAnimation *fullRotation;
+//        fullRotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+//        fullRotation.fromValue = [NSNumber numberWithFloat:0];
+//        fullRotation.toValue = [NSNumber numberWithFloat:(2 * M_PI)];
+//        fullRotation.duration = 1.0;
+//        fullRotation.repeatCount = MAXFLOAT;
+//        [spinner.layer addAnimation:fullRotation forKey:@"spinner"];
 
     }
     return self;
