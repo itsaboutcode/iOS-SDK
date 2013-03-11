@@ -386,6 +386,7 @@ static SinglySession *sharedInstance = nil;
     SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/apply", serviceIdentifier]];
     if (tokenSecret)
         request.parameters = @{
+            @"account": self.accountID,
             @"client_id": self.clientID,
             @"client_secret": self.clientSecret,
             @"token": accessToken,
@@ -393,6 +394,7 @@ static SinglySession *sharedInstance = nil;
         };
     else
         request.parameters = @{
+            @"account": self.accountID,
             @"client_id": self.clientID,
             @"client_secret": self.clientSecret,
             @"token": accessToken
@@ -410,9 +412,11 @@ static SinglySession *sharedInstance = nil;
         return NO;
     }
 
+    // Set Access Token and Account ID on the Shared Sesssion
     SinglySession.sharedSession.accessToken = responseObject[@"access_token"];
     SinglySession.sharedSession.accountID   = responseObject[@"account"];
 
+    // Update Profiles
     NSError *profilesError;
     [SinglySession.sharedSession updateProfiles:&profilesError];
     if (profilesError)
@@ -421,6 +425,7 @@ static SinglySession *sharedInstance = nil;
         return NO;
     }
 
+    // Post Notification
     dispatch_async(dispatch_get_main_queue(), ^{
         [NSNotificationCenter.defaultCenter postNotificationName:kSinglyServiceAppliedNotification
                                                           object:serviceIdentifier];
