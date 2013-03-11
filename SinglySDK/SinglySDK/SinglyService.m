@@ -107,19 +107,9 @@
                                     withScopes:(NSArray *)scopes
                                     completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
-    self.isAuthorized = NO;
-    [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes completion:completionHandler];
-}
-
-- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
-{
-    [self requestAuthorizationFromViewController:viewController withScopes:nil completion:nil];
-}
-
-- (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
-                                             withScopes:(NSArray *)scopes
-{
-    [self requestAuthorizationFromViewController:viewController withScopes:scopes completion:nil];
+    [self requestAuthorizationViaSinglyFromViewController:viewController
+                                               withScopes:scopes
+                                               completion:completionHandler];
 }
 
 - (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
@@ -127,12 +117,17 @@
                                              completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
     self.completionHandler = completionHandler;
+    self.isAuthorized = NO;
 
+    // Initialize the Login View Controller
     SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithServiceIdentifier:self.serviceIdentifier];
     loginViewController.scopes = scopes;
     loginViewController.delegate = self;
 
-    [viewController presentViewController:loginViewController animated:YES completion:nil];
+    // Present the Login View Controller
+    [viewController presentViewController:loginViewController
+                                 animated:YES
+                               completion:nil];
 }
 
 #pragma mark - Service Disconnection
