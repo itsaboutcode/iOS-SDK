@@ -54,15 +54,21 @@
  * Attempts to request authorization from the device using the native Facebook
  * support available on iOS 6+.
  *
- * @param scopes The optional scopes to request permissions for.
+ * @param viewController The view controller instance that is presenting the
+ *                       authorization request.
  *
- * @param completionHandler The block to call once the operation has completed.
+ * @param scopes The scope(s) to request from the service.
+ *
+ * @param completionHandler The block to run when the request is complete. It
+ *                          will be passed a `BOOL` stating whether or not the
+ *                          operation succeeded.
  *
  * @available Available in Singly iOS SDK 1.2.2 and later.
  *
 **/
-- (void)requestNativeAuthorization:(NSArray *)scopes
-                        completion:(SinglyAuthorizationCompletionBlock)completionHandler;
+- (void)requestNativeAuthorizationFromViewController:(UIViewController *)viewController
+                                              scopes:(NSArray *)scopes
+                                          completion:(SinglyAuthorizationCompletionBlock)completionHandler;
 
 /*!
  *

@@ -91,7 +91,9 @@
         // Step 2 - Attempt Native Authorization
         //
         if (self.clientID && !self.isAuthorized && !self.isAborted && [self isNativeAuthorizationConfigured])
-            [self requestNativeAuthorization:scopes completion:completionHandler];
+            [self requestNativeAuthorizationFromViewController:viewController
+                                                        scopes:scopes
+                                                    completion:completionHandler];
 
         //
         // Step 3 - Fallback to Singly Authorization
@@ -109,8 +111,9 @@
 
 }
 
-- (void)requestNativeAuthorization:(NSArray *)scopes
-                        completion:(SinglyAuthorizationCompletionBlock)completionHandler
+- (void)requestNativeAuthorizationFromViewController:(UIViewController *)viewController
+                                          withScopes:(NSArray *)scopes
+                                          completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
 
