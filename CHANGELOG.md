@@ -10,6 +10,9 @@
 * Fixed an issue where applying access tokens with the Singly API would always
   create a new account.
 
+* Completion handlers are now called reliably for native authorizations via
+  Twitter and Facebook.
+
 ## 1.2.1 - March 4th, 2013
 
 * Fixed example in documentation for the SinglyLoginPickerViewController.
