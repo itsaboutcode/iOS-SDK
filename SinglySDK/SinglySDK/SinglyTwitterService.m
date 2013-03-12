@@ -233,51 +233,42 @@
 
                 // TODO Check for errors!
 
+                //
+                // We are now authorized. Do not attempt any further authorizations.
+                //
+                self.isAuthorized = YES;
+
+                //
+                // Inform the Delegate
+                //
                 if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
                 {
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                    dispatch_sync(dispatch_get_main_queue(), ^{
                         [self.delegate singlyServiceDidAuthorize:self];
                     });
                 }
+
+                //
+                // Call the Completion Handler
+                //
+                if (completionHandler)
+                {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        completionHandler(YES, nil);
+                    });
+                }
+
+                dispatch_semaphore_signal(authorizationSemaphore);
             };
 
             //
             // Apply Service to Singly
             //
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [SinglySession.sharedSession applyService:self.serviceIdentifier
-                                                withToken:accessToken[@"oauth_token"]
-                                              tokenSecret:accessToken[@"oauth_token_secret"]
-                                               completion:applyServiceHandler];
-            });
-
-            dispatch_semaphore_signal(authorizationSemaphore);
+            [SinglySession.sharedSession applyService:self.serviceIdentifier
+                                            withToken:accessToken[@"oauth_token"]
+                                          tokenSecret:accessToken[@"oauth_token_secret"]
+                                           completion:applyServiceHandler];
         }];
-
-        //
-        // We are now authorized. Do not attempt any further authorizations.
-        //
-        self.isAuthorized = YES;
-
-        //
-        // Inform the Delegate
-        //
-        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
-        {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.delegate singlyServiceDidAuthorize:self];
-            });
-        }
-
-        //
-        // Call the Completion Handler
-        //
-        if (completionHandler)
-        {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completionHandler(YES, nil);
-            });
-        }
     }];
 
     dispatch_semaphore_wait(authorizationSemaphore, DISPATCH_TIME_FOREVER);
