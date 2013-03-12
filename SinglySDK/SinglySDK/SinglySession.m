@@ -382,23 +382,22 @@ static SinglySession *sharedInstance = nil;
                error:(NSError **)error
 {
 
-    // Prepare the Request
-    SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/apply", serviceIdentifier]];
+    // Prepare the Request Parameters
+    NSMutableDictionary *requestParameters = [ @{
+        @"client_id": self.clientID,
+    } mutableCopy ];
+
+    // Set Token Secret (for OAuth 1.x)
     if (tokenSecret)
-        request.parameters = @{
-            @"account": self.accountID,
-            @"client_id": self.clientID,
-            @"client_secret": self.clientSecret,
-            @"token": accessToken,
-            @"token_secret": tokenSecret
-        };
-    else
-        request.parameters = @{
-            @"account": self.accountID,
-            @"client_id": self.clientID,
-            @"client_secret": self.clientSecret,
-            @"token": accessToken
-        };
+        requestParameters[@"token_secret"] = tokenSecret;
+    
+    // Set Account ID (if available)
+    if (self.accountID)
+        requestParameters[@"account"] = self.accountID;
+
+    // Prepare the Request
+    SinglyRequest *request = [SinglyRequest requestWithEndpoint:[NSString stringWithFormat:@"auth/%@/apply", serviceIdentifier]];
+    request.parameters = requestParameters;
 
     // Perform the Request
     NSError *requestError;
