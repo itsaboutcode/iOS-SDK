@@ -57,7 +57,8 @@
             if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:didLoginForService:)])
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate singlyLoginPickerViewController:self didLoginForService:[service serviceIdentifier]];
+                    [self.delegate singlyLoginPickerViewController:self
+                                                didLoginForService:[service serviceIdentifier]];
                 });
             }
         }
@@ -68,7 +69,9 @@
             if (self.delegate && [self.delegate respondsToSelector:@selector(singlyLoginPickerViewController:errorLoggingInToService:withError:)])
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate singlyLoginPickerViewController:self errorLoggingInToService:serviceIdentifier withError:error];
+                    [self.delegate singlyLoginPickerViewController:self
+                                           errorLoggingInToService:serviceIdentifier
+                                                         withError:error];
                 });
             }
         }

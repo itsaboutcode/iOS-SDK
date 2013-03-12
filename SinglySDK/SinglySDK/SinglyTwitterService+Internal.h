@@ -54,10 +54,14 @@ typedef void (^SinglyTwitterAccessTokenCompletionBlock)(NSDictionary *accessToke
  *
  * @param scopes The optional scopes to request permissions for.
  *
- * @available Available in Singly iOS SDK 1.2.0 and later.
+ * @available Available in Singly iOS SDK 1.2.2 and later.
  *
 **/
-- (void)requestNativeAuthorization:(NSArray *)scopes;
+- (void)requestNativeAuthorization:(NSArray *)scopes
+                        completion:(SinglyAuthorizationCompletionBlock)completionHandler;
+
+ *
+**/
 
 /// ----------------------------------------------------------------------------
 /// @name Handling Reverse Authentication

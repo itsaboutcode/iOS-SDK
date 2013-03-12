@@ -125,7 +125,7 @@
         // Step 2 - Attempt Native Authorization (iOS 6+)
         //
         if (self.clientID && !self.isAuthorized && !self.isAborted && [self isNativeAuthorizationConfigured])
-            [self requestNativeAuthorization:scopes];
+            [self requestNativeAuthorization:scopes completion:completionHandler];
 
         //
         // Step 3 - Attempt Authorization via Facebook App
@@ -149,6 +149,7 @@
 }
 
 - (void)requestNativeAuthorization:(NSArray *)scopes
+                        completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
 
@@ -204,11 +205,23 @@
 
             SinglyLog(@"Unhandled error! %@", accessError);
 
+            //
             // Inform the Delegate
+            //
             if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.delegate singlyServiceDidFail:self withError:accessError];
+                });
+            }
+
+            //
+            // Call the Completion Handler
+            //
+            if (completionHandler)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionHandler(NO, accessError);
                 });
             }
 
@@ -284,12 +297,22 @@
         self.isAuthorized = YES;
 
         //
-        // Notify the Delegate
+        // Inform the Delegate
         //
         if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.delegate singlyServiceDidAuthorize:self];
+            });
+        }
+
+        //
+        // Call the Completion Handler
+        //
+        if (completionHandler)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionHandler(YES, nil);
             });
         }
 

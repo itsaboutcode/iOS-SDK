@@ -89,8 +89,8 @@
         //
         // Step 2 - Attempt Native Authorization
         //
-        if (self.clientID && !self.isAuthorized && [self isNativeAuthorizationConfigured])
-            [self requestNativeAuthorization:scopes];
+        if (self.clientID && !self.isAuthorized && !self.isAborted && [self isNativeAuthorizationConfigured])
+            [self requestNativeAuthorization:scopes completion:completionHandler];
 
         //
         // Step 3 - Fallback to Singly Authorization
@@ -109,6 +109,7 @@
 }
 
 - (void)requestNativeAuthorization:(NSArray *)scopes
+                        completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
 
@@ -122,7 +123,7 @@
     }
     
     [accountStore requestAccessToAccountsWithType:accountType
-                            withCompletionHandler:^(BOOL granted, NSError *error)
+                            withCompletionHandler:^(BOOL granted, NSError *accessError)
     {
 
         // Check for Access
@@ -134,7 +135,7 @@
         }
 
         // Check for Errors
-        if (error)
+        if (accessError)
         {
             if (error.code == ACErrorAccountNotFound)
             {
@@ -143,23 +144,25 @@
                 return;
             }
 
-            SinglyLog(@"Unhandled error! %@", error);
+            SinglyLog(@"Unhandled error! %@", accessError);
 
             // Inform the Delegate
             if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate singlyServiceDidFail:self withError:error];
+                    [self.delegate singlyServiceDidFail:self withError:accessError];
                 });
             }
 
-            // Display an Alert to the User
-            // TODO Remove this, errors should be displayed by the consuming apps, not us...
-            dispatch_async(dispatch_get_main_queue(), ^{
-                SinglyAlertView *alertView = [[SinglyAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription]];
-                [alertView addCancelButtonWithTitle:@"Dissmiss"];
-                [alertView show];
-            });
+            //
+            // Call the Completion Handler
+            //
+            if (completionHandler)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionHandler(NO, accessError);
+                });
+            }
 
             dispatch_semaphore_signal(authorizationSemaphore);
 
@@ -222,6 +225,26 @@
         // We are now authorized. Do not attempt any further authorizations.
         //
         self.isAuthorized = YES;
+
+        //
+        // Inform the Delegate
+        //
+        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate singlyServiceDidAuthorize:self];
+            });
+        }
+
+        //
+        // Call the Completion Handler
+        //
+        if (completionHandler)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionHandler(YES, nil);
+            });
+        }
     }];
 
     dispatch_semaphore_wait(authorizationSemaphore, DISPATCH_TIME_FOREVER);
