@@ -13,6 +13,10 @@
 * Completion handlers are now called reliably for native authorizations via
   Twitter and Facebook.
 
+* Capitalize service identifiers displayed in the web-based workflow. There is
+  a better solution coming in 1.3 that will display services with their correct
+  capitalization.
+
 ## 1.2.1 - March 4th, 2013
 
 * Fixed example in documentation for the SinglyLoginPickerViewController.
