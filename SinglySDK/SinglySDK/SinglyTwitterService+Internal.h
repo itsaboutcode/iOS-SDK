@@ -60,8 +60,14 @@ typedef void (^SinglyTwitterAccessTokenCompletionBlock)(NSDictionary *accessToke
 - (void)requestNativeAuthorization:(NSArray *)scopes
                         completion:(SinglyAuthorizationCompletionBlock)completionHandler;
 
+/*!
+ *
+ * Denotes whether the user has aborted the authorization process.
+ *
+ * @available Available in Singly iOS SDK 1.2.2 and later.
  *
 **/
+@property BOOL isAborted;
 
 /// ----------------------------------------------------------------------------
 /// @name Handling Reverse Authentication

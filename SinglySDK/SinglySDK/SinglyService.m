@@ -88,19 +88,25 @@
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
 {
-    [self requestAuthorizationFromViewController:viewController withScopes:nil completion:nil];
+    [self requestAuthorizationFromViewController:viewController
+                                      withScopes:nil
+                                      completion:nil];
 }
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
                                     completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
-    [self requestAuthorizationFromViewController:viewController withScopes:nil completion:completionHandler];
+    [self requestAuthorizationFromViewController:viewController
+                                      withScopes:nil
+                                      completion:completionHandler];
 }
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
                                     withScopes:(NSArray *)scopes
 {
-    [self requestAuthorizationFromViewController:viewController withScopes:scopes completion:nil];
+    [self requestAuthorizationFromViewController:viewController
+                                      withScopes:scopes
+                                      completion:nil];
 }
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
@@ -244,34 +250,42 @@
 - (void)singlyLoginViewController:(SinglyLoginViewController *)controller
                didLoginForService:(NSString *)service
 {
-    // Call the Delegate
+
+    //
+    // Inform the Delegate
+    //
     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
         [self.delegate singlyServiceDidAuthorize:self];
 
+    //
     // Call the Completion Handler
+    //
     if (self.completionHandler)
-    {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.completionHandler(YES, nil);
         });
-    }
+
 }
 
 - (void)singlyLoginViewController:(SinglyLoginViewController *)viewController
           errorLoggingInToService:(NSString *)serviceIdentifier
                         withError:(NSError *)error
 {
-    // Call the Delegate
+
+    //
+    // Inform the Delegate
+    //
     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
         [self.delegate singlyServiceDidFail:self withError:error];
 
+    //
     // Call the Completion Handler
+    //
     if (self.completionHandler)
-    {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.completionHandler(NO, error);
         });
-    }
+
 }
 
 @end

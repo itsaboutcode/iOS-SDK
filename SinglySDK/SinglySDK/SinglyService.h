@@ -191,6 +191,9 @@ typedef void (^SinglyDisconnectCompletionBlock)(BOOL isSuccessful, NSError *erro
  * from integrated auth, app-based auth then Singly auth via our standard
  * login web view.
  *
+ * This method should be overridden by subclasses that wish to implement their
+ * own workflow for authorization.
+ *
  * @param viewController The view controller instance that is presenting the
  *                       authorization request.
  *

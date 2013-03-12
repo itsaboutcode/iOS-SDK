@@ -107,8 +107,8 @@
                                     completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
 
-    self.isAuthorized = NO;
     self.isAborted = NO;
+    self.isAuthorized = NO;
 
     dispatch_queue_t authorizationQueue;
     authorizationQueue = dispatch_queue_create("com.singly.AuthorizationQueue", NULL);
@@ -140,7 +140,9 @@
         if (!self.isAuthorized && !self.isAborted && !isAuthorizingViaApplication)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes completion:completionHandler];
+                [self requestAuthorizationViaSinglyFromViewController:viewController
+                                                           withScopes:scopes
+                                                           completion:completionHandler];
             });
         }
 
@@ -174,9 +176,13 @@
                                        completion:^(BOOL granted, NSError *accessError)
     {
 
+        //
         // Check for Access
+        //
         if (!granted)
         {
+            SinglyLog(@"Access to the Facebook account on the device was denied.");
+
             // If there was an error object, it means that the user denied
             // access, so we should be in an aborted state...
             if (accessError)
@@ -187,13 +193,18 @@
             else
                 self.isAborted = NO;
 
-            SinglyLog(@"We were not granted access to the device accounts.");
+            //
+            // We do not call the callback or delegate methods because we want
+            // to fallback to the standard web-based workflow.
+            //
 
             dispatch_semaphore_signal(authorizationSemaphore);
             return;
         }
 
-        // Check for Errors
+        //
+        // Check for Access Errors
+        //
         if (accessError)
         {
             if (accessError.code == ACErrorAccountNotFound)
@@ -269,17 +280,22 @@
                     SinglyLog(@"Facebook token is invalid. Attempting to renew credentials...");
                     [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error)
                     {
-                        NSError *applyError;
-                        [SinglySession.sharedSession applyService:self.serviceIdentifier
-                                                        withToken:account.credential.oauthToken
-                                                            error:&applyError];
 
-                        if (applyError)
-                        {
-                            SinglyLog(@"Unhandled error: %@", applyError);
-                            dispatch_semaphore_signal(authorizationSemaphore);
-                            return;
-                        }
+                        // TODO Check for errors...
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            NSError *applyError;
+                            [SinglySession.sharedSession applyService:self.serviceIdentifier
+                                                            withToken:account.credential.oauthToken
+                                                                error:&applyError];
+
+                            if (applyError)
+                            {
+                                SinglyLog(@"Unhandled error: %@", applyError);
+                                dispatch_semaphore_signal(authorizationSemaphore);
+                                return;
+                            }
+                        });
                     }];
                 }
 

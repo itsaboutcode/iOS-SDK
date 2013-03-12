@@ -73,6 +73,7 @@
                                     completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
 
+    self.isAborted = NO;
     self.isAuthorized = NO;
 
     dispatch_queue_t authorizationQueue;
@@ -95,7 +96,7 @@
         //
         // Step 3 - Fallback to Singly Authorization
         //
-        if (!self.isAuthorized)
+        if (!self.isAuthorized && !self.isAborted)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self requestAuthorizationViaSinglyFromViewController:viewController
@@ -118,7 +119,7 @@
 
     if (!accountType)
     {
-        SinglyLog(@"Native Facebook authorization is not available because this device is not signed into Facebook.");
+        SinglyLog(@"Native Twitter authorization is not available because this device is not signed into Twitter.");
         return;
     }
     
@@ -126,18 +127,42 @@
                             withCompletionHandler:^(BOOL granted, NSError *accessError)
     {
 
-        // Check for Access
+        //
+        // Check for Access to Accounts
+        //
         if (!granted)
         {
-            SinglyLog(@"We were not granted access to the device accounts.");
+            SinglyLog(@"Access to the Twitter accounts on the device was denied.");
+
+            //
+            // If there was an error object, it means that the user denied
+            // access, so we should be in an aborted state...
+            //
+            if (accessError)
+                self.isAborted = YES;
+
+            //
+            // If the error is nil, it means access was already denied (in
+            // Settings) so we should fall-back to the next method.
+            //
+            else
+                self.isAborted = NO;
+
+            //
+            // We do not call the callback or delegate methods because we want
+            // to fallback to the standard web-based workflow.
+            //
+
             dispatch_semaphore_signal(authorizationSemaphore);
             return;
         }
 
-        // Check for Errors
+        //
+        // Check for Access Errors
+        //
         if (accessError)
         {
-            if (error.code == ACErrorAccountNotFound)
+            if (accessError.code == ACErrorAccountNotFound)
             {
                 SinglyLog(@"Native Twitter authorization is not available because this device is not signed into Twitter.");
                 dispatch_semaphore_signal(authorizationSemaphore);
@@ -146,7 +171,9 @@
 
             SinglyLog(@"Unhandled error! %@", accessError);
 
+            //
             // Inform the Delegate
+            //
             if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -165,14 +192,14 @@
             }
 
             dispatch_semaphore_signal(authorizationSemaphore);
-
             return;
         }
 
-        // Select the Account
+        //
+        // Select the Account to Authorize
+        //
         NSArray *accounts = [accountStore accountsWithAccountType:accountType];
         __block ACAccount *account;
-
         if (accounts.count > 1)
         {
             if (self.delegate && [self.delegate respondsToSelector:@selector(accountForTwitterAuthorization:)])
@@ -203,7 +230,9 @@
 
             id applyServiceHandler = ^(BOOL isSuccessful, NSError *applyError)
             {
+
                 // TODO Check for errors!
+
                 if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -212,11 +241,15 @@
                 }
             };
 
+            //
             // Apply Service to Singly
-            [SinglySession.sharedSession applyService:self.serviceIdentifier
-                                            withToken:accessToken[@"oauth_token"]
-                                          tokenSecret:accessToken[@"oauth_token_secret"]
-                                           completion:applyServiceHandler];
+            //
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [SinglySession.sharedSession applyService:self.serviceIdentifier
+                                                withToken:accessToken[@"oauth_token"]
+                                              tokenSecret:accessToken[@"oauth_token_secret"]
+                                               completion:applyServiceHandler];
+            });
 
             dispatch_semaphore_signal(authorizationSemaphore);
         }];
