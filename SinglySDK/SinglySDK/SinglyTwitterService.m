@@ -32,6 +32,7 @@
 #import "NSDictionary+QueryString.h"
 #import "NSString+URLEncoding.h"
 
+#import "SinglyActivityIndicatorView.h"
 #import "SinglyAlertView.h"
 #import "SinglyConnection.h"
 #import "SinglyLog.h"
@@ -227,6 +228,13 @@
         }
 
         //
+        // Display the Activity Indicator View
+        //
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SinglyActivityIndicatorView showIndicator];
+        });
+
+        //
         // Request Access Token from Twitter
         //
         [self fetchAccessTokenForAccount:account completion:^(NSDictionary *accessToken, NSError *error)
@@ -243,6 +251,13 @@
                 // We are now authorized. Do not attempt any further authorizations.
                 //
                 _isAuthorized = YES;
+
+                //
+                // Dismiss the Activity Indicator View
+                //
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [SinglyActivityIndicatorView dismissIndicator];
+                });
 
                 //
                 // Inform the Delegate

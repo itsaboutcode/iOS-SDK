@@ -17,6 +17,9 @@
   a better solution coming in 1.3 that will display services with their correct
   capitalization.
 
+* The activity indicator is now displayed while waiting for native authorization
+  via Twitter and Facebook to complete.
+
 ## 1.2.1 - March 4th, 2013
 
 * Fixed example in documentation for the SinglyLoginPickerViewController.

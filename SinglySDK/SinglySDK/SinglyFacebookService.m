@@ -30,6 +30,7 @@
 #import "NSDictionary+QueryString.h"
 #import "NSString+URLEncoding.h"
 
+#import "SinglyActivityIndicatorView.h"
 #import "SinglyAlertView.h"
 #import "SinglyConnection.h"
 #import "SinglyFacebookService.h"
@@ -250,6 +251,13 @@
         ACAccount *account = [accounts lastObject];
 
         //
+        // Display the Activity Indicator View
+        //
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SinglyActivityIndicatorView showIndicator];
+        });
+
+        //
         // Apply the Facebook service to our current session.
         //
         NSError *applyError;
@@ -298,6 +306,14 @@
                             if (applyError)
                             {
                                 SinglyLog(@"Unhandled error: %@", applyError);
+
+                                //
+                                // Dismiss the Activity Indicator View
+                                //
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [SinglyActivityIndicatorView dismissIndicator];
+                                });
+                                
                                 dispatch_semaphore_signal(authorizationSemaphore);
                                 return;
                             }
@@ -308,6 +324,13 @@
             }
             else
             {
+                //
+                // Dismiss the Activity Indicator View
+                //
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [SinglyActivityIndicatorView dismissIndicator];
+                });
+
                 dispatch_semaphore_signal(authorizationSemaphore);
                 return;
             }
@@ -317,6 +340,13 @@
         // We are now authorized. Do not attempt any further authorizations.
         //
         _isAuthorized = YES;
+
+        //
+        // Dismiss the Activity Indicator View
+        //
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SinglyActivityIndicatorView dismissIndicator];
+        });
 
         //
         // Inform the Delegate
