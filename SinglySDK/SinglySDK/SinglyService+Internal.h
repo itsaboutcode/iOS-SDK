@@ -114,6 +114,11 @@ typedef void (^SinglyFetchClientIDCompletionBlock)(NSString *clientID, NSError *
 **/
 + (NSString *)normalizeServiceIdentifier:(NSString *)serviceIdentifier;
 
+
+/// ----------------------------------------------------------------------------
+/// @name Requesting Authorization
+/// ----------------------------------------------------------------------------
+
 /*!
  *
  * Requests authorization from Singly by initializing an instance of the login
@@ -140,5 +145,16 @@ typedef void (^SinglyFetchClientIDCompletionBlock)(NSString *clientID, NSError *
  *
 **/
 @property (nonatomic, strong) SinglyAuthorizationCompletionBlock completionHandler;
+
+/*!
+ *
+ * Denotes whether or not the service is authorized. This property is only used
+ * during the authorization workflow and does not indicate current authorization
+ * status in the Singly API.
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later.
+ *
+**/
+@property (readonly) BOOL isAuthorized;
 
 @end

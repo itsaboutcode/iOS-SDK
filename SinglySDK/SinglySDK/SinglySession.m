@@ -386,7 +386,7 @@ static SinglySession *sharedInstance = nil;
     NSMutableDictionary *requestParameters = [ @{
         @"client_id": self.clientID,
         @"client_secret": self.clientSecret,
-        @"token": accessToken,
+        @"token": accessToken
     } mutableCopy ];
 
     // Set Token Secret (for OAuth 1.x)

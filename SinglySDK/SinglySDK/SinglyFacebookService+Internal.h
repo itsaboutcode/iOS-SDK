@@ -67,7 +67,7 @@
  *
 **/
 - (void)requestNativeAuthorizationFromViewController:(UIViewController *)viewController
-                                              scopes:(NSArray *)scopes
+                                          withScopes:(NSArray *)scopes
                                           completion:(SinglyAuthorizationCompletionBlock)completionHandler;
 
 /*!
@@ -77,6 +77,6 @@
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
 **/
-@property BOOL isAborted;
+@property (readonly) BOOL isAborted;
 
 @end

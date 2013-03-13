@@ -42,6 +42,9 @@
 
 @implementation SinglyFacebookService
 
+@synthesize isAborted = _isAborted;
+@synthesize isAuthorized = _isAuthorized;
+
 - (NSString *)serviceIdentifier
 {
     return @"facebook";
@@ -107,8 +110,8 @@
                                     completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
 
-    self.isAborted = NO;
-    self.isAuthorized = NO;
+    _isAborted = NO;
+    _isAuthorized = NO;
 
     dispatch_queue_t authorizationQueue;
     authorizationQueue = dispatch_queue_create("com.singly.AuthorizationQueue", NULL);
@@ -126,7 +129,7 @@
         //
         if (self.clientID && !self.isAuthorized && !self.isAborted && [self isNativeAuthorizationConfigured])
             [self requestNativeAuthorizationFromViewController:viewController
-                                                        scopes:scopes
+                                                    withScopes:scopes
                                                     completion:completionHandler];
 
         //
@@ -153,7 +156,7 @@
 }
 
 - (void)requestNativeAuthorizationFromViewController:(UIViewController *)viewController
-                                              scopes:(NSArray *)scopes
+                                          withScopes:(NSArray *)scopes
                                           completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
@@ -189,12 +192,12 @@
             // If there was an error object, it means that the user denied
             // access, so we should be in an aborted state...
             if (accessError)
-                self.isAborted = YES;
+                _isAborted = YES;
 
             // If the error is nil, it means access was already denied (in
             // Settings) so we should fall-back to the next method.
             else
-                self.isAborted = NO;
+                _isAborted = NO;
 
             //
             // We do not call the callback or delegate methods because we want
@@ -313,7 +316,7 @@
         //
         // We are now authorized. Do not attempt any further authorizations.
         //
-        self.isAuthorized = YES;
+        _isAuthorized = YES;
 
         //
         // Inform the Delegate

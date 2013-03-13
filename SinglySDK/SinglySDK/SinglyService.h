@@ -116,15 +116,6 @@ typedef void (^SinglyDisconnectCompletionBlock)(BOOL isSuccessful, NSError *erro
 
 /*!
  *
- * Whether or not the service is currently authorized.
- *
- * @available Available in Singly iOS SDK 1.0.0 and later.
- *
-**/
-@property BOOL isAuthorized;
-
-/*!
- *
  * Requests authorization from the user through any means possible, falling back
  * from integrated auth, app-based auth then Singly auth via our standard
  * login web view.

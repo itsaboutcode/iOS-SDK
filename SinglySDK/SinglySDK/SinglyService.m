@@ -37,6 +37,8 @@
 
 @implementation SinglyService
 
+@synthesize isAuthorized = _isAuthorized;
+
 + (id)serviceWithIdentifier:(NSString *)serviceIdentifier
 {
 
@@ -122,8 +124,9 @@
                                              withScopes:(NSArray *)scopes
                                              completion:(SinglyAuthorizationCompletionBlock)completionHandler
 {
+    _isAuthorized = NO;
+
     self.completionHandler = completionHandler;
-    self.isAuthorized = NO;
 
     // Initialize the Login View Controller
     SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithServiceIdentifier:self.serviceIdentifier];
@@ -251,6 +254,11 @@
 - (void)singlyLoginViewController:(SinglyLoginViewController *)controller
                didLoginForService:(NSString *)service
 {
+
+    //
+    // Set Authorization State
+    //
+    _isAuthorized = YES;
 
     //
     // Inform the Delegate
