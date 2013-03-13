@@ -60,23 +60,23 @@
 
 - (void)testShouldReturnInitializedServiceWithIdentifier
 {
-    SinglyService *testService = [SinglyService serviceWithIdentifier:@"someservice"];
+    SinglyService *testService = [SinglyService serviceWithIdentifier:@"generic"];
 
-    STAssertEqualObjects(testService.serviceIdentifier, @"someservice", @"Service instance should be initialized for 'someservice'.");
+    STAssertEqualObjects(testService.serviceIdentifier, @"generic", @"Service instance should be initialized for 'generic'.");
 }
 
 - (void)testShouldInitializeServiceWithIdentifier
 {
-    SinglyService *testService = [[SinglyService alloc] initWithIdentifier:@"someservice"];
+    SinglyService *testService = [[SinglyService alloc] initWithIdentifier:@"generic"];
 
-    STAssertEqualObjects(testService.serviceIdentifier, @"someservice", @"Service instance should be initialized for 'someservice'.");
+    STAssertEqualObjects(testService.serviceIdentifier, @"generic", @"Service instance should be initialized for 'generic'.");
 }
 
 #pragma mark - Service Disconnection
 
 - (void)testShouldDisconnectFromService
 {
-    SinglyService *testService = [SinglyService serviceWithIdentifier:@"facebook"];
+    SinglyService *testService = [SinglyService serviceWithIdentifier:@"generic"];
 
     NSData *responseData = [self dataForFixture:@"profiles-service-delete"];
     [SinglyTestURLProtocol setCannedResponseData:responseData];
@@ -90,7 +90,7 @@
 {
     __block BOOL isComplete = NO;
 
-    SinglyService *testService = [SinglyService serviceWithIdentifier:@"facebook"];
+    SinglyService *testService = [SinglyService serviceWithIdentifier:@"generic"];
 
     NSData *responseData = [self dataForFixture:@"profiles-service-delete"];
     [SinglyTestURLProtocol setCannedResponseData:responseData];
@@ -107,9 +107,9 @@
 
 - (void)testShouldFetchClientID
 {
-    SinglyService *testService = [SinglyService serviceWithIdentifier:@"facebook"];
+    SinglyService *testService = [SinglyService serviceWithIdentifier:@"generic"];
 
-    NSData *responseData = [self dataForFixture:@"auth-client_id-facebook"];
+    NSData *responseData = [self dataForFixture:@"auth-client_id-generic"];
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
     NSString *testClientID = [testService fetchClientID:nil];
@@ -121,9 +121,9 @@
 {
     __block BOOL isComplete = NO;
 
-    SinglyService *testService = [SinglyService serviceWithIdentifier:@"facebook"];
+    SinglyService *testService = [SinglyService serviceWithIdentifier:@"generic"];
 
-    NSData *responseData = [self dataForFixture:@"auth-client_id-facebook"];
+    NSData *responseData = [self dataForFixture:@"auth-client_id-generic"];
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
     [testService fetchClientIDWithCompletion:^(NSString *clientID, NSError *error) {

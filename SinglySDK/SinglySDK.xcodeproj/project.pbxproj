@@ -29,6 +29,9 @@
 		D005904D167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */; };
 		D005904E167A492600F1374D /* SinglyFriendPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */; };
 		D0059051167A4D5400F1374D /* SinglyFriendPlaceholder.h in Headers */ = {isa = PBXBuildFile; fileRef = D0059049167A492600F1374D /* SinglyFriendPlaceholder.h */; };
+		D00C434A16F0E123000B455D /* SinglyFacebookServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D00C434916F0E123000B455D /* SinglyFacebookServiceTests.m */; };
+		D00C434D16F0E138000B455D /* SinglyTwitterServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D00C434C16F0E138000B455D /* SinglyTwitterServiceTests.m */; };
+		D00C434F16F0EDAE000B455D /* auth-client_id-generic.json in Resources */ = {isa = PBXBuildFile; fileRef = D00C434E16F0EDAE000B455D /* auth-client_id-generic.json */; };
 		D00D662416C1A64B00746AA3 /* SinglyTwitterService.h in Headers */ = {isa = PBXBuildFile; fileRef = D00D662216C1A64B00746AA3 /* SinglyTwitterService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D00D662516C1A64B00746AA3 /* SinglyTwitterService.h in Headers */ = {isa = PBXBuildFile; fileRef = D00D662216C1A64B00746AA3 /* SinglyTwitterService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D00D662616C1A64B00746AA3 /* SinglyTwitterService.m in Sources */ = {isa = PBXBuildFile; fileRef = D00D662316C1A64B00746AA3 /* SinglyTwitterService.m */; };
@@ -330,6 +333,11 @@
 		D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPlaceholder.m; sourceTree = "<group>"; };
 		D0059052167A766D00F1374D /* SinglyFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriend.h; sourceTree = "<group>"; };
 		D0059053167A766D00F1374D /* SinglyFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriend.m; sourceTree = "<group>"; };
+		D00C434816F0E123000B455D /* SinglyFacebookServiceTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFacebookServiceTests.h; sourceTree = "<group>"; };
+		D00C434916F0E123000B455D /* SinglyFacebookServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFacebookServiceTests.m; sourceTree = "<group>"; };
+		D00C434B16F0E138000B455D /* SinglyTwitterServiceTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyTwitterServiceTests.h; sourceTree = "<group>"; };
+		D00C434C16F0E138000B455D /* SinglyTwitterServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyTwitterServiceTests.m; sourceTree = "<group>"; };
+		D00C434E16F0EDAE000B455D /* auth-client_id-generic.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "auth-client_id-generic.json"; sourceTree = "<group>"; };
 		D00D662216C1A64B00746AA3 /* SinglyTwitterService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SinglyTwitterService.h; path = SinglySDK/SinglyTwitterService.h; sourceTree = "<group>"; usesTabs = 0; };
 		D00D662316C1A64B00746AA3 /* SinglyTwitterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SinglyTwitterService.m; path = SinglySDK/SinglyTwitterService.m; sourceTree = "<group>"; };
 		D013E6F216A062E2008C80A3 /* SinglyAvatarCacheTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyAvatarCacheTests.h; sourceTree = "<group>"; };
@@ -676,6 +684,7 @@
 				D06F113116BB21D400809E3E /* profiles-service-delete.json */,
 				D0467FF016D6DFD800F4F981 /* profiles-delete.json */,
 				D06F113316BB287F00809E3E /* auth-client_id-facebook.json */,
+				D00C434E16F0EDAE000B455D /* auth-client_id-generic.json */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -978,6 +987,10 @@
 			children = (
 				D08A3DBD169B7CFB00A3130C /* SinglyServiceTests.h */,
 				D08A3DBE169B7CFB00A3130C /* SinglyServiceTests.m */,
+				D00C434816F0E123000B455D /* SinglyFacebookServiceTests.h */,
+				D00C434916F0E123000B455D /* SinglyFacebookServiceTests.m */,
+				D00C434B16F0E138000B455D /* SinglyTwitterServiceTests.h */,
+				D00C434C16F0E138000B455D /* SinglyTwitterServiceTests.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1271,6 +1284,7 @@
 				D06F113216BB21D400809E3E /* profiles-service-delete.json in Resources */,
 				D06F113416BB287F00809E3E /* auth-client_id-facebook.json in Resources */,
 				D0467FF116D6E38900F4F981 /* profiles-delete.json in Resources */,
+				D00C434F16F0EDAE000B455D /* auth-client_id-generic.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1512,6 +1526,8 @@
 				D00D662816C1A64B00746AA3 /* SinglyTwitterService.m in Sources */,
 				D044C9BB16D5341500BA1305 /* SinglyActionSheet.m in Sources */,
 				D044C9C216D56A7A00BA1305 /* SinglyAlertView.m in Sources */,
+				D00C434A16F0E123000B455D /* SinglyFacebookServiceTests.m in Sources */,
+				D00C434D16F0E138000B455D /* SinglyTwitterServiceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
