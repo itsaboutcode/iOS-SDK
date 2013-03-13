@@ -53,6 +53,15 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "827E3ECC15E5528200D30D96"
+            BuildableName = "SinglySDK Example.app"
+            BlueprintName = "SinglySDK Example"
+            ReferencedContainer = "container:../SinglySDK Example/SinglySDK Example.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -63,6 +72,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "827E3ECC15E5528200D30D96"
+            BuildableName = "SinglySDK Example.app"
+            BlueprintName = "SinglySDK Example"
+            ReferencedContainer = "container:../SinglySDK Example/SinglySDK Example.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
