@@ -164,7 +164,10 @@ typedef void (^SinglyDisconnectCompletionBlock)(BOOL isSuccessful, NSError *erro
  * @param viewController The view controller instance that is presenting the
  *                       authorization request.
  *
- * @param scopes The scope(s) to request from the service.
+ * @param scopes The scope(s) to request from the service. If you are requesting
+ *               scopes from Facebook and wish for native authorization to
+ *               succeed, you must only request read or write permissions in
+ *               your request (you cannot ask for read and write simultaneously).
  *
  * @see requestAuthorizationFromViewController:
  * @see requestAuthorizationFromViewController:completion:
@@ -188,7 +191,10 @@ typedef void (^SinglyDisconnectCompletionBlock)(BOOL isSuccessful, NSError *erro
  * @param viewController The view controller instance that is presenting the
  *                       authorization request.
  *
- * @param scopes The scope(s) to request from the service.
+ * @param scopes The scope(s) to request from the service. If you are requesting
+ *               scopes from Facebook and wish for native authorization to
+ *               succeed, you must only request read or write permissions in
+ *               your request (you cannot ask for read and write simultaneously).
  *
  * @param completionHandler The block to run when the request is complete. It
  *                          will be passed a `BOOL` stating whether or not the

@@ -57,7 +57,9 @@
  * @param viewController The view controller instance that is presenting the
  *                       authorization request.
  *
- * @param scopes The scope(s) to request from the service.
+ * @param scopes The scope(s) to request from the service. You may request
+ *               either read or write permissions, but not read and write within
+ *               the same authorization request.
  *
  * @param completionHandler The block to run when the request is complete. It
  *                          will be passed a `BOOL` stating whether or not the
