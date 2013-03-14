@@ -211,9 +211,7 @@
         {
             if (self.delegate && [self.delegate respondsToSelector:@selector(accountForTwitterAuthorization:)])
             {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    account = [self.delegate accountForTwitterAuthorization:accounts];
-                });
+                account = [self.delegate accountForTwitterAuthorization:accounts];
             }
             else
             {
