@@ -251,11 +251,11 @@
         ACAccount *account = [accounts lastObject];
 
         //
-        // Display the Activity Indicator View
+        // Post a notification that the authorization is being performed.
         //
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SinglyActivityIndicatorView showIndicator];
-        });
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceIsAuthorizingNotification
+                                                            object:self];
+
 
         //
         // Apply the Facebook service to our current session.
@@ -306,14 +306,6 @@
                             if (applyError)
                             {
                                 SinglyLog(@"Unhandled error: %@", applyError);
-
-                                //
-                                // Dismiss the Activity Indicator View
-                                //
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    [SinglyActivityIndicatorView dismissIndicator];
-                                });
-                                
                                 dispatch_semaphore_signal(authorizationSemaphore);
                                 return;
                             }
@@ -324,13 +316,6 @@
             }
             else
             {
-                //
-                // Dismiss the Activity Indicator View
-                //
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [SinglyActivityIndicatorView dismissIndicator];
-                });
-
                 dispatch_semaphore_signal(authorizationSemaphore);
                 return;
             }
@@ -340,13 +325,6 @@
         // We are now authorized. Do not attempt any further authorizations.
         //
         _isAuthorized = YES;
-
-        //
-        // Dismiss the Activity Indicator View
-        //
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SinglyActivityIndicatorView dismissIndicator];
-        });
 
         //
         // Inform the Delegate

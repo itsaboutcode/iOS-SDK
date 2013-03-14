@@ -87,6 +87,7 @@
 
     // Customize Table View Appearance
     self.tableView.rowHeight = 54;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -100,6 +101,16 @@
     [[NSNotificationCenter defaultCenter] addObserver:self.tableView
                                              selector:@selector(reloadData)
                                                  name:kSinglySessionProfilesUpdatedNotification
+                                               object:nil];
+
+    //
+    // Observe for services that are currently authorizing (native services,
+    // such as Facebook and Twitter) so that we can display the activitiy
+    // indicator.
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showActivityIndicator)
+                                                 name:kSinglyServiceIsAuthorizingNotification
                                                object:nil];
 
     // Load Services Dictionary
@@ -247,6 +258,7 @@
 - (void)singlyLoginViewController:(SinglyLoginViewController *)controller didLoginForService:(NSString *)service
 {
     [self.tableView reloadData];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -288,6 +300,29 @@
     #endif
 
     return chosenAccount;
+}
+
+- (void)singlyServiceDidAuthorize:(SinglyService *)service
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [SinglyActivityIndicatorView dismissIndicator];
+    });
+}
+
+- (void)singlyServiceDidFail:(SinglyService *)service withError:(NSError *)error
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [SinglyActivityIndicatorView dismissIndicator];
+    });
+}
+
+#pragma mark -
+
+- (void)showActivityIndicator
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [SinglyActivityIndicatorView showIndicator];
+    });
 }
 
 @end

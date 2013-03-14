@@ -50,6 +50,17 @@ typedef void (^SinglyDisconnectCompletionBlock)(BOOL isSuccessful, NSError *erro
 
 /*!
  *
+ * Notification raised when a service is authorizing. This notification is only
+ * raised for native authorizations (i.e. Twitter and Facebook) as the web-based
+ * workflow provides its own status indication.
+ *
+ * @available Available in Singly iOS SDK 1.2.2 and later.
+ *
+ **/
+static NSString * const kSinglyServiceIsAuthorizingNotification = @"com.singly.notifications.isAuthorizingNotification";
+
+/*!
+ *
  * Authentication and state handling for a service (such as Facebook, Twitter,
  * etc) is managed by a SinglyService instance.
  *
