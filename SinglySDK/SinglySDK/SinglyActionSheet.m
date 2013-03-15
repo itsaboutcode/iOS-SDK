@@ -109,22 +109,26 @@
 
 - (void)actionSheetCancel:(UIActionSheet *)actionSheet
 {
-	[externalDelegate actionSheetCancel:actionSheet];
+    if (externalDelegate && [externalDelegate respondsToSelector:@selector(actionSheetCancel:)])
+        [externalDelegate actionSheetCancel:actionSheet];
 }
 
 - (void)willPresentActionSheet:(UIActionSheet *)actionSheet
 {
-	[externalDelegate willPresentActionSheet:actionSheet];
+    if (externalDelegate && [externalDelegate respondsToSelector:@selector(willPresentActionSheet:)])
+        [externalDelegate willPresentActionSheet:actionSheet];
 }
 
 - (void)didPresentActionSheet:(UIActionSheet *)actionSheet
 {
-	[externalDelegate didPresentActionSheet:actionSheet];
+    if (externalDelegate && [externalDelegate respondsToSelector:@selector(didPresentActionSheet:)])
+        [externalDelegate didPresentActionSheet:actionSheet];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	[externalDelegate actionSheet:actionSheet willDismissWithButtonIndex:buttonIndex];
+    if (externalDelegate && [externalDelegate respondsToSelector:@selector(actionSheet:willDismissWithButtonIndex:)])
+        [externalDelegate actionSheet:actionSheet willDismissWithButtonIndex:buttonIndex];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -134,7 +138,8 @@
 	SinglyActionSheetBlock block = [actionsPerIndex objectForKey:key];
 	if (block) block();
 
-	[externalDelegate actionSheet:actionSheet didDismissWithButtonIndex:buttonIndex];
+    if (externalDelegate && [externalDelegate respondsToSelector:@selector(actionSheet:didDismissWithButtonIndex:)])
+        [externalDelegate actionSheet:actionSheet didDismissWithButtonIndex:buttonIndex];
 }
 
 @end
