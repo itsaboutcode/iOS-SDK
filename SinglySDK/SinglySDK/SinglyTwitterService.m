@@ -146,7 +146,16 @@
             // access, so we should be in an aborted state...
             //
             if (accessError)
+            {
                 _isAborted = YES;
+
+                if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate singlyServiceDidFail:self withError:accessError];
+                    });
+                }
+            }
 
             //
             // If the error is nil, it means access was already denied (in

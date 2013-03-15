@@ -281,6 +281,7 @@
     dispatch_semaphore_t actionSheetSemaphore = dispatch_semaphore_create(0);
     dispatch_sync(dispatch_get_main_queue(), ^{
         SinglyActionSheet *actionSheet = [[SinglyActionSheet alloc] initWithTitle:@"Select Account"];
+        actionSheet.delegate = self;
 
         for (ACAccount *account in availableAccounts)
         {
@@ -300,6 +301,23 @@
     #endif
 
     return chosenAccount;
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SinglyActivityIndicatorView dismissIndicator];
+        });
+    }
+}
+
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [SinglyActivityIndicatorView dismissIndicator];
+    });
 }
 
 - (void)singlyServiceDidAuthorize:(SinglyService *)service

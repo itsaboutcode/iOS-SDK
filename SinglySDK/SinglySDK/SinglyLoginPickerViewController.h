@@ -46,7 +46,8 @@
 @interface SinglyLoginPickerViewController : UITableViewController
     <SinglyLoginViewControllerDelegate,
      SinglyServiceDelegate,
-     SinglyTwitterServiceDelegate>
+     SinglyTwitterServiceDelegate,
+     UIActionSheetDelegate>
 
 /// ----------------------------------------------------------------------------
 /// @name Managing Available Services

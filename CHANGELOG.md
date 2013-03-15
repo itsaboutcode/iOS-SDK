@@ -17,8 +17,8 @@
   a better solution coming in 1.3 that will display services with their correct
   capitalization.
 
-* The activity indicator is now displayed while waiting for native authorization
-  via Twitter and Facebook to complete.
+* The `singlyServiceDidFail:` delegate method is now called when the user aborts
+  a Facebook or Twitter native request.
 
 ## 1.2.1 - March 4th, 2013
 
