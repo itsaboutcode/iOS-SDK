@@ -130,6 +130,12 @@
         return;
     }
     
+    //
+    // Post a notification that the authorization is being performed.
+    //
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceIsAuthorizingNotification
+                                                        object:self];
+
     [accountStore requestAccessToAccountsWithType:accountType
                             withCompletionHandler:^(BOOL granted, NSError *accessError)
     {
@@ -233,12 +239,6 @@
         {
             account = [accounts lastObject];
         }
-
-        //
-        // Post a notification that the authorization is being performed.
-        //
-        [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceIsAuthorizingNotification
-                                                            object:self];
 
         //
         // Request Access Token from Twitter

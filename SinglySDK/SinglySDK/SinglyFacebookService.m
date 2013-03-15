@@ -178,6 +178,12 @@
         @"ACFacebookAudienceKey": @"everyone"
     };
 
+    //
+    // Post a notification that the authorization is being performed.
+    //
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceIsAuthorizingNotification
+                                                        object:self];
+
     [accountStore requestAccessToAccountsWithType:accountType
                                           options:options
                                        completion:^(BOOL granted, NSError *accessError)
@@ -258,13 +264,6 @@
 
         NSArray *accounts = [accountStore accountsWithAccountType:accountType];
         ACAccount *account = [accounts lastObject];
-
-        //
-        // Post a notification that the authorization is being performed.
-        //
-        [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceIsAuthorizingNotification
-                                                            object:self];
-
 
         //
         // Apply the Facebook service to our current session.
