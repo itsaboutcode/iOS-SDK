@@ -1,7 +1,11 @@
 
 # Singly SDK ChangeLog
 
-## 1.2.2 - In Development
+## 1.2.3 - In Development
+
+* 
+
+## 1.2.2 - March 15th, 2013
 
 * Delegate methods are now dispatched on the main thread.
 

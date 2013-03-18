@@ -36,7 +36,7 @@
 **/
 
 // Singly SDK Version
-static NSString * const kSinglySDKVersion = @"1.2.2";
+static NSString * const kSinglySDKVersion = @"1.2.3";
 
 // Default Base URL
 static NSString * const kSinglyBaseURL = @"https://api.singly.com";
