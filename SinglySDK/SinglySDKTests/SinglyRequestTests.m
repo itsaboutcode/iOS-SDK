@@ -81,4 +81,34 @@
     SinglySession.sharedSession.baseURL = oldBaseURL;
 }
 
+- (void)testRequestParametersShouldBeFormattedCorrectly
+{
+    NSURL *expectedURL = [NSURL URLWithString:@"https://api.singly.com/test?foo=bar&baz=qux"];
+    NSDictionary *testParameters = @{ @"foo": @"bar", @"baz": @"qux" };
+    SinglyRequest *testRequest = [SinglyRequest requestWithEndpoint:@"test"
+                                                      andParameters:testParameters];
+
+    STAssertEqualObjects(testRequest.URL, expectedURL, [NSString stringWithFormat:@"The constructed URL for the request should equal '%@'.", expectedURL]);
+}
+
+- (void)testRequestParametersShouldBeFormattedCorrectlyWithAccessToken
+{
+    SinglySession.sharedSession.accessToken = @"test-access-token";
+    NSURL *expectedURL = [NSURL URLWithString:@"https://api.singly.com/test?foo=bar&baz=qux&access_token=test-access-token"];
+    NSDictionary *testParameters = @{ @"foo": @"bar", @"baz": @"qux" };
+    SinglyRequest *testRequest = [SinglyRequest requestWithEndpoint:@"test"
+                                                      andParameters:testParameters];
+
+    STAssertEqualObjects(testRequest.URL, expectedURL, [NSString stringWithFormat:@"The constructed URL for the request should equal '%@'.", expectedURL]);
+}
+
+- (void)testShouldProperlyFormatRequestURLWithAccessTokenAndNoParameters
+{
+    SinglySession.sharedSession.accessToken = @"test-access-token";
+    NSURL *expectedURL = [NSURL URLWithString:@"https://api.singly.com/test?access_token=test-access-token"];
+    SinglyRequest *testRequest = [SinglyRequest requestWithEndpoint:@"test"];
+
+    STAssertEqualObjects(testRequest.URL, expectedURL, [NSString stringWithFormat:@"The constructed URL for the request should equal '%@'.", expectedURL]);
+}
+
 @end

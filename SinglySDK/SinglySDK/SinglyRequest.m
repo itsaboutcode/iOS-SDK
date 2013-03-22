@@ -148,25 +148,30 @@
                         andAuthorization:YES];
 }
 
-+ (NSURL *)URLForEndpoint:(NSString *)endpoint withParameters:(NSDictionary *)parameters andAuthorization:(BOOL)isAuthorized
++ (NSURL *)URLForEndpoint:(NSString *)endpoint
+           withParameters:(NSDictionary *)parameters
+         andAuthorization:(BOOL)isAuthorized
 {
     NSMutableString *apiURLString = [NSMutableString stringWithFormat:@"%@/%@", SinglySession.sharedSession.baseURL, endpoint];
+    NSMutableArray *parameterComponents = [NSMutableArray array];
 
     // Add Parameters to URL
     if (parameters && parameters.count > 0)
     {
-        [apiURLString appendString:@"?"];
         [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
             if (![value isKindOfClass:[NSNull class]])
-                [apiURLString appendFormat:@"&%@=%@", [key URLEncodedString], [value URLEncodedString]];
+                [parameterComponents addObject:[NSString stringWithFormat:@"%@=%@", [key URLEncodedString], [value URLEncodedString]]];
         }];
     }
 
     // Add Singly Access Token to URL
     if (isAuthorized && SinglySession.sharedSession.accessToken)
+        [parameterComponents addObject:[NSString stringWithFormat:@"access_token=%@", SinglySession.sharedSession.accessToken]];
+
+    if (parameterComponents.count > 0)
     {
-        [apiURLString appendString:(!parameters || parameters.count == 0) ? @"?" : @"&"];
-        [apiURLString appendFormat:@"&access_token=%@", SinglySession.sharedSession.accessToken];
+        [apiURLString appendString:@"?"];
+        [apiURLString appendString:[parameterComponents componentsJoinedByString:@"&"]];
     }
 
     return [NSURL URLWithString:apiURLString];
