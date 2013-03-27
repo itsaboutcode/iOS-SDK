@@ -2,6 +2,13 @@
 # Singly SDK ChangeLog
 
 ## 1.2.4
+* When an app is not properly configured for Facebook app-based authorization, a
+  more informative message is printed to the console (when the DEBUG flag is
+  set).
+
+* When determining whether or not an app is configured for Facebook app-based
+  authorization, the app delegate is now checks for implementation of the
+  `application:openURL:sourceApplication:annotation:` method.
 
 * Fixed an issue where apps with custom URL schemes other than or in addition to
   Facebook would prevent application-based authorization from being attempted.

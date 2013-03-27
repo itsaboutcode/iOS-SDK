@@ -53,6 +53,11 @@
 
 - (BOOL)isAppAuthorizationConfigured
 {
+    BOOL isConfigured = NO;
+
+    //
+    // Check for the Facebook URL Scheme in Info.plist.
+    //
     NSArray *urlTypesArray = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
     if (urlTypesArray)
     {
@@ -61,13 +66,35 @@
             NSArray *urlSchemesArray = [urlTypeDictionary valueForKey:@"CFBundleURLSchemes"];
             if (!urlSchemesArray) continue;
             for (NSString *urlScheme in urlSchemesArray)
-                if ([urlScheme hasPrefix:@"fb"]) return YES;
+            {
+                if ([urlScheme hasPrefix:@"fb"])
+                {
+                    isConfigured = YES;
+                    break;
+                }
+            }
+            if (isConfigured) break;
         }
     }
 
-    SinglyLog(@"Authorization via the installed Facebook app is not available because the Info.plist is not configured to handle Facebook URLs.");
+    //
+    // Check for openURL: delegate method implementation on the application
+    // delegate.
+    //
+    if (isConfigured && ![[UIApplication sharedApplication].delegate respondsToSelector:@selector(application:openURL:sourceApplication:annotation:)])
+        isConfigured = NO;
 
-    return NO;
+    //
+    // Output a useful message to the console stating that application-based
+    // authorization is not configured properly for the app.
+    //
+    if (!isConfigured)
+        SinglyLog(@"Authorization via the installed Facebook app is not available"
+                  "because this app is not configured to handle Facebook URLs."
+                  "Please see http://singly.github.com/iOS-SDK/api/Classes/SinglyFacebookService.html"
+                  "for more details.");
+
+    return isConfigured;
 }
 
 - (BOOL)isNativeAuthorizationConfigured

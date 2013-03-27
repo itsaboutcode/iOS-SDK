@@ -60,6 +60,13 @@
 
 #pragma mark - Application-Based Authorization Tests
 
+//
+// Tests that an app that has been properly configured to both answer Facebook
+// URL schemes and handle opens from those URLs by implementing the
+// `application:openURL:sourceApplication:annotation:` method is properly
+// recognized as being configured by the `isApplicationAuthorizationConfigured`
+// method on `SinglyFacebookService`.
+//
 - (void)testApplicationBasedAuthorizationShouldBeAvailable
 {
     SinglyFacebookService *facebookService = [[SinglyFacebookService alloc] init];
@@ -68,33 +75,98 @@
         @{ @"CFBundleURLSchemes": @[ @"fb000000000000000" ] }
     ];
 
-    id mockBundleInstance = [OCMockObject mockForClass:[NSBundle class]];
-    [[[mockBundleInstance stub] andReturn:testURLTypes] objectForInfoDictionaryKey:[OCMArg any]];
+    //
+    // Mock the app delegate so that we can implement the delegate method
+    // `application:openURL:sourceApplication:annotation:`.
+    //
+    id mockAppDelegate = [OCMockObject mockForProtocol:@protocol(UIApplicationDelegate)];
+    id mockApplication = [OCMockObject mockForClass:[UIApplication class]];
+    id mockApplicationInstance = [OCMockObject mockForClass:[UIApplication class]];
+    [[mockAppDelegate stub] application:[OCMArg any] openURL:[OCMArg any] sourceApplication:[OCMArg any] annotation:[OCMArg any]];
+    [[[mockApplicationInstance stub] andReturn:mockAppDelegate] delegate];
+    [[[mockApplication stub] andReturn:mockApplicationInstance] sharedApplication];
 
+    //
+    // Mock the main bundle for the application so that we can override the
+    // values found in Info.plist with values we want to use for testing.
+    //
+    id mockBundleInstance = [OCMockObject mockForClass:[NSBundle class]];
     id mockBundle = [OCMockObject mockForClass:[NSBundle class]];
+    [[[mockBundleInstance stub] andReturn:testURLTypes] objectForInfoDictionaryKey:[OCMArg any]];
     [[[mockBundle stub] andReturn:mockBundleInstance] mainBundle];
 
     STAssertTrue([facebookService isAppAuthorizationConfigured], @"Facebook application authorization should be available.");
 
     [mockBundle stopMocking];
     [mockBundleInstance stopMocking];
+    [mockApplicationInstance stopMocking];
+    [mockApplication stopMocking];
+    [mockAppDelegate stopMocking];
 }
 
+//
+// Tests that the `isApplicationAuthorizationConfigured` method on
+// `SinglyFacebookService` will return false if the app integrating the Singly
+// SDK is not configured for the Facebook URL scheme (i.e. fb123456789012345).
+//
 - (void)testApplicationBasedAuthorizationShouldNotBeAvailableWhenURLSchemeIsMissing
 {
     SinglyFacebookService *facebookService = [[SinglyFacebookService alloc] init];
-    NSArray *testURLTypes = @[
-        @{ @"CFBundleURLSchemes": @[ @"custom-scheme" ] }
-    ];
+    NSArray *testURLTypes = @[ @{ @"CFBundleURLSchemes": @[ @"custom-scheme" ] } ];
 
+    //
+    // Mock the app delegate so that we can implement the delegate method
+    // `application:openURL:sourceApplication:annotation:`. Even though the
+    // implemented method should not reach this check, we should keep it mocked
+    // in case the method implementation changes.
+    //
+    id mockAppDelegate = [OCMockObject mockForProtocol:@protocol(UIApplicationDelegate)];
+    id mockApplication = [OCMockObject mockForClass:[UIApplication class]];
+    id mockApplicationInstance = [OCMockObject mockForClass:[UIApplication class]];
+    [[mockAppDelegate stub] application:[OCMArg any] openURL:[OCMArg any] sourceApplication:[OCMArg any] annotation:[OCMArg any]];
+    [[[mockApplicationInstance stub] andReturn:mockAppDelegate] delegate];
+    [[[mockApplication stub] andReturn:mockApplicationInstance] sharedApplication];
+
+    //
+    // Mock the main bundle for the application so that we can override the
+    // values found in Info.plist with values we want to use for testing.
+    //
     id mockBundleInstance = [OCMockObject mockForClass:[NSBundle class]];
     [[[mockBundleInstance stub] andReturn:testURLTypes] objectForInfoDictionaryKey:[OCMArg any]];
-
     id mockBundle = [OCMockObject mockForClass:[NSBundle class]];
     [[[mockBundle stub] andReturn:mockBundleInstance] mainBundle];
 
     STAssertFalse([facebookService isAppAuthorizationConfigured], @"Facebook application authorization should not be available.");
     
+    [mockBundle stopMocking];
+    [mockBundleInstance stopMocking];
+    [mockApplicationInstance stopMocking];
+    [mockApplication stopMocking];
+    [mockAppDelegate stopMocking];
+}
+
+//
+// Tests that the `isApplicationAuthorizationConfigured` method on
+// `SinglyFacebookService` will return false if the app integrating the Singly
+// SDK has not implemented the `application:openURL:sourceApplication:annotation:`
+// method in the application delegate.
+//
+- (void)testApplicationBasedAuthorizationShouldNotBeAvailableWhenAppDelegateMethodIsMissing
+{
+    SinglyFacebookService *facebookService = [[SinglyFacebookService alloc] init];
+    NSArray *testURLTypes = @[ @{ @"CFBundleURLSchemes": @[ @"custom-scheme" ] } ];
+
+    //
+    // Mock the main bundle for the application so that we can override the
+    // values found in Info.plist with values we want to use for testing.
+    //
+    id mockBundleInstance = [OCMockObject mockForClass:[NSBundle class]];
+    [[[mockBundleInstance stub] andReturn:testURLTypes] objectForInfoDictionaryKey:[OCMArg any]];
+    id mockBundle = [OCMockObject mockForClass:[NSBundle class]];
+    [[[mockBundle stub] andReturn:mockBundleInstance] mainBundle];
+
+    STAssertFalse([facebookService isAppAuthorizationConfigured], @"Facebook application authorization should not be available.");
+
     [mockBundle stopMocking];
     [mockBundleInstance stopMocking];
 }
