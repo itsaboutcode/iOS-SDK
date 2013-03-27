@@ -53,33 +53,21 @@
 
 - (BOOL)isAppAuthorizationConfigured
 {
-    BOOL isConfigured = YES;
-
-    NSDictionary *urlTypesDictionary = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
-    if (!urlTypesDictionary)
-        isConfigured = NO;
-
-    NSArray *urlSchemesArray = [urlTypesDictionary valueForKey:@"CFBundleURLSchemes"];
-    if (!urlSchemesArray)
-        isConfigured = NO;
-    else
-        urlSchemesArray = urlSchemesArray[0];
-
-    for (NSString *urlScheme in urlSchemesArray)
+    NSArray *urlTypesArray = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
+    if (urlTypesArray)
     {
-        if ([urlScheme hasPrefix:@"fb"])
+        for (NSDictionary *urlTypeDictionary in urlTypesArray)
         {
-            isConfigured = YES;
-            break;
+            NSArray *urlSchemesArray = [urlTypeDictionary valueForKey:@"CFBundleURLSchemes"];
+            if (!urlSchemesArray) continue;
+            for (NSString *urlScheme in urlSchemesArray)
+                if ([urlScheme hasPrefix:@"fb"]) return YES;
         }
-        else
-            isConfigured = NO;
     }
 
-    if (!isConfigured)
-        SinglyLog(@"Authorization via the installed Facebook app is not available because your Info.plist is not configured to handle Facebook URLs.");
+    SinglyLog(@"Authorization via the installed Facebook app is not available because the Info.plist is not configured to handle Facebook URLs.");
 
-    return isConfigured;
+    return NO;
 }
 
 - (BOOL)isNativeAuthorizationConfigured

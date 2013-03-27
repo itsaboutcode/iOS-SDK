@@ -3,7 +3,8 @@
 
 ## 1.2.4
 
-* 
+* Fixed an issue where apps with custom URL schemes other than or in addition to
+  Facebook would prevent application-based authorization from being attempted.
 
 ## 1.2.3 - March 22nd, 2013
 

@@ -253,6 +253,7 @@
 		D09686E8169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D09686E5169E17FC00CA7D04 /* SinglyKeychainItemWrapper+Internal.h */; };
 		D09686EE169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D09686ED169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m */; };
 		D0991E211683BD310009BCA2 /* SinglySessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0991E201683BD310009BCA2 /* SinglySessionTests.m */; };
+		D0C5BE7017027AB300864269 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C5BE6917027AB300864269 /* libOCMock.a */; };
 		D0D96E3416C5569400283404 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D96E3316C5569400283404 /* Twitter.framework */; };
 		D0DB1623162E0A93005EC7C7 /* Service Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */; };
 		D0DB1624162E0A93005EC7C7 /* Service Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */; };
@@ -522,6 +523,13 @@
 		D09686ED169E1E4D00CA7D04 /* SinglyKeychainItemWrapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyKeychainItemWrapperTests.m; sourceTree = "<group>"; };
 		D0991E1F1683BD310009BCA2 /* SinglySessionTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySessionTests.h; sourceTree = "<group>"; };
 		D0991E201683BD310009BCA2 /* SinglySessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySessionTests.m; sourceTree = "<group>"; };
+		D0C5BE6917027AB300864269 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
+		D0C5BE6A17027AB300864269 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
+		D0C5BE6B17027AB300864269 /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
+		D0C5BE6C17027AB300864269 /* OCMConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMConstraint.h; sourceTree = "<group>"; };
+		D0C5BE6D17027AB300864269 /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
+		D0C5BE6E17027AB300864269 /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
+		D0C5BE6F17027AB300864269 /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
 		D0D96E3316C5569400283404 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder.png"; sourceTree = "<group>"; };
 		D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder@2x.png"; sourceTree = "<group>"; };
@@ -571,6 +579,7 @@
 				D05C000C1684CBBE006AD03C /* Social.framework in Frameworks */,
 				D036DB4416CD968600815856 /* Twitter.framework in Frameworks */,
 				D05C000F1684CBF8006AD03C /* UIKit.framework in Frameworks */,
+				D0C5BE7017027AB300864269 /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,6 +822,7 @@
 				D06194F11638668400A906F7 /* Social.framework */,
 				D0D96E3316C5569400283404 /* Twitter.framework */,
 				D02B538116309C7700F1F535 /* UIKit.framework */,
+				D0C5BE6817027AB300864269 /* OCMock */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1026,6 +1036,21 @@
 				D013E6F316A062E2008C80A3 /* SinglyAvatarCacheTests.m */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		D0C5BE6817027AB300864269 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				D0C5BE6917027AB300864269 /* libOCMock.a */,
+				D0C5BE6A17027AB300864269 /* NSNotificationCenter+OCMAdditions.h */,
+				D0C5BE6B17027AB300864269 /* OCMArg.h */,
+				D0C5BE6C17027AB300864269 /* OCMConstraint.h */,
+				D0C5BE6D17027AB300864269 /* OCMock.h */,
+				D0C5BE6E17027AB300864269 /* OCMockObject.h */,
+				D0C5BE6F17027AB300864269 /* OCMockRecorder.h */,
+			);
+			name = OCMock;
+			path = SinglySDKTests/Libraries/OCMock;
 			sourceTree = "<group>";
 		};
 		D0DB161B162E0A87005EC7C7 /* Login Picker */ = {
@@ -1702,12 +1727,22 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDKTests/SinglySDKTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/SinglySDKTests/Libraries/OCMock\"",
+					"\"$(SRCROOT)/SinglySDKTests/Libraries\"",
+				);
 				INFOPLIST_FILE = "SinglySDKTests/SinglySDKTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/SinglySDKTests/Libraries/OCMock\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/SinglySDKTests/Libraries/OCMock/libOCMock.a\"",
+					"-ObjC",
+				);
 				PRODUCT_NAME = SinglySDK;
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1724,10 +1759,20 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDKTests/SinglySDKTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/SinglySDKTests/Libraries/OCMock\"",
+					"\"$(SRCROOT)/SinglySDKTests/Libraries\"",
+				);
 				INFOPLIST_FILE = "SinglySDKTests/SinglySDKTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/SinglySDKTests/Libraries/OCMock\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/SinglySDKTests/Libraries/OCMock/libOCMock.a\"",
+					"-ObjC",
 				);
 				PRODUCT_NAME = SinglySDK;
 				WRAPPER_EXTENSION = octest;
@@ -1836,10 +1881,20 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SinglySDKTests/SinglySDKTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/SinglySDKTests/Libraries/OCMock\"",
+					"\"$(SRCROOT)/SinglySDKTests/Libraries\"",
+				);
 				INFOPLIST_FILE = "SinglySDKTests/SinglySDKTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/SinglySDKTests/Libraries/OCMock\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/SinglySDKTests/Libraries/OCMock/libOCMock.a\"",
+					"-ObjC",
 				);
 				PRODUCT_NAME = SinglySDK;
 				WRAPPER_EXTENSION = octest;

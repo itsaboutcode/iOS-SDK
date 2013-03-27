@@ -27,8 +27,76 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import <OCMock/OCMock.h>
+#import "SenTestCase+AsynchronousSupport.h"
+#import "SenTestCase+Fixtures.h"
+
+#import "SinglyService.h"
+#import "SinglyService+Internal.h"
+#import "SinglyTestURLProtocol.h"
+
 #import "SinglyFacebookServiceTests.h"
 
 @implementation SinglyFacebookServiceTests
+
+- (void)setUp
+{
+    [super setUp];
+
+    SinglySession.sharedSession.clientID = @"test-client-id";
+    SinglySession.sharedSession.clientSecret = @"test-client-secret";
+
+    [NSURLProtocol registerClass:[SinglyTestURLProtocol class]];
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+
+    [SinglySession.sharedSession resetSession];
+
+    [SinglyTestURLProtocol reset];
+}
+
+#pragma mark - Application-Based Authorization Tests
+
+- (void)testApplicationBasedAuthorizationShouldBeAvailable
+{
+    SinglyFacebookService *facebookService = [[SinglyFacebookService alloc] init];
+    NSArray *testURLTypes = @[
+        @{ @"CFBundleURLSchemes": @[ @"custom-scheme" ] },
+        @{ @"CFBundleURLSchemes": @[ @"fb000000000000000" ] }
+    ];
+
+    id mockBundleInstance = [OCMockObject mockForClass:[NSBundle class]];
+    [[[mockBundleInstance stub] andReturn:testURLTypes] objectForInfoDictionaryKey:[OCMArg any]];
+
+    id mockBundle = [OCMockObject mockForClass:[NSBundle class]];
+    [[[mockBundle stub] andReturn:mockBundleInstance] mainBundle];
+
+    STAssertTrue([facebookService isAppAuthorizationConfigured], @"Facebook application authorization should be available.");
+
+    [mockBundle stopMocking];
+    [mockBundleInstance stopMocking];
+}
+
+- (void)testApplicationBasedAuthorizationShouldNotBeAvailableWhenURLSchemeIsMissing
+{
+    SinglyFacebookService *facebookService = [[SinglyFacebookService alloc] init];
+    NSArray *testURLTypes = @[
+        @{ @"CFBundleURLSchemes": @[ @"custom-scheme" ] }
+    ];
+
+    id mockBundleInstance = [OCMockObject mockForClass:[NSBundle class]];
+    [[[mockBundleInstance stub] andReturn:testURLTypes] objectForInfoDictionaryKey:[OCMArg any]];
+
+    id mockBundle = [OCMockObject mockForClass:[NSBundle class]];
+    [[[mockBundle stub] andReturn:mockBundleInstance] mainBundle];
+
+    STAssertFalse([facebookService isAppAuthorizationConfigured], @"Facebook application authorization should not be available.");
+    
+    [mockBundle stopMocking];
+    [mockBundleInstance stopMocking];
+}
 
 @end
