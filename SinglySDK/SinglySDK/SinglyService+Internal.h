@@ -32,10 +32,10 @@
 
 /*!
  *
- * @available Available in Singly iOS SDK 1.2.0 and later.
+ * @available Available in Singly iOS SDK 1.3.0 and later.
  *
 **/
-typedef void (^SinglyFetchClientIDCompletionBlock)(NSString *clientID, NSError *error);
+typedef void (^SinglyFetchClientIdentifierCompletionBlock)(NSString *clientIdentifier, NSError *error);
 
 @interface SinglyService ()
 
@@ -63,31 +63,17 @@ typedef void (^SinglyFetchClientIDCompletionBlock)(NSString *clientID, NSError *
  *
  * Fetches the client id for the service from the Singly API.
  *
- * @see fetchClientID:
- * @see fetchClientIDWithCompletion:
- *
- * @available Available in Singly iOS SDK 1.0.0 and later. This method is
- *            **deprecated** and will be removed in a future release. Please use
- *            fetchClientID: or fetchClientIDWithCompletion: instead.
- *
-**/
-- (void)fetchClientID DEPRECATED_ATTRIBUTE;
-
-/*!
- *
- * Fetches the client id for the service from the Singly API.
- *
  * @param error Out parameter used if an error occurs while fetching the client
  *              id. May be `NULL`.
  *
  * @returns `YES` if the request was successful.
  *
- * @see fetchClientIDWithCompletion:
+ * @see fetchClientIdentifierWithCompletion:
  *
- * @available Available in Singly iOS SDK 1.2.0 and later.
+ * @available Available in Singly iOS SDK 1.3.0 and later.
  *
 **/
-- (NSString *)fetchClientID:(NSError **)error;
+- (NSString *)fetchClientIdentifier:(NSError **)error;
 
 /*!
  *
@@ -97,12 +83,12 @@ typedef void (^SinglyFetchClientIDCompletionBlock)(NSString *clientID, NSError *
  *                          be passed a `BOOL` stating whether or not the
  *                          operation succeeded.
  *
- * @see fetchClientID:
+ * @see fetchClientIdentifier:
  *
- * @available Available in Singly iOS SDK 1.2.0 and later.
+ * @available Available in Singly iOS SDK 1.3.0 and later.
  *
  **/
-- (void)fetchClientIDWithCompletion:(SinglyFetchClientIDCompletionBlock)completionHandler;
+- (void)fetchClientIdentifierWithCompletion:(SinglyFetchClientIdentifierCompletionBlock)completionHandler;
 
 /*!
  *

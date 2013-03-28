@@ -198,17 +198,11 @@
 
 #pragma mark - Service Client Identifiers
 
-- (void)fetchClientID // DEPRECATED
-{
-
-    [self fetchClientIDWithCompletion:nil];
-}
-
-- (NSString *)fetchClientID:(NSError **)error
+- (NSString *)fetchClientIdentifier:(NSError **)error
 {
 
     // If we already have the Client ID, do not attempt to fetch it again...
-    if (self.clientID) return self.clientID;
+    if (self.clientIdentifier) return self.clientIdentifier;
 
     // Prepare the Request
     SinglyRequest *request = [[SinglyRequest alloc] initWithEndpoint:[NSString stringWithFormat:@"auth/%@/client_id/%@", SinglySession.sharedSession.clientID, self.serviceIdentifier]];
@@ -227,23 +221,23 @@
         return nil;
     }
 
-    self.clientID = responseObject[self.serviceIdentifier];
+    self.clientIdentifier = responseObject[self.serviceIdentifier];
 
-    SinglyLog(@"Retrieved Client ID for '%@': %@", self.serviceIdentifier, self.clientID);
+    SinglyLog(@"Retrieved Client Identifier for '%@': %@", self.serviceIdentifier, self.clientIdentifier);
 
-    return self.clientID;
+    return self.clientIdentifier;
 }
 
-- (void)fetchClientIDWithCompletion:(SinglyFetchClientIDCompletionBlock)completionHandler
+- (void)fetchClientIdentifierWithCompletion:(SinglyFetchClientIdentifierCompletionBlock)completionHandler
 {
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         NSError *error;
-        NSString *clientID = [self fetchClientID:&error];
+        NSString *clientIdentifier = [self fetchClientIdentifier:&error];
 
         if (completionHandler) dispatch_sync(currentQueue, ^{
-            completionHandler(clientID, error);
+            completionHandler(clientIdentifier, error);
         });
         
     });

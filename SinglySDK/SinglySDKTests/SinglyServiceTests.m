@@ -105,19 +105,19 @@
 
 #pragma mark - Service Client Identifiers
 
-- (void)testShouldFetchClientID
+- (void)testShouldFetchClientIdentifier
 {
     SinglyService *testService = [SinglyService serviceWithIdentifier:@"generic"];
 
     NSData *responseData = [self dataForFixture:@"auth-client_id-generic"];
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
-    NSString *testClientID = [testService fetchClientID:nil];
+    NSString *testClientID = [testService fetchClientIdentifier:nil];
 
     STAssertNotNil(testClientID, @"Return value of fetchClientID: should not be nil.");
 }
 
-- (void)testShouldFetchClientIDWithCompletion
+- (void)testShouldFetchClientIdentifierWithCompletion
 {
     __block BOOL isComplete = NO;
 
@@ -126,8 +126,8 @@
     NSData *responseData = [self dataForFixture:@"auth-client_id-generic"];
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
-    [testService fetchClientIDWithCompletion:^(NSString *clientID, NSError *error) {
-        STAssertNotNil(clientID, @"Parameter 'clientID' value should not be nil.");
+    [testService fetchClientIdentifierWithCompletion:^(NSString *clientIdentifier, NSError *error) {
+        STAssertNotNil(clientIdentifier, @"Parameter 'clientIdentifier' value should not be nil.");
         isComplete = YES;
     }];
 

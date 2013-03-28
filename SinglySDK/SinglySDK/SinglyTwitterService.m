@@ -88,13 +88,13 @@
         //
         // Step 1 - Fetch the Client ID from Singly
         //
-        if (!self.clientID)
-            [self fetchClientID:nil];
+        if (!self.clientIdentifier)
+            [self fetchClientIdentifier:nil];
 
         //
         // Step 2 - Attempt Native Authorization
         //
-        if (self.clientID && !self.isAuthorized && !self.isAborted && [self isNativeAuthorizationConfigured])
+        if (self.clientIdentifier && !self.isAuthorized && !self.isAborted && [self isNativeAuthorizationConfigured])
             [self requestNativeAuthorizationFromViewController:viewController
                                                     withScopes:scopes
                                                     completion:completionHandler];
@@ -351,7 +351,7 @@
     NSURL *accessTokenURL = [NSURL URLWithString:@"https://api.twitter.com/oauth/access_token"];
     NSString *reverseAuthParameters = [self fetchReverseAuthParameters:nil];
     NSDictionary *accessTokenParameters = @{
-        @"x_reverse_auth_target": self.clientID,
+        @"x_reverse_auth_target": self.clientIdentifier,
         @"x_reverse_auth_parameters": reverseAuthParameters
     };
     TWRequest *accessTokenRequest = [[TWRequest alloc] initWithURL:accessTokenURL

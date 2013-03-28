@@ -137,13 +137,13 @@
         //
         // Step 1 - Fetch the Client ID from Singly
         //
-        if (!self.clientID)
-            [self fetchClientID:nil];
+        if (!self.clientIdentifier)
+            [self fetchClientIdentifier:nil];
 
         //
         // Step 2 - Attempt Native Authorization (iOS 6+)
         //
-        if (self.clientID && !self.isAuthorized && !self.isAborted && [self isNativeAuthorizationConfigured])
+        if (self.clientIdentifier && !self.isAuthorized && !self.isAborted && [self isNativeAuthorizationConfigured])
             [self requestNativeAuthorizationFromViewController:viewController
                                                     withScopes:scopes
                                                     completion:completionHandler];
@@ -152,7 +152,7 @@
         // Step 3 - Attempt Authorization via Facebook App
         //
         BOOL isAuthorizingViaApplication = NO;
-        if (self.clientID && !self.isAuthorized && !self.isAborted && [self isAppAuthorizationConfigured])
+        if (self.clientIdentifier && !self.isAuthorized && !self.isAborted && [self isAppAuthorizationConfigured])
             isAuthorizingViaApplication = [self requestApplicationAuthorization:scopes];
 
         //
@@ -188,7 +188,7 @@
 
     NSArray *permissions = (scopes != nil) ? scopes : @[ @"email", @"user_location", @"user_birthday" ];
     NSDictionary *options = @{
-        @"ACFacebookAppIdKey": self.clientID,
+        @"ACFacebookAppIdKey": self.clientIdentifier,
         @"ACFacebookPermissionsKey": permissions,
         @"ACFacebookAudienceKey": @"everyone"
     };
@@ -382,7 +382,7 @@
 {
     NSArray *permissions = (scopes != nil) ? scopes : @[ @"email", @"user_location", @"user_birthday" ];
     NSDictionary *params = @{
-        @"client_id": self.clientID,
+        @"client_id": self.clientIdentifier,
         @"type": @"user_agent",
         @"redirect_uri": @"fbconnect://success",
         @"display": @"touch",

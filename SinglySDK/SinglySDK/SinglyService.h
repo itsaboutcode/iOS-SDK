@@ -113,13 +113,28 @@ static NSString * const kSinglyServiceIsAuthorizingNotification = @"com.singly.n
 
 /*!
  *
- * The client id for the service. This will be requested from the Singly API
- * automatically unless explicitly provided.
+ * The client identifier for the service. This will be requested from the Singly
+ * API automatically, unless it has been explicitly provided.
  *
- * @available Available in Singly iOS SDK 1.0.0 and later.
+ * @see clientIdentifier
+ *
+ * @available Available in Singly iOS SDK 1.0.0 and later. This property is
+ *            **deprecated** and will be removed in a future release. Please use
+ *            `clientIdentifier` instead.
+ *
  *
 **/
-@property (copy) NSString *clientID;
+@property (copy) NSString *clientID DEPRECATED_ATTRIBUTE;
+
+/*!
+ *
+ * The client identifier for the service. This will be requested from the Singly
+ * API automatically, unless it has been explicitly provided.
+ *
+ * @available Available in Singly iOS SDK 1.3.0 and later.
+ *
+**/
+@property (copy) NSString *clientIdentifier;
 
 /// ----------------------------------------------------------------------------
 /// @name Requesting Authorization
