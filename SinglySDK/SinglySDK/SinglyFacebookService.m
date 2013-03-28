@@ -123,7 +123,7 @@
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
                                     withScopes:(NSArray *)scopes
-                                    completion:(SinglyAuthorizationCompletionBlock)completionHandler
+                                    completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
 
     _isAborted = NO;
@@ -173,7 +173,7 @@
 
 - (void)requestNativeAuthorizationFromViewController:(UIViewController *)viewController
                                           withScopes:(NSArray *)scopes
-                                          completion:(SinglyAuthorizationCompletionBlock)completionHandler
+                                          completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
 
@@ -220,7 +220,7 @@
                 if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.delegate singlyServiceDidFail:self withError:accessError];
+                        [self.delegate singlyService:self didFailWithError:accessError];
                     });
                 }
             }
@@ -254,25 +254,11 @@
             SinglyLog(@"Unhandled error! %@", accessError);
 
             //
-            // Inform the Delegate
+            // We are not authorized. Attempt fallbacks.
             //
-            if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
-            {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate singlyServiceDidFail:self withError:accessError];
-                });
-            }
+            _isAuthorized = NO;
 
-            //
-            // Call the Completion Handler
-            //
-            if (completionHandler)
-            {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    completionHandler(NO, accessError);
-                });
-            }
-
+            [self serviceDidFailAuthorizationWithError:accessError completion:completionHandler];
             dispatch_semaphore_signal(authorizationSemaphore);
             return;
         }
@@ -329,6 +315,20 @@
                             if (applyError)
                             {
                                 SinglyLog(@"Unhandled error: %@", applyError);
+                                [self serviceDidFailAuthorizationWithError:applyError completion:completionHandler];
+                                dispatch_semaphore_signal(authorizationSemaphore);
+                                return;
+                            }
+
+                            else
+                            {
+
+                                //
+                                // We are now authorized. Do not attempt any further authorizations.
+                                //
+                                _isAuthorized = YES;
+
+                                [self serviceDidAuthorize:completionHandler];
                                 dispatch_semaphore_signal(authorizationSemaphore);
                                 return;
                             }
@@ -343,33 +343,17 @@
                 return;
             }
         }
-
-        //
-        // We are now authorized. Do not attempt any further authorizations.
-        //
-        _isAuthorized = YES;
-
-        //
-        // Inform the Delegate
-        //
-        if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
+        else
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.delegate singlyServiceDidAuthorize:self];
-            });
-        }
 
-        //
-        // Call the Completion Handler
-        //
-        if (completionHandler)
-        {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completionHandler(YES, nil);
-            });
-        }
+            //
+            // We are now authorized. Do not attempt any further authorizations.
+            //
+            _isAuthorized = YES;
 
-        dispatch_semaphore_signal(authorizationSemaphore);
+            [self serviceDidAuthorize:completionHandler];
+            dispatch_semaphore_signal(authorizationSemaphore);
+        }
     }];
 
     dispatch_semaphore_wait(authorizationSemaphore, DISPATCH_TIME_FOREVER);

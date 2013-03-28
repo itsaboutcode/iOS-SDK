@@ -31,9 +31,10 @@
 #import "SinglyConstants.h"
 #import "SinglyLog.h"
 #import "SinglyRequest.h"
-#import "SinglySession.h"
 #import "SinglyService.h"
 #import "SinglyService+Internal.h"
+#import "SinglySession.h"
+#import "SinglySession+Internal.h"
 
 @implementation SinglyService
 
@@ -96,7 +97,7 @@
 }
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
-                                    completion:(SinglyAuthorizationCompletionBlock)completionHandler
+                                    completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
     [self requestAuthorizationFromViewController:viewController
                                       withScopes:nil
@@ -113,7 +114,7 @@
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
                                     withScopes:(NSArray *)scopes
-                                    completion:(SinglyAuthorizationCompletionBlock)completionHandler
+                                    completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
     [self requestAuthorizationViaSinglyFromViewController:viewController
                                                withScopes:scopes
@@ -122,7 +123,7 @@
 
 - (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
                                              withScopes:(NSArray *)scopes
-                                             completion:(SinglyAuthorizationCompletionBlock)completionHandler
+                                             completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
     _isAuthorized = NO;
 
@@ -181,7 +182,7 @@
     return YES;
 }
 
-- (void)disconnectWithCompletion:(SinglyDisconnectCompletionBlock)completionHandler
+- (void)disconnectWithCompletion:(SinglyServiceDisconnectionCompletionHandler)completionHandler
 {
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -243,6 +244,71 @@
     });
 }
 
+#pragma mark - Authorization Callbacks
+
+- (void)serviceDidAuthorize:(SinglyServiceAuthorizationCompletionHandler)completionHandler
+{
+
+    //
+    // Inform the Delegate
+    //
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate singlyServiceDidAuthorize:self];
+        });
+    }
+
+    //
+    // Call the Completion Handler
+    //
+    if (completionHandler)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionHandler(YES, nil);
+        });
+    }
+
+}
+
+- (void)serviceDidFailAuthorizationWithError:(NSError *)error
+                           completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
+{
+
+    //
+    // Inform the Delegate
+    //
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyService:didFailWithError:)])
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate singlyService:self didFailWithError:error];
+        });
+    }
+
+    //
+    // Inform the Delegate w/Deprecated Implementation
+    //
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+            [self.delegate singlyServiceDidFail:self withError:error];
+#pragma clang diagnostic warning "-Wdeprecated-declarations"
+        });
+    }
+
+    //
+    // Call the Completion Handler
+    //
+    if (completionHandler)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionHandler(NO, error);
+        });
+    }
+    
+}
+
 #pragma mark - Login View Controller Delegates
 
 - (void)singlyLoginViewController:(SinglyLoginViewController *)controller
@@ -255,18 +321,9 @@
     _isAuthorized = YES;
 
     //
-    // Inform the Delegate
+    // Call the Authorization Callback
     //
-    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
-        [self.delegate singlyServiceDidAuthorize:self];
-
-    //
-    // Call the Completion Handler
-    //
-    if (self.completionHandler)
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.completionHandler(YES, nil);
-        });
+    [self serviceDidAuthorize:self.completionHandler];
 
 }
 
@@ -276,18 +333,14 @@
 {
 
     //
-    // Inform the Delegate
+    // Set Authorization State
     //
-    if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
-        [self.delegate singlyServiceDidFail:self withError:error];
+    _isAuthorized = NO;
 
     //
-    // Call the Completion Handler
+    // Call the Failed Authorization Callback
     //
-    if (self.completionHandler)
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.completionHandler(NO, error);
-        });
+    [self serviceDidFailAuthorizationWithError:error completion:self.completionHandler];
 
 }
 

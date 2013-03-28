@@ -34,19 +34,23 @@
 
 /*!
  *
+ * Completion handler that is called after the user authorizes with a service
+ * or when the authorization attempt has failed.
  *
- * @available Available in Singly iOS SDK 1.2.0 and later.
+ * @available Available in Singly iOS SDK 1.3.0 and later.
  *
 **/
-typedef void (^SinglyAuthorizationCompletionBlock)(BOOL isSuccessful, NSError *error);
+typedef void (^SinglyServiceAuthorizationCompletionHandler)(BOOL isSuccessful, NSError *error);
 
 /*!
  *
+ * Completion handler that is called after the user has disconnected from a
+ * service or the disconnection attempt has failed.
  *
- * @available Available in Singly iOS SDK 1.2.0 and later.
+ * @available Available in Singly iOS SDK 1.3.0 and later.
  *
 **/
-typedef void (^SinglyDisconnectCompletionBlock)(BOOL isSuccessful, NSError *error);
+typedef void (^SinglyServiceDisconnectionCompletionHandler)(BOOL isSuccessful, NSError *error);
 
 /*!
  *
@@ -179,7 +183,7 @@ static NSString * const kSinglyServiceIsAuthorizingNotification = @"com.singly.n
  *
 **/
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
-                                    completion:(SinglyAuthorizationCompletionBlock)completionHandler;
+                                    completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler;
 
 /*!
  *
@@ -235,7 +239,7 @@ static NSString * const kSinglyServiceIsAuthorizingNotification = @"com.singly.n
 **/
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
                                     withScopes:(NSArray *)scopes
-                                    completion:(SinglyAuthorizationCompletionBlock)completionHandler;
+                                    completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Disconnecting from the Service
@@ -285,7 +289,7 @@ static NSString * const kSinglyServiceIsAuthorizingNotification = @"com.singly.n
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
 **/
-- (void)disconnectWithCompletion:(SinglyDisconnectCompletionBlock)completionHandler;
+- (void)disconnectWithCompletion:(SinglyServiceDisconnectionCompletionHandler)completionHandler;
 
 /// ----------------------------------------------------------------------------
 /// @name Managing the Delegate

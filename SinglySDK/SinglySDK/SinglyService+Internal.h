@@ -120,7 +120,7 @@ typedef void (^SinglyFetchClientIdentifierCompletionBlock)(NSString *clientIdent
 **/
 - (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
                                              withScopes:(NSArray *)scopes
-                                             completion:(SinglyAuthorizationCompletionBlock)completionHandler;
+                                             completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler;
 
 /*!
  *
@@ -130,7 +130,7 @@ typedef void (^SinglyFetchClientIdentifierCompletionBlock)(NSString *clientIdent
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
 **/
-@property (nonatomic, strong) SinglyAuthorizationCompletionBlock completionHandler;
+@property (nonatomic, strong) SinglyServiceAuthorizationCompletionHandler completionHandler;
 
 /*!
  *
@@ -142,5 +142,32 @@ typedef void (^SinglyFetchClientIdentifierCompletionBlock)(NSString *clientIdent
  *
 **/
 @property (readonly) BOOL isAuthorized;
+
+/// ----------------------------------------------------------------------------
+/// @name Authorization Callbacks
+/// ----------------------------------------------------------------------------
+
+/*!
+ *
+ * This method is called once the user has been successfully authorized with the
+ * service. It is responsible for posting notifications, informing delegates and
+ * calling the completion handler.
+ *
+ * @available Available in Singly iOS SDK 1.3.0 and later.
+ *
+ **/
+- (void)serviceDidAuthorize:(SinglyServiceAuthorizationCompletionHandler)completionHandler;
+
+/*!
+ *
+ * This method is called if there was an error during the authorization process.
+ * It is responsible for posting notifications, informing delegates and calling
+ * the completion handler.
+ *
+ * @available Available in Singly iOS SDK 1.3.0 and later.
+ *
+ **/
+- (void)serviceDidFailAuthorizationWithError:(NSError *)error
+                           completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler;
 
 @end

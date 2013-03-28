@@ -3,6 +3,9 @@
 
 ## 1.3.0
 
+* Fixed an issue where revoked access to an app via Facebook would prevent the
+  next authorization attempt from succeeding.
+
 * When an app is not properly configured for Facebook app-based authorization, a
   more informative message is printed to the console (when the DEBUG flag is
   set).

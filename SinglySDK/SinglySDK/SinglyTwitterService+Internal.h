@@ -66,7 +66,7 @@ typedef void (^SinglyTwitterAccessTokenCompletionBlock)(NSDictionary *accessToke
 **/
 - (void)requestNativeAuthorizationFromViewController:(UIViewController *)viewController
                                           withScopes:(NSArray *)scopes
-                                          completion:(SinglyAuthorizationCompletionBlock)completionHandler;
+                                          completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler;
 
 /*!
  *

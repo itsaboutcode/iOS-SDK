@@ -39,7 +39,6 @@
 #import "SinglyRequest.h"
 #import "SinglyService+Internal.h"
 #import "SinglySession.h"
-#import "SinglySession+Internal.h"
 #import "SinglyTwitterService.h"
 #import "SinglyTwitterService+Internal.h"
 
@@ -74,7 +73,7 @@
 
 - (void)requestAuthorizationFromViewController:(UIViewController *)viewController
                                     withScopes:(NSArray *)scopes
-                                    completion:(SinglyAuthorizationCompletionBlock)completionHandler
+                                    completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
 
     _isAborted = NO;
@@ -117,7 +116,7 @@
 
 - (void)requestNativeAuthorizationFromViewController:(UIViewController *)viewController
                                           withScopes:(NSArray *)scopes
-                                          completion:(SinglyAuthorizationCompletionBlock)completionHandler
+                                          completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
 
@@ -158,7 +157,7 @@
                 if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.delegate singlyServiceDidFail:self withError:accessError];
+                        [self.delegate singlyService:self didFailWithError:accessError];
                     });
                 }
             }
@@ -199,7 +198,7 @@
             if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate singlyServiceDidFail:self withError:accessError];
+                    [self.delegate singlyService:self didFailWithError:accessError];
                 });
             }
 
