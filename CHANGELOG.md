@@ -1,7 +1,8 @@
 
 # Singly SDK ChangeLog
 
-## 1.2.4
+## 1.3.0
+
 * When an app is not properly configured for Facebook app-based authorization, a
   more informative message is printed to the console (when the DEBUG flag is
   set).
