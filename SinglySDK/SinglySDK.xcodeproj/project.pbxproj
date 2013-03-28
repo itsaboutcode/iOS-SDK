@@ -299,23 +299,8 @@
 		821D088A15ED17B000ECFED0 /* SinglySession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySession.m; sourceTree = "<group>"; };
 		8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendPickerViewController.h; sourceTree = "<group>"; };
 		8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPickerViewController.m; sourceTree = "<group>"; };
-		824DCF331607B48D009FE2EA /* SinglySharingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SinglySharingViewController.xib; path = SinglySDK/SinglySharingViewController.xib; sourceTree = SOURCE_ROOT; };
-		824DCF361607B48D009FE2EA /* DEFacebookGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEFacebookGradientView.h; sourceTree = "<group>"; };
-		824DCF371607B48D009FE2EA /* DEFacebookGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEFacebookGradientView.m; sourceTree = "<group>"; };
-		824DCF381607B48D009FE2EA /* DEFacebookSheetCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEFacebookSheetCardView.h; sourceTree = "<group>"; };
-		824DCF391607B48D009FE2EA /* DEFacebookSheetCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEFacebookSheetCardView.m; sourceTree = "<group>"; };
-		824DCF3A1607B48D009FE2EA /* DEFacebookTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEFacebookTextView.h; sourceTree = "<group>"; };
-		824DCF3B1607B48D009FE2EA /* DEFacebookTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEFacebookTextView.m; sourceTree = "<group>"; };
-		824DCF3C1607B48D009FE2EA /* DERuledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DERuledView.h; sourceTree = "<group>"; };
-		824DCF3D1607B48D009FE2EA /* DERuledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DERuledView.m; sourceTree = "<group>"; };
-		824DCF551607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+DEFacebookComposeViewController.h"; sourceTree = "<group>"; };
-		824DCF561607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+DEFacebookComposeViewController.m"; sourceTree = "<group>"; };
-		824DCF571607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+DEFacebookComposeViewController.h"; sourceTree = "<group>"; };
-		824DCF581607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+DEFacebookComposeViewController.m"; sourceTree = "<group>"; };
 		825B6D92161C99EF0034DB92 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
 		825B6D93161C99EF0034DB92 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
-		82C6252E16011E7900BF5225 /* SinglySharingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglySharingViewController.h; sourceTree = "<group>"; };
-		82C6252F16011E7900BF5225 /* SinglySharingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglySharingViewController.m; sourceTree = "<group>"; };
 		82CAD78915EEB0B300D3E486 /* SinglyLoginPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyLoginPickerViewController.h; sourceTree = "<group>"; };
 		82CAD78A15EEB0B300D3E486 /* SinglyLoginPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyLoginPickerViewController.m; sourceTree = "<group>"; };
 		D00348371665322D0048513A /* SinglyRequest+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinglyRequest+Internal.h"; sourceTree = "<group>"; };
@@ -332,8 +317,6 @@
 		D003CDB916AF3ADE00D2B17A /* SenTestCase+Fixtures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SenTestCase+Fixtures.m"; sourceTree = "<group>"; };
 		D0059049167A492600F1374D /* SinglyFriendPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriendPlaceholder.h; sourceTree = "<group>"; };
 		D005904A167A492600F1374D /* SinglyFriendPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriendPlaceholder.m; sourceTree = "<group>"; };
-		D0059052167A766D00F1374D /* SinglyFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFriend.h; sourceTree = "<group>"; };
-		D0059053167A766D00F1374D /* SinglyFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFriend.m; sourceTree = "<group>"; };
 		D00C434816F0E123000B455D /* SinglyFacebookServiceTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyFacebookServiceTests.h; sourceTree = "<group>"; };
 		D00C434916F0E123000B455D /* SinglyFacebookServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyFacebookServiceTests.m; sourceTree = "<group>"; };
 		D00C434B16F0E138000B455D /* SinglyTwitterServiceTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyTwitterServiceTests.h; sourceTree = "<group>"; };
@@ -619,32 +602,12 @@
 				D067E1AE161B433700B43C32 /* Authentication */,
 				D090E33D165AE98E00FE8273 /* API Requests */,
 				D067E1B1161B434E00B43C32 /* Friends */,
-				D067E1B0161B433D00B43C32 /* Sharing */,
 				D0034852166672180048513A /* Extensions */,
 				825B6D91161C99CE0034DB92 /* Utilities */,
 				D06830CD1624D0AF00F398A6 /* Resources */,
 			);
 			name = Framework;
 			path = SinglySDK;
-			sourceTree = "<group>";
-		};
-		824DCF321607B48D009FE2EA /* ComposeViewController */ = {
-			isa = PBXGroup;
-			children = (
-				824DCF361607B48D009FE2EA /* DEFacebookGradientView.h */,
-				824DCF371607B48D009FE2EA /* DEFacebookGradientView.m */,
-				824DCF381607B48D009FE2EA /* DEFacebookSheetCardView.h */,
-				824DCF391607B48D009FE2EA /* DEFacebookSheetCardView.m */,
-				824DCF3A1607B48D009FE2EA /* DEFacebookTextView.h */,
-				824DCF3B1607B48D009FE2EA /* DEFacebookTextView.m */,
-				824DCF3C1607B48D009FE2EA /* DERuledView.h */,
-				824DCF3D1607B48D009FE2EA /* DERuledView.m */,
-				824DCF551607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.h */,
-				824DCF561607B48D009FE2EA /* UIApplication+DEFacebookComposeViewController.m */,
-				824DCF571607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.h */,
-				824DCF581607B48D009FE2EA /* UIDevice+DEFacebookComposeViewController.m */,
-			);
-			path = ComposeViewController;
 			sourceTree = "<group>";
 		};
 		825B6D91161C99CE0034DB92 /* Utilities */ = {
@@ -942,22 +905,9 @@
 			name = Authentication;
 			sourceTree = "<group>";
 		};
-		D067E1B0161B433D00B43C32 /* Sharing */ = {
-			isa = PBXGroup;
-			children = (
-				824DCF321607B48D009FE2EA /* ComposeViewController */,
-				82C6252E16011E7900BF5225 /* SinglySharingViewController.h */,
-				82C6252F16011E7900BF5225 /* SinglySharingViewController.m */,
-				824DCF331607B48D009FE2EA /* SinglySharingViewController.xib */,
-			);
-			name = Sharing;
-			sourceTree = "<group>";
-		};
 		D067E1B1161B434E00B43C32 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
-				D0059052167A766D00F1374D /* SinglyFriend.h */,
-				D0059053167A766D00F1374D /* SinglyFriend.m */,
 				8236EBDB15EFE79E00F3351E /* SinglyFriendPickerViewController.h */,
 				D064F0DD16699BC000091CE5 /* SinglyFriendPickerViewController+Internal.h */,
 				8236EBDC15EFE79E00F3351E /* SinglyFriendPickerViewController.m */,
@@ -1425,7 +1375,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\nif [ ! -e /usr/local/bin/appledoc ]; then\n    echo \"warning: Unable to generate documentation because AppleDoc is not installed. Please install AppleDoc by using Homebrew (e.g. brew install appledoc).\"\n    exit 0\nfi\n\nexport SINGLY_SDK_VERSION=`grep SinglySDKVersion \"${PROJECT_DIR}/SinglySDK/SinglyConstants.h\" | sed 's/[^0-9\\.]//g'`\n\n/usr/local/bin/appledoc \\\n  --project-name \"${PROJECT_NAME}\" \\\n  --project-company \"Singly, Inc\" \\\n  --project-version \"${SINGLY_SDK_VERSION}\" \\\n  --company-id \"com.singly\" \\\n  --output \"${PROJECT_DIR}/Documentation\" \\\n  --docset-atom-filename \"SinglySDK.atom\" \\\n  --docset-feed-url \"http://singly.github.com/iOS-SDK/api/%DOCSETATOMFILENAME\" \\\n  --docset-package-url \"http://singly.github.com/iOS-SDK/api/%DOCSETPACKAGEFILENAME\" \\\n  --docset-fallback-url \"http://singly.github.com/iOS-SDK/api\" \\\n  --publish-docset \\\n  --logformat xcode \\\n  --keep-undocumented-objects \\\n  --keep-undocumented-members \\\n  --keep-intermediate-files \\\n  --no-repeat-first-par \\\n  --no-warn-invalid-crossref \\\n  --exit-threshold 2 \\\n  --ignore \".m\" \\\n  --ignore \"+Internal.h\" \\\n  --ignore \"DEFacebookGradientView.h\" \\\n  --ignore \"DEFacebookSheetCardView.h\" \\\n  --ignore \"DEFacebookTextView.h\" \\\n  --ignore \"DERuledView.h\" \\\n  --ignore \"NSDictionary+QueryString.h\" \\\n  --ignore \"NSString+URLEncoding.h\" \\\n  --ignore \"NSURL+AccessToken.h\" \\\n  --ignore \"SinglyActionSheet.h\" \\\n  --ignore \"SinglyActivityIndicatorView.h\" \\\n  --ignore \"SinglyAlertView.h\" \\\n  --ignore \"SinglyAvatarCache.h\" \\\n  --ignore \"SinglyConnection.h\" \\\n  --ignore \"SinglyFriend.h\" \\\n  --ignore \"SinglyKeychainItemWrapper.h\" \\\n  --ignore \"SinglySDKTests\" \\\n  --ignore \"SinglySDK/SinglySDK/Libraries\" \\\n  --ignore \"SinglySharingViewController.h\" \\\n  --ignore \"UIApplication+DEFacebookComposeViewController.h\" \\\n  --ignore \"UIDevice+DEFacebookComposeViewController.h\" \\\n  --ignore \"UIViewController+Modal.h\" \\\n  \"${PROJECT_DIR}\"\n";
+			shellScript = "\nif [ ! -e /usr/local/bin/appledoc ]; then\n    echo \"warning: Unable to generate documentation because AppleDoc is not installed. Please install AppleDoc by using Homebrew (e.g. brew install appledoc).\"\n    exit 0\nfi\n\nexport SINGLY_SDK_VERSION=`grep SinglySDKVersion \"${PROJECT_DIR}/SinglySDK/SinglyConstants.h\" | sed 's/[^0-9\\.]//g'`\n\n/usr/local/bin/appledoc \\\n  --project-name \"${PROJECT_NAME}\" \\\n  --project-company \"Singly, Inc\" \\\n  --project-version \"${SINGLY_SDK_VERSION}\" \\\n  --company-id \"com.singly\" \\\n  --output \"${PROJECT_DIR}/Documentation\" \\\n  --docset-atom-filename \"SinglySDK.atom\" \\\n  --docset-feed-url \"http://singly.github.com/iOS-SDK/api/%DOCSETATOMFILENAME\" \\\n  --docset-package-url \"http://singly.github.com/iOS-SDK/api/%DOCSETPACKAGEFILENAME\" \\\n  --docset-fallback-url \"http://singly.github.com/iOS-SDK/api\" \\\n  --publish-docset \\\n  --logformat xcode \\\n  --keep-undocumented-objects \\\n  --keep-undocumented-members \\\n  --keep-intermediate-files \\\n  --no-repeat-first-par \\\n  --no-warn-invalid-crossref \\\n  --exit-threshold 2 \\\n  --ignore \".m\" \\\n  --ignore \"+Internal.h\" \\\n  --ignore \"NSDictionary+QueryString.h\" \\\n  --ignore \"NSString+URLEncoding.h\" \\\n  --ignore \"NSURL+AccessToken.h\" \\\n  --ignore \"SinglyActionSheet.h\" \\\n  --ignore \"SinglyActivityIndicatorView.h\" \\\n  --ignore \"SinglyAlertView.h\" \\\n  --ignore \"SinglyAvatarCache.h\" \\\n  --ignore \"SinglyConnection.h\" \\\n  --ignore \"SinglyKeychainItemWrapper.h\" \\\n  --ignore \"SinglySDKTests\" \\\n  --ignore \"SinglySDK/SinglySDK/Libraries\" \\\n  --ignore \"UIViewController+Modal.h\" \\\n  \"${PROJECT_DIR}\"\n";
 		};
 		D0E158DD1631BF9B000D0BCA /* Create Universal Library */ = {
 			isa = PBXShellScriptBuildPhase;
