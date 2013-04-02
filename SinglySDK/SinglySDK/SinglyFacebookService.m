@@ -45,6 +45,7 @@
 
 @synthesize isAborted = _isAborted;
 @synthesize isAuthorized = _isAuthorized;
+@synthesize completionHandler = _completionHandler;
 
 - (NSString *)serviceIdentifier
 {
@@ -128,6 +129,7 @@
 
     _isAborted = NO;
     _isAuthorized = NO;
+    _completionHandler = completionHandler;
 
     dispatch_queue_t authorizationQueue;
     authorizationQueue = dispatch_queue_create("com.singly.AuthorizationQueue", NULL);
@@ -144,9 +146,7 @@
         // Step 2 - Attempt Native Authorization (iOS 6+)
         //
         if (self.clientIdentifier && !self.isAuthorized && !self.isAborted && [self isNativeAuthorizationConfigured])
-            [self requestNativeAuthorizationFromViewController:viewController
-                                                    withScopes:scopes
-                                                    completion:completionHandler];
+            [self requestNativeAuthorizationFromViewController:viewController withScopes:scopes];
 
         //
         // Step 3 - Attempt Authorization via Facebook App
@@ -161,9 +161,7 @@
         if (!self.isAuthorized && !self.isAborted && !isAuthorizingViaApplication)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self requestAuthorizationViaSinglyFromViewController:viewController
-                                                           withScopes:scopes
-                                                           completion:completionHandler];
+                [self requestAuthorizationViaSinglyFromViewController:viewController withScopes:scopes];
             });
         }
 
@@ -173,7 +171,6 @@
 
 - (void)requestNativeAuthorizationFromViewController:(UIViewController *)viewController
                                           withScopes:(NSArray *)scopes
-                                          completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
 
@@ -216,13 +213,7 @@
             if (accessError)
             {
                 _isAborted = YES;
-
-                if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
-                {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.delegate singlyService:self didFailWithError:accessError];
-                    });
-                }
+                [self serviceDidFailAuthorizationWithError:accessError];
             }
 
             // If the error is nil, it means access was already denied (in
@@ -258,7 +249,7 @@
             //
             _isAuthorized = NO;
 
-            [self serviceDidFailAuthorizationWithError:accessError completion:completionHandler];
+            [self serviceDidFailAuthorizationWithError:accessError];
             dispatch_semaphore_signal(authorizationSemaphore);
             return;
         }
@@ -315,7 +306,7 @@
                             if (applyError)
                             {
                                 SinglyLog(@"Unhandled error: %@", applyError);
-                                [self serviceDidFailAuthorizationWithError:applyError completion:completionHandler];
+                                [self serviceDidFailAuthorizationWithError:applyError];
                                 dispatch_semaphore_signal(authorizationSemaphore);
                                 return;
                             }
@@ -328,7 +319,7 @@
                                 //
                                 _isAuthorized = YES;
 
-                                [self serviceDidAuthorize:completionHandler];
+                                [self serviceDidAuthorize];
                                 dispatch_semaphore_signal(authorizationSemaphore);
                                 return;
                             }
@@ -351,7 +342,7 @@
             //
             _isAuthorized = YES;
 
-            [self serviceDidAuthorize:completionHandler];
+            [self serviceDidAuthorize];
             dispatch_semaphore_signal(authorizationSemaphore);
         }
     }];

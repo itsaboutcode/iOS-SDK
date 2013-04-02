@@ -28,9 +28,13 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import <OCMock/OCMock.h>
 
 @interface SenTestCase (AsynchronousSupport)
 
 - (void)waitForCompletion:(BOOL (^)())predicate;
+
+- (void)waitForVerifiedMock:(OCMockObject *)mock
+                      delay:(NSTimeInterval)delay;
 
 @end

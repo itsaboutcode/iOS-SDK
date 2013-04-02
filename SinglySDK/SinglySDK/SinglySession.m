@@ -41,6 +41,7 @@
 #import "SinglyRequest.h"
 #import "SinglySession.h"
 #import "SinglySession+Internal.h"
+#import "SinglyService+Internal.h"
 
 static SinglySession *sharedInstance = nil;
 
@@ -619,22 +620,32 @@ static SinglySession *sharedInstance = nil;
 
 - (BOOL)handleOpenURL:(NSURL *)url
 {
-    NSError *error;
+    SinglyService *authorizingService = SinglySession.sharedSession.authorizingService;
 
     // Facebook
     if ([url.scheme hasPrefix:@"fb"])
     {
+        SinglyFacebookService *service = (SinglyFacebookService *)authorizingService;
         NSString *accessToken = [url extractAccessToken];
+
         if (accessToken)
         {
-            [SinglySession.sharedSession applyService:@"facebook" withToken:accessToken error:&error];
-
-            if (error)
+            [SinglySession.sharedSession applyService:@"facebook"
+                                            withToken:accessToken
+                                           completion:^(BOOL isSuccessful, NSError *error)
             {
-                // TODO Handle Errors
-            }
-            return YES;
+                if (isSuccessful)
+                    [service serviceDidAuthorize];
+                else
+                    [service serviceDidFailAuthorizationWithError:error];
+            }];
         }
+        else
+        {
+            [service serviceDidFailAuthorizationWithError:nil];
+        }
+
+        return YES;
     }
 
     return NO;

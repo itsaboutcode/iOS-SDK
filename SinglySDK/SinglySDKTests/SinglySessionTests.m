@@ -426,7 +426,9 @@
     NSData *responseData = [self dataForFixture:@"auth-facebook-apply"];
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
-    BOOL isSuccessful = [SinglySession.sharedSession applyService:@"facebook" withToken:@"test-token" error:nil];
+    BOOL isSuccessful = [SinglySession.sharedSession applyService:@"facebook"
+                                                        withToken:@"test-token"
+                                                            error:nil];
 
     STAssertTrue(isSuccessful, @"Return value for applyService: should be true.");
 }

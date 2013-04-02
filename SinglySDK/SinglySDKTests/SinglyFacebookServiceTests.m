@@ -33,6 +33,7 @@
 
 #import "SinglyService.h"
 #import "SinglyService+Internal.h"
+#import "SinglySession+Internal.h"
 #import "SinglyTestURLProtocol.h"
 
 #import "SinglyFacebookServiceTests.h"
@@ -107,7 +108,7 @@
 //
 // Tests that the `isApplicationAuthorizationConfigured` method on
 // `SinglyFacebookService` will return false if the app integrating the Singly
-// SDK is not configured for the Facebook URL scheme (i.e. fb123456789012345).
+// SDK is not configured for the Facebook URL scheme (i.e. fb000000000000000).
 //
 - (void)testApplicationBasedAuthorizationShouldNotBeAvailableWhenURLSchemeIsMissing
 {
@@ -169,6 +170,278 @@
 
     [mockBundle stopMocking];
     [mockBundleInstance stopMocking];
+}
+
+//
+// Tests that the `handleOpenURL:` method on `SinglySession` will return true
+// for Facebook URLs.
+//
+- (void)testHandleOpenURLShouldRecognizeFacebookURLs
+{
+    SinglySession *session = SinglySession.sharedSession;
+    NSURL *testURL = [NSURL URLWithString:@"fb000000000000000://foo"];
+
+    STAssertTrue([session handleOpenURL:testURL], @"Facebook URLs should be handled.");
+}
+
+//
+// Tests that when the user cancels a login from the launched Facebook app that
+// the delegate is informed that the authorization failed.
+//
+- (void)testCanceledAuthorizationViaFacebookAppShouldInformDelegate
+{
+    SinglySession *session = SinglySession.sharedSession;
+    SinglyFacebookService *testService = [[SinglyFacebookService alloc] init];
+    NSURL *testURL = [NSURL URLWithString:@"fb000000000000000://authorize"];
+
+    //
+    // Mock an object to act as the service delegate.
+    //
+    id mockServiceDelegate = [OCMockObject mockForProtocol:@protocol(SinglyServiceDelegate)];
+    [[mockServiceDelegate expect] singlyService:[OCMArg any] didFailWithError:[OCMArg isNil]];
+    [[mockServiceDelegate expect] singlyServiceDidFail:[OCMArg any] withError:[OCMArg isNil]]; // DEPRECATED
+
+    //
+    // Set our service delegate mock as the delegate for the Facebook service
+    // instance we are testing.
+    testService.delegate = mockServiceDelegate;
+
+    //
+    // Set the Facebook service instance as the currently authorizing service on
+    // the shared session.
+    //
+    session.authorizingService = testService;
+
+    //
+    // Perform the test and verify that the delegate methods were called.
+    //
+    [session handleOpenURL:testURL];
+    [mockServiceDelegate verify];
+}
+
+//
+// Tests that when the user cancels a login from the launched Facebook app that
+// the completion handler is called.
+//
+- (void)testCanceledAuthorizationViaFacebookAppShouldCallCompletionHandler
+{
+    __block BOOL isComplete = NO;
+    SinglySession *session = SinglySession.sharedSession;
+    SinglyFacebookService *testService = [[SinglyFacebookService alloc] init];
+    NSURL *testURL = [NSURL URLWithString:@"fb000000000000000://authorize"];
+
+    //
+    // Set a custom completion handler on the service instance so that we can
+    // ensure that it was called.
+    //
+    SinglyServiceAuthorizationCompletionHandler testCompletionHandler = ^(BOOL isSuccessful, NSError *error) {
+        STAssertFalse(isSuccessful, @"The isSuccessful parameter should be false.");
+        isComplete = YES;
+    };
+    [testService setValue:testCompletionHandler forKey:@"_completionHandler"];
+
+    //
+    // Set the Facebook service instance as the currently authorizing service on
+    // the shared session.
+    //
+    session.authorizingService = testService;
+
+    //
+    // Pass our test URL to the `handleOpenURL:` method on the session.
+    //
+    [session handleOpenURL:testURL];
+
+    //
+    // Verify that the delegate method was called after a short delay, since we
+    // need to wait for the asynchronous operation of applying access token to
+    // the Singly API to complete.
+    //
+    [self waitForCompletion:^{ return isComplete; }];
+}
+
+//
+// Tests that when the user successfully authorizes the app from the launched
+// Facebook app the delegate is informed that the authorization succeeded.
+//
+- (void)testSuccessfulAuthorizationViaFacebookAppShouldInformDelegate
+{
+    SinglySession *session = SinglySession.sharedSession;
+    SinglyFacebookService *testService = [[SinglyFacebookService alloc] init];
+    NSURL *testURL = [NSURL URLWithString:@"fb000000000000000://authorize#code=test-code&access_token=test-access-token&expires_in=12345"];
+
+    //
+    // Can the response from applying the passed token to the Singly API.
+    //
+    NSData *responseData = [self dataForFixture:@"auth-facebook-apply"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    //
+    // Mock an object to act as the service delegate.
+    //
+    id mockServiceDelegate = [OCMockObject mockForProtocol:@protocol(SinglyServiceDelegate)];
+    [[mockServiceDelegate expect] singlyServiceDidAuthorize:[OCMArg any]];
+
+    //
+    // Set our service delegate mock as the delegate for the Facebook service
+    // instance we are testing.
+    testService.delegate = mockServiceDelegate;
+
+    //
+    // Set the Facebook service instance as the currently authorizing service on
+    // the shared session.
+    //
+    session.authorizingService = testService;
+
+    //
+    // Pass our test URL to the `handleOpenURL:` method on the session.
+    //
+    [session handleOpenURL:testURL];
+
+    //
+    // Verify that the delegate method was called after a short delay, since we
+    // need to wait for the asynchronous operation of applying access token to
+    // the Singly API to complete.
+    //
+    [self waitForVerifiedMock:mockServiceDelegate delay:1.0];
+}
+
+//
+// Tests that when the user successfully authorizes the app from the launched
+// Facebook app the completion handler is called.
+//
+- (void)testSuccessfulAuthorizationViaFacebookAppShouldCallCompletionHandler
+{
+    __block BOOL isComplete = NO;
+    SinglySession *session = SinglySession.sharedSession;
+    SinglyFacebookService *testService = [[SinglyFacebookService alloc] init];
+    NSURL *testURL = [NSURL URLWithString:@"fb000000000000000://authorize#code=test-code&access_token=test-access-token&expires_in=12345"];
+
+    //
+    // Can the response from applying the passed token to the Singly API.
+    //
+    NSData *responseData = [self dataForFixture:@"auth-facebook-apply"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    //
+    // Set a custom completion handler on the service instance so that we can
+    // ensure that it was called.
+    //
+    SinglyServiceAuthorizationCompletionHandler testCompletionHandler = ^(BOOL isSuccessful, NSError *error) {
+        STAssertTrue(isSuccessful, @"The isSuccessful parameter should be true.");
+        isComplete = YES;
+    };
+    [testService setValue:testCompletionHandler forKey:@"_completionHandler"];
+
+    //
+    // Set the Facebook service instance as the currently authorizing service on
+    // the shared session.
+    //
+    session.authorizingService = testService;
+
+    //
+    // Pass our test URL to the `handleOpenURL:` method on the session.
+    //
+    [session handleOpenURL:testURL];
+
+    //
+    // Verify that the delegate method was called after a short delay, since we
+    // need to wait for the asynchronous operation of applying access token to
+    // the Singly API to complete.
+    //
+    [self waitForCompletion:^{ return isComplete; }];
+}
+
+//
+// Tests that when authorization fails in the launched Facebook app that the
+// delegate is informed of the failure.
+//
+- (void)testFailedAuthorizationViaFacebookAppShouldInformDelegate
+{
+    SinglySession *session = SinglySession.sharedSession;
+    SinglyFacebookService *testService = [[SinglyFacebookService alloc] init];
+    NSURL *testURL = [NSURL URLWithString:@"fb000000000000000://authorize#code=test-code&access_token=test-access-token&expires_in=12345"];
+
+    //
+    // Can the response from applying the passed token to the Singly API.
+    //
+    NSData *responseData = [self dataForFixture:@"auth-facebook-apply-invalid"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    //
+    // Mock an object to act as the service delegate.
+    //
+    id mockServiceDelegate = [OCMockObject mockForProtocol:@protocol(SinglyServiceDelegate)];
+    [[mockServiceDelegate expect] singlyService:[OCMArg any] didFailWithError:[OCMArg any]];
+    [[mockServiceDelegate expect] singlyServiceDidFail:[OCMArg any] withError:[OCMArg any]]; // DEPRECATED
+
+    //
+    // Set our service delegate mock as the delegate for the Facebook service
+    // instance we are testing.
+    testService.delegate = mockServiceDelegate;
+
+    //
+    // Set the Facebook service instance as the currently authorizing service on
+    // the shared session.
+    //
+    session.authorizingService = testService;
+
+    //
+    // Pass our test URL to the `handleOpenURL:` method on the session.
+    //
+    [session handleOpenURL:testURL];
+
+    //
+    // Verify that the delegate method was called after a short delay, since we
+    // need to wait for the asynchronous operation of applying access token to
+    // the Singly API to complete.
+    //
+    [self waitForVerifiedMock:mockServiceDelegate delay:1.0];
+}
+
+//
+// Tests that when authorization fails in the launched Facebook app that the
+// completion handler is called.
+//
+- (void)testFailedAuthorizationViaFacebookAppShouldCallCompletionHandler
+{
+    __block BOOL isComplete = NO;
+    SinglySession *session = SinglySession.sharedSession;
+    SinglyFacebookService *testService = [[SinglyFacebookService alloc] init];
+    NSURL *testURL = [NSURL URLWithString:@"fb000000000000000://authorize#code=test-code&access_token=test-access-token&expires_in=12345"];
+
+    //
+    // Can the response from applying the passed token to the Singly API.
+    //
+    NSData *responseData = [self dataForFixture:@"auth-facebook-apply-invalid"];
+    [SinglyTestURLProtocol setCannedResponseData:responseData];
+
+    //
+    // Set a custom completion handler on the service instance so that we can
+    // ensure that it was called.
+    //
+    SinglyServiceAuthorizationCompletionHandler testCompletionHandler = ^(BOOL isSuccessful, NSError *error) {
+        STAssertFalse(isSuccessful, @"The isSuccessful parameter should be false.");
+        isComplete = YES;
+    };
+    [testService setValue:testCompletionHandler forKey:@"_completionHandler"];
+
+    //
+    // Set the Facebook service instance as the currently authorizing service on
+    // the shared session.
+    //
+    session.authorizingService = testService;
+
+    //
+    // Pass our test URL to the `handleOpenURL:` method on the session.
+    //
+    [session handleOpenURL:testURL];
+
+    //
+    // Verify that the delegate method was called after a short delay, since we
+    // need to wait for the asynchronous operation of applying access token to
+    // the Singly API to complete.
+    //
+    [self waitForCompletion:^{ return isComplete; }];
 }
 
 @end

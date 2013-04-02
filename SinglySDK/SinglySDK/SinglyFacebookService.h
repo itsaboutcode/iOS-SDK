@@ -129,8 +129,8 @@
  *    authorized account as the only entry.
  *
  * Unfortunately, the above assumptions are the only way to discover what we
- * need to know and quite likely will break in future releases of iOS 6. For
- * that reason, one should keep a close eye on this method to ensure support is
+ * need to know and quite likely will break in future releases of iOS. For that
+ * reason, one should keep a close eye on this method to ensure support is
  * maintained throughout future releases.
  *
  * @returns `YES` if the device is configured for native authorization.

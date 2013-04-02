@@ -39,6 +39,7 @@
 @implementation SinglyService
 
 @synthesize isAuthorized = _isAuthorized;
+@synthesize completionHandler = _completionHandler;
 
 + (id)serviceWithIdentifier:(NSString *)serviceIdentifier
 {
@@ -116,19 +117,16 @@
                                     withScopes:(NSArray *)scopes
                                     completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
+    _isAuthorized = NO;
+    _completionHandler = completionHandler;
+
     [self requestAuthorizationViaSinglyFromViewController:viewController
-                                               withScopes:scopes
-                                               completion:completionHandler];
+                                               withScopes:scopes];
 }
 
 - (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
                                              withScopes:(NSArray *)scopes
-                                             completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
-    _isAuthorized = NO;
-
-    self.completionHandler = completionHandler;
-
     // Initialize the Login View Controller
     SinglyLoginViewController *loginViewController = [[SinglyLoginViewController alloc] initWithServiceIdentifier:self.serviceIdentifier];
     loginViewController.scopes = scopes;
@@ -246,65 +244,50 @@
 
 #pragma mark - Authorization Callbacks
 
-- (void)serviceDidAuthorize:(SinglyServiceAuthorizationCompletionHandler)completionHandler
+- (void)serviceDidAuthorize
 {
 
     //
     // Inform the Delegate
     //
     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidAuthorize:)])
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate singlyServiceDidAuthorize:self];
-        });
-    }
+        [self.delegate singlyServiceDidAuthorize:self];
 
     //
-    // Call the Completion Handler
+    // Call & Clear the Completion Handler
     //
-    if (completionHandler)
+    if (self.completionHandler)
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completionHandler(YES, nil);
-        });
+        self.completionHandler(YES, nil);
+        _completionHandler = nil;
     }
 
 }
 
 - (void)serviceDidFailAuthorizationWithError:(NSError *)error
-                           completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
 
     //
     // Inform the Delegate
     //
     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyService:didFailWithError:)])
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate singlyService:self didFailWithError:error];
-        });
-    }
+        [self.delegate singlyService:self didFailWithError:error];
 
     //
-    // Inform the Delegate w/Deprecated Implementation
+    // Inform the Delegate w/Deprecated Method
     //
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if (self.delegate && [self.delegate respondsToSelector:@selector(singlyServiceDidFail:withError:)])
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-            [self.delegate singlyServiceDidFail:self withError:error];
-#pragma clang diagnostic warning "-Wdeprecated-declarations"
-        });
-    }
+        [self.delegate singlyServiceDidFail:self withError:error];
+    #pragma clang diagnostic warning "-Wdeprecated-declarations"
 
     //
-    // Call the Completion Handler
+    // Call & Clear the Completion Handler
     //
-    if (completionHandler)
+    if (self.completionHandler)
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completionHandler(NO, error);
-        });
+        self.completionHandler(NO, error);
+        _completionHandler = nil;
     }
     
 }
@@ -323,7 +306,7 @@
     //
     // Call the Authorization Callback
     //
-    [self serviceDidAuthorize:self.completionHandler];
+    [self serviceDidAuthorize];
 
 }
 
@@ -340,7 +323,7 @@
     //
     // Call the Failed Authorization Callback
     //
-    [self serviceDidFailAuthorizationWithError:error completion:self.completionHandler];
+    [self serviceDidFailAuthorizationWithError:error];
 
 }
 

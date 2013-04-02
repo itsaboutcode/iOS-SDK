@@ -39,6 +39,10 @@ typedef void (^SinglyFetchClientIdentifierCompletionBlock)(NSString *clientIdent
 
 @interface SinglyService ()
 
+/// ----------------------------------------------------------------------------
+/// @name Initializing a Service
+/// ----------------------------------------------------------------------------
+
 /*!
  *
  * A convenience accessor for creating and returning an instance of the Facebook
@@ -109,18 +113,13 @@ typedef void (^SinglyFetchClientIdentifierCompletionBlock)(NSString *clientIdent
  *
  * Requests authorization from Singly by initializing an instance of the login
  * view controller and configuring it for the service identified by the current
- * instance and any custom scope(s). The specified `completionHandler` will be
- * called once the operation has completed.
+ * instance and any custom scope(s).
  *
- * @see requestAuthorizationViaSinglyFromViewController:
- * @see requestAuthorizationViaSinglyFromViewController:withScopes:
- *
- * @available Available in Singly iOS SDK 1.2.0 and later.
+ * @available Available in Singly iOS SDK 1.3.0 and later.
  *
 **/
 - (void)requestAuthorizationViaSinglyFromViewController:(UIViewController *)viewController
-                                             withScopes:(NSArray *)scopes
-                                             completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler;
+                                             withScopes:(NSArray *)scopes;
 
 /*!
  *
@@ -130,7 +129,7 @@ typedef void (^SinglyFetchClientIdentifierCompletionBlock)(NSString *clientIdent
  * @available Available in Singly iOS SDK 1.2.0 and later.
  *
 **/
-@property (nonatomic, strong) SinglyServiceAuthorizationCompletionHandler completionHandler;
+@property (readonly, strong) SinglyServiceAuthorizationCompletionHandler completionHandler;
 
 /*!
  *
@@ -156,7 +155,7 @@ typedef void (^SinglyFetchClientIdentifierCompletionBlock)(NSString *clientIdent
  * @available Available in Singly iOS SDK 1.3.0 and later.
  *
  **/
-- (void)serviceDidAuthorize:(SinglyServiceAuthorizationCompletionHandler)completionHandler;
+- (void)serviceDidAuthorize;
 
 /*!
  *
@@ -167,7 +166,6 @@ typedef void (^SinglyFetchClientIdentifierCompletionBlock)(NSString *clientIdent
  * @available Available in Singly iOS SDK 1.3.0 and later.
  *
  **/
-- (void)serviceDidFailAuthorizationWithError:(NSError *)error
-                           completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler;
+- (void)serviceDidFailAuthorizationWithError:(NSError *)error;
 
 @end

@@ -69,8 +69,7 @@
  *
 **/
 - (void)requestNativeAuthorizationFromViewController:(UIViewController *)viewController
-                                          withScopes:(NSArray *)scopes
-                                          completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler;
+                                          withScopes:(NSArray *)scopes;
 
 /*!
  *

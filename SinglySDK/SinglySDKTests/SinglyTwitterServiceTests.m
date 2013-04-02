@@ -27,8 +27,34 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "SenTestCase+AsynchronousSupport.h"
+#import "SenTestCase+Fixtures.h"
+
+#import "SinglyService.h"
+#import "SinglyService+Internal.h"
+#import "SinglyTestURLProtocol.h"
+
 #import "SinglyTwitterServiceTests.h"
 
 @implementation SinglyTwitterServiceTests
+
+- (void)setUp
+{
+    [super setUp];
+
+    SinglySession.sharedSession.clientID = @"test-client-id";
+    SinglySession.sharedSession.clientSecret = @"test-client-secret";
+
+    [NSURLProtocol registerClass:[SinglyTestURLProtocol class]];
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+
+    [SinglySession.sharedSession resetSession];
+
+    [SinglyTestURLProtocol reset];
+}
 
 @end

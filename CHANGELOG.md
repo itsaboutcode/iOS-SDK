@@ -3,6 +3,9 @@
 
 ## 1.3.0
 
+* Delegate methods are no longer guaranteed to be called on the main thread. You
+  should ensure that you are dispatching to the correct thread as needed.
+
 * Fixed an issue where revoked access to an app via Facebook would prevent the
   next authorization attempt from succeeding.
 

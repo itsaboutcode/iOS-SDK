@@ -46,6 +46,7 @@
 
 @synthesize isAborted = _isAborted;
 @synthesize isAuthorized = _isAuthorized;
+@synthesize completionHandler = _completionHandler;
 
 - (NSString *)serviceIdentifier
 {
@@ -78,6 +79,7 @@
 
     _isAborted = NO;
     _isAuthorized = NO;
+    _completionHandler = completionHandler;
 
     dispatch_queue_t authorizationQueue;
     authorizationQueue = dispatch_queue_create("com.singly.AuthorizationQueue", NULL);
@@ -105,8 +107,7 @@
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self requestAuthorizationViaSinglyFromViewController:viewController
-                                                           withScopes:scopes
-                                                           completion:completionHandler];
+                                                           withScopes:scopes];
             });
         }
 
