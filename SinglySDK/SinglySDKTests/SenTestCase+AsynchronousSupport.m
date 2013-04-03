@@ -36,8 +36,7 @@
     NSDate *timeout = [NSDate dateWithTimeIntervalSinceNow:10];
 
     while (!predicate() && [timeout timeIntervalSinceNow] > 0)
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
-                                 beforeDate:timeout];
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:timeout];
 
     STAssertTrue([timeout timeIntervalSinceNow] > 0, @"Test timed out!");
 }
@@ -54,7 +53,7 @@
         }
         @catch (NSException *e) {}
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
-        i+=0.5;
+        i += 0.5;
     }
     [inMock verify];
 }

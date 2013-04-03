@@ -80,4 +80,13 @@
 **/
 @property (readonly) BOOL isAborted;
 
+/*!
+ *
+ * The shared account store.
+ *
+ * @available Available in Singly iOS SDK 1.3.0 and later.
+ *
+**/
+@property (readonly) ACAccountStore *accountStore;
+
 @end

@@ -444,4 +444,26 @@
     [self waitForCompletion:^{ return isComplete; }];
 }
 
+#pragma mark - Integrated Authorization Tests
+
+//
+// Tests that integrated authorization is available on devices where the user is
+// signed into Facebook using the integrated support offered in iOS 6+.
+//
+- (void)testIntegratedAuthorizationShouldBeAvailable
+{
+    SinglyFacebookService *facebookService = [SinglyService facebookService];
+
+    //
+    // Mock the app delegate so that we can implement the delegate method
+    // `application:openURL:sourceApplication:annotation:`.
+    //
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    id mockAccountStore = [OCMockObject partialMockForObject:accountStore];
+    [[[mockAccountStore stub] andReturn:@[]] accountsWithAccountType:[OCMArg any]];
+    [facebookService setValue:mockAccountStore forKey:@"_accountStore"];
+
+    STAssertTrue([facebookService isNativeAuthorizationConfigured], @"Facebook integrated authorization should be available.");
+}
+
 @end

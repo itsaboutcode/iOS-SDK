@@ -43,9 +43,19 @@
 
 @implementation SinglyFacebookService
 
+@synthesize accountStore = _accountStore;
+@synthesize completionHandler = _completionHandler;
 @synthesize isAborted = _isAborted;
 @synthesize isAuthorized = _isAuthorized;
-@synthesize completionHandler = _completionHandler;
+
+- (id)initWithIdentifier:(NSString *)serviceIdentifier
+{
+    if (self = [super initWithIdentifier:serviceIdentifier])
+    {
+        _accountStore = [[ACAccountStore alloc] init];
+    }
+    return self;
+}
 
 - (NSString *)serviceIdentifier
 {
@@ -102,13 +112,12 @@
 {
     BOOL isConfigured = NO;
 
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
+    ACAccountType *accountType = [self.accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
 
     // iOS 6+
     if (accountType)
     {
-        NSArray *accounts = [accountStore accountsWithAccountType:accountType];
+        NSArray *accounts = [self.accountStore accountsWithAccountType:accountType];
 
         if ([accounts respondsToSelector:@selector(count)])
             isConfigured = YES;
@@ -174,8 +183,7 @@
 {
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
 
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
+    ACAccountType *accountType = [self.accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
 
     if (!accountType)
     {
@@ -196,9 +204,9 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceIsAuthorizingNotification
                                                         object:self];
 
-    [accountStore requestAccessToAccountsWithType:accountType
-                                          options:options
-                                       completion:^(BOOL granted, NSError *accessError)
+    [self.accountStore requestAccessToAccountsWithType:accountType
+                                               options:options
+                                            completion:^(BOOL granted, NSError *accessError)
     {
 
         //
@@ -254,7 +262,7 @@
             return;
         }
 
-        NSArray *accounts = [accountStore accountsWithAccountType:accountType];
+        NSArray *accounts = [self.accountStore accountsWithAccountType:accountType];
         ACAccount *account = [accounts lastObject];
 
         //
@@ -292,7 +300,8 @@
                 if ([facebookError[@"code"] intValue] == 190)
                 {
                     SinglyLog(@"Facebook token is invalid. Attempting to renew credentials...");
-                    [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error)
+                    [self.accountStore renewCredentialsForAccount:account
+                                                  completion:^(ACAccountCredentialRenewResult renewResult, NSError *error)
                     {
 
                         // TODO Check for errors...
