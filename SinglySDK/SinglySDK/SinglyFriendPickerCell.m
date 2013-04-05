@@ -27,7 +27,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SinglyAvatarCache.h"
+#import "SinglyCache.h"
 #import "SinglyFriendPickerCell.h"
 #import "SinglyFriendPickerCell+Internal.h"
 
@@ -92,9 +92,9 @@
         {
 
             // Check cache...
-            if ([SinglyAvatarCache.sharedCache cachedImageExistsForURL:imageLocation])
+            if ([SinglyCache.sharedCache cachedImageExistsForURL:imageLocation])
             {
-                self.imageView.image = (UIImage *)[SinglyAvatarCache.sharedCache cachedImageForURL:imageLocation];
+                self.imageView.image = (UIImage *)[SinglyCache.sharedCache cachedImageForURL:imageLocation];
             }
             else
             {
@@ -136,7 +136,7 @@
     if (receivedImage)
     {
         self.imageView.image = receivedImage;
-        [SinglyAvatarCache.sharedCache cacheImage:receivedImage forURL:imageLocation];
+        [SinglyCache.sharedCache cacheImage:receivedImage forURL:imageLocation];
     }
     self.imageConnection = nil;
     self.receivedData = nil;

@@ -1,5 +1,5 @@
 //
-//  SinglyAvatarCacheTests.h
+//  SinglyCache+Internal.h
 //  SinglySDK
 //
 //  Copyright (c) 2012-2013 Singly, Inc. All rights reserved.
@@ -27,10 +27,18 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import "SinglyCache.h"
 
-@interface SinglyAvatarCacheTests : SenTestCase
+@interface SinglyCache ()
 
-- (UIImage *)blankImage;
+/*!
+ *
+ * Accessor for the static shared cache instance. This is required for unit
+ * testing (and thus a private API).
+ *
+ * @available Available in Singly iOS SDK 1.1.0 and later.
+ *
+ **/
++ (SinglyCache *)sharedCacheInstance;
 
 @end

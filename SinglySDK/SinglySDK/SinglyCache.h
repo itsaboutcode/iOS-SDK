@@ -1,5 +1,5 @@
 //
-//  SinglyAvatarCache.h
+//  SinglyCache.h
 //  SinglySDK
 //
 //  Copyright (c) 2012-2013 Singly, Inc. All rights reserved.
@@ -30,22 +30,22 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface SinglyAvatarCache : NSCache
+@interface SinglyCache : NSCache
 
 /// ----------------------------------------------------------------------------
-/// @name Accessing the Avatar Cache
+/// @name Accessing the Shared Cache
 /// ----------------------------------------------------------------------------
 
 /*!
  *
- * The shared singleton avatar cache instance.
+ * The singleton shared cache instance.
  *
- * @returns SinglyAvatarCache
+ * @returns SinglyCache
  *
  * @available Available in Singly iOS SDK 1.1.0 and later.
  *
 **/
-+ (SinglyAvatarCache *)sharedCache;
++ (SinglyCache *)sharedCache;
 
 /// ----------------------------------------------------------------------------
 /// @name Manipulating Cache Contents

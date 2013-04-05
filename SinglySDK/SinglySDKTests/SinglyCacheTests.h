@@ -1,5 +1,5 @@
 //
-//  SinglyAvatarCache.m
+//  SinglyCacheTests.h
 //  SinglySDK
 //
 //  Copyright (c) 2012-2013 Singly, Inc. All rights reserved.
@@ -27,46 +27,10 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import <SenTestingKit/SenTestingKit.h>
 
-#import "SinglyAvatarCache.h"
+@interface SinglyCacheTests : SenTestCase
 
-static SinglyAvatarCache *sharedInstance = nil;
-
-@implementation SinglyAvatarCache
-
-+ (SinglyAvatarCache *)sharedCache
-{
-    static dispatch_once_t queue;
-    dispatch_once(&queue, ^{
-        sharedInstance = [[SinglyAvatarCache alloc] init];
-    });
-
-    return sharedInstance;
-}
-
-+ (SinglyAvatarCache *)sharedCacheInstance
-{
-    return sharedInstance;
-}
-
-- (void)cacheImage:(UIImage *)image forURL:(NSString *)url
-{
-    if (!url)
-    {
-        [NSException raise:NSInvalidArgumentException
-                    format:@"%s: attempt to insert nil key", __PRETTY_FUNCTION__];
-    }
-    [self setObject:image forKey:url];
-}
-
-- (UIImage *)cachedImageForURL:(NSString *)url
-{
-    return [self objectForKey:url];
-}
-
-- (BOOL)cachedImageExistsForURL:(NSString *)url
-{
-    return [self objectForKey:url] != nil;
-}
+- (UIImage *)blankImage;
 
 @end

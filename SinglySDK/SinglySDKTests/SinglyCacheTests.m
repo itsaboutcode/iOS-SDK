@@ -1,5 +1,5 @@
 //
-//  SinglyAvatarCacheTests.m
+//  SinglyCacheTests.m
 //  SinglySDK
 //
 //  Copyright (c) 2012-2013 Singly, Inc. All rights reserved.
@@ -27,38 +27,38 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SinglyAvatarCache.h"
-#import "SinglyAvatarCache+Internal.h"
-#import "SinglyAvatarCacheTests.h"
+#import "SinglyCache.h"
+#import "SinglyCache+Internal.h"
+#import "SinglyCacheTests.h"
 
-@implementation SinglyAvatarCacheTests
+@implementation SinglyCacheTests
 
 - (void)testSharedCacheInitialization
 {
-    STAssertNotNil(SinglyAvatarCache.sharedCache, @"The shared cache was not initialized!");
+    STAssertNotNil(SinglyCache.sharedCache, @"The shared cache was not initialized!");
 }
 
 - (void)testShouldCacheImage
 {
-    SinglyAvatarCache *cache = SinglyAvatarCache.sharedCache;
+    SinglyCache *cache = SinglyCache.sharedCache;
     [cache cacheImage:[self blankImage] forURL:@"http://localhost/blank"];
 }
 
 - (void)testShouldRaiseExceptionForNilImage
 {
-    SinglyAvatarCache *cache = SinglyAvatarCache.sharedCache;
+    SinglyCache *cache = SinglyCache.sharedCache;
     STAssertThrows([cache cacheImage:nil forURL:@"http://localhost/blank"], @"Setting a nil image did not throw an exception!");
 }
 
 - (void)testShouldRaiseExceptionForNilURL
 {
-    SinglyAvatarCache *cache = SinglyAvatarCache.sharedCache;
+    SinglyCache *cache = SinglyCache.sharedCache;
     STAssertThrows([cache cacheImage:[self blankImage] forURL:nil], @"Setting a nil URL did not throw an exception!");
 }
 
 - (void)testShouldReturnCachedImage
 {
-    SinglyAvatarCache *cache = SinglyAvatarCache.sharedCache;
+    SinglyCache *cache = SinglyCache.sharedCache;
     NSString *testURL = @"http://localhost/test";
     UIImage *testImage = [self blankImage];
     UIImage *cachedImage;
@@ -71,7 +71,7 @@
 
 - (void)testCheckForExistenceShouldReturnTrueForCachedImage
 {
-    SinglyAvatarCache *cache = SinglyAvatarCache.sharedCache;
+    SinglyCache *cache = SinglyCache.sharedCache;
     NSString *testURL = @"http://localhost/test";
     UIImage *testImage = [self blankImage];
     BOOL isCached = NO;
@@ -84,7 +84,7 @@
 
 - (void)testCheckForExistenceShouldReturnFalseForUnknownImage
 {
-    SinglyAvatarCache *cache = SinglyAvatarCache.sharedCache;
+    SinglyCache *cache = SinglyCache.sharedCache;
     BOOL isCached = YES;
 
     isCached = [cache cachedImageExistsForURL:@"http://localhost/unknown"];

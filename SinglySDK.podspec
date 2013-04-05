@@ -19,7 +19,7 @@ Pod::Spec.new do |spec|
     files.exclude /SinglyActionSheet/
     files.exclude /SinglyActivityIndicatorView/
     files.exclude /SinglyAlertView/
-    files.exclude /SinglyAvatarCache/
+    files.exclude /SinglyCache/
     files.exclude /SinglyConnection/
     files.exclude /SinglyKeychainItemWrapper/
     files.exclude /UIViewController\+Modal/
