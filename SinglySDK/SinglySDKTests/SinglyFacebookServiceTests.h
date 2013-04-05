@@ -31,4 +31,6 @@
 
 @interface SinglyFacebookServiceTests : SenTestCase
 
+@property SinglyFacebookService *testService;
+
 @end

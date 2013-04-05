@@ -45,9 +45,29 @@
 {
     [super setUp];
 
+    //
+    // Initialize a test service instance for Facebook.
+    //
+    self.testService = [SinglyService facebookService];
+
+    //
+    // Set a bogus service client identifier. Fetching of client identifiers is
+    // tested separately by `SinglyServiceTests`.
+    //
+    self.testService.clientIdentifier = @"000000000000000";
+
+    //
+    // Configure the Shared Session Instance with a bogus client identifier and
+    // secret. These don't need to be valid because all of our interactions with
+    // the Singly API will be canned or otherwise mocked.
+    //
     SinglySession.sharedSession.clientID = @"test-client-id";
     SinglySession.sharedSession.clientSecret = @"test-client-secret";
 
+    //
+    // Register our custom URL protocol that will return canned responses for
+    // requests to the Singly API.
+    //
     [NSURLProtocol registerClass:[SinglyTestURLProtocol class]];
 }
 
@@ -55,9 +75,30 @@
 {
     [super tearDown];
 
-    [SinglySession.sharedSession resetSession];
+    self.testService = nil;
 
+    [SinglySession.sharedSession resetSession];
     [SinglyTestURLProtocol reset];
+}
+
+#pragma mark - Mock Helpers
+
+- (id)mockAccountStoreWithAccounts:(NSArray *)accounts
+{
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    id mockAccountStore = [OCMockObject partialMockForObject:accountStore];
+    [[[mockAccountStore stub] andReturn:accounts] accountsWithAccountType:[OCMArg any]];
+    return mockAccountStore;
+}
+
+- (id)mockAccount
+{
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *testAccountType = [accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
+    ACAccountCredential *testCredentials = [[ACAccountCredential alloc] initWithOAuth2Token:@"test-access-token" refreshToken:@"test-refresh-token" expiryDate:[NSDate dateWithTimeIntervalSinceNow:86400]];
+    ACAccount *mockAccount = [[ACAccount alloc] initWithAccountType:testAccountType];
+    mockAccount.credential = testCredentials;
+    return mockAccount;
 }
 
 #pragma mark - Application-Based Authorization Tests
@@ -71,7 +112,6 @@
 //
 - (void)testApplicationBasedAuthorizationShouldBeAvailable
 {
-    SinglyFacebookService *facebookService = [[SinglyFacebookService alloc] init];
     NSArray *testURLTypes = @[
         @{ @"CFBundleURLSchemes": @[ @"custom-scheme" ] },
         @{ @"CFBundleURLSchemes": @[ @"fb000000000000000" ] }
@@ -97,7 +137,7 @@
     [[[mockBundleInstance stub] andReturn:testURLTypes] objectForInfoDictionaryKey:[OCMArg any]];
     [[[mockBundle stub] andReturn:mockBundleInstance] mainBundle];
 
-    STAssertTrue([facebookService isAppAuthorizationConfigured], @"Facebook application authorization should be available.");
+    STAssertTrue([self.testService isAppAuthorizationConfigured], @"Facebook application authorization should be available.");
 
     [mockBundle stopMocking];
     [mockBundleInstance stopMocking];
@@ -113,7 +153,6 @@
 //
 - (void)testApplicationBasedAuthorizationShouldNotBeAvailableWhenURLSchemeIsMissing
 {
-    SinglyFacebookService *facebookService = [[SinglyFacebookService alloc] init];
     NSArray *testURLTypes = @[ @{ @"CFBundleURLSchemes": @[ @"custom-scheme" ] } ];
 
     //
@@ -138,7 +177,7 @@
     id mockBundle = [OCMockObject mockForClass:[NSBundle class]];
     [[[mockBundle stub] andReturn:mockBundleInstance] mainBundle];
 
-    STAssertFalse([facebookService isAppAuthorizationConfigured], @"Facebook application authorization should not be available.");
+    STAssertFalse([self.testService isAppAuthorizationConfigured], @"Facebook application authorization should not be available.");
     
     [mockBundle stopMocking];
     [mockBundleInstance stopMocking];
@@ -155,7 +194,6 @@
 //
 - (void)testApplicationBasedAuthorizationShouldNotBeAvailableWhenAppDelegateMethodIsMissing
 {
-    SinglyFacebookService *facebookService = [[SinglyFacebookService alloc] init];
     NSArray *testURLTypes = @[ @{ @"CFBundleURLSchemes": @[ @"custom-scheme" ] } ];
 
     //
@@ -167,7 +205,7 @@
     id mockBundle = [OCMockObject mockForClass:[NSBundle class]];
     [[[mockBundle stub] andReturn:mockBundleInstance] mainBundle];
 
-    STAssertFalse([facebookService isAppAuthorizationConfigured], @"Facebook application authorization should not be available.");
+    STAssertFalse([self.testService isAppAuthorizationConfigured], @"Facebook application authorization should not be available.");
 
     [mockBundle stopMocking];
     [mockBundleInstance stopMocking];
@@ -179,10 +217,9 @@
 //
 - (void)testHandleOpenURLShouldRecognizeFacebookURLs
 {
-    SinglySession *session = SinglySession.sharedSession;
     NSURL *testURL = [NSURL URLWithString:@"fb000000000000000://foo"];
 
-    STAssertTrue([session handleOpenURL:testURL], @"Facebook URLs should be handled.");
+    STAssertTrue([SinglySession.sharedSession handleOpenURL:testURL], @"Facebook URLs should be handled.");
 }
 
 //
@@ -191,8 +228,6 @@
 //
 - (void)testCanceledAuthorizationViaFacebookAppShouldInformDelegate
 {
-    SinglySession *session = SinglySession.sharedSession;
-    SinglyFacebookService *testService = [[SinglyFacebookService alloc] init];
     NSURL *testURL = [NSURL URLWithString:@"fb000000000000000://authorize"];
 
     //
@@ -205,18 +240,18 @@
     //
     // Set our service delegate mock as the delegate for the Facebook service
     // instance we are testing.
-    testService.delegate = mockServiceDelegate;
+    self.testService.delegate = mockServiceDelegate;
 
     //
     // Set the Facebook service instance as the currently authorizing service on
     // the shared session.
     //
-    session.authorizingService = testService;
+    SinglySession.sharedSession.authorizingService = self.testService;
 
     //
     // Perform the test and verify that the delegate methods were called.
     //
-    [session handleOpenURL:testURL];
+    [SinglySession.sharedSession handleOpenURL:testURL];
     [mockServiceDelegate verify];
 }
 
@@ -227,8 +262,6 @@
 - (void)testCanceledAuthorizationViaFacebookAppShouldCallCompletionHandler
 {
     __block BOOL isComplete = NO;
-    SinglySession *session = SinglySession.sharedSession;
-    SinglyFacebookService *testService = [[SinglyFacebookService alloc] init];
     NSURL *testURL = [NSURL URLWithString:@"fb000000000000000://authorize"];
 
     //
@@ -239,18 +272,18 @@
         STAssertFalse(isSuccessful, @"The isSuccessful parameter should be false.");
         isComplete = YES;
     };
-    [testService setValue:testCompletionHandler forKey:@"_completionHandler"];
+    [self.testService setValue:testCompletionHandler forKey:@"_completionHandler"];
 
     //
     // Set the Facebook service instance as the currently authorizing service on
     // the shared session.
     //
-    session.authorizingService = testService;
+    SinglySession.sharedSession.authorizingService = self.testService;
 
     //
     // Pass our test URL to the `handleOpenURL:` method on the session.
     //
-    [session handleOpenURL:testURL];
+    [SinglySession.sharedSession handleOpenURL:testURL];
 
     //
     // Verify that the delegate method was called after a short delay, since we
@@ -266,8 +299,6 @@
 //
 - (void)testFailedAuthorizationViaFacebookAppShouldInformDelegate
 {
-    SinglySession *session = SinglySession.sharedSession;
-    SinglyFacebookService *testService = [[SinglyFacebookService alloc] init];
     NSURL *testURL = [NSURL URLWithString:@"fb000000000000000://authorize#code=test-code&access_token=test-access-token&expires_in=12345"];
 
     //
@@ -286,18 +317,18 @@
     //
     // Set our service delegate mock as the delegate for the Facebook service
     // instance we are testing.
-    testService.delegate = mockServiceDelegate;
+    self.testService.delegate = mockServiceDelegate;
 
     //
     // Set the Facebook service instance as the currently authorizing service on
     // the shared session.
     //
-    session.authorizingService = testService;
+    SinglySession.sharedSession.authorizingService = self.testService;
 
     //
     // Pass our test URL to the `handleOpenURL:` method on the session.
     //
-    [session handleOpenURL:testURL];
+    [SinglySession.sharedSession handleOpenURL:testURL];
 
     //
     // Verify that the delegate method was called after a short delay, since we
@@ -314,8 +345,6 @@
 - (void)testFailedAuthorizationViaFacebookAppShouldCallCompletionHandler
 {
     __block BOOL isComplete = NO;
-    SinglySession *session = SinglySession.sharedSession;
-    SinglyFacebookService *testService = [[SinglyFacebookService alloc] init];
     NSURL *testURL = [NSURL URLWithString:@"fb000000000000000://authorize#code=test-code&access_token=test-access-token&expires_in=12345"];
 
     //
@@ -332,18 +361,18 @@
         STAssertFalse(isSuccessful, @"The isSuccessful parameter should be false.");
         isComplete = YES;
     };
-    [testService setValue:testCompletionHandler forKey:@"_completionHandler"];
+    [self.testService setValue:testCompletionHandler forKey:@"_completionHandler"];
 
     //
     // Set the Facebook service instance as the currently authorizing service on
     // the shared session.
     //
-    session.authorizingService = testService;
+    SinglySession.sharedSession.authorizingService = self.testService;
 
     //
     // Pass our test URL to the `handleOpenURL:` method on the session.
     //
-    [session handleOpenURL:testURL];
+    [SinglySession.sharedSession handleOpenURL:testURL];
 
     //
     // Verify that the delegate method was called after a short delay, since we
@@ -362,8 +391,6 @@
 //
 - (void)testIntegratedAuthorizationShouldBeAvailable
 {
-    SinglyFacebookService *facebookService = [SinglyService facebookService];
-
     //
     // Mock the app delegate so that we can implement the delegate method
     // `application:openURL:sourceApplication:annotation:`.
@@ -371,9 +398,9 @@
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     id mockAccountStore = [OCMockObject partialMockForObject:accountStore];
     [[[mockAccountStore stub] andReturn:@[]] accountsWithAccountType:[OCMArg any]];
-    [facebookService setValue:mockAccountStore forKey:@"_accountStore"];
+    [self.testService setValue:mockAccountStore forKey:@"_accountStore"];
 
-    STAssertTrue([facebookService isNativeAuthorizationConfigured], @"Facebook integrated authorization should be available.");
+    STAssertTrue([self.testService isNativeAuthorizationConfigured], @"Facebook integrated authorization should be available.");
 }
 
 //
@@ -383,8 +410,6 @@
 //
 - (void)testIntegratedAuthorizationShouldNotBeAvailableWhenDeviceIsNotAuthenticatedWithFacebook
 {
-    SinglyFacebookService *facebookService = [SinglyService facebookService];
-
     //
     // Mock the app delegate so that we can implement the delegate method
     // `application:openURL:sourceApplication:annotation:`.
@@ -392,9 +417,9 @@
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     id mockAccountStore = [OCMockObject partialMockForObject:accountStore];
     [[[mockAccountStore stub] andReturn:nil] accountsWithAccountType:[OCMArg any]];
-    [facebookService setValue:mockAccountStore forKey:@"_accountStore"];
+    [self.testService setValue:mockAccountStore forKey:@"_accountStore"];
 
-    STAssertFalse([facebookService isNativeAuthorizationConfigured], @"Facebook integrated authorization should not be available.");
+    STAssertFalse([self.testService isNativeAuthorizationConfigured], @"Facebook integrated authorization should not be available.");
 }
 
 //
@@ -403,7 +428,6 @@
 //
 - (void)testCanceledIntegratedAuthorizationShouldInformDelegate
 {
-    SinglyFacebookService *facebookService = [SinglyService facebookService];
     UIViewController *testViewController = [[UIViewController alloc] init];
 
     //
@@ -413,27 +437,16 @@
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
     //
-    // Configure the account store and account that we will be using for the
-    // test.
+    // Mock the account store with a valid account, but force it to return
+    // an error to symbolize the user canceling the request.
     //
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *testAccountType = [accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
-    ACAccount *testAccount = [[ACAccount alloc] initWithAccountType:testAccountType];
-    ACAccountCredential *testCredentials = [[ACAccountCredential alloc] initWithOAuth2Token:@"test-access-token" refreshToken:@"test-refresh-token" expiryDate:[NSDate dateWithTimeIntervalSinceNow:86400]];
-    testAccount.credential = testCredentials;
-
-    //
-    // Mock the account store with the one we configured above on the service
-    // instance.
-    //
-    id mockAccountStore = [OCMockObject partialMockForObject:accountStore];
-    [[[mockAccountStore stub] andReturn:@[ testAccount ]] accountsWithAccountType:[OCMArg any]];
+    id mockAccountStore = [self mockAccountStoreWithAccounts:@[ [self mockAccount] ]];
     [[[mockAccountStore stub] andDo:^(NSInvocation *invocation) {
         void (^grantBlock)(BOOL granted, NSError *error) = nil;
         [invocation getArgument:&grantBlock atIndex:4];
         grantBlock(NO, [[NSError alloc] init]);
-    }] requestAccessToAccountsWithType:[OCMArg any] options:[OCMArg any] completion:[OCMArg any]];
-    [facebookService setValue:mockAccountStore forKey:@"_accountStore"];
+    }] requestAccessToAccountsWithType:[OCMArg any] options:[OCMArg any] completion:[OCMArg any]];    
+    [self.testService setValue:mockAccountStore forKey:@"_accountStore"];
 
     //
     // Mock an object to act as the service delegate.
@@ -445,20 +458,13 @@
     //
     // Set our service delegate mock as the delegate for the Facebook service
     // instance we are testing.
-    facebookService.delegate = mockServiceDelegate;
-
-    //
-    // Set a custom client identifier since we are accessing an internal method
-    // that expects the client identifier to have already been loaded from the
-    // Singly API.
-    //
-    facebookService.clientIdentifier = @"000000000000000";
+    self.testService.delegate = mockServiceDelegate;
 
     //
     // Perform the test by requesting integrated authorization.
     //
-    [facebookService requestNativeAuthorizationFromViewController:testViewController
-                                                       withScopes:nil];
+    [self.testService requestNativeAuthorizationFromViewController:testViewController
+                                                        withScopes:nil];
 
     //
     // Verify that the delegate method was called after a short delay.
@@ -473,7 +479,6 @@
 - (void)testCanceledIntegratedAuthorizationShouldCallCompletionHandler
 {
     __block BOOL isComplete = NO;
-    SinglyFacebookService *facebookService = [SinglyService facebookService];
     UIViewController *testViewController = [[UIViewController alloc] init];
 
     //
@@ -483,27 +488,16 @@
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
     //
-    // Configure the account store and account that we will be using for the
-    // test.
+    // Mock the account store with a valid account, but force it to return
+    // an error to symbolize the user canceling the request.
     //
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *testAccountType = [accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
-    ACAccount *testAccount = [[ACAccount alloc] initWithAccountType:testAccountType];
-    ACAccountCredential *testCredentials = [[ACAccountCredential alloc] initWithOAuth2Token:@"test-access-token" refreshToken:@"test-refresh-token" expiryDate:[NSDate dateWithTimeIntervalSinceNow:86400]];
-    testAccount.credential = testCredentials;
-
-    //
-    // Mock the account store with the one we configured above on the service
-    // instance.
-    //
-    id mockAccountStore = [OCMockObject partialMockForObject:accountStore];
-    [[[mockAccountStore stub] andReturn:@[ testAccount ]] accountsWithAccountType:[OCMArg any]];
+    id mockAccountStore = [self mockAccountStoreWithAccounts:@[ [self mockAccount] ]];
     [[[mockAccountStore stub] andDo:^(NSInvocation *invocation) {
         void (^grantBlock)(BOOL granted, NSError *error) = nil;
         [invocation getArgument:&grantBlock atIndex:4];
         grantBlock(NO, [[NSError alloc] init]);
     }] requestAccessToAccountsWithType:[OCMArg any] options:[OCMArg any] completion:[OCMArg any]];
-    [facebookService setValue:mockAccountStore forKey:@"_accountStore"];
+    [self.testService setValue:mockAccountStore forKey:@"_accountStore"];
 
     //
     // Set a custom completion handler on the service instance so that we can
@@ -513,20 +507,13 @@
         STAssertFalse(isSuccessful, @"The isSuccessful parameter should be false.");
         isComplete = YES;
     };
-    [facebookService setValue:testCompletionHandler forKey:@"_completionHandler"];
-
-    //
-    // Set a custom client identifier since we are accessing an internal method
-    // that expects the client identifier to have already been loaded from the
-    // Singly API.
-    //
-    facebookService.clientIdentifier = @"000000000000000";
+    [self.testService setValue:testCompletionHandler forKey:@"_completionHandler"];
 
     //
     // Perform the test by requesting integrated authorization.
     //
-    [facebookService requestNativeAuthorizationFromViewController:testViewController
-                                                       withScopes:nil];
+    [self.testService requestNativeAuthorizationFromViewController:testViewController
+                                                        withScopes:nil];
 
     //
     // Verify that the completion handler was called by waiting for the
@@ -541,7 +528,6 @@
 //
 - (void)testFailedIntegratedAuthorizationShouldInformDelegate
 {
-    SinglyFacebookService *facebookService = [SinglyService facebookService];
     UIViewController *testViewController = [[UIViewController alloc] init];
 
     //
@@ -551,27 +537,15 @@
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
     //
-    // Configure the account store and account that we will be using for the
-    // test.
+    // Mock the account store with a valid account and return with success.
     //
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *testAccountType = [accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
-    ACAccount *testAccount = [[ACAccount alloc] initWithAccountType:testAccountType];
-    ACAccountCredential *testCredentials = [[ACAccountCredential alloc] initWithOAuth2Token:@"test-access-token" refreshToken:@"test-refresh-token" expiryDate:[NSDate dateWithTimeIntervalSinceNow:86400]];
-    testAccount.credential = testCredentials;
-
-    //
-    // Mock the account store with the one we configured above on the service
-    // instance.
-    //
-    id mockAccountStore = [OCMockObject partialMockForObject:accountStore];
-    [[[mockAccountStore stub] andReturn:@[ testAccount ]] accountsWithAccountType:[OCMArg any]];
+    id mockAccountStore = [self mockAccountStoreWithAccounts:@[ [self mockAccount] ]];
     [[[mockAccountStore stub] andDo:^(NSInvocation *invocation) {
         void (^grantBlock)(BOOL granted, NSError *error) = nil;
         [invocation getArgument:&grantBlock atIndex:4];
         grantBlock(YES, nil);
     }] requestAccessToAccountsWithType:[OCMArg any] options:[OCMArg any] completion:[OCMArg any]];
-    [facebookService setValue:mockAccountStore forKey:@"_accountStore"];
+    [self.testService setValue:mockAccountStore forKey:@"_accountStore"];
 
     //
     // Mock an object to act as the service delegate.
@@ -583,20 +557,13 @@
     //
     // Set our service delegate mock as the delegate for the Facebook service
     // instance we are testing.
-    facebookService.delegate = mockServiceDelegate;
-
-    //
-    // Set a custom client identifier since we are accessing an internal method
-    // that expects the client identifier to have already been loaded from the
-    // Singly API.
-    //
-    facebookService.clientIdentifier = @"000000000000000";
+    self.testService.delegate = mockServiceDelegate;
 
     //
     // Perform the test by requesting integrated authorization.
     //
-    [facebookService requestNativeAuthorizationFromViewController:testViewController
-                                                       withScopes:nil];
+    [self.testService requestNativeAuthorizationFromViewController:testViewController
+                                                        withScopes:nil];
 
     //
     // Verify that the delegate method was called after a short delay.
@@ -611,7 +578,6 @@
 - (void)testFailedIntegratedAuthorizationShouldCallCompletionHandler
 {
     __block BOOL isComplete = NO;
-    SinglyFacebookService *facebookService = [SinglyService facebookService];
     UIViewController *testViewController = [[UIViewController alloc] init];
 
     //
@@ -621,27 +587,15 @@
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
     //
-    // Configure the account store and account that we will be using for the
-    // test.
+    // Mock the account store with a valid account and return with success.
     //
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *testAccountType = [accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
-    ACAccount *testAccount = [[ACAccount alloc] initWithAccountType:testAccountType];
-    ACAccountCredential *testCredentials = [[ACAccountCredential alloc] initWithOAuth2Token:@"test-access-token" refreshToken:@"test-refresh-token" expiryDate:[NSDate dateWithTimeIntervalSinceNow:86400]];
-    testAccount.credential = testCredentials;
-
-    //
-    // Mock the account store with the one we configured above on the service
-    // instance.
-    //
-    id mockAccountStore = [OCMockObject partialMockForObject:accountStore];
-    [[[mockAccountStore stub] andReturn:@[ testAccount ]] accountsWithAccountType:[OCMArg any]];
+    id mockAccountStore = [self mockAccountStoreWithAccounts:@[ [self mockAccount] ]];
     [[[mockAccountStore stub] andDo:^(NSInvocation *invocation) {
         void (^grantBlock)(BOOL granted, NSError *error) = nil;
         [invocation getArgument:&grantBlock atIndex:4];
         grantBlock(YES, nil);
     }] requestAccessToAccountsWithType:[OCMArg any] options:[OCMArg any] completion:[OCMArg any]];
-    [facebookService setValue:mockAccountStore forKey:@"_accountStore"];
+    [self.testService setValue:mockAccountStore forKey:@"_accountStore"];
 
     //
     // Set a custom completion handler on the service instance so that we can
@@ -652,20 +606,13 @@
         STAssertNotNil(error, @"The error parameter should not be nil.");
         isComplete = YES;
     };
-    [facebookService setValue:testCompletionHandler forKey:@"_completionHandler"];
-
-    //
-    // Set a custom client identifier since we are accessing an internal method
-    // that expects the client identifier to have already been loaded from the
-    // Singly API.
-    //
-    facebookService.clientIdentifier = @"000000000000000";
+    [self.testService setValue:testCompletionHandler forKey:@"_completionHandler"];
 
     //
     // Perform the test by requesting integrated authorization.
     //
-    [facebookService requestNativeAuthorizationFromViewController:testViewController
-                                                       withScopes:nil];
+    [self.testService requestNativeAuthorizationFromViewController:testViewController
+                                                        withScopes:nil];
 
     //
     // Verify that the completion handler was called by waiting for the
@@ -680,7 +627,6 @@
 //
 - (void)testSuccessfulIntegratedAuthorizationShouldInformDelegate
 {
-    SinglyFacebookService *facebookService = [SinglyService facebookService];
     UIViewController *testViewController = [[UIViewController alloc] init];
 
     //
@@ -690,27 +636,15 @@
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
     //
-    // Configure the account store and account that we will be using for the
-    // test.
+    // Mock the account store with a valid account and return with success.
     //
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *testAccountType = [accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
-    ACAccount *testAccount = [[ACAccount alloc] initWithAccountType:testAccountType];
-    ACAccountCredential *testCredentials = [[ACAccountCredential alloc] initWithOAuth2Token:@"test-access-token" refreshToken:@"test-refresh-token" expiryDate:[NSDate dateWithTimeIntervalSinceNow:86400]];
-    testAccount.credential = testCredentials;
-
-    //
-    // Mock the account store with the one we configured above on the service
-    // instance.
-    //
-    id mockAccountStore = [OCMockObject partialMockForObject:accountStore];
-    [[[mockAccountStore stub] andReturn:@[ testAccount ]] accountsWithAccountType:[OCMArg any]];
+    id mockAccountStore = [self mockAccountStoreWithAccounts:@[ [self mockAccount] ]];
     [[[mockAccountStore stub] andDo:^(NSInvocation *invocation) {
         void (^grantBlock)(BOOL granted, NSError *error) = nil;
         [invocation getArgument:&grantBlock atIndex:4];
         grantBlock(YES, nil);
     }] requestAccessToAccountsWithType:[OCMArg any] options:[OCMArg any] completion:[OCMArg any]];
-    [facebookService setValue:mockAccountStore forKey:@"_accountStore"];
+    [self.testService setValue:mockAccountStore forKey:@"_accountStore"];
 
     //
     // Mock an object to act as the service delegate.
@@ -721,19 +655,12 @@
     //
     // Set our service delegate mock as the delegate for the Facebook service
     // instance we are testing.
-    facebookService.delegate = mockServiceDelegate;
-
-    //
-    // Set a custom client identifier since we are accessing an internal method
-    // that expects the client identifier to have already been loaded from the
-    // Singly API.
-    //
-    facebookService.clientIdentifier = @"000000000000000";
+    self.testService.delegate = mockServiceDelegate;
 
     //
     // Perform the test by requesting integrated authorization.
     //
-    [facebookService requestNativeAuthorizationFromViewController:testViewController
+    [self.testService requestNativeAuthorizationFromViewController:testViewController
                                                        withScopes:nil];
 
     //
@@ -749,7 +676,6 @@
 - (void)testSuccessfulIntegratedAuthorizationShouldCallCompletionHandler
 {
     __block BOOL isComplete = NO;
-    SinglyFacebookService *facebookService = [SinglyService facebookService];
     UIViewController *testViewController = [[UIViewController alloc] init];
 
     //
@@ -759,27 +685,15 @@
     [SinglyTestURLProtocol setCannedResponseData:responseData];
 
     //
-    // Configure the account store and account that we will be using for the
-    // test.
+    // Mock the account store with a valid account and return with success.
     //
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *testAccountType = [accountStore accountTypeWithAccountTypeIdentifier:@"com.apple.facebook"];
-    ACAccount *testAccount = [[ACAccount alloc] initWithAccountType:testAccountType];
-    ACAccountCredential *testCredentials = [[ACAccountCredential alloc] initWithOAuth2Token:@"test-access-token" refreshToken:@"test-refresh-token" expiryDate:[NSDate dateWithTimeIntervalSinceNow:86400]];
-    testAccount.credential = testCredentials;
-
-    //
-    // Mock the account store with the one we configured above on the service
-    // instance.
-    //
-    id mockAccountStore = [OCMockObject partialMockForObject:accountStore];
-    [[[mockAccountStore stub] andReturn:@[ testAccount ]] accountsWithAccountType:[OCMArg any]];
+    id mockAccountStore = [self mockAccountStoreWithAccounts:@[ [self mockAccount] ]];
     [[[mockAccountStore stub] andDo:^(NSInvocation *invocation) {
         void (^grantBlock)(BOOL granted, NSError *error) = nil;
         [invocation getArgument:&grantBlock atIndex:4];
         grantBlock(YES, nil);
     }] requestAccessToAccountsWithType:[OCMArg any] options:[OCMArg any] completion:[OCMArg any]];
-    [facebookService setValue:mockAccountStore forKey:@"_accountStore"];
+    [self.testService setValue:mockAccountStore forKey:@"_accountStore"];
 
     //
     // Set a custom completion handler on the service instance so that we can
@@ -789,20 +703,13 @@
         STAssertTrue(isSuccessful, @"The isSuccessful parameter should be true.");
         isComplete = YES;
     };
-    [facebookService setValue:testCompletionHandler forKey:@"_completionHandler"];
-
-    //
-    // Set a custom client identifier since we are accessing an internal method
-    // that expects the client identifier to have already been loaded from the
-    // Singly API.
-    //
-    facebookService.clientIdentifier = @"000000000000000";
+    [self.testService setValue:testCompletionHandler forKey:@"_completionHandler"];
 
     //
     // Perform the test by requesting integrated authorization.
     //
-    [facebookService requestNativeAuthorizationFromViewController:testViewController
-                                                       withScopes:nil];
+    [self.testService requestNativeAuthorizationFromViewController:testViewController
+                                                        withScopes:nil];
 
     //
     // Verify that the completion handler was called by waiting for the
