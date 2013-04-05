@@ -339,6 +339,7 @@
             }
             else
             {
+                [self serviceDidFailAuthorizationWithError:applyError];
                 dispatch_semaphore_signal(authorizationSemaphore);
                 return;
             }
