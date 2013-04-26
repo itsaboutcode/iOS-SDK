@@ -48,9 +48,9 @@
 @synthesize isAborted = _isAborted;
 @synthesize isAuthorized = _isAuthorized;
 
-- (id)initWithIdentifier:(NSString *)serviceIdentifier
+- (id)init
 {
-    if (self = [super initWithIdentifier:serviceIdentifier])
+    if (self = [super init])
     {
         _accountStore = [[ACAccountStore alloc] init];
     }
