@@ -48,6 +48,15 @@
 @synthesize isAuthorized = _isAuthorized;
 @synthesize completionHandler = _completionHandler;
 
+- (id)init
+{
+    if (self = [super init])
+    {
+        _accountStore = [[ACAccountStore alloc] init];
+    }
+    return self;
+}
+
 - (NSString *)serviceIdentifier
 {
     return @"twitter";
@@ -57,9 +66,8 @@
 {
     BOOL isConfigured = NO;
 
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    NSArray *accounts = [accountStore accountsWithAccountType:accountType];
+    ACAccountType *accountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    NSArray *accounts = [self.accountStore accountsWithAccountType:accountType];
 
     if ([accounts respondsToSelector:@selector(count)])
         isConfigured = YES;
@@ -120,9 +128,7 @@
                                           completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
-
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    ACAccountType *accountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
 
     if (!accountType)
     {
@@ -136,8 +142,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kSinglyServiceIsAuthorizingNotification
                                                         object:self];
 
-    [accountStore requestAccessToAccountsWithType:accountType
-                            withCompletionHandler:^(BOOL granted, NSError *accessError)
+    [self.accountStore requestAccessToAccountsWithType:accountType
+                                 withCompletionHandler:^(BOOL granted, NSError *accessError)
     {
 
         //
@@ -220,7 +226,7 @@
         //
         // Select the Account to Authorize
         //
-        NSArray *accounts = [accountStore accountsWithAccountType:accountType];
+        NSArray *accounts = [self.accountStore accountsWithAccountType:accountType];
         __block ACAccount *account;
         if (accounts.count > 1)
         {
