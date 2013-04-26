@@ -57,16 +57,11 @@ typedef void (^SinglyTwitterAccessTokenCompletionBlock)(NSDictionary *accessToke
  *
  * @param scopes The scope(s) to request from the service.
  *
- * @param completionHandler The block to run when the request is complete. It
- *                          will be passed a `BOOL` stating whether or not the
- *                          operation succeeded.
- *
- * @available Available in Singly iOS SDK 1.2.2 and later.
+ * @available Available in Singly iOS SDK 1.3.0 and later.
  *
 **/
 - (void)requestNativeAuthorizationFromViewController:(UIViewController *)viewController
-                                          withScopes:(NSArray *)scopes
-                                          completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler;
+                                          withScopes:(NSArray *)scopes;
 
 /*!
  *

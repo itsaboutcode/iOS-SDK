@@ -105,8 +105,7 @@
         //
         if (self.clientIdentifier && !self.isAuthorized && !self.isAborted && [self isNativeAuthorizationConfigured])
             [self requestNativeAuthorizationFromViewController:viewController
-                                                    withScopes:scopes
-                                                    completion:completionHandler];
+                                                    withScopes:scopes];
 
         //
         // Step 3 - Fallback to Singly Authorization
@@ -125,7 +124,6 @@
 
 - (void)requestNativeAuthorizationFromViewController:(UIViewController *)viewController
                                           withScopes:(NSArray *)scopes
-                                          completion:(SinglyServiceAuthorizationCompletionHandler)completionHandler
 {
     dispatch_semaphore_t authorizationSemaphore = dispatch_semaphore_create(0);
     ACAccountType *accountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
@@ -212,10 +210,10 @@
             //
             // Call the Completion Handler
             //
-            if (completionHandler)
+            if (self.completionHandler)
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    completionHandler(NO, accessError);
+                    self.completionHandler(NO, accessError);
                 });
             }
 
@@ -277,10 +275,10 @@
                 //
                 // Call the Completion Handler
                 //
-                if (completionHandler)
+                if (self.completionHandler)
                 {
                     dispatch_sync(dispatch_get_main_queue(), ^{
-                        completionHandler(YES, nil);
+                        self.completionHandler(YES, nil);
                     });
                 }
 

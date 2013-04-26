@@ -61,11 +61,7 @@
  *               either read or write permissions, but not read and write within
  *               the same authorization request.
  *
- * @param completionHandler The block to run when the request is complete. It
- *                          will be passed a `BOOL` stating whether or not the
- *                          operation succeeded.
- *
- * @available Available in Singly iOS SDK 1.2.2 and later.
+ * @available Available in Singly iOS SDK 1.3.0 and later.
  *
 **/
 - (void)requestNativeAuthorizationFromViewController:(UIViewController *)viewController
