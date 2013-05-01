@@ -284,6 +284,13 @@
             // Parse Original Response from Singly
             //
             NSData *responseData = [applyError.userInfo[kSinglyResponseKey] dataUsingEncoding:NSUTF8StringEncoding];
+            if (responseData == nil) {
+                SinglyLog(@"Unhandled error: Response from singly was nil");
+                NSError *responseError = [NSError errorWithDomain:@"com.singly.sdk" code:400 userInfo:@{NSLocalizedDescriptionKey:@"Unable to connect to server. Please try again."}];
+                [self serviceDidFailAuthorizationWithError:responseError];
+                dispatch_semaphore_signal(authorizationSemaphore);
+                return;
+            }
             id responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
 
             //
