@@ -385,14 +385,19 @@
 - (BOOL)requestApplicationAuthorization:(NSArray *)scopes
 {
     NSArray *permissions = (scopes != nil) ? scopes : @[ @"email", @"user_location", @"user_birthday" ];
-    NSDictionary *params = @{
+    NSMutableDictionary *params = [@{
         @"client_id": self.clientIdentifier,
         @"type": @"user_agent",
         @"redirect_uri": @"fbconnect://success",
         @"display": @"touch",
         @"sdk": @"ios",
         @"scope": [permissions componentsJoinedByString:@","]
-    };
+    } mutableCopy];
+    
+    if (self.urlSchemeSuffix)
+    {
+        params[@"local_client_id"] = self.urlSchemeSuffix;
+    }
 
     NSString *facebookAppURL = [NSString stringWithFormat:@"fbauth://authorize?%@", [params queryStringValue]];
     BOOL isAppInstalled = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:facebookAppURL]];
