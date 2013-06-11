@@ -3,6 +3,9 @@
 
 ## 1.3.0
 
+* Fixed a possible crash in the login picker view controller when services are
+  missing icons.
+
 * Delegate methods are no longer guaranteed to be called on the main thread. You
   should ensure that you are dispatching to the correct thread as needed.
 
