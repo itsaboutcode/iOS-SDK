@@ -258,6 +258,7 @@
 		D0D96E3416C5569400283404 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D96E3316C5569400283404 /* Twitter.framework */; };
 		D0DB1623162E0A93005EC7C7 /* Service Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */; };
 		D0DB1624162E0A93005EC7C7 /* Service Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */; };
+		D0DE0428172B0BAC0018FC6E /* auth-facebook-oauth-error-app-not-installed.json in Resources */ = {isa = PBXBuildFile; fileRef = D0DE0427172B0BA50018FC6E /* auth-facebook-oauth-error-app-not-installed.json */; };
 		D0E2C7081637572B00AAD565 /* SinglySession.h in Headers */ = {isa = PBXBuildFile; fileRef = 821D088915ED17B000ECFED0 /* SinglySession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0E2C7091637573800AAD565 /* NSString+URLEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 825B6D92161C99EF0034DB92 /* NSString+URLEncoding.h */; };
 		D0E2C70A1637573C00AAD565 /* UIViewController+Modal.h in Headers */ = {isa = PBXBuildFile; fileRef = D08B3EE4162DF3E3009001D5 /* UIViewController+Modal.h */; };
@@ -518,6 +519,7 @@
 		D0D96E3316C5569400283404 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		D0DB161C162E0A87005EC7C7 /* Service Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder.png"; sourceTree = "<group>"; };
 		D0DB161E162E0A87005EC7C7 /* Service Placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Service Placeholder@2x.png"; sourceTree = "<group>"; };
+		D0DE0427172B0BA50018FC6E /* auth-facebook-oauth-error-app-not-installed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "auth-facebook-oauth-error-app-not-installed.json"; sourceTree = "<group>"; };
 		D0E158DF1631C1BD000D0BCA /* Create Universal Library.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "Create Universal Library.rb"; sourceTree = "<group>"; };
 		D0EA60BC163B3B99001AC1DF /* SinglyActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyActivityIndicatorView.h; sourceTree = "<group>"; };
 		D0EA60BD163B3B99001AC1DF /* SinglyActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyActivityIndicatorView.m; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 				D0467FF016D6DFD800F4F981 /* profiles-delete.json */,
 				D06F113316BB287F00809E3E /* auth-client_id-facebook.json */,
 				D00C434E16F0EDAE000B455D /* auth-client_id-generic.json */,
+				D0DE0427172B0BA50018FC6E /* auth-facebook-oauth-error-app-not-installed.json */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -1264,6 +1267,7 @@
 				D0467FF116D6E38900F4F981 /* profiles-delete.json in Resources */,
 				D00C434F16F0EDAE000B455D /* auth-client_id-generic.json in Resources */,
 				D0C5BE7217064B6B00864269 /* auth-facebook-apply-invalid.json in Resources */,
+				D0DE0428172B0BAC0018FC6E /* auth-facebook-oauth-error-app-not-installed.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
