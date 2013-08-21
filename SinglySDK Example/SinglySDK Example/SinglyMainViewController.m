@@ -105,22 +105,8 @@
             }
             break;
 
-        // Sync Contacts
-        case 2:
-            if (session.isReady && !session.isSyncingDeviceContacts)
-            {
-                cell.userInteractionEnabled = YES;
-                cell.textLabel.alpha = 1.0;
-            }
-            else
-            {
-                cell.userInteractionEnabled = NO;
-                cell.textLabel.alpha = 0.25;
-            }
-            break;
-
         // Reset Application
-        case 3:
+        case 2:
             if (session.isReady)
             {
                 cell.userInteractionEnabled = YES;
@@ -149,13 +135,8 @@
 
     switch (indexPath.section)
     {
-        // Sync Contacts
-        case 2:
-            [self syncContacts];
-            break;
-
         // Reset Application
-        case 3:
+        case 2:
             [self resetApplicationState];
             break;
 
@@ -166,30 +147,6 @@
 }
 
 #pragma mark -
-
-- (void)syncContacts
-{
-    NSLog(@"Syncing Device Contacts with Singly API...");
-
-    // Tell the current Singly Session to sync the contacts.
-    [SinglySession.sharedSession syncDeviceContactsWithCompletion:^(BOOL isSuccessful, NSError *error) {
-
-        // Reload the table view to re-enable the "Sync Contacts" option.
-        [self.tableView reloadData];
-
-        UIAlertView *notificationAlert = [[UIAlertView alloc] initWithTitle:@"Contacts Synced"
-                                                                    message:[NSString stringWithFormat:@"Synced contacts with the Singly API."]
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"Dismiss"
-                                                          otherButtonTitles:nil];
-        [notificationAlert show];
-
-    }];
-
-    // Reload the table view so that the "Sync Contacts" option will become
-    // disabled...
-    [self.tableView reloadData];
-}
 
 - (void)resetApplicationState
 {

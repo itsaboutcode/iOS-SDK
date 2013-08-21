@@ -3,6 +3,9 @@
 
 ## 1.3.0
 
+* Removed support for the Friends API and syncing of contacts to the Singly
+  service.
+
 * Fixed a possible crash in the login picker view controller when services are
   missing icons.
 
