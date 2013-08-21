@@ -89,24 +89,8 @@
 
     switch (indexPath.section)
     {
-        // Examples
-        case 1:
-            if (session.isReady && session.profiles)
-            {
-                cell.userInteractionEnabled = YES;
-                cell.textLabel.alpha = 1.0;
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
-            else
-            {
-                cell.userInteractionEnabled = NO;
-                cell.textLabel.alpha = 0.25;
-                cell.accessoryType = UITableViewCellAccessoryNone;
-            }
-            break;
-
         // Reset Application
-        case 2:
+        case 1:
             if (session.isReady)
             {
                 cell.userInteractionEnabled = YES;
@@ -136,7 +120,7 @@
     switch (indexPath.section)
     {
         // Reset Application
-        case 2:
+        case 1:
             [self resetApplicationState];
             break;
 
