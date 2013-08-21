@@ -416,13 +416,7 @@
     else
     {
         SinglyLog(@"Attempting to authorize via the installed Facebook app...");
-
         [SinglySession sharedSession].authorizingService = self;
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(handleServiceAppliedNotification:)
-                                                     name:kSinglyServiceAppliedNotification
-                                                   object:nil];
-		
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:facebookAppURL]];
     }
 
