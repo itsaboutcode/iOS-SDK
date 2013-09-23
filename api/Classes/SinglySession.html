@@ -4,10 +4,9 @@
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>SinglySession Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
-		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.1 (build 840)" />
+		<meta name="generator" content="appledoc 2.1 (build 858)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -51,8 +50,6 @@
 	<option value="//api/name/clientSecret">&nbsp;&nbsp;&nbsp;&nbsp;clientSecret</option>
 	
 	<option value="//api/name/isReady">&nbsp;&nbsp;&nbsp;&nbsp;isReady</option>
-	
-	<option value="//api/name/isSyncingDeviceContacts">&nbsp;&nbsp;&nbsp;&nbsp;isSyncingDeviceContacts</option>
 	
 	<option value="//api/name/profile">&nbsp;&nbsp;&nbsp;&nbsp;profile</option>
 	
@@ -102,12 +99,6 @@
 	
 	<option value="//api/name/startSessionWithCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- startSessionWithCompletionHandler:</option>
 	
-	<option value="//api/name/syncDeviceContacts">&nbsp;&nbsp;&nbsp;&nbsp;- syncDeviceContacts</option>
-	
-	<option value="//api/name/syncDeviceContacts:">&nbsp;&nbsp;&nbsp;&nbsp;- syncDeviceContacts:</option>
-	
-	<option value="//api/name/syncDeviceContactsWithCompletion:">&nbsp;&nbsp;&nbsp;&nbsp;- syncDeviceContactsWithCompletion:</option>
-	
 	<option value="//api/name/updateProfiles:">&nbsp;&nbsp;&nbsp;&nbsp;- updateProfiles:</option>
 	
 	<option value="//api/name/updateProfilesWithCompletion:">&nbsp;&nbsp;&nbsp;&nbsp;- updateProfilesWithCompletion:</option>
@@ -138,8 +129,6 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Managing Services">Managing Services</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Syncing Device Contacts">Syncing Device Contacts</a></span></li>
-	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Handling App Launches by URL">Handling App Launches by URL</a></span></li>
 	
 </ul></li>
@@ -161,8 +150,6 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/clientSecret">clientSecret</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isReady">isReady</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isSyncingDeviceContacts">isSyncingDeviceContacts</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/profile">profile</a></span></li>
 	
@@ -214,12 +201,6 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/startSessionWithCompletionHandler:">startSessionWithCompletionHandler:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/syncDeviceContacts">syncDeviceContacts</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/syncDeviceContacts:">syncDeviceContacts:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/syncDeviceContactsWithCompletion:">syncDeviceContactsWithCompletion:</a></span></li>
-	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateProfiles:">updateProfiles:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateProfilesWithCompletion:">updateProfilesWithCompletion:</a></span></li>
@@ -255,8 +236,8 @@
 </tr>
 						</tbody></table></div>
 					
-					
-					
+                    
+                    
 					
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
@@ -280,8 +261,6 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/sharedSession">+&nbsp;sharedSession</a></code>
-		<span class="tooltip"><p>Access the shared session object. If a shared session has not yet been
-initialized, this method will initialize and return the shared instance.</p></span>
 	</span>
 	
 	
@@ -296,39 +275,30 @@ initialized, this method will initialize and return the shared instance.</p></sp
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/baseURL">&nbsp;&nbsp;baseURL</a></code>
-		<span class="tooltip"><p>The base URL of the Singly API to use for the session. Defaults to
-<a href="https://api.singly.com"><code>https://api.singly.com</code></a>.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/clientID">&nbsp;&nbsp;clientID</a></code>
-		<span class="tooltip"><p>The client ID to be used while authenticating against the Singly API.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/clientSecret">&nbsp;&nbsp;clientSecret</a></code>
-		<span class="tooltip"><p>The client secret to be used while authenticating against the Singly API.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/accessToken">&nbsp;&nbsp;accessToken</a></code>
-		<span class="tooltip"><p>The access token that will be used for all Singly API requests. This property
-will be set automatically when authorizing against a supported service, but
-you may also set it manually if your use case requires it.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/accountID">&nbsp;&nbsp;accountID</a></code>
-		<span class="tooltip"><p>The account ID associated with the current access token. This property will
-be set automatically when authorizing against a supported service.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -343,87 +313,60 @@ be set automatically when authorizing against a supported service.</p></span>
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/requestAccessTokenWithCode:">&ndash;&nbsp;requestAccessTokenWithCode:</a></code>
-		<span class="tooltip"><p>Requests your Access Token from the Singly API for the given code. The code
-is returned in the Redirect URI after you have successfully authenticated
-with a service via Singly.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/requestAccessTokenWithCode:error:">&ndash;&nbsp;requestAccessTokenWithCode:error:</a></code>
-		<span class="tooltip"><p>Requests your Access Token from the Singly API for the given code. The code
-is returned in the Redirect URI after you have successfully authenticated
-with a service via Singly.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/requestAccessTokenWithCode:completion:">&ndash;&nbsp;requestAccessTokenWithCode:completion:</a></code>
-		<span class="tooltip"><p>Requests your Access Token from the Singly API for the given code. The code
-is returned in the Redirect URI after you have successfully authenticated
-with a service via Singly. Once complete, the given completion handler will
-be called.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isReady">&nbsp;&nbsp;isReady</a></code>
-		<span class="tooltip"><p>Denotes whether or not the session is in a ready state (i.e. authorized and
-valid).</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/startSession:">&ndash;&nbsp;startSession:</a></code>
-		<span class="tooltip"><p>Gets the session into a state that is ready for your application to make API
-calls.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/startSessionWithCompletion:">&ndash;&nbsp;startSessionWithCompletion:</a></code>
-		<span class="tooltip"><p>Gets the session into a state that is ready for your application to make API
-calls. Once the steps have finished, the provided completion block will be
-called.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/startSessionWithCompletionHandler:">&ndash;&nbsp;startSessionWithCompletionHandler:</a></code>
-		<span class="tooltip"><p>Gets the session into a state that is ready for your application to make API
-calls. Once the steps have finished, the provided completion block will be
-called.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/resetSession">&ndash;&nbsp;resetSession</a></code>
-		<span class="tooltip"><p>Resets the current session by clearing the access token, account id and the
-loaded <a href="#//api/name/profiles">profiles</a>.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/removeAccount:">&ndash;&nbsp;removeAccount:</a></code>
-		<span class="tooltip"><p>Completely removes (destroys) the account on Singly for the current session
-and resets the session state to a blank slate. Use with caution!</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/removeAccountWithCompletion:">&ndash;&nbsp;removeAccountWithCompletion:</a></code>
-		<span class="tooltip"><p>Completely removes (destroys) the account on Singly for the current session
-and resets the session state to a blank slate. Use with caution! Calls the
-<code>completionHandler</code> when the operation has completed.</p></span>
 	</span>
 	
 	
@@ -438,40 +381,30 @@ and resets the session state to a blank slate. Use with caution! Calls the
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/profile">&nbsp;&nbsp;profile</a></code>
-		<span class="tooltip"><p>A combined profile for the user derived from normalized data from all of the
-services to which they are connected.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/profiles">&nbsp;&nbsp;profiles</a></code>
-		<span class="tooltip"><p>Profiles of the services that the account has connected. Will return until
-there is a valid session.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/updateProfiles:">&ndash;&nbsp;updateProfiles:</a></code>
-		<span class="tooltip"><p>Updates the <a href="#//api/name/profiles">profiles</a> by connecting to the Singly API and fetching the latest
-version. This method is called synchronously.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/updateProfilesWithCompletion:">&ndash;&nbsp;updateProfilesWithCompletion:</a></code>
-		<span class="tooltip"><p>Updates the <a href="#//api/name/profiles">profiles</a> by connecting to the Singly API and fetching the latest
-version and call the specified <code>completionHandler</code> once the update has
-completed.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/resetProfiles">&ndash;&nbsp;resetProfiles</a></code>
-		<span class="tooltip"><p>Resets the loaded <a href="#//api/name/profiles">profiles</a>.</p></span>
 	</span>
 	
 	
@@ -486,79 +419,30 @@ completed.</p></span>
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/applyService:withToken:">&ndash;&nbsp;applyService:withToken:</a></code>
-		<span class="tooltip"><p>Allows you to associate a service with an existing access token to the Singly
-session.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/applyService:withToken:error:">&ndash;&nbsp;applyService:withToken:error:</a></code>
-		<span class="tooltip"><p>Allows you to associate a service with an existing access token to the Singly
-session.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/applyService:withToken:completion:">&ndash;&nbsp;applyService:withToken:completion:</a></code>
-		<span class="tooltip"><p>Allows you to associate a service with an existing access token to the Singly
-session.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/applyService:withToken:tokenSecret:error:">&ndash;&nbsp;applyService:withToken:tokenSecret:error:</a></code>
-		<span class="tooltip"><p>Allows you to associate a service with an existing access token to the Singly
-session.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/applyService:withToken:tokenSecret:completion:">&ndash;&nbsp;applyService:withToken:tokenSecret:completion:</a></code>
-		<span class="tooltip"><p>Allows you to associate a service with an existing access token to the Singly
-session.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
-						<a title="Syncing Device Contacts" name="task_Syncing Device Contacts"></a>
-						<h3 class="subsubtitle task-title">Syncing Device Contacts</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/isSyncingDeviceContacts">&nbsp;&nbsp;isSyncingDeviceContacts</a></code>
-		<span class="tooltip"><p>Denotes whether or not the device contacts are currently being synced with
-the Singly API.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/syncDeviceContacts:">&ndash;&nbsp;syncDeviceContacts:</a></code>
-		<span class="tooltip"><p>Syncs the device contacts with the Singly API.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/syncDeviceContacts">&ndash;&nbsp;syncDeviceContacts</a></code>
-		<span class="tooltip"><p>Syncs the device contacts with the Singly API. This method is syncronous. For
-an asyncronous version, use <a href="#//api/name/syncDeviceContactsWithCompletion:">syncDeviceContactsWithCompletion:</a>.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/syncDeviceContactsWithCompletion:">&ndash;&nbsp;syncDeviceContactsWithCompletion:</a></code>
-		<span class="tooltip"><p>Syncs the device contacts with the Singly API and calls the specified
-<code>completionHandler</code> once the sync has completed.</p></span>
 	</span>
 	
 	
@@ -573,8 +457,6 @@ an asyncronous version, use <a href="#//api/name/syncDeviceContactsWithCompletio
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/handleOpenURL:">&ndash;&nbsp;handleOpenURL:</a></code>
-		<span class="tooltip"><p>Handles app launches by oauth redirection requests and maps them appropriately
-based on the service.</p></span>
 	</span>
 	
 	
@@ -628,9 +510,9 @@ you may also set it manually if your use case requires it.</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/requestAccessTokenWithCode:">&ndash; requestAccessTokenWithCode:</a></p></code></li>
+			<li><code><p><a href="#//api/name/requestAccessTokenWithCode:">- requestAccessTokenWithCode:</a></p></code></li>
 			
-			<li><code><p><a href="#//api/name/requestAccessTokenWithCode:completion:">&ndash; requestAccessTokenWithCode:completion:</a></p></code></li>
+			<li><code><p><a href="#//api/name/requestAccessTokenWithCode:completion:">- requestAccessTokenWithCode:completion:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -854,48 +736,6 @@ valid).</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/isSyncingDeviceContacts" title="isSyncingDeviceContacts"></a>
-	<h3 class="subsubtitle method-title">isSyncingDeviceContacts</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Denotes whether or not the device contacts are currently being synced with
-the Singly API.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (readonly) BOOL isSyncingDeviceContacts</code></div>
-
-    
-	
-	
-	
-	
-	
-	<div class="method-subsection availability">
-		<h4 class="method-subtitle parameter-title">Availability</h4>
-		<p>Available in Singly iOS SDK 1.1.0 and later.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglySession.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
 	<a name="//api/name/profile" title="profile"></a>
 	<h3 class="subsubtitle method-title">profile</h3>
 	
@@ -936,9 +776,9 @@ services to which they are connected.</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/updateProfiles:">&ndash; updateProfiles:</a></p></code></li>
+			<li><code><p><a href="#//api/name/updateProfiles:">- updateProfiles:</a></p></code></li>
 			
-			<li><code><p><a href="#//api/name/updateProfilesWithCompletion:">&ndash; updateProfilesWithCompletion:</a></p></code></li>
+			<li><code><p><a href="#//api/name/updateProfilesWithCompletion:">- updateProfilesWithCompletion:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -996,9 +836,9 @@ there is a valid session.</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/updateProfiles:">&ndash; updateProfiles:</a></p></code></li>
+			<li><code><p><a href="#//api/name/updateProfiles:">- updateProfiles:</a></p></code></li>
 			
-			<li><code><p><a href="#//api/name/updateProfilesWithCompletion:">&ndash; updateProfilesWithCompletion:</a></p></code></li>
+			<li><code><p><a href="#//api/name/updateProfilesWithCompletion:">- updateProfilesWithCompletion:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -1125,9 +965,9 @@ session.</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/applyService:withToken:error:">&ndash; applyService:withToken:error:</a></p></code></li>
+			<li><code><p><a href="#//api/name/applyService:withToken:error:">- applyService:withToken:error:</a></p></code></li>
 			
-			<li><code><p><a href="#//api/name/applyService:withToken:completion:">&ndash; applyService:withToken:completion:</a></p></code></li>
+			<li><code><p><a href="#//api/name/applyService:withToken:completion:">- applyService:withToken:completion:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -1199,7 +1039,7 @@ session.</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/applyService:withToken:error:">&ndash; applyService:withToken:error:</a></p></code></li>
+			<li><code><p><a href="#//api/name/applyService:withToken:error:">- applyService:withToken:error:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -1277,7 +1117,7 @@ session. May be <code>NULL</code>.</p></dd>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/applyService:withToken:completion:">&ndash; applyService:withToken:completion:</a></p></code></li>
+			<li><code><p><a href="#//api/name/applyService:withToken:completion:">- applyService:withToken:completion:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -1354,7 +1194,7 @@ session.</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/applyService:withToken:error:">&ndash; applyService:withToken:error:</a></p></code></li>
+			<li><code><p><a href="#//api/name/applyService:withToken:error:">- applyService:withToken:error:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -1437,7 +1277,7 @@ session. May be <code>NULL</code>.</p></dd>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/applyService:withToken:completion:">&ndash; applyService:withToken:completion:</a></p></code></li>
+			<li><code><p><a href="#//api/name/applyService:withToken:completion:">- applyService:withToken:completion:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -1667,9 +1507,9 @@ with a service via Singly.</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/requestAccessTokenWithCode:error:">&ndash; requestAccessTokenWithCode:error:</a></p></code></li>
+			<li><code><p><a href="#//api/name/requestAccessTokenWithCode:error:">- requestAccessTokenWithCode:error:</a></p></code></li>
 			
-			<li><code><p><a href="#//api/name/requestAccessTokenWithCode:completion:">&ndash; requestAccessTokenWithCode:completion:</a></p></code></li>
+			<li><code><p><a href="#//api/name/requestAccessTokenWithCode:completion:">- requestAccessTokenWithCode:completion:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -1962,7 +1802,7 @@ session has been started.</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/startSessionWithCompletion:">&ndash; startSessionWithCompletion:</a></p></code></li>
+			<li><code><p><a href="#//api/name/startSessionWithCompletion:">- startSessionWithCompletion:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -2032,7 +1872,7 @@ session has been started.</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/startSession:">&ndash; startSession:</a></p></code></li>
+			<li><code><p><a href="#//api/name/startSession:">- startSession:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -2104,204 +1944,7 @@ session has been started.</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/startSessionWithCompletion:">&ndash; startSessionWithCompletion:</a></p></code></li>
-			
-		</ul>
-	</div>
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglySession.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/syncDeviceContacts" title="syncDeviceContacts"></a>
-	<h3 class="subsubtitle method-title">syncDeviceContacts</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Syncs the device contacts with the Singly API. This method is syncronous. For
-an asyncronous version, use <a href="#//api/name/syncDeviceContactsWithCompletion:">syncDeviceContactsWithCompletion:</a>.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)syncDeviceContacts</code></div>
-
-    
-	
-	
-	
-	
-	
-	<div class="method-subsection availability">
-		<h4 class="method-subtitle parameter-title">Availability</h4>
-		<p>Available in Singly iOS SDK 1.1.0 and later. This method is
-<strong>deprecated</strong> and will be removed in a future release. Please use
-<a href="#//api/name/syncDeviceContacts:">syncDeviceContacts:</a> instead.</p>
-	</div>
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>This method will execute synchronously, waiting for the synchronization to
-complete before returning. In most cases, you will actually want to call
-<a href="#//api/name/syncDeviceContactsWithCompletion:">syncDeviceContactsWithCompletion:</a> to perform these steps asyncronously.</p>
-	</div>
-	
-	
-	
-	
-	
-	<div class="method-subsection see-also-section">
-		<h4 class="method-subtitle">See Also</h4>
-		<ul>
-			
-			<li><code><p><a href="#//api/name/syncDeviceContacts:">&ndash; syncDeviceContacts:</a></p></code></li>
-			
-			<li><code><p><a href="#//api/name/syncDeviceContactsWithCompletion:">&ndash; syncDeviceContactsWithCompletion:</a></p></code></li>
-			
-		</ul>
-	</div>
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglySession.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/syncDeviceContacts:" title="syncDeviceContacts:"></a>
-	<h3 class="subsubtitle method-title">syncDeviceContacts:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Syncs the device contacts with the Singly API.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (BOOL)syncDeviceContacts:(NSError **)<em>error</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>error</em></dt>
-			<dd><p>Out parameter used if an error occurs while syncing device
-contacts. May be <code>NULL</code>.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	<div class="method-subsection availability">
-		<h4 class="method-subtitle parameter-title">Availability</h4>
-		<p>Available in Singly iOS SDK 1.2.0 and later.</p>
-	</div>
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>This method will execute synchronously, waiting for the synchronization to
-complete before returning. In most cases, you will actually want to call
-<a href="#//api/name/syncDeviceContactsWithCompletion:">syncDeviceContactsWithCompletion:</a> to perform these steps asyncronously.</p>
-	</div>
-	
-	
-	
-	
-	
-	<div class="method-subsection see-also-section">
-		<h4 class="method-subtitle">See Also</h4>
-		<ul>
-			
-			<li><code><p><a href="#//api/name/syncDeviceContactsWithCompletion:">&ndash; syncDeviceContactsWithCompletion:</a></p></code></li>
-			
-		</ul>
-	</div>
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">SinglySession.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/syncDeviceContactsWithCompletion:" title="syncDeviceContactsWithCompletion:"></a>
-	<h3 class="subsubtitle method-title">syncDeviceContactsWithCompletion:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Syncs the device contacts with the Singly API and calls the specified
-<code>completionHandler</code> once the sync has completed.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)syncDeviceContactsWithCompletion:(SinglyContactsSyncCompletionBlock)<em>completionHandler</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>completionHandler</em></dt>
-			<dd><p>The block to call once the sync has been completed.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	<div class="method-subsection availability">
-		<h4 class="method-subtitle parameter-title">Availability</h4>
-		<p>Available in Singly iOS SDK 1.1.0 and later.</p>
-	</div>
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>In addition to calling the specified completion handler, a notification
-(<code>kSinglyContactsSyncedNotification</code>) is posted once the sync has completed.</p>
-	</div>
-	
-	
-	
-	
-	
-	<div class="method-subsection see-also-section">
-		<h4 class="method-subtitle">See Also</h4>
-		<ul>
-			
-			<li><code><p><a href="#//api/name/syncDeviceContacts:">&ndash; syncDeviceContacts:</a></p></code></li>
+			<li><code><p><a href="#//api/name/startSessionWithCompletion:">- startSessionWithCompletion:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -2369,7 +2012,7 @@ the update has completed.</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/updateProfilesWithCompletion:">&ndash; updateProfilesWithCompletion:</a></p></code></li>
+			<li><code><p><a href="#//api/name/updateProfilesWithCompletion:">- updateProfilesWithCompletion:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -2439,7 +2082,7 @@ completed.</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/updateProfiles:">&ndash; updateProfiles:</a></p></code></li>
+			<li><code><p><a href="#//api/name/updateProfiles:">- updateProfiles:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -2457,6 +2100,8 @@ completed.</p>
 					</div>
 					
 					
+                    
+                    
 				</div>
 				<div class="main-navigation navigation-bottom">
 					<ul>
@@ -2467,9 +2112,9 @@ completed.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Singly, Inc. All rights reserved. (Last updated: 2013-02-27)</span><br />
+						<p><span class="copyright">&copy; 2013 Singly, Inc. All rights reserved. (Last updated: 2013-09-23)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
 					</div>
 				</div>
