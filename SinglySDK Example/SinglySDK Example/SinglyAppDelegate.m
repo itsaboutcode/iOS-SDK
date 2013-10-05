@@ -35,9 +35,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
-    // Initialize Defaults
-    [self initializeDefaults];
-
     // Initialize TestFlight
     #ifdef TESTFLIGHT_TOKEN
         [TestFlight takeOff:TESTFLIGHT_TOKEN];
@@ -53,7 +50,7 @@
     session.clientSecret = CLIENT_SECRET;
 
     // Set the Base URL (You don't need to do this in your own app)
-    session.baseURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"SinglyApiLocation"];
+    session.baseURL = kSinglyBaseURL;
 
     [[NSNotificationCenter defaultCenter] addObserverForName:kSinglySessionProfilesUpdatedNotification
                                                       object:self
@@ -77,15 +74,6 @@
          annotation:(id)annotation
 {
     return [SinglySession.sharedSession handleOpenURL:url];
-}
-
-#pragma mark - Defaults
-
-- (void)initializeDefaults
-{
-    NSString *defaultsFile = [[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"];
-    NSDictionary *defaults = [NSDictionary dictionaryWithContentsOfFile:defaultsFile];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 
 @end

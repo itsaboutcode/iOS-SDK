@@ -21,7 +21,6 @@
 		D0059059167A7A2700F1374D /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0059058167A7A2700F1374D /* AddressBook.framework */; };
 		D0075FED161A215400F763A1 /* SinglyMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0075FEC161A215400F763A1 /* SinglyMainViewController.m */; };
 		D007BE21161B844200F694FF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D007BE20161B844200F694FF /* Default-568h@2x.png */; };
-		D00D662B16C2BDD600746AA3 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = D00D662A16C2BDD600746AA3 /* Defaults.plist */; };
 		D00D662D16C2BDF400746AA3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D00D662C16C2BDF400746AA3 /* Settings.bundle */; };
 		D03BE92C161CA29D009D0341 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D03BE928161CA29D009D0341 /* libTestFlight.a */; };
 		D03BE92D161CA29E009D0341 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D03BE929161CA29D009D0341 /* README.md */; };
@@ -63,7 +62,6 @@
 		D0075FEB161A215400F763A1 /* SinglyMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglyMainViewController.h; sourceTree = "<group>"; };
 		D0075FEC161A215400F763A1 /* SinglyMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglyMainViewController.m; sourceTree = "<group>"; };
 		D007BE20161B844200F694FF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
-		D00D662A16C2BDD600746AA3 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		D00D662C16C2BDF400746AA3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D03BE928161CA29D009D0341 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		D03BE929161CA29D009D0341 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 				D081F86A1639BCC1000F63DA /* Default.png */,
 				D081F86C1639BCD4000F63DA /* Default@2x.png */,
 				D007BE20161B844200F694FF /* Default-568h@2x.png */,
-				D00D662A16C2BDD600746AA3 /* Defaults.plist */,
 				D00D662C16C2BDF400746AA3 /* Settings.bundle */,
 			);
 			name = Resources;
@@ -302,7 +299,6 @@
 				D081F8691639B542000F63DA /* Icon-512.png in Resources */,
 				D081F86B1639BCC1000F63DA /* Default.png in Resources */,
 				D081F86D1639BCD4000F63DA /* Default@2x.png in Resources */,
-				D00D662B16C2BDD600746AA3 /* Defaults.plist in Resources */,
 				D00D662D16C2BDF400746AA3 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
