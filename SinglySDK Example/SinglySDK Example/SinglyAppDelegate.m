@@ -43,7 +43,6 @@
         [TestFlight takeOff:TESTFLIGHT_TOKEN];
     #endif
 
-#error You must configure your Singly client id and client secret in SinglyConfiguration.h
     // Confirm that the Client ID and Client Secret have been configured
     if (CLIENT_ID.length == 0 || CLIENT_SECRET.length == 0)
         [NSException raise:@"Missing Singly credentials"

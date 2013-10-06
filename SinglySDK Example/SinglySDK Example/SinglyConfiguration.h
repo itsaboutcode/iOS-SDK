@@ -18,6 +18,7 @@
  * obtain them by signing up for a Singly account at https://singly.com/signup.
  *
 **/
+#error You must configure your Singly client id and client secret - comment/remove this line after fixing.
 #define CLIENT_ID @""
 #define CLIENT_SECRET @""
 
